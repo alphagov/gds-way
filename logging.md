@@ -1,0 +1,15 @@
+# Logging
+
+## Sumo Logic
+
+Some teams have used [Sumo Logic](https://www.sumologic.com/)
+successfully for storing and querying logs.
+
+## Elasticsearch, Logstash and Kibana (ELK)
+
+Each team should not operate its own ELK stack for logging.
+In the past we've found that ELK is relatively easy to set up
+but teams tend to not prioritise keeping it updated.
+
+ELK isn't appropriate for long term archival of logs. There
+are services which are less expensive and more reliable.
