@@ -18,3 +18,6 @@ New repositories for GDS products and services go in the
 If the repository contains secrets rather than code,
 make it private and restrict the people who have access to it.
 Consider encrypting the contents of the repository.
+
+Teams are responsible for ensuring that their Git repositories
+are backed up to another location.
