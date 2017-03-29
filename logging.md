@@ -1,5 +1,7 @@
 # Logging
 
+This document is current until 1 September 2017.
+
 ## Shared logging platform
 
 The service support and operations team is investigating whether
