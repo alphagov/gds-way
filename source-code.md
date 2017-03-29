@@ -1,5 +1,7 @@
 # Source code
 
+This document is current until 1 September 2017.
+
 We follow the principles set out in the service manual for
 managing the code that we write:
 

@@ -6,8 +6,9 @@ Government Digital Service has made for the products we operate.
 It complements the [Service Manual](https://www.gov.uk/service-manual) which
 covers service design more broadly.
 
-Right now we won't accept pull requests that change the decisions in this
-repository. Ask about changes in the
+If you think that you can contribute a change to this repository which reflects
+current practice at GDS, make a pull request to this repo and we'll discuss it
+at the Tech Ops Forum meeting and in the
 [#tech-ops-forum Slack channel](https://govuk.slack.com/messages/tech-ops-forum/).
 
 Products at GDS must follow the
