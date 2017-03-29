@@ -27,10 +27,14 @@ the status of a system is actually a monitoring tool. The text of
 your alerts should be specific - people will be responding to alerts
 in the middle of the night.
 
-Abandon the use of emails as an alerting method. Emails become noisy
-which over time results in them being ignored or overlooked. If you
-absolutely have to use emails, template them so that the information
-is presented consistently.
+Don't rely on emails as an automated alerting method for
+incident responders. Emails become noisy which over time
+results in them being ignored or overlooked. If you absolutely
+have to use emails, template them so that the information is
+presented consistently.
+
+Don't include sensitive information in your alerts. Alerts are likely
+to be shared while they're being worked on.
 
 Consolidate multiple dashboards into one to have an authoritative
 source to check for alerts.
@@ -52,14 +56,14 @@ track alerts, escalate them (automatically or manually), acknowledge them
 
 ## Tools for alerting
 
-Several teams at GDS use [PagerDuty](https://www.pagerduty.com/) to be
-alerted of problems with their service.
+The default tool at GDS to be alerted of problems with your service
+is [PagerDuty](https://www.pagerduty.com/).
 
-Several teams use [Pingdom](https://www.pingdom.com/) as well
+We recommend using [Pingdom](https://www.pingdom.com/) as well
 in case PagerDuty becomes unavailable.
 
-A couple of teams use [Atlassian StatusPage](https://www.statuspage.io/) to
+We recommend using [Atlassian StatusPage](https://www.statuspage.io/) to
 provide updates on service status to users.
 
-[Dashing](http://dashing.io/) and [Smashing](https://github.com/Smashing/smashing)
-are good tools to use for creating dashboards.
+[Smashing](https://github.com/Smashing/smashing) is our preferred tool
+for creating dashboards.
