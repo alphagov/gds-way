@@ -63,6 +63,10 @@ There will be sensible reasons to pick another language. For example:
 - when scripting in a particular environment
 - when we're experimenting during an alpha (with an expectation that it's replaced by something we have more confidence in for beta)
 
-The set of languages in the core group will change over time. This is likely
-to be through the adoption of a new language into the core group, and with
-an existing language being put on hold for new work.
+The set of languages we're comfortable supporting will change over time.
+
+If you want to use a new language, talk to your technical architect and create
+a prototype. If it goes well make a pull request to change this document.
+
+If you've had problems using one of the languages we support, make a pull request to
+document the issues you've had.
