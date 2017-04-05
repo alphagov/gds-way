@@ -22,21 +22,26 @@ These are successfully being used by many teams at the moment and
 we're confident in how to host and operate applications written in them.
 New development should normally be carried out in one of them.
 
-## Node.js
+## JavaScript
 
-This recommendation doesn't apply to in-browser JavaScript.
+This recommendation only applies to server-side JavaScript.
 The service manual has information on
-[services using client-side JavaScript][manual_js].
+[using client-side JavaScript][manual_js].
 
 [manual_js]: https://www.gov.uk/service-manual/technology/using-progressive-enhancement
+
+The only way we're comfortable writing server-side JavaScript at the
+moment is with [Node.js][nodejs].
+
+[nodejs]: https://nodejs.org/
 
 Node.js is used in a few projects at GDS; GOV.UK Frontend, GOV.UK Pay and Performance Platform.
 
 In the past we've had problems operating and maintaining products written in
 Node.js. We suspect that this is because:
 
-- It's younger and less mature than other languages we use
-- We have fewer developers with Node.js skills than other languages we use
+- It's younger and less mature than other tools we use
+- We have fewer developers with Node.js skills than other tools we use
 
 Because both of these points should gradually improve over time, we think
 that Node.js is suitable for creating thin, client-facing applications
@@ -57,11 +62,12 @@ application written in Scala. Do not use Scala for new projects.
 
 ## Other languages
 
-There will be sensible reasons to pick another language. For example:
+There will be sensible reasons to pick another language. For example when we're:
 
-- when we're extending an existing codebase/ecosystem
-- when scripting in a particular environment
-- when we're experimenting during an alpha (with an expectation that it's replaced by something we have more confidence in for beta)
+- extending an existing codebase or ecosystem
+- scripting in a particular environment
+- experimenting during an alpha (with an expectation that it's replaced by something we have more confidence in for beta)
+- working in a very specific or unusual problem domain, like heavy use of WebSockets
 
 The set of languages we're comfortable supporting will change over time.
 
