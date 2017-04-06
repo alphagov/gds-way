@@ -4,23 +4,27 @@ layout: recommendation
 expires: 2017-10-01
 ---
 
-All programming languages have their own strengths and weaknesses.
-We want to use a range of programming languages in
-order to build services and supporting tools to meet users' needs.
-This document does not apply to choosing 'off the shelf' software
-(open source or not).
+We want to use a range of programming languages at GDS because we think
+using the right tool for the job will give us the best chance of building
+services that best meet users’ needs. This document does not apply to
+choosing 'off the shelf' software (open source or not).
 
-In order to make it easier for developers to move around the organisation,
-to get more value out of developing shared components, to better hire and
-develop people, and to be great at operating applications, we want to focus
-on a small number of choices of programming languages for core
-software development tasks.
+We want to focus on using a small number of programming languages for
+core software development tasks.
+
+This should make it easier for developers to:
+
+- move around the organisation
+- develop shared components
+- improve their personal development
+- master how they operate applications
 
 ## Java, Python and Ruby
 
-These are successfully being used by many teams at the moment and
-we're confident in how to host and operate applications written in them.
-New development should normally be carried out in one of them.
+We've chosen these 3 languages because they are successfully used by
+teams at the moment, and we are confident in how to host and operate
+applications written in them. We'd advise you to carry out new
+development in one of them.
 
 ## JavaScript
 
@@ -35,7 +39,7 @@ moment is with [Node.js][nodejs].
 
 [nodejs]: https://nodejs.org/
 
-Node.js is used in a few projects at GDS; GOV.UK Frontend, GOV.UK Pay and Performance Platform.
+Node.js is used by a few projects at GDS; GOV.UK Frontend, GOV.UK Pay and the Performance Platform.
 
 In the past we've had problems operating and maintaining products written in
 Node.js. We suspect that this is because:
@@ -62,7 +66,7 @@ application written in Scala. Do not use Scala for new projects.
 
 ## Other languages
 
-There will be sensible reasons to pick another language. For example when we're:
+There will be sensible reasons to pick another language. For example when you're:
 
 - extending an existing codebase or ecosystem
 - scripting in a particular environment
