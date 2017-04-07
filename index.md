@@ -27,3 +27,34 @@ in this repository. Projects at beta and live should follow these recommendation
 - [Storing and querying logs](logging.html)
 - [Monitoring your service](monitoring.html)
 - [Responding to problems](alerting.html)
+
+## Adding new guidance
+
+Create a new Markdown file that follows this pattern and make a pull request:
+
+```markdown
+---
+title: Thing you're writing a recommendation about
+layout: recommendation
+expires: yyyy-mm-dd (6 months from now)
+---
+
+Introduction of a couple of paragraphs to explain why the thing you're
+writing a recommendation about is important.
+
+## User needs
+
+Why do we do this thing? Who is it helping?
+
+## Principles
+
+What broad approaches do we follow when we do this thing?
+
+## Tools
+
+What specific bits of software (commercial or open source) do
+we use to help us do this thing?
+```
+
+The service manual has some useful information on
+[learning about and writing user needs](https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs).

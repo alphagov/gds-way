@@ -108,6 +108,12 @@ ul li {
   margin: 0.4em 1.2em;
 }
 
+pre {
+  background: #eee;
+  font-family: Menlo, monospace;
+  padding: 1em;
+}
+
 .banner {
   background: #eee;
   padding: 1em;
