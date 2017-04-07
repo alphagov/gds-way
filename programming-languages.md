@@ -44,7 +44,7 @@ Node.js is used by a few projects at GDS; GOV.UK Frontend, GOV.UK Pay and the Pe
 In the past we've had problems operating and maintaining products written in
 Node.js. We suspect that this is because:
 
-- It's younger and less mature than other tools we use
+- It's younger and less mature than Java, Python and Ruby
 - We have fewer developers with Node.js skills than other tools we use
 
 Because both of these points should gradually improve over time, we think
