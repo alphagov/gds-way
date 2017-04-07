@@ -1,6 +1,8 @@
-# Source code
-
-This document is current until 1 September 2017.
+---
+title: Source code
+layout: recommendation
+expires: 2017-09-01
+---
 
 We follow the principles set out in the service manual for
 managing the code that we write:

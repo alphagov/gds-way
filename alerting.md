@@ -1,6 +1,8 @@
-# Alerting
-
-This document is current until 1 October 2017.
+---
+title: Alerting
+layout: recommendation
+expires: 2017-10-01
+---
 
 Services at GDS need to be set up to send automated alerts
 to staff if the service's monitoring detects issues.

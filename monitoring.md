@@ -1,6 +1,8 @@
-# Monitoring
-
-This document is current until 1 September 2017.
+---
+title: Monitoring
+layout: recommendation
+expires: 2017-09-01
+---
 
 ## Availability monitoring
 

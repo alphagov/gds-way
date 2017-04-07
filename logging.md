@@ -1,6 +1,8 @@
-# Logging
-
-This document is current until 1 September 2017.
+---
+title: Logging
+layout: recommendation
+expires: 2017-09-01
+---
 
 ## Shared logging platform
 

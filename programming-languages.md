@@ -1,6 +1,8 @@
-# Server-side programming languages
-
-This document is current until 1 September 2017.
+---
+title: Server-side programming languages
+layout: recommendation
+expires: 2017-09-01
+---
 
 All programming languages have their own strengths and weaknesses.
 This means that we want to use a range of programming languages in
