@@ -8,3 +8,7 @@ Static site for GDS technical guidance using Jekyll.
 bundle install
 bundle exec jekyll serve
 ```
+
+## Published
+
+https://alphagov.github.io/gds-tech/
