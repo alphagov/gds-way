@@ -19,14 +19,18 @@ This should make it easier for developers to:
 - improve their personal development
 - master how they operate applications
 
-## Java, Python and Ruby
+## Core languages
+
+Our core languages are __Java, Python and Ruby__.
 
 We've chosen these 3 languages because they are successfully used by
 teams at the moment, and we are confident in how to host and operate
 applications written in them. We'd advise you to carry out new
 development in one of them.
 
-## JavaScript
+## Languages in use in specific contexts
+
+### JavaScript
 
 This recommendation only applies to server-side JavaScript.
 The service manual has information on
@@ -51,7 +55,7 @@ Because both of these points should gradually improve over time, we think
 that Node.js is suitable for creating thin, client-facing applications
 that don't persist data.
 
-## Go
+### Go
 
 The GOV.UK router is built using Go, and it's the core language for Cloud
 Foundry which runs our Platform as a Service.
@@ -59,9 +63,9 @@ Foundry which runs our Platform as a Service.
 We suspect that Go may be suitable for some systems programming, like proxying,
 routing and transforming HTTP requests.
 
-## Scala
+## Languages we won't use for new projects
 
-We used Scala in the early days of GDS. GOV.UK Licensing is the only remaining
+We used __Scala__ in the early days of GDS. GOV.UK Licensing is the only remaining
 application written in Scala. Do not use Scala for new projects.
 
 ## Other languages
