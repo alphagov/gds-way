@@ -46,14 +46,30 @@ moment is with [Node.js][nodejs].
 Node.js is used by a few projects at GDS; GOV.UK Frontend, GOV.UK Pay and the Performance Platform.
 
 In the past we've had problems operating and maintaining products written in
-Node.js. We suspect that this is because:
+Node.js (for example maintaining dependencies, picking the appropriate
+libraries to use, understanding the appropriate application structure, and
+ensuring security of the code). We suspect that this is because:
 
 - It's younger and less mature than Java, Python and Ruby
 - We have fewer developers with Node.js skills than other tools we use
 
-Because both of these points should gradually improve over time, we think
-that Node.js is suitable for creating thin, client-facing applications
-that don't persist data.
+Node.js is now frequently used in the wider software development ecosystem for
+building web application frontends. This means there are a lot of supporting
+tools and technologies and we expect this to gradually improve over time.
+
+It may therefore sometimes be appropriate to use this technology for rendering
+the web interface for our services. It is hard to set a specific boundary for
+where Node.js should be used, but our current approach is that Node.js shouldn't
+be used to implement any significant "application logic". GOV.UK Pay are adopting
+this approach by using Node.js only to create thin, client-facing applications
+which do not directly persist data (they may talk to an API for this); Node.js
+transforms an API to a web interface and back again. This divide matches reasonably
+well with the division between frontend and backend areas of specialism, and
+should allow the frontend to be developed with a reasonable level of decoupling
+from the backend applications.
+
+Teams that adopt Node.js must take steps to ensure that they have access to
+sufficient developers with Node.js experience.
 
 ### Go
 
