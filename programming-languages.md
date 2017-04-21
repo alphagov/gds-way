@@ -60,8 +60,13 @@ that don't persist data.
 The GOV.UK router is built using Go, and it's the core language for Cloud
 Foundry which runs our Platform as a Service.
 
-We suspect that Go may be suitable for some systems programming, like proxying,
-routing and transforming HTTP requests.
+Go is an appropriate language for some systems programming, like proxying,
+routing and transforming HTTP requests. However, since we don't maintain much
+Go and thus are likely to have few people with the skills to do so, any such
+code poses a significant risk. Components should only be written in Go if
+there is no alternative maintained open source tool which could be used, and
+after a team has developed a plan to ensure that it will have the skills to
+maintain the component in future.
 
 ## Languages we won't use for new projects
 
