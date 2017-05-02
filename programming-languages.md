@@ -45,6 +45,8 @@ moment is with [Node.js][nodejs].
 
 Node.js is used by a few projects at GDS; GOV.UK Frontend, GOV.UK Pay and the Performance Platform.
 
+These projects have made the decision to use Node.JS, and the tech forum is watching the output of this. No new projects should use Node.JS without prior consultation with the Deputy Director Technology Operations
+
 In the past we've had problems operating and maintaining products written in
 Node.js (for example maintaining dependencies, picking the appropriate
 libraries to use, understanding the appropriate application structure, and
