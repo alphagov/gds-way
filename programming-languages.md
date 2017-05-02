@@ -1,51 +1,109 @@
 ---
-title: Server-side programming languages
+title: Programming languages
 layout: recommendation
-expires: 2017-09-01
+expires: 2017-10-01
 ---
 
-All programming languages have their own strengths and weaknesses.
-This means that we want to use a range of programming languages in
-order to build services and supporting tools to meet users needs.
-This document does not apply to choosing 'off the shelf' software
-(open source or not).
+We want to use a range of programming languages at GDS because we think
+using the right tool for the job will give us the best chance of building
+services that best meet users’ needs. This document does not apply to
+choosing 'off the shelf' software (open source or not).
 
-In order to make it easier for developers to move around the organisation,
-to get more value out of developing shared components, to better hire and
-develop people, and to be great at operating applications, we want to focus
-on a small number of choices of programming languages for core
-'backend development' tasks.
+We want to focus on using a small number of programming languages for
+core software development tasks.
 
-These are (alphabetically): Java, Python, Ruby. These are successfully being
-used by teams at the moment, and we are confident in how to host and operate
-applications written in them. New development should normally be carried out
-in one of them.
+This should make it easier for developers to:
 
-There will be sensible reasons to go outside this core group. For example:
+- move around the organisation
+- develop shared components
+- improve their personal development
+- master how they operate applications
 
-- when we're extending an existing codebase/ecosystem
-- when scripting in a particular environment
-- when we're experimenting during an alpha (with an expectation that it's replaced by something from the core set for beta)
+## Core languages
 
-The set of languages in the core group will change over time. This is likely
-to be through the adoption of a new language into the core group, and with
-an existing language being put on hold for new work.
+Our core languages are __Java, Python and Ruby__.
 
-## Languages in use not in the core group
+We've chosen these 3 languages because they are successfully used by
+teams at the moment, and we are confident in how to host and operate
+applications written in them. We'd advise you to carry out new
+development in one of them.
+
+## Languages in use in specific contexts
+
+### JavaScript
+
+This recommendation only applies to server-side JavaScript.
+The service manual has information on
+[using client-side JavaScript][manual_js].
+
+[manual_js]: https://www.gov.uk/service-manual/technology/using-progressive-enhancement
+
+The only way we're comfortable writing server-side JavaScript at the
+moment is with [Node.js][nodejs].
+
+[nodejs]: https://nodejs.org/
+
+Node.js is used by a few projects at GDS; GOV.UK Frontend, GOV.UK Pay and the Performance Platform.
+
+These projects have made the decision to use Node.JS, and the tech forum is watching the output of this. No new projects should use Node.JS without prior consultation with the Deputy Director Technology Operations
+
+In the past we've had problems operating and maintaining products written in
+Node.js (for example maintaining dependencies, picking the appropriate
+libraries to use, understanding the appropriate application structure, and
+ensuring security of the code). We suspect that this is because:
+
+- It's younger and less mature than Java, Python and Ruby
+- We have fewer developers with Node.js skills than other tools we use
+
+Node.js is now frequently used in the wider software development ecosystem for
+building web application frontends. This means there are a lot of supporting
+tools and technologies and we expect this to gradually improve over time.
+
+It may therefore sometimes be appropriate to use this technology for rendering
+the web interface for our services. It is hard to set a specific boundary for
+where Node.js should be used, but our current approach is that Node.js shouldn't
+be used to implement any significant "application logic". GOV.UK Pay are adopting
+this approach by using Node.js only to create thin, client-facing applications
+which do not directly persist data (they may talk to an API for this); Node.js
+transforms an API to a web interface and back again. This divide matches reasonably
+well with the division between frontend and backend areas of specialism, and
+should allow the frontend to be developed with a reasonable level of decoupling
+from the backend applications.
+
+Teams that adopt Node.js must take steps to ensure that they have access to
+sufficient developers with Node.js experience.
 
 ### Go
 
-A small amount of use in GOV.UK. Core language for CloudFoundry used by the
-PaaS team.
+The GOV.UK router is built using Go, and it's the core language for Cloud
+Foundry which runs our Platform as a Service.
 
-### Node.js (JavaScript)
+Go is an appropriate language for some systems programming, like proxying,
+routing and transforming HTTP requests. However, since we don't maintain much
+Go and thus are likely to have few people with the skills to do so, any such
+code poses a significant risk. Components should only be written in Go if
+there is no alternative maintained open source tool which could be used, and
+after a team has developed a plan to ensure that it will have the skills to
+maintain the component in future.
 
-In use in GOV.UK Pay and Performance Platform. Not as mature as other
-languages/frameworks in use, and lacking a critical mass of skills in
-GDS, so further adoption discouraged. Note: does not apply to in-browser
-JavaScript.
+## Languages we won't use for new projects
 
-### Scala
+We used __Scala__ in the early days of GDS. GOV.UK Licensing is the only remaining
+application written in Scala. Do not use Scala for new projects.
 
-Used in the early days of GDS. GOV.UK Licensing is the only remaining
-application written in Scala. Not for use in new development.
+## Other languages
+
+There will be sensible reasons to pick another language. For example when you're:
+
+- extending an existing codebase or ecosystem
+- scripting in a particular environment
+- experimenting during an alpha (with an expectation that it's replaced by something we have more confidence in for beta)
+- working in a very specific or unusual problem domain, like heavy use of WebSockets
+
+The set of languages we're comfortable supporting will change over time.
+
+If you want to use a new language, talk to your technical architect and create
+a prototype. If it goes well make a pull request to change this document.
+
+If you've had problems using one of the languages we support, make a pull request to
+document the issues you've had.
