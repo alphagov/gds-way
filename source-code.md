@@ -23,3 +23,11 @@ Consider encrypting the contents of the repository.
 
 Teams are responsible for ensuring that their Git repositories
 are backed up to another location.
+
+### Retired applications
+
+We have an organisation called [gds-attic](https://github.com/gds-attic/)
+which is used for source code which is no longer in production.
+
+Email the `gds-github-owners` mailing list to ask for an application to be
+migrated to the attic.
