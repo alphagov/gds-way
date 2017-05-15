@@ -28,3 +28,5 @@ Consider encrypting the contents of the repository.
 
 Teams are responsible for ensuring that their Git repositories
 are backed up to another location.
+
+GitHub organisations should have two-factor authorisation enforced.
