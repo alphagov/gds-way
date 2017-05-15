@@ -61,20 +61,22 @@ add a guide for Python and Java.
 
 ### JavaScript
 
-This recommendation only applies to server-side JavaScript.
+We write server-side JavaScript with [Node.js][nodejs].
 The service manual has information on
 [using client-side JavaScript][manual_js].
 
+[nodejs]: https://nodejs.org/
 [manual_js]: https://www.gov.uk/service-manual/technology/using-progressive-enhancement
 
-The only way we're comfortable writing server-side JavaScript at the
-moment is with [Node.js][nodejs].
+GDS projects that use Node.js include:
+GOV.UK Frontend, GOV.UK Pay and the Performance Platform.
 
-[nodejs]: https://nodejs.org/
+These projects have made the decision to use Node.js, and the tech forum is watching the output of this. No new projects should use Node.js without prior consultation with the Deputy Director Technology Operations.
 
-Node.js is used by a few projects at GDS; GOV.UK Frontend, GOV.UK Pay and the Performance Platform.
-
-These projects have made the decision to use Node.JS, and the tech forum is watching the output of this. No new projects should use Node.JS without prior consultation with the Deputy Director Technology Operations
+Node.js can be used to render a web interface for your service but should
+not be used to implement any significant ‘application logic’. For instance
+GOV.UK Pay has created thin, client-facing applications that do not store
+data (although they may retrieve data from an API).
 
 In the past we've had problems operating and maintaining products written in
 Node.js (for example maintaining dependencies, picking the appropriate
@@ -87,17 +89,6 @@ ensuring security of the code). We suspect that this is because:
 Node.js is now frequently used in the wider software development ecosystem for
 building web application frontends. This means there are a lot of supporting
 tools and technologies and we expect this to gradually improve over time.
-
-It may therefore sometimes be appropriate to use this technology for rendering
-the web interface for our services. It is hard to set a specific boundary for
-where Node.js should be used, but our current approach is that Node.js shouldn't
-be used to implement any significant "application logic". GOV.UK Pay are adopting
-this approach by using Node.js only to create thin, client-facing applications
-which do not directly persist data (they may talk to an API for this); Node.js
-transforms an API to a web interface and back again. This divide matches reasonably
-well with the division between frontend and backend areas of specialism, and
-should allow the frontend to be developed with a reasonable level of decoupling
-from the backend applications.
 
 Teams that adopt Node.js must take steps to ensure that they have access to
 sufficient developers with Node.js experience.
