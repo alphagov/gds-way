@@ -19,7 +19,7 @@ This should make it easier for developers to:
 - improve their personal development
 - master how they operate applications
 
-## Core languages
+## Using Java, Python and Ruby as our core languages
 
 Our core languages are __Java, Python and Ruby__.
 
