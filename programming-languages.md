@@ -122,7 +122,8 @@ There will be sensible reasons to pick another language. For example when you're
 
 The set of languages we're comfortable supporting will change over time.
 
-If you want to use a new language, talk to your technical architect and create
+If you want to use a new language, talk to your technical architect and the
+Deputy Director Technology Operations and then create
 a prototype. If it goes well make a pull request to change this document.
 
 If you've had problems using one of the languages we support, make a pull request to
