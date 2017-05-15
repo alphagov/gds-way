@@ -23,6 +23,11 @@ This should make it easier for developers to:
 
 Our core languages are __Java, Python and Ruby__.
 
+We've chosen these 3 languages because they are successfully used by
+teams at the moment, and we are confident in how to host and operate
+applications written in them. We'd advise you to carry out new
+development in one of them.
+
 ## Code styleguides
 
 Developers read code much more often than they write it. These guidelines
@@ -51,13 +56,6 @@ Some good reasons to ignore a particular guideline:
 
 We've got a consistent style for [Ruby](programming-languages/ruby.html) and will
 add a guide for Python and Java.
-
-## Languages in use not in the core group
-
-We've chosen these 3 languages because they are successfully used by
-teams at the moment, and we are confident in how to host and operate
-applications written in them. We'd advise you to carry out new
-development in one of them.
 
 ## Languages in use in specific contexts
 
