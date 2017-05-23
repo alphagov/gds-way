@@ -87,8 +87,9 @@ ensuring security of the code). We suspect that this is because:
 - We have fewer developers with Node.js skills than other tools we use
 
 Node.js is now frequently used in the wider software development ecosystem for
-building web application frontends. This means there are a lot of supporting
-tools and technologies and we expect this to gradually improve over time.
+building web application frontends. This increase in Node.js use means there
+has been a growth in  skills and supporting tools and we expect this to continue.
+This means we may reevaluate it as a core language in the future.
 
 Teams that adopt Node.js must take steps to ensure that they have access to
 sufficient developers with Node.js experience.
@@ -109,11 +110,13 @@ maintain the component in future.
 ## Languages we won't use for new projects
 
 We used __Scala__ in the early days of GDS. GOV.UK Licensing is the only remaining
-application written in Scala. Do not use Scala for new projects.
+application written in Scala but we've found it hard to support because of a lack
+of skills in GDS and we’re planning to rewrite it. Do not use Scala for new projects.
 
-## Other languages
+## Using other languages
 
-There will be sensible reasons to pick another language. For example when you're:
+There will be sensible reasons to not follow the above guidance on languages.
+For example when you're:
 
 - extending an existing codebase or ecosystem
 - scripting in a particular environment
