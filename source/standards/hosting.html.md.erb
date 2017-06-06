@@ -16,7 +16,7 @@ GDS follows the [Government Cloud First policy](https://www.gov.uk/guidance/gove
 
 ## Principles
 
-GDS will build new tools on only one cloud platform for each of IaaS and PaaS.
+GDS will build new tools on a primary cloud platform for each of PaaS and IaaS.
 
 We prefer systems built on a PaaS to systems built on IaaS where possible.
 
@@ -29,7 +29,15 @@ GDS has selected two cloud platforms:
 ### PaaS
 
 * GOV.UK PaaS
+  https://cloud.service.gov.uk 
 
 ### IaaS
 
 * Amazon Web Services
+  https://aws.amazon.com
+
+### Lock in concerns
+
+In order to minimise lock-in, we determine that for the IaaS model, we will use only the core features of AWS that are common with the biggest competitors.  That is to say we will be using  for example: Compute, Networking (load balancing and network segregation), File storage (EBS and S3), Hosted databases (RDS and DynamoDB).
+
+Other platform like services (Cloudfront, Route 53, SQS, SNS, Directory Service and so on) need to be weighed against the lock-in cost before adopting.
