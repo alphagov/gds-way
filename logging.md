@@ -25,8 +25,8 @@ logs.
 
 ## Sumo Logic
 
-Some teams have used [Sumo Logic](https://www.sumologic.com/)
-successfully for storing and querying logs.
+Some teams have used [Sumo Logic][] successfully for storing and
+querying logs.
 
 ## Self-hosted Elasticsearch, Logstash and Kibana (ELK)
 
@@ -52,6 +52,24 @@ stack).
 If you are using Amazon Web Services, CloudWatch can run rudimentary
 queries on older logs which may be good enough.
 
+# Shipping logs
+
+When implementing your mechanism to ship logs to your stores, here are
+some questions to ask:
+
+  * How do I ensure my logs get to both my short-term and long-term
+    stores?
+  * What happens if one of these stores is temporarily unavailable?
+    What happens when it comes back online?
+
+The [beats][] tools will detect periods of unavailability.  They will
+remember how much they have sent and continue where they left off.
+
+One pattern is to have one process to ship logs to your long-term
+archive, and a second process to fill the short-term query tool from
+the long-term archive.  This way you can have confidence that
+everything has been correctly archived.
+
 # Retention periods
 
 This section recommends some sensible default choices for retention
@@ -76,4 +94,6 @@ logs are:
 
 It's sensible to keep logs in long-term archives for at least a year.
 
+[beats]: https://www.elastic.co/products/beats
 [PCI-DSS]: https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard
+[Sumo Logic]: https://www.sumologic.com/
