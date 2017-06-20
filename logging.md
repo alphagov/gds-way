@@ -64,6 +64,8 @@ some questions to ask:
 
 The [beats][] tools will detect periods of unavailability.  They will
 remember how much they have sent and continue where they left off.
+They also use a protocol which is backpressure-aware, so they will not
+overload logstash when it comes back online.
 
 One pattern is to have one process to ship logs to your long-term
 archive, and a second process to fill the short-term query tool from
