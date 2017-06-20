@@ -41,7 +41,7 @@ are services which are less expensive and more reliable.
 
 You should have a way of storing logs which focuses on long-term
 durability.  Some teams archive logs to S3 at the same time as sending
-them to their ELK or Sumo Logic
+them to their ELK or Sumo Logic store.
 
 ## Querying from the archives
 
