@@ -1,24 +1,34 @@
 ---
 title: Logging
 layout: recommendation
-expires: 2017-09-01
+expires: 2017-12-01
 ---
 
-## Shared logging platform
+# Short term queryable logs
 
-The service support and operations team is investigating whether
-we should run a shared logging platform for product teams at GDS.
+For the purposes of incident management and debugging, it's useful to
+have a system for storing and querying the most recent logs produced
+by your application and infrastructure.
 
-If you're about to start some work on logging, ask in the
-[#tech-ops-forum Slack channel](https://govuk.slack.com/messages/tech-ops-forum/)
-whether there's something you can use.
+In general, tools for querying logs are not a good fit for long-term
+archival, and vice versa.
+
+## Shared Elasticsearch, Logstash and Kibana (ELK) stack
+
+GDS has a shared account with logit, which offers on-demand ELK stacks
+as a service.
+
+This is suitable for a short-term place to store logs in order that
+they are available and queryable.  This should not be considered a
+durable store of logs; it is *not* suitable for long-term archival of
+logs.
 
 ## Sumo Logic
 
 Some teams have used [Sumo Logic](https://www.sumologic.com/)
 successfully for storing and querying logs.
 
-## Elasticsearch, Logstash and Kibana (ELK)
+## Self-hosted Elasticsearch, Logstash and Kibana (ELK)
 
 Each team should not operate its own ELK stack for logging.
 In the past we've found that ELK is relatively easy to set up
@@ -26,3 +36,44 @@ but teams tend to not prioritise keeping it updated.
 
 ELK isn't appropriate for long term archival of logs. There
 are services which are less expensive and more reliable.
+
+# Long term archival of logs
+
+You should have a way of storing logs which focuses on long-term
+durability.  Some teams archive logs to S3 at the same time as sending
+them to their ELK or Sumo Logic
+
+## Querying from the archives
+
+It's a good idea to be able to take logs from the long-term archive
+and load them into a queryable tool (for example, a one-time-use ELK
+stack).
+
+If you are using Amazon Web Services, CloudWatch can run rudimentary
+queries on older logs which may be good enough.
+
+# Retention periods
+
+This section recommends some sensible default choices for retention
+periods for logs.  These are a starting point for a discussion, or a
+default choice in the absence of any other constraints.
+
+Your product may have requirements which affect your choice of log
+retention periods: for example, [PCI-DSS][] mandates 3 months of
+easily-accessible logs, and a year (no more, no less) of archived
+logs.
+
+## Short-term
+
+You shouldn't need to store a long period of logs in your short-term
+queryable store.  Sensible retention periods for short-term queryable
+logs are:
+
+  * non-production environments: no more than 7 days
+  * production environments: no more than 30 days
+
+## Long-term
+
+It's sensible to keep logs in long-term archives for at least a year.
+
+[PCI-DSS]: https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard
