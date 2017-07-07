@@ -17,4 +17,4 @@ service.gov.uk domains are delegated to [nameservers](https://www.gov.uk/service
 
 - use route53 from AWS
 - if you want more availabilty for your nameservers use Google and/or Dyn
-- use use a tool such as [govuk-dns](https://github.com/alphagov/govuk-dns) or [octodns](https://github.com/github/octodns) to version control and publish your records if you need to
+- use a tool such as [govuk-dns](https://github.com/alphagov/govuk-dns) or [octodns](https://github.com/github/octodns) to version control and publish your records if you need to
