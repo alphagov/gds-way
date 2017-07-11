@@ -15,7 +15,7 @@ We should use current logstash naming conventions, as documented in
 
   - the only guaranteed fields are `@timestamp` and `@version`
   - `@version` is always `1`
-  - `@timestamp` is always an ISO-8601
+  - `@timestamp` is always an ISO-8601 formatted timestamp
   - you shouldn't prefix field names with `@fields.`
   
 We should use the
@@ -47,7 +47,13 @@ Lots of fields related to http access logs should be grouped under the
   - `path`
       - type: string
       - meaning: HTTP path, *excluding* query string
-  
+      - example: `/foo/bar/baz`
+  - `query_string`
+      - type: string
+      - meaning: HTTP query string, *excluding* inital question mark
+        character
+      - example: `foo=bar&baz=quux`
+
 Example:
 
 ```json
