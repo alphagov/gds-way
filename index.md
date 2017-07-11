@@ -27,6 +27,7 @@ in this repository. Projects at beta and live should follow these recommendation
 - [Storing and querying logs](logging.html)
 - [Monitoring your service](monitoring.html)
 - [Responding to problems](alerting.html)
+- [Sending emails](sending-email.html)
 
 ## Adding new guidance
 
