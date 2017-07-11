@@ -19,9 +19,14 @@ This should make it easier for developers to:
 - improve their personal development
 - master how they operate applications
 
-## Core languages
+## Using Java, Python and Ruby as our core languages
 
 Our core languages are __Java, Python and Ruby__.
+
+We've chosen these 3 languages because they are successfully used by
+teams at the moment, and we are confident in how to host and operate
+applications written in them. We'd advise you to carry out new
+development in one of them.
 
 ## Code styleguides
 
@@ -52,31 +57,26 @@ Some good reasons to ignore a particular guideline:
 We've got a consistent style for [Ruby](programming-languages/ruby.html) and will
 add a guide for Python and Java.
 
-## Languages in use not in the core group
-
-We've chosen these 3 languages because they are successfully used by
-teams at the moment, and we are confident in how to host and operate
-applications written in them. We'd advise you to carry out new
-development in one of them.
-
 ## Languages in use in specific contexts
 
 ### JavaScript
 
-This recommendation only applies to server-side JavaScript.
+We write server-side JavaScript with [Node.js][nodejs].
 The service manual has information on
 [using client-side JavaScript][manual_js].
 
+[nodejs]: https://nodejs.org/
 [manual_js]: https://www.gov.uk/service-manual/technology/using-progressive-enhancement
 
-The only way we're comfortable writing server-side JavaScript at the
-moment is with [Node.js][nodejs].
+GDS projects that use Node.js include:
+GOV.UK Frontend, GOV.UK Pay and the Performance Platform.
 
-[nodejs]: https://nodejs.org/
+These projects have made the decision to use Node.js, and the tech forum is watching the output of this. No new projects should use Node.js without prior consultation with the Deputy Director Technology Operations.
 
-Node.js is used by a few projects at GDS; GOV.UK Frontend, GOV.UK Pay and the Performance Platform.
-
-These projects have made the decision to use Node.JS, and the tech forum is watching the output of this. No new projects should use Node.JS without prior consultation with the Deputy Director Technology Operations
+Node.js can be used to render a web interface for your service but should
+not be used to implement any significant ‘application logic’. For instance
+GOV.UK Pay has created thin, client-facing applications that do not store
+data (although they may retrieve data from an API).
 
 In the past we've had problems operating and maintaining products written in
 Node.js (for example maintaining dependencies, picking the appropriate
@@ -87,19 +87,9 @@ ensuring security of the code). We suspect that this is because:
 - We have fewer developers with Node.js skills than other tools we use
 
 Node.js is now frequently used in the wider software development ecosystem for
-building web application frontends. This means there are a lot of supporting
-tools and technologies and we expect this to gradually improve over time.
-
-It may therefore sometimes be appropriate to use this technology for rendering
-the web interface for our services. It is hard to set a specific boundary for
-where Node.js should be used, but our current approach is that Node.js shouldn't
-be used to implement any significant "application logic". GOV.UK Pay are adopting
-this approach by using Node.js only to create thin, client-facing applications
-which do not directly persist data (they may talk to an API for this); Node.js
-transforms an API to a web interface and back again. This divide matches reasonably
-well with the division between frontend and backend areas of specialism, and
-should allow the frontend to be developed with a reasonable level of decoupling
-from the backend applications.
+building web application frontends. This increase in Node.js use means there
+has been a growth in  skills and supporting tools and we expect this to continue.
+This means we may reevaluate it as a core language in the future.
 
 Teams that adopt Node.js must take steps to ensure that they have access to
 sufficient developers with Node.js experience.
@@ -120,11 +110,13 @@ maintain the component in future.
 ## Languages we won't use for new projects
 
 We used __Scala__ in the early days of GDS. GOV.UK Licensing is the only remaining
-application written in Scala. Do not use Scala for new projects.
+application written in Scala but we've found it hard to support because of a lack
+of skills in GDS and we’re planning to rewrite it. Do not use Scala for new projects.
 
-## Other languages
+## Using other languages
 
-There will be sensible reasons to pick another language. For example when you're:
+There will be sensible reasons to not follow the above guidance on languages.
+For example when you're:
 
 - extending an existing codebase or ecosystem
 - scripting in a particular environment
@@ -133,7 +125,8 @@ There will be sensible reasons to pick another language. For example when you're
 
 The set of languages we're comfortable supporting will change over time.
 
-If you want to use a new language, talk to your technical architect and create
+If you want to use a new language, talk to your technical architect and the
+Deputy Director Technology Operations and then create
 a prototype. If it goes well make a pull request to change this document.
 
 If you've had problems using one of the languages we support, make a pull request to

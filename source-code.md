@@ -30,3 +30,11 @@ Teams are responsible for ensuring that their Git repositories
 are backed up to another location.
 
 GitHub organisations should have two-factor authorisation enforced for all members using the GitHub organisation settings.
+
+### Retired applications
+
+If an application is no longer used in production its public repository should be migrated to the [gds-attic](https://github.com/gds-attic/) organisation on GitHub.
+
+Email the `gds-github-owners` mailing list to ask for an application to be
+migrated to the attic.
+
