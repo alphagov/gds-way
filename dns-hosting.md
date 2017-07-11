@@ -3,7 +3,7 @@ title: DNS hosting
 layout: recommendation
 expires: 2018-01-01
 ---
-To make services available on the internet they need to have DNS records to let people know where they are.
+To make your services available over the internet they will need DNS records to let people know where they are.
 service.gov.uk domains are delegated to [nameservers](https://www.gov.uk/service-manual/technology/get-a-domain-name#check-where-youll-host-your-dns) controlled by service teams.
 
 
@@ -16,5 +16,5 @@ service.gov.uk domains are delegated to [nameservers](https://www.gov.uk/service
 ## Recommendations
 
 - use route53 from AWS
-- if you want more availabilty for your nameservers use Google and/or Dyn
+- if you want more availabilty for your nameservers use Google and/or Dynamic DNS (DDNS or DynDNS)
 - use a tool such as [govuk-dns](https://github.com/alphagov/govuk-dns) or [octodns](https://github.com/github/octodns) to version control and publish your records if you need to
