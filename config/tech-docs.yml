@@ -1,0 +1,26 @@
+# Host to use for canonical URL generation (without trailing slash)
+host: gds-tech-docs.cloudapps.digital
+
+# Header-related options
+show_govuk_logo: true
+service_name: My First Service
+service_link: https://www.larry-the-cat.service.gov.uk
+phase: Beta
+
+# Links to show on right-hand-side of header
+header_links:
+  About: https://www.larry-the-cat.service.gov.uk
+  Get Started: https://www.larry-the-cat.service.gov.uk/get-started
+  Documentation: /
+  Support: https://www.larry-the-cat.service.gov.uk/support
+
+# Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
+ga_tracking_id:
+
+# Table of contents depth – how many levels to include in the table of contents.
+# If your ToC is too long, reduce this number and we'll only show higher-level
+# headings.
+max_toc_heading_level: 6
+
+# Prevent robots from indexing (e.g. whilst in development)
+prevent_indexing: false
