@@ -28,6 +28,7 @@ in this repository. Projects at beta and live should follow these recommendation
 - [Monitoring your service](monitoring.html)
 - [Responding to problems](alerting.html)
 - [Sending emails](sending-email.html)
+- [Managing DNS](dns-hosting.html)
 
 ## Adding new guidance
 
