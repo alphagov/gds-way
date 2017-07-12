@@ -24,7 +24,7 @@ We don't currently have any recommendations on choosing an operating system for 
 
 ### Recommendation
 
-If you need to run a VM you should prefer the latest Ubuntu Long Term Support (LTS) version.  You should also apply some security hardening.  For example: disable root ssh access, disable ssh access via password. 
+If you need to run a VM you should prefer the latest Ubuntu Long Term Support (LTS) version.  You should also apply some security hardening.  For example, disable root ssh access, disable ssh access via password.
 
 If you need newer kernels/features running non-LTS Ubuntu is fine, provided that you ensure you stay within the support period to make sure it is receiving security updates.  If you are not using LTS, you have 3 months to migrate to a new release before the old release is no longer supported.
 
