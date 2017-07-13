@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <% if config[:tech_docs][:prevent_indexing] %>
+      <meta name="robots" content="noindex">
+    <% end %>
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title><%= current_page.data.title || "GOV.UK Documentation" %></title>
+
+    <!--[if gt IE 8]><!--><%= stylesheet_link_tag :screen, media: 'screen' %><!--<![endif]-->
+    <!--[if lte IE 8]><%= stylesheet_link_tag 'screen-old-ie', media: 'screen' %><![endif]-->
+
+    <link rel="canonical" href="<%= config[:tech_docs][:host] %><%= current_page.url %>">
+
+    <%= stylesheet_link_tag :print, media: 'print' %>
+    <%= javascript_include_tag :application %>
+  </head>
+
+  <body>
+    <div class="app-pane">
+      <div class="app-pane__header toc-open-disabled">
+        <a href="#content" class="skip-link">Skip to main content</a>
+
+        <%= partial 'layouts/header' %>
+      </div>
+
+      <div id="toc-heading" class="toc-show fixedsticky">
+        <a href="#toc" class="toc-show__label js-toc-show" aria-controls="toc">
+          Table of contents <span class="toc-show__icon"></span>
+        </a>
+      </div>
+
+      <div class="app-pane__body"<%= " data-module=\"#{yield_content(:toc_module)}\"" if content_for? :toc_module %>>
+        <div class="app-pane__toc">
+          <div class="toc" data-module="table-of-contents">
+            <a href="#" class="toc__close js-toc-close" aria-controls="toc" aria-label="Hide table of contents"></a>
+            <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading">
+              <%= yield_content :sidebar %>
+            </nav>
+          </div>
+        </div>
+
+        <div class="app-pane__content toc-open-disabled">
+          <main id="content" class="technical-documentation" data-module="anchored-headings">
+            <%= yield %>
+          </main>
+
+          <%= partial "layouts/footer" %>
+        </div>
+      </div>
+    </div>
+
+    <%= partial 'layouts/analytics' %>
+  </body>
+</html>

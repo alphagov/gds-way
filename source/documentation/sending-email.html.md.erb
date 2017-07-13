@@ -1,0 +1,18 @@
+---
+title: Sending email
+expires: 2017-11-01
+---
+
+# <%= current_page.data.title %>
+
+<%= partial :expires %>
+
+## Sending notifications to users
+
+Use [GOV.UK Notify](https://www.notifications.service.gov.uk/) when you need to send notifications to users, for example password resets and confirmation emails.
+
+## Sending notifications to engineers
+
+Use [Amazon SES](https://aws.amazon.com/ses/) when sending automatic notifications from systems (for example, cron or jenkins) to engineers.
+
+Only use email notifications from systems when the issue can't be picked up through monitoring or logging.

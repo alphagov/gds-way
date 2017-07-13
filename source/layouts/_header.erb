@@ -1,0 +1,46 @@
+<header class="header header--full-width">
+  <div class="header__container">
+    <div class="header__brand">
+      <% if config[:tech_docs][:service_link] %>
+        <a href="<%= config[:tech_docs][:service_link] %>">
+      <% else %>
+        <span>
+      <% end %>
+        <% if config[:tech_docs][:show_govuk_logo] %>
+          <span class="govuk-logo">
+            <img class="govuk-logo__printable-crown" src="/images/gov.uk_logotype_crown_invert_trans.png" height="32" width="36">
+            GOV.UK
+          </span>
+        <% end %>
+        <span class="header__title">
+          <%= config[:tech_docs][:service_name] %>
+          <% if config[:tech_docs][:phase] %>
+            <span class="phase-banner"><%= config[:tech_docs][:phase] %></span>
+          <% end %>
+        </span>
+      <% if config[:tech_docs][:service_link] %>
+        </a>
+      <% else %>
+        </span>
+      <% end %>
+    </div>
+
+    <% if config[:tech_docs][:header_links] %>
+      <div data-module="navigation">
+        <button type="button" class="header__navigation-toggle js-nav-toggle" aria-controls="navigation" aria-label="Show or hide top level navigation">Menu</button>
+
+        <nav id="navigation" class="header__navigation js-nav" aria-label="Top Level Navigation" aria-hidden="true">
+          <ul>
+            <% config[:tech_docs][:header_links].each do |title, url| %>
+              <li<% if url == current_page.url %> class="active"<% end %>>
+                <a href="<%= url %>">
+                  <%= title %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    <% end %>
+  </div>
+</header>
