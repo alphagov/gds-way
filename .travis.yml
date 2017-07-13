@@ -12,4 +12,4 @@ deploy:
   space: docs
   on:
     repo: alphagov/gds-tech
-    branch: gh-pages
+    branch: master
