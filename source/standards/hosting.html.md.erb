@@ -37,19 +37,36 @@ Amazon Web Services (AWS) offer scalable computing, storage and deployment servi
 * Amazon Web Services
   https://aws.amazon.com
 
-### Lock in concerns
+### Consider switching costs
 
-In order to minimise costs if you switch services, we determine that for the IaaS model, we will only use the core features of AWS that are common with the biggest competitors, for example:
+AWS has a large number of different services available.  Some are common to many providers, such as compute and file storage.  Others are more specific to AWS itself.
 
-  * Compute
+#### Common services
+
+It's fine to use the core features of AWS that are common with the biggest competitors, for example:
+
+  * Compute (EC2)
   * Networking (load balancing and network segregation)
   * File storage (EBS and S3)
-  * Hosted databases (Amazon Amazon Relational Database Service and Amazon DynamoDB)
+  * Hosted databases (Amazon Relational Database Service (RDS))
 
-  Other platform-like services should be weighed against the cost of switching to another service before adopting, for example:
+#### Less common services
 
-  * CloudFront
-  * Route 53
-  * Simple Queue Service (SQS)
-  * Simple Notification Service (SNS)
+When using less common services, such as CloudFront, Simple Queue Service (SQS), or Lambda, it may make it more expensive to switch to another provider if that is required in future.
+
+For example, a web API service which is built entirely from Amazon API Gateway, Lambda, SNS, SES and similar services would be harder to migrate to another platform than an API built as a traditional web application and deployed to EC2.
+
+On the other hand, a Lambda function which is used for shipping CloudTrail logs to a log provider is probably an acceptable use of a proprietary service.  It would not make sense to rewrite this Lambda function to run on EC2 hardware instead; this would do nothing to reduce switching costs.
+
+If you are using services which are more Amazon-specific, take some time to think about what they will mean for your service.
+
+Services which have the /potential/ to raise switching costs include:
+
+  * API Gateway
   * AWS Directory Service for Microsoft Active Directory
+  * CloudFront
+  * DynamoDB
+  * Lambda
+  * Route 53
+  * Simple Notification Service (SNS)
+  * Simple Queue Service (SQS)
