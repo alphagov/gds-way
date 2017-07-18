@@ -1,0 +1,39 @@
+---
+title: Programming language style guides
+---
+
+# <%= current_page.data.title %>
+
+This is a manual to accompany the
+[programming language recommendations](../recommendations/programming-languages.html).
+
+## Code styleguides
+
+Developers read code much more often than they write it. These guidelines
+are intended to improve the readability of code and make it consistent
+across GDS projects.
+
+A style guide is about consistency. Consistency with this style guide is
+important. Consistency within a project is more important. Consistency within
+one module or function is most important.
+
+But most importantly: know when to be inconsistent -- sometimes the style guide
+just doesn't apply. When in doubt, use your best judgement. Look at other
+examples and decide what looks best. And don't hesitate to ask!
+
+Some good reasons to ignore a particular guideline:
+
+- When applying the guideline would make the code less readable, even for
+  someone who is used to reading code that follows this style guide.
+- To be consistent with surrounding code that also breaks it (maybe for
+  historic reasons) -- although this is also an opportunity to clean up the
+  existing code.
+- Because the code in question predates the introduction of the guideline and
+  there is no other reason to be modifying that code.
+- When the code needs to remain compatible with older versions that
+  don't support the feature recommended by the style guide.
+
+We've got a consistent style for [Ruby](programming-languages/ruby.html) and will
+add a guide for Python and Java.
+
+
