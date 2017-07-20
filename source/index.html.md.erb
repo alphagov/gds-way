@@ -18,24 +18,35 @@ at the Tech Ops Forum meeting and in the
 
 Products at GDS must follow the
 [discovery, alpha, beta and live phases set out in the Service Manual](https://www.gov.uk/service-manual/agile-delivery).
-Products at discovery and alpha can optionally follow the recommendations
-in this repository. Projects at beta and live should follow these recommendations.
+Products at discovery and alpha can optionally follow the standards
+in this repository. Projects at beta and live should follow these standards.
 
-## Topics
+## Standards
+
+Standards are based on formal decisions made by the tech forum.
+They have an expiry date to ensure we review decisions and see if they
+are still working for us as an organization.
 
 ### Building software
 
-- [Choosing programming languages](documentation/programming-languages.html)
-- [Storing source code](documentation/source-code.html)
+- [Choosing programming languages](standards/programming-languages.html)
+- [Storing source code](standards/source-code.html)
 
 ### Operating services
 
-- [Operating systems](documentation/operating-systems.html)
-- [Storing and querying logs](documentation/logging.html)
-- [Monitoring your service](documentation/monitoring.html)
-- [Responding to problems](documentation/alerting.html)
-- [Sending emails](documentation/sending-email.html)
-- [Managing DNS](documentation/dns-hosting.html)
+- [Managing DNS](standards/dns-hosting.html)
+- [Monitoring your service](standards/monitoring.html)
+- [Operating systems](standards/operating-systems.html)
+- [Responding to problems](standards/alerting.html)
+- [Sending emails](standards/sending-email.html)
+- [Storing and querying logs](standards/logging.html)
+
+## Manuals
+
+Manuals are informative guides, not necessarily based on any formal
+decision or standard.
+
+- [Programming language style guides](manuals/programming-languages.html)
 
 ## Adding new guidance
 
@@ -43,13 +54,12 @@ Create a new Markdown file that follows this pattern and make a pull request:
 
 ```markdown
 ---
-title: Thing you're writing a recommendation about
-layout: recommendation
+title: Thing you're writing a standard about
 expires: yyyy-mm-dd (6 months from now)
 ---
 
 Introduction of a couple of paragraphs to explain why the thing you're
-writing a recommendation about is important.
+writing a standard about is important.
 
 ## User needs
 
