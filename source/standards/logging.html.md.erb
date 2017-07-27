@@ -21,7 +21,7 @@ archival, and vice versa.
 GDS has a shared account with [logit](https://logit.io/), which offers
 on-demand ELK stacks as a service.
 
-This is suitable for a short-term place to store logs in order that
+This is suitable for a short-term place to store logs so
 they are available and queryable.  This should not be considered a
 durable store of logs; it is *not* suitable for long-term archival of
 logs.
@@ -34,11 +34,11 @@ querying logs.
 ### Self-hosted Elasticsearch, Logstash and Kibana (ELK)
 
 Each team should not operate its own ELK stack for logging.
-In the past we've found that ELK is relatively easy to set up
+In the past we've found that ELK is relatively easy to set up,
 but teams tend to not prioritise keeping it updated.
 
-ELK isn't appropriate for long term archival of logs. There
-are services which are less expensive and more reliable.
+However, ELK isn't appropriate for long term archival of logs. There
+are other services which are less expensive and more reliable.
 
 ## Long term archival of logs
 
@@ -58,12 +58,12 @@ queries on older logs which may be good enough.
 ## Shipping logs
 
 When implementing your mechanism to ship logs to your stores, here are
-some questions to ask:
+some questions we suggest you ask:
 
-  * How do I ensure my logs get to both my short-term and long-term
+  * how do I ensure my logs get to both my short-term and long-term
     stores?
-  * What happens if one of these stores is temporarily unavailable?
-    What happens when it comes back online?
+  * what happens if one of these stores is temporarily unavailable?
+  * what happens when the store comes back online?
 
 The [beats][] tools will detect periods of unavailability.  They will
 remember how much they have sent and continue where they left off.
@@ -77,12 +77,12 @@ everything has been correctly archived.
 
 ## Retention periods
 
-This section recommends some sensible default choices for retention
-periods for logs.  These are a starting point for a discussion, or a
+This section recommends some sensible default choices for log retention
+periods.  These should be a starting point for a discussion, or a
 default choice in the absence of any other constraints.
 
 Your product may have requirements which affect your choice of log
-retention periods: for example, [PCI-DSS][] mandates 3 months of
+retention periods. For example, [PCI-DSS][] mandates 3 months of
 easily-accessible logs, and a year (no more, no less) of archived
 logs.
 
