@@ -3,7 +3,7 @@ host: gds-tech-docs.cloudapps.digital
 
 # Header-related options
 show_govuk_logo: false
-service_name: GDS technical guidance
+service_name: The GDS Way
 service_link: https://gds-tech-docs.cloudapps.digital
 phase: Beta
 
