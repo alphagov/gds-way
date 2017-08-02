@@ -1,20 +1,32 @@
 ---
-title: GDS technical guidance
+title: The GDS Way
 ---
 
 # <%= current_page.data.title %>
 
-This site documents some of the technical decisions that the
-[Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service)
-has made for the products we operate.
+The GDS Way is guidance for how GDS teams should build their digital services. If you do not work for GDS and are looking for help creating and running digital services, please refer to the [Service Manual](https://www.gov.uk/service-manual).
 
-It complements the [Service Manual](https://www.gov.uk/service-manual) which
+# About The GDS Way
+
+Since the [Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service) was formed a few years ago, we've grown to an organisation of several hundred people with well established teams which are meeting user needs by creating software.
+
+As we've grown GDS teams have had to choose how they want to build their services. In some ways this has been good - every team has picked the most suitable tools for their project - but now we suspect that we're at the point where having some easy-to-use defaults for new teams will be helpful. Some of the things we're hoping to achieve are:
+
+* using similar tools across GDS
+* doing procurement once centrally for GDS
+* new teams will be cheaper to spin up
+
+The phrase we are using to explain this to other people in GDS is "The GDS Way". We are trying to get across the idea that this guidance will make it easier for projects to get started while still giving teams the flexibility to do something different if their project needs it.
+
+Essentially The GDS Way includes:
+
+* consistent terminology
+* consistent ways of working
+* consistent technology and tools
+* consistent measures
+
+This site documents some of the technical decisions we have made for the products we operate and that have been agreed at the Tech Ops Forum. It also complements the [Service Manual](https://www.gov.uk/service-manual) which
 covers service design more broadly.
-
-If you think that you can contribute a change to this repository which reflects
-current practice at GDS, make a pull request to this repo and we'll discuss it
-at the Tech Ops Forum meeting and in the
-[#tech-ops-forum Slack channel](https://govuk.slack.com/messages/tech-ops-forum/).
 
 Products at GDS must follow the
 [discovery, alpha, beta and live phases set out in the Service Manual](https://www.gov.uk/service-manual/agile-delivery).
@@ -25,7 +37,7 @@ in this repository. Projects at beta and live should follow these standards.
 
 Standards are based on formal decisions made by the tech forum.
 They have an expiry date to ensure we review decisions and see if they
-are still working for us as an organization.
+are still working for GDS as an organization.
 
 ### Building software
 
@@ -34,12 +46,13 @@ are still working for us as an organization.
 
 ### Operating services
 
-- [Managing DNS](standards/dns-hosting.html)
-- [Monitoring your service](standards/monitoring.html)
-- [Operating systems](standards/operating-systems.html)
-- [Responding to problems](standards/alerting.html)
-- [Sending emails](standards/sending-email.html)
-- [Storing and querying logs](standards/logging.html)
+- [managing DNS](standards/dns-hosting.html)
+- [monitoring your service](standards/monitoring.html)
+- [operating systems](standards/operating-systems.html)
+- [responding to problems](standards/alerting.html)
+- [sending emails](standards/sending-email.html)
+- [storing and querying logs](standards/logging.html)
+- [supporting a service](standards/supporting-services.html)
 
 ## Manuals
 
@@ -51,7 +64,16 @@ decision or standard.
 
 ## Adding new guidance
 
-Create a new Markdown file that follows this pattern and make a pull request:
+We’d like to thank all contributors for their suggestions and challenges as we continue to build and develop this repository, and seek the best way to build and operate our services so we can deliver at scale.
+
+If you think you can contribute a change to this repository which reflects
+current practice at GDS, make a pull request in GitHub and we'll discuss it
+at the Tech Ops Forum meeting and in the
+[#tech-ops-forum Slack channel](https://govuk.slack.com/messages/tech-ops-forum/).
+
+Alternatively contact email us at (<a href="mailto:the-gds-way@digital.cabinet-office.gov.uk?subject=feedback">The GDS Way</a>)
+
+When you create a new Markdown file please ensure it follows this pattern and make a pull request:
 
 ```markdown
 ---
