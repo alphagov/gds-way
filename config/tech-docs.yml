@@ -1,10 +1,10 @@
 # Host to use for canonical URL generation (without trailing slash)
-host: gds-tech-docs.cloudapps.digital
+host: gds-way.cloudapps.digital
 
 # Header-related options
 show_govuk_logo: false
 service_name: The GDS Way
-service_link: https://gds-tech-docs.cloudapps.digital
+service_link: https://gds-way.cloudapps.digital
 phase: Beta
 
 # Links to show on right-hand-side of header
