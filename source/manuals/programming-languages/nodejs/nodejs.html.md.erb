@@ -1,0 +1,64 @@
+---
+title: Using Node.js at GDS
+---
+
+# <%= current_page.data.title %>
+
+
+## Important Note
+
+No new projects at GDS should use Node.js without prior consultation with the Deputy Director Technology Operations.
+The [programming language recommendations](../../../standards/programming-languages.html#javascript) section has more detail on how we currently use Node.js at GDS and why this decision has been made.
+
+## About this manual
+
+This manual is designed to aid developers in writing Node.js code that is clear and consistent, within, and across,
+projects at GDS.
+
+It is intended also as a location to collect identified best practices in Node.js development from across GDS.
+
+## Guidance
+
+As with all Javascript at GDS, for Node.js applications we use the [standard] style.
+
+When writing server-side Javascript for Node.js, there can be additional considerations on-top of those covered by the [standard] style.
+These can be found in the [GDS Node.js Style Guide][GDSNSG] in this manual.
+
+As always the rules in the [GDS Node.js Style Guide][GDSNSG] should be followed only in conjunction with the advice
+on consistency on the main [programming languages manual page](../../programming-languages.html).
+
+If you want to add guidance on Node.js please create a pull request against this repo.
+
+## Versions
+We should only use LTS (Long-Term-Support) versions of Node.js, these are even numbered versions (Node 4.x, 6.x e.t.c).
+However it is important to keep an eye on the [Node.js LTS Schedule] as to when versions move in and out of LTS.
+
+## Testing
+
+_For more on Node.js testing see the [testing][testing] section of this manual._
+
+We use [Mocha] and [Chai] (specifically Chai's `expect` assertion style) for Node.js testing at GDS.
+
+
+## Updating this manual
+
+This manual, and by extension the [GDS Node.js Style Guide][GDSNSG], is not presumed to be infallible or beyond dispute.
+If you think something is missing or if you'd like to see something changed then:
+
+1. _(optional)_ Start with the [#frontend][slack-frontend] community's Slack channel. See what other developers think and you'll get an idea
+of how likely your proposal is of being accepted as a pull request even before you put in any work.
+2. Check out the making changes section of the [GDS Tech repo][github-gds-tech-readme-making-changes]
+3. Create a pull request against [GDS Tech repo][github-gds-tech]
+
+
+
+[github-gds-tech]: https://github.com/alphagov/gds-tech
+[github-gds-tech-readme-making-changes]: https://github.com/alphagov/gds-tech/blob/master/README.md#making-changes
+[slack-fronend]: https://govuk.slack.com/messages/frontend
+[testing]: testing.html
+[GDSNSG]: style-guide.html
+[standard]: https://standardjs.com/
+[Mocha]: https://mochajs.org
+[Chai]: http://chaijs.com/
+[Node.js LTS Schedule]: https://github.com/nodejs/Release
+
