@@ -25,7 +25,7 @@ For example:
 
 ### Stack version
 
-In the **Stack version** field select the latest ELK version from the displayed drop-down menu, unless you have specific reasons to prefer an earlier version.
+In the **Stack version** field select the latest Elasticsearch, Logstash and Kibana (ELK) version from the displayed drop-down menu, unless you have specific reasons to prefer an earlier version.
 
 Complete the **Daily logs** and **Retention fields** as appropriate then choose **continue**, confirm your stack details are correct and then **Create Stack**.
 
@@ -57,7 +57,7 @@ The only inputs we are interested in are **Beats-SSL** and **Syslog-SSL**, you w
 
 If you know in advance which IP addresses or address ranges you will be sourcing logging traffic from, include these in your request so that the **Beats-SSL** and **Syslog-SSL** ports can be whitelisted.
 
-## Request TLS mutual auth
+## Request TLS mutual authentication
 
 Request TLS mutual authentication is switched on for your stack. You can do this through a support request to Logit.
 
@@ -101,7 +101,7 @@ Logit will send you a zip file containing three files.
 
 1. `f046ca39-8388-4c49-a536-19f95a555905-<x>.cert.pem` where x is an 8-digit hex number. This is the client certificate, signed by the stack-specific intermediate CA.
 
-2. `f046ca39-8388-4c49-a536-19f95a555905-<x>.key.encrypted.pem` the corresponding RSA private key for the above certificate. This private key needs to be provided to any process that wants to authenticate to the Logit service to initiate a log stream, for example, Filebeat or Rsyslog. The private key is encrypted.  The decryption password is your **Stack API Key**, available through **settings** in the Logit dashboard.
+2. `f046ca39-8388-4c49-a536-19f95a555905-<x>.key.encrypted.pem` the corresponding RSA private key for the above certificate. This private key needs to be provided to any process that wants to authenticate to the Logit service to initiate a log stream, for example, Filebeat or Rsyslog. The private key is encrypted. The decryption password is your **Stack API Key**, available through **settings** in the Logit dashboard.
 
 3. `f046ca39-8388-4c49-a536-19f95a555905-ca-chain.pem` a concatenation of three certificates forming the CA chain, both from the Logit Root CA to the above certificate, and from the Logit Root CA to the server certificate.
 
@@ -109,7 +109,7 @@ Although it is permissible in the TLS spec for the client and the server certifi
 
 > Even in x509/fingerprint mode, both the client and sever certificate currently
 > must be signed by the same root CA. This is an artifact of the underlying
-> GnuTLS library and the way we use it.  It is expected that we can resolve this
+> GnuTLS library and the way we use it. It is expected that we can resolve this
 > issue in the future.
 
 for further information refer to [RSyslog's documentation](http://www.rsyslog.com/doc/ns_gtls.html)
@@ -133,7 +133,7 @@ The client key will need to be decrypted before being installed.
 
 ## Configuring Filebeat
 
-[Filebeat](https://www.elastic.co/products/beats/filebeat) is a Logstash client that reads log files from the filesystem and ships them to Logstash as they are being written to. Please refer to Filebeat's own documentation for details on installation, general configuration and operation.
+Filebeat is a Logstash client that reads log files from the filesystem and ships them to Logstash as they are being written to. Please refer to [Filebeat documentation](https://www.elastic.co/products/beats/filebeat)for details on installation, general configuration and operation.
 
 The following is a sample configuration fragment for mutual auth to Logit.  The port number in the `hosts` specification must be the TCP port assigned to the `Beats-SSL` input in your stack.
 
@@ -150,7 +150,7 @@ output.logstash:
     key: "/etc/ssl/private/logstash-client.key"
 ```
 
-Puppet example with *optional* mutual auth - via the [pcfens-filebeat module](https://github.com/pcfens/puppet-filebeat):
+Puppet example with *optional* mutual auth - through the [pcfens-filebeat module](https://github.com/pcfens/puppet-filebeat):
 
 ```puppet
 $logstash_output_config = {
@@ -236,7 +236,7 @@ been changed.
 
 Architectural constraints around Egress security often mean that having each of your servers connect directly to Logit's endpoint is not an option.
 
-This section covers some possible approaches to securely relaying Beats and Syslog traffic to Logit.io at your environment's boundary.
+This section covers some possible approaches to securely relaying Beats and Syslog traffic to Logit at your environment's boundary.
 
 ### Proxying Beats-SSL (Lumberjack protocol)
 
@@ -287,9 +287,9 @@ In this example, `10.1.0.0/24` is the private network CIDR range of the log-gene
 
 *This section may need updating as the examples have not yet been tested*
 
-The Syslog protocol is designed to be relayed, and Rsyslog supports this fully.
+The Syslog protocol is designed to be relayed, Rsyslog fully supports this.
 
-The configuration example in the above section will in fact already do the egress-proxy-to-Logit part of the relay unmodified, and this should be applied to your Egress proxy's rsyslogd config.
+The configuration example in the above section will already do the egress-proxy-to-Logit part of the relay unmodified, and this should be applied to your Egress proxy's rsyslogd config.
 
 However, you may need some additional configuration to allow your Egress proxy's rsyslogd to accept syslog messages from your internal hosts. For example:
 
