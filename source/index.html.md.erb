@@ -39,30 +39,23 @@ Standards are based on formal decisions made by the tech forum.
 They have an expiry date to ensure we review decisions and see if they
 are still working for GDS as an organization.
 
-### Building software
 
-- [naming things](standards/naming-things.html)
-- [choosing programming languages](standards/programming-languages.html)
-- [storing source code](standards/source-code.html)
+<% standards_table_of_contents.each do |section, pages| %>
 
-### Operating services
-
-- [managing DNS](standards/dns-hosting.html)
-- [monitoring your service](standards/monitoring.html)
-- [operating systems](standards/operating-systems.html)
-- [responding to problems](standards/alerting.html)
-- [sending emails](standards/sending-email.html)
-- [storing and querying logs](standards/logging.html)
-- [supporting a service](standards/supporting-services.html)
+### <%= section %>
+<% pages.each do |page| %>
+- <%= link_to page.data.title, page.path %>
+<% end %>
+<% end %>
 
 ## Manuals
 
 Manuals are informative guides, not necessarily based on any formal
 decision or standard.
 
-- [Programming language style guides](manuals/programming-languages.html)
-- [Setting up logging](manuals/logging.html)
-- [Sending logs securely to Logit.io](manuals/logit-io.html)
+<% manuals_table_of_contents.each do |page| %>
+- <%= link_to page.data.title, page.path %>
+<% end %>
 
 ## Adding new guidance
 

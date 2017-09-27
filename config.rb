@@ -47,6 +47,19 @@ activate :syntax
 helpers do
   require 'table_of_contents/helpers'
   include TableOfContents::Helpers
+
+  def standards_table_of_contents
+    sitemap.resources
+      .select { |page| page.path.start_with?('standards') }
+      .sort_by { |page| page.data.title }
+      .group_by { |page| page.data.section }
+  end
+
+  def manuals_table_of_contents
+    sitemap.resources
+      .select { |page| page.path.start_with?('manuals') }
+      .sort_by { |page| page.data.title }
+  end
 end
 
 configure :build do
