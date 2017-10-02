@@ -4,9 +4,9 @@ title: Sending logs securely to Logit.io
 
 # <%= current_page.data.title %>
 
-*we should say here why we have we written this guidance?
-what problem are we fixing?
-then we go into how to do the thing?*
+Logit offers logstash endpoints. However in their default mode there is no authentication on them, this means anyone who has the logstash address could inject fake logs into your stash.
+
+This guide takes you through setting up authentication for logstash on Logit using mutual TLS authentication.
 
 ## Provision a new stack
 
@@ -112,9 +112,9 @@ Although it is permissible in the TLS spec for the client and the server certifi
 > GnuTLS library and the way we use it. It is expected that we can resolve this
 > issue in the future.
 
-for further information refer to [RSyslog's documentation](http://www.rsyslog.com/doc/ns_gtls.html)
+For further information refer to [RSyslog's documentation](http://www.rsyslog.com/doc/ns_gtls.html)
 
-Although we have not done any further testing around this, there may be some possible configuration where the Logit server certificate is signed by the GeoTrust public CA, and the client certifiate is signed by a GDS CA that Logit trusts.
+Although we have not carried out any further testing around this, there may be some possible configuration where the Logit server certificate is signed by the GeoTrust public CA, and the client certifiate is signed by a GDS CA that Logit trusts.
 
 ## Install client key, client certificates, and CA chain certificates
 
@@ -150,7 +150,7 @@ output.logstash:
     key: "/etc/ssl/private/logstash-client.key"
 ```
 
-Puppet example with *optional* mutual auth - through the [pcfens-filebeat module](https://github.com/pcfens/puppet-filebeat):
+Puppet example with *optional* mutual auth - using the [pcfens-filebeat module](https://github.com/pcfens/puppet-filebeat):
 
 ```puppet
 $logstash_output_config = {
@@ -226,15 +226,13 @@ Declare an action on matching messages that uses the `omfwd` module to forward t
 )
 ```
 
-```
 Note the `streamdriver="gtls"` and `streamdrivermode="1"` are required here,
 despite the earlier config fragment implying that the default behaviour has
 been changed.
-```
 
 ## Proxy patterns
 
-Architectural constraints around Egress security often mean that having each of your servers connect directly to Logit's endpoint is not an option.
+Architectural constraints around egress security often mean that having each of your servers connect directly to Logit's endpoint is not an option.
 
 This section covers some possible approaches to securely relaying Beats and Syslog traffic to Logit at your environment's boundary.
 
@@ -281,17 +279,15 @@ pass {
 }
 ```
 
-In this example, `10.1.0.0/24` is the private network CIDR range of the log-generating servers that you're proxying for, and `12345` is the TCP port of the Beats-SSL input on the `f046ca39-8388-4c49-a536-19f95a555905-ls.logit.io` Logstash endpoint.
-
 ### Proxying Syslog
 
 *This section may need updating as the examples have not yet been tested*
 
-The Syslog protocol is designed to be relayed, Rsyslog fully supports this.
+The Syslog protocol is designed to be relayed; Rsyslog fully supports this.
 
-The configuration example in the above section will already do the egress-proxy-to-Logit part of the relay unmodified, and this should be applied to your Egress proxy's rsyslogd config.
+The configuration example in the above section will already do the egress-proxy-to-Logit part of the relay unmodified, and this should be applied to your egress proxy's rsyslogd config.
 
-However, you may need some additional configuration to allow your Egress proxy's rsyslogd to accept syslog messages from your internal hosts. For example:
+However, you may need some additional configuration to allow your egress proxy's rsyslogd to accept syslog messages from your internal hosts. For example:
 
 ```
 $ModLoad imudp
