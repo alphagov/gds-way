@@ -1,0 +1,69 @@
+---
+title: Testing Services
+expires: 2018-01-10
+---
+
+# <%= current_page.data.title %>
+
+<%= partial :expires %>
+
+## Why and when to test
+
+You should carry out [penetration testing](https://www.gov.uk/service-manual/technology/vulnerability-and-penetration-testing) and vulnerability assessments to ensure your service is secure, according to the [Service Manual](https://www.gov.uk/service-manual):
+
+> "Vulnerability assessments help you find potential weaknesses in your service.
+> Penetration tests proactively attack your systems to find weaknesses and help you understand how easy they are to exploit."
+
+At a minimum you should test twice a year at six month intervals, your tests should consist of:
+
+* one external test by an [approved third party](https://www.gov.uk/service-manual/technology/vulnerability-and-penetration-testing#working-with-third-parties) which is classed as a major test
+* one internal test which is classed as a minor test
+
+In addition to routine testing every 6 months, you should also test following significant changes to your infrastructure or network, for example when you:
+
+* change a cloud service provider
+* change or upgrade an operating system
+* apply security updates or patches
+
+To schedule a test please contact [GDS Information Assurance (IA)](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) directly.
+
+Please note, for an external penetration test you should provide them with at least 6 months advance notice.
+
+You should also seek clarification from IA whether your service is classed as large or minor in terms of potential risk. This could affect how frequently you need to test as large services may need to test more frequently than twice a year.
+
+Test frequency also depends on the complexity of your service:
+
+* a complex service is not necessarily defined as a large service
+* smaller services can be considered as complex depending on their specific configuration
+
+IA can provide clarification on whether your service is considered as large or small in terms of its complexity.
+
+## How to test?
+
+The costs involved in testing can be significant so it is advisable to use GDS internal services as far as possible.
+
+While, it is not practical to test all components of a service every six months; whether the test is a major external test or a minor internal test will determine which components of your service to focus testing on.
+
+Before you begin testing clearly define:
+
+* the beginning and end test states
+* the explicit results you want and do not want to achieve
+* the specific technical requirements to complete your testing
+
+If your testing produces negative results:
+
+ * aim to schedule a follow up test within six months of the first one
+ * this should be an internal incremental test
+ * it is advisable to carry out an external assessment until the issue is resolved
+
+Please note, some of the things leading to negative results can relate to possible structural issues with a service and not the penetration test itself. In this case problems may not be addressed by a specific fix, and will require further investigation.
+
+For example, increasing the frequency of your test regime could be the prompt for a full internal review to resolve a particular problem.
+
+## Tools
+
+*Do we have anything to say about test tools in this guidance?*
+
+## Who to contact
+
+*we need to put something here, who should this be in IA?*
