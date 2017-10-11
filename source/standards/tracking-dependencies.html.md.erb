@@ -1,0 +1,31 @@
+---
+title: How to track dependencies
+expires: 2018-10-11
+---
+
+# <%= current_page.data.title %>
+
+<%= partial :expires %>
+
+When you develop and operate your service, you’ll need to know if any third party libraries you depend on are out of date or have potential security vulnerabilities.
+
+The automated tools you use to do this should not slow down the development process. They should support our [supported programming languages][] and should not disclose potential security vulnerabilities to the public.
+
+We recommend you use the [GOV.UK Gem Security Checker][] with regular code checks to feed any discovered vulnerabilities into your team’s backlog. You can then prioritise fixes relative to other project work, addressing the vulnerability in private before making the fix public.
+
+### Snyk.io
+
+Snyk monitors the dependencies of applications for reported security vulnerabilities. It will optionally check Pull Requests for the introduction of vulnerable dependencies. It will optionally create a PR to fix vulnerabilities.
+
+We evaluated Snyk on GOV.UK's Ruby repositories. We decided to disable the automatic checking and fixing capabilities of the service, but continue to use it as a dashboard of vulnerable gems.
+
+Its automatic checking regularly identified a low impact vulnerability in Nokogiri for which a fix wasn't available. This would cause PRs to show as failing checks in the GitHub interface. The proposed workaround was to allow Snyk to add a `.snyk.yml` file to the root of the repository to ignore the vulnerability in question. We decided not to allow this.
+
+There were further examples of false positives that proved difficult to silence. The noise of a failing Snyk build caused developers to ignore the check entirely, giving a false sense of security.
+
+Due to GOV.UK's policy of pessimistically pinning gem versions in the `Gemfile`, the automatically generated fix PRs wouldn't resolve the issue without manual tweaking of the proposed Pull Request.
+
+The automatically generated fixes would be shown to the public as a Pull Request on GitHub.com. This potentially discloses the vulnerability to the public.
+
+[supported programming languages]: https://gds-way.cloudapps.digital/standards/programming-languages.html#content
+[GOV.UK Gem Security Checker]: https://github.com/alphagov/govuk_security_audit
