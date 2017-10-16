@@ -1,0 +1,146 @@
+---
+title: Managing accounts with third party services
+expires: 2018-04-01
+---
+
+# <%= current_page.data.title %>
+
+<%= partial :expires %>
+
+When developing a service, your team will often require the use of
+third-party services.  To access these services, you will need some
+sort of user account.  This page provides guidance on how to manage
+those accounts.
+
+## Terms
+
+In this page we distinguish between an account and an individual:
+
+- An *account* means an account with an identifier such as a username or
+  email address
+- An *individual* means a human being
+- A set of *credentials* means some sort of secret used to gain access
+  to a user account (for example: a password, a secret access key)
+
+## Goals and principles
+
+When managing credentials we have a few goals:
+
+- Ensure that the right people have access
+- Ensure that the wrong people do not have access
+  - Particularly: ensure when people leave the organization, their
+    access is revoked or expired
+- Identify who did what and when (audit)
+  - This goal has varying importance depending on context
+  - Technical limitations may prevent the goal from being achieved, or
+    only provide partial audit
+
+To meet these goals, we have some principles:
+
+- Prefer to minimise the number of secrets that an individual needs to
+  keep
+  - This helps with revocation because there are fewer sets of
+    credentials to revoke when someone leaves
+  - Passwords are particularly problematic secrets. Other forms of
+    secrets (eg secret access keys or OAuth tokens) are more easily
+    revoked and recycled.
+- No individual should ever have to use credentials associated with
+  another individual
+  - This would be counter to the audit goal
+- There should be no need to share credentials between teams
+  - Again, this is problematic for audit
+  - This is also problematic for knowing when credentials should be
+    revoked
+  - Technical limitations may mean this is unavoidable sometimes
+
+## Creating accounts for shared third-party services
+
+The recommendations here depend on whether the service supports
+organisation or team access natively.
+
+### Services that support organisation accounts
+
+For services which support organisation accounts, we should use this
+to ensure the correct individuals have access.  Therefore:
+
+- Create separate accounts for each individual rather than sharing
+  credentials
+- Prefer using a single-sign-on provider over creating an account with
+  separate username and password
+- Prefer using G-Suite as a single sign-on provider over any other
+  provider
+    - this is because G-Suite is a core part of the leaver's process and
+      so we have high confidence this will be revoked when somebody
+      leaves
+    - Sometimes GitHub may be preferable as sign-on provider, for
+      services that can use GitHub’s team structure to manage
+      permissions. For example, travis does this.
+- Ensure that you have a documented process for removing individual's
+  access when they leave.
+    - If you use G-Suite then their access will be revoked when their
+      G-Suite access is revoked.  However, you may still wish to clean
+      up the individual's account with the third-party service.
+
+### Services that only provide individual accounts
+
+For services which do not support organisation accounts, there is no
+choice but to share credentials.  This carries a number of problems:
+
+- It's not always easy to know who has access to a service,
+  particularly an occasionally-accessed service
+- If the last person with access leaves, we can lose access altogether
+- If the account is registered with an individual's email address, and
+  that person leaves, a number of features may be lost (such as
+  important notifications or "lost password" functionality)
+
+These recommendations try to reduce the risks of these adverse
+outcomes:
+
+- Create an account using a Google group email address rather than an
+  individual email address to avoid losing access to the account when
+  people leave (see notes below on using shared Google groups).
+- Store the password in your team's shared credential store.
+- If the account supports two-factor authentication, ensure each team
+  member has access to a second factor for the account
+- Ensure you have a documented process for removing individual's
+  access to the Google group and the credential store and for rotating
+  the credentials including any API keys and multi-factor
+  authentication.
+
+## Notes on using shared Google Groups
+
+Ensure that:
+
+- the group is able to receive emails from outside of the organisation by 
+  setting 'permission to post' to 'Public'
+- only users who should be able to access the service are able to view the
+  posts by setting 'permission to view topics' to 'all members of the group'
+
+## Recommendations for specific services:
+
+### GitHub
+
+Key recommendation: **use separate accounts per individual**.
+
+- Individuals may have existing GitHub accounts when they join GDS; we
+  can use those rather than creating a separate GDS account
+    - However, this means it is doubly important to ensure that
+      individuals are removed from our GitHub organisation as part of
+      the leaver's process.
+- Each team should have someone (usually a tech lead) who is an owner
+  and can grant/revoke access
+- CI users and dashboards such as fourth wall should use scoped OAuth
+  tokens where possible, with the minimum access required to do their
+  job
+
+### Travis
+
+Use GitHub to log in to Travis.  Travis doesn’t offer any other option
+anyway, and using GitHub for login means that travis can use GitHub’s
+team structure to control access to specific repos
+
+### Logit
+
+Use Google Apps Marketplace to log in to logit.  Again, this is the
+only possible option.
+
