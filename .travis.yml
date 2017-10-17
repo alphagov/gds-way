@@ -11,5 +11,5 @@ deploy:
   organization: gds-tech-ops
   space: docs
   on:
-    repo: alphagov/gds-tech
+    repo: alphagov/gds-way
     branch: master
