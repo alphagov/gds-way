@@ -5,13 +5,13 @@ title: Writing Python at GDS
 # <%= current_page.data.title %>
 
 
-### About this manual:
+### About this manual
 
 This manual is designed to aid developers in writing Python code that is clear and consistent, within, and across,
 projects at GDS.
 
 
-### Guidance:
+### Guidance
 
 We follow [PEP8][], in some cases [PEP8][] doesn't express a view (e.g. on the usage of language
 features such as metaclasses) in these cases we defer to the [Google Python style guide][GPSG].
@@ -19,7 +19,7 @@ We suggest using [PEP8][] and the [Google Python style guide][GPSG] (in order of
 something is explicitly mentioned in the [GDS Python Style Guide][GDSPSG].
 
 
-### Additional rules:
+### Additional rules
 
 The [GDS Python Style Guide][GDSPSG] is the place for detailing GDS specific rules/ exemptions to [PEP8][] or the
 [Google Python style guide][GPSG]. An example of which is allowing a line length of 120 instead of 79.
@@ -30,17 +30,18 @@ on consistency on the main [programming languages manual page][GDSPSG].
 If you want to add a new rule or exception please create a pull request against this repo.
 
 
-### Linting:
+### Linting
 
 _For more on linting (including standard settings and config) see the [linting][linting] section of this manual._
 
 [Flake8][] is the preferred linting tool. It incorporates:
+
 * [PEP-0008][PEP8] inspired style checks using PyCodeStyle
 * [Complexity][WikiCyclomatic_complexity] checking using the [McCabe project][McCabe]
 * Lint checks using [PyFlakes][]
 
 
-### Updating this manual:
+### Updating this manual
 
 This manual, and by extension the [GDS Python Style Guide][GDSPSG], is not presumed to be infallible or beyond dispute.
 If you think something is missing or if you'd like to see something changed then:
