@@ -10,7 +10,7 @@ phase: Alpha
 # Links to show on right-hand-side of header
 header_links:
   Documentation: /
-  GitHub: https://github.com/alphagov/gds-tech
+  GitHub: https://github.com/alphagov/gds-way
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
 ga_tracking_id:
