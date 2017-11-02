@@ -1,0 +1,51 @@
+---
+title: Running services as containers
+expires: 2018-05-02
+---
+# <%= current_page.data.title %>
+
+<%= partial :expires %>
+
+## Principles
+
+This guidance should not be applied to development environments using containers.
+
+Where possible, web applications should use the PaaS as per the [hosting guidance](standards/hosting.html).
+
+It is not recommended to run bare containers on the PaaS, as provided by the [documentation](https://docs.cloud.service.gov.uk/#deploy-a-docker-image-experimental).
+
+If your service is inappropriate to run on the PaaS, or it is not possible to use the PaaS platform, then guidance should be followed to ensure best practice when running your service as a container.
+
+## Recommendations
+
+### Use Docker
+
+Use Docker to build images. Docker is an industry standard and already used across GDS.
+
+### Hosting images
+
+A container registry should host your images.
+
+You should use [Dockerhub](https://hub.docker.com/) or [Amazon EC2 Container Registry](https://aws.amazon.com/ecr/).
+
+### Running containers
+
+#### Bare Docker on EC2
+
+You can run services using Docker on an EC2 instance. This is appropriate for services that:
+
+ - Uptime is not the priority
+ - Do not require zero downtime deployments
+ - Can be managed by configuration management
+
+We recommend against running Docker as root.
+
+The service should have monitoring and logging like any other non-container based application.
+
+#### Amazon ECS as a scheduler
+
+If your service is user facing and uptime is critical, a clustered scheduler should be used to ensure high availability.
+
+Clustering your service means you are able to protect against unhealthy nodes, and the scheduler should appropriately balance workloads across healthy nodes.
+
+We recommend using [Amazon ECS](https://aws.amazon.com/ecs/) as your scheduler. This is a SaaS product offered by our chosen hosting provider.
