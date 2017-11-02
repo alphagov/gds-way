@@ -13,6 +13,10 @@ Use [GOV.UK Notify](https://www.notifications.service.gov.uk/) when you need to 
 
 ## Sending notifications to engineers
 
-Use [Amazon SES](https://aws.amazon.com/ses/) when sending automatic notifications from systems (for example, cron or jenkins) to engineers.
+Use your [alerting], [monitoring] or [logging] tool when sending automatic notifications from systems (for example, cron or jenkins) to engineers.
 
-Only use email notifications from systems when the issue can't be picked up through monitoring or logging.
+Only use email notifications from systems when the issue can't be picked up through monitoring or logging.  In these situations, use [Amazon SES](https://aws.amazon.com/ses/).
+
+[alerting]: alerting.html
+[monitoring]: monitoring.html
+[logging]: logging.html
