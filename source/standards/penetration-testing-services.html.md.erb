@@ -1,6 +1,6 @@
 ---
-title: Testing Services
-expires: 2018-01-10
+title: Penetration Testing Services
+expires: 2018-05-10
 ---
 
 # <%= current_page.data.title %>
@@ -14,54 +14,89 @@ You should carry out [penetration testing](https://www.gov.uk/service-manual/tec
 > "Vulnerability assessments help you find potential weaknesses in your service.
 > Penetration tests proactively attack your systems to find weaknesses and help you understand how easy they are to exploit."
 
-At a minimum you should test twice a year at six month intervals, your tests should consist of:
+Regular penetration testing coupled with an ongoing improvement programme will reduce long term service cost.
+
+At a minimum you should test twice a year at 6 month intervals, your tests should consist of:
 
 * one external test by an [approved third party](https://www.gov.uk/service-manual/technology/vulnerability-and-penetration-testing#working-with-third-parties) which is classed as a major test
 * one internal test, which is classed as a minor test, carried out by members of the GDS Security Team
 
-In addition to routine testing every 6 months, you should also test following significant changes to your infrastructure or network, for example when you:
+In addition to routine testing every 6 months, you may also need to test after significant changes to your application, infrastructure or network, for example when you:
 
 * change a cloud service provider
 * change or upgrade an operating system
 * make significant changes to your firewall configuration
+* make significant changes to your application’s operation or code
+* change stored data, for example if you introduce new data which can be classified as PII (Personally Identifiable Information)
+* add a third-party partner, for example, a database processor or email provider (especially if the third-party partner is processing PII)
 
-You should also seek clarification from IA whether your service is classed as large or minor in terms of potential risk. This could affect how frequently you need to test as large services may need to test more frequently than twice a year.
+You should discuss significant changes with the Information Assurance (IA) team when you begin to design or plan the change, as they can advise on any important considerations.
+
+If your service is particularly large or complex it may be better to test more frequently but with a narrower scope.
 
 Test frequency also depends on the complexity of your service:
 
 * a complex service is not necessarily defined as a large service
-* smaller services can be considered as complex depending on their specific configuration
+* smaller services can be considered as complex depending on their specific designs and configurations
 
-IA can provide clarification on whether your service is considered as large or small in terms of its complexity. You will need to work with IA to establish a testing pattern and meet with them regularly to discuss ongoing changes to your service.
+You will need to work with IA to establish a testing pattern and meet with them regularly to discuss ongoing changes to your service.
 
-## How to test?
+## Scoping a test
 
-The costs involved in testing can be significant so it is advisable to use GDS internal services as far as possible.
-
-While, it is not practical to test all components of a service every six months; whether the test is a major external test or a minor internal test will determine which components of your service to focus testing on.
+While it is not practical to test all components of a service every six months; whether the test is a major external test or a minor internal test will determine which components of your service to focus testing on.
 
 Before you begin testing clearly define:
 
-* the beginning and end test states
+* the beginning and end test dates
 * the explicit results you want and do not want to achieve
+	* what should be tested and not tested
+	* any areas of concern requiring focus
 * the specific technical requirements to complete your testing
 
-If your testing produces negative results:
+The costs involved in testing can be significant so it is advisable to use GDS internal services as far as possible.
 
- * aim to schedule a follow up test within six months of the first one
- * this should be an internal incremental test
- * it is advisable to carry out an external assessment until the issue is resolved
+## Preparing for a test
 
-Please note, some of the causes of negative results can relate to possible structural issues with a service and not the penetration test itself. In this case problems may not be addressed by a specific fix, and will require further investigation.
+There are some suggested baseline tasks you should do to prepare your infrastructure for testing.
 
-For example, increasing the frequency of your test regime could be the prompt for a full internal review to resolve a particular problem.
+These should also form part of the routine maintenance your team should carry out for your environment, for example:
 
-## Tools
+* Server maintenance
+ * ensure operating systems are patched and up-to-date
+ * audit administrative accounts and associated passwords
+ * regularly review system logs
 
-*Do we have anything to say about test tools in this guidance?*
+* Firewall rule-base
+ * Review existing rules to avoid overlap or duplication
+ * Review temporary rules, removing them if no longer required
+ * Ensure the reason and purpose for rules are understood and documented
+
+* System documentation
+ * Ensure guidance reflects the current system state
+ * Conduct regular documentation reviews
+ * Use version control for your documentation
+
+* Prepare a test environment
+ * Create temporary credentials for 3rd party testers
+ * Ensure the test environment is separate from your live environment
+ * The test environment should replicate the live service
+ * Notify your service providers in advance, for example AWS
+
+## What to do after testing
+
+Once you have completed your testing, we suggest you:
+
+* clean up your test environment, for example reinstalling and re-deploying virtual test machines
+* disable test credentials
+* address root causes of failure by initiating a suitable improvement programme
+* schedule a second test with the assistance of Cyber Security and IA
+
+Following the test results aim to schedule a follow up test within 4 weeks of the test report but this time may vary depending on the exact test results.
+
+Please note, some test results can potentially be mitigated through design or other security settings. In this case a specific fix may not be required, but you should discuss this with the IA team.
 
 ## Who to contact
 
 To schedule a test please contact [GDS Information Assurance (IA)](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) directly.
 
-Please note, for an external penetration test you should provide them with at least 6 months advance notice.
+Please note, for an external penetration test you should provide them with at least three months advance notice due to procurement and third-party supplier lead times.
