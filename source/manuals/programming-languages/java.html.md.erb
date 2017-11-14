@@ -1,0 +1,43 @@
+---
+title: Java styleguide
+---
+
+# <%= current_page.data.title %>
+
+The purpose of this style guide is to provide some conventions for working on Java code within GDS. The old [Sun/Oracle Java style guide](https://www.oracle.com/technetwork/java/index-135089.html) is a useful start.
+
+Generally [IntelliJ IDEA](https://www.jetbrains.com/idea/) is used within GDS and consistency of its use helps when pairing and mob programming.
+
+We favour consistency across our code, so when considering using a new or different method or paradigm to what exists already, ensure that you have agreement of your team.
+
+## Code formatting
+
+Variable and field names should match the class they are instantiating, or have a descriptive name in the context of their use.
+
+Use the default code indenting in IntelliJ.
+
+Ensure line feeds are present at the ends of files.  This can be enabled as an option in IntelliJ: `Settings->Editor->Other->Ensure line feed at file end on save.`
+
+## Dependency injection (DI)
+
+Some programmes use [Guice](https://github.com/google/guice) as a dependency injection framework, however, consider whether use of DI is appropriate for your project.
+
+## Imports
+
+No wildcard imports should be used.  IntelliJ can be configured to explicitly import all classes and static methods in `Code Style->Java->Imports` with `Class count to use import with '*'` and `Names count to use static import with '*'` both set to a very high number, i.e. 1000.
+
+The IntelliJ "Optimize imports" command helps to sorting them alphabetically and removes any that are unused.
+
+## Code checking
+
+Use of [Sonar](https://www.sonarqube.org/) for static analysis of code is encouraged.
+
+## Build tools / external dependencies
+
+Either Gradle or Maven should be used as the build tool.
+
+Different programmes have differing requirements about where dependencies should be sourced from.
+
+## Web frameworks
+
+We use [Dropwizard](http://www.dropwizard.io/) as our web framework of choice, using our own [logging extension](https://github.com/alphagov/dropwizard-logstash/)
