@@ -52,7 +52,7 @@
   }
 
   h3, h4, h5, h6 {
-    @include heading-offset($gutter);
+    padding-top: 26px;
   }
 
   h3 {
