@@ -33,6 +33,13 @@ generated output.
 Including files manually like this lets us specify the position they appear in
 the page.
 
+## Making functional changes
+
+The GDS Way is built from the [Tech Docs Template](https://github.com/alphagov/tech-docs-template)
+repository. Any functional changes and bug fixes should be made here first, then follow the
+instructions [here](https://github.com/alphagov/tech-docs-template#updating-a-project-to-use-the-latest-template)
+to update the GDS Way.
+
 ## Preview
 
 Whilst writing documentation we can run a middleman server to preview how the
