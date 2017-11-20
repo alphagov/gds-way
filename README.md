@@ -13,7 +13,7 @@ In the application folder type the following to install the required gems:
 bundle install
 ```
 
-## Making changes
+## Making documentation changes
 
 To make changes edit the source files in the `source` folder.
 
