@@ -40,14 +40,11 @@ Technical limitations may prevent a full audit from being achieved, or may only 
 
 ### Account management principles
 
-To achieve the above goals, there are 3 principles we recommend you follow:
+To achieve the above goals, there are 3 principles we recommend you follow by:
 
-- minimising the number of secrets an individual needs to keep reduces the number of credentials to revoke when someone leaves GDS. Passwords are particularly problematic secrets. Other forms of secrets, for example secret access keys or OAuth tokens, are more easily rotated
-
-- no individual should ever have to use credentials associated with
-  another individual as this counters the audit goal
-
-- there should be no need to share credentials between service teams. This creates problems for audit and for knowing when credentials should be revoked, although technical limitations may mean this is sometimes unavoidable
+- minimising the number of secrets an individual needs to keep, reduces the number of credentials to revoke when someone leaves GDS (passwords are particularly problematic secrets, other forms of secrets such as secret access keys or OAuth tokens are more easily rotated)
+- no individual should ever have to use credentials associated with another individual as this counters the audit goal
+- there should be no need to share credentials between service teams, this creates problems for audit and for knowing when credentials should be revoked (technical limitations may mean this is sometimes unavoidable)
 
 ## Creating accounts for shared third-party services
 
@@ -70,7 +67,7 @@ Sometimes GitHub may be preferable as sign-on provider for services that can use
 
 You should ensure you have a documented process for removing individual's access when they leave GDS.
 
-If you use G Suite an individual's access will be revoked when their G Suite access is revoked. However, you may still wish to clean up the individual's account with the third-party service.
+If you use G Suite an individual's access will be revoked when their G Suite access is revoked. However, you may still wish to clean up the individual's account with the third-party service, for example Logit.
 
 ### Services only providing individual accounts
 
