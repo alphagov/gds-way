@@ -1,0 +1,143 @@
+---
+title: Using Node.js at GDS
+---
+
+# <%= current_page.data.title %>
+
+## Important Note
+
+No new projects at GDS should use Node.js without prior consultation with the 
+Deputy Director Technology Operations. The [programming language recommendations](../../../standards/programming-languages.html#javascript) 
+section has more detail on how we currently use Node.js at GDS and why this 
+decision has been made.
+
+## Guidance
+The guidance set out here should be followed in conjunction with the advice 
+on the main [programming languages manual page](../../programming-languages.html).
+
+If you want to add guidance on Node.js please see [Updating this manual](#updating-this-manual) below.
+
+### Style
+#### Formatting and linting
+To maintain consistent and readable style we use a few tools to keep our JavaScript 
+consistent. We use [Standard] style guide and linter.
+To make sure everything stays clean we recommend running these tools pre-commit. 
+It is possible to setup a pre-commit hook to automate this process.
+[Standard] can auto-fix common errors and have clear error messaging when auto-fix 
+isn’t possible. 
+
+We’ve encapsulated our recommended process into a [repo](https://github.com/jonheslop/nodejs-starter) where everything 
+is controlled by a few lines of config within your `package.json`. Once you have 
+run `npm install`, any time you make a commit [Standard] runs which formats and 
+lints your code. [Standard] will autofix small errors then continue with your 
+commit. If there’s something it can’t fix then the commit fails with a useful 
+error message such as:
+
+```
+❯ Running tasks for *.js
+   ✖ standard --fix
+     → standard: Use JavaScript Standard Style (https://standardjs.com)
+     git add
+✖ standard --fix found some errors. Please fix them and try committing again.
+  ~/nodejs-starter/index.js:5:9: 'hello' is assigned a value but never used.
+
+```
+
+#### Editor plugins
+It’s nicer to know about lint errors before commit. To do this you can get live 
+linting in your text editor of choice by installing one of [Standard’s plugins](https://standardjs.com/#are-there-text-editor-plugins).
+[SublimeLinter](http://www.sublimelinter.com/) also will work out of the box using this config.
+
+### Structure
+As well as having a consistent code style it is important that our projects and repositories 
+are structured in similar ways so that developers can find things quickly and 
+easily. We want our code to be modular and reusable and so our project structure 
+should reflect this. Below are our four guiding principles (hat tip to [Rising Stack](https://blog.risingstack.com/) 
+for this [blog post](https://blog.risingstack.com/node-hero-node-js-project-structure-tutorial/)).
+
+#### Organise files around features, not roles
+This structure means you don’t require lots of context switching to find related 
+functions and that your `require` statements don’t have overly complicated paths.
+
+```
+├── product
+|   ├── index.js
+|   ├── product.js
+|   ├── product.spec.js
+|   └── product.njk
+├── user
+|   ├── index.js
+|   ├── user.js
+|   ├── user.spec.js
+|   └── user.njk
+```
+
+#### Don’t put logic in index.js files
+Use these files to `require` all the modules functions.
+
+```js
+// product/index.js
+const product = require('./product')
+
+module.exports = {
+  create: product.create
+}
+```
+
+#### Store test files within the implementation
+Keeping tests in the same directory makes them easier to find and makes it obvious 
+when a test is missing. Keep the projects global test config and setup scripts 
+in a separate `test` directory.
+
+
+```
+├── test
+|   └── setup.spec.js
+├── product
+|   ├── index.js
+|   ├── product.js
+|   ├── product.spec.js
+|   └── product.njk
+```
+
+#### Use a config directory
+Keep your configuration together in a config folder
+
+```
+├── config
+|   ├── index.js
+|   └── server.js
+├── product
+├── user
+```
+
+### Versions
+We should only use <abbr title="Long term support">LTS</abbr> versions of Node.js. 
+These are even numbered versions (e.g Node 6.x or 8.x).
+However, it is important to keep an eye on the [Node.js LTS Schedule] as to when versions move in and out of LTS.
+
+### Further resources
+* **[Node.js best practices]** — A comprehensive guide to Node.js best practices
+* **[node.cool]** — A curated list of Node.js packages and resources by Sindre Sorhus
+* **[Node ES2015 support]** — Check Node.js support for ES2015+ features
+* **[JS documentation]** — MDN's definitive JS docs
+
+## Updating this manual
+This manual is not presumed to be infallible or beyond dispute.
+If you think something is missing or if you'd like to see something changed then:
+
+1. _(optional)_ Start with the [#Nodejs] community's Slack channel. See what other 
+developers think and you'll get an idea of how likely your proposal is of being 
+accepted as a pull request even before you put in any work.
+2. Check out the making changes section of the [GDS Tech repo][github-gds-tech-readme-making-changes]
+3. Create a pull request against [GDS Tech repo][github-gds-tech]
+
+[github-gds-tech]: https://github.com/alphagov/gds-tech
+[github-gds-tech-readme-making-changes]: https://github.com/alphagov/gds-tech/blob/master/README.md#making-changes
+[Standard]: https://standardjs.com/
+[Node.js LTS Schedule]: https://github.com/nodejs/Release
+[#Nodejs]: https://govuk.slack.com/messages/nodejs
+[node.cool]: https://node.cool
+[Node ES2015 support]: http://node.green/
+[JS documentation]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[Node.js best practices]: https://github.com/i0natan/nodebestpractices
