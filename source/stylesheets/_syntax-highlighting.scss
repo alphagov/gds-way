@@ -1,5 +1,19 @@
 .highlight {
 
+  /*
+  Seems like a horrible hack. Highlight ignores its parents
+  width for some reason. The only way to stop horizontal scrollbars
+  is to set an explicit width. I believe it must be a grid layout issue.
+   */
+  @supports (display: grid) {
+    width: calc(100vw - 75px);
+    max-width: 40em;
+
+    @include media(tablet) {
+      width: 46vw;
+    }
+  }
+
   /* Map Rouge / Pygments Tokens to work with 'Base 16' themes */
 
   background: $code-00;
