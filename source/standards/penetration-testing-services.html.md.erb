@@ -1,5 +1,5 @@
 ---
-title: Penetration Testing Services
+title: Penetration testing your service
 expires: 2018-05-10
 ---
 
@@ -7,96 +7,48 @@ expires: 2018-05-10
 
 <%= partial :expires %>
 
-## Why and when to test
+You should aim to [penetration test](https://www.gov.uk/service-manual/technology/vulnerability-and-penetration-testing) your services at 6 month intervals.
 
-You should carry out [penetration testing](https://www.gov.uk/service-manual/technology/vulnerability-and-penetration-testing) and vulnerability assessments to ensure your service is secure, according to the [Service Manual](https://www.gov.uk/service-manual):
+Testing may be carried out by an approved third party through the [National Cyber Security Centre (NCSC) CHECK scheme](https://www.ncsc.gov.uk/articles/check-fundamental-principles) or by a member of the GDS Cyber Security Team.
 
-> "Vulnerability assessments help you find potential weaknesses in your service.
-> Penetration tests proactively attack your systems to find weaknesses and help you understand how easy they are to exploit."
+Your team should work with the [GDS Information Assurance (IA) team](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) to establish a testing schedule and to procure external tests.
 
-Regular penetration testing coupled with an ongoing improvement programme will reduce long term service cost.
+You may need to schedule additional testing following significant changes to your service, meeting regularly with Information Assurance to discuss ongoing changes which can identify these changes.
 
-At a minimum you should test twice a year at 6 month intervals, your tests should consist of:
-
-* one external test by an [approved third party](https://www.gov.uk/service-manual/technology/vulnerability-and-penetration-testing#working-with-third-parties) which is classed as a major test
-* one internal test, which is classed as a minor test, carried out by members of the GDS Security Team
-
-In addition to routine testing every 6 months, you may also need to test after significant changes to your application, infrastructure or network, for example when you:
+Some examples of significant change are when you:
 
 * change a cloud service provider
-* change or upgrade an operating system
-* make significant changes to your firewall configuration
 * make significant changes to your application’s operation or code
-* change stored data, for example if you introduce new data which can be classified as PII (Personally Identifiable Information)
+* change stored data, for example if you introduce new data which can be classified as [PII (Personally Identifiable Information)](https://en.wikipedia.org/wiki/Personally_identifiable_information)
 * add a third-party partner, for example, a database processor or email provider (especially if the third-party partner is processing PII)
 
-You should discuss significant changes with the Information Assurance (IA) team when you begin to design or plan the change, as they can advise on any important considerations.
+## How to scope your test
 
-If your service is particularly large or complex it may be better to test more frequently but with a narrower scope.
-
-Test frequency also depends on the complexity of your service:
-
-* a complex service is not necessarily defined as a large service
-* smaller services can be considered as complex depending on their specific designs and configurations
-
-You will need to work with IA to establish a testing pattern and meet with them regularly to discuss ongoing changes to your service.
-
-## Scoping a test
-
-While it is not practical to test all components of a service every six months; whether the test is a major external test or a minor internal test will determine which components of your service to focus testing on.
-
-Before you begin testing clearly define:
+Before testing you should define:
 
 * the beginning and end test dates
 * the explicit results you want and do not want to achieve
-	* what should be tested and not tested
-	* any areas of concern requiring focus
-* the specific technical requirements to complete your testing
+* what should be tested and what should excluded
+* any areas of concern focus on
+* the specific technical requirements to complete testing
 
-The costs involved in testing can be significant so it is advisable to use GDS internal services as far as possible.
+## How to prepare for your test
 
-## Preparing for a test
+Before you test you will be expected to share documentation with testers, for example up to date architecture diagrams. This can also include documentation for the individual components of each application being tested.
 
-There are some suggested baseline tasks you should do to prepare your infrastructure for testing.
+To prepare your test environment you should:
 
-These should also form part of the routine maintenance your team should carry out for your environment, for example:
-
-* Server maintenance
- * ensure operating systems are patched and up-to-date
- * audit administrative accounts and associated passwords
- * regularly review system logs
-
-* Firewall rule-base
- * Review existing rules to avoid overlap or duplication
- * Review temporary rules, removing them if no longer required
- * Ensure the reason and purpose for rules are understood and documented
-
-* System documentation
- * Ensure guidance reflects the current system state
- * Conduct regular documentation reviews
- * Use version control for your documentation
-
-* Prepare a test environment
- * Create temporary credentials for 3rd party testers
- * Ensure the test environment is separate from your live environment
- * The test environment should replicate the live service
- * Notify your service providers in advance, for example AWS
+ * create temporary credentials for 3rd party testers, you can expect testers to provide their own SSH public keys
+ * ensure your test environment is separate from your live environment
+ * ensure your test environment replicates the live service
+ * notify your service providers in advance by [completing the AWS Penetration Testing request form](https://aws.amazon.com/security/penetration-testing/) and [emailing GOV.UK PaaS Support](gov-uk-paas-support@digital.cabinet-office.gov.uk)
 
 ## What to do after testing
 
-Once you have completed your testing, we suggest you:
+After your test you should meet with the IA team to discuss the test results. Working with IA will allow you to prioritise work to mitigate test findings and schedule any potential retest of those findings.
 
-* clean up your test environment, for example reinstalling and re-deploying virtual test machines
-* disable test credentials
-* address root causes of failure by initiating a suitable improvement programme
-* schedule a second test with the assistance of Cyber Security and IA
-
-Following the test results aim to schedule a follow up test within 4 weeks of the test report but this time may vary depending on the exact test results.
-
-Please note, some test results can potentially be mitigated through design or other security settings. In this case a specific fix may not be required, but you should discuss this with the IA team.
-
-## Who to contact
+## Who you need to contact
 
 To schedule a test please contact [GDS Information Assurance (IA)](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) directly.
 
-Please note, for an external penetration test you should provide them with at least three months advance notice due to procurement and third-party supplier lead times.
+For an external penetration test you should provide them with at least three months advance notice due to procurement and third-party supplier lead times.
