@@ -5,26 +5,29 @@
 # uncomment if top-most EditorConfig file
 # root = true
 
-[*.java]
+[*]
 indent_style: space
-indent_size: 4
-end_of_line: lf
-charset: utf-8
-insert_final_newline: true
-continuation_indent_size: 8
-
-[*.{scss,erb}]
 charset = utf-8
 end_of_line = lf
-indent_style = space
+insert_final_newline: true
+
+[*.java]
+indent_size: 4
+continuation_indent_size: 8
+
+[*.{scss,erb,html}]
 indent_size = 2
-insert_final_newline = true
 trim_trailing_whitespace = true
 
 [*.{js,json}]
-charset = utf-8
-end_of_line = lf
-indent_style = space
 indent_size = 2
-insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.py]
+indent_size = 4
+trim_trailing_whitespace = true
+max_line_length = 119
+
+[**.rb]
+indent_size = 2
 trim_trailing_whitespace = true
