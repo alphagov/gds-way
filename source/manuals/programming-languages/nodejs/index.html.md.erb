@@ -20,7 +20,7 @@ If you want to add guidance on Node.js please see [Updating this manual](#updati
 #### Formatting and linting
 To maintain a consistent and readable JavaScript codebase we use [StandardJS]. This includes a built in formatter, linter and automatic code fixer (auto-fix). To make sure everything stays clean we recommend running this tool before each commit. It is possible to setup a pre-commit hook to automate this process. When [StandardJS] auto-fix's errors it has clear and concise messaging and it also tells you when an automatic fix isn't possible.
 
-We’ve encapsulated our recommended process into a separate [repository](https://github.com/jonheslop/nodejs-starter) where everything is controlled by a few lines of config within your `package.json` file. Once you have run `npm install`, any time you make a commit, [StandardJS] runs. It will then format and lint your code automatically. [StandardJS] will auto-fix obvious errors then continue with your commit. If there’s something it can’t fix, then the commit fails with a useful error message such as:
+We’ve encapsulated our recommended process into a separate [repository](https://github.com/alphagov/nodejs-starter) where everything is controlled by a few lines of config within your `package.json` file. Once you have run `npm install`, any time you make a commit, [StandardJS] runs. It will then format and lint your code automatically. [StandardJS] will auto-fix obvious errors then continue with your commit. If there’s something it can’t fix, then the commit fails with a useful error message such as:
 
 ```
 ❯ Running tasks for *.js
