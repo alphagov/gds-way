@@ -5,46 +5,109 @@
 # uncomment if top-most EditorConfig file
 # root = true
 
-[*]
-indent_style: space
+[*.java]
+indent_size = 4
+indent_style = space
 charset = utf-8
 end_of_line = lf
-insert_final_newline: true
+insert_final_newline = true
+trim_trailing_whitespace = false
+continuation_indent_size = 8
+
+[*.scss]
+indent_size = 2
+indent_style = space
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.java]
-indent_size: 4
-continuation_indent_size: 8
-/* this wasn't explicitly set, so setting to false until told otherwise */
-trim_trailing_whitespace = false
-
-[*.{scss,erb,html,css}]
+[*.erb]
 indent_size = 2
+indent_style = space
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
 
-[*.{js,json}]
+[*.html]
 indent_size = 2
+indent_style = space
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.css]
+indent_size = 2
+indent_style = space
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.js]
+indent_size = 2
+indent_style = space
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.json]
+indent_size = 2
+indent_style = space
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
 
 [*.py]
 indent_size = 4
+indent_style = space
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
 max_line_length = 119
 
-[**.rb]
+[*.rb]
 indent_size = 2
+indent_style = space
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
 
 [*.sh]
 indent_size = 2
+indent_style = space
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
 
 [*.yml]
 indent_size = 2
+indent_style = space
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
 
 [Makefile]
+indent_size = 2
 indent_style = tab
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
 
 [**vendor**]
-indent_style =
 indent_size =
-end_of_line =
+indent_style =
 charset =
-trim_trailing_whitespace =
+end_of_line =
 insert_final_newline =
+trim_trailing_whitespace =
 max_line_length =
