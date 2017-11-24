@@ -9,11 +9,11 @@ expires: 2018-05-10
 
 You should aim to [penetration test](https://www.gov.uk/service-manual/technology/vulnerability-and-penetration-testing) your services at 6 month intervals.
 
-Testing may be carried out by an approved third party through the [National Cyber Security Centre (NCSC) CHECK scheme](https://www.ncsc.gov.uk/articles/check-fundamental-principles) or by a member of the GDS Cyber Security Team.
+Your team should work with the [GDS Information Assurance (IA)](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) team to establish a testing schedule and to procure external tests.
 
-Your team should work with the [GDS Information Assurance (IA) team](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) to establish a testing schedule and to procure external tests.
+Testing should be carried out by an approved third party through the [National Cyber Security Centre (NCSC) CHECK scheme](https://www.ncsc.gov.uk/articles/check-fundamental-principles) or internally by a member of the GDS Cyber Security Team.
 
-You may need to schedule additional testing following significant changes to your service, meeting regularly with Information Assurance to discuss ongoing changes which can identify these changes.
+You may need to schedule additional testing following significant changes to your service. Regular meetings with Information Assurance to discuss ongoing changes can help identify these significant changes
 
 Some examples of significant change are when you:
 
@@ -27,9 +27,8 @@ Some examples of significant change are when you:
 Before testing you should define:
 
 * the beginning and end test dates
-* the explicit results you want and do not want to achieve
-* what should be tested and what should excluded
-* any areas of concern focus on
+* the areas you want the tester to target, for example bypassing authentication
+* what should be excluded, for example third party managed infrastructure
 * the specific technical requirements to complete testing
 
 ## How to prepare for your test
@@ -38,10 +37,10 @@ Before you test you will be expected to share documentation with testers, for ex
 
 To prepare your test environment you should:
 
- * create temporary credentials for 3rd party testers, you can expect testers to provide their own SSH public keys
+ * create temporary credentials for testers (testers should provide their own SSH public keys)
  * ensure your test environment is separate from your live environment
  * ensure your test environment replicates the live service
- * notify your service providers in advance by [completing the AWS Penetration Testing request form](https://aws.amazon.com/security/penetration-testing/) and [emailing GOV.UK PaaS Support](gov-uk-paas-support@digital.cabinet-office.gov.uk)
+ * notify your service providers in advance, for example by [completing the AWS Penetration Testing request form](https://aws.amazon.com/security/penetration-testing/) or [emailing GOV.UK PaaS Support](gov-uk-paas-support@digital.cabinet-office.gov.uk)
 
 ## What to do after testing
 
