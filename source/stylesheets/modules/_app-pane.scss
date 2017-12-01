@@ -1,62 +1,127 @@
+@mixin body-scroll(){
+  > * {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+  }
+}
+
 @include screen {
-  @include media(tablet) {
-    $toc-width: 330px;
+  $toc-width: 330px;
 
-    .flexbox, .flexboxtweener {
+  .app-pane {
+    $pane-height: 100vh;
 
-      body {
-        overflow: hidden;
+    @include media(tablet) {
+      display: flex;
+      flex-direction: column;
+      height: $pane-height;
+    }
+
+    @supports (display: grid) {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, auto);
+
+      @include media(tablet) {
+        grid-template-rows: repeat(2, auto);
+        height: $pane-height;
       }
+    }
+  }
 
-      .app-pane {
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        height: 100vh;
-      }
+  .app-pane__header {
+    @include media(tablet) {
+      display: flex;
+      flex-direction: column;
+      flex: 1 0 auto;
 
-      .app-pane__header {
-        display: flex;
-        flex-direction: column;
+      > * {
         flex: 1 0 auto;
-
-        > * {
-          flex: 1 0 auto;
-        }
-      }
-
-      .app-pane__body {
-        display: flex;
-        flex: 1 1 100%;
-        min-height: 0;
-        position: relative;
-
-        > * {
-          overflow-x: scroll;
-          -webkit-overflow-scrolling: touch;
-          -ms-overflow-style: none;
-        }
-      }
-
-      .app-pane__toc {
-        flex: 0 0 auto;
-        width: $toc-width;
-        border-right: 1px solid $grey-2;
-      }
-
-      .app-pane__content {
-        flex: 1 1 auto;
       }
     }
 
-    .no-flexbox.no-flexboxtweener {
-      .app-pane__toc {
+    @supports (display: grid) {
+      grid-column: span 1;
+    }
+  }
+
+  .app-pane__body {
+    @include media(tablet) {
+      display: flex;
+      flex: 1 1 100%;
+      min-height: 0;
+      position: relative;
+
+      @include body-scroll();
+    }
+
+    @supports (display: grid) {
+      grid-column: span 1;
+
+      @include media(tablet) {
+        display: grid;
+        grid-template-columns: $toc-width 1fr;
+        grid-template-rows: auto;
+        grid-column: span 1;
+        grid-row: span 2;
+
+        @include body-scroll();
+      }
+    }
+
+    // fix left-hand navigation in Safari 5.1 (Windows)
+    .no-flexbox & {
+      display: block;
+    }
+  }
+
+  .app-pane__toc {
+    @include media(tablet) {
+      border-right: 1px solid $grey-2;
+
+      .no-flexbox & {
         float: left;
         width: $toc-width;
+        overflow-x: hidden;
+        border: 0;
       }
+    }
 
-      .app-pane__content {
-        margin-left: $toc-width;
+    @include media(tablet) {
+      flex: 0 0 auto;
+      width: $toc-width;
+    }
+
+    @supports (display: grid) {
+      @include media(tablet) {
+        grid-column: span 1;
+        width: auto;
+      }
+    }
+  }
+
+  .toc-show {
+    @supports (display: grid) {
+      grid-column: span 1;
+      width: auto;
+    }
+  }
+
+  .app-pane__content {
+    @include media(tablet) {
+      flex: 1 1 auto;
+      margin-left: auto;
+    }
+
+    @include media(desktop) {
+      flex: 1 1 auto;
+    }
+
+    @supports (display: grid) {
+      @include media(tablet) {
+        grid-column: span 1;
+        margin-left: 0;
       }
     }
   }
