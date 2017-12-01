@@ -7,47 +7,44 @@ expires: 2018-05-10
 
 <%= partial :expires %>
 
-You should aim to [penetration test](https://www.gov.uk/service-manual/technology/vulnerability-and-penetration-testing) your services at 6 month intervals.
+You should aim to run [penetration tests](https://www.gov.uk/service-manual/technology/vulnerability-and-penetration-testing) on your service every 6 months. You must work with the [GDS Information Assurance (IA) team](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) to agree when you will test and to procure external tests.
 
-Your team should work with the [GDS Information Assurance (IA)](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) team to establish a testing schedule and to procure external tests.
+Tests should be carried out by an approved third party through the [National Cyber Security Centre (NCSC) CHECK scheme](https://www.ncsc.gov.uk/articles/check-fundamental-principles) or internally by a member of the GDS Cyber Security Team.
 
-Testing should be carried out by an approved third party through the [National Cyber Security Centre (NCSC) CHECK scheme](https://www.ncsc.gov.uk/articles/check-fundamental-principles) or internally by a member of the GDS Cyber Security Team.
+You may need to schedule additional testing if you make significant changes to your service. You should meet with the IA team regularly to discuss ongoing changes.
 
-You may need to schedule additional testing following significant changes to your service. Regular meetings with Information Assurance to discuss ongoing changes can help identify these significant changes
-
-Some examples of significant change are when you:
+A significant change could be when you:
 
 * change a cloud service provider
-* make significant changes to your application’s operation or code
-* change stored data, for example if you introduce new data which can be classified as [PII (Personally Identifiable Information)](https://en.wikipedia.org/wiki/Personally_identifiable_information)
+* change stored data, for example if you introduce new data which can be classified as [personally identifiable information (PII)](https://en.wikipedia.org/wiki/Personally_identifiable_information)
 * add a third-party partner, for example, a database processor or email provider (especially if the third-party partner is processing PII)
 
-## How to scope your test
+## Scope your test
 
 Before testing you should define:
 
 * the beginning and end test dates
 * the areas you want the tester to target, for example bypassing authentication
 * what should be excluded, for example third party managed infrastructure
-* the specific technical requirements to complete testing
+* any specific technical capabilities to allow third-party testers to complete testing, for example experience working with AWS security groups
 
-## How to prepare for your test
+## Prepare for your test
 
-Before you test you will be expected to share documentation with testers, for example up to date architecture diagrams. This can also include documentation for the individual components of each application being tested.
+Before the test you will be expected to share documentation with the testers, for example up to date architecture diagrams. The documentation could also include information about the individual components of each application being tested.
+
+You should run the tests  on a separate test environment which replicates the behaviour of your live service.
 
 To prepare your test environment you should:
 
  * create temporary credentials for testers (testers should provide their own SSH public keys)
- * ensure your test environment is separate from your live environment
- * ensure your test environment replicates the live service
  * notify your service providers in advance, for example by [completing the AWS Penetration Testing request form](https://aws.amazon.com/security/penetration-testing/) or [emailing GOV.UK PaaS Support](gov-uk-paas-support@digital.cabinet-office.gov.uk)
 
 ## What to do after testing
 
-After your test you should meet with the IA team to discuss the test results. Working with IA will allow you to prioritise work to mitigate test findings and schedule any potential retest of those findings.
+After your test you should meet with the IA team to discuss the test results. You can then prioritise work to mitigate any issues identified in the test and schedule a retest if needed.
 
-## Who you need to contact
+## Schedule a test
 
-To schedule a test please contact [GDS Information Assurance (IA)](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) directly.
+To schedule a test [contact the IA team](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance).
 
-For an external penetration test you should provide them with at least three months advance notice due to procurement and third-party supplier lead times.
+If you plan to test with a third-party, you must contact the IA team at least 3 months in advance so they can organise the procurement for you.
