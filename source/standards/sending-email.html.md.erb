@@ -9,7 +9,7 @@ expires: 2018-05-01
 
 At GDS you should use the following standards for sending email notifications to service users and engineers.
 
-## How you should send notifications to users
+## How to send notifications to users
 
 Use [GOV.UK Notify](https://www.notifications.service.gov.uk/) when sending notifications to users from a GDS service, for example password resets and confirmation emails.
 
@@ -17,11 +17,11 @@ There's a [complete feature list](https://www.notifications.service.gov.uk/featu
 
 The Service Manual has further information related to [sending emails from your service domain](https://www.gov.uk/service-manual/technology/how-to-email-your-users).
 
-## How you should send notifications to engineers
+## How to send notifications to engineers
 
-Use an [alerting], [monitoring] or [logging] tool when you need to send automatic notifications from systems like [Cron](https://en.wikipedia.org/wiki/Cron) or [Jenkins](https://jenkins.io/) to engineers. For example you can use dashboards, sms, phone calls or status websites depending on the situation.
+Use an [alerting], [monitoring] or [logging] tool when you need to send automatic notifications from systems like [Cron](https://en.wikipedia.org/wiki/Cron) or [Jenkins](https://jenkins.io/) to engineers.
 
-To reduce inbox noise which can result in emails being ignored or overlooked, you should only use automatic email notifications from systems when the issue can’t be picked up through monitoring or logging. In these situations, use [Amazon Simple Email Service (Amazon SES)](https://aws.amazon.com/ses/).
+To reduce inbox noise which can result in emails being ignored or overlooked, you should only use automatic email notifications from systems when the issue can’t be picked up through monitoring or logging. In these situations send email using [Amazon Simple Email Service (Amazon SES)](https://aws.amazon.com/ses/).
 
 [alerting]: alerting.html
 [monitoring]: monitoring.html
