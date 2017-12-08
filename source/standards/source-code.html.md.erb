@@ -12,16 +12,18 @@ At GDS, we follow the principles set out in the Service Manual for managing the 
 - [using version control](https://www.gov.uk/service-manual/technology/maintaining-version-control-in-coding)
 - [making source code open](https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable)
 
-You must keep secret data such as keys or credentials closed and separate from source code. This information could allow someone to gain access to your system. You should consider encrypting the contents of your repository.
+You must keep secret data such as API keys or credentials closed and separate from source code. This information could allow someone to gain access to your system.
 
-## Use GitHub as your repository
+You should consider encrypting the contents of your repository.
+
+## Use GitHub
 
 [GDS uses GitHub as its code repository](https://gdstechnology.blog.gov.uk/2016/05/31/how-we-use-git-at-the-government-digital-service/).
 
 New repositories for GDS products and services go in the
 [alphagov](https://github.com/alphagov/) organisation on GitHub.
 
-You can use your personal GitHub account to access alphagov. Ask your tech lead or technical architect to add you (they will need to be on the [list of alphagov owners](https://github.com/orgs/alphagov/people?utf8=%E2%9C%93&query=%20role%3Aowner) to do so).
+You can use your personal GitHub account to access alphagov. Ask your tech lead or technical architect to invite you.
 
 You must have two-factor authentication configured for your account.
 
@@ -29,6 +31,6 @@ Your team is responsible for ensuring their Git repositories are backed up to an
 
 ### How to to retire applications
 
-If your application is no longer used in production, its public repository should be migrated to the [gds-attic](https://help.github.com/articles/archiving-repositories/) organisation on GitHub.
+If an application is no longer used in production its repository should be [archived](https://help.github.com/articles/archiving-repositories/).
 
-Email [gds-github-owners](mailto:gds-github-owners@digital.cabinet-office.gov.uk) to ask for your application to be migrated to the attic.
+The application’s README should be updated to detail why the repository has been archived, and should link to a new location if the function of the application has been superseded.
