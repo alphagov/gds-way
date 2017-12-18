@@ -6,6 +6,9 @@
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   ga('create', '<%= config[:tech_docs][:ga_tracking_id] %>', 'auto');
+  ga('set', 'anonymizeIp', true);
+  ga('set', 'displayFeaturesTask', null);
+  ga('set', 'transport', 'beacon');
   ga('send', 'pageview');
   </script>
 <% end %>
