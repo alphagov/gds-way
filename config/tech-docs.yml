@@ -13,7 +13,7 @@ header_links:
   GitHub: https://github.com/alphagov/gds-way
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
-ga_tracking_id:
+ga_tracking_id: UA-111409592-1
 
 # Table of contents depth – how many levels to include in the table of contents.
 # If your ToC is too long, reduce this number and we'll only show higher-level
