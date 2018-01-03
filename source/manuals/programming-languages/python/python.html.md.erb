@@ -41,6 +41,55 @@ _For more on linting (including standard settings and config) see the [linting][
 * Lint checks using [PyFlakes][]
 
 
+### Dependencies
+
+It is important to have a good strategy for specifying your project's Python
+libraries. There are two desirable characteristics:
+
+1. Reproducibility
+
+    Pin your full dependencies or you'll get unpredictability between your dev
+    environment and other environments. You want a new starter to avoid small
+    hard-to-spot problems. And you want parity between what you test locally,
+    what is tested by CI and what you deploy, or you risk new issues appearing
+    on a live server. Additionaly these things can be hard to diagnose.
+
+    Simply manually maintaining a requirements.txt doesn't capture
+    sub-dependencies. And we've noticed [minor problems with using
+    piptools/pip-compile and pipenv/Pipfile][dm-deps-commit].
+
+    **Recommendation**: Put your top-level requirements in a
+    `requirements-app.txt` file and use [this Makefile
+    script][dm-deps-commit-makefile] to generate a fully specified
+    `requirements.txt`, which is used whenever you need to pip-install the
+    dependencies. The script creates a temporary virtualenv, pip-installs the
+    `requirements-app.txt` and pip-freezes the result as `requirements.txt`.
+
+2. Kept up-to-date
+
+    Security issues are found in libraries, so it is important to choose
+    libraries that are maintained and to ensure your team has a strategy to
+    ensure security updates are installed without significant delay.
+
+    There are several web services which check a project's python dependencies
+    daily. When new releases are available, the service automatically creates a
+    Pull Request to update your requirements file, prompting the team's typical
+    processes to review, merge and deploy. A couple of GDS teams have found that
+    keeping up with every single update can be difficult - a daily nag that one
+    is soon inclined to start ignoring. At least two of these web services (snyk
+    and pyup) track which of the updates are for security reasons (as opposed to
+    just bugfixes/features) so there is scope to try getting PRs only for these.
+    However it relies on their database being correct about which updates are
+    security related, and we've spotted at least one case where a security fix
+    was missed.
+
+    **Recommendation**: Trial a service, such as [requires.io][], [pyup.io][],
+    [dependabot.com][] or [snyk.io][]. Ideally try two and compare them. Try
+    different settings. Report findings back to GDS's Python group. We're keen
+    to track this quickly emerging area to maximize our security assurance of
+    public services.
+
+
 ### Updating this manual
 
 This manual, and by extension the [GDS Python Style Guide][GDSPSG], is not presumed to be infallible or beyond dispute.
@@ -65,4 +114,10 @@ of how likely your proposal is of being accepted as a pull request even before y
 [Flake8]: http://flake8.pycqa.org/en/latest/
 [PyFlakes]: https://github.com/pycqa/pyflakes
 [McCabe]: https://pypi.python.org/pypi/mccabe
+[dm-deps-commit]: https://github.com/alphagov/digitalmarketplace-api/commit/95ac12206d26e6b219dd381dd63641c33467afbd
+[dm-deps-commit-makefile]: https://github.com/alphagov/digitalmarketplace-api/commit/95ac12206d26e6b219dd381dd63641c33467afbd#diff-b67911656ef5d18c4ae36cb6741b7965
+[requires.io]: https://requires.io/
+[pyup.io]: https://pyup.io/
+[dependabot.com]: https://dependabot.com/
+[snyk.io]: https://snyk.io/
 [GDSPSG]: style-guide.html
