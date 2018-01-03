@@ -51,11 +51,12 @@ libraries. There are two desirable characteristics:
     Pin your full dependencies or you'll get unpredictability between your dev
     environment and other environments. You want a new starter to avoid small
     hard-to-spot problems. And you want parity between what you test locally,
-    what is tested by CI and what you deploy, or you risk new issues appearing
-    on a live server. Additionaly these things can be hard to diagnose.
+    what is tested by CI, and what you deploy, or you risk new issues appearing
+    on a live server. Additionally these things can be hard to diagnose.
 
-    Simply manually maintaining a requirements.txt doesn't capture
-    sub-dependencies. And we've noticed [minor problems with using
+    Traditionally a `requirements.txt` lists the app's immediate dependencies,
+    but that leaves sub-dependencies unpinned. It makes sense to use a tool to
+    generate these, but we've noticed [minor problems with using
     piptools/pip-compile and pipenv/Pipfile][dm-deps-commit].
 
     **Recommendation**: Put your top-level requirements in a
@@ -64,6 +65,10 @@ libraries. There are two desirable characteristics:
     `requirements.txt`, which is used whenever you need to pip-install the
     dependencies. The script creates a temporary virtualenv, pip-installs the
     `requirements-app.txt` and pip-freezes the result as `requirements.txt`.
+
+    **Recommendation**: Use `requirements-dev.txt` for any dependencies used in
+    development/test but not production environments.
+
 
 2. Kept up-to-date
 
@@ -85,9 +90,9 @@ libraries. There are two desirable characteristics:
 
     **Recommendation**: Trial a service, such as [requires.io][], [pyup.io][],
     [dependabot.com][] or [snyk.io][]. Ideally try two and compare them. Try
-    different settings. Report findings back to GDS's Python group. We're keen
-    to track this quickly emerging area to maximize our security assurance of
-    public services.
+    different configuration. Report findings back to GDS's Python group. We're
+    keen to track this quickly emerging area to maximize our security assurance
+    of public services.
 
 
 ### Updating this manual
