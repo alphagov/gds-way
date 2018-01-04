@@ -4,7 +4,6 @@ title: Writing Python at GDS
 
 # <%= current_page.data.title %>
 
-
 ### About this manual
 
 This manual is designed to aid developers in writing Python code that is clear and consistent, within, and across,
@@ -43,6 +42,9 @@ _For more on linting (including standard settings and config) see the [linting][
 
 ### Dependencies
 
+<blockquote>The tools mentioned in this topic are changing quickly, so this
+section would benefit from review in July 2018</blockquote>
+
 It is important to have a good strategy for specifying your project's Python
 libraries. There are two desirable characteristics:
 
@@ -56,8 +58,9 @@ libraries. There are two desirable characteristics:
 
     Traditionally a `requirements.txt` lists the app's immediate dependencies,
     but that leaves sub-dependencies unpinned. It makes sense to use a tool to
-    generate these, but we've noticed [minor problems with using
-    piptools/pip-compile and pipenv/Pipfile][dm-deps-commit].
+    generate these, but we've noticed problems with using
+    piptools/pip-compile and pipenv/Pipfile, as detailed in [this commit
+    message][dm-deps-commit].
 
     **Recommendation**: Put your top-level requirements in a
     `requirements-app.txt` file and use [this Makefile
