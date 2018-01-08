@@ -4,43 +4,67 @@ title: Using Node.js at GDS
 
 # <%= current_page.data.title %>
 
-## Important Note
+**Important Note**
 
-New projects at GDS should never use Node.js without prior consultation with the 
-GDS Way Forum. Topics like this are discussed at our monthly meetings. To contact 
-the forum [email](mailto:programme-technical-leaders@digital.cabinet-office.gov.uk) explaining 
-the need and linking to whatever else might be relevant. The [programming language recommendations](../../../standards/programming-languages.html#javascript) 
-section has more detail on how we currently use Node.js at GDS and why this 
+New projects at GDS should never use Node.js without prior consultation with the
+GDS Way Forum. Topics like this are discussed at our monthly meetings. To contact
+the forum [email](mailto:programme-technical-leaders@digital.cabinet-office.gov.uk) explaining
+the need and linking to whatever else might be relevant. The [programming language recommendations](../../../standards/programming-languages.html#javascript)
+section has more detail on how we currently use Node.js at GDS and why this
 decision has been made.
 
-## Guidance
-The guidance set out here should be followed in conjunction with the advice on the main [programming languages manual page](../../programming-languages.html).
+## Introduction
 
-If you want to add guidance on Node.js please see [Updating this manual](#updating-this-manual) below.
+The guidance set out here should be followed in conjunction with the advice on
+the main [programming languages manual page](../../programming-languages.html).
 
-### Style
-#### Formatting and linting
-To maintain a consistent and readable JavaScript codebase we use [StandardJS]. This includes a built in formatter, linter and automatic code fixer (auto-fix). To make sure everything stays clean we recommend running this tool before each commit. It is possible to setup a pre-commit hook to automate this process. When [StandardJS] automatically fixes errors it has clear and concise messaging and it also tells you when an automatic fix isn't possible.
+The advice here is specifically about Node.js, and general guidance on writing
+code is out of scope.
 
-We’ve encapsulated our recommended process into a separate [repository](https://github.com/alphagov/nodejs-starter) where everything is controlled by a few lines of config within your `package.json` file. Once you have run `npm install`, any time you make a commit, [StandardJS] runs. It will then format and lint your code automatically. [StandardJS] will auto-fix obvious errors then continue with your commit. If there’s something it can’t fix, then the commit fails with a useful error message such as:
+If you want to add guidance on Node.js please see [Updating this
+manual](#updating-this-manual) below.
 
-```
-❯ Running tasks for *.js
-   ✖ standard --fix
-     → standard: Use JavaScript Standard Style (https://standardjs.com)
-     git add
-✖ standard --fix found some errors. Please fix them and try committing again.
-  ~/nodejs-starter/index.js:5:9: 'hello' is assigned a value but never used.
+## Node versions
 
-```
+> Only use Long Term Support (<abbr title="Long term support">LTS</abbr>)
+versions of Node.js.
 
-#### Editor plugins
-It’s useful to highlight lint errors before starting the commit process. To do this you can get live linting in your text editor of choice by installing one of [Standard’s plugins](https://standardjs.com/#are-there-text-editor-plugins). Users of [SublimeLinter](http://www.sublimelinter.com/) will find [StandardJS] will work out of the box using the default config.
+These are even numbered versions (e.g Node 6.x or 8.x). However, it is important
+to keep an eye on the [Node.js LTS Schedule] as to when versions move in and out
+of LTS.
 
-### Structure
-As well as having a consistent code style, it is important that our projects and repositories are structured in similar ways. This allows developers to find things quickly and easily. We want our code to be modular and reusable so our project structure should reflect this. Below are our four guiding principles: (thanks to [Rising Stack](https://blog.risingstack.com/) for this [blog post](https://blog.risingstack.com/node-hero-node-js-project-structure-tutorial/)).
+> Do not use the `--harmony` or in-progress feature flags
 
-#### Organise files around features, not roles
+*Staged* or *in-progress* features aren't considered stable by the Node implementors.
+
+> Don't use language features beyond EcmaScript2016
+
+Even though ES2017 is final, some features aren't yet implemented in LTS versions. Check using [node.green](http://node.green/).
+
+## Source formatting and linting
+
+> Use the JavaScript Standard Style ([StandardJS])
+
+StandardJS includes a built in formatter, linter and automatic code fixer
+(auto-fix). To make sure everything stays clean we recommend running this tool
+before each commit. It is possible to setup a pre-commit hook to automate this
+process. When [StandardJS] automatically fixes errors it has clear and concise
+messaging and it also tells you when an automatic fix isn't possible.
+
+We’ve encapsulated our recommended process into a separate
+[repository](https://github.com/alphagov/nodejs-starter) where everything is
+controlled by a few lines of config within your `package.json` file. Once you
+have run `npm install`, any time you make a commit, [StandardJS] runs. It will
+then format and lint your code automatically.
+
+Most editors can check StandardJS syntax through plugins that in some cases comes pre-installed.
+Check the [editor plugin list](https://standardjs.com/#are-there-text-editor-plugins).
+
+## Project directory structure
+
+
+> Organise files around features, not roles
+
 The following structure means you don’t require lots of context switching to find related functions and your `require` statements don’t need overly complicated paths.
 
 ```
@@ -56,7 +80,8 @@ The following structure means you don’t require lots of context switching to f
 |   └── user.njk
 ```
 
-#### Don’t put logic in index.js files
+> Don’t put logic in index.js files
+
 Use these files to `require` all the modules functions.
 
 ```js
@@ -64,12 +89,13 @@ Use these files to `require` all the modules functions.
 const product = require('./product')
 
 module.exports = {
-  create: product.create
+create: product.create
 }
 ```
 
-#### Store test files within the implementation
-Keeping tests in the same directory makes them easier to find and more obvious when a test is missing. Keep the projects global test config and setup scripts in a separate `test` directory.
+> Store test files within the implementation
+
+Keeping tests in the same directory makes them easier to find and more obvious when a test is missing. Keep the project's global test config and setup scripts in a separate `test` directory.
 
 
 ```
@@ -82,24 +108,313 @@ Keeping tests in the same directory makes them easier to find and more obvious w
 |   └── product.njk
 ```
 
-#### Use a config directory
-Keep your configuration together in a config folder.
+
+See also:
+
+- [Node.js Project Structure Tutorial](https://blog.risingstack.com/node-hero-node-js-project-structure-tutorial/) on [Rising Stack](https://blog.risingstack.com/)
+
+## Language constructs
+
+*Note to reviewers: not sure how exhaustive to go with this. We don't want to end up discussing each javascript language feature, but we do want to recommend certain ways of doing things over others*
+
+### Declarations
+
+> Use `const` and `let`, avoid `var`
+
+Don't let hoisting confuse you.
+
+
+### Functions
+
+> Prefer `function` for top-level function declarations and `=>` for function literals
 
 ```
-├── config
-|   ├── index.js
-|   └── server.js
-├── product
-├── user
+// Use:
+const foo = function(x) { ... }
+
+// avoid:
+const foo = x => { ... }
+
+
+// Use:
+map(item => Math.sqrt(item), array)
+
+// avoid:
+map(function (item) { return Math.sqrt(item) }, array)
+
 ```
 
-### Versions
-We should only use Long Term Support (<abbr title="Long term support">LTS</abbr>) versions of Node.js. These are even numbered versions (e.g Node 6.x or 8.x). However, it is important to keep an eye on the [Node.js LTS Schedule] as to when versions move in and out of LTS.
+One exception is for curryied functions, which are much more readable when defined using the arrow notation:
 
-### Further resources
+```
+const foo = x => y => z => x*y+z
+```
+
+But be aware that because anonymous functions don't have a name, a stack trace
+will be harder to read for debugging. Also remember that arrow functions keep
+their context's `this`.
+
+### Classes
+
+> Use the `class` keyword to define classes
+
+There are many different ways to define classes in JavaScript. `class` has been added to the standard specifically to resolve this.
+As a result, it's recommended to use `class` for classes and `function` for functions.
+
+```
+class Rectangle {
+  constructor(height, width) {
+    this.height = height
+    this.width = width
+  }
+  area () {
+    return this.width * this.height
+  }
+}
+
+```
+
+
+
+
+### Asynchronous code
+
+> Use asynchronous versions of the NodeJS API functions whenever possible.
+
+For instance, avoid `readFileSync` but instead use `readFile`. Even if your code
+is less readable as a result and that particular piece of code doesn't need to
+be asynchronous (because you can't proceed until you've read that file anyway),
+it won't block other server threads. However if your program doesn't use
+concurrency, synchronous versions are preferable.
+
+> Avoid inline callbacks
+
+```
+// Prefer:
+const pwdReadCallback = function (err, data) { ... }
+fs.readFile('/etc/passwd', passwordsRead)
+
+// over:
+fs.readFile('/etc/passwd', (err, data) {
+...
+}
+
+
+// Another example:
+
+const done = function (resolve, reject) {
+  return () => {
+    try {
+      // Do something that might fail
+      resolve('all went well')
+    } catch (e) {
+      reject(e)
+    }
+  }
+}
+
+const waitAndSee = function (resolve, reject) {
+  setTimeout(done(resolve, reject), 2500)
+}
+
+const log = status => message => console.log(status + ': ' + message)
+
+new Promise(waitAndSee)
+  .then(log('Success'))
+  .catch(log('Failure'))
+```
+
+This will avoid "callback hell" and encourage organising callback functions
+linearly, in an event-driven fashion. It also makes it easier to write unit
+tests for them.
+
+```
+const pwdReadCallback = function (err, data) { ... }
+const userLoggedInCallback = function (authToken) { ... }
+const dbRequestResultCallback = function (req, res) { ... }
+```
+
+Separating out a callback may pose a problem when it needs its original scope. This can be handled by currying the callback:
+
+```
+fs.readFile(filename, callback(filename));
+
+const callback = filename => (err, data) =>
+  if (err) {
+    console.log(`failed reading ${filename}.`)
+    throw err
+  }
+  ...
+}
+```
+
+
+### Functional programming
+
+> Use Javascript's functional programming features
+
+JavaScript has the advantage that it offers functional programming concepts
+natively, like functions as first-class objects, higher-order functions (like
+`map`, `reduce` or `apply`) or pattern matching.
+
+Following functional programming principles (such as immutable data structures
+and pure functions) yield code that is easier to test, less prone to runtime
+errors and is often more performant. Write functions as expressions that return
+values of a single type. Avoid side effects, especially if you're using
+metaprogramming functions.
+
+Side effects in a function can have bad consequences, especially within `map` or
+`reduce`. `this` is better avoided, as it can refer to different objects
+depending on the context in which a function is executed and lead to unexpected
+side-effects.
+
+Remain aware that JavaScript is not an exclusively functional language, and you
+will most probably end up mixing functional and object-oriented concepts, which
+can be tricky to get right.
+
+
+More guidance:
+
+- [An Introduction to Functional JavaScript](https://www.sitepoint.com/introduction-functional-javascript/)
+- [JavaScript Allongé](https://leanpub.com/javascriptallongesix/read)
+
+
+## Errors
+
+> Make sure you handle all errors
+
+Envisage all error scenarios, in particular in asynchronous callback functions
+or Promises, and have a fallback for any situation. Consider programmer errors
+(ie, bugs) as well as operational errors (arising from external cicrcumstances,
+like a missing file). Bugs that are caught by exceptions should be logged and
+the execution stopped, and the supervisor will restart the process. Use the
+built-in `Error` object instead of custom types. It makes logging easier.
+
+Your application shouldn't trust any input (from a file or an API), and so
+should handle all operational errors and recover from them.
+
+## NodeJS's HTTP server
+
+> Offload Node's server as much as possible
+
+Don't expose node's HTTP server to the public. Use a reverse proxy to serve
+static assets, and cache content as much as possible. Implement adequate
+monitoring: [pm2](http://pm2.keymetrics.io/) is recommended as a NodeJS-specific
+supervisor.
+
+## Transpiling
+
+> Stick to JavaScript
+
+Avoid anything that compiles to Javascript (except for static type checking, see
+below). Examples to avoid include CoffeeScript, PureScript and many others.
+
+> Use TypeScript
+
+In order to avoid runtime exceptions and catch errors before execution,
+[TypeScript](http://www.typescriptlang.org/) is
+recommended. [Flow](https://flow.org/) is also acceptable, but anything that
+departs from the standard JavaScript syntax in a way that a Node developer would
+have trouble reading code is advised against.
+
+## Frameworks
+
+> Use Express for web applications, avoid lesser-known frameworks
+
+Express is very common for writing web applications that talk to back-end
+APIs. If you find yourself looking for an <abbr
+title="model-view-controller">MVC</abbr> framework or if you need an <abbr
+title="object relationship manager">ORM</abbr> to manage records in a database,
+[you probably shouldn't be using NodeJS in the first
+place](/standards/programming-languages.html#javascript).
+
+
+## Libraries
+
+> Avoid libraries that produce esoteric code, or which have a steep learning curve
+
+Using advanced libraries can make code very hard to read for developers not familiar
+with them. As useful as they may be. For instance, [Ramda](http://ramdajs.com/)
+lets you write:
+
+```
+R.cond([
+ [R.is(Number), R.identity],
+ [R.is(String), parseInt],
+ [R.T, R.always(NaN)]
+])
+```
+
+which is compact and useful, but not easily understood up by a developer not
+familiar with the library.
+
+Generally, readable code is better than compact or advanced code. Optimisation
+can lead to very arcane code, so should be used with caution.
+
+
+```
+// Prefer
+for (var i=0; i<10; i+=1) {
+  for (var j=0; j<10; j+=1) {
+    console.log(i, j)
+  }
+}
+
+// Over:
+for (var i=0,j=0;i<10 && j<10;j++,i=(j==10)?i+1:i,j=(j==10)?j=0:j,console.log(i,j)){}
+```
+
+
+## Node package manager (<abbr title="Node package manager">NPM</abbr>)
+
+> Limit your reliance on NPM packages, and check the packages your use
+
+Relying on other people's code is a risk. NPM is no exception and is arguably
+worse than other package manager as the unusually small granularity of packages
+leads to very large numbers of dependencies. Your application may easily end up
+relying on software written by hundreds of different people, most of whom you
+don't know.
+
+It's almost impossible not to depend on foreign code, but you should your best
+to mitigate risks:
+- Do your best to avoid relying on packages that offer functionality you could
+easily implement yourself.
+- Empirically assess how reliable any foreign code are using is: look up the
+source, check how popular a package is, or its author.
+- Reduce the number of dependencies in your applications
+- Use tools like [Snyk](https://snyk.io/) to check packages for vulnerabilities
+
+> Use `npm init`, `npm start`, `npm script`, etc.
+
+Making full use of NPM's features will simplify your continuous integration and deployment.
+
+For instance, [you might not need gulp or grunt](https://medium.freecodecamp.org/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8).
+
+> Lock down dependencies
+
+to avoid incompatible upgrades that may break your application. NPM5 does it by
+default, but be careful when upgrading or installing a new package.
+
+> Regularly check for unused dependencies, and make sure you don't have dev dependencies in production
+
+Don't slow down your deployments with unused code
+
+> If you build modules you think could be useful for others, publish it on npm
+
+Because [Open Source is a Good Thing](https://gdstechnology.blog.gov.uk/category/open-source/)
+
+### See also:
+
+- [Controlling the Node.js security risk of npm dependencies](https://blog.risingstack.com/controlling-node-js-security-risk-npm-dependencies/)
+- [I’m harvesting credit card numbers and passwords from your site. Here’s how.](https://hackernoon.com/im-harvesting-credit-card-numbers-and-passwords-from-your-site-here-s-how-9a8cb347c5b5)
+
+
+## Further reading
+
+The guidelines below are advisory. The guidance provided here takes precedence in case of conflicting opinions.
+
 * **[Node.js best practices]** — A comprehensive guide to Node.js best practices
 * **[node.cool]** — A curated list of Node.js packages and resources by Sindre Sorhus
-* **[Node ES2015 support]** — Check Node.js support for ES2015+ features
 * **[JS documentation]** — MDN's definitive JS docs
 
 ## Updating this manual
