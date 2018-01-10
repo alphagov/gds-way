@@ -7,21 +7,21 @@ expires: 2018-05-01
 
 <%= partial :expires %>
 
-GDS follows the [Government Cloud First policy](https://www.gov.uk/guidance/government-cloud-first-policy) and prefers Platform as a service (PaaS) and Infrastructure as a Service (IaaS) solutions over managing our own hardware.
+GDS follows the [Government Cloud First policy](https://www.gov.uk/guidance/government-cloud-first-policy) preferring Platform as a service (PaaS) and Infrastructure as a Service (IaaS) solutions over managing our own hardware.
 
 Your team can build new tools on a primary cloud platform, we prefer:
 
 * systems built on a PaaS instead of on IaaS
-* cloud suppliers that are well supported by common tools
+* cloud suppliers which are well supported by common tools
 
-There is some useful information in the [Service Manual](https://www.gov.uk/service-manual/technology/deciding-how-to-host-your-service) about how to host your service.
+There is some useful information in the [Service Manual](https://www.gov.uk/service-manual/technology/deciding-how-to-host-your-service) about deciding how to host your service.
 
 ## Choose your hosting solution
 
 Your hosting solution should accommodate:
 
 * service users who want highly scalable and available systems
-* GDS administrators who want to manage their environments simply and confidently using automated tools
+* GDS administrators who want to manage their environments simply using automated tools
 
 GDS has decided to use following cloud platforms:
 
@@ -30,11 +30,7 @@ GDS has decided to use following cloud platforms:
 
 ## Consider vendor switching costs
 
-AWS has a large number of different services available. Some are common to many providers, such as compute and file storage. Others are more specific to AWS itself.
-
-The services you choose may impact switching costs. If you are using services which are more Amazon-specific, consider how this may effect your service.
-
-### When using common services
+AWS has a large number of available services. Some are common to many providers, such as compute and file storage, others are more specific to AWS itself. The services you choose may impact switching costs both financially and in the time taken to switch.
 
 You can use the core services of AWS that are common with its biggest competitors (for example Microsoft Azure or Google Cloud Platform). These services will have a lower impact on switching costs, and include:
 
@@ -43,13 +39,9 @@ You can use the core services of AWS that are common with its biggest competitor
   * [Amazon Elastic Block Store (EBS)](https://aws.amazon.com/ebs/) and [Amazon S3](https://aws.amazon.com/s3/) - file storage
   * [Amazon Relational Database Service (RDS)](https://aws.amazon.com/rds/) - hosted databases
 
-### When using less common AWS services
+If you do choose a less common service it may make switching to a different hosting solution more expensive. For example, if you migrate a web API service to another provider it would be harder if the API was built using [Amazon API Gateway](https://aws.amazon.com/api-gateway/) instead of as a traditional web application and then deployed to EC2.
 
-If you choose a less common service it may make switching to a different hosting solution more expensive.
-
-For example, if you migrate a web API service to another provider it would be harder if the API was built using [Amazon API Gateway](https://aws.amazon.com/api-gateway/) instead of as a traditional web application and then deployed to EC2.
-
-A good use of a less common service is using a Lambda function to ship [AWS CloudTrail](https://aws.amazon.com/cloudtrail/) logs to a log provider. It wouldn’t make sense rewriting a Lambda function to run on EC2 hardware because this wouldn’t reduce your switching costs.
+A good use of a less common service is using a Lambda function to ship [AWS CloudTrail](https://aws.amazon.com/cloudtrail/) logs to a log provider such as Logit. It wouldn’t make sense rewriting a Lambda function to run on EC2 hardware because this wouldn’t reduce your switching costs.
 
 Less common Amazon Web Services include:
 
