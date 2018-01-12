@@ -4,6 +4,12 @@ title: Using Node.js at GDS
 
 # <%= current_page.data.title %>
 
+This document describes how we write Node.js code at GDS. It is a list of
+guidelines that developers should follow in order to standardise code across all
+Node.js projects, making it easy for developers to change projects or start new
+ones.
+
+
 **Important Note**
 
 New projects at GDS should never use Node.js without prior consultation with the
@@ -13,27 +19,31 @@ the need and linking to whatever else might be relevant. The [programming langua
 section has more detail on how we currently use Node.js at GDS and why this
 decision has been made.
 
+
 ## Introduction
 
 The guidance set out here should be followed in conjunction with the advice on
 the main [programming languages manual page](../../programming-languages.html).
 
-The advice here is specifically about Node.js, and general guidance on writing
-code is out of scope.
+The advice here is specifically about Node.js. Generic guidelines on writing
+code are out of scope.
 
-If you want to add guidance on Node.js please see [Updating this
-manual](#updating-this-manual) below.
+If you want to contribute to this document please see the [Updating this
+manual](#updating-this-manual) section below.
+
+Most guidelines listed here are recommendations, and the authors acknowledge
+that there will sometimes be valid exceptions.
 
 ## Node versions
 
 > Only use Long Term Support (<abbr title="Long term support">LTS</abbr>)
 versions of Node.js.
 
-These are even numbered versions (e.g Node 6.x or 8.x). However, it is important
+These are even-numbered versions (for example, Node.js 6.x or 8.x). However, it is important
 to keep an eye on the [Node.js LTS Schedule] as to when versions move in and out
 of LTS.
 
-> Do not use the `--harmony` or in-progress feature flags
+> Don't use the `--harmony` or in-progress feature flags
 
 *Staged* or *in-progress* features aren't considered stable by the Node implementors.
 
@@ -47,8 +57,8 @@ Even though ES2017 is final, some features aren't yet implemented in LTS version
 
 StandardJS includes a built in formatter, linter and automatic code fixer
 (auto-fix). To make sure everything stays clean we recommend running this tool
-before each commit. It is possible to setup a pre-commit hook to automate this
-process. When [StandardJS] automatically fixes errors it has clear and concise
+before each commit. It is also possible to setup a pre-commit hook to automate this
+process. When StandardJS automatically fixes errors it has clear and concise
 messaging and it also tells you when an automatic fix isn't possible.
 
 We’ve encapsulated our recommended process into a separate
@@ -89,7 +99,7 @@ Use these files to `require` all the modules functions.
 const product = require('./product')
 
 module.exports = {
-create: product.create
+  create: product.create
 }
 ```
 
@@ -115,13 +125,11 @@ See also:
 
 ## Language constructs
 
-*Note to reviewers: not sure how exhaustive to go with this. We don't want to end up discussing each javascript language feature, but we do want to recommend certain ways of doing things over others*
-
 ### Declarations
 
 > Use `const` and `let`, avoid `var`
 
-Don't let hoisting confuse you.
+Embrace immutability (more below) and don't let hoisting confuse you.
 
 
 ### Functions
@@ -130,10 +138,14 @@ Don't let hoisting confuse you.
 
 ```
 // Use:
-const foo = function(x) { ... }
+const foo = function (x) {
+  ...
+}
 
 // avoid:
-const foo = x => { ... }
+const foo = x => {
+  ...
+}
 
 
 // Use:
@@ -144,22 +156,28 @@ map(function (item) { return Math.sqrt(item) }, array)
 
 ```
 
-One exception is for curryied functions, which are much more readable when defined using the arrow notation:
+Acceptable exceptions include single expression functions, such as
+
+```
+const collatz = n => (n % 2) ? (n / 2) : (3 * n + 1)
+```
+
+or curryied functions, which are more readable using the arrow
+notation:
 
 ```
 const foo = x => y => z => x*y+z
 ```
 
-But be aware that because anonymous functions don't have a name, a stack trace
-will be harder to read for debugging. Also remember that arrow functions keep
+Be aware that because anonymous functions don't have a name, a stack trace
+will be harder to read when debugging. Also remember that arrow functions keep
 their context's `this`.
 
 ### Classes
 
 > Use the `class` keyword to define classes
 
-There are many different ways to define classes in JavaScript. `class` has been added to the standard specifically to resolve this.
-As a result, it's recommended to use `class` for classes and `function` for functions.
+There are many different ways to define classes in JavaScript. `class` has been added to the standard specifically to resolve this. In short, use `class` for classes and `function` for functions.
 
 ```
 class Rectangle {
@@ -179,23 +197,24 @@ class Rectangle {
 
 ### Asynchronous code
 
-> Use asynchronous versions of the NodeJS API functions whenever possible.
+> Use asynchronous versions of the Node.js API functions whenever possible.
 
 For instance, avoid `readFileSync` but instead use `readFile`. Even if your code
 is less readable as a result and that particular piece of code doesn't need to
 be asynchronous (because you can't proceed until you've read that file anyway),
 it won't block other server threads. However if your program doesn't use
-concurrency, synchronous versions are preferable.
+concurrency, synchronous versions are sometimes preferable as they are more
+readable and less heavy on the operating system.
 
 > Avoid inline callbacks
 
 ```
 // Prefer:
 const pwdReadCallback = function (err, data) { ... }
-fs.readFile('/etc/passwd', passwordsRead)
+fs.readFile('/etc/passwd', pwdReadCallback)
 
 // over:
-fs.readFile('/etc/passwd', (err, data) {
+fs.readFile('/etc/passwd', (err, data) => {
 ...
 }
 
@@ -226,7 +245,7 @@ new Promise(waitAndSee)
 
 This will avoid "callback hell" and encourage organising callback functions
 linearly, in an event-driven fashion. It also makes it easier to write unit
-tests for them.
+tests for those functions.
 
 ```
 const pwdReadCallback = function (err, data) { ... }
@@ -237,7 +256,7 @@ const dbRequestResultCallback = function (req, res) { ... }
 Separating out a callback may pose a problem when it needs its original scope. This can be handled by currying the callback:
 
 ```
-fs.readFile(filename, callback(filename));
+fs.readFile(filename, callback(filename))
 
 const callback = filename => (err, data) =>
   if (err) {
@@ -251,26 +270,25 @@ const callback = filename => (err, data) =>
 
 ### Functional programming
 
-> Use Javascript's functional programming features
+> Use JavaScript's functional programming features
 
 JavaScript has the advantage that it offers functional programming concepts
 natively, like functions as first-class objects, higher-order functions (like
 `map`, `reduce` or `apply`) or pattern matching.
 
-Following functional programming principles (such as immutable data structures
-and pure functions) yield code that is easier to test, less prone to runtime
+Following functional programming principles, such as immutable data structures
+and pure functions, produces code that is easier to test, less prone to runtime
 errors and is often more performant. Write functions as expressions that return
-values of a single type. Avoid side effects, especially if you're using
-metaprogramming functions.
+values of a single type.
 
 Side effects in a function can have bad consequences, especially within `map` or
 `reduce`. `this` is better avoided, as it can refer to different objects
 depending on the context in which a function is executed and lead to unexpected
 side-effects.
 
-Remain aware that JavaScript is not an exclusively functional language, and you
-will most probably end up mixing functional and object-oriented concepts, which
-can be tricky to get right.
+Remain aware that JavaScript is not just a functional language and you will
+most probably have to mix functional and object-oriented concepts, which can
+be tricky to get right.
 
 
 More guidance:
@@ -285,29 +303,30 @@ More guidance:
 
 Envisage all error scenarios, in particular in asynchronous callback functions
 or Promises, and have a fallback for any situation. Consider programmer errors
-(ie, bugs) as well as operational errors (arising from external cicrcumstances,
+(bugs) as well as operational errors (arising from external circumstances,
 like a missing file). Bugs that are caught by exceptions should be logged and
 the execution stopped, and the supervisor will restart the process. Use the
 built-in `Error` object instead of custom types. It makes logging easier.
 
-Your application shouldn't trust any input (from a file or an API), and so
-should handle all operational errors and recover from them.
+Your application shouldn't trust any input, for example from a file or an
+API. So the application should handle all operational errors and recover from
+them.
 
-## NodeJS's HTTP server
+## Node.js's HTTP server
 
 > Offload Node's server as much as possible
 
-Don't expose node's HTTP server to the public. Use a reverse proxy to serve
+Don't expose Node's HTTP server to the public. Use a reverse proxy to serve
 static assets, and cache content as much as possible. Implement adequate
-monitoring: [pm2](http://pm2.keymetrics.io/) is recommended as a NodeJS-specific
-supervisor.
+supervising: [pm2](http://pm2.keymetrics.io/) is recommended for Node.js-specific
+servers.
 
 ## Transpiling
 
 > Stick to JavaScript
 
-Avoid anything that compiles to Javascript (except for static type checking, see
-below). Examples to avoid include CoffeeScript, PureScript and many others.
+Avoid anything that compiles to JavaScript (except for static type checking, see
+below). Examples to avoid include CoffeeScript, PureScript and [many others](https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS).
 
 > Use TypeScript
 
@@ -315,7 +334,7 @@ In order to avoid runtime exceptions and catch errors before execution,
 [TypeScript](http://www.typescriptlang.org/) is
 recommended. [Flow](https://flow.org/) is also acceptable, but anything that
 departs from the standard JavaScript syntax in a way that a Node developer would
-have trouble reading code is advised against.
+have trouble reading your code is advised against.
 
 ## Frameworks
 
@@ -325,16 +344,16 @@ Express is very common for writing web applications that talk to back-end
 APIs. If you find yourself looking for an <abbr
 title="model-view-controller">MVC</abbr> framework or if you need an <abbr
 title="object relationship manager">ORM</abbr> to manage records in a database,
-[you probably shouldn't be using NodeJS in the first
+[you probably shouldn't be using Node.js in the first
 place](/standards/programming-languages.html#javascript).
 
 
 ## Libraries
 
-> Avoid libraries that produce esoteric code, or which have a steep learning curve
+> Avoid libraries that produce esoteric code, or that have a steep learning curve
 
 Using advanced libraries can make code very hard to read for developers not familiar
-with them. As useful as they may be. For instance, [Ramda](http://ramdajs.com/)
+with them, as useful as they may be. For instance, [Ramda](http://ramdajs.com/)
 lets you write:
 
 ```
@@ -346,60 +365,57 @@ R.cond([
 ```
 
 which is compact and useful, but not easily understood up by a developer not
-familiar with the library.
+familiar with it.
 
 Generally, readable code is better than compact or advanced code. Optimisation
-can lead to very arcane code, so should be used with caution.
+can lead to very arcane code, so should only be used when necessary.
 
 
 ```
-// Prefer
-for (var i=0; i<10; i+=1) {
-  for (var j=0; j<10; j+=1) {
+// Prefer:
+for (let i=0; i<10; i+=1) {
+  for (let j=0; j<10; j+=1) {
     console.log(i, j)
   }
 }
 
 // Over:
-for (var i=0,j=0;i<10 && j<10;j++,i=(j==10)?i+1:i,j=(j==10)?j=0:j,console.log(i,j)){}
+for (let i=0,j=0;i<10 && j<10;j++,i=(j==10)?i+1:i,j=(j==10)?j=0:j,console.log(i,j)){}
 ```
 
 
-## Node package manager (<abbr title="Node package manager">NPM</abbr>)
+## Node Package Manager (<abbr title="Node package manager">NPM</abbr>)
 
-> Limit your reliance on NPM packages, and check the packages your use
+> Limit your reliance on external code, and check the NPM packages you use
 
-Relying on other people's code is a risk. NPM is no exception and is arguably
-worse than other package manager as the unusually small granularity of packages
-leads to very large numbers of dependencies. Your application may easily end up
-relying on software written by hundreds of different people, most of whom you
-don't know.
+Using other people's code is a risk. NPM is no exception and is arguably worse
+than other package managers as the small granularity of packages leads to a very
+large number of dependencies. Your application may easily end up relying on
+software written by hundreds of different people, most of whom you don't know.
 
-It's almost impossible not to depend on foreign code, but you should your best
-to mitigate risks:
-- Do your best to avoid relying on packages that offer functionality you could
-easily implement yourself.
-- Empirically assess how reliable any foreign code are using is: look up the
-source, check how popular a package is, or its author.
-- Reduce the number of dependencies in your applications
+However, given that it's impossible not to depend on foreign code, you should do
+your best to mitigate the risks involved:
+
+- avoid relying on packages for functionality you could implement yourself without too much effort
+- Empirically assess how reliable any foreign code you are using is: look up the
+source, check how trustworthy a package is, or its author
+- Reduce the number of dependencies in your applications to a minimum
 - Use tools like [Snyk](https://snyk.io/) to check packages for vulnerabilities
 
 > Use `npm init`, `npm start`, `npm script`, etc.
 
 Making full use of NPM's features will simplify your continuous integration and deployment.
 
-For instance, [you might not need gulp or grunt](https://medium.freecodecamp.org/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8).
-
 > Lock down dependencies
 
-to avoid incompatible upgrades that may break your application. NPM5 does it by
-default, but be careful when upgrading or installing a new package.
+Avoid incompatible upgrades that may break your application. NPM 5 does it by
+default, but be careful when upgrading or adding a new package.
 
 > Regularly check for unused dependencies, and make sure you don't have dev dependencies in production
 
 Don't slow down your deployments with unused code
 
-> If you build modules you think could be useful for others, publish it on npm
+> If you build modules you think could be useful for others, publish them on npm
 
 Because [Open Source is a Good Thing](https://gdstechnology.blog.gov.uk/category/open-source/)
 
@@ -407,11 +423,13 @@ Because [Open Source is a Good Thing](https://gdstechnology.blog.gov.uk/category
 
 - [Controlling the Node.js security risk of npm dependencies](https://blog.risingstack.com/controlling-node-js-security-risk-npm-dependencies/)
 - [I’m harvesting credit card numbers and passwords from your site. Here’s how.](https://hackernoon.com/im-harvesting-credit-card-numbers-and-passwords-from-your-site-here-s-how-9a8cb347c5b5)
+- [you might not need gulp or grunt](https://medium.freecodecamp.org/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8).
 
 
 ## Further reading
 
-The guidelines below are advisory. The guidance provided here takes precedence in case of conflicting opinions.
+In the GDS context, the guidelines provided in the links below are advisory
+only. The guidance provided here takes precedence in case of conflicts.
 
 * **[Node.js best practices]** — A comprehensive guide to Node.js best practices
 * **[node.cool]** — A curated list of Node.js packages and resources by Sindre Sorhus
@@ -430,6 +448,6 @@ This manual is not presumed to be infallible or beyond dispute. If you think som
 [Node.js LTS Schedule]: https://github.com/nodejs/Release
 [#Nodejs]: https://govuk.slack.com/messages/nodejs
 [node.cool]: https://node.cool
-[Node ES2015 support]: http://node.green/
+[Node.js ES2015 support]: http://node.green/
 [JS documentation]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
-[Node.js best practices]: https://github.com/i0natan/nodebestpractices
+[Node best practices]: https://github.com/i0natan/nodebestpractices
