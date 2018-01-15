@@ -7,19 +7,12 @@ expires: 2018-01-31
 
 <%= partial :expires %>
 
-This guidance makes recommendations for choosing an operating system for a Virtual Machine (VM).
+When choosing an operating system (OS) for your Virtual Machine (VM) we recommend using [Ubuntu Long Term Support (LTS)](https://www.ubuntu.com/download/desktop).
 
-We recommend you use [Ubuntu Long Term Support (LTS)](https://www.ubuntu.com/download/desktop) as an operating system for your VM. You should apply some security hardening, for example, disabling root ssh access using password.
-
-You can use non-LTS Ubuntu if you need newer kernels/features. To ensure you receive all security updates you should migrate to the latest OS version within 3 months of release.
-
-You should value stability when choosing operating systems for Virtual Machines by ensuring they're:
+You should apply security hardening to your VM (for example disable root ssh access and ssh access using password) and keep your OS:
 
 - auto updated for security issues
-- kept up to date with the latest OS releases
-- able to run as an OS on a local virtual machine
+- up to date with the latest OS releases
+- able to run on a local virtual machine
 
-Following these recommendations will help GDS service teams:
-
-- assist people moving teams without learning a new OS or distribution
-- know they are using a secure and maintained OS
+If you need newer kernels or features than those in Ubuntu LTS you can use a standard Ubuntu release. If you use a standard Ubuntu release you should migrate to the latest version within 3 months to ensure it stays within its support period and receives security updates.
