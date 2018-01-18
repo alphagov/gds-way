@@ -129,14 +129,16 @@ See also:
 
 > Use `const` and `let`, avoid `var`
 
-Embrace immutability (more below) and don't let hoisting confuse you.
+Embrace immutability (more below) and don't let
+[hoisting](http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html#declarations_names_and_hoisting)
+confuse you.
 
 
 ### Functions
 
 > Prefer `function` for top-level function declarations and `=>` for function literals
 
-```
+```js
 // Use:
 const foo = function (x) {
   ...
@@ -153,19 +155,18 @@ map(item => Math.sqrt(item), array)
 
 // avoid:
 map(function (item) { return Math.sqrt(item) }, array)
-
 ```
 
 Acceptable exceptions include single expression functions, such as
 
-```
+```js
 const collatz = n => (n % 2) ? (n / 2) : (3 * n + 1)
 ```
 
 or curryied functions, which are more readable using the arrow
 notation:
 
-```
+```js
 const foo = x => y => z => x*y+z
 ```
 
@@ -179,7 +180,7 @@ their context's `this`.
 
 There are many different ways to define classes in JavaScript. `class` has been added to the standard specifically to resolve this. In short, use `class` for classes and `function` for functions.
 
-```
+```js
 class Rectangle {
   constructor(height, width) {
     this.height = height
@@ -189,7 +190,6 @@ class Rectangle {
     return this.width * this.height
   }
 }
-
 ```
 
 
@@ -208,7 +208,7 @@ readable and less heavy on the operating system.
 
 > Avoid inline callbacks
 
-```
+```js
 // Prefer:
 const pwdReadCallback = function (err, data) { ... }
 fs.readFile('/etc/passwd', pwdReadCallback)
@@ -247,7 +247,7 @@ This will avoid "callback hell" and encourage organising callback functions
 linearly, in an event-driven fashion. It also makes it easier to write unit
 tests for those functions.
 
-```
+```js
 const pwdReadCallback = function (err, data) { ... }
 const userLoggedInCallback = function (authToken) { ... }
 const dbRequestResultCallback = function (req, res) { ... }
@@ -255,7 +255,7 @@ const dbRequestResultCallback = function (req, res) { ... }
 
 Separating out a callback may pose a problem when it needs its original scope. This can be handled by currying the callback:
 
-```
+```js
 fs.readFile(filename, callback(filename))
 
 const callback = filename => (err, data) =>
@@ -328,13 +328,18 @@ servers.
 Avoid anything that compiles to JavaScript (except for static type checking, see
 below). Examples to avoid include CoffeeScript, PureScript and [many others](https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS).
 
-> Use TypeScript
+If you would like to use static typing consider using JavaScript extensions like
+[TypeScript](http://www.typescriptlang.org/), or [Flow](https://flow.org/). This
+has the advantage of making it easier to prevent runtime errors, by adding type
+information to variables or parameters and transpiling the source to JavaScript,
+reporting errors when wrong types are used.
 
-In order to avoid runtime exceptions and catch errors before execution,
-[TypeScript](http://www.typescriptlang.org/) is
-recommended. [Flow](https://flow.org/) is also acceptable, but anything that
-departs from the standard JavaScript syntax in a way that a Node developer would
-have trouble reading your code is advised against.
+However be aware that there are disadvantages too: augmented source code will no
+longer be executable uncompiled. You may also need some extra type definitions if you
+want to use external libraries.
+
+Generally, anything that departs from the standard JavaScript syntax in a way
+that a Node developer would have trouble reading your code is advised against.
 
 ## Frameworks
 
@@ -356,7 +361,7 @@ Using advanced libraries can make code very hard to read for developers not fami
 with them, as useful as they may be. For instance, [Ramda](http://ramdajs.com/)
 lets you write:
 
-```
+```js
 R.cond([
  [R.is(Number), R.identity],
  [R.is(String), parseInt],
@@ -371,7 +376,7 @@ Generally, readable code is better than compact or advanced code. Optimisation
 can lead to very arcane code, so should only be used when necessary.
 
 
-```
+```js
 // Prefer:
 for (let i=0; i<10; i+=1) {
   for (let j=0; j<10; j+=1) {
@@ -409,11 +414,13 @@ Making full use of NPM's features will simplify your continuous integration and 
 > Lock down dependencies
 
 Avoid incompatible upgrades that may break your application. NPM 5 does it by
-default, but be careful when upgrading or adding a new package.
+default, but be careful when upgrading or adding a new package. Tools like
+[Greenkeeper](https://greenkeeper.io/) can be useful to automatically check
+dependencies as part of your continuous integration.
 
 > Regularly check for unused dependencies, and make sure you don't have dev dependencies in production
 
-Don't slow down your deployments with unused code
+Don't slow down your deployments with unused code.
 
 > If you build modules you think could be useful for others, publish them on npm
 
