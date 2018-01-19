@@ -1,5 +1,5 @@
 ---
-title: How to host services
+title: How to host a service
 expires: 2018-05-01
 ---
 
@@ -7,41 +7,34 @@ expires: 2018-05-01
 
 <%= partial :expires %>
 
-GDS follows the [Government Cloud First policy](https://www.gov.uk/guidance/government-cloud-first-policy) preferring Platform as a service (PaaS) and Infrastructure as a Service (IaaS) solutions over managing our own hardware.
+At GDS you should use the following cloud platforms to host your service:
 
-Your team can build new tools on a primary cloud platform, we prefer:
+* [GOV.UK Platform as a Service (PaaS)](https://cloud.service.gov.uk) to manage deployment of apps and services
+* [Amazon Web Services (AWS)](https://aws.amazon.com) for scalable computing, storage and deployment services
 
-* systems built on a PaaS instead of on IaaS
-* cloud suppliers which are well supported by common tools
+We follow the [Government Cloud First policy](https://www.gov.uk/guidance/government-cloud-first-policy) and use Platform as a Service (PaaS) and Infrastructure as a Service (IaaS) solutions to host our services rather than using our own hardware.
 
-There is some useful information in the [Service Manual](https://www.gov.uk/service-manual/technology/deciding-how-to-host-your-service) about deciding how to host your service.
+Our choice of cloud platforms:
 
-## Choose your hosting solution
+* are highly scalable and available to meet the needs of service users
+* have automated tools for GDS administrators to manage their environments
 
-Your hosting solution should accommodate:
-
-* service users who want highly scalable and available systems
-* GDS administrators who want to manage their environments simply using automated tools
-
-GDS has decided to use following cloud platforms:
-
-* [GOV.UK Platform as a Service (PaaS)](https://cloud.service.gov.uk) which manages the deployment of your apps and services
-* [Amazon Web Services (AWS)](https://aws.amazon.com) which offers scalable computing, storage and deployment services
+Please read the [Service Manual](https://www.gov.uk/service-manual/technology/deciding-how-to-host-your-service) for more information on how to host your service.
 
 ## Consider vendor switching costs
 
-AWS has a large number of available services. Some are common to many providers, such as compute and file storage, others are more specific to AWS itself. The services you choose may impact switching costs both financially and in the time taken to switch.
+AWS has a large number of available services. Some services such as compute capacity, email and file storage, are common to other providers like Microsoft Azure and Google Cloud Platform. Other services are specific to AWS.
 
-You can use the core services of AWS that are common with its biggest competitors (for example Microsoft Azure or Google Cloud Platform). These services will have a lower impact on switching costs, and include:
+You should be aware that it’s generally easier, quicker and cheaper to switch from common AWS services to other suppliers than from AWS-only services. For example, if you migrate a web API service to another provider it would be harder if the API was built using [Amazon API Gateway](https://aws.amazon.com/api-gateway/) instead of as a traditional web application and then deployed to EC2.
+
+A good use of a less common service would be to use a Lambda function to ship [AWS CloudTrail](https://aws.amazon.com/cloudtrail/) activity logs to a log provider such as Logit. It wouldn’t make sense to rewrite a Lambda function to run on EC2 hardware because this wouldn’t reduce your switching costs.
+
+Core AWS services that are common with its biggest competitors include:
 
   * [Amazon Elastic Compute Cloud (Amazon EC2)](https://aws.amazon.com/ec2/)
-  * [Networking Products with AWS](https://aws.amazon.com/products/networking/) - load balancing and network segregation
-  * [Amazon Elastic Block Store (EBS)](https://aws.amazon.com/ebs/) and [Amazon S3](https://aws.amazon.com/s3/) - file storage
-  * [Amazon Relational Database Service (RDS)](https://aws.amazon.com/rds/) - hosted databases
-
-If you do choose a less common service it may make switching to a different hosting solution more expensive. For example, if you migrate a web API service to another provider it would be harder if the API was built using [Amazon API Gateway](https://aws.amazon.com/api-gateway/) instead of as a traditional web application and then deployed to EC2.
-
-A good use of a less common service is using a Lambda function to ship [AWS CloudTrail](https://aws.amazon.com/cloudtrail/) logs to a log provider such as Logit. It wouldn’t make sense rewriting a Lambda function to run on EC2 hardware because this wouldn’t reduce your switching costs.
+  * [Networking Products with AWS](https://aws.amazon.com/products/networking/)
+  * [Amazon Elastic Block Store (EBS)](https://aws.amazon.com/ebs/) and [Amazon S3](https://aws.amazon.com/s3/)
+  * [Amazon Relational Database Service (RDS)](https://aws.amazon.com/rds/)
 
 Less common Amazon Web Services include:
 
