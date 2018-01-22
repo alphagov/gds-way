@@ -1,5 +1,5 @@
 ---
-title: How to choose operating systems
+title: Operating systems for virtual machines
 expires: 2018-01-31
 ---
 
@@ -7,12 +7,16 @@ expires: 2018-01-31
 
 <%= partial :expires %>
 
-When choosing an operating system (OS) for your Virtual Machine (VM) we recommend using [Ubuntu Long Term Support (LTS)](https://www.ubuntu.com/download/server).
+You should use [Ubuntu Long Term Support](https://www.ubuntu.com/download/server) as an operating system (OS) for your virtual machine (VM).
 
-You should apply security hardening to your VM (for example disable root ssh access and ssh access using password) and keep your OS:
+You must apply hardening to your VM. For example, you should only use SSH keys to access VMs. You should disable root SSH access and SSH access using a password. 
 
-- auto updated for security issues
-- up to date with the latest OS releases
-- able to run on a local virtual machine
+You must also make sure your OS is:
 
-If you need newer kernels or features than those in Ubuntu LTS you can use a standard Ubuntu release. If you use a standard Ubuntu release you should migrate to the latest version within 3 months to ensure it stays within its support period and receives security updates.
+* automatically updated for security issues
+* up to date with the latest OS releases
+* able to run on a local VM
+
+If you need a newer kernel, or features not yet available in Ubuntu LTS then you can use a standard Ubuntu release.
+
+If you use standard Ubuntu, we recommend that you migrate to the latest release within 3 months to ensure that you stay within the support period, and receive security updates.
