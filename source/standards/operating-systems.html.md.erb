@@ -7,7 +7,7 @@ expires: 2018-01-31
 
 <%= partial :expires %>
 
-You should use [Ubuntu Long Term Support](https://www.ubuntu.com/download/server) as an operating system (OS) for your virtual machine (VM).
+You should use [Ubuntu Long Term Support (LTS)](https://www.ubuntu.com/download/server) as an operating system (OS) for your virtual machine (VM).
 
 You must apply hardening to your VM. For example, you should only use SSH keys to access VMs. You should disable root SSH access and SSH access using a password. 
 
@@ -17,6 +17,6 @@ You must also make sure your OS is:
 * up to date with the latest OS releases
 * able to run on a local VM
 
-If you need a newer kernel, or features not yet available in Ubuntu LTS then you can use a standard Ubuntu release.
+GDS recommends LTS as the default choice for your VM, but you can use a standard release if you have a specific reason for doing so, for example if you need a newer kernel, or features not yet available in Ubuntu LTS.
 
-If you use standard Ubuntu, we recommend that you migrate to the latest release within 3 months to ensure that you stay within the support period, and receive security updates.
+If you use standard Ubuntu, we recommend you migrate to the latest release within 3 months to ensure you stay within the support period, and receive security updates.
