@@ -30,7 +30,7 @@ You shouldn’t need to store logs spanning long periods in your short-term quer
 
 ### Long term archiving
 
-You should have a way of storing logs focusing on long-term durability. Some GDS teams archive logs to [Amazon S3](https://aws.amazon.com/s3/) and at the same time send them to their ELK or [Sumo Logic](https://www.sumologic.com/) store.
+When storing logs you should focus on long-term durability. Some GDS teams archive logs to [Amazon S3](https://aws.amazon.com/s3/) and at the same time send them to their ELK or [Sumo Logic](https://www.sumologic.com/) store.
 
 It’s a good idea to take logs from a long-term archive and load them into a queryable tool, for example, a one-time-use ELK stack. If you use Amazon Web Services (AWS) you could use [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/) to run basic queries on older logs which may be a suitable solution.
 
