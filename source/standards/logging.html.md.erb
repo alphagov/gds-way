@@ -1,5 +1,5 @@
 ---
-title: Logging
+title: Store and query logs
 expires: 2018-03-01
 ---
 
@@ -7,102 +7,41 @@ expires: 2018-03-01
 
 <%= partial :expires %>
 
-## Short-term querying of logs
+For incident management and debugging you should have a system in place so you can store and query your infrastructure and application logs.
 
-For the purposes of incident management and debugging, it's useful to
-have a system for storing and querying the most recent logs produced
-by your application and infrastructure.
+GDS has a shared account with [Logit](https://logit.io/), offering on-demand shared [ELK (Elasticsearch, Logstash and Kibana)](https://www.elastic.co/elk-stack) stacks as a service. ELK offers suitable short-term storage for your logs so they are both accessible and queryable.
 
-In general, tools for querying logs are not a good fit for long-term
-archival, and vice versa.
+You shouldn’t operate your own self hosted ELK stacks for logging. In the past we’ve found ELK relatively easy to set up, but long term it’s easier to use a cloud-hosted ELK solution.
 
-### Shared Elasticsearch, Logstash and Kibana (ELK) stack
+You should be aware that ELK isn’t appropriate for long term archival of logs. There are other services which are less expensive and more reliable.
 
-GDS has a shared account with [logit](https://logit.io/), which offers
-on-demand ELK stacks as a service.
+You can read the [Reliability Engineering team documentation](https://reliability-engineering.cloudapps.digital/#logging) for more information about using Logit.
 
-This is suitable for a short-term place to store logs so
-they are available and queryable.  This should not be considered a
-durable store of logs; it is *not* suitable for long-term archival of
-logs.
+## Store your logs
 
-Guides on how to use the logit service can be found in
-the [Reliability Engineering team documentation][].
+Your product may have legal or other requirements affecting how long you should store logs. For example, the [Payment Card Industry Data Security Standard (PCI-DSS}](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard) requires 3 months of easily accessible logs and 12 months of archived logs.
 
-### Sumo Logic
+### Short term storage
 
-Some teams have used [Sumo Logic][] successfully for storing and
-querying logs.
+You shouldn’t need to store logs spanning long periods in your short-term queryable store, practical retention periods for short-term queryable logs are:
 
-### Self-hosted Elasticsearch, Logstash and Kibana (ELK)
+* non-production environments - no more than 7 days
+* production environments - no more than 30 days
 
-Each team should not operate its own ELK stack for logging.
-In the past we've found that ELK is relatively easy to set up,
-but teams tend to not prioritise keeping it updated.
+### Long term archiving
 
-However, ELK isn't appropriate for long term archival of logs. There
-are other services which are less expensive and more reliable.
+You should have a way of storing logs focusing on long-term durability. Some GDS teams archive logs to [Amazon S3](https://aws.amazon.com/s3/) and at the same time send them to their ELK or [Sumo Logic](https://www.sumologic.com/) store.
 
-## Long term archival of logs
+It’s a good idea to take logs from a long-term archive and load them into a queryable tool, for example, a one-time-use ELK stack. If you use Amazon Web Services (AWS) you could use [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/) to run basic queries on older logs which may be a suitable solution.
 
-You should have a way of storing logs which focuses on long-term
-durability.  Some teams archive logs to S3 at the same time as sending
-them to their ELK or Sumo Logic store.
+## Ship your logs
 
-### Querying from the archives
+When you setup a shipping method for your logs, consider:
 
-It's a good idea to be able to take logs from the long-term archive
-and load them into a queryable tool (for example, a one-time-use ELK
-stack).
+* how your logs will get to short and long-term stores?
+* what happens if one of these stores is unavailable?
+* whether the store will be overloaded when it comes back online?
 
-If you are using Amazon Web Services, CloudWatch can run rudimentary
-queries on older logs which may be good enough.
+You can use [Elastic Beats](https://www.elastic.co/products/beats) family of tools which detect periods of unavailability. They remember how much data they send and continue where they left off. By using a protocol which is backpressure-aware they also won’t overload [Logstash](https://www.elastic.co/products/logstash) when it comes back online.
 
-## Shipping logs
-
-When implementing your mechanism to ship logs to your stores, here are
-some questions we suggest you ask:
-
-  * how do I ensure my logs get to both my short-term and long-term
-    stores?
-  * what happens if one of these stores is temporarily unavailable?
-  * what happens when the store comes back online?
-
-The [beats][] tools will detect periods of unavailability.  They will
-remember how much they have sent and continue where they left off.
-They also use a protocol which is backpressure-aware, so they will not
-overload logstash when it comes back online.
-
-One pattern is to have one process to ship logs to your long-term
-archive, and a second process to fill the short-term query tool from
-the long-term archive.  This way you can have confidence that
-everything has been correctly archived.
-
-## Retention periods
-
-This section recommends some sensible default choices for log retention
-periods.  These should be a starting point for a discussion, or a
-default choice in the absence of any other constraints.
-
-Your product may have requirements which affect your choice of log
-retention periods. For example, [PCI-DSS][] mandates 3 months of
-easily-accessible logs, and a year (no more, no less) of archived
-logs.
-
-### Short-term
-
-You shouldn't need to store a long period of logs in your short-term
-queryable store.  Sensible retention periods for short-term queryable
-logs are:
-
-  * non-production environments: no more than 7 days
-  * production environments: no more than 30 days
-
-### Long-term
-
-It's sensible to keep logs in long-term archives for at least a year.
-
-[beats]: https://www.elastic.co/products/beats
-[PCI-DSS]: https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard
-[Sumo Logic]: https://www.sumologic.com/
-[Reliability Engineering team documentation]: https://reliability-engineering.cloudapps.digital/#logging
+For example you could have one process to ship logs to your long-term archive, and a second process to fill a short-term query tool from the long-term archive. This way you can be confident everything has been safely stored.
