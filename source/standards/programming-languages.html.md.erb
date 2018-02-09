@@ -22,31 +22,11 @@ This should make it easier for developers to:
 - improve their personal development
 - master how they operate applications
 
-## Using Java, Python and Ruby as our core languages
+## Frontend development
 
-Our core languages are __Java, Python and Ruby__.
-
-We've chosen these 3 languages because they are successfully used by
-teams at the moment, and we are confident in how to host and operate
-applications written in them. We'd advise you to carry out new
-development in one of them.
-
-### Python
-
-New Python projects should be in Python 3.  Python 2 will
-[reach end of life in 2020][PEP373].  Python 3 is now well-supported
-by application frameworks and libraries, and is commonly used in
-production.
-
-[PEP373]: https://www.python.org/dev/peps/pep-0373/
-
-## Languages in use in specific contexts
-
-### JavaScript
-
-We write server-side JavaScript with [Node.js][nodejs].
 The service manual has information on
-[using client-side JavaScript][manual_js].
+[using client-side JavaScript][manual_js]. For server-side JavaScript we use [Node.js][nodejs].
+
 
 [nodejs]: https://nodejs.org/
 [manual_js]: https://www.gov.uk/service-manual/technology/using-progressive-enhancement
@@ -54,7 +34,7 @@ The service manual has information on
 GDS projects that use Node.js include:
 GOV.UK Frontend, GOV.UK Pay and the Performance Platform.
 
-These projects have made the decision to use Node.js, and the tech forum is watching the output of this. No new projects should use Node.js without prior consultation with the GDS Way Forum.
+These projects have made the decision to use Node.js, and the GDS Way forum is watching the output of this. No new projects should use Node.js without prior consultation with the GDS Way Forum.
 
 Node.js can be used to render a web interface for your service but should
 not be used to implement any significant ‘application logic’. For instance
@@ -71,13 +51,27 @@ ensuring security of the code). We suspect that this is because:
 
 Node.js is now frequently used in the wider software development ecosystem for
 building web application frontends. This increase in Node.js use means there
-has been a growth in  skills and supporting tools and we expect this to continue.
+has been a growth in skills and supporting tools and we expect this to continue.
 This means we may reevaluate it as a core language in the future.
 
 Teams that adopt Node.js must take steps to ensure that they have access to
 sufficient developers with Node.js experience.
 
-### Go
+## Backend development
+
+Our core languages are __Java, Python and Ruby__.
+
+We've chosen these 3 languages because they are successfully used by
+teams at the moment, and we are confident in how to host and operate
+applications written in them. We'd advise you to carry out new
+development in one of them.
+
+New Python projects should be in Python 3.  Python 2 will
+[reach end of life in 2020][PEP373].  Python 3 is now well-supported
+by application frameworks and libraries, and is commonly used in
+production.
+
+[PEP373]: https://www.python.org/dev/peps/pep-0373/
 
 The GOV.UK router is built using Go, and it's the core language for Cloud
 Foundry which runs our Platform as a Service.
@@ -90,7 +84,7 @@ there is no alternative maintained open source tool which could be used, and
 after a team has developed a plan to ensure that it will have the skills to
 maintain the component in future.
 
-## Languages we won't use for new projects
+### Languages we won't use for new projects
 
 We used __Scala__ in the early days of GDS. GOV.UK Licensing is the only remaining
 application written in Scala but we've found it hard to support because of a lack
