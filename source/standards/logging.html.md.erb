@@ -7,15 +7,11 @@ expires: 2018-03-01
 
 <%= partial :expires %>
 
-For incident management and debugging you should have a system in place so you can store and query your infrastructure and application logs.
+For incident management and debugging you should use the GDS shared [Logit](https://logit.io/) account to store and query your infrastructure and application logs.
 
-GDS has a shared account with [Logit](https://logit.io/), offering on-demand shared [ELK (Elasticsearch, Logstash and Kibana)](https://www.elastic.co/elk-stack) stacks as a service. ELK offers suitable short-term storage for your logs so they are both accessible and queryable.
+Logit offers cloud based on-demand, shared [ELK (Elasticsearch, Logstash and Kibana)](https://www.elastic.co/elk-stack) stacks as a service, and suitable short-term storage for your logs so they are accessible and queryable. [Reliability Engineering](https://reliability-engineering.cloudapps.digital/#logging) has more information about using Logit.
 
 You shouldn’t operate your own self hosted ELK stacks for logging. In the past we’ve found ELK relatively easy to set up, but long term it’s easier to use a cloud-hosted ELK solution.
-
-You should be aware that ELK isn’t appropriate for long term archival of logs. There are other services which are less expensive and more reliable.
-
-You can read the [Reliability Engineering team documentation](https://reliability-engineering.cloudapps.digital/#logging) for more information about using Logit.
 
 ## Store your logs
 
@@ -30,9 +26,9 @@ You shouldn’t need to store logs spanning long periods in your short-term quer
 
 ### Long term archiving
 
-When storing logs you should focus on long-term durability. Some GDS teams archive logs to [Amazon S3](https://aws.amazon.com/s3/) and at the same time send them to their ELK or [Sumo Logic](https://www.sumologic.com/) store.
+When storing logs you should focus on long-term durability, so it’s a good idea to take logs from a long-term archive and load them into a queryable tool, for example, a one-time-use ELK stack.
 
-It’s a good idea to take logs from a long-term archive and load them into a queryable tool, for example, a one-time-use ELK stack. If you use Amazon Web Services (AWS) you could use [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/) to run basic queries on older logs which may be a suitable solution.
+You should be aware that ELK isn’t appropriate for long term archival of logs. There are other services which are less expensive and more reliable. If you use Amazon Web Services (AWS) you could use [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/) to run basic queries on older logs which may be a suitable solution.
 
 ## Ship your logs
 
@@ -42,6 +38,6 @@ When you setup a shipping method for your logs, consider:
 * what happens if one of these stores is unavailable?
 * whether the store will be overloaded when it comes back online?
 
-You can use [Elastic Beats](https://www.elastic.co/products/beats) family of tools which detect periods of unavailability. They remember how much data they send and continue where they left off. By using a protocol which is backpressure-aware they also won’t overload [Logstash](https://www.elastic.co/products/logstash) when it comes back online.
+You can use the [Elastic Beats](https://www.elastic.co/products/beats) family of tools which detect periods of unavailability. They remember how much data they send and continue where they left off. By using a protocol which is backpressure-aware they also won’t overload [Logstash](https://www.elastic.co/products/logstash) when it comes back online.
 
 For example you could have one process to ship logs to your long-term archive, and a second process to fill a short-term query tool from the long-term archive. This way you can be confident everything has been safely stored.
