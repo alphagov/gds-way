@@ -43,19 +43,23 @@ These are even-numbered versions (for example, Node.js 6.x or 8.x). However, it 
 to keep an eye on the [Node.js LTS Schedule] as to when versions move in and out
 of LTS.
 
-> Don't use the `--harmony` or in-progress feature flags
+> Don't use the `--harmony`, `--experimental-modules` or other in-progress feature flags
 
 *Staged* or *in-progress* features aren't considered stable by the Node implementors.
 
-> Don't use language features beyond EcmaScript2016
+> Specify the supported version of Node.js in your `package.json`.
 
-Even though ES2017 is final, some features aren't yet implemented in LTS versions. Check using [node.green](http://node.green/).
+Use the [engines](https://docs.npmjs.com/files/package.json#engines) key.
 
 ## Source formatting and linting
 
 > Lint your JavaScript code with [XO]
 
-We use the JavaScript style used by [XO] to make all our codebase use the same standard. However we make two exceptions: we disallow semicolons and we mandate spaces over tabs. Your `package.json` file should [reflect these exceptions](https://github.com/alphagov/nodejs-starter/blob/master/package.json#L24).
+We use the JavaScript style used by [XO] to make all our codebase use the same
+standard. However we make one exception: we mandate spaces over tabs. Your
+`package.json` file should [reflect this
+exception](https://github.com/alphagov/nodejs-starter/blob/master/package.json#L24). Using
+`--fix` helps with fixing issues automatically.
 
 We’ve encapsulated our recommended process into a separate
 [repository](https://github.com/alphagov/nodejs-starter) where everything is
@@ -97,7 +101,7 @@ Use these files to `require` all the modules functions.
 const product = require('./product')
 
 module.exports = {
-  create: product.create
+create: product.create
 }
 ```
 
@@ -139,12 +143,12 @@ confuse you.
 ```js
 // Use:
 const foo = function (x) {
-  ...
+...
 }
 
 // avoid:
 const foo = x => {
-  ...
+...
 }
 
 
@@ -180,13 +184,13 @@ There are many different ways to define classes in JavaScript. `class` has been 
 
 ```js
 class Rectangle {
-  constructor(height, width) {
-    this.height = height
-    this.width = width
-  }
-  area () {
-    return this.width * this.height
-  }
+constructor(height, width) {
+this.height = height
+this.width = width
+}
+area () {
+return this.width * this.height
+}
 }
 ```
 
@@ -209,7 +213,7 @@ readable and less heavy on the operating system.
 ```js
 // Prefer:
 const pwdReadCallback = function (err, data) {
-  ...
+...
 }
 fs.readFile('/etc/passwd', pwdReadCallback)
 
@@ -222,25 +226,25 @@ fs.readFile('/etc/passwd', (err, data) => {
 // Another example:
 
 const done = function (resolve, reject) {
-  return () => {
-    try {
-      // Do something that might fail
-      resolve('all went well')
-    } catch (err) {
-      reject(err)
-    }
-  }
+return () => {
+try {
+// Do something that might fail
+resolve('all went well')
+} catch (err) {
+reject(err)
+}
+}
 }
 
 const waitAndSee = function (resolve, reject) {
-  setTimeout(done(resolve, reject), 2500)
+setTimeout(done(resolve, reject), 2500)
 }
 
 const log = status => message => console.log(status + ': ' + message)
 
 new Promise(waitAndSee)
-  .then(log('Success'))
-  .catch(log('Failure'))
+.then(log('Success'))
+.catch(log('Failure'))
 ```
 
 This will avoid "callback hell" and encourage organising callback functions
@@ -249,13 +253,13 @@ tests for those functions.
 
 ```js
 const pwdReadCallback = function (err, data) {
-  ...
+...
 }
 const userLoggedInCallback = function (authToken) {
-  ...
+...
 }
 const dbRequestResultCallback = function (req, res) {
-  ...
+...
 }
 ```
 
@@ -265,11 +269,11 @@ Separating out a callback may pose a problem when it needs its original scope. T
 fs.readFile(filename, callback(filename))
 
 const callback = filename => (err, data) => {
-  if (err) {
-    console.log(`failed reading ${filename}.`)
-    throw err
-  }
-  ...
+if (err) {
+console.log(`failed reading ${filename}.`)
+throw err
+}
+...
 }
 ```
 
@@ -351,8 +355,7 @@ that a Node developer would have trouble reading your code is advised against.
 
 > Use Express for web applications, avoid lesser-known frameworks
 
-Express is very common for writing web applications that talk to back-end
-APIs. If you find yourself looking for an <abbr
+If you find yourself looking for an <abbr
 title="model-view-controller">MVC</abbr> framework or if you need an <abbr
 title="object relationship manager">ORM</abbr> to manage records in a database,
 [you probably shouldn't be using Node.js in the first
@@ -397,7 +400,8 @@ for (let i=0,j=0;i<10 && j<10;j++,i=(j==10)?i+1:i,j=(j==10)?j=0:j,console.log(i,
 
 ## Node Package Manager (<abbr title="Node package manager">NPM</abbr>)
 
-> Limit your reliance on external code, and check the NPM packages you use
+> Don't reinvent the wheel, but don't over-use the amount of external code you
+  import.
 
 Using other people's code is a risk. NPM is no exception and is arguably worse
 than other package managers as the small granularity of packages leads to a very
@@ -405,12 +409,12 @@ large number of dependencies. Your application may easily end up relying on
 software written by hundreds of different people, most of whom you don't know.
 
 However, given that it's impossible not to depend on foreign code, you should do
-your best to mitigate the risks involved:
+your best to reduce the risks involved:
 
-- avoid relying on packages for functionality you could implement yourself without too much effort
-- Empirically assess how reliable any foreign code you are using is: look up the
-source, check how trustworthy a package is, or its author
-- Reduce the number of dependencies in your applications to a minimum
+- avoid relying on packages for functionality you can easily implement yourself,
+  especially if a package has a lot of functionality you don't need.
+- empirically check the trustworthiness of a package you wish to use: check
+  its popularity, author reputation, etc.
 - Use tools like [Snyk](https://snyk.io/) to check packages for vulnerabilities
 
 > Use `npm init`, `npm start`, `npm script`, etc.
@@ -430,7 +434,11 @@ Don't slow down your deployments with unused code.
 
 > If you build modules you think could be useful for others, publish them on npm
 
-Because [Open Source is a Good Thing](https://gdstechnology.blog.gov.uk/category/open-source/)
+Because [Open Source is a Good
+Thing](https://gdstechnology.blog.gov.uk/category/open-source/).
+
+> Published modules should be tested and supported on the last two current LTS
+versions of Node.js.
 
 ### See also:
 
