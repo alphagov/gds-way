@@ -1,0 +1,24 @@
+---
+title: Configuration Management
+expires: 2018-05-16
+---
+
+# <%= current_page.data.title %>
+
+<%= partial :expires %>
+
+When running VMs, such as in Amazon EC2, where the complexity of the configuration
+in the instance becomes too great for managing during deployment or within AMIs,
+use configuration management.
+
+Using configuration management ensures that the configuration of an environment is
+documented as code.
+
+## Tools
+
+In large environments [Puppet][] should be used.
+
+In smaller environments, [Ansible][] is an acceptable choice.
+
+[Puppet]: https://puppet.com/
+[Ansible]: https://www.ansible.com/
