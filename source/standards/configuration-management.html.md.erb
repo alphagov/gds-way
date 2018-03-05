@@ -7,19 +7,13 @@ expires: 2018-05-16
 
 <%= partial :expires %>
 
-You should use configuration management to track and control changes in your software in large software deployments. When you use configuration management you ensure your environment configuration is documented and [stored as code][].
+You should use configuration management to track and control changes in large software deployments. When using configuration management you ensure your environment configuration is documented and [stored as code][].
 
-For example, when you run virtual machines (VM) in [Amazon Elastic Compute Cloud (Amazon EC2)][] and the VMs instance configuration becomes too complex to manage either during its deployment or within your [Amazon Machine Image (AMI)][].
+For example, when you run virtual machines (VM) in [Amazon Elastic Compute Cloud (Amazon EC2)][] and the VMs instance configuration becomes too complex to manage either during its deployment or within your [Amazon Machine Image (AMI)][] use configuration management.
 
-You should use
+You should use [Puppet][] in large software environments, and for smaller environments, you can use [Ansible][].
 
 You should not use configuration management for relatively simple deployments as there are other tools more suitable, for example [cloud-init][].
-
-
-
-In large environments [Puppet][] should be used.
-
-In smaller environments, [Ansible][] is an acceptable choice.
 
 
 
