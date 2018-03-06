@@ -1,5 +1,5 @@
 ---
-title: Configuration Management
+title: Use configuration management
 expires: 2018-05-16
 ---
 
@@ -7,18 +7,19 @@ expires: 2018-05-16
 
 <%= partial :expires %>
 
-When running VMs, such as in Amazon EC2, where the complexity of the configuration
-in the instance becomes too great for managing during deployment or within AMIs,
-use configuration management.
+You should use configuration management to track and control changes in large software deployments. When using configuration management you ensure your environment configuration is documented and [stored as code][].
 
-Using configuration management ensures that the configuration of an environment is
-documented as code.
+For example, when you run virtual machines (VM) in [Amazon Elastic Compute Cloud (Amazon EC2)][] and the VMs instance configuration becomes too complex to manage either during its deployment or within your [Amazon Machine Image (AMI)][] use configuration management.
 
-## Tools
+You should use [Puppet][] in large software environments, and for smaller environments, you can use [Ansible][].
 
-In large environments [Puppet][] should be used.
+You should not use configuration management for relatively simple deployments as there are other tools more suitable, for example [cloud-init][].
 
-In smaller environments, [Ansible][] is an acceptable choice.
+
 
 [Puppet]: https://puppet.com/
 [Ansible]: https://www.ansible.com/
+[Amazon Elastic Compute Cloud (Amazon EC2)]: https://aws.amazon.com/ec2/
+[Amazon Machine Image (AMI)]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html
+[cloud-init]: https://cloud-init.io/
+[stored as code]: https://gds-way.cloudapps.digital/standards/source-code.html#content
