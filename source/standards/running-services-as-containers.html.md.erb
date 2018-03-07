@@ -1,51 +1,50 @@
 ---
-title: Running services as containers
+title: How to run your service as a container
+
 expires: 2018-05-02
 ---
 # <%= current_page.data.title %>
 
 <%= partial :expires %>
 
-## Principles
+If your web application is running on [GOV.UK Platform as a Service (PaaS)][] you should follow the [recommended hosting guidance][].
 
-This guidance should not be applied to development environments using containers.
+If your web application is running on PaaS you should use:
 
-Where possible, web applications should use the PaaS as per the [hosting guidance](standards/hosting.html).
+* [Docker][] to [build and deploy images][], as it’s widely used across GDS and industry
+* [Dockerhub][] or [Amazon EC2 Container Registry][] to host your images following the [PaaS responsibility model][]
+* the recommended [monitoring and logging solution][]
 
-It is not recommended to run bare containers on the PaaS, as provided by the [documentation](https://docs.cloud.service.gov.uk/#deploy-a-docker-image-experimental).
+You can also run your service using bare metal Docker on an [Amazon Elastic Compute Cloud (Amazon EC2)][] instance if:
 
-If your service is inappropriate to run on the PaaS, or it is not possible to use the PaaS platform, then guidance should be followed to ensure best practice when running your service as a container.
+* service uptime is not a priority
+* zero downtime deployments are not required
+* it can be managed by configuration management
 
-## Recommendations
+You should not run:
 
-### Use Docker
+* local images on the PaaS, as [deploying bare metal containers][] are not supported
+* Docker containers with root access using the Docker daemon as this has [security implications][]
 
-Use Docker to build images. Docker is an industry standard and already used across GDS.
+If your service requires high-availability, you should use the [Amazon Elastic Container Service (Amazon ECS)][] as your container orchestration service. By using [Amazon ECS clustering][] you can protect against unhealthy instances, and balance service workload across corresponding healthy instances.
 
-### Hosting images
+If your application is either not currently running on PaaS, or it’s not possible to use PaaS as a platform due to technical constraints, you should...
 
-A container registry should host your images.
+If you are running a development environment using containers then you should…
 
-You should use [Dockerhub](https://hub.docker.com/) or [Amazon EC2 Container Registry](https://aws.amazon.com/ecr/).
 
-### Running containers
 
-#### Bare Docker on EC2
 
-You can run services using Docker on an EC2 instance. This is appropriate for services that:
-
- - Uptime is not the priority
- - Do not require zero downtime deployments
- - Can be managed by configuration management
-
-We recommend against running Docker as root.
-
-The service should have monitoring and logging like any other non-container based application.
-
-#### Amazon ECS as a scheduler
-
-If your service is user facing and uptime is critical, a clustered scheduler should be used to ensure high availability.
-
-Clustering your service means you are able to protect against unhealthy nodes, and the scheduler should appropriately balance workloads across healthy nodes.
-
-We recommend using [Amazon ECS](https://aws.amazon.com/ecs/) as your scheduler. This is a SaaS product offered by our chosen hosting provider.
+[GOV.UK Platform as a Service (PaaS)]: https://www.cloud.service.gov.uk/
+[recommended hosting guidance]: https://gds-way.cloudapps.digital/standards/hosting.html#content
+[Docker]: https://www.docker.com/
+[build and deploy images]: https://docs.cloud.service.gov.uk/#deploy-a-docker-image-experimental
+[Dockerhub]: https://hub.docker.com/
+[Amazon EC2 Container Registry]: https://aws.amazon.com/ecr/
+[PaaS responsibility model]: https://docs.cloud.service.gov.uk/#responsibility-model
+[monitoring and logging solution]: https://reliability-engineering.cloudapps.digital/#content
+[Amazon Elastic Compute Cloud (Amazon EC2)]: https://aws.amazon.com/ec2/
+[deploying bare metal containers]: https://docs.cloud.service.gov.uk/#deploy-a-docker-image-experimental
+[security implications]: https://docs.docker.com/engine/security/security/
+[Amazon Elastic Container Service (Amazon ECS)]: https://aws.amazon.com/ecs/
+[Amazon ECS clustering]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_clusters.html
