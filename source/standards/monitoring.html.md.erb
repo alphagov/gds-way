@@ -7,19 +7,30 @@ expires: 2018-03-01
 
 <%= partial :expires %>
 
-At GDS, we follow the the Service Manual guidance on how to [monitor the status of services](https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service) and on how to [set performance metrics](https://www.gov.uk/service-manual/measuring-success/how-to-set-performance-metrics-for-your-service).
+At GDS, we follow the Service Manual guidance on how to [monitor the status of services][] and set [performance metrics][]. 
 
-We recommend using [Pingdom](https://www.pingdom.com/) for availability monitoring on your service. But if you need availability monitoring for your service from outside the US or EU (for example, users reporting issues loading pages from Australia) we recommend using [CA App Synthetic Monitor](https://asm.ca.com/en/).
+We recommend using [Pingdom][] to monitor your service’s availability. To further ensure your service is working, you should:
 
-To further ensure your service is working, you should:
-* run regular [smoke tests](https://www.gov.uk/service-manual/technology/deploying-software-regularly#using-smoke-tests-after-you-deploy) using a browser automation app such as [Selenium](http://www.seleniumhq.org/)
+* run regular [smoke tests][] using a browser automation app such as Selenium
 * implement a tool to ensure user journeys are working as you expect
-* monitor applications for errors using an error tracking app such as [Sentry](https://sentry.io/welcome/)
+* monitor applications for errors using an error tracking app such as [Sentry][]
 * implement configuration management to set up repeatable monitoring
 
-Collecting metrics on the performance of your service is useful for [capacity planning](https://www.gov.uk/service-manual/technology/test-your-services-performance#start-with-capacity-planning) and autoscaling. You should:
+Collecting metrics on the performance of your service is useful for [capacity planning][] and autoscaling. You should:
 
 * apply metrics-based monitoring because it's not platform-specific
-* create dashboards using [Grafana](http://grafana.org/) to view metrics from your datasource, for example those related to your infrastructure or application
+* create dashboards using [Grafana][] to view metrics from your datasource, for example related to your infrastructure or application
 
-Reliability Engineering is running an Alpha on using [Prometheus](https://prometheus.io/) as the operational metrics service for GDS. It will be available to all teams that use the [recommended hosting](https://gds-way.cloudapps.digital/standards/hosting.html#content) options. Please <a href="mailto:the-gds-way@digital.cabinet-office.gov.uk?subject=feedback">contact us</a> to find out more.
+Reliability Engineering is running an Alpha on using [Prometheus][] as the operational metrics service for GDS. It will be available to all teams that use the [recommended hosting][] options. Please [contact us][] to find out more.
+
+
+[monitor the status of services]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
+[performance metrics]: https://www.gov.uk/service-manual/measuring-success/how-to-set-performance-metrics-for-your-service
+[Pingdom]: https://www.pingdom.com/
+[smoke tests]: https://www.gov.uk/service-manual/technology/deploying-software-regularly#using-smoke-tests-after-you-deploy
+[Sentry]: https://sentry.io/welcome/
+[capacity planning]: https://www.gov.uk/service-manual/technology/test-your-services-performance#start-with-capacity-planning
+[Grafana]: http://grafana.org/
+[Prometheus]: https://prometheus.io/
+[recommended hosting]: https://gds-way.cloudapps.digital/standards/hosting.html#content
+[contact us]: the-gds-way@digital.cabinet-office.gov.uk
