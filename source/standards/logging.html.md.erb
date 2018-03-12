@@ -1,5 +1,5 @@
 ---
-title: Logging
+title: How to store and query logs
 expires: 2018-03-01
 ---
 
@@ -7,102 +7,48 @@ expires: 2018-03-01
 
 <%= partial :expires %>
 
-## Short-term querying of logs
+You will store and query logs to detect any potential errors within infrastructure that could be critical. Use the shared GDS [Logit][] account to store and query all your infrastructure and application logs.
 
-For the purposes of incident management and debugging, it's useful to
-have a system for storing and querying the most recent logs produced
-by your application and infrastructure.
+Logit offers cloud-based on-demand, shared [ELK (Elasticsearch, Logstash and Kibana)][] stacks as a service. They are suitable for short-term storage of logs, and are accessible and queryable. The [Reliability Engineering documentation][] has more information about using Logit.
 
-In general, tools for querying logs are not a good fit for long-term
-archival, and vice versa.
+You should not operate your own self-hosted ELK stacks for logging. The Logit cloud-hosted ELK solution is easier to manage.
 
-### Shared Elasticsearch, Logstash and Kibana (ELK) stack
+# How to store your logs
 
-GDS has a shared account with [logit](https://logit.io/), which offers
-on-demand ELK stacks as a service.
+Your product may have legal or other requirements determining how long you should store logs. For example, the [Payment Card Industry Data Security Standard (PCI-DSS)][] requires 3 months of easily accessible logs and 12 months of archived logs.
 
-This is suitable for a short-term place to store logs so
-they are available and queryable.  This should not be considered a
-durable store of logs; it is *not* suitable for long-term archival of
-logs.
+## Short-term storage
 
-Guides on how to use the logit service can be found in
-the [Reliability Engineering team documentation][].
+You should not need to store logs spanning long periods in your short-term queryable store. Practical retention periods for short-term queryable logs are:
 
-### Sumo Logic
+* no more than 7 days for non-production environments
+* no more than 30 days production environments
 
-Some teams have used [Sumo Logic][] successfully for storing and
-querying logs.
+## Long-term storage
 
-### Self-hosted Elasticsearch, Logstash and Kibana (ELK)
+When storing logs, you should focus on long-term durability for compliance reasons or to identify long-term performance trends.
 
-Each team should not operate its own ELK stack for logging.
-In the past we've found that ELK is relatively easy to set up,
-but teams tend to not prioritise keeping it updated.
+You should be aware that ELK is not appropriate for long-term storage. There are other services which are less expensive and more reliable, for example if you use [Amazon Web Services (AWS)][] you could use [Amazon CloudWatch][] to run basic queries on older logs which may be a suitable solution.
 
-However, ELK isn't appropriate for long term archival of logs. There
-are other services which are less expensive and more reliable.
+### Log shipping
 
-## Long term archival of logs
+If you have set up log shipping, you should consider:
 
-You should have a way of storing logs which focuses on long-term
-durability.  Some teams archive logs to S3 at the same time as sending
-them to their ELK or Sumo Logic store.
+*how your logs will get to short and long-term stores - we recommend using the [Elastic Beats family of tools][] as a platform to collect and ship your data.
+* what happens if one of these stores is unavailable
+* whether the store will be overloaded when it comes back online
 
-### Querying from the archives
+You could have one process to ship logs to your long-term archive, and a second process to fill a short-term query tool from the long-term archive, for example you could combine [Elasticsearch and Amazon Cloudwatch][]. This way you can be confident everything is safely stored.
 
-It's a good idea to be able to take logs from the long-term archive
-and load them into a queryable tool (for example, a one-time-use ELK
-stack).
+The Beats tools can detect periods of service unavailability. The Beats tools recall how much data is sent to your store and will resume sending data, where they left off, when your service comes back online. By using a protocol which is backpressure-aware Beats tools also won’t overload [Logstash][] with data.
 
-If you are using Amazon Web Services, CloudWatch can run rudimentary
-queries on older logs which may be good enough.
 
-## Shipping logs
-
-When implementing your mechanism to ship logs to your stores, here are
-some questions we suggest you ask:
-
-  * how do I ensure my logs get to both my short-term and long-term
-    stores?
-  * what happens if one of these stores is temporarily unavailable?
-  * what happens when the store comes back online?
-
-The [beats][] tools will detect periods of unavailability.  They will
-remember how much they have sent and continue where they left off.
-They also use a protocol which is backpressure-aware, so they will not
-overload logstash when it comes back online.
-
-One pattern is to have one process to ship logs to your long-term
-archive, and a second process to fill the short-term query tool from
-the long-term archive.  This way you can have confidence that
-everything has been correctly archived.
-
-## Retention periods
-
-This section recommends some sensible default choices for log retention
-periods.  These should be a starting point for a discussion, or a
-default choice in the absence of any other constraints.
-
-Your product may have requirements which affect your choice of log
-retention periods. For example, [PCI-DSS][] mandates 3 months of
-easily-accessible logs, and a year (no more, no less) of archived
-logs.
-
-### Short-term
-
-You shouldn't need to store a long period of logs in your short-term
-queryable store.  Sensible retention periods for short-term queryable
-logs are:
-
-  * non-production environments: no more than 7 days
-  * production environments: no more than 30 days
-
-### Long-term
-
-It's sensible to keep logs in long-term archives for at least a year.
-
-[beats]: https://www.elastic.co/products/beats
-[PCI-DSS]: https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard
-[Sumo Logic]: https://www.sumologic.com/
-[Reliability Engineering team documentation]: https://reliability-engineering.cloudapps.digital/#logging
+[Logit]: https://logit.io/
+[ELK (Elasticsearch, Logstash and Kibana)]: https://www.elastic.co/elk-stack
+[Reliability Engineering documentation]: https://reliability-engineering.cloudapps.digital/#logging
+[Payment Card Industry Data Security Standard (PCI-DSS)]: https://www.pcisecuritystandards.org/pci_security/
+[Amazon Web Services (AWS)]: https://aws.amazon.com/
+[Amazon CloudWatch]: https://aws.amazon.com/cloudwatch/
+[Elastic Beats family of tools]: https://www.elastic.co/products/beats
+[Elasticsearch and Amazon Cloudwatch]: https://www.elastic.co/guide/en/logstash-versioned-plugins/versioned_plugin_docs/v3.0.7-plugins-outputs-cloudwatch.html#v3.0.7-plugins-outputs-cloudwatch-options
+[Logstash]: https://www.elastic.co/products/logstash
