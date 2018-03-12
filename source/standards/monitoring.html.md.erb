@@ -1,5 +1,5 @@
 ---
-title: Monitoring
+title: How to monitor your service
 expires: 2018-03-01
 ---
 
@@ -7,38 +7,30 @@ expires: 2018-03-01
 
 <%= partial :expires %>
 
-## Availability monitoring
+At GDS, we follow the Service Manual guidance on how to [monitor the status of services][] and set [performance metrics][]. 
 
-[Pingdom](https://www.pingdom.com/) is the tool we've used most for availability
-monitoring. If you need to monitor a service from outside the US or EU,
-GOV.UK has used [CA App Synthetic Monitor](https://asm.ca.com/en/).
+We recommend using [Pingdom][] to monitor your service’s availability. To further ensure your service is working, you should:
 
-## Smoke tests
+* run regular [smoke tests][] using a browser automation app such as Selenium
+* implement a tool to ensure user journeys are working as you expect
+* monitor applications for errors using an error tracking app such as [Sentry][]
+* implement configuration management to set up repeatable monitoring
 
-Teams should run regular smoke tests to ensure that services are available.
-Several teams at GDS have used [Selenium](http://www.seleniumhq.org/) for this.
+Collecting metrics on the performance of your service is useful for [capacity planning][] and autoscaling. You should:
 
-## User journeys
+* apply metrics-based monitoring because it's not platform-specific
+* create dashboards using [Grafana][] to view metrics from your datasource, for example related to your infrastructure or application
 
-Teams should use a tool to ensure user journeys are working as expected.
+Reliability Engineering is running an Alpha on using [Prometheus][] as the operational metrics service for GDS. It will be available to all teams that use the [recommended hosting][] options. Please [contact us][] to find out more.
 
-## Metrics-based monitoring
 
-Metrics-based monitoring is useful - it works with virtual machines,
-PaaS and containers. Collecting metrics is useful for capacity planning and
-autoscaling.
-
-## Metrics dashboards
-
-Use [Grafana](http://grafana.org/) for creating dashboards to view
-infrastructure and application metrics.
-
-## Application error monitoring
-
-Multiple teams at GDS are using or evaluating [Sentry](https://sentry.io/)
-for application error monitoring.
-
-## Configuration management
-
-Teams should use configuration management to set up monitoring
-reproducibly.
+[monitor the status of services]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
+[performance metrics]: https://www.gov.uk/service-manual/measuring-success/how-to-set-performance-metrics-for-your-service
+[Pingdom]: https://www.pingdom.com/
+[smoke tests]: https://www.gov.uk/service-manual/technology/deploying-software-regularly#using-smoke-tests-after-you-deploy
+[Sentry]: https://sentry.io/welcome/
+[capacity planning]: https://www.gov.uk/service-manual/technology/test-your-services-performance#start-with-capacity-planning
+[Grafana]: http://grafana.org/
+[Prometheus]: https://prometheus.io/
+[recommended hosting]: https://gds-way.cloudapps.digital/standards/hosting.html#content
+[contact us]: the-gds-way@digital.cabinet-office.gov.uk
