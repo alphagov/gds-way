@@ -11,7 +11,7 @@ If your web application is running on [GOV.UK Platform as a Service (PaaS)][] yo
 
 If your web application is running on PaaS you should use:
 
-* [Docker][] to [build and deploy images][], as it’s widely used across GDS and industry
+* [Cloud Foundry Buildpacks][] to [build and deploy images][], as they’re widely used across GDS and industry
 * [Dockerhub][] or [Amazon EC2 Container Registry][] to host your images following the [PaaS responsibility model][]
 * the recommended [monitoring and logging solution][]
 
@@ -21,9 +21,9 @@ You can also run your service using bare metal Docker on an [Amazon Elastic Comp
 * zero downtime deployments are not required
 * it can be managed by configuration management
 
-You should not run:
+You cannot run:
 
-* local images on the PaaS, as [deploying bare metal containers][] are not supported
+* local images on the PaaS, as [deploying bare metal containers][] is not supported
 * Docker containers with root access using the Docker daemon as this has [security implications][]
 
 If your service requires high-availability, you should use the [Amazon Elastic Container Service (Amazon ECS)][] as your container orchestration service. By using [Amazon ECS clustering][] you can protect against unhealthy instances, and balance service workload across corresponding healthy instances.
@@ -37,8 +37,9 @@ If you are running a development environment using containers then you should…
 
 [GOV.UK Platform as a Service (PaaS)]: https://www.cloud.service.gov.uk/
 [recommended hosting guidance]: https://gds-way.cloudapps.digital/standards/hosting.html#content
+[Cloud Foundry Buildpacks]: https://docs.cloudfoundry.org/buildpacks/using-buildpacks.html
 [Docker]: https://www.docker.com/
-[build and deploy images]: https://docs.cloud.service.gov.uk/#deploy-a-docker-image-experimental
+[build and deploy images]: https://docs.cloud.service.gov.uk/#buildpacks
 [Dockerhub]: https://hub.docker.com/
 [Amazon EC2 Container Registry]: https://aws.amazon.com/ecr/
 [PaaS responsibility model]: https://docs.cloud.service.gov.uk/#responsibility-model
