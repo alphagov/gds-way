@@ -1,0 +1,46 @@
+---
+title: How to publish open source code
+expires: 2018-09-01
+---
+
+# <%= current_page.data.title %>
+
+<%= partial :expires %>
+
+At GDS we follow the Service Manual, [making source code open and reusable][].
+
+Our open source projects were developed for use on GOV.UK and other work we do, such as [Puppet module for go-audit][] or the [GDS Operations open source web site][]. Unless stated otherwise, all our open source software is released under the [MIT licence][] and is free to use. We encourage and appreciate contributions.
+
+By releasing your project as open source software your work can benefit other government departments, and outside institutions.
+
+When you publish open source code, your project must:
+
+* include a readme.md
+* have useful and informative commit messages about why a change was made
+* provide a changelog, for example the [specification for CPAN Changes files][]
+* include a valid open source licence file
+* link to a public list of known issues and bugs
+* have an email address to submit security related bug reports
+* list a version number compatible with [Semantic Versioning][]
+
+Your open source code project should:
+
+* publish packages to relevant language specific repositories such as [PyPI - the Python Package Index][] or [RubyGems][]
+* post contributors guidelines in a contributing file
+* set up any tests to run in a public continuous integration environment using tools such as [Travis CI][], [CircleCI][] or [Jenkins][]
+
+Your project could also include a contributors file, like the people who contributed code to the [Go repository][] and you can also provide a mailing list so people can discuss your project.
+
+
+[making source code open and reusable]: https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable
+[Puppet module for go-audit]: https://github.com/gds-operations/puppet-goaudit
+[GDS Operations open source web site]: https://github.com/gds-operations/gds-operations.github.io
+[MIT licence]: https://github.com/alphagov/styleguides/blob/master/licensing.md
+[Specification for CPAN Changes files]: https://metacpan.org/pod/CPAN::Changes::Spec
+[Semantic Versioning]: https://semver.org/spec/v2.0.0.html
+[PyPI - the Python Package Index]: https://pypi.python.org/pypi
+[RubyGems]: https://rubygems.org/
+[Travis CI]: https://travis-ci.org/
+[CircleCI]: https://circleci.com/
+[Jenkins]: https://jenkins.io/
+[Go repository]: https://golang.org/CONTRIBUTORS
