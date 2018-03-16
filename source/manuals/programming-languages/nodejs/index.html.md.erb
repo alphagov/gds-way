@@ -98,11 +98,11 @@ Use these files to `require` all the modules functions.
 
 ```js
 // product/index.js
-const product = require('./product')
+const product = require('./product');
 
 module.exports = {
   create: product.create
-}
+};
 ```
 
 > Store test files within the implementation
@@ -143,33 +143,33 @@ confuse you.
 ```js
 // Use:
 const foo = function (x) {
-...
-}
+  //...
+};
 
 // avoid:
 const foo = x => {
-...
-}
+  //...
+};
 
 
 // Use:
-map(item => Math.sqrt(item), array)
+map(item => Math.sqrt(item), array);
 
 // avoid:
-map(function (item) { return Math.sqrt(item) }, array)
+map(function (item) { return Math.sqrt(item) }, array);
 ```
 
 Acceptable exceptions include single expression functions, such as
 
 ```js
-const collatz = n => (n % 2) ? (n / 2) : ((3 * n) + 1)
+const collatz = n => (n % 2) ? (n / 2) : ((3 * n) + 1);
 ```
 
 or curryied functions, which are more readable using the arrow
 notation:
 
 ```js
-const foo = x => y => z => (x * y) + z
+const foo = x => y => z => (x * y) + z;
 ```
 
 Be aware that because anonymous functions don't have a name, a stack trace
@@ -185,11 +185,11 @@ There are many different ways to define classes in JavaScript. `class` has been 
 ```js
 class Rectangle {
   constructor(height, width) {
-    this.height = height
-    this.width = width
+    this.height = height;
+    this.width = width;
   }
   area () {
-    return this.width * this.height
+    return this.width * this.height;
   }
 }
 ```
@@ -213,13 +213,13 @@ readable and less heavy on the operating system.
 ```js
 // Prefer:
 const pwdReadCallback = function (err, data) {
-...
-}
-fs.readFile('/etc/passwd', pwdReadCallback)
+  //...
+};
+fs.readFile('/etc/passwd', pwdReadCallback);
 
 // over:
 fs.readFile('/etc/passwd', (err, data) => {
-...
+  //...
 }
 
 
@@ -229,22 +229,22 @@ const done = function (resolve, reject) {
   return () => {
     try {
       // Do something that might fail
-      resolve('all went well')
+      resolve('all went well');
     } catch (err) {
-      reject(err)
+      reject(err);
     }
-  }
-}
+  };
+};
 
 const waitAndSee = function (resolve, reject) {
-  setTimeout(done(resolve, reject), 2500)
-}
+  setTimeout(done(resolve, reject), 2500);
+};
 
-const log = status => message => console.log(status + ': ' + message)
+const log = status => message => console.log(status + ': ' + message);
 
 new Promise(waitAndSee)
   .then(log('Success'))
-  .catch(log('Failure'))
+  .catch(log('Failure'));
 ```
 
 This will avoid "callback hell" and encourage organising callback functions
@@ -253,28 +253,28 @@ tests for those functions.
 
 ```js
 const pwdReadCallback = function (err, data) {
-...
-}
+  //...
+};
 const userLoggedInCallback = function (authToken) {
-...
-}
+  //...
+};
 const dbRequestResultCallback = function (req, res) {
-...
-}
+  //...
+};
 ```
 
 Separating out a callback may pose a problem when it needs its original scope. This can be handled by currying the callback:
 
 ```js
-fs.readFile(filename, callback(filename))
+fs.readFile(filename, callback(filename));
 
 const callback = filename => (err, data) => {
   if (err) {
-    console.log(`failed reading ${filename}.`)
-    throw err
+    console.log(`failed reading ${filename}.`);
+    throw err;
   }
-...
-}
+  //...
+};
 ```
 
 
@@ -375,7 +375,7 @@ R.cond([
  [R.is(Number), R.identity],
  [R.is(String), parseInt],
  [R.T, R.always(NaN)]
-])
+]);
 ```
 
 which is compact and useful, but not easily understood up by a developer not
@@ -389,7 +389,7 @@ can lead to very arcane code, so should only be used when necessary.
 // Prefer:
 for (let i = 0; i < 10; i += 1) {
   for (let j = 0; j < 10; j += 1) {
-    console.log(i, j)
+    console.log(i, j);
   }
 }
 
