@@ -101,7 +101,7 @@ Use these files to `require` all the modules functions.
 const product = require('./product')
 
 module.exports = {
-create: product.create
+  create: product.create
 }
 ```
 
@@ -184,13 +184,13 @@ There are many different ways to define classes in JavaScript. `class` has been 
 
 ```js
 class Rectangle {
-constructor(height, width) {
-this.height = height
-this.width = width
-}
-area () {
-return this.width * this.height
-}
+  constructor(height, width) {
+    this.height = height
+    this.width = width
+  }
+  area () {
+    return this.width * this.height
+  }
 }
 ```
 
@@ -226,25 +226,25 @@ fs.readFile('/etc/passwd', (err, data) => {
 // Another example:
 
 const done = function (resolve, reject) {
-return () => {
-try {
-// Do something that might fail
-resolve('all went well')
-} catch (err) {
-reject(err)
-}
-}
+  return () => {
+    try {
+      // Do something that might fail
+      resolve('all went well')
+    } catch (err) {
+      reject(err)
+    }
+  }
 }
 
 const waitAndSee = function (resolve, reject) {
-setTimeout(done(resolve, reject), 2500)
+  setTimeout(done(resolve, reject), 2500)
 }
 
 const log = status => message => console.log(status + ': ' + message)
 
 new Promise(waitAndSee)
-.then(log('Success'))
-.catch(log('Failure'))
+  .then(log('Success'))
+  .catch(log('Failure'))
 ```
 
 This will avoid "callback hell" and encourage organising callback functions
@@ -269,10 +269,10 @@ Separating out a callback may pose a problem when it needs its original scope. T
 fs.readFile(filename, callback(filename))
 
 const callback = filename => (err, data) => {
-if (err) {
-console.log(`failed reading ${filename}.`)
-throw err
-}
+  if (err) {
+    console.log(`failed reading ${filename}.`)
+    throw err
+  }
 ...
 }
 ```
@@ -455,7 +455,7 @@ We recommend starting any new project with the [GDS Node.JS boilerplate](https:/
 In the GDS context, the guidelines provided in the links below are advisory
 only. The guidance provided here takes precedence in case of conflicts.
 
-* **[Node.js best practices]** — A comprehensive guide to Node.js best practices
+* **[Node best practices]** — A comprehensive guide to Node.js best practices
 * **[node.cool]** — A curated list of Node.js packages and resources by Sindre Sorhus
 * **[JS documentation]** — MDN's definitive JS docs
 
@@ -463,8 +463,8 @@ only. The guidance provided here takes precedence in case of conflicts.
 This manual is not presumed to be infallible or beyond dispute. If you think something is missing or if you'd like to see something changed then:
 
 1. _(optional)_ Start with the [#Nodejs] community's Slack channel to see what other developers think. You will then understand how likely it is that your proposal will be accepted as a pull request before you complete any work.
-2. Check out the making changes section of the [GDS Tech repo][github-gds-tech-readme-making-changes]
-3. Create a pull request against [GDS Tech repo][github-gds-tech]
+2. Check out the making changes section of the [GDS Tech repo][github-gds-tech-readme-making-changes].
+3. Create a pull request against [GDS Tech repo][github-gds-tech].
 
 [github-gds-tech]: https://github.com/alphagov/gds-tech
 [github-gds-tech-readme-making-changes]: https://github.com/alphagov/gds-tech/blob/master/README.md#making-changes
