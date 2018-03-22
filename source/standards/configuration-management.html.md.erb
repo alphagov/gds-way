@@ -7,15 +7,15 @@ expires: 2018-06-30
 
 <%= partial :expires %>
 
-You should use [configuration management][] to manage and automate and standardise your infrastructure. The Service Manual has more information about how to [manage your software configuration][].
+You should use [configuration management][] to manage, automate and standardise your infrastructure. The Service Manual has more information about how to [manage your software configuration][].
 
-When you use configuration management you store your infrastructure as code, for example your virtual machines (VM) configuration.
+When you use configuration management you store your infrastructure as code, such as your virtual machines (VM) configuration.
 
 For example, you can use configuration management during your VMs deployment when running them in [Amazon Elastic Compute Cloud (Amazon EC2)][] or in your [Amazon Machine Image (AMI)][],  to ensure build consistency and provide an audit trail of what was changed.
 
-We recommend using [Puppet][] for configuration management, as it’s scalable and it’s widely used.
+We recommend using [Puppet][] for configuration management, as it’s scalable and widely used.
 
-We do not recommend configuration management for simple deployments, such as a single app with a database running on one server. There are other tools more suitable for smaller projects you could use for example, cloud-init.
+We do not recommend configuration management for simple deployments, such as a single app with a database running on one server. There are other tools more suitable for smaller projects you could use for example, [cloud-init][].
 
 
 [configuration management]: https://puppet.com/solutions/configuration-management
