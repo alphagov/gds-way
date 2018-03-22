@@ -1,25 +1,26 @@
 ---
-title: Use configuration management
-expires: 2018-05-16
+title: Use configuration management for your software
+expires: 2018-06-30
 ---
 
 # <%= current_page.data.title %>
 
 <%= partial :expires %>
 
-You should use configuration management to track and control changes in large software deployments. When using configuration management you ensure your environment configuration is documented and [stored as code][].
+You should use [configuration management][] to manage and automate and standardise your infrastructure. The Service Manual has more information about how to [manage your software configuration][].
 
-For example, when you run virtual machines (VM) in [Amazon Elastic Compute Cloud (Amazon EC2)][] and the VMs instance configuration becomes too complex to manage either during its deployment or within your [Amazon Machine Image (AMI)][] use configuration management.
+When you use configuration management you store your infrastructure as code, for example your virtual machines (VM) configuration.
 
-You should use [Puppet][] in large software environments, and for smaller environments, you can use [Ansible][].
+For example, you can use configuration management during your VMs deployment when running them in [Amazon Elastic Compute Cloud (Amazon EC2)][] or in your [Amazon Machine Image (AMI)][],  to ensure build consistency and provide an audit trail of what was changed.
 
-You should not use configuration management for relatively simple deployments as there are other tools more suitable, for example [cloud-init][].
+We recommend using [Puppet][] for configuration management, as it’s scalable and it’s widely used.
+
+We do not recommend configuration management for simple deployments, such as a single app with a database running on one server. There are other tools more suitable for smaller projects you could use for example, cloud-init.
 
 
-
-[Puppet]: https://puppet.com/
-[Ansible]: https://www.ansible.com/
+[configuration management]: https://puppet.com/solutions/configuration-management
+[manage your software configuration]: https://www.gov.uk/service-manual/technology/manage-your-software-configuration#using-configuration-management-tools
 [Amazon Elastic Compute Cloud (Amazon EC2)]: https://aws.amazon.com/ec2/
 [Amazon Machine Image (AMI)]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html
+[Puppet]: https://puppet.com/
 [cloud-init]: https://cloud-init.io/
-[stored as code]: https://gds-way.cloudapps.digital/standards/source-code.html#content
