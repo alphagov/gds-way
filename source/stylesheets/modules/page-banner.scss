@@ -10,6 +10,7 @@
 
 .page-banner {
   padding: 10px 0 8px;
+  margin-top: 15px;
 
   @include media(tablet) {
     padding-bottom: 10px;
@@ -23,4 +24,3 @@
     @include core-16;
   }
 }
-
