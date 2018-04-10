@@ -7,16 +7,23 @@ expires: 2018-09-01
 
 <%= partial :expires %>
 
-At GDS we code in the open following the Service Manual, [making source code open and reusable][]. We also maintain several open source projects developed for use on GOV.UK and with other work we do, such as [Puppet module for go-audit][] or the [GDS Operations open source web site][].
+Wherever possible, we [make our source code open and reusable][]. This means other government departments and people in outside organisations can benefit from our work. We also maintain several open source projects developed for use on GOV.UK and with other work we do, such as the [Puppet module for go-audit][] or the [GDS Operations open source web site][].
 
-Unless stated otherwise, all our open source software is released under the [MIT licence][] and is free to use, so we encourage and appreciate contributions. Releasing your project as open source software can benefit other government departments and outside institutions.
+It’s not always appropriate to open code, there are situations [when you should keep some data and code closed][], for example when involving keys and security credentials.
+
+The Service Manual explains [how to open previously closed code and your responsibilities for maintaining open code][].
+
+You should release any open code with a clear license for reuse. As our documentation repositories include both content and code, we use 2 licences:
+
+* [MIT licence][]  for code and code samples in documentation
+* [Open Government Licence (OGL)][] for documentation
 
 When you publish open source code, your project must:
 
-* include a readme
+* include a readme, for example the [Digital Marketplace API][]
 * have useful and informative commit messages about why a change was made
 * provide a changelog, for example the [specification for CPAN Changes files][]
-* include a valid open source licence file
+* include an MIT and OGL licence file
 * link to a public list of known issues and bugs
 * have an email address to submit security related bug reports
 * list a version number compatible with [Semantic Versioning][]
@@ -24,13 +31,13 @@ When you publish open source code, your project must:
 Your open source code project should:
 
 * publish packages to relevant language specific repositories such as [PyPI - the Python Package Index][] or [RubyGems][]
-* post contributors' guidelines in a contributing file
+* post contributors' guidelines in a contributing file, like the [Go repository][]
 * set up any tests to run in a public continuous integration environment using tools such as [Travis CI][], [CircleCI][] or [Jenkins][]
 
-Your project could also include a contributors file, like the [Go repository][]. You can also provide a mailing list so people can discuss your project.
+You could also provide a mailing list so people can discuss your project.
 
 
-[making source code open and reusable]: https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable
+[make our source code open and reusable]: https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable
 [Puppet module for go-audit]: https://github.com/gds-operations/puppet-goaudit
 [GDS Operations open source web site]: https://github.com/gds-operations/gds-operations.github.io
 [MIT licence]: https://github.com/alphagov/styleguides/blob/master/licensing.md
@@ -41,4 +48,9 @@ Your project could also include a contributors file, like the [Go repository][].
 [Travis CI]: https://travis-ci.org/
 [CircleCI]: https://circleci.com/
 [Jenkins]: https://jenkins.io/
+[Go repository]: https://golang.org/CONTRIBUTORS
+[when you should keep some data and code closed]: https://www.gov.uk/government/publications/open-source-guidance/when-code-should-be-open-or-closed
+[how to open previously closed code and your responsibilities for maintaining open code]: https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable
+[Open Government Licence (OGL)]: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+[Digital Marketplace API]: https://github.com/alphagov/digitalmarketplace-api
 [Go repository]: https://golang.org/CONTRIBUTORS
