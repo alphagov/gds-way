@@ -1,0 +1,56 @@
+---
+title: How to publish open source code
+expires: 2018-09-01
+---
+
+# <%= current_page.data.title %>
+
+<%= partial :expires %>
+
+Wherever possible, we [make our source code open and reusable][]. This means other government departments and people in outside organisations can benefit from our work. We also maintain several open source projects developed for use on GOV.UK and with other work we do, such as the [Puppet module for go-audit][] or the [GDS Operations open source web site][].
+
+It’s not always appropriate to open code, there are situations [when you should keep some data and code closed][], for example when involving keys and security credentials.
+
+The Service Manual explains [how to open previously closed code and your responsibilities for maintaining open code][].
+
+You should release any open code with a clear license for reuse. As our documentation repositories include both content and code, we use 2 licences:
+
+* [MIT licence][]  for code and code samples in documentation
+* [Open Government Licence (OGL)][] for documentation
+
+When you publish open source code, your project must:
+
+* include a readme, for example the [Digital Marketplace API][]
+* have useful and informative commit messages about why a change was made
+* provide a changelog, for example the [specification for CPAN Changes files][]
+* include an MIT and OGL licence file
+* link to a public list of known issues and bugs
+* have an email address to submit security related bug reports
+* list a version number compatible with [Semantic Versioning][]
+
+Your open source code project should:
+
+* publish packages to relevant language specific repositories such as [PyPI - the Python Package Index][] or [RubyGems][]
+* post contributors' guidelines in a contributing file, like the [Go repository][]
+* set up any tests to run in a public continuous integration environment using tools such as [Travis CI][], [CircleCI][] or [Jenkins][]
+
+You could also provide a mailing list so people can discuss your project.
+
+
+[make our source code open and reusable]: https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable
+[Puppet module for go-audit]: https://github.com/gds-operations/puppet-goaudit
+[GDS Operations open source web site]: https://github.com/gds-operations/gds-operations.github.io
+[MIT licence]: https://opensource.org/licenses/MIT
+[Specification for CPAN Changes files]: https://metacpan.org/pod/CPAN::Changes::Spec
+[Semantic Versioning]: https://semver.org/spec/v2.0.0.html
+[PyPI - the Python Package Index]: https://pypi.python.org/pypi
+[RubyGems]: https://rubygems.org/
+[Travis CI]: https://travis-ci.org/
+[CircleCI]: https://circleci.com/
+[Jenkins]: https://jenkins.io/
+[Go repository]: https://golang.org/CONTRIBUTORS
+[when you should keep some data and code closed]: https://www.gov.uk/government/publications/open-source-guidance/when-code-should-be-open-or-closed
+[how to open previously closed code and your responsibilities for maintaining open code]: https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable
+[Open Government Licence (OGL)]: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+[Digital Marketplace API]: https://github.com/alphagov/digitalmarketplace-api
+[Go repository]: https://golang.org/CONTRIBUTORS
