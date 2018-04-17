@@ -1,0 +1,51 @@
+---
+title: How to run your service as a container
+
+expires: 2018-05-02
+---
+# <%= current_page.data.title %>
+
+<%= partial :expires %>
+
+If your web application is running on [GOV.UK Platform as a Service (PaaS)][] you should follow the [recommended hosting guidance][].
+
+If your web application is running on PaaS you should use:
+
+* [Cloud Foundry Buildpacks][] to [build and deploy images][], as they’re widely used across GDS and industry
+* [Dockerhub][] or [Amazon EC2 Container Registry][] to host your images following the [PaaS responsibility model][]
+* the recommended [monitoring and logging solution][]
+
+You can also run your service using bare metal Docker on an [Amazon Elastic Compute Cloud (Amazon EC2)][] instance if:
+
+* service uptime is not a priority
+* zero downtime deployments are not required
+* it can be managed by configuration management
+
+You cannot run:
+
+* local images on the PaaS, as [deploying bare metal containers][] is not supported
+* Docker containers with root access using the Docker daemon as this has [security implications][]
+
+If your service requires high-availability, you should use the [Amazon Elastic Container Service (Amazon ECS)][] as your container orchestration service. By using [Amazon ECS clustering][] you can protect against unhealthy instances, and balance service workload across corresponding healthy instances.
+
+If your application is either not currently running on PaaS, or it’s not possible to use PaaS as a platform due to technical constraints, you should...
+
+If you are running a development environment using containers then you should…
+
+
+
+
+[GOV.UK Platform as a Service (PaaS)]: https://www.cloud.service.gov.uk/
+[recommended hosting guidance]: https://gds-way.cloudapps.digital/standards/hosting.html#content
+[Cloud Foundry Buildpacks]: https://docs.cloudfoundry.org/buildpacks/using-buildpacks.html
+[Docker]: https://www.docker.com/
+[build and deploy images]: https://docs.cloud.service.gov.uk/#buildpacks
+[Dockerhub]: https://hub.docker.com/
+[Amazon EC2 Container Registry]: https://aws.amazon.com/ecr/
+[PaaS responsibility model]: https://docs.cloud.service.gov.uk/#responsibility-model
+[monitoring and logging solution]: https://reliability-engineering.cloudapps.digital/#content
+[Amazon Elastic Compute Cloud (Amazon EC2)]: https://aws.amazon.com/ec2/
+[deploying bare metal containers]: https://docs.cloud.service.gov.uk/#deploy-a-docker-image-experimental
+[security implications]: https://docs.docker.com/engine/security/security/
+[Amazon Elastic Container Service (Amazon ECS)]: https://aws.amazon.com/ecs/
+[Amazon ECS clustering]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_clusters.html
