@@ -1,13 +1,6 @@
 ---
 title: AWS Account Management
 expires: 2018-10-18
-account_list:
-  - team: 'GOV.UK'
-    url: 'https://github.com/alphagov/govuk-aws-data/blob/master/docs/govuk-aws-accounts.md'
-  - team: 'Verify'
-    url: 'https://github.com/alphagov/verify-blackbox-passwords/blob/master/aws-accounts.info'
-  - team: 'Digital Marketplace'
-    url: 'https://alphagov.github.io/digitalmarketplace-manual/aws-accounts.html#available-roles'
 ---
 
 # <%= current_page.data.title %>
@@ -18,103 +11,7 @@ GDS manage a number of Amazon Web Services (AWS) accounts.
 User accounts are managed centally in a "base account" from which users
 can access the target accounts through a process called "assuming roles".
 
-## Accessing the AWS Console
-
-<ul>
-  <li>
-    Sign in to the GDS base account at:
-    <a href="https://gds-users.signin.aws.amazon.com/console">https://gds-users.signin.aws.amazon.com/console</a>
-    <details>
-      <summary><small>Screenshot of the sign in page</small></summary>
-      <img src="/images/aws-base-account-signin-form.png" alt="Screenshot of the sign in page">
-    </details>
-  </li>
-  <li>
-    From the menu in the top right, select "Switch Role"
-    <details>
-      <summary><small>Screenshot of the switch role menu item</small></summary>
-      <img src="/images/aws-switch-role-menu.png" alt="Screenshot of the sign in page">
-    </details>
-  </li>
-  <li>
-    Fill in the account number and role you're switching to
-    <details>
-      <summary><small>Screenshot of the switch role page</small></summary>
-      <img src="/images/aws-switch-role-form.png" alt="Screenshot of the sign in page">
-    </details>
-    <details>
-      <summary><small>Teams' lists of accounts and roles</small></summary>
-      <ul>
-        <% for link in current_page.data.account_list %>
-          <li><a href="<%= link['url'] %>"><%= link['team'] %></a></li>
-        <% end %>
-      </ul>
-    </details>
-  </li>
-</ul>
-
-## Accessing AWS from the command line
-
-There are several command line tools which interact with AWS, including:
-
-* [AWS Command Line Interface](https://aws.amazon.com/cli/)
-* [AWS Shell](https://github.com/awslabs/aws-shell)
-* [Terraform](https://www.terraform.io/)
-
-These need credentials for accessing AWS. The simplest way of managing these credentials
-is with an AWS credentials file.
-
-### Create an AWS credentials file
-
-Create a file at `~/.aws/credentials` and add the following text:
-
-```
-[gds-users]
-aws_access_key_id = MYACCESSKEYID
-aws_secret_access_key = MYSECRETACCESSKEY
-```
-
-You can find your access key id and secret access key by logging into the AWS console
-to the base account and following [the AWS instructions here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
-
-For each role you need to assume, add a section like the following:
-
-```
-[your-account-name]
-source_profile = gds-users
-role_arn = <role arn>
-mfa_serial = <mfa device arn>
-```
-
-Where `<role arn>` is taken from your Team's list of accounts and roles...
-
-<details>
-  <summary><small>Teams' lists of accounts and roles</small></summary>
-  <ul>
-    <% for link in current_page.data.account_list %>
-      <li><a href="<%= link['url'] %>"><%= link['team'] %></a></li>
-    <% end %>
-  </ul>
-</details>
-
-... and `<mfa device arn>` is your user's assigned MFA device.
-
-<details>
-  <summary><small>How to find your MFA device ARN</small></summary>
-  <li>Sign in to the base account in the console</li>
-  <li>Navigat to `IAM` > `Users` > `$your-user`</li>
-  <li>Select the `Security credentials` tab</li>
-  <li>Look for the `Asssigned MFA device`</li>
-  </ul>
-</details>
-
-
-## How GDS manages AWS accounts
-
-TODO
-
 ## Advice on managing cross account access
-
 
 Cross account access allows user accounts in one AWS account (the *base* account) to access resources in another AWS account (the *target* account).
 
