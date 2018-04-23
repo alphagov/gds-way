@@ -115,22 +115,48 @@ TODO
 
 ## Advice on managing cross account access
 
-Cross account access allows user accounts in one AWS account (the base account) to access resources in another AWS account (the target account).
+
+Cross account access allows user accounts in one AWS account (the *base* account) to access resources in another AWS account (the *target* account).
+
 Access to the resources within the target AWS account is controlled through IAM roles which are managed within that target AWS account.
-The IAM roles are used to establish trust relationships between the target (trusting) AWS account and the base (trusted) AWS account.
 
-It is the target AWS accounts responsibility to manage access to it's resources. Although user accounts are managed within the base AWS account their access to resources is managed by the target AWS account in which those resources reside.
+The IAM roles are used to establish trust relationships between the target (*trusting*) AWS account and the base (*trusted*) AWS account.
 
-The target account does not need to manage user accounts but still has full control of a access to it's resources.
+It is the target AWS accounts responsibility to manage access to it's resources. Although user accounts are managed within the base AWS account access to resources is managed by the target AWS account in which those resources reside.
 
-A role consists of a single trust policy and one or more permissions policies.
+### Manage Access to Resources
 
-The trust policy consists of principles and conditions. Principles are the entities which are being trusted, conditions are checks performed against those entities when they attempt to assume the role.
+![Assume Role Diagram](../images/assume-role.svg)
+
+The users exist in the base account and have permission to assume role into the target account.
+
+The target account defines the roles (Data Analyst in this example) which the users in the base account can assume. 
+
+#### The Trust Relationship (Assume Role Policy)
+
+The trust relationship describes which entities can assume the role (*principles*) and imposes *conditions* on how and when those entities can assume the role.
+
+##### Principles
+
 A principle can be a user account, an AWS account or a role. The principle entities are expressed as an AWS ARN.
-When an AWS account is trusted all of its containing users and roles are trusted it is therefore not recommend to trust the base account as this will allow any user within the base account to assume the role.
-It is recommended to include conditions on the trust policy to help increase security and restrict there usage.
+
+It is **strongly** recommended not to trust an AWS account. Trusting an AWS account base account allows all of the entities within the base account to assume the role. 
+
+##### Conditions
+
 Conditionals can be used to enforce the presence of MFA, restrict access to particular source ip addresses or restrict access to particular times of the day.
 
-It is recommended to design roles based on the resources that are being managed for a particular task rather then task a particular user may need to perform. This makes it easier to design roles around a least privilege principle.
-e
+##### An example Trust Relationship policy
+    {
+      "Version": "2012-10-17",
+      "Statement": {
+        "Effect": "Allow",
+        "Principal": { "AWS": "arn:aws:iam::123456789012:user/example.user@digital.cabinet-office.gov.uk" },
+        "Action": "sts:AssumeRole",
+        "Condition": { "Bool": { "aws:MultiFactorAuthPresent": "true" } }
+      }
+    }
 
+#### Resource Permissions (Policies)
+
+Access to resources are managed through IAM Policies, these can be custom or defined by Amazon. Roles should be designed around the permissions required to complete a task. 
