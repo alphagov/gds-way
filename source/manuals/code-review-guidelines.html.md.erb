@@ -1,0 +1,110 @@
+---
+title: Code review guidelines
+---
+
+# <%= current_page.data.title %>
+
+This page contains advice for developers on how to constructively review code.
+
+A thorough code review can:
+
+  - Help produce quality code and surface bugs early.
+  - Share knowledge between the team, and help less experienced reviewers learn about the code.
+  - Help make the code more maintainable and re-usable.
+  - Surface potential gaps in documentation.
+  - Help the author (and reviewer) write better pull requests in the future.
+
+
+## General guidelines
+
+Your code review should:
+
+  - Be courteous. Assume the author has good intentions. See the Further Reading section below for tips on positively phrasing comments.
+  - Use Github’s 'review' feature where possible.
+  - Flag up major issues quickly, in person if necessary.
+  - Ask the author to explain any parts of the code that aren’t clear.
+  - Give positive feedback where it’s deserved.
+  - When suggesting a change:
+    - Explain your reasoning (for example, refer to a style guide).
+    - If possible, give a short example.
+    - If it’s an optional change or a personal preference, say so.
+
+You should not:
+
+  - Approve a pull request that you don’t fully understand.
+  - Rush the review, even if it’s urgent.
+  - Repeatedly point out the same error pattern.
+  - Leave 'drive by reviews' (single comments with no context or follow up).
+
+
+## Questions for reviewers to ask
+
+Not all the sections below will apply to every pull request. Use common sense!
+
+### Description, structure and overall purpose
+
+  - Is the overall purpose of the pull request clear?
+  - Are the changes within the scope of the problem?
+  - Is this the simplest way to solve the problem? If not, is there a good reason?
+  - If there are fundamental problems with the code, would it be useful to have a face-to-face chat with the author?
+  - Is this a temporary fix for a much bigger problem?
+  - Should the author break the pull request down into smaller chunks?
+  - Will the changes incur tech debt? Should anything be refactored in order to help solve an existing tech-debt issue?
+
+### Infrastructure/Deployment
+
+  - Are the changes self-contained within the repo, or could they affect other apps/systems?
+  - Are there any potential security issues?
+  - Will there be any problems deploying the changes?
+
+### Code Style
+
+  - Are there any linting issues? (Consider running automated linting before allowing a pull request to be merged, for example with Travis CI.)
+  - Are there any edge cases (how does the code handle nulls/errors)?
+  - Are the patterns consistent with similar code elsewhere in the codebase?
+  - Is the code reusable? Can existing code be reused to do the same job?
+  - Are variable names readable? Do they accurately represent their contents?
+  - Does the code adhere to the principles of the language (for example, the [Zen of Python](https://www.python.org/dev/peps/pep-0020/))?
+  - If a line of code isn’t clear, would a comment be helpful?
+  - Has something appeared/gone missing following a merge or rebase?
+
+### Tests
+
+  - Do the changes have appropriate test coverage?
+  - Are null/error cases covered?
+  - Will the tests pass in all appropriate environments?
+  - Are unit tests sufficient, or are integration/functional tests required?
+  - Do the test names describe what’s happening in the test?
+
+### Introducing/updating dependencies
+
+  - Are new dependencies trustworthy/open source/well maintained/essential for the code?
+  - Could the new dependency break anything? Is it compatible with the version of the language used?
+
+### Reviewing libraries or packages
+
+  - Are the changes backwards compatible with the old version?
+  - Has the version number been updated?
+  - Does the changelog need to be updated (especially if there are breaking changes)?
+
+### Documentation
+
+  - If it’s a new feature, do the docs need to be updated?
+  - Do any existing docs need to be changed (or linked to)?
+  - If the pull request itself contains documentation:
+    - Is it in the right place?
+    - Is it ambiguous? Could it be misinterpreted?
+    - Spelling/punctuation/grammar (this helps avoid misinterpretation).
+
+
+## Further Reading
+
+  - [GOV.UK pull request guidelines](https://github.com/alphagov/styleguides/blob/master/pull-requests.md#reviewing-a-request)
+
+  - [Code Review Guidelines](https://engineeringblog.yelp.com/2017/11/code-review-guidelines.html) - checklists for both code authors and code reviewers, from the Yelp engineering blog
+
+  - [How to code review like a human](https://mtlynch.io/human-code-reviews-1/) - a 2-part blog post by Michael Lynch, on the social aspects of code review
+
+  - [Effective code reviews](https://codeahoy.com/2016/04/03/effective-code-reviews/) - a blog post by Umer Mansoor, on phrasing review comments positively
+
+  - [Better Code Reviews](http://www.bettercode.reviews/) - collated feedback and data from a developer survey by Vaidehi Joshi
