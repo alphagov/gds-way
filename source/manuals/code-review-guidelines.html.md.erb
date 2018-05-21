@@ -1,110 +1,121 @@
 ---
-title: Code review guidelines
+title: How to review code
 ---
 
 # <%= current_page.data.title %>
 
-This page contains advice for developers on how to constructively review code.
+By thoroughly reviewing code during the development process it can help teams produce quality code and find bugs early in their projects.
 
-A thorough code review can:
+Reviewing code encourages knowledge sharing in your team and helps less experienced people learn about your code. A comprehensive review will keep your code maintainable and reusable, indicating gaps in documentation and encouraging developers to write clearer [GitHub pull requests (PR)][].
 
-  - Help produce quality code and surface bugs early.
-  - Share knowledge between the team, and help less experienced reviewers learn about the code.
-  - Help make the code more maintainable and re-usable.
-  - Surface potential gaps in documentation.
-  - Help the author (and reviewer) write better pull requests in the future.
+Your code review should aim to:
 
+* give appropriate positive feedback
+* flag up major issues quickly and in person if necessary
+* clarify any parts of the code that are unclear
+* use the [GitHub review feature][] where possible
 
-## General guidelines
+When suggesting a change:
 
-Your code review should:
-
-  - Be courteous. Assume the author has good intentions. See the Further Reading section below for tips on positively phrasing comments.
-  - Use Github’s 'review' feature where possible.
-  - Flag up major issues quickly, in person if necessary.
-  - Ask the author to explain any parts of the code that aren’t clear.
-  - Give positive feedback where it’s deserved.
-  - When suggesting a change:
-    - Explain your reasoning (for example, refer to a style guide).
-    - If possible, give a short example.
-    - If it’s an optional change or a personal preference, say so.
+* indicate if it’s optional or just personal preference
+* give a short example if necessary
+* explain your reasoning, [refer to a programming language style guide][]
 
 You should not:
 
-  - Approve a pull request that you don’t fully understand.
-  - Rush the review, even if it’s urgent.
-  - Repeatedly point out the same error pattern.
-  - Leave 'drive by reviews' (single comments with no context or follow up).
+* approve a request you don’t fully understand
+* rush the review, even if it’s urgent
+* repeatedly point out the same error pattern
+* leave single comments without context
 
+## Suggested questions when reviewing code
 
-## Questions for reviewers to ask
+When you review a PR think about the overall purpose of the code when asking questions. For example does the PR:
 
-Not all the sections below will apply to every pull request. Use common sense!
+* have a clear purpose
+* capture the simplest way to solve a problem
+* provide a temporary fix for a much bigger problem
+* suggest a change or changes outside the project’s scope
+* need breaking into smaller pull requests
 
-### Description, structure and overall purpose
+You should also consider if a PR’s suggested changes will contribute to [technical debt][] or if anything should be rewritten to help solve existing technical debt. If there are wider problems with the code, it’s useful to have a face-to-face chat with the person who raised the PR.
 
-  - Is the overall purpose of the pull request clear?
-  - Are the changes within the scope of the problem?
-  - Is this the simplest way to solve the problem? If not, is there a good reason?
-  - If there are fundamental problems with the code, would it be useful to have a face-to-face chat with the author?
-  - Is this a temporary fix for a much bigger problem?
-  - Should the author break the pull request down into smaller chunks?
-  - Will the changes incur tech debt? Should anything be refactored in order to help solve an existing tech-debt issue?
+You can use these questions to help speed up your review process.
 
-### Infrastructure/Deployment
+## Programming style
 
-  - Are the changes self-contained within the repo, or could they affect other apps/systems?
-  - Are there any potential security issues?
-  - Will there be any problems deploying the changes?
+Consider if the code has:
 
-### Code Style
+* linting issues, you could run automated linting before allowing a PR to be merged, for example with [Travis CI][]
+* an applicable edge case, like how it handles nulls/errors
+* patterns consistent with similar code elsewhere in your codebase
+* readable variable names, accurately representing their contents
+* adheres to the principles of its language, for example, [The Zen of Python][]
+* missing or additional elements following a merge or rebase
+* any unclear lines - would more commenting be helpful
+* capacity for reusability - can existing code be reused to do the same thing
 
-  - Are there any linting issues? (Consider running automated linting before allowing a pull request to be merged, for example with Travis CI.)
-  - Are there any edge cases (how does the code handle nulls/errors)?
-  - Are the patterns consistent with similar code elsewhere in the codebase?
-  - Is the code reusable? Can existing code be reused to do the same job?
-  - Are variable names readable? Do they accurately represent their contents?
-  - Does the code adhere to the principles of the language (for example, the [Zen of Python](https://www.python.org/dev/peps/pep-0020/))?
-  - If a line of code isn’t clear, would a comment be helpful?
-  - Has something appeared/gone missing following a merge or rebase?
+## Code libraries
 
-### Tests
+It might be helpful to ask if the:
 
-  - Do the changes have appropriate test coverage?
-  - Are null/error cases covered?
-  - Will the tests pass in all appropriate environments?
-  - Are unit tests sufficient, or are integration/functional tests required?
-  - Do the test names describe what’s happening in the test?
+* changes are backwards compatible
+* version number has been updated
+* changelog needs to be updated - especially if there are major problems
 
-### Introducing/updating dependencies
+## Third party dependencies
 
-  - Are new dependencies trustworthy/open source/well maintained/essential for the code?
-  - Could the new dependency break anything? Is it compatible with the version of the language used?
+When reviewing code, are new or updated third party dependencies:
 
-### Reviewing libraries or packages
+* trustworthy
+* open source
+* well maintained
+* essential for the code
 
-  - Are the changes backwards compatible with the old version?
-  - Has the version number been updated?
-  - Does the changelog need to be updated (especially if there are breaking changes)?
+Could the new dependency break anything, is it compatible with the version of the language used. The Service Manual contains some guidance about [managing software dependencies][].
 
-### Documentation
+## Testing
 
-  - If it’s a new feature, do the docs need to be updated?
-  - Do any existing docs need to be changed (or linked to)?
-  - If the pull request itself contains documentation:
-    - Is it in the right place?
-    - Is it ambiguous? Could it be misinterpreted?
-    - Spelling/punctuation/grammar (this helps avoid misinterpretation).
+Code changes should have appropriate test coverage. Consider running any new tests as part of your review, and ask whether:
 
+* null/error cases are covered
+* the tests pass in all appropriate environments
+* unit tests are enough or are integration tests needed
+* test names describe what’s happening in the test
+
+## Deployment
+
+Consider whether code changes will impact on the deployment process:
+
+* are self-contained in their code repository
+* could affect other applications and systems
+* have any potential security issues
+* will have any deployment problems
+
+The Service Manual has some useful suggestions to think about when [deploying software][].
 
 ## Further Reading
 
-  - [GOV.UK pull request guidelines](https://github.com/alphagov/styleguides/blob/master/pull-requests.md#reviewing-a-request)
+You can find out more about how to review code by following these links:
 
-  - [Code Review Guidelines](https://engineeringblog.yelp.com/2017/11/code-review-guidelines.html) - checklists for both code authors and code reviewers, from the Yelp engineering blog
+* [GOV.UK pull request guidelines][] - pull requests style guide for working on GOV.UK
+* [Code Review Guidelines][] - checklists for code authors and reviewers
+* [How to code review like a human][] - blog post on the social aspects of code review
+* [Effective code reviews][] - blog post on phrasing review comments positively
+* [Better Code Reviews][] - collated feedback and data from a developer survey
 
-  - [How to code review like a human](https://mtlynch.io/human-code-reviews-1/) - a 2-part blog post by Michael Lynch, on the social aspects of code review
 
-  - [Effective code reviews](https://codeahoy.com/2016/04/03/effective-code-reviews/) - a blog post by Umer Mansoor, on phrasing review comments positively
 
-  - [Better Code Reviews](http://www.bettercode.reviews/) - collated feedback and data from a developer survey by Vaidehi Joshi
+[GitHub pull requests (PR)]: https://help.github.com/articles/about-pull-requests/
+[GitHub review feature]: https://help.github.com/articles/about-pull-request-reviews/
+[refer to a programming language style guide]: https://gds-way.cloudapps.digital/manuals/programming-languages.html
+[technical debt]: https://insidegovuk.blog.gov.uk/2018/02/19/classifying-and-measuring-tech-debt-in-gov-uk/
+[Travis CI]: https://travis-ci.org/
+[The Zen of Python]: https://www.python.org/dev/peps/pep-0020/
+[managing software dependencies]: https://www.gov.uk/service-manual/technology/managing-software-dependencies
+[deploying software]: https://www.gov.uk/service-manual/technology/deploying-software-regularly
+[GOV.UK pull request guidelines]: https://github.com/alphagov/styleguides/blob/master/pull-requests.md#reviewing-a-request
+[Code Review Guidelines]: https://engineeringblog.yelp.com/2017/11/code-review-guidelines.html
+[How to code review like a human]: https://mtlynch.io/human-code-reviews-1/
+[Effective code reviews]: https://codeahoy.com/2016/04/03/effective-code-reviews/
+[Better Code Reviews]: http://www.bettercode.reviews/
