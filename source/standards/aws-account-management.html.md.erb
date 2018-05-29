@@ -7,9 +7,19 @@ expires: 2018-10-18
 
 <%= partial :expires %>
 
-GDS manage a number of Amazon Web Services (AWS) accounts.
-User accounts are managed centrally in a "base account" from which users
-can access the target accounts through a process called "assuming roles".
+Teams in GDS use multiple Amazon Web Services (AWS) accounts to:
+
+* enforce administrative isolation between workloads
+* minimize the impact of security breaches
+* isolate audit data in separate accounts
+
+For example, by having separate AWS accounts for production and test workloads
+a team can restrict the security impact of a compromised credential.
+
+To avoid users having to manage several sets of AWS credentials teams should
+use roles and cross-account access.
+
+AWS describe this approach as the [multiple account security strategy][].
 
 ## Advice on managing cross account access
 
@@ -57,3 +67,5 @@ Conditionals can be used to enforce the presence of MFA, restrict access to part
 #### Resource Permissions (Policies)
 
 Access to resources are managed through IAM Policies, these can be custom or defined by Amazon. Roles should be designed around the permissions required to complete a task. 
+
+[multiple account security strategy]: https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/
