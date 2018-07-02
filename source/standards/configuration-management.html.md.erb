@@ -9,12 +9,21 @@ expires: 2018-06-30
 
 Use [configuration management][] to manage, automate and standardise your infrastructure. When using configuration management you store your [infrastructure as code][] and put that code in a version control system such as Git.
 
-For configuration of servers and virtual machines we recommend the use of [Puppet][] for most systems of even modest complexity, it’s scalable and widely used within GDS. If your environment consists of a simple deployment artefact like an [Amazon Machine Image (AMI)][], Puppet may not be necessary, but the process for building that artefact must be codified and version controlled.
+## Puppet
 
-For the configuration of thirty party cloud infrastructure such as AWS or Fastly, use [Terraform][]. It supports a large number of providers, and is configurable to support multiple environments with different parameters. See the [govuk-aws][] repository for an example.
+Use [Puppet][] to configure servers and virtual machines. Puppet is widely used within GDS. It is suitable for most systems and scaleable from the simplest to more complex systems.
 
-You can find out more about configuration management in the [Service Manual][].
+If your environment consists of a simple deployment artefact like an [Amazon Machine Image (AMI)][], Puppet may not be necessary, but the process for building that artefact must still be codified and version controlled.
 
+## Terraform
+
+Use [Terraform][] to configure third party cloud infrastructure like Amazon Web Services (AWS) or [Fastly][].
+
+Terraform supports a [large number of providers][], and you can configure it to support multiple environments with different parameters. See the [govuk-aws][] repository as an example.
+
+## Further reading
+
+Find out more about configuration management in the [Service Manual][].
 
 [configuration management]: https://www.digitalocean.com/community/tutorials/an-introduction-to-configuration-management
 [infrastructure as code]: https://www.gov.uk/service-manual/technology/manage-your-software-configuration#use-infrastructure-as-code
@@ -23,3 +32,6 @@ You can find out more about configuration management in the [Service Manual][].
 [Terraform]: https://www.terraform.io/
 [Puppet]: https://puppet.com/
 [Service Manual]: https://www.gov.uk/service-manual/technology/manage-your-software-configuration#using-configuration-management-tools
+[Fastly]: https://www.fastly.com/
+[govuk-aws]: https://github.com/alphagov/govuk-aws
+[large number of providers]: https://www.terraform.io/docs/providers/
