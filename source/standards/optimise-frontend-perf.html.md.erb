@@ -22,7 +22,7 @@ For example:
 ||Compress static resources|Use [minification][] or [GNU Gzip][] to compress CSS and JavaScript code|
 ||Set correct Headers|Set correct [Cache-Control][] and [ETag][] headers on assets for optimal caching|
 |Medium|Look for empty image `src` attributes|Avoid using empty image `src` attributes as some browsers always send requests to them, resulting in additional traffic|
-||Minimise DNS lookups|Use fewer domains to reduce the number of DNS lookups per page|
+||Minimise DNS lookups|Use fewer third-party domains to reduce the number of DNS lookups per page|
 ||Maximise parallelisation|Serve static assets from a different subdomain so browsers can download more assets in parallel|
 ||Investigate [lazy loading][]|For pages with many images, only load images in the immediate browser viewport|
 ||Investigate the impact of loading multiple [@font-face][] assets|Investigate @font-face assets when dealing with common issues like [FOUT, FOIT and FOFT][]|
@@ -30,6 +30,7 @@ For example:
 ||Reduce cookie size|Because every cookie is sent with each HTTP request, consider using a cookie-free domain for static assets|
 ||[AJAX][] requests using JSON|Avoid adding too much data to a JSON Object because this causes performance errors with parsing|
 ||Investigate using [WebSockets][]|Consider using WebSockets rather than [XMLHttpRequest][], because an HTTP request packet has 1,684 bytes of overhead, compared to 8 bytes for a WebSocket packet|
+||Investigate using a Service Worker| A service worker caches critical assets on a users machine. These assets can be later retrieved from the local filesystem instead of being transferred over the network improving performance|
 
 ## Automate optimisation
 
