@@ -7,18 +7,31 @@ expires: 2018-06-30
 
 <%= partial :expires %>
 
-Use [configuration management][] to manage, automate and standardise your infrastructure. When using configuration management you store your [infrastructure as code][], such as your virtual machines (VM) environment configuration.
+Use [configuration management][] to manage, automate and standardise your infrastructure. When using configuration management you store your [infrastructure as code][] and put that code in a version control system such as Git.
 
-A particularly good use case for configuration management is virtual machines, for example, when you run a VM in [Amazon Elastic Compute Cloud (Amazon EC2)][] or as an instance in an [Amazon Machine Image (AMI)][].This will help you track and control changes in large software deployments. You will also automatically be building environments consistently - all new environments produced from the same configuration will be identical.
+## Puppet
 
-We recommend using [Puppet][] for configuration management, as it’s scalable and widely used.
+Use [Puppet][] to configure servers and virtual machines. Puppet is widely used within GDS. It is suitable for most systems and scaleable from the simplest to more complex systems.
 
-You can find out more about configuration management in the [Service Manual][].
+If your environment consists of a simple deployment artefact like an [Amazon Machine Image (AMI)][], Puppet may not be necessary, but the process for building that artefact must still be codified and version controlled.
 
+## Terraform
 
-[configuration management]: https://puppet.com/solutions/configuration-management
+Use [Terraform][] to configure third party cloud infrastructure like Amazon Web Services (AWS) or [Fastly][].
+
+Terraform supports a [large number of providers][], and you can configure it to support multiple environments with different parameters. See the [govuk-aws][] repository as an example.
+
+## Further reading
+
+Find out more about configuration management in the [Service Manual][].
+
+[configuration management]: https://www.digitalocean.com/community/tutorials/an-introduction-to-configuration-management
 [infrastructure as code]: https://www.gov.uk/service-manual/technology/manage-your-software-configuration#use-infrastructure-as-code
 [Amazon Elastic Compute Cloud (Amazon EC2)]: https://aws.amazon.com/ec2/
 [Amazon Machine Image (AMI)]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html
+[Terraform]: https://www.terraform.io/
 [Puppet]: https://puppet.com/
 [Service Manual]: https://www.gov.uk/service-manual/technology/manage-your-software-configuration#using-configuration-management-tools
+[Fastly]: https://www.fastly.com/
+[govuk-aws]: https://github.com/alphagov/govuk-aws
+[large number of providers]: https://www.terraform.io/docs/providers/
