@@ -19,7 +19,7 @@ For example:
 |---|---|---|
 |High|Position styles correctly|Set styles at the top and scripts at the bottom of a webpage|
 ||Minimise HTTP requests|Minimise tiling icons, CSS and JavaScript files to reduce size and loading time|
-||Compress static resources|Use [minification][] or [GNU Gzip][] to compress CSS and JavaScript code|
+||Compress static resources|Use [minification][] and [Gzip][] to compress CSS and JavaScript code|
 ||Set correct Headers|Set correct [Cache-Control][] and [ETag][] headers on assets for optimal caching|
 |Medium|Look for empty image `src` attributes|Avoid using empty image `src` attributes as some browsers always send requests to them, resulting in additional traffic|
 ||Minimise DNS lookups|Use fewer third-party domains to reduce the number of DNS lookups per page|
@@ -81,7 +81,7 @@ The Service Manual has more suggestions about [how you can test frontend perform
 
 [frontend performance]: https://www.gov.uk/service-manual/technology/how-to-test-frontend-performance
 [minification]: http://minifycode.com/
-[GNU Gzip]: https://www.gnu.org/software/gzip/#content
+[Gzip]: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer#text_compression_with_gzip
 [Cache-Control]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
 [ETag]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag
 [lazy loading]: https://developers.google.com/web/fundamentals/performance/lazy-loading-guidance/images-and-video/#what_is_lazy_loading
