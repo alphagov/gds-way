@@ -1,6 +1,6 @@
 ---
 title: Alerting
-expires: 2018-06-30
+expires: 2018-12-04
 ---
 
 # <%= current_page.data.title %>
@@ -10,8 +10,8 @@ expires: 2018-06-30
 Services at GDS need to be set up to send automated alerts
 to staff if the service's monitoring detects issues.
 
-Alerts can take many forms including dashboards, emails,
-phone calls and status websites.
+Alerts can take many forms including emails, phone calls and status
+websites.
 
 The service manual has [some information on writing alerts][service_manual_alerts].
 
@@ -41,8 +41,10 @@ presented consistently.
 Don't include sensitive information in your alerts. Alerts are likely
 to be shared while they're being worked on.
 
-Consolidate multiple dashboards into one to have an authoritative
-source to check for alerts.
+Dashboards or information radiators can be useful to show the current
+status of alerts, but they should not be the primary alerting mechanism.
+If you use them, ensure you have one reliable source
+rather than multiple dashboards.
 
 People respond better to their preferred alerting method. Use a tool
 which allows your on-call staff to have the same alert presented in
@@ -61,14 +63,15 @@ track alerts, escalate them (automatically or manually), acknowledge them
 
 ## Tools for alerting
 
-The default tool at GDS to be alerted of problems with your service
-is [PagerDuty](https://www.pagerduty.com/).
+Your monitoring system should use [PagerDuty](https://www.pagerduty.com/)
+to send alerts about problems with your service.
 
-We recommend using [Pingdom](https://www.pingdom.com/) as well
-in case PagerDuty becomes unavailable.
+We recommend using [Pingdom](https://www.pingdom.com/) as well, as a 
+top-level check on your service's availability.
 
 We recommend using [Atlassian StatusPage](https://www.statuspage.io/) to
 provide updates on service status to users.
 
-[Smashing](https://github.com/Smashing/smashing) is our preferred tool
-for creating dashboards.
+Teams use a range of tools to create information radiators - for
+example [Smashing](https://github.com/Smashing/smashing) or
+[BlinkenJS](https://github.com/alphagov/blinkenjs).
