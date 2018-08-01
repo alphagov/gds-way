@@ -5,7 +5,6 @@ host: gds-way.cloudapps.digital
 show_govuk_logo: false
 service_name: The GDS Way
 service_link: https://gds-way.cloudapps.digital
-phase: Alpha
 
 # Links to show on right-hand-side of header
 header_links:
