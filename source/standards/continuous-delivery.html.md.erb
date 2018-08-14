@@ -1,0 +1,59 @@
+---
+title: Continuous Delivery
+expires: 2018-10-08
+---
+
+# <%= current_page.data.title %>
+
+<%= partial :expires %>
+
+##Definition
+> Continuous Delivery is the ability to get changes of all types—including new features, configuration changes, bug fixes and experiments—into production, or into the hands of users, safely and quickly in a sustainable way. - [Taken from continuousdelivery.com](https://www.continuousdelivery.com/)
+
+
+## Why adopt this practice?
+
+Adopting contiunous delivery has the following benefits for teams:
+
+**Enable frequent iteration** Continuous delivery makes it cheaper and easier to deliver small changes to production. Releasing to production multiple times a day means we can quickly get feedback on our changes from users to validate our assumptions.
+
+**Build quality software** Automated test suites allow teams to quickly identify regressions in their software and free them up to focus on  exploratory testing, usability testing, and performance and security testing.
+
+**Low risk releases** Releasing small changes frequently makes it easier to diagniose issues when they arise and the cost of rolling back is much lower than with large releases.
+
+**Maintainable code** Building and releasing software in small pieces helps developers focus on writing small composable bits of code. This should help makes mantaining and changing the code easier in the future
+
+## Key Concepts
+
+### Integrate with Master-branch frequently
+Continuous integration is the process of integrating against a shared main-line at least once a day. Many organisations do this using [Trunk Based Development](https://trunkbaseddevelopment.com/) however in more heavily regulated environments where teams are required to prove that changes have been reviewed the same benefits can be realised by frequently raising and merging small pull requests. The key is to build a culture of raising small PR's and merging them quickly. You may find tools such as [Fourth Wall](https://github.com/alphagov/fourth-wall) helpful for building a culture that supports this practice.
+
+We can use approaches such as feature-flagging or modular architechtures to deploy partially complete features. By doing this we reduce the size of the changes going to production and encourage developers to build modular, configurable systems [this Martin Fowler article](https://www.martinfowler.com/bliki/FeatureBranch.html) has lots more detail on the benefits of working in this way
+
+
+### Automatic promotion of builds
+
+
+### Production monitoring
+Production monitoring and alerting enables teams to understand the impact of their changes on production. Monitoring key attributes of the system allows developers to determine if thier change has had an unintended impact on the system and to quickly respond by making the required fix and rolling forwards
+
+
+## Measuring Continuous Delivery
+In the book [Accelerate](https://wordery.com/accelerate-nicole-forsgren-phd-9781942788331?cTrk=OTc2NDYwNzZ8NWI2ZDg5NGJkYzAyZjoxOjE6NWI2ZDg5NDQwM2ZhODguNDU0MTgxMTU6ODJlODM3ODY%3D) Nicole Forsgren et al discuss several key metrics which they found to correlate to high performing teams. 
+
+* Lead Time to Change (cycle time)
+* Mean time to recovery
+* Frequency of releases
+
+These metrics can be used by teams to gain an insight into the effectiveness of their build and release processes and to determine the impact of changes to this process. 
+
+## Further reading
+
+* [Architecting for Continuous Delivery (video)](https://www.youtube.com/watch?v=Lx9ssegE6FA)
+* [Continuous Delivery]()
+* [Accelerate](https://wordery.com/accelerate-nicole-forsgren-phd-9781942788331?cTrk=OTc2NDYwNzZ8NWI2ZDg5NGJkYzAyZjoxOjE6NWI2ZDg5NDQwM2ZhODguNDU0MTgxMTU6ODJlODM3ODY%3D)
+* [Trunk based development](https://trunkbaseddevelopment.com/)
+* state of devops survey
+
+
+
