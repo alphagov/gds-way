@@ -9,7 +9,7 @@ gem 'wdm', '~> 0.1.0', platforms: [:mswin, :mingw]
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 
 # Include the tech docs gem
-gem 'govuk_tech_docs'
+gem 'govuk_tech_docs', git: 'https://github.com/alphagov/tech-docs-gem'
 
 # Overrride middleman-search with our fork.
 # See: https://github.com/manastech/middleman-search/pull/24

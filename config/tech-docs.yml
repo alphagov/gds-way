@@ -24,3 +24,7 @@ max_toc_heading_level: 6
 
 # Prevent robots from indexing (e.g. whilst in development)
 prevent_indexing: false
+
+# Ownership for page reviews
+default_owner_slack: '#gds-way'
+owner_slack_workspace: gds
