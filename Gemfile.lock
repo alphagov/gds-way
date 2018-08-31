@@ -7,6 +7,25 @@ GIT
       middleman-core (>= 3.2)
       nokogiri (~> 1.6)
 
+GIT
+  remote: https://github.com/alphagov/tech-docs-gem
+  revision: 60ee8188664d3e3312c3e413303e37c506ea02a3
+  specs:
+    govuk_tech_docs (1.5.0)
+      activesupport
+      chronic (~> 0.10.2)
+      middleman (~> 4.0)
+      middleman-autoprefixer (~> 2.7.0)
+      middleman-compass (>= 4.0.0)
+      middleman-livereload
+      middleman-search
+      middleman-sprockets (~> 4.0.0)
+      middleman-syntax (~> 3.0.0)
+      nokogiri
+      openapi3_parser
+      pry
+      redcarpet (~> 3.3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -22,10 +41,13 @@ GEM
     backports (3.11.4)
     chronic (0.10.2)
     chunky_png (1.3.10)
+    coderay (1.1.2)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    commonmarker (0.17.11)
+      ruby-enum (~> 0.5)
     compass (1.0.3)
       chunky_png (~> 1.2)
       compass-core (~> 1.0.2)
@@ -50,18 +72,6 @@ GEM
     fast_blank (1.0.0)
     fastimage (2.1.3)
     ffi (1.9.25)
-    govuk_tech_docs (1.5.0)
-      activesupport
-      chronic (~> 0.10.2)
-      middleman (~> 4.0)
-      middleman-autoprefixer (~> 2.7.0)
-      middleman-compass (>= 4.0.0)
-      middleman-livereload
-      middleman-search
-      middleman-sprockets (~> 4.0.0)
-      middleman-syntax (~> 3.0.0)
-      nokogiri
-      redcarpet (~> 3.3.2)
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
@@ -75,6 +85,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
     memoist (0.16.0)
+    method_source (0.9.0)
     middleman (4.2.1)
       coffee-script (~> 2.2)
       compass-import-once (= 1.0.5)
@@ -129,6 +140,8 @@ GEM
     multi_json (1.13.1)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
+    openapi3_parser (0.5.2)
+      commonmarker (~> 0.17)
     padrino-helpers (0.13.3.4)
       i18n (~> 0.6, >= 0.6.7)
       padrino-support (= 0.13.3.4)
@@ -136,6 +149,9 @@ GEM
     padrino-support (0.13.3.4)
       activesupport (>= 3.1)
     parallel (1.12.1)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     public_suffix (3.0.3)
     rack (2.0.5)
     rack-livereload (0.3.17)
@@ -145,6 +161,8 @@ GEM
       ffi (>= 0.5.0, < 2)
     redcarpet (3.3.4)
     rouge (2.2.1)
+    ruby-enum (0.7.2)
+      i18n
     sass (3.4.25)
     servolux (0.13.0)
     sprockets (3.7.2)
@@ -163,7 +181,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  govuk_tech_docs
+  govuk_tech_docs!
   middleman-search!
   tzinfo-data
   wdm (~> 0.1.0)
