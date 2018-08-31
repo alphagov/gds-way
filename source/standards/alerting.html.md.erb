@@ -1,5 +1,5 @@
 ---
-title: Alerting
+title: How to manage alerting
 expires: 2018-12-04
 ---
 
@@ -7,125 +7,77 @@ expires: 2018-12-04
 
 <%= partial :expires %>
 
-Services at GDS need to be set up to send automated alerts
-to staff if the service's monitoring detects issues.
+Services at GDS should send automated alerts to staff if the service's monitoring detects issues.
 
-The service manual has [some information on writing alerts][service_manual_alerts].
+Sending alerts help the service meet service level agreements and user needs.
 
-[service_manual_alerts]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service#writing-alerts
+## When to send an alert
 
-## User needs for alerting
+You should send an alert when your [service monitoring][] detects an issue that:
 
-- Support GDS' goal of services being available to meet user needs
-- Mitigate reputational damage to GDS
-- Adhere to service level agreements (with reliant parties like other
-government departments), industry standards (like PCI compliance) and legal
-requirements (like the [Code of Practice for Official Statistics][stats_law])
+* affects service users
+* requires action to fix
+* lasts for a sustained period of time
 
-[stats_law]: https://gss.civilservice.gov.uk/about/code-of-practice/
+You should setup alerts based on things affecting users, for example, if service requests are slow or webpages are unavailable. You should still track other things like disks being full or almost full, or databases being down, as these can lead to more serious alerts that do affect users.
 
-## Principles for setting up an alerting system
+Only things that need action should trigger an alert. This can be an immediate action for critical or high priority alerts, or “soon” for non-urgent alerts.
 
-### Alerting is not the same as monitoring
+If you do not need to take action, it should not be an alert. For example, an “alert” that shows the status of a system is actually a monitoring tool and a dashboard can display this instead.
 
-Monitoring potentially covers a whole range of things, from business metrics
-right down to operating system issues. However, not all of these are suitable
-for alerts.
+Alerts must show something is wrong for a sustained period of time, instead of a brief issue caused by temporary network conditions. For example, Prometheus supports this using the `for` parameter in its alerting rule, which indicates the condition has to be true for a set period of time before an alert's triggered.
 
-### Alerts should be meaningful, actionable and require intervention
+Specific examples of issues that should not trigger an alert include an individual container instance dying or a single task invocation failing. The orchestration system will bring the instance back up, and the task will retry. A long period of fewer than expected instances or repeated task failures should trigger alerts, as they show underlying problems.
 
-The only issues that should trigger an alert are things that require action
-from someone - either immediately, in the case of a critical/high priority
-alert, or “soon” in the case of lower priorities. It shouldn’t be possible to
-ignore it, knowing it’s benign. And similarly, if there is no action that need
-to be taken to fix the issue, then it should not be an alert. An alert that
-shows the status of a system is actually a monitoring tool. This kind of
-information can be displayed on a dashboard, for example.
+The text of your alerts should be specific and contain useful actionable information.
 
-In particular, something like an individual container instance dying should not
-trigger an alert, as the orchestration system will quickly bring it back up;
-similarly, a single task invocation failing shouldn’t trigger, as it will be
-retried. It’s only an extended period of fewer than expected instances, or
-repeated task failures, that should trigger alerts, as they are probably
-indications of underlying problems.
+Do not include sensitive information in your alerts.
 
-The text of your alerts should be specific - people will be responding to alerts
-in the middle of the night.
+## Manage alerts
 
-Don't include sensitive information in your alerts. Alerts are likely
-to be shared while they're being worked on.
+You must prioritise alerts based on whether they need an immediate fix. Class issues as:
 
-### Alerts must not be transient
+* interrupting - need immediate investigate and resolution
+* non-interrupting - do not need immediate resolution
 
-Related to the previous point, alerts must indicate that something is actually
-wrong for a sustained period of time, rather than a momentary blip caused by
-transient network conditions. For example, Prometheus supports this via the 
-`for` parameter in the alerting rule, which indicates that the condition has to
-be true for at least that period of time before the alert is sent.
+The [Google Site Reliability Engineering (SRE)][] handbook classifies "interrupting" issues as “pages”, and "non-interrupting" issues as “tickets”. Put non-interrupting alerts into a ticket queue for your support team to solve.
 
-### Alert on symptoms, not causes, as far as possible
+You should specify a service level agreement (SLA) for how long both types of alert take to resolve.
 
-We should aim to alert for things based on their impact on the user, not the
-underlying issue. The user cares about things like requests being slow, or
-pages being unavailable. This isn’t always possible; we still need to monitor
-things like disks being (or approaching being) full or databases down.
+Keep the ticket queue and team backlog separate to avoid confusion.
 
-### Alerts should be prioritised
+You should manage alerts using a dedicated tool allowing you to:
 
-There is a clear distinction between issues that require attention right now -
-eg fundamental interruption to service, basic functionality broken - and those
-that require attention soon - eg disk space X% full. The Google SRE Handbook
-classifies these respectively as “pages” and “tickets”; teams may want to adopt
-this convention, or refer to them as “interrupting” and “non-interrupting”. In
-either case, the difference is that the first will interrupt the on-call person
-to take action immediately.
+* manage alerts in a queue
+* triage alerts for review
+* attach statuses to alerts, for example, in progress or resolved
+* gather data about alerts to help improve processes
 
-For a service with round-the-clock support, pages will in fact trigger a page
-that will wake someone up; but for all teams, a page will interrupt someone on
-the team from their current work so that they fix the issue immediately. A
-ticket, on the other hand, will go into a queue to be picked up; it will be
-someone’s responsibility to look through the ticket queue regularly and deal
-with the issues on it, but this wouldn’t interrupt their current work.
+We recommend you use:
 
-Note that the ticket queue is not the same as the backlog; the issues on it
-still need fixing as soon as possible. Teams may want to consider tickets as
-timeboxed, needing attention within a certain period of time (say 24 or 72
-hours.)
+- [PagerDuty][] to send high-priority / interrupting alerts
+- [Zendesk][] to manage non-interrupting alerts as tickets
 
-### Alerts should be recorded in a dedicated tool
+You can also configure these tools to send alert notifications using email or Slack.
 
-Alerts should not go directly to email or Slack; they should be surfaced in a
-dedicated tool that allows users to see what is active, and what the priorities
-are. If alerts only go to email, they risk being lost. Emails become noisy,
-which over time results in them being ignores, overlooked, or even filtered out
-or treated like spam.
+You should only use email and Slack as an addition to your primary alerting tool. If alerts only go to email or Slack, they may be ignored, overlooked, filtered out or treated like spam.
 
-Tools like PagerDuty (for pages) or Zendesk (for tickets) keep all alerts in a
-queue, allows triaging, and lets users mark issues as acknowledged or resolved.
-Teams may of course want to configure the tools to send notifications for
-alerts via email or Slack; but the alert itself will be managed in the tool
-itself.
+We recommend dashboards and information radiators in combination with alert management tools.
 
-Another advantage of a dedicated tool is that it makes it possible to gather
-metrics about alerts, such as mean time to fix, which will allow teams to
-determine if the processes are working.
+Information radiators include [Smashing][] or [BlinkenJS][].
 
-### Discourage use of dashboards for alerts
+## Further reading
 
-Dashboards or information radiators can be useful to show the current
-status of alerts, but they should not be the primary alerting mechanism.
-If you use them, ensure you have one reliable source rather than multiple
-dashboards.
+Refer to the service manual for [more information on how to write alerts][] and the GDS way for [information about monitoring][].
 
+Read the Google SRE handbook to find out more about [site reliability engineering][].
 
-## Tools for alerting
-
-Your monitoring system should use [PagerDuty](https://www.pagerduty.com/)
-to send interrupting alerts about problems with your service.
-
-[Zendesk](https://www.zendesk.com) can be used to raise non-interrupting alerts
-as tickets.
-
-Teams use a range of tools to create information radiators - for
-example [Smashing](https://github.com/Smashing/smashing) or
-[BlinkenJS](https://github.com/alphagov/blinkenjs).
+[service monitoring]: https://gds-way.cloudapps.digital/standards/monitoring.html
+[Google Site Reliability Engineering (SRE)]: https://landing.google.com/sre/book.html
+[PagerDuty]: https://www.pagerduty.com
+[Zendesk]: https://www.zendesk.com
+[Smashing]: https://github.com/Smashing/smashing
+[BlinkenJS]: https://github.com/alphagov/blinkenjs
+[information about monitoring]: https://gds-way.cloudapps.digital/standards/monitoring.html
+[site reliability engineering]: https://landing.google.com/sre/book/index.html
+[more information on how to write alerts]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
