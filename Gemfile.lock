@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/alphagov/middleman-search
+  revision: 50d072378c6f92a78ea02fed366ec6453aea8552
+  specs:
+    middleman-search (0.10.0)
+      execjs (~> 2.6)
+      middleman-core (>= 3.2)
+      nokogiri (~> 1.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -10,7 +19,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     autoprefixer-rails (6.7.7.2)
       execjs
-    backports (3.11.3)
+    backports (3.11.4)
     chronic (0.10.2)
     chunky_png (1.3.10)
     coffee-script (2.4.1)
@@ -58,11 +67,10 @@ GEM
       tilt
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
-    hashie (3.5.7)
+    hashie (3.6.0)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     kramdown (1.17.0)
-    libv8 (3.16.14.19)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -110,10 +118,6 @@ GEM
       em-websocket (~> 0.5.1)
       middleman-core (>= 3.3)
       rack-livereload (~> 0.3.15)
-    middleman-search (0.10.0)
-      middleman-core (>= 3.2)
-      nokogiri (~> 1.6)
-      therubyracer (~> 0.12.2)
     middleman-sprockets (4.0.0)
       middleman-core (~> 4.0)
       sprockets (>= 3.0)
@@ -132,7 +136,7 @@ GEM
     padrino-support (0.13.3.4)
       activesupport (>= 3.1)
     parallel (1.12.1)
-    public_suffix (3.0.2)
+    public_suffix (3.0.3)
     rack (2.0.5)
     rack-livereload (0.3.17)
       rack
@@ -140,7 +144,6 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     redcarpet (3.3.4)
-    ref (2.0.0)
     rouge (2.2.1)
     sass (3.4.25)
     servolux (0.13.0)
@@ -148,9 +151,6 @@ GEM
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     temple (0.8.0)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -164,8 +164,9 @@ PLATFORMS
 
 DEPENDENCIES
   govuk_tech_docs
+  middleman-search!
   tzinfo-data
   wdm (~> 0.1.0)
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
