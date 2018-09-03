@@ -5,44 +5,34 @@ expires: 2018-12-04
 
 <%= partial :expires %>
 
-Services at GDS need to be set up to send automated alerts to staff if the service's monitoring detects issues.
+Services at GDS should send automated alerts to staff if the service’s monitoring detects issues. Sending alerts help services meet service level agreements and user needs.
 
-Sending alerts help the service meet service level agreements and user needs.
+## When to send alerts
 
-## Send an alert
-
-You should send an alert when your [service monitoring][] detects an issue that:
+Your service should send an alert when your [service monitoring][] detects an issue that:
 
 * affects service users
 * requires action to fix
 * lasts for a sustained period of time
 
-You should setup alerts based on things affecting users, for example, if service requests are slow or webpages are unavailable. You should still track other things like disks being full or almost full, or databases being down, as these can lead to more serious alerts that do affect users.
+Only things that need action should send an alert whether it’s an immediate action for critical or high priority alerts, or “soon” for non-urgent alerts. The text of your alerts should be specific, containing useful actionable information but should not include sensitive material.
 
-Only things that need action should trigger an alert. This can be an immediate action for critical or high priority alerts, or “soon” for non-urgent alerts.
+Create alerts based on things affecting users, such as slow service requests or unavailable webpages. You should also track things like disks being full or almost full, or databases being down, because these can lead to more serious alerts that do affect users.
 
-If you do not need to take action, it should not be an alert. For example, an “alert” that shows the status of a system is actually a monitoring tool and a dashboard can display this instead.
+Alerts must show something is wrong for a sustained period of time, instead of a brief issue caused by temporary network conditions. For example, Prometheus supports this using the for parameter in its alerting rule, which indicates the condition has to be true for a set period of time before an alert is triggered.
 
-Alerts must show something is wrong for a sustained period of time, instead of a brief issue caused by temporary network conditions. For example, Prometheus supports this using the `for` parameter in its alerting rule, which indicates the condition has to be true for a set period of time before an alert's triggered.
+Specific examples of issues that should not trigger an alert include an individual container instance dying or a single task invocation failing. This is because the systems running the architecture like ECS or Kubernetes will bring the instance back up, and the task will retry. But if there’s a long period of fewer than expected instances or repeated task failures these should trigger alerts, as they show underlying problems.
 
-Specific examples of issues that should not trigger an alert include an individual container instance dying or a single task invocation failing. The systems running the architecture like ECS or Kubernetes will bring the instance back up, and the task will retry. A long period of fewer than expected instances or repeated task failures should trigger alerts, as they show underlying problems.
+If no action is needed, it should not be an alert. For example, an alert showing a system’s status is really a monitoring tool and you should use a dashboard to display this information instead.
 
-The text of your alerts should be specific and contain useful actionable information.
-
-Do not include sensitive information in your alerts.
-
-## Manage an alert
+## How to prioritise alerts
 
 You must prioritise alerts based on whether they need an immediate fix. Class issues as:
 
 * interrupting - need immediate investigate and resolution
 * non-interrupting - do not need immediate resolution
 
-The [Google Site Reliability Engineering (SRE)][] handbook classifies "interrupting" issues as “pages”, and "non-interrupting" issues as “tickets”. Put non-interrupting alerts into a ticket queue for your support team to solve.
-
-You should specify a service level agreement (SLA) for how long both types of alert take to resolve.
-
-Keep the ticket queue and team backlog separate to avoid confusion.
+The [Google Site Reliability Engineering (SRE)][] handbook classifies “interrupting” issues as “pages”, and “non-interrupting” issues as “tickets”. Put non-interrupting alerts into a ticket queue for your support team to solve. Keep the ticket queue and team backlog separate to avoid confusion. You should specify a service level agreement (SLA) for how long both types of alert take to resolve.
 
 You should manage alerts using a dedicated tool allowing you to:
 
@@ -56,19 +46,17 @@ We recommend you use:
 - [PagerDuty][] to send high-priority / interrupting alerts
 - [Zendesk][] to manage non-interrupting alerts as tickets
 
-You can also configure these tools to send alert notifications using email or Slack.
+You can also configure these tools to send alert notifications using email or Slack, but only use email and Slack as additions to your primary alerting tool. If alerts only go to email or Slack, they may be ignored, overlooked, filtered out or treated like spam.
 
-You should only use email and Slack as an addition to your primary alerting tool. If alerts only go to email or Slack, they may be ignored, overlooked, filtered out or treated like spam.
-
-We recommend dashboards and information radiators in combination with alert management tools.
-
-Information radiators include [Smashing][] or [BlinkenJS][].
+We recommend using dashboards and information radiators like [Smashing][] or [BlinkenJS][] in combination with alert management tools.
 
 ## Further reading
 
-Refer to the service manual for [more information on how to write alerts][] and the GDS way for [information about monitoring][].
+For more information refer to the:
 
-Read the Google SRE handbook to find out more about [site reliability engineering][].
+* Service Manual for [more information on how to write alerts][]
+* GDS way for [information about monitoring][]
+* Google SRE handbook to find out more about [site reliability engineering][]
 
 [service monitoring]: https://gds-way.cloudapps.digital/standards/monitoring.html
 [Google Site Reliability Engineering (SRE)]: https://landing.google.com/sre/book.html
