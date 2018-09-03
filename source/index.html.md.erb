@@ -61,6 +61,7 @@ These standards will enable us to maintain a consistent operating environment ac
 - [how to manage access to your third-party service accounts](standards/accounts-with-third-parties.html)
 - [how to publish open source code](standards/publish-opensource-code.html)
 - [use configuration management](standards/configuration-management.html)
+- [Reliability Engineering](standards/reliability-engineering.html)
 - [Support Operations](standards/supporting-services.html)
 
 
@@ -90,12 +91,11 @@ When you create a new Markdown file please ensure it follows this pattern and ma
 ```markdown
 ---
 title: Thing you're writing a standard about
-expires: yyyy-mm-dd (6 months from now)
+last_reviewed_on: yyyy-mm-dd
+review_in: 6 months
 ---
 
 # <%%= current_page.data.title %>
-
-<%%= partial :expires %>
 
 Introduction of a couple of paragraphs to explain why the thing you're
 writing a standard about is important.
