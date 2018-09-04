@@ -1,5 +1,5 @@
 ---
-title: How to know when your service is ready for production
+title: How to check if your service is production ready
 expires: 2019-03-01
 ---
 
@@ -7,22 +7,44 @@ expires: 2019-03-01
 
 <%= partial :expires %>
 
-Before you take a service into production, and introduce it to real users, you should make sure that it meets the technical standards set by GDS and your team. Some of these standards are provided in the GDS Way but your team may have set its own standards. For example, your team may require that all new services must be connected to logit before they go to production. If you neglect to implement a standard before users start using your service then you could have difficulties operating your service or supporting it when a fault occurs.
+Before taking your service into production and introducing it to live users make sure it meets the relevant technical standards set by GDS and your team.
 
-You can use a checklist to confirm whether your service is ready for production. Checks in the list should reference a standard that must be in place before you can take any service into production. You can also include communication checks to ensure that specific groups or individuals are informed in advance.
+Some of these standards are provided in the GDS Way but your team may also have its own specific standards. For example, your team may require that all its new services are connected to [Logit][] before going to production.
 
-The checklist should be reusable so that your team can apply it every time you wish to take a new service, or subcomponent, into production. 
+If you do not implement a standard before people start using your service then you could have difficulties operating your service or supporting it when a fault occurs. **For example…**
 
-## Example
+## Use a checklist
 
-```
-In order to take a service into production:
-- It MUST be possible to search logs 
-- It MUST be possible to monitor the health of the service
-- It MUST be possible to view application metrics
-- It MUST be possible to be alerted when the service has problems
-- It MUST be possible to follow a documented deployment process
-- You MUST have agreement to proceed from IA
-- You MUST inform PERSON A
-- You MUST inform GROUP B
-```
+To avoid problems when your service goes into production you should use a checklist to confirm whether your service is ready. Each check should reference a standard that's already in place before you can take any service into production. **For example…**
+
+You can also include communication checks to make sure specific groups or individuals are informed in advance, **such as...**
+
+Save your check list as a template so your team can apply it each time you need to take a new service or subcomponent into production.
+
+### Example checklist
+
+In order to take a service into production, it must be possible to:
+
+* search logs
+* monitor the health of the service
+* view application metrics
+* alert people when the service has problems
+* follow a documented deployment process
+
+You must also:
+
+* have agreement to proceed from [Information Assurance (IA)][]
+* inform PERSON A
+* inform GROUP B
+
+## Further reading
+
+To find out more about making sure your service is production ready, you can read:
+
+* is there something in the service manual?
+* a helpful article\website?
+* some helpful blog posts?
+
+
+[Logit]: https://logit.io/
+[Information Assurance (IA)]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance
