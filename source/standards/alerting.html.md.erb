@@ -5,7 +5,7 @@ expires: 2018-12-04
 
 <%= partial :expires %>
 
-Services at GDS should send automated alerts to staff if the service’s monitoring detects issues. Sending alerts help services meet service level agreements and user needs.
+Services built by GDS should have a system in place to send automated alerts if an issue is detected by its monitoring system. Sending alerts help services meet service level agreements and user needs.
 
 ## When to send alerts
 
@@ -15,15 +15,17 @@ Your service should send an alert when your [service monitoring][] detects an is
 * requires action to fix
 * lasts for a sustained period of time
 
-Only things that need action should send an alert whether it’s an immediate action for critical or high priority alerts, or “soon” for non-urgent alerts. The text of your alerts should be specific, containing useful actionable information but should not include sensitive material.
+You should only send an alert for things that need action. This includes immediate action for critical or high priority alerts,  or less urgent alerts. You should make the text of your alerts specific, with useful actionable information. You should not include sensitive material in this text.
 
-Create alerts based on things affecting users, such as slow service requests or unavailable webpages. You should also track things like disks being full or almost full, or databases being down, because these can lead to more serious alerts that do affect users.
+Create alerts based on things affecting users, such as slow service requests or unavailable webpages. You should also track things like disks being full or almost full, or databases being down. These are both issues that can lead to more serious alerts that do affect users.
 
-Alerts must show something is wrong for a sustained period of time, instead of a brief issue caused by temporary network conditions. For example, Prometheus supports this using the for parameter in its alerting rule, which indicates the condition has to be true for a set period of time before an alert is triggered.
-
-Specific examples of issues that should not trigger an alert include an individual container instance dying or a single task invocation failing. This is because the systems running the architecture like ECS or Kubernetes will bring the instance back up, and the task will retry. But if there’s a long period of fewer than expected instances or repeated task failures these should trigger alerts, as they show underlying problems.
+Alerts must distinguish between  when something is wrong for a sustained period of time, rather than a brief issue caused by temporary network conditions. Prometheus is a tool that supports this by using the `for` parameter in its alerting rule, which indicates the condition has to be true for a set period of time before an alert is triggered.
 
 If no action is needed, it should not be an alert. For example, an alert showing a system’s status is really a monitoring tool and you should use a dashboard to display this information instead.
+
+Specific examples of issues that should not trigger an alert include an individual container instance dying or a single task invocation failing. This is because the systems running the architecture like ECS or Kubernetes will bring the instance back up, and the task will retry. 
+
+Situations where there’s a long period of fewer than expected instances or repeated task failures these should trigger alerts, as they show underlying problems.
 
 ## How to prioritise alerts
 
@@ -46,9 +48,9 @@ We recommend you use:
 - [PagerDuty][] to send high-priority / interrupting alerts
 - [Zendesk][] to manage non-interrupting alerts as tickets
 
-You can also configure these tools to send alert notifications using email or Slack, but only use email and Slack as additions to your primary alerting tool. If alerts only go to email or Slack, they may be ignored, overlooked, filtered out or treated like spam.
+You can also configure these tools to send alert notifications using email or Slack. But, you should only use email and Slack as additions to your primary alerting tool. If alerts only go to email or Slack, people may ignore, overlook, filter them out or treat them like spam.
 
-We recommend using dashboards and information radiators like [Smashing][] or [BlinkenJS][] in combination with alert management tools.
+We recommend using dashboards and information radiators like [Smashing][] or [BlinkenJS][] in combination with alert management tools, because they are used successfully by GDS teams.
 
 ## Further reading
 
