@@ -24,7 +24,7 @@ Alerts must distinguish between  when something is wrong for a sustained period 
 
 If no action is needed, it should not be an alert. For example, an alert showing a system’s status is really a monitoring tool and you should use a dashboard to display this information instead.
 
-Specific examples of issues that should not trigger an alert include an individual container instance dying or a single task invocation failing. This is because the systems running the architecture like ECS or Kubernetes will bring the instance back up, and the task will retry. 
+Specific examples of issues that should not trigger an alert include an individual container instance dying or a single task invocation failing. This is because the systems running the architecture like ECS or Kubernetes will bring the instance back up, and the task will retry.
 
 Situations where there’s a long period of fewer than expected instances or repeated task failures these should trigger alerts, as they show underlying problems.
 
@@ -51,7 +51,7 @@ We recommend you use:
 
 You can also configure these tools to send alert notifications using email or Slack. But, you should only use email and Slack as additions to your primary alerting tool. If alerts only go to email or Slack, people may ignore, overlook, filter them out or treat them like spam.
 
-We recommend using dashboards and information radiators like [Smashing][] or [BlinkenJS][] in combination with alert management tools, because they are used successfully by GDS teams.
+We recommend using dashboards and information radiators, also known as Big Visible Charts (BVC), like [Smashing][] or [BlinkenJS][] in combination with alert management tools.
 
 ## Further reading
 
