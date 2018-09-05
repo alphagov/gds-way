@@ -25,6 +25,9 @@ max_toc_heading_level: 6
 # Prevent robots from indexing (e.g. whilst in development)
 prevent_indexing: false
 
+show_contribution_banner: true
+github_repo: alphagov/gds-way
+
 # Ownership for page reviews
 default_owner_slack: '#gds-way'
 owner_slack_workspace: gds
