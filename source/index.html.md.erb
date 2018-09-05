@@ -4,28 +4,28 @@ title: The GDS Way
 
 # <%= current_page.data.title %>
 
-The GDS Way documents the specific technology, tools and processes that GDS teams use to build and operate the services GDS is responsible for, you can find out about them in the [Service toolkit](https://www.gov.uk/service-toolkit).
+The GDS Way documents the specific technology, tools and processes that GDS teams use to build and operate services.
 
-We're sharing it openly because we hope it's useful for people to see how we do things. But it's not intended as guidance for anyone working outside GDS - you'll find that in the [Service Manual](https://www.gov.uk/service-manual).
+It's not intended as guidance for anyone working outside GDS - you'll find that in the [Service Manual](https://www.gov.uk/service-manual).
 
 ## About The GDS Way
 
-In the early years of the [Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service), development teams chose how to build their services, picking the most suitable tools and approaches for their projects. Now we’re at the point where having some agreed ways of working for new teams is helpful. Some of the things we’re hoping to achieve with these agreed ways of working are:
+The GDS Way shares agreed ways of working so service teams benefit from:
 
-* use of similar tools across GDS
-* procurement once centrally for GDS
-* costs savings because new teams will be cheaper to spin up
+* using similar tools
+* central procurement
+* costs savings as new teams will be cheaper to spin up
 
-The phrase we use for these agreed ways of working is The GDS Way. This guidance will make it easier for projects to get started while still giving teams flexibility to do something different if their project needs it.
+The GDS Way makes it easier for projects to get started while still giving teams flexibility to do something different if their project needs it.
 
-The GDS Way includes:
+The GDS Way includes consistent:
 
-* consistent terminology
-* consistent ways of working
-* consistent technology and tools
-* consistent measures
+* terminology
+* ways of working
+* technology and tools
+* measures
 
-This site documents some of the decisions agreed by the Tech Ops Forum about products we operate. The decisions are made in alignment with [Service Manual](https://www.gov.uk/service-manual) which covers service design more broadly.
+All decisions are made in alignment with [Service Manual](https://www.gov.uk/service-manual) which covers service design more broadly.
 
 Products at GDS in discovery or alpha development phases must [follow instructions set out in the Service Manual](https://www.gov.uk/service-manual/agile-delivery) and also have the option to follow the standards in this repository.
 
@@ -33,60 +33,61 @@ Products in beta and live phases must follow both the [instructions set out in t
 
 ## Standards
 
-Standards are based on formal decisions made by the tech forum. The standards have an expiry date to ensure we review our decisions and assess whether they are still working for GDS as an organisation.
+Standards are based on formal decisions made by the [GDS Way Forum](#the-gds-way-forum) and have an expiry date. Expiry dates ensure decisions are reviewed to check their continued relevance for GDS.
 
-### Building software
+### How to build software
 
-The following standards will help you name your service, choose an appropriate programming language and where to store your code:
+The following standards help you build your service, for example choosing consistent names or an appropriate programming language. Find out how to:
 
-- [how to name software products](standards/naming-software-products.html)
+- [name software products](standards/naming-software-products.html)
 - [choosing programming languages](standards/programming-languages.html)
-- [how to store source code](standards/source-code.html)
-- [how to manage third party software dependencies](standards/tracking-dependencies.html)
-- [how to optimise frontend performance](standards/optimise-frontend-perf.html)
-- [how to track technical debt](standards/technical-debt.html)
+- [store source code](standards/source-code.html)
+- [manage third party software dependencies](standards/tracking-dependencies.html)
+- [optimise frontend performance](standards/optimise-frontend-perf.html)
+- [track technical debt](standards/technical-debt.html)
 
-### Operating services
+### How to operate services
 
-These standards will enable us to maintain a consistent operating environment across our services:
+These standards enable us to maintain a consistent operating environment across our services. Find out how to:
 
-- [how to host a service](standards/hosting.html)
-- [how to manage DNS records for your service](standards/dns-hosting.html)
-- [how to monitor your service](standards/monitoring.html)
-- [operating systems for virtual machines](standards/operating-systems.html)
-- [responding to problems](standards/alerting.html)
-- [how to send email notifications](standards/sending-email.html)
-- [how to store and query logs](standards/logging.html)
-- [how to do penetration tests](standards/how-to-do-penetration-tests.html)
-- [how to manage access to your third-party service accounts](standards/accounts-with-third-parties.html)
-- [how to publish open source code](standards/publish-opensource-code.html)
+- [host a service](standards/hosting.html)
+- [manage DNS records for your service](standards/dns-hosting.html)
+- [monitor your service](standards/monitoring.html)
+- [configure operating systems for virtual machines](standards/operating-systems.html)
+- [manage alerting](standards/alerting.html)
+- [send email notifications](standards/sending-email.html)
+- [store and query logs](standards/logging.html)
+- [do penetration tests](standards/how-to-do-penetration-tests.html)
+- [manage access to your third-party service accounts](standards/accounts-with-third-parties.html)
+- [publish open source code](standards/publish-opensource-code.html)
 - [use configuration management](standards/configuration-management.html)
-- [Reliability Engineering](standards/reliability-engineering.html)
-- [Support Operations](standards/supporting-services.html)
 
+You can also contact:
+
+* [Reliability Engineering](standards/reliability-engineering.html) about their shared platform to distribute tools and services
+* [Support Operations](standards/supporting-services.html) for technical incident management
 
 ## Manuals
 
-Manuals are informative guides, not necessarily based on any formal
-decision or standard:
+Manuals are informative guides, not necessarily based on any formal decision or standard:
 
 - [programming language style guides](manuals/programming-languages.html)
 - [setting up logging](manuals/logging.html)
 - [licensing](manuals/licensing.html)
 - [how to review code](manuals/code-review-guidelines.html)
 
-## Adding new guidance
+## How to add new guidance
 
-We’d like to thank all contributors for their suggestions as we continue to develop this repository, so we can seek the best way to build and operate our services enabling us to deliver at scale.
+Contribute to this repository by making a pull request in [GitHub](https://github.com/alphagov/gds-way) for discussion at the GDS Way Forum.
 
-If you think you can contribute a change to this repository which reflects
-current practice at GDS, make a pull request in [GitHub](https://github.com/alphagov/gds-way)
-and we'll discuss it at the Tech Ops Forum meeting and in the
-[#gds-way Slack channel](https://gds.slack.com/messages/gds-way/).
+You can also read the service manual to find out about
+[learning about and writing user needs](https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs).
 
-Alternatively contact us <a href="mailto:the-gds-way@digital.cabinet-office.gov.uk?subject=feedback">by email</a>.
+Thank you for your contributions as we develop this repository.
 
-When you create a new Markdown file please ensure it follows this pattern and make a pull request:
+### Submission template
+
+When you create a new Markdown file follow this pattern and then make a pull request:
 
 ```markdown
 ---
@@ -114,5 +115,18 @@ What specific bits of software (commercial or open source) do
 we use to help us do this thing?
 ```
 
-The service manual has some useful information on
-[learning about and writing user needs](https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs).
+## The GDS Way Forum
+
+This site documents some of the decisions agreed at the GDS Way Forum about the products we operate.
+
+The GDS Forum meets once a month. The Forum is lead developers and technical architects representing GDS programmes who are responsible for communicating and implementing the GDS Way.
+
+The Forum reviews:
+
+* all GDS Way open and closed PRs
+* expired guidance and if it should be continued
+* possible subject areas and ownership of new content
+
+### Contact The GDS Way Forum
+
+Contact the GDS Way Forum using the [#gds-way Slack channel](https://gds.slack.com/messages/gds-way/) or by email at <a href="mailto:the-gds-way@digital.cabinet-office.gov.uk?subject=feedback">the-gds-way@digital.cabinet-office.gov.uk</a>.
