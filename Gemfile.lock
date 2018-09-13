@@ -9,9 +9,9 @@ GIT
 
 GIT
   remote: https://github.com/alphagov/tech-docs-gem
-  revision: 60ee8188664d3e3312c3e413303e37c506ea02a3
+  revision: c583614cc0ff51d6c724530b645e987b1d2dbdee
   specs:
-    govuk_tech_docs (1.5.0)
+    govuk_tech_docs (1.6.1)
       activesupport
       chronic (~> 0.10.2)
       middleman (~> 4.0)
@@ -46,7 +46,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    commonmarker (0.17.11)
+    commonmarker (0.17.13)
       ruby-enum (~> 0.5)
     compass (1.0.3)
       chunky_png (~> 1.2)
@@ -70,7 +70,7 @@ GEM
     eventmachine (1.2.7)
     execjs (2.7.0)
     fast_blank (1.0.0)
-    fastimage (2.1.3)
+    fastimage (2.1.4)
     ffi (1.9.25)
     haml (5.0.4)
       temple (>= 0.8.0)
