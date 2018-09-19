@@ -1,77 +1,77 @@
 ---
-title: Alerting
-expires: 2018-12-04
+title: How to manage alerts
+last_reviewed_on: 2018-06-04
+review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-<%= partial :expires %>
+Your service should have a system in place to send automated alerts if its monitoring system detects a problem. Sending alerts help services meet service level agreements (SLAs).
 
-Services at GDS need to be set up to send automated alerts
-to staff if the service's monitoring detects issues.
+## When to send alerts
 
-Alerts can take many forms including emails, phone calls and status
-websites.
+Your service should send an alert when your [service monitoring][] detects an issue that:
 
-The service manual has [some information on writing alerts][service_manual_alerts].
+* affects service users
+* requires action to fix
+* lasts for a sustained period of time
 
-[service_manual_alerts]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service#writing-alerts
+You should only send an alert for things that need action. This includes immediate action for critical or high priority alerts, or less urgent alerts. Alert text should be specific and [include actionable information][]. You should not include sensitive material in this text.
 
-## User needs for alerting
+Create alerts based on events affecting users, such as slow service requests or unavailable webpages. You should also track events like disks being full or almost full, or databases being down. These are both events that can lead to more serious alerts that do affect users.
 
-- Support GDS' goal of services being available to meet user needs
-- Mitigate reputational damage to GDS
-- Adhere to service level agreements (with reliant parties like other government departments), industry standards (like PCI compliance) and legal requirements (like the [Code of Practice for Official Statistics][stats_law])
+You must set up your alerts to distinguish between when something is wrong for a sustained period of time, rather than a brief issue caused by temporary network conditions. [Prometheus][] supports this by using the `for` parameter in its alerting rule, which indicates the condition has to be true for a set period of time before it triggers an alert.
 
-[stats_law]: https://gss.civilservice.gov.uk/about/code-of-practice/
+If no action is needed, it should not be an alert. For example, an alert showing a system’s status is really a monitoring tool and you should use a dashboard to display this information instead. The GDS Way has more guidance on [how to monitor your service][].
 
-## Principles for setting up an alerting system
+Specific examples of issues that should not trigger an alert include an individual container instance dying or a single task invocation failing. This is because the systems running the architecture like [Amazon Elastic Container Service (Amazon ECS)][] or [Kubernetes][] will bring the instance back up, and the task will retry.
 
-Alerts should be meaningful and actionable. An alert that shows
-the status of a system is actually a monitoring tool. The text of
-your alerts should be specific - people will be responding to alerts
-in the middle of the night.
+Situations where there’s a long period of fewer than expected instances or repeated task failures should trigger alerts, as they show underlying problems.
 
-Don't rely on emails as an automated alerting method for
-incident responders. Emails become noisy which over time
-results in them being ignored or overlooked. If you absolutely
-have to use emails, template them so that the information is
-presented consistently.
+## How to prioritise alerts
 
-Don't include sensitive information in your alerts. Alerts are likely
-to be shared while they're being worked on.
+You must prioritise alerts based on whether they need an immediate fix. It can help to class issues as:
 
-Dashboards or information radiators can be useful to show the current
-status of alerts, but they should not be the primary alerting mechanism.
-If you use them, ensure you have one reliable source
-rather than multiple dashboards.
+* interrupting - need immediate investigate and resolution
+* non-interrupting - do not need immediate resolution
 
-People respond better to their preferred alerting method. Use a tool
-which allows your on-call staff to have the same alert presented in
-different ways depending on the responder.
+The [Google Site Reliability Engineering (SRE)][] handbook classifies “interrupting” issues as “pages”, and “non-interrupting” issues as “tickets”. Put non-interrupting alerts into a ticket queue for your support team to solve. Keep the ticket queue and team backlog separate to avoid confusion. You should specify an SLA for how long both types of alert take to resolve.
 
-The audience for your alerts should dictate which alerting
-mechanism to use. Sending an SMS to all of your users when
-you have an outage might be impractical, but setting up
-a status page is probably sensible.
+You should manage alerts using a dedicated tool which will allow you to:
 
-Do end-to-end tests of your alerting pipeline regularly.
+* manage alerts in a queue
+* triage alerts for review
+* attach statuses to alerts, for example, in progress or resolved
+* gather data about alerts to help improve processes
 
-As a team grows or becomes more mature, it becomes more important to
-track alerts, escalate them (automatically or manually), acknowledge them
-(as work in progress) and co-ordinate rotas.
+Recommended tools are:
 
-## Tools for alerting
+- [PagerDuty][] to send high-priority / interrupting alerts
+- [Zendesk][] to manage non-interrupting alerts as tickets
 
-Your monitoring system should use [PagerDuty](https://www.pagerduty.com/)
-to send alerts about problems with your service.
+You can also configure these tools to send alert notifications using email or Slack. However, you should only use email and Slack as additions to your primary alerting tool. If alerts only go to email or Slack, people may ignore, overlook, filter them out, or treat them like spam.
 
-We recommend using [Pingdom](https://www.pingdom.com/) as well, as a 
-top-level check on your service's availability.
+We recommend using dashboards and information radiators, also known as Big Visible Charts (BVC), like [Smashing][] or [BlinkenJS][] in combination with alert management tools.
 
-We recommend using [Atlassian StatusPage](https://www.statuspage.io/) to
-provide updates on service status to users.
+## Further reading
 
-Teams use a range of tools to create information radiators - for
-example [Smashing](https://github.com/Smashing/smashing) or
-[BlinkenJS](https://github.com/alphagov/blinkenjs).
+For more information refer to the:
+
+* Service Manual for [more information on how to write alerts][]
+* GDS way for [information about monitoring][]
+* Google SRE handbook to find out more about [site reliability engineering][]
+
+[service monitoring]: https://gds-way.cloudapps.digital/standards/monitoring.html
+[Google Site Reliability Engineering (SRE)]: https://landing.google.com/sre/book.html
+[PagerDuty]: https://www.pagerduty.com
+[Zendesk]: https://www.zendesk.com
+[Smashing]: https://github.com/Smashing/smashing
+[BlinkenJS]: https://github.com/alphagov/blinkenjs
+[information about monitoring]: https://gds-way.cloudapps.digital/standards/monitoring.html
+[site reliability engineering]: https://landing.google.com/sre/book/index.html
+[more information on how to write alerts]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
+[include actionable information]: https://response.pagerduty.com/oncall/alerting_principles/#alert-content
+[Prometheus]: https://prometheus.io/
+[how to monitor your service]: https://gds-way.cloudapps.digital/standards/monitoring.html
+[Amazon Elastic Container Service (Amazon ECS)]: https://aws.amazon.com/ecs/
+[Kubernetes]: https://kubernetes.io/
