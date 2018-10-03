@@ -8,13 +8,17 @@ review_in: 6 months
 
 While planning for the technical work we do in GDS, we need a common language
 between technologists and product people to describe the scale and scope of
-technical debt. The language should enable communication of the benefits of
-individual pieces of work that pay down tech debt. It should also enable us to
-be clearer about the consequences of not doing something, or leaving a piece of
-work in a certain state. It should also allow us to track the reduction or
-accumulation of technical debt over time. It should not add significant
-overhead to planning, and assigning a rating to a piece of technical debt
-should be quick and simple.
+technical debt.
+
+The language should enable communication of the benefits of individual pieces
+of work that pay down tech debt. It should also enable us to be clearer about
+the consequences of not doing something, or leaving a piece of work in a
+certain state, and should allow us to track the reduction or accumulation of
+technical debt over time.
+
+The process used for tracking debt should not add significant overhead to
+planning, and assigning a rating to a piece of technical debt should be quick
+and simple.
 
 ### Example consequences of tech debt
 
@@ -44,13 +48,14 @@ should be quick and simple.
 Classifying tech debt uses two factors: the impact of the consequence and the
 effort required to remove the cause. Both are subjectively measured as high
 (red), medium (amber) or low (green) with a justification and explanation of
-the cause and consequence. These are subjectively combined into an overall
-high/medium/low risk rating, with the reason for the relative weighting also
-recorded. This rating signifies the risk and associated cost with not dealing
-with the item right now. In some circumstances (such as an upcoming planned
-rewrite or retirement) we would accept a high risk as the item would go away
-naturally anyway. For this reason, the risks don't necessarily map directly to
-priorities.
+the cause and consequence.
+
+These are subjectively combined into an overall high/medium/low risk rating,
+with the reason for the relative weighting also recorded. This rating signifies
+the risk and associated cost with not dealing with the item right now. In some
+circumstances (such as an upcoming planned rewrite or retirement) we would
+accept a high risk as the item would go away naturally anyway. For this reason,
+the risks don't necessarily map directly to priorities.
 
 This is similar to how risks are recorded in a Risk Register. High, medium and
 low ratings are given for impact and likelihood along with a combined overall
