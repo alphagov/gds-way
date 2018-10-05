@@ -1,0 +1,70 @@
+---
+title: Incident Management
+last_reviewed_on: 2018-09-12
+review_in: 6 months
+---
+
+## Incident Management
+
+You should define the incident priority levels for your service applications. Potential incidents include:
+
+* security vulnerabilities
+* data or security breaches
+* system access problems
+* wider technical failures, with possible reputational impact to GDS
+
+Your [support team][] should assign a priority level to an incident based on its complexity, urgency and how long it could take to fix. The severity of an incident also determines the response time and the level of support required.
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+Incident priority table:
+
+|Classification|Type|Example|Response time|Update frequency|
+|---|---|---|---|---|
+|P1|Critical|Complete outage|20 minutes (office and out of hours)|1 hour|
+|P2|Major|Substantial degradation of service|60 minutes (office and out of hours)|2 hours|
+|P3|Significant|Users experiencing intermittent or degraded service due to platform issue|2 hours (office hours only)|Once after 2 business days|
+|P4|Minor|Component failure that does not immediately|1 business day (office hours only)|Once after 5 business
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
+### How to manage incidents
+
+GDS teams provide support in 3 groups, known as ‘lines’, for each product.
+
+**1st line user support**
+
+1st line support provide resolution for basic user enquiries and triage frequent, repeatable incidents. For example, issues signing in.
+
+**2nd line technical support**
+
+2nd line support provide direct incident resolution and triage user requests. For example, when users receive timeout errors or performance is issues.
+
+**3rd line product teams**
+
+3rd line support are technical specialists associated with an existing product team. Their involvement in incident management is limited to the diagnosis and resolution of more complex incidents, such as a data or security breach, or a complete service outage.
+
+### Zendesk
+
+Support Operations require GDS teams to use [Zendesk][] to manage communications with service users. Support Operations work with GDS teams to help manage Zendesk setup and configuration, for example with:
+
+* choosing agent types, groups and ‘pass-ons’ to other government departments
+* [General Data Protection Regulation (GDPR)][] considerations, such as data disclosure and data retention
+
+### Support Operations dashboard
+
+Support Operations use a dashboard to show availability, performance and support-service-level data, such as incident resolution times.
+
+The dashboard gives an easy way to show how Support Operations meet service-level objectives for both GOV.UK user support and GDS service teams. The dashboard shows metrics related to end users, for example service levels and the average amount of contact from users.
+
+The Support Operations dashboard pulls data from a variety of sources including Zendesk, other government performance dashboards such as web traffic on GOV.UK, and service status pages like [GOV.UK Platform as a Service (PaaS)][].
+
+### How to contact Support Operations
+
+You can contact the Support Operations team using the [#user-support Slack channel][].
+
+
+
+[Zendesk]: https://www.zendesk.com/
+[General Data Protection Regulation (GDPR)]: https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/
+[GOV.UK Platform as a Service (PaaS)]: https://status.cloud.service.gov.uk/
+[#user-support Slack channel]: https://gds.slack.com/messages/CADFJBDQU/details/#
+[support team]: #how-to-manage-incidents
