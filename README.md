@@ -4,7 +4,7 @@
 
 To preview or build the website, we need to use the terminal.
 
-Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm],
+Install Ruby with Rubygems, perferably with a [Ruby version manager][rvm],
 and the [Bundler gem][bundler].
 
 In the application folder type the following to install the required gems:
@@ -13,9 +13,11 @@ In the application folder type the following to install the required gems:
 bundle install
 ```
 
-## Making documentation changes
+## Making changes
 
 To make changes edit the source files in the `source` folder.
+
+### Single page output
 
 Although a single page of HTML is generated the markdown is spread across
 multiple files to make it easier to manage. They can be found in
@@ -33,12 +35,11 @@ generated output.
 Including files manually like this lets us specify the position they appear in
 the page.
 
-## Making functional changes
+### Multiple pages
 
-The GDS Way is built from the [Tech Docs Template](https://github.com/alphagov/tech-docs-template)
-repository. Any functional changes and bug fixes should be made to that project first, then follow the
-instructions [here](https://github.com/alphagov/tech-docs-template#updating-a-project-to-use-the-latest-template)
-to update the GDS Way.
+To add a completely new page, create a file with a `.html.md` extension in the `/source` directory.
+
+For example, `source/about.html.md` will be accessible on <http://localhost:4567/about.html>.
 
 ## Preview
 
@@ -80,16 +81,5 @@ bundle exec middleman build
 This will create a `build` subfolder in the application folder which contains
 the HTML and asset files ready to be published.
 
-## Licence
-
-Unless stated otherwise, the codebase is released under [the MIT License][mit].
-This covers both the codebase and any sample code in the documentation.
-
-The documentation is [© Crown copyright][copyright] and available under the terms
-of the [Open Government 3.0][ogl] licence.
-
 [rvm]: https://www.ruby-lang.org/en/documentation/installation/#managers
 [bundler]: http://bundler.io/
-[mit]: LICENCE
-[copyright]: http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/
-[ogl]: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/

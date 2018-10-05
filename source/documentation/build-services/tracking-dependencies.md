@@ -1,0 +1,52 @@
+---
+title: Manage third party software dependencies
+last_reviewed_on: 2018-04-11
+review_in: 6 months
+---
+
+## Manage third party software dependencies
+
+When you develop and operate a service, it’s important to keep any third party dependencies you use up to date. By doing this, you can avoid potential security vulnerabilities.
+
+Any automated tools you use to manage third party dependencies should be compatible with [GDS supported programming languages][]. The tools you use should neither slow down your development process nor disclose potential security vulnerabilities to the public.
+
+You can read more about [managing software dependencies in the Service Manual][].
+
+### Programming languages and their dependencies
+
+Depending on what programming language you use, there are differences in how to manage software dependencies. The Service Manual [explains some of these differences][].
+
+#### Ruby
+
+You should use the [GOV.UK Gem Security Checker][] alongside your regular code checks. This will help your team move any code vulnerabilities into the team’s work backlog. You can then:
+
+* prioritise fixes relative to other project work
+* address vulnerabilities in private before making the fix public
+
+### Dependency management tools
+
+A common way to manage third party dependencies is to use a dependency management tool. [The Service Manual][] has some suggestions about [how to work with third party code][] and about some common dependency management tools.
+
+### Case study - Snyk
+
+The GOV.UK team evaluated [Snyk as a dependency management tool][] for GOV.UK's Ruby repositories because it [monitors code dependencies][] for security vulnerabilities. Using Snyk allows you to automatically check GitHub pull requests (PRs) for vulnerable dependencies and potentially create a pull request to fix them.
+
+When the GOV.UK team evaluated Snyk, the team disabled the tool’s automatic checking and fixing capabilities because of false positive results. For example, automatic checking identified a low-impact vulnerability in [Nokogiri][] which did not have a fix.
+
+A potential workaround was allowing Snyk to add a `.snyk.yml` file to the root of the repository to ignore the Nokogiri vulnerability. The team decided it was best not to allow a third party product to add a file to their code repositories.
+
+GOV.UK has a policy of pinning its gem versions in the Gemfile, so automatically generated pull requests would not resolve the issue without manual developer intervention. Since automatically generated fixes would be visible as a pull request on GitHub, this could reveal the vulnerability to the general public.
+
+If you have questions about managing third party dependencies you can use the [#gds-way Slack channel][].
+
+
+[GDS supported programming languages]: #programming-languages
+[managing software dependencies in the Service Manual]: https://www.gov.uk/service-manual/technology/managing-software-dependencies
+[explains some of these differences]: https://www.gov.uk/service-manual/technology/managing-software-dependencies#differences-across-programming-language-communities
+[GOV.UK Gem Security Checker]: https://github.com/alphagov/govuk_security_audit
+[The Service Manual]: https://www.gov.uk/service-manual
+[how to work with third party code]: https://www.gov.uk/service-manual/technology/managing-software-dependencies#how-to-work-with-third-party-code
+[Snyk as a dependency management tool]: https://snyk.io/docs/snyk-for-ruby
+[monitors code dependencies]: https://snyk.io/features
+[Nokogiri]: http://www.nokogiri.org/
+[#gds-way Slack channel]: https://gds.slack.com/messages/CACFQBL0Y/#
