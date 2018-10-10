@@ -25,7 +25,7 @@ You should use the [GOV.UK Gem Security Checker][] alongside your regular code c
 
 ### Case study - Snyk
 
-The GOV.UK team evaluated [Snyk as a dependency management tool][] for GOV.UK's Ruby repositories because it [monitors code dependencies][] for security vulnerabilities. Using Snyk allows you to automatically check GitHub pull requests (PRs) for vulnerable dependencies and potentially create a pull request to fix them.
+The GOV.UK team evaluated [Snyk][] as a dependency management tool for GOV.UK's Ruby repositories because it [monitors code dependencies][] for security vulnerabilities. Using Snyk allows you to automatically check GitHub pull requests (PRs) for vulnerable dependencies and potentially create a pull request to fix them. It also supports the other languages that GDS uses, including Python, Java and JavaScript.
 
 When the GOV.UK team evaluated Snyk, the team disabled the tool’s automatic checking and fixing capabilities because of false positive results. For example, automatic checking identified a low-impact vulnerability in [Nokogiri][] which did not have a fix.
 
@@ -33,7 +33,9 @@ A potential workaround was allowing Snyk to add a `.snyk.yml` file to the root o
 
 GOV.UK has a policy of pinning its gem versions in the Gemfile, so automatically generated pull requests would not resolve the issue without manual developer intervention. Since automatically generated fixes would be visible as a pull request on GitHub, this could reveal the vulnerability to the general public.
 
-If you have questions about managing third party dependencies you can use the [#gds-way Slack channel][].
+Snyk is being used successfully in the Digital Marketplace and GOV.UK Pay programmes, but configured to ignore vulnerabilities that have no fix, and without automatic generation of pull requests.
+
+If you have questions about managing third party dependencies you can use the [#gds-way Slack channel][], or the Slack channel for the programming language you are using.
 
 
 [GDS supported programming languages]: /standards/programming-languages.html#content
@@ -42,7 +44,7 @@ If you have questions about managing third party dependencies you can use the [#
 [managing Python dependencies]: /manuals/programming-languages/python/python.html#dependencies
 [GOV.UK Gem Security Checker]: https://github.com/alphagov/govuk_security_audit
 [The Service Manual]: https://www.gov.uk/service-manual
-[Snyk as a dependency management tool]: https://snyk.io/docs/snyk-for-ruby
+[Snyk]: https://snyk.io/
 [monitors code dependencies]: https://snyk.io/features
 [Nokogiri]: http://www.nokogiri.org/
 [#gds-way Slack channel]: https://gds.slack.com/messages/CACFQBL0Y/#
