@@ -6,26 +6,26 @@ review_in: 6 months
 
 # <%= current_page.data.title %>
 
-Before taking your service into production and introducing it to live users make sure it meets the relevant technical standards set by GDS and your team.
+Before taking your service into production and introducing it to live users make sure it meets the technical standards set by GDS and your team.
 
 Some of these standards are provided in the GDS Way but your team may also have its own specific standards. For example, your team may require that all its new services are connected to [Logit][] before going to production.
 
-If you do not implement a standard before people start using your service then you could have difficulties operating your service or supporting it when a fault occurs. **For example…**
+If you do not use a standard before people start using your service you could have difficulties operating your service or supporting it when there’s a problem. For example, if you have not [configured alerting correctly][].
 
 ## Use a checklist
 
-To avoid problems when your service goes into production you should use a checklist to confirm whether your service is ready. Each check should reference a standard that's already in place before you can take any service into production. **For example…**
+To avoid problems when your service goes into production use a checklist to confirm if your service is ready. Each check should reference a standard that’s already in place before you can take any service into production. For example, [documenting architecture decisions][].
 
-You can also include communication checks to make sure specific groups or individuals are informed in advance, **such as...**
+You can also include communication checks to make sure specific groups or individuals are informed in advance, like senior management or user groups.
 
 Save your check list as a template so your team can apply it each time you need to take a new service or subcomponent into production.
 
 ### Example checklist
 
-In order to take a service into production, it must be possible to:
+To take a service into production, it must be possible to:
 
 * search logs
-* monitor the health of the service
+* monitor its health
 * view application metrics
 * alert people when the service has problems
 * follow a documented deployment process
@@ -46,3 +46,6 @@ To find out more about making sure your service is production ready, you can rea
 
 [Logit]: https://logit.io/
 [Information Assurance (IA)]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance
+[configured alerting correctly]: https://gds-way.cloudapps.digital/standards/alerting.html#content
+[documenting architecture decisions]: https://gds-way.cloudapps.digital/standards/architecture-decisions.html#content
+
