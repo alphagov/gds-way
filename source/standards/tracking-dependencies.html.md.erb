@@ -27,7 +27,9 @@ You should use the [GOV.UK Gem Security Checker][] alongside your regular code c
 
 [Snyk][] is a dependency management tool which can [monitor code dependencies][] for security vulnerabilities. Using Snyk allows you to automatically check GitHub pull requests (PRs) for vulnerable dependencies and potentially create a pull request to fix them. It also supports the other languages that GDS uses, including Python, Java and JavaScript.
 
-Snyk is being used successfully in the Digital Marketplace and GOV.UK Pay programmes, but configured to ignore vulnerabilities that have no fix, and without automatic generation of pull requests.
+> The GDS Way does not mandate the use of Snyk: please contribute any experience you have of other dependency management tools to this document.
+
+Snyk is being used successfully in the Digital Marketplace and GOV.UK Pay programmes. The Digital Marketplace uses Snyk as a pre-merge check on all pull requests for its public repositories. The developers also review the weekly report for new vulnerabilities, applying fixes manually instead of using Snyk's automatic pull request feature. The reports can be configured to ignore vulnerabilities that have no fix.
 
 [GDS supported programming languages]: /standards/programming-languages.html#content
 [managing software dependencies in the Service Manual]: https://www.gov.uk/service-manual/technology/managing-software-dependencies
@@ -35,4 +37,4 @@ Snyk is being used successfully in the Digital Marketplace and GOV.UK Pay progra
 [managing Python dependencies]: /manuals/programming-languages/python/python.html#dependencies
 [GOV.UK Gem Security Checker]: https://github.com/alphagov/govuk_security_audit
 [Snyk]: https://snyk.io/
-[monitors code dependencies]: https://snyk.io/features
+[monitor code dependencies]: https://snyk.io/features
