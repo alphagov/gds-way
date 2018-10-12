@@ -7,35 +7,41 @@ review_in: 6 months
 
 # <%= current_page.data.title %>
 
-When your team uses [Continuous Delivery (CD)][] you can implement changes like new features or configuration updates quickly and safely, by adopting CD you:
+With C[Continuous Delivery (CD)][] you can implement changes like new features or configuration updates into production quickly and safely. 
 
-[Enable frequent iterations][] - it’s cheaper and easier to deliver small changes to production. Releasing to production multiple times a day means you quickly get feedback from users.
+Using continuous delivery means you benefit from:
 
-[Deploy low risk releases][] - frequent small changes make it easier to diagnose problems and the cost of fixing them is much lower than with large releases.
+Frequent code iterations as it’s cheaper and easier to deliver small changes to production. Releasing to production multiple times a day means you quickly get feedback from users.
 
-[Build quality software][] - automated test suites allow you to quickly identify regressions in your software so you can focus on exploratory, usability, performance and security testing.
+Low risk releases because frequent small changes make it easier to diagnose problems and the cost of fixing them is much lower than with large releases.
 
-Have maintainable code - building and releasing software in small pieces helps you focus on writing small composable bits of code. This means code is easier to maintain and change.
+Quality software builds because automated test suites allow you to quickly identify regressions in your software. This means you can focus on exploratory, usability, performance and security testing.
 
-## Feature branching
+Maintainable code as building and releasing software in small pieces helps you focus on writing small composable bits of code. This means your code is easier to maintain and update.
+
+## Essential concepts
+
+When using continuous delivery you should implement frequent integration with master-branch, automatic build promotion and production monitoring.
+
+### Frequent integration with master-branch
 
 With [continuous integration][] you integrate with a shared main-line at least once a day, for example using source-control branching models like [Trunk-Based Development][].
 
 If your team’s environment is heavily regulated and you need to prove all code changes are reviewed, you should raise and merge frequent small pull requests. Tools like [Fourth Wall Helpful][] will help you build a team culture that supports this practice.
 
-Use approaches such as [feature-flagging][] or [modular architectures][] to deploy partially complete features. By working in this way you can reduce the size of changes going to production and encourage your team to build modular, configurable systems.
+Use approaches like [feature-flagging][] or [modular architectures][] to deploy partially complete features. By working in this way you can reduce the size of changes going to production and encourage your team to build modular, configurable systems.
 
-This approach differs from [feature branching][] because it encourages more frequent integration and release of changes.
+### Automatic build promotion
 
-## Production monitoring
+### Production monitoring
 
 You can understand the impact of your changes on production using [production monitoring and alerting][]. Monitoring essential parts of your system allows you to see if changes have any unintended impacts and respond quickly in case of problems.
 
-## Performance metrics
+## How to measure continuous delivery
 
 It’s important to set [performance metrics for your service][] and [monitor its status][].
 
-[Accelerate The Science of Lean Software and Devops][] shares three metrics that correlate with high performing teams:
+[Accelerate The Science of Lean Software and Devops][] suggests three metrics that correlate with high performing teams:
 
 - lead time to change
 - mean time to recovery
@@ -45,7 +51,7 @@ You can use these metrics to understand how effective your build and release pro
 
 ## Further reading
 
-Find out more about CD from:
+Find out more about continuous delivery from:
 
 - [Architecting for Continuous Delivery by Jez Humble at Agile India 2016][] - Architecting for Continuous Delivery (video)
 - [State of DevOps Report][] - The state of DevOps report 
