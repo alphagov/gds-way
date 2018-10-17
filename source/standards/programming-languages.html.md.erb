@@ -31,37 +31,40 @@ The service manual has information on
 [manual_js]: https://www.gov.uk/service-manual/technology/using-progressive-enhancement
 
 GDS projects that use Node.js include:
-GOV.UK Frontend, GOV.UK Pay, Performance Platform and GOV.UK Platform as a Service.
+
+- [GOV.UK Frontend](https://github.com/alphagov/govuk-frontend)
+- [GOV.UK Pay](https://www.payments.service.gov.uk/)
+- [Performance Platform](https://www.gov.uk/performance)
+- [GOV.UK PaaS](https://www.cloud.service.gov.uk/) (TypeScript)
+- [Passport Verify](https://github.com/alphagov/passport-verify) (TypeScript)
 
 Node.js can be used to render a web interface for your service but should
 not be used to implement any significant ‘application logic’. For instance
 GOV.UK Pay has created thin, client-facing applications that do not store
 data (although they may retrieve data from an API).
 
-In the past we've had problems operating and maintaining products written in
-Node.js (for example maintaining dependencies, picking the appropriate
-libraries to use, understanding the appropriate application structure, and
-ensuring security of the code). We suspect that this is because:
-
-- It's younger and less mature than Java, Python and Ruby
-- We have fewer developers with Node.js skills than other tools we use
-
-Node.js is now frequently used in the wider software development ecosystem for
-building web application frontends. This increase in Node.js use means there
-has been a growth in skills and supporting tools and we expect this to continue.
-This means we may reevaluate it as a core language in the future.
-
-Teams that adopt Node.js must take steps to ensure that they have access to
-sufficient developers with Node.js experience.
+[TypeScript](https://www.typescriptlang.org/) can be used when teams deem it
+appropriate. An example of this is the PaaS team choosing to use TypeScript
+because they are used to working with a statically typed, compiled language,
+and they felt that the compilation and static-analysis tooling was better for
+their workflow. There is more information about TypeScript on the
+[Node.js][nodejs] page.
 
 ## Backend development
 
-Our core languages are __Java, Python and Ruby__.
+Our core languages for backend development are:
 
-We've chosen these 3 languages because they are successfully used by
+- [Java](https://github.com/alphagov?language=java)
+- [Python](https://github.com/alphagov?language=python)
+- [Ruby](https://github.com/alphagov?language=ruby)
+- [Go](https://github.com/alphagov?language=go)
+
+We've chosen these languages because they are successfully used by
 teams at the moment, and we are confident in how to host and operate
 applications written in them. We'd advise you to carry out new
 development in one of them.
+
+### Python
 
 New Python projects should be in Python 3.  Python 2 will
 [reach end of life in 2020][PEP373].  Python 3 is now well-supported
@@ -70,16 +73,20 @@ production.
 
 [PEP373]: https://www.python.org/dev/peps/pep-0373/
 
+### Go
+
 The GOV.UK router is built using Go, and it's the core language for Cloud
 Foundry which runs our Platform as a Service.
 
-Go is an appropriate language for some systems programming, like proxying,
-routing and transforming HTTP requests. However, since we don't maintain much
-Go and thus are likely to have few people with the skills to do so, any such
-code poses a significant risk. Components should only be written in Go if
-there is no alternative maintained open source tool which could be used, and
-after a team has developed a plan to ensure that it will have the skills to
-maintain the component in future.
+Go is an appropriate language for systems programming, like proxying, routing,
+and transforming HTTP requests. However these sorts of components should only
+be written if there is no alternative maintained open source tool which could
+be used.
+
+Go has a feature complete standard library, good concurrency primitives, and is
+a memory safe language; these features make it a good choice for backend
+application which aggregate or transform APIs, or have performance
+requirements.
 
 ### Languages we won't use for new projects
 
