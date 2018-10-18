@@ -69,7 +69,7 @@ Find out more about continuous delivery from:
 
 
 
-[Continuous delivery]: https://www.continuousdelivery.com/a
+[Continuous delivery]: https://www.continuousdelivery.com
 [Enable frequent iterations]: https://medium.com/continuous-delivery/why-continuous-deployment-matters-to-business-6a79b5602145
 [Deploy low risk releases]: http://www.informit.com/articles/article.aspx?p=1833567
 [Build quality software]: https://continuousdelivery.com/foundations/test-automation/
