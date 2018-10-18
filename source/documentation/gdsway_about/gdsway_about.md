@@ -1,11 +1,5 @@
 # About The GDS Way
 
-The GDS Way shares agreed ways of working so service teams benefit from:
-
-* using similar tools
-* central procurement
-* cost savings as new teams will be cheaper to spin up
-
 The GDS Way makes it easier for projects to get started while still giving teams flexibility to do something different if their project needs it. The GDS Way includes consistent:
 
 * terminology
