@@ -1,0 +1,105 @@
+---
+title: How to develop Progressive Web Apps (PWA)
+last_reviewed_on: 2018-10-31
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+Progressive Web Apps (PWA) allow you to create native app experiences using web technologies and delivered using web infrastructure. With PWA you maintain and release features as part of your standard service, you do not need to develop and support them separately.
+
+PWA are commonly supported by modern devices, [79% of the UK population](https://caniuse.com/#feat=serviceworkers) can now benefit from PWA core functionality.
+
+Read more about [what makes something a PWA](https://infrequently.org/2016/09/what-exactly-makes-something-a-progressive-web-app/).
+
+## PWA core technology
+
+PWA use:
+
+- service workers
+- web app manifest
+- application shell architecture
+- Fetch API
+- IndexedDB
+
+### Service workers
+
+A [service worker](https://codeburst.io/an-introduction-to-service-workers-in-javascript-27d6376460c2) is a programmable network proxy written in JavaScript and runs separately from the main browser thread.
+
+Using service workers means your browser can improve your site or application performance by caching essential assets. By working [offline-first](https://codelabs.developers.google.com/codelabs/workbox-indexeddb/index.html?index=..%2F..%2Findex#0) with a service worker your browser can deliver content to your users when they are offline.
+
+Your browser acts as a gateway to more advanced features allowing PWA to act like native applications using:
+
+- [Background Sync API](https://developers.google.com/web/updates/2015/12/background-sync) - defers messaging until users are on stable connections
+- [Notifications API](https://developers.google.com/web/fundamentals/push-notifications/display-a-notification) - displays notifications using a device’s messaging system
+- [Channel Messaging API](https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API) - allows service workers and web workers to communicate with each other and the host application
+- [Push API](https://www.w3.org/TR/push-api/) - enables apps to subscribe to push messages or trigger periodic updates of an app’s local state
+
+Service workers require HTTPS. Because service workers intercept and modify network requests, a [man-in-the-middle attack](https://us.norton.com/internetsecurity-wifi-what-is-a-man-in-the-middle-attack.html) would be serious. Using HTTPS removes this potential attack vector.
+
+Your browser acts as a gateway to more advanced features allowing PWA to act like native applications.
+
+#### Background Sync API
+Background Sync API defers messaging until users are on stable connections.
+
+#### Notifications API
+Notifications API displays notifications using a device’s messaging system
+
+#### Channel Messaging API
+Channel Messaging API allows service workers and web workers to communicate with each other and the host application
+
+#### Push API
+Push API enables apps to subscribe to push messages or trigger periodic updates of an app’s local state
+
+Service workers require HTTPS. Because service workers intercept and modify network requests, a [man-in-the-middle attack](https://us.norton.com/internetsecurity-wifi-what-is-a-man-in-the-middle-attack.html) would be serious. Using HTTPS removes this potential attack vector.
+
+### Web app manifest
+
+Web App Manifest is a simple JSON file that tells your browser about your application and how it behaves when installed. When a user installs your application, the browser will look at the manifest for its settings.
+
+Typical manifest files include information about (required fields marked with an *):
+
+- `short_name`*
+- `name`*
+- `icons`*
+- `start_url`*
+- `background_color`
+- `display`
+- `scope`
+- `theme_color`
+
+To tell the browser a manifest file exists, add a single meta tag to the document head:
+
+`<link rel="manifest" href="/manifest.json">`
+
+This automatically generates an application splash screen from the `name`, `background_colour`, and `icons` properties.
+
+### Application shell architecture
+
+Application shell (app shell) is [the minimal view for your application](https://developers.google.com/web/updates/2015/11/app-shell). Once the app shell caches on a device it does not need to load over the network again. Only the main application content loads over the network.
+
+App shell creates native-like interactions that load instantly even when offline, saving users’ data by only downloading apps’ minimum necessary content.
+
+### Fetch API
+
+Fetch API is a simple interface for fetching resources. It replaces [XMLHttpRequest](https://xhr.spec.whatwg.org/) which often needed additional logic to handle some types of responses, like handling redirects.
+
+For example, requests from a fetch call return a promise that resolves to a response object. The response passes to a .then method where it uses the response. Should the request fail it passes to a .catch method for error handling.
+
+Read [Introduction to fetch()](https://developers.google.com/web/updates/2015/03/introduction-to-fetch) and [JavaScript Promises: an Introduction](https://developers.google.com/web/fundamentals/primers/promises) to find out more.
+
+### IndexedDB
+
+[IndexedDB](https://dev.opera.com/articles/introduction-to-indexeddb/) is a large-scale, [NoSQL](https://www.mongodb.com/nosql-explained) storage system that stores any data needed by an app in a user’s browser. Each IndexedDB database is unique to its origin, usually a site domain or subdomain, meaning other domains cannot access the data.
+
+[Data storage limits](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria) are quite large if they exist at all, because some browsers handle [storage limit and data eviction very differently](https://developers.google.com/web/ilt/pwa/working-with-indexeddb#resources).
+
+## PWA core functionality
+
+PWA core technology creates web apps that mimic functionality only associated in the native applications in the past. PWA core functionality contains:
+
+- offline browsing
+- asset precaching
+- background sync
+- push notifications
+- add to homescreen
