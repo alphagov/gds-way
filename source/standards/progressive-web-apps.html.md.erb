@@ -96,10 +96,243 @@ Read [Introduction to fetch()](https://developers.google.com/web/updates/2015/03
 
 ## PWA core functionality
 
-PWA core technology creates web apps that mimic functionality only associated in the native applications in the past. PWA core functionality contains:
+PWA core technology allows you to create web apps that mimic functionality only associated with native applications in the past.
+
+PWA core functionality includes:
+
 
 - offline browsing
 - asset precaching
 - background sync
 - push notifications
 - add to homescreen
+
+### Offline browsing
+
+With PWA you can cache assets from your website for later use, even when users are offline. For example, a service worker intercepts requests for assets and retrieves them from the browser cache instead of the network.
+
+You could also serve up a custom offline page for your app. if you use asset precaching it’s possible to cache some, if not all of your website to view offline.
+
+### Asset precaching
+
+[Asset precaching](https://developers.google.com/web/tools/workbox/modules/workbox-precaching) is when a service worker precaches a list of assets for later use. This happens on the service workers [install event](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers#Install_and_activate_populating_your_cache).
+
+For example, when a webpage uses these critical assets, the service worker intercepts the request and delivers the webpage from the browser cache instead of the network. This applies if you’re using a [cache first (cache falling back to network) strategy](https://developers.google.com/web/tools/workbox/modules/workbox-strategies#cache_first_cache_falling_back_to_network). If you are not using cache first, other strategies are available with a different network, cache response.
+
+You could also expand precaching to include other pages, or potentially cache your entire website for offline viewing. If you cache your entire website consider its total size before doing so.
+
+For example, precache will automatically request all assets in the background without your users' knowledge or control. If your users have an expensive, data limited mobile plan, they should not have to download data they may never use. Browser storage space is finite, so storing too much data will result in a browser error.
+
+### Background sync API
+
+[Background sync API](https://developers.google.com/web/updates/2015/12/background-sync) allows you to suspend an action until a user has a stable network connection. This means you make sure whatever your user wants to send is actually sent.
+
+With background sync API a user can send a message offline. The message is stored in the background and transmitted once the browser establishes a network connection.
+
+For example, when a user submits a form offline, the browser stores the data and submits it only when it re-establishes a network connection.
+
+### Push notifications
+
+[Push notifications]() use a device’s native notification method. Notifications are either triggered from the application, or pushed from a server. This happens even when the application is not loaded.
+
+Push notifications make use of:
+
+- [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) to allow your app to handle pushed messages from a server
+- [Notifications](https://notifications.spec.whatwg.org/) API to work with user’s devices to show messages
+- [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) API to control the flow through push and notification APIs
+
+You should limit the number of notifications sent to your users but do not switch them all off. If you switch off all notifications you’ll lose important user engagement.
+
+### Add to Homescreen
+
+[Add to Homescreen](https://developers.google.com/web/fundamentals/app-install-banners/) (sometimes called the web app install prompt) allows users to install a PWA on their mobile or desktop. Once added to the homescreen an app imitates native app functionality.
+
+Add to Homescreen requires the web app manifest file.
+
+## Case study - Workbox
+
+GDS recommends using [Workbox](https://developers.google.com/web/tools/workbox/) to incorporate PWA into your service.
+
+GDS uses the Workbox library to add offline support to its web apps. Workbox is an [open source service worker library](https://github.com/GoogleChrome/workbox) created by Google, it’s well tested and [used by thousands of websites](https://developers.google.com/web/showcase/).
+
+If you write your service worker without any abstraction libraries you could include inferior code in your design.
+
+Using Workbox means you can:
+
+- add offline capabilities to your website or web application
+- remove the need to create boilerplate code for each service worker
+- benefit from a [comprehensive set of documentation](https://developers.google.com/web/tools/workbox/guides/get-started).
+
+Workbox comes with [built-in functionally](https://developers.google.com/web/tools/workbox/reference-docs/latest/) including:
+
+- asset precaching
+- runtime caching
+- caching strategies
+- request routing
+- background sync
+- offline Google Analytics tracking
+- comprehensive debugging
+
+You’ll need to write some code to define what this functionality controls, but it’s much simpler than writing a service worker from scratch.
+
+We review the recommendation to use Workbox every six months to make sure it’s still the best choice for GDS teams.
+
+### Build process integration
+
+You can integrate Workbox into your current build process using three node modules without writing any code.
+
+[Workbox Command Line Interface (CLI)](https://developers.google.com/web/tools/workbox/modules/workbox-cli) - use CLI if you’re new to Node and frontend build tools. With the CLI you can integrate Workbox into projects that do not rely on the Node toolchain for their frontend development, like Ruby on Rails.
+
+[Workbox-build](https://developers.google.com/web/tools/workbox/modules/workbox-build) - use workbox-build if you’re familiar with languages like Node or Gulp to generate your service workers.
+
+[Workbox webpack Plugins](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) - If you use webpack in your build pipeline, Workbox provides you with a plugin to generate your service worker:
+
+| Workbox-webpack-plugin classes  |  Description |
+|---|---|
+|  [generateSW()](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin-GenerateSW) |  Automatically generates most of the service worker, controls precaching and includes customisation options, writes the service worker code to disk |
+|  generateSWString() |  Identical to `generateSW()` but returns as a string Useful if you need to manually change the service worker configuration it writes to disk|
+|  [injectManifest()](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin-InjectManifest)  |   Allows complete control of service worker setup, uses asset precaching. When generating the service worker, an automatically generated list of files replaces the precache placeholder. Recommended if you need low level control over service worker functionality|
+
+### Example service worker code
+
+The code example shows how you can include Workbox in your build pipeline and use it to generate a service worker. The example uses `injectManifest()`, allowing more control over the service worker as well as precache functionality.
+
+You can read the documentation and more examples in the [Workbox Get Started guide](https://developers.google.com/web/tools/workbox/guides/get-started).
+
+```js
+/**
+service-worker-example-src.js
+You can use this example service worker file with injectManifest()
+**/
+
+/**
+Import the Workbox library from the Google CDN. It’s possible to serve this locally if you want to remove the dependency on Google. For more information read the Workbox documentation.
+
+**/
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js');
+
+workbox.setConfig({
+  // set the local path is not using Google CDN
+  //modulePathPrefix: '/directory/to/workbox/'
+
+  // By default, workbox-sw will use the debug build for sites on localhost,
+  // but for any other origin it’ll use the production build. Force by setting to true.
+  // debug: true
+});
+// Force verbose logging even for the production
+// workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug)
+
+// Cache settings
+workbox.core.setCacheNameDetails({
+  // set the default cache name prefix. each domain should be unique to stop clashes
+  // this is used for runtime and precaching only
+  prefix: 'sample-cache'
+});
+
+// Example of cachefirst strategy for the JavaScript
+workbox.routing.registerRoute(
+  // match only with assets on this domain
+  new RegExp('https://sample.testdomain.com/.*\.js$'),
+  workbox.strategies.cacheFirst({
+    cacheName: 'sample-js-cache'
+  })
+);
+
+// Example of using a network first strategy for CSS files as well as setting custom
+// expiration settings
+workbox.routing.registerRoute(
+  // match only with assets on this domain
+  new RegExp('https://sample.testdomain.com/.*\.css$'),
+  workbox.strategies.networkFirst({
+    cacheName: 'sample-css-cache',
+    plugins: [
+      new workbox.expiration.Plugin({
+        // 28 days cache before expiration
+        maxAgeSeconds: 24 * 60 * 60 * 28,
+        // Opt-in to automatic cleanup whenever a quota errors occurs anywhere in Workbox
+        purgeOnQuotaError: true // Opt-in to automatic cleanup.
+      })
+    ]
+  })
+);
+
+// Using networkOnly means the assets will only ever come from the network,
+// the service worker never caches them
+workbox.routing.registerRoute(
+  // match only with assets on this domain
+  new RegExp('https://sample.testdomain.com/.*\.woff2$'),
+  workbox.strategies.networkOnly({
+    cacheName: 'sample-font-cache'
+  })
+);
+
+// If Workbox setup defines any rules this is where it injects them
+workbox.precaching.precacheAndRoute([]);
+
+// skip the 'worker in waiting' phase and activate immediately
+workbox.skipWaiting();
+// claim any clients that match the worker scope immediately. requests on these pages will
+// now go via the service worker.
+workbox.clientsClaim();
+```
+
+The following module is used with Node to generate the service worker based from the previous service worker source code:
+
+```js
+/**
+build-service-worker.js
+Custom node module used to generate the service worker. Include this in your build pipeline (node) like this:
+
+const generateServiceWorker = require('build-service-worker');
+// Now generate the service worker (make sure this runs after it generates all files)
+generateServiceWorker.init();
+**/
+
+'use strict'
+const { injectManifest } = require('workbox-build')
+
+module.exports = {
+  generate: function () {
+    injectManifest({
+      swSrc: 'lib/service-worker-example-src.js',
+      swDest: 'dist/service-worker-example.js',
+      globDirectory: 'dist/',
+      globPatterns: ['**/*.{js,css,html}']
+    })
+    // notify console of generation data
+    .then(({ count, size }) => {
+      console.info(`Service worker generation complete which will precache ${count} files, totaling ${(size / 1024 / 1024).toFixed(2)} megabytes.`)
+
+      return { count, size }
+    })
+    // if there are errors, what happened
+    .catch((error) => {
+      console.error('Service worker generation failed: ' + error)
+    })
+  },
+  init: function () {
+    // generate the service worker
+    this.generate()
+  }
+}
+```
+
+All HTML files on the domain include the following code, which checks for API support then registers the service worker for use.
+
+```html
+<body>
+  <!-- ..... -->
+  <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          // Scope will be restricted to the path where the service-worker-example.js file is located
+          navigator.serviceWorker.register('/service-worker-example.js', {scope: '/'}).then(registration => {
+            console.log('Service Worker registered: ', registration)
+          }).catch(registrationError => {
+            console.log('Service Worker registration failed: ', registrationError)
+          })
+        })
+      }
+  </script>
+</body>
+```
