@@ -8,7 +8,7 @@ review_in: 6 months
 
 Make sure your service performs the way users need it to. If your service does not perform as expected when there are extra loads it will impact your users.
 
-Run performance tests to check how your service performs in certain situations. For example, during a [denial-of-service attack (DoS attack)](https://www.ncsc.gov.uk/guidance/denial-service-dos-guidance-collection).
+You should run performance tests to check how your service performs in certain situations. For example, during a [denial-of-service attack (DoS attack)](https://www.ncsc.gov.uk/guidance/denial-service-dos-guidance-collection).
 
 The Service Manual has more information about why you need to [test your service’s performance](https://www.gov.uk/service-manual/technology/test-your-services-performance) and how to start capacity planning and running performance tests.
 
@@ -16,21 +16,25 @@ The Service Manual has more information about why you need to [test your service
 
 Plan and scope your test whether you're testing the entire service or specific user journeys.
 
+### Estimate costs
+
+Estimate any additional infrastructure costs your tests will incur and share them with your service owner or product manager for approval.
+
 ### Plan user journeys
 
-Test complete journeys that are representative of how your service is used in production. For example, to complete a transaction a user may have to first sign in or register, plan tests where some users sign in and others register.
-
-### Inform people
-
-Inform people affected by your test, for example, hosting providers or developers planning to use the test environment and get their consent.
+Test complete journeys that are representative of how your service is used in production. For example, if a user has to sign in or register, plan tests where some users sign in and others register.
 
 ### Plan test scenarios
 
-Plan the main scenarios for your test. For example, every year the [G-Cloud framework on the Digital Marketplace](https://www.gov.uk/guidance/the-g-cloud-framework-on-the-digital-marketplace) opens for applications from suppliers for several weeks. This activity generates increasing load on [Digital Marketplace](https://www.digitalmarketplace.service.gov.uk/) up to the deadline.
+A scenario is a hypothetical event when your service will be under heavy load. For example, every year the [G-Cloud framework on the Digital Marketplace](https://www.gov.uk/guidance/the-g-cloud-framework-on-the-digital-marketplace) opens for applications from suppliers for several weeks. This activity increases load on the [Digital Marketplace](https://www.digitalmarketplace.service.gov.uk/) up to the deadline.
 
-When most of its application infrastructure moved to the [GOV.UK PaaS](https://www.cloud.service.gov.uk/) the Digital Marketplace service needed retesting. To do this, Digital Marketplace developers and performance analysts queried Google Analytics for popular journeys, modelling normal and peak capacity needs for the previous year’s G-Cloud framework application period.
+When most of its application infrastructure moved to the [GOV.UK PaaS](https://www.cloud.service.gov.uk/) the Digital Marketplace service needed to retest the service. Its developers and performance analysts queried Google Analytics for popular journeys, modelling normal and peak capacity needs for the previous year’s G-Cloud framework application period.
 
-The result was accurate figures for the largest number of concurrent user sessions and Requests Per Second (RPS) Digital Marketplace support. This made sure the new platform could still cope with its expected network traffic.
+This helped the team calculate figures for the largest number of concurrent user sessions and Requests Per Second (RPS) Digital Marketplace was able to support. This made sure the new platform could still cope with its expected network traffic.
+
+### Inform people
+
+Inform people affected by your test. For example, tell hosting providers or developers planning to use the test environment of your test’s date, time and duration. Make sure everyone involved in the test agrees to its conditions.
 
 ### Build your test
 
@@ -38,42 +42,17 @@ You do not need to fully hand code your tests because most load testing tools li
 
 Gatling is a popular load testing tool used by many teams at GDS including [GOV.UK Pay](https://www.payments.service.gov.uk/), [GOV.UK Notify](https://www.notifications.service.gov.uk/) and [Digital Marketplace](https://www.digitalmarketplace.service.gov.uk/).
 
-### Estimate costs
-
-Estimate any additional infrastructure costs your tests will incur and share them with your service owner or product manager.
-
 ## Configure your test environment
 
 Test environments must resemble your production environment as far as possible so tests are accurate. Isolate test environments to stop them affecting your production environment.
 
-Consider how to monitor service performance during the load test. Your service will likely already have dashboards and graphs set up for common metrics such as CPU and memory utilization. Decide if your current metrics are sufficient or if you need to turn on additional logging or configure profiling traces.
+Consider how to [monitor service performance](https://gds-way.cloudapps.digital/standards/monitoring.html) during the load test. Your service will likely already have dashboards and graphs set up for common metrics such as CPU and memory utilization. Decide if your current metrics are sufficient or if you need to turn on additional logging or configure profiling traces.
 
-Perform practice runs of your tests to make sure they work as expected. You may encounter tooling issues such like temporarily disabling [Cross-Site Request Forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) protection in your test environment.
+Perform practice runs of your tests to make sure they work as expected. For example, you may encounter tooling issues related to [Cross-Site Request Forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) in your test environment.
 
 ## Run your tests
 
 Start with a low level of concurrent users and increase them to your anticipated maximum. If there are no problems, increase the amount of traffic until you reach a breaking point in your system.
-
-## Analyse your results
-
-Testing tools should record the number of concurrent users, RPS, HTTP response codes and timings. These reports help determine your service’s maximum supported capacity. If your service cannot meet your requirements or you find problems, you’ll need to diagnose them.
-
-Common problems that are easy to fix can include:
-
-- inefficient code - for example accidental looping through large datasets in your application
-- inefficient database queries - introduce lazy loading, add or alter indexes
-- Webserver workers becoming blocked awaiting API responses - adjusting worker/thread count settings may help depending on specific use cases and technology
-
-Problems with your infrastructure can be harder to resolve. For example, if your service is read-heavy you can introduce additional caching. Caching can drastically improve performance.
-
-You can scale infrastructure:
-
-- vertically by adding more power, for example upgrading CPUs, memory or storage
-- horizontally by adding additional instances of your service’s components, you can only do this if your service supports this type of scaling
-
-Read [The Twelve-Factor App](https://12factor.net/) methodology to find out more.
-
-Make sure you retest after any changes to confirm everything works as expected and you have not introduced any new problems to your service.
 
 ## Document and share your results
 
@@ -85,9 +64,23 @@ When testing your service, record:
 
 If your service meets your capacity requirements, document its upper limits and communicate them to the service owner.
 
+## Analyse your results
+
+Testing tools should record the number of concurrent users, RPS, HTTP response codes and timings. These reports help determine your service’s maximum supported capacity. If your service cannot meet your requirements or you find problems, you’ll need to diagnose them.
+
+Common problems like inefficient database queries can be fixed by introducing lazy loading and adding or altering indexes. Or when [Webserver workers](https://developers.google.com/web/fundamentals/primers/service-workers/) are blocked waiting for API responses, adjusting thread count settings can help depending on your specific use cases and technology.
+
+Problems with your infrastructure can be harder to resolve. For example, if your service is read-heavy you can introduce additional caching to improve performance.
+
+You can scale infrastructure vertically by adding more power, for example upgrading CPUs, memory or storage. You can also scale  horizontally by adding additional instances of your service’s components. You can only do this if your service supports this type of scaling.
+
+[The Twelve-Factor App](https://12factor.net/) provides more information on how to scale your infrastructure and build SaaS.
+
+Make sure you rerun your performance tests after any changes to confirm everything works as expected and you have not introduced any new problems to your service.
+
 ## Performance testing for auto-scaling environments
 
-Test auto-scaling infrastructures to make sure they scale up and down as expected and are cost-efficient. For example, are infrastructure scales at the correct thresholds, check if servers become stressed and response times slow down before scaling takes effect.
+Test auto-scaling infrastructures to make sure they scale up and down as expected and are cost-efficient. For example, if infrastructure scales at the correct thresholds, check if servers become stressed and response times slow down before scaling takes effect.
 
 Performance testing helps determine if you’re using the correct machine instance types for your workload. For example, more expensive larger specification machines may be capable of handling more traffic cheaper than adding additional smaller instances to your auto-scaling group. Depending on your service requirements the reverse may be true.
 
@@ -96,3 +89,11 @@ Performance testing helps determine if you’re using the correct machine instan
 Testing can help you tune serverless components’ performance. For example, Amazon prices [AWS Lambda](https://aws.amazon.com/lambda/) on the number of function executions, allocated memory and estimated execution time.
 
 Performance testing will help determine if a function is taking longer to execute because it does not have enough memory allocated, or is over-provisioned with memory and costing more than necessary.
+
+## Further reading
+
+To find our more about performance testing read:
+
+- the Service Manual about [testing your service’s performance](https://www.gov.uk/service-manual/technology/test-your-services-performance)
+- [The Twelve-Factor App](https://12factor.net/) a methodology for building software-as-a-service apps
+- [Gatling product documentation](https://gatling.io/docs/current/) about maintainable and high performance load testing
