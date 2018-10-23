@@ -14,48 +14,37 @@ Read more about [what makes something a PWA](https://infrequently.org/2016/09/wh
 
 ## PWA core technology
 
-PWA use:
-
-- service workers
-- web app manifest
-- application shell architecture
-- Fetch API
-- IndexedDB
+PWA core technology includes, service workers, web app manifest, application shell architecture, Fetch API and IndexedDB.
 
 ### Service workers
 
-A [service worker](https://codeburst.io/an-introduction-to-service-workers-in-javascript-27d6376460c2) is a programmable network proxy written in JavaScript and runs separately from the main browser thread.
+[Service workers](https://codeburst.io/an-introduction-to-service-workers-in-javascript-27d6376460c2) are programmable network proxies written in JavaScript and running separately from the main browser thread.
 
-Using service workers means your browser can improve your site or application performance by caching essential assets. By working [offline-first](https://codelabs.developers.google.com/codelabs/workbox-indexeddb/index.html?index=..%2F..%2Findex#0) with a service worker your browser can deliver content to your users when they are offline.
+Using service workers mean your browser improves your site or application performance by caching essential assets. By working [offline-first](https://codelabs.developers.google.com/codelabs/workbox-indexeddb/index.html?index=..%2F..%2Findex#0) with a service worker your browser delivers content to your users when they are offline.
+
+Service workers require HTTPS. Because service workers intercept and modify network requests, a [man-in-the-middle attack](https://us.norton.com/internetsecurity-wifi-what-is-a-man-in-the-middle-attack.html) would be serious. Using HTTPS removes this potential attack vector.
 
 Your browser acts as a gateway to more advanced features allowing PWA to act like native applications using:
 
-- [Background Sync API](https://developers.google.com/web/updates/2015/12/background-sync) - defers messaging until users are on stable connections
-- [Notifications API](https://developers.google.com/web/fundamentals/push-notifications/display-a-notification) - displays notifications using a device’s messaging system
-- [Channel Messaging API](https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API) - allows service workers and web workers to communicate with each other and the host application
-- [Push API](https://www.w3.org/TR/push-api/) - enables apps to subscribe to push messages or trigger periodic updates of an app’s local state
-
-Service workers require HTTPS. Because service workers intercept and modify network requests, a [man-in-the-middle attack](https://us.norton.com/internetsecurity-wifi-what-is-a-man-in-the-middle-attack.html) would be serious. Using HTTPS removes this potential attack vector.
-
-Your browser acts as a gateway to more advanced features allowing PWA to act like native applications.
-
 #### Background Sync API
-Background Sync API defers messaging until users are on stable connections.
+
+[Background Sync API](https://developers.google.com/web/updates/2015/12/background-sync) - defers messaging until users are on stable connections.
 
 #### Notifications API
-Notifications API displays notifications using a device’s messaging system
+
+[Notifications API](https://developers.google.com/web/fundamentals/push-notifications/display-a-notification) - displays notifications using a device’s messaging system.
 
 #### Channel Messaging API
-Channel Messaging API allows service workers and web workers to communicate with each other and the host application
+
+[Channel Messaging API](https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API) - allows service workers and web workers to communicate with each other and the host application.
 
 #### Push API
-Push API enables apps to subscribe to push messages or trigger periodic updates of an app’s local state
 
-Service workers require HTTPS. Because service workers intercept and modify network requests, a [man-in-the-middle attack](https://us.norton.com/internetsecurity-wifi-what-is-a-man-in-the-middle-attack.html) would be serious. Using HTTPS removes this potential attack vector.
+[Push API](https://www.w3.org/TR/push-api/) - enables apps to subscribe to push messages or trigger periodic updates of an app’s local state.
 
 ### Web app manifest
 
-Web App Manifest is a simple JSON file that tells your browser about your application and how it behaves when installed. When a user installs your application, the browser will look at the manifest for its settings.
+[Web App Manifest](https://www.w3.org/TR/appmanifest/) is a JSON file that tells your browser about your application and how it behaves when installed. When users install your application, their browser looks at the web app manifest for the application’s settings including its post installation behaviour.
 
 Typical manifest files include information about (required fields marked with an *):
 
@@ -68,7 +57,7 @@ Typical manifest files include information about (required fields marked with an
 - `scope`
 - `theme_color`
 
-To tell the browser a manifest file exists, add a single meta tag to the document head:
+Adding a single meta tag to the document head tells the browser a manifest file exists:
 
 `<link rel="manifest" href="/manifest.json">`
 
@@ -78,28 +67,27 @@ This automatically generates an application splash screen from the `name`, `back
 
 Application shell (app shell) is [the minimal view for your application](https://developers.google.com/web/updates/2015/11/app-shell). Once the app shell caches on a device it does not need to load over the network again. Only the main application content loads over the network.
 
-App shell creates native-like interactions that load instantly even when offline, saving users’ data by only downloading apps’ minimum necessary content.
+App shell creates native-like interactions that instantly load even offline, saving users’ data by only downloading apps’ minimum necessary content.
 
 ### Fetch API
 
 Fetch API is a simple interface for fetching resources. It replaces [XMLHttpRequest](https://xhr.spec.whatwg.org/) which often needed additional logic to handle some types of responses, like handling redirects.
 
-For example, requests from a fetch call return a promise that resolves to a response object. The response passes to a .then method where it uses the response. Should the request fail it passes to a .catch method for error handling.
+For example, requests from a fetch call return a promise that resolves to a response object. The response passes to a `.then` method where it uses the response. Should the request fail it passes to a `.catch` method for error handling.
 
 Read [Introduction to fetch()](https://developers.google.com/web/updates/2015/03/introduction-to-fetch) and [JavaScript Promises: an Introduction](https://developers.google.com/web/fundamentals/primers/promises) to find out more.
 
 ### IndexedDB
 
-[IndexedDB](https://dev.opera.com/articles/introduction-to-indexeddb/) is a large-scale, [NoSQL](https://www.mongodb.com/nosql-explained) storage system that stores any data needed by an app in a user’s browser. Each IndexedDB database is unique to its origin, usually a site domain or subdomain, meaning other domains cannot access the data.
+[IndexedDB](https://dev.opera.com/articles/introduction-to-indexeddb/) is a large-scale, [NoSQL](https://www.mongodb.com/nosql-explained) system for storing any data needed by an app in a user’s browser. Each IndexedDB database is unique to its origin, usually a site domain or subdomain, meaning other domains cannot access the data.
 
-[Data storage limits](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria) are quite large if they exist at all, because some browsers handle [storage limit and data eviction very differently](https://developers.google.com/web/ilt/pwa/working-with-indexeddb#resources).
+With IndexedDB [data storage limits](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria) are quite large if they exist at all, because some browsers handle [storage limit and data eviction very differently](https://developers.google.com/web/ilt/pwa/working-with-indexeddb#resources).
 
 ## PWA core functionality
 
-PWA core technology allows you to create web apps that mimic functionality only associated with native applications in the past.
+With PWA core technology you create web apps that mimic functionality only associated in the past with native applications.
 
 PWA core functionality includes:
-
 
 - offline browsing
 - asset precaching
@@ -109,39 +97,37 @@ PWA core functionality includes:
 
 ### Offline browsing
 
-With PWA you can cache assets from your website for later use, even when users are offline. For example, a service worker intercepts requests for assets and retrieves them from the browser cache instead of the network.
+With PWA you cache assets from your website for later use, even when users are offline. For example, a service worker intercepts requests for assets and retrieves them from the browser cache instead of the network.
 
-You could also serve up a custom offline page for your app. if you use asset precaching it’s possible to cache some, if not all of your website to view offline.
+You could also deliver a custom offline page for your app. If you use asset precaching it’s possible to cache some, if not all of your website for offline viewing.
 
 ### Asset precaching
 
-[Asset precaching](https://developers.google.com/web/tools/workbox/modules/workbox-precaching) is when a service worker precaches a list of assets for later use. This happens on the service workers [install event](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers#Install_and_activate_populating_your_cache).
+ Service workers [precache a list of assets](https://developers.google.com/web/tools/workbox/modules/workbox-precaching) for later use. This happens on the service workers [install event](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers#Install_and_activate_populating_your_cache).
 
-For example, when a webpage uses these critical assets, the service worker intercepts the request and delivers the webpage from the browser cache instead of the network. This applies if you’re using a [cache first (cache falling back to network) strategy](https://developers.google.com/web/tools/workbox/modules/workbox-strategies#cache_first_cache_falling_back_to_network). If you are not using cache first, other strategies are available with a different network, cache response.
+ For example, if you’re using a [cache first strategy](https://developers.google.com/web/tools/workbox/modules/workbox-strategies#cache_first_cache_falling_back_to_network), when a webpage uses these critical assets, the service worker intercepts the request delivering the webpage from the browser cache instead of the network.
 
-You could also expand precaching to include other pages, or potentially cache your entire website for offline viewing. If you cache your entire website consider its total size before doing so.
+You could also expand precaching to include other pages, or potentially cache your entire website for offline viewing. If you cache your entire website consider its total size first.
 
-For example, precache will automatically request all assets in the background without your users' knowledge or control. If your users have an expensive, data limited mobile plan, they should not have to download data they may never use. Browser storage space is finite, so storing too much data will result in a browser error.
+For example, precache automatically requests all assets in the background without your users' knowledge or control. If your users have an expensive, data limited mobile plan, they should not have to download unneeded data. Because browser storage space is finite, storing too much data will result in a browser error.
 
 ### Background sync API
 
-[Background sync API](https://developers.google.com/web/updates/2015/12/background-sync) allows you to suspend an action until a user has a stable network connection. This means you make sure whatever your user wants to send is actually sent.
+[Background sync API](https://developers.google.com/web/updates/2015/12/background-sync) allows you to suspend an action until a user has a stable network connection network connection, making sure your users data is actually sent.
 
-With background sync API a user can send a message offline. The message is stored in the background and transmitted once the browser establishes a network connection.
-
-For example, when a user submits a form offline, the browser stores the data and submits it only when it re-establishes a network connection.
+This means users can send messages offline. Messages are stored in the background and transmitted once the browser establishes a network connection.
 
 ### Push notifications
 
-[Push notifications]() use a device’s native notification method. Notifications are either triggered from the application, or pushed from a server. This happens even when the application is not loaded.
+[Push notifications](https://medium.com/@derek_dyer/progressive-web-applications-push-notifications-d7cfb42f30c3) use a device’s native notification method. Notifications are either triggered by an application or pushed from a server. This happens even when the app is offline.
 
-Push notifications make use of:
+Push notifications use:
 
-- [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) to allow your app to handle pushed messages from a server
-- [Notifications](https://notifications.spec.whatwg.org/) API to work with user’s devices to show messages
-- [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) API to control the flow through push and notification APIs
+- [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) - allowing your app to handle pushed messages from a server
+- [Notifications API](https://notifications.spec.whatwg.org/) - working with user’s devices to show messages
+- [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) - controlling the flow through push and notification APIs
 
-You should limit the number of notifications sent to your users but do not switch them all off. If you switch off all notifications you’ll lose important user engagement.
+Limit the number of notifications sent to your users but do not switch them all off. If you switch off all notifications you’ll lose important user engagement.
 
 ### Add to Homescreen
 
@@ -151,17 +137,15 @@ Add to Homescreen requires the web app manifest file.
 
 ## Case study - Workbox
 
-GDS recommends using [Workbox](https://developers.google.com/web/tools/workbox/) to incorporate PWA into your service.
+GDS recommends [Workbox](https://developers.google.com/web/tools/workbox/) to incorporate PWA into your service, using the Workbox library to add offline support to its web apps.
 
-GDS uses the Workbox library to add offline support to its web apps. Workbox is an [open source service worker library](https://github.com/GoogleChrome/workbox) created by Google, it’s well tested and [used by thousands of websites](https://developers.google.com/web/showcase/).
+Workbox is an [open source service worker library](https://github.com/GoogleChrome/workbox) created by Google, it’s well tested and [used by thousands of websites](https://developers.google.com/web/showcase/). If you write your service worker without any abstraction libraries you could include inferior code in your design.
 
-If you write your service worker without any abstraction libraries you could include inferior code in your design.
-
-Using Workbox means you can:
+Using Workbox means you:
 
 - add offline capabilities to your website or web application
 - remove the need to create boilerplate code for each service worker
-- benefit from a [comprehensive set of documentation](https://developers.google.com/web/tools/workbox/guides/get-started).
+- benefit from a [comprehensive set of documentation](https://developers.google.com/web/tools/workbox/guides/get-started)
 
 Workbox comes with [built-in functionally](https://developers.google.com/web/tools/workbox/reference-docs/latest/) including:
 
@@ -175,29 +159,32 @@ Workbox comes with [built-in functionally](https://developers.google.com/web/too
 
 You’ll need to write some code to define what this functionality controls, but it’s much simpler than writing a service worker from scratch.
 
-We review the recommendation to use Workbox every six months to make sure it’s still the best choice for GDS teams.
+The GDS Forum reviews the recommendation to use Workbox every six months to make sure it’s still the best choice for GDS teams.
 
 ### Build process integration
 
-You can integrate Workbox into your current build process using three node modules without writing any code.
+Integrate Workbox into your current build process without writing any code using three node modules, Workbox Command Line Interface (CLI), workbox-build and Workbox webpack Plugins.
 
-[Workbox Command Line Interface (CLI)](https://developers.google.com/web/tools/workbox/modules/workbox-cli) - use CLI if you’re new to Node and frontend build tools. With the CLI you can integrate Workbox into projects that do not rely on the Node toolchain for their frontend development, like Ruby on Rails.
+[Workbox Command Line Interface (CLI)](https://developers.google.com/web/tools/workbox/modules/workbox-cli) - use CLI if you’re new to Node and frontend build tools. With the CLI you integrate Workbox into projects that do not rely on the Node toolchain for their frontend development, like Ruby on Rails.
 
 [Workbox-build](https://developers.google.com/web/tools/workbox/modules/workbox-build) - use workbox-build if you’re familiar with languages like Node or Gulp to generate your service workers.
 
-[Workbox webpack Plugins](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) - If you use webpack in your build pipeline, Workbox provides you with a plugin to generate your service worker:
+[Workbox webpack Plugins](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) - if you use webpack in your build pipeline, Workbox provides you with a plugin to generate your service worker with three class.
 
 | Workbox-webpack-plugin classes  |  Description |
 |---|---|
 |  [generateSW()](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin-GenerateSW) |  Automatically generates most of the service worker, controls precaching and includes customisation options, writes the service worker code to disk |
 |  generateSWString() |  Identical to `generateSW()` but returns as a string Useful if you need to manually change the service worker configuration it writes to disk|
-|  [injectManifest()](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin-InjectManifest)  |   Allows complete control of service worker setup, uses asset precaching. When generating the service worker, an automatically generated list of files replaces the precache placeholder. Recommended if you need low level control over service worker functionality|
+|  [injectManifest()](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin-InjectManifest)  |   Allows complete control of service worker setup, uses asset precaching, when generating the service worker, an automatically generated list of files replaces the precache placeholder, recommended if you need low level control over service worker functionality|
+|getManifest()| Generates the file manifest, but leaves the injection into the service worker to the developer, useful if you need to use the manifest from an existing service worker|
 
 ### Example service worker code
 
-The code example shows how you can include Workbox in your build pipeline and use it to generate a service worker. The example uses `injectManifest()`, allowing more control over the service worker as well as precache functionality.
+The code example shows how to include Workbox in your build pipeline to generate a service worker. The example uses `injectManifest()`, allowing more control over the service worker as well as precache functionality.
 
-You can read the documentation and more examples in the [Workbox Get Started guide](https://developers.google.com/web/tools/workbox/guides/get-started).
+Read the Workbox documentation and see more examples in the [Workbox Get Started guide](https://developers.google.com/web/tools/workbox/guides/get-started).
+
+Service Worker example code:
 
 ```js
 /**
@@ -275,8 +262,7 @@ workbox.skipWaiting();
 // now go via the service worker.
 workbox.clientsClaim();
 ```
-
-The following module is used with Node to generate the service worker based from the previous service worker source code:
+Use the following module with Node.js to generate a service worker based on the Service Worker example code:
 
 ```js
 /**
@@ -317,7 +303,7 @@ module.exports = {
 }
 ```
 
-All HTML files on the domain include the following code, which checks for API support then registers the service worker for use.
+All HTML files on the domain include the following code. The code checks for API support then registers the service worker for use.
 
 ```html
 <body>
