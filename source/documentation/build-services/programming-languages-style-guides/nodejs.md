@@ -34,24 +34,9 @@ Use the [engines](https://docs.npmjs.com/files/package.json#engines) key.
 
 #### Source formatting and linting
 
-> Lint your JavaScript code with [XO]
+> Lint your JavaScript code with [StandardJS]
 
-We use the JavaScript style used by [XO] to make all our codebase use the same
-standard. However we make one exception: we mandate spaces over tabs. Your
-`package.json` file should [reflect this
-exception](https://github.com/alphagov/nodejs-starter/blob/master/package.json#L24). Using
-`--fix` helps with fixing issues automatically.
-
-We’ve encapsulated our recommended process into a separate
-[repository](https://github.com/alphagov/nodejs-starter) where everything is
-controlled by a few lines of config within your `package.json` file. Once you
-have run `npm install`, any time you make a commit, [XO] runs. It will
-then format and lint your code automatically.
-
-There is also a GDS boilerplate repository for Node.js apps. See below.
-
-Most editors can check XO syntax through plugins that in some cases comes pre-installed.
-Check the [editor plugin list](https://github.com/sindresorhus/xo#editor-plugins).
+See the general [JavaScript styleguide for linting guidance](https://github.com/alphagov/styleguides/blob/master/js.md#linting).
 
 #### Project directory structure
 
@@ -425,7 +410,7 @@ versions of Node.js.
 
 #### Starting a new project
 
-We recommend starting any new project with the [GDS Node.JS boilerplate](https://github.com/alphagov/gds-nodejs-boilerplate). It makes it easier to create new serves and follows the advice given here. Is also includes the GOV.UK styles and templates, XO, grunt and snyk.
+We recommend starting any new project with the [GDS Node.JS boilerplate](https://github.com/alphagov/gds-nodejs-boilerplate). It makes it easier to create new serves and follows the advice given here. Is also includes the GOV.UK styles and templates, StandardJS, grunt and snyk.
 
 #### Further reading
 
@@ -445,7 +430,7 @@ This manual is not presumed to be infallible or beyond dispute. If you think som
 
 [github-gds-tech]: https://github.com/alphagov/gds-tech
 [github-gds-tech-readme-making-changes]: https://github.com/alphagov/gds-tech/blob/master/README.md#making-changes
-[XO]: https://github.com/sindresorhus/xo
+[StandardJS]: https://standardjs.com/
 [ESLint]: https://eslint.org/
 [Node.js LTS Schedule]: https://github.com/nodejs/Release
 [#Nodejs]: https://gds.slack.com/messages/nodejs
