@@ -48,7 +48,7 @@ Test environments must resemble your production environment as far as possible s
 
 Consider how to [monitor service performance](https://gds-way.cloudapps.digital/standards/monitoring.html) during the load test. Your service will likely already have dashboards and graphs set up for common metrics such as CPU and memory utilization. Decide if your current metrics are sufficient or if you need to turn on additional logging or configure profiling traces.
 
-Perform practice runs of your tests to make sure they work as expected. For example, you may encounter tooling issues related to [Cross-Site Request Forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) in your test environment.
+Perform practice runs of your tests to make sure they work as expected. You may need to disable  [Cross-Site Request Forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) tokens and rate limiting in your test environment.
 
 ## Run your tests
 
