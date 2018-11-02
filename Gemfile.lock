@@ -53,14 +53,14 @@ GEM
     fast_blank (1.0.0)
     fastimage (2.1.4)
     ffi (1.9.25)
-    govuk_tech_docs (1.6.2)
+    govuk_tech_docs (1.6.3)
       activesupport
       chronic (~> 0.10.2)
       middleman (~> 4.0)
       middleman-autoprefixer (~> 2.7.0)
       middleman-compass (>= 4.0.0)
       middleman-livereload
-      middleman-search
+      middleman-search-gds
       middleman-sprockets (~> 4.0.0)
       middleman-syntax (~> 3.0.0)
       nokogiri
@@ -124,6 +124,10 @@ GEM
       em-websocket (~> 0.5.1)
       middleman-core (>= 3.3)
       rack-livereload (~> 0.3.15)
+    middleman-search-gds (0.11.0a)
+      execjs (~> 2.6)
+      middleman-core (>= 3.2)
+      nokogiri (~> 1.6)
     middleman-sprockets (4.0.0)
       middleman-core (~> 4.0)
       sprockets (>= 3.0)
