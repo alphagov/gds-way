@@ -143,7 +143,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (3.0.3)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-livereload (0.3.17)
       rack
     rb-fsevent (0.10.3)
