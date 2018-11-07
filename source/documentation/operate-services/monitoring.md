@@ -1,17 +1,6 @@
----
-title: Monitor your service
-last_reviewed_on: 2018-03-30
-review_in: 6 months
----
-
 ## Monitor your service
 
-<<<<<<< HEAD:source/documentation/operate-services/monitoring.md
 At GDS, we follow the Service Manual guidance on how to [monitor the status of services][] and set [performance metrics][].
-=======
-
-At GDS, we follow the Service Manual guidance on how to [monitor the status of services][] and set [performance metrics][]. 
->>>>>>> master:source/standards/monitoring.html.md.erb
 
 We recommend using [Pingdom][] to monitor your service’s availability. To further make sure your service is working, you should:
 

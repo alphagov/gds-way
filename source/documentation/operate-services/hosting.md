@@ -1,7 +1,7 @@
 ---
 title: Host a service
-last_reviewed_on: 2018-05-01
-review_in: 6 months
+last_reviewed_on: 2018-11-02
+review_in: 5 months
 ---
 
 ## Host a service
@@ -44,3 +44,9 @@ Less common Amazon Web Services include:
   * [AWS Lambda](https://aws.amazon.com/lambda/)
   * [Amazon Simple Notification Service (SNS)](https://aws.amazon.com/sns/)
   * [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/)
+
+### Future platform
+
+  Reliability Engineering is working on an Alpha project to provide GDS apps with a common infrastructure platform built and operated using [Kubernetes](https://kubernetes.io/). The new platform will operate in parallel with [GOV.UK PaaS](https://www.cloud.service.gov.uk/).
+
+  If you're starting a new project or application contact Reliability Engineering by email using [reliability-engineering@digital.cabinet-office.gov.uk](mailto:reliability-engineering@digital.cabinet-office.gov.uk) or using the [#reliability-eng Slack channel](https://gds.slack.com/messages/CAD6NP598/#) about your needs before standing up new infrastructure.
