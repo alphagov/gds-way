@@ -46,7 +46,7 @@ Gatling is a popular load testing tool used by many teams at GDS including [GOV.
 
 Test environments must resemble your production environment as far as possible so tests are accurate. Isolate test environments to stop them affecting your production environment.
 
-Consider how to [monitor service performance](https://gds-way.cloudapps.digital/standards/monitoring.html) during the load test. Your service will likely already have dashboards and graphs set up for common metrics such as CPU and memory utilization. Decide if your current metrics are sufficient or if you need to turn on additional logging or configure profiling traces.
+Consider how to [monitor service performance](operate-services.html#monitor-your-service) during the load test. Your service will likely already have dashboards and graphs set up for common metrics such as CPU and memory utilization. Decide if your current metrics are sufficient or if you need to turn on additional logging or configure profiling traces.
 
 Perform practice runs of your tests to make sure they work as expected. You may need to disable  [Cross-Site Request Forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) tokens and rate limiting in your test environment.
 

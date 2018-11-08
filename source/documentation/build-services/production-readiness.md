@@ -41,5 +41,5 @@ You must also:
 [Logit]: https://reliability-engineering.cloudapps.digital/logging.html#logging
 [Information Assurance (IA)]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance
 [alerting]: operate-services.html#how-to-manage-alerts
-[documenting architecture decisions]: build-services.html#architecture-decisions
+[documenting architecture decisions]: build-services.html#document-architecture-decisions
 [Service Manual]: https://www.gov.uk/service-manual/technology

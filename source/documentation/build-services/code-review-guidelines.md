@@ -107,7 +107,7 @@ You can find out more about how to review code by reading:
 [programming language style guides]: #programming-language-style-guides
 [The Zen of Python]: https://www.python.org/dev/peps/pep-0020/
 [Travis CI]: https://travis-ci.org/
-[how to manage third party software dependencies here]: https://gds-way.cloudapps.digital/standards/tracking-dependencies.html
+[how to manage third party software dependencies here]: build-services.html#manage-third-party-software-dependencies
 [deploying software]: https://www.gov.uk/service-manual/technology/deploying-software-regularly
 [style guide for working on GOV.UK]: https://github.com/alphagov/styleguides/blob/master/pull-requests.md#reviewing-a-request
 [code authors and reviewers]: https://engineeringblog.yelp.com/2017/11/code-review-guidelines.html

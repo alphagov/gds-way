@@ -10,7 +10,7 @@ Your service should have a system in place to send automated alerts if its monit
 
 ### When to send alerts
 
-Your service should send an alert when your [service monitoring][] detects an issue that:
+Your service should send an alert when your service monitoring detects an issue that:
 
 * affects service users
 * requires action to fix
@@ -61,17 +61,16 @@ For more information refer to the:
 * GDS way for [information about monitoring][]
 * Google SRE handbook to find out more about [site reliability engineering][]
 
-[service monitoring]: #monitoring
 [Google Site Reliability Engineering (SRE)]: https://landing.google.com/sre/book.html
 [PagerDuty]: https://www.pagerduty.com
 [Zendesk]: https://www.zendesk.com
 [Smashing]: https://github.com/Smashing/smashing
 [BlinkenJS]: https://github.com/alphagov/blinkenjs
-[information about monitoring]: https://gds-way.cloudapps.digital/standards/monitoring.html
+[information about monitoring]: operate-services.html#monitor-your-service
 [site reliability engineering]: https://landing.google.com/sre/book/index.html
 [more information on how to write alerts]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
 [include actionable information]: https://response.pagerduty.com/oncall/alerting_principles/#alert-content
 [Prometheus]: https://prometheus.io/
-[how to monitor your service]: https://gds-way.cloudapps.digital/standards/monitoring.html
+[how to monitor your service]: operate-services.html#monitor-your-service
 [Amazon Elastic Container Service (Amazon ECS)]: https://aws.amazon.com/ecs/
 [Kubernetes]: https://kubernetes.io/

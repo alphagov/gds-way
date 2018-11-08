@@ -66,6 +66,8 @@ to iterate on them.
 It may be helpful to set a standardised format for recording SLIs, SLOs and the
 rationale, including the code or pseudocode for measuring them. One example is
 as follows:
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
 > ### Service Name
 > Prometheus
 > ### Service Overview
@@ -80,3 +82,4 @@ as follows:
 > ### Rationale
 > This is an initial attempt at setting SLOs, and the values have been picked
 > based on best judgement.
+<div style="height:1px;font-size:1px;">&nbsp;</div>

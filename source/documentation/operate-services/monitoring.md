@@ -22,5 +22,5 @@ Reliability Engineering is running a beta on using [Prometheus][] as the operati
 [capacity planning]: https://www.gov.uk/service-manual/technology/test-your-services-performance#start-with-capacity-planning
 [Grafana]: http://grafana.org/
 [Prometheus]: https://prometheus.io/
-[recommended hosting]: https://gds-way.cloudapps.digital/standards/hosting.html#content
+[recommended hosting]: operate-services.html#host-a-service
 [reliability engineering docs]: https://reliability-engineering.cloudapps.digital/#metrics

@@ -8,8 +8,8 @@ review_in: 6 months
 
 At GDS, we follow the principles set out in the Service Manual for managing the code, we write by:
 
-- [using version control](https://www.gov.uk/service-manual/technology/maintaining-version-control-in-coding)
-- [making source code open](https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable)
+- maintaining [version control in coding](https://www.gov.uk/service-manual/technology/maintaining-version-control-in-coding)
+- making [source code open and reusable](https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable)
 
 You must keep secret data such as API keys or credentials closed and separate from source code. This information could allow someone to gain access to your system.
 

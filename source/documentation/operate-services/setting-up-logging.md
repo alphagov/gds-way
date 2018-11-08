@@ -7,7 +7,7 @@ review_in: 6 months
 ## Setting up logging
 
 This page contains informative advice for how to manage logs.  See
-the [logging recommendation](../standards/logging.html) for specific
+the [logging recommendation](operate-services.html#store-and-query-logs) for specific
 recommendations.
 
 ### Standard field names

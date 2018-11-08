@@ -79,7 +79,7 @@ Find out more about continuous delivery from:
 [feature-flagging]: https://featureflags.io/2016/10/28/continuous-delivery-coding-patterns-feature-toggles/
 [modular architectures]: https://continuousdelivery.com/implementing/architecture/
 [feature branching]: https://www.martinfowler.com/bliki/FeatureBranch.html
-[production monitoring and alerting]: https://gds-way.cloudapps.digital/standards/monitoring.html
+[production monitoring and alerting]: operate-services.html#monitor-your-service
 [performance metrics for your service]: https://www.gov.uk/service-manual/measuring-success/how-to-set-performance-metrics-for-your-service
 [monitor its status]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
 [Accelerate: The Science of Lean Software and Devops: Building and Scaling High Performing Technology Organizations]: https://medium.com/slashdeploy/book-review-accelerate-92ebc00f4354

@@ -13,7 +13,7 @@ You should define the incident priority levels for your service applications. Po
 * system access problems
 * wider technical failures, with possible reputational impact to GDS
 
-Your [support team][] should assign a [priority level][] to an incident based on its complexity, urgency and how long it could take to fix. The severity of an incident also determines the response time and the level of support required.
+Your [support team][] should assign a priority level to an incident based on its complexity, urgency and how long it could take to fix. The severity of an incident also determines the response time and the level of support required.
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 Incident priority table:
@@ -68,4 +68,3 @@ You can contact the Support Operations team using the [#user-support Slack chann
 [GOV.UK Platform as a Service (PaaS)]: https://status.cloud.service.gov.uk/
 [#user-support Slack channel]: https://gds.slack.com/messages/CADFJBDQU/details/#
 [support team]: #how-to-manage-incidents
-[priority level]: #incident-priority-table

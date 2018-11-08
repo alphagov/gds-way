@@ -102,7 +102,7 @@ of how likely your proposal is of being accepted as a pull request even before y
 [linting]: #linting
 [WikiCyclomatic_complexity]: https://en.wikipedia.org/wiki/Cyclomatic_complexity
 [PyCharm]: https://www.jetbrains.com/pycharm/
-[GPSG]: https://google.github.io/styleguide/pyguide.html
+[GPSG]: build-services.html#programming-language-style-guides
 [PEP8]: https://www.python.org/dev/peps/pep-0008/
 [PEP373]: https://www.python.org/dev/peps/pep-0373/
 [Flake8]: http://flake8.pycqa.org/en/latest/
