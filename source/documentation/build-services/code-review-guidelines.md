@@ -1,3 +1,9 @@
+---
+title: How to review code
+last_reviewed_on: 2018-06-04
+review_in: 6 months
+---
+
 ## How to review code
 
 Comprehensive reviews help to keep code maintainable and reusable, and reveal gaps in documentation. You should use the [GitHub review][] feature with [pull requests (PRs)][] wherever possible.
