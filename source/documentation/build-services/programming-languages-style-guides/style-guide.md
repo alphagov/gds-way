@@ -1,8 +1,5 @@
----
-title: GDS Python Style Guide
----
 
-# <%= current_page.data.title %>
+## GDS Python Style Guide
 
 
 ### Line length <= 120

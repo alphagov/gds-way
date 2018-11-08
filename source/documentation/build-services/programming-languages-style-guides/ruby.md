@@ -1,6 +1,6 @@
 ### Ruby
 
-The GDS Ruby styleguide is enforced using [govuk-lint], a wrapper around
+The GDS Ruby style guide is enforced using [govuk-lint], a wrapper around
 Rubocop. You can find the enabled and disabled rules in the
 [govuk-lint repo][govuk-lint-rules].
 
