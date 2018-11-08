@@ -1,3 +1,9 @@
+---
+title: Licensing
+last_reviewed_on: 2018-11-07
+review_in: 6 months
+---
+
 ## Licensing
 
 ### Guidelines for repositories containing code
