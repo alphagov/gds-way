@@ -1,13 +1,13 @@
 # Add new guidance
 
-Contribute to this repository by making a pull request in [GitHub](https://github.com/alphagov/gds-way) for discussion at the GDS Way Forum. You can also read the service manual to find out about
+Contribute to this repository by making a pull request in [GitHub](https://github.com/alphagov/gds-way) for discussion at the GDS Way Forum and read the service manual to find out about
 [learning about and writing user needs](https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs).
 
 Thank you for your contributions as we develop this repository.
 
 ### Submission template
 
-When you create a new Markdown file follow this pattern and then make a pull request:
+When you create a new Markdown file follow this pattern and make a pull request:
 
 ```markdown
 ---
