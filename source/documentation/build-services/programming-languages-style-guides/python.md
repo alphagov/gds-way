@@ -1,3 +1,9 @@
+---
+title: Writing Python at GDS
+last_reviewed_on: 2018-07-31
+review_in: 6 months
+---
+
 ### Python
 
 This manual is designed to aid developers in writing Python code that is clear and consistent, within, and across projects at GDS.

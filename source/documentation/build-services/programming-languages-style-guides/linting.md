@@ -1,4 +1,12 @@
+---
+title: Linting Python at GDS
+last_reviewed_on: 2018-07-31
+review_in: 6 months
+---
+
 ### Linting Python with Flake8
+
+### Flake8
 
 This manual advises the use of the [Flake8][] all in one lint, codestyle and complexity checker.
 

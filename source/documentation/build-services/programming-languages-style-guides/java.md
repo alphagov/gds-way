@@ -1,3 +1,9 @@
+---
+title: Java style guide
+last_reviewed_on: 2017-07-14
+review_in: 6 months
+---
+
 ### Java
 
 The purpose of this style guide is to provide some conventions for working on Java code within GDS. The old [Sun/Oracle Java style guide](https://www.oracle.com/technetwork/java/index-135089.html) is a useful start.

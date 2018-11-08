@@ -1,12 +1,3 @@
-GIT
-  remote: https://github.com/alphagov/middleman-search
-  revision: 50d072378c6f92a78ea02fed366ec6453aea8552
-  specs:
-    middleman-search (0.10.0)
-      execjs (~> 2.6)
-      middleman-core (>= 3.2)
-      nokogiri (~> 1.6)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -27,7 +18,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    commonmarker (0.17.13)
+    commonmarker (0.18.1)
       ruby-enum (~> 0.5)
     compass (1.0.3)
       chunky_png (~> 1.2)
@@ -53,14 +44,14 @@ GEM
     fast_blank (1.0.0)
     fastimage (2.1.4)
     ffi (1.9.25)
-    govuk_tech_docs (1.6.1)
+    govuk_tech_docs (1.6.3)
       activesupport
       chronic (~> 0.10.2)
       middleman (~> 4.0)
       middleman-autoprefixer (~> 2.7.0)
       middleman-compass (>= 4.0.0)
       middleman-livereload
-      middleman-search
+      middleman-search-gds
       middleman-sprockets (~> 4.0.0)
       middleman-syntax (~> 3.0.0)
       nokogiri
@@ -124,6 +115,10 @@ GEM
       em-websocket (~> 0.5.1)
       middleman-core (>= 3.3)
       rack-livereload (~> 0.3.15)
+    middleman-search-gds (0.11.0a)
+      execjs (~> 2.6)
+      middleman-core (>= 3.2)
+      nokogiri (~> 1.6)
     middleman-sprockets (4.0.0)
       middleman-core (~> 4.0)
       sprockets (>= 3.0)
@@ -148,7 +143,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (3.0.3)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-livereload (0.3.17)
       rack
     rb-fsevent (0.10.3)
@@ -177,7 +172,6 @@ PLATFORMS
 
 DEPENDENCIES
   govuk_tech_docs
-  middleman-search!
   tzinfo-data
   wdm (~> 0.1.0)
 

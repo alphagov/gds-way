@@ -1,3 +1,8 @@
+---
+title: GDS Python Style Guide
+last_reviewed_on: 2017-10-12
+review_in: 6 months
+---
 
 ## GDS Python Style Guide
 
