@@ -37,9 +37,9 @@ the page.
 
 ### Multiple pages
 
-To add a completely new page, create a file with a `.html.md` extension in the `/source` directory.
+To add a completely new page, create a file with a `.html.md.erb` extension in the `/source` directory.
 
-For example, `source/about.html.md` will be accessible on <http://localhost:4567/about.html>.
+For example, `source/about.html.md.erb` will be accessible on <http://localhost:4567/about.html>.
 
 ## Preview
 

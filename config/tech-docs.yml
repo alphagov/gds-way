@@ -1,11 +1,12 @@
 # Host to use for canonical URL generation (without trailing slash)
-host: gds-way.cloudapps.digital/#gds-technical-guidance
+host: https://gds-way.cloudapps.digital
+service_link: /
 
 # Header-related options
 show_govuk_logo: false
 service_name: The GDS Way
-service_link: https://github.com/alphagov/gds-way
-phase: INTERNAL
+# not showing phase banner due to confusion from external folk about private docs being public
+# phase: INTERNAL
 
 # Links to show on right-hand-side of header
 header_links:
@@ -16,7 +17,7 @@ header_links:
 enable_search: true
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
-ga_tracking_id:
+ga_tracking_id: UA-111409592-1
 
 # Enable multipage navigation in the sidebar
 multipage_nav: true
@@ -34,3 +35,7 @@ prevent_indexing: false
 
 show_contribution_banner: true
 github_repo: alphagov/gds-way
+
+# Ownership for page reviews
+default_owner_slack: '#gds-way'
+owner_slack_workspace: gds
