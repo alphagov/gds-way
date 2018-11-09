@@ -14,7 +14,7 @@ last_reviewed_on: yyyy-mm-dd
 review_in: 6 months
 ---
 
-# <%%= current_page.data.title %>
+# Thing you're writing a standard about
 
 Introduction of a couple of paragraphs to explain why the thing you're
 writing a standard about is important.
