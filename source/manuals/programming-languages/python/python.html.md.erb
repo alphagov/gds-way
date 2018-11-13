@@ -14,10 +14,10 @@ projects at GDS.
 
 ## Coding standards
 
-We follow [PEP 8][], in some cases [PEP 8][] doesn't express a view (e.g. on the usage of language
-features such as metaclasses) in these cases we defer to the [Google Python style guide][GPSG].
-We suggest using [PEP 8][] and the [Google Python style guide][GPSG] (in order of preference) as references
-unless something is explicitly mentioned in the [GDS Python Style Guide][GDSPSG].
+We follow [PEP 8][]; where [PEP 8][] doesn't express a view (e.g. on the usage of language
+features such as metaclasses) we defer to the [Google Python style guide][GPSG].
+Use these as references unless
+something is explicitly mentioned in the [GDS Python Style Guide][GDSPSG].
 
 The [GDS Python Style Guide][GDSPSG] is the place for detailing GDS specific rules/exemptions to [PEP&nbsp;8][PEP 8]
 or the [Google Python style guide][GPSG]. An example of which is allowing a line length of 120 instead
@@ -41,7 +41,7 @@ _For more on linting (including standard settings and config) see the [linting][
 
 ## Dependencies
 
-A Python application project typically brings together Python packages from PyPI, and
+A Python application project typically brings together Python packages from PyPI, with
 others written in-house (or otherwise not distributed via PyPI).
 
 There are two ways of specifying dependencies in Python world: as a specific version or
@@ -59,7 +59,7 @@ applies to a collection of scripts that are deployed into the cloud and run auto
 (for example, batch jobs).
 
 A good strategy for specifying your application's Python dependencies has two desirable
-characteristics:
+characteristics - they should be:
 
 1. Reproducible (predictable)
 
