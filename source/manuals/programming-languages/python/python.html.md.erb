@@ -19,7 +19,7 @@ features such as metaclasses) in these cases we defer to the [Google Python styl
 We suggest using [PEP 8][] and the [Google Python style guide][GPSG] (in order of preference) as references
 unless something is explicitly mentioned in the [GDS Python Style Guide][GDSPSG].
 
-The [GDS Python Style Guide][GDSPSG] is the place for detailing GDS specific rules/exemptions to [PEP 8][]
+The [GDS Python Style Guide][GDSPSG] is the place for detailing GDS specific rules/exemptions to [PEP&nbsp;8][PEP 8]
 or the [Google Python style guide][GPSG]. An example of which is allowing a line length of 120 instead
 of 79.
 
@@ -53,34 +53,32 @@ versions at the last responsible moment.
 
 ### Applications
 
-This recommendation applies wherever you need a reproducible set of dependencies, such
-as a complete web application, perhaps with many dependencies and sub-dependencies. It
-would also apply to a collection of scripts that are deployed into the cloud and run
-automatically (for example, batch jobs).
+These recommendation apply wherever you need a reproducible set of dependencies, such
+as a complete web application, perhaps with many dependencies and sub-dependencies. It also
+applies to a collection of scripts that are deployed into the cloud and run automatically
+(for example, batch jobs).
 
 A good strategy for specifying your application's Python dependencies has two desirable
 characteristics:
 
 1. Reproducible (predictable)
 
-    Pin your application's full dependencies – specific versions, rather than
-    ranges – or you'll get unpredictability between your dev
-    environment and other environments. You want a new starter to avoid small
-    hard-to-spot problems. And you want parity between what you test locally,
-    what is tested by CI, and what you deploy, or you risk new issues appearing
-    on a live server. Additionally these things can be hard to diagnose.
+    Pin your application's full dependencies – specific versions, rather than ranges – or you'll
+    get unpredictability between your dev environment and other environments. You want a
+    new starter to avoid small hard-to-spot problems. And you want parity between what you
+    test locally, what is tested by CI, and what you deploy, or you risk new issues appearing on
+    a live server. Additionally these things can be hard to diagnose.
 
 2. Kept up-to-date
 
-    Security issues are found in libraries, so it is important to choose
-    libraries that are maintained and to ensure your team has a strategy to
-    ensure security updates are installed without significant delay. The
-    [How to manage third party software dependencies][gds-way-deps] section gives further
-    context and discusses tools that can help, such as [snyk.io][].
+    Security issues are found in libraries, so it is important to choose libraries that are
+    maintained and to ensure your team has a strategy to ensure security updates are installed
+    without significant delay. The [how to manage third party software dependencies][gds-way-deps] section
+    gives further context and discusses tools that can help, such as [snyk.io][].
 
 Your README should document an easy-to-follow process by which all your Python
-dependencies can be upgraded to get bug fixes and security fixes, without
-introducing breaking changes to your build.
+dependencies can be upgraded to get bug fixes and security fixes, without introducing
+breaking changes to your build.
 
 Put your top-level requirements in a `requirements-app.txt` file.
 
