@@ -14,12 +14,12 @@ projects at GDS.
 
 ## Coding standards
 
-We follow [PEP8][], in some cases [PEP8][] doesn't express a view (e.g. on the usage of language
+We follow [PEP 8][], in some cases [PEP 8][] doesn't express a view (e.g. on the usage of language
 features such as metaclasses) in these cases we defer to the [Google Python style guide][GPSG].
-We suggest using [PEP8][] and the [Google Python style guide][GPSG] (in order of preference) as references
+We suggest using [PEP 8][] and the [Google Python style guide][GPSG] (in order of preference) as references
 unless something is explicitly mentioned in the [GDS Python Style Guide][GDSPSG].
 
-The [GDS Python Style Guide][GDSPSG] is the place for detailing GDS specific rules/exemptions to [PEP8][]
+The [GDS Python Style Guide][GDSPSG] is the place for detailing GDS specific rules/exemptions to [PEP 8][]
 or the [Google Python style guide][GPSG]. An example of which is allowing a line length of 120 instead
 of 79.
 
@@ -34,7 +34,7 @@ _For more on linting (including standard settings and config) see the [linting][
 
 [Flake8][] is the preferred linting tool. It incorporates:
 
-* [PEP-0008][PEP8] inspired style checks using PyCodeStyle
+* [PEP 8][] inspired style checks using PyCodeStyle
 * [Complexity][WikiCyclomatic_complexity] checking using the [McCabe project][McCabe]
 * Lint checks using [PyFlakes][]
 
@@ -120,7 +120,7 @@ can be reasonably expected to work.
   outside the existing range.
 
 > If you have dependencies that aren't available on PyPI (for example, because you've fixed
-> a bug by forking the code), then you can use a [PEP-0440][]
+> a bug by forking the code), then you can use a [PEP 440][]
 > git reference in your `install_requires` list.
 >
 > - This requires pip 18.1, and we haven't tried it much at GDS.
@@ -156,7 +156,7 @@ of how likely your proposal is of being accepted as a pull request even before y
 [linting]: linting.html
 [WikiCyclomatic_complexity]: https://en.wikipedia.org/wiki/Cyclomatic_complexity
 [GPSG]: https://google.github.io/styleguide/pyguide.html
-[PEP8]: https://www.python.org/dev/peps/pep-0008/
+[PEP 8]: https://www.python.org/dev/peps/pep-0008/
 [Flake8]: http://flake8.pycqa.org/en/latest/
 [PyFlakes]: https://github.com/pycqa/pyflakes
 [McCabe]: https://pypi.python.org/pypi/mccabe
@@ -165,4 +165,4 @@ of how likely your proposal is of being accepted as a pull request even before y
 [snyk.io]: https://snyk.io/
 [GDSPSG]: style-guide.html
 [setup-deps]: https://docs.python.org/3/distutils/setupscript.html#relationships-between-distributions-and-packages
-[PEP-0440]: https://www.python.org/dev/peps/pep-0440/#direct-references
+[PEP 440]: https://www.python.org/dev/peps/pep-0440/#direct-references
