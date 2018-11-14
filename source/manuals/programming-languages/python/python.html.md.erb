@@ -80,9 +80,18 @@ Your README should document an easy-to-follow process by which all your Python
 dependencies can be upgraded to get bug fixes and security fixes, without introducing
 breaking changes to your build.
 
+Your pinned dependencies should be fully specified in a file called `requirements.txt`, and checked
+into your version control system (VCS). For projects with only a small number of dependencies, maintaining
+this manually (for example, installing with `pip install`, then using `pip freeze`) may be adequate.
+
+For larger projects, GDS recommends the following approach, which was developed after various issues
+were found in current mainstream tooling (see [this commit message][dm-deps-commit], and note also the
+[lack of support for specifying VCS dependencies](https://github.com/jazzband/pip-tools/issues/355)
+in `pip-compile`).
+
 Put your top-level requirements in a `requirements-app.txt` file.
 
-Use a "freeze" script (as seen in [this Makefile][dm-deps-commit-makefile]) to generate a
+Use a "freeze" script (as seen in [this Makefile][dm-deps-commit-makefile]) to generate the
 fully specified `requirements.txt`, which is used whenever you need to pip-install the
 dependencies.
 
