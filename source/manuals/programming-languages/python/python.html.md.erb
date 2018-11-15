@@ -44,12 +44,37 @@ _For more on linting (including standard settings and config) see the [linting][
 A Python application project typically brings together Python packages from PyPI, with
 others written in-house (or otherwise not distributed via PyPI).
 
+These packages are the applications immediate dependencies. Additionally, any
+package can have its own immediate dependencies, where they draw on other
+packages. From an application's point of view, the dependencies of the packages
+it requires are its sub-dependencies.
+
+The below diagram shows a simplified view of the resulting pyramid of dependencies;
+however it is important to note that the hierarchy can repeat itself infinitely.
+
+```
+                               Application
+
+                                    |
+                              +-----+-----+
+                              |     |     |
+
+                          Immediate dependencies
+
+                              |     |     |
+                        +--+--+--+--+--+--+--+--+
+                        |  |  |  |  |  |  |  |  |
+
+                         ... Sub-dependencies ...
+```
+
 There are two ways of specifying dependencies in Python world: as a specific version or
 as an allowable range.
 
 Different considerations apply to dependency management depending whether you are packaging a library, or creating
-a deployable artifact such as an application or a bundle of scripts: in general, you should only specify specific
-versions at the last responsible moment.
+an end-product such as an application or a bundle of scripts. In general, you should only specify specific versions
+when creating a Python system that sits at the top of the dependency pyramid; otherwise there is a danger of creating
+version conflicts.
 
 ### Applications
 
