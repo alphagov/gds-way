@@ -30,7 +30,9 @@ The IntelliJ "Optimize imports" command helps to sorting them alphabetically and
 
 ## Code checking
 
-Use of [Sonar](https://www.sonarqube.org/) for static analysis of code is encouraged.
+The use of static analysis is encouraged. Static analysis tools for Java include [SonarQube](https://www.sonarqube.org/), [Codacy](https://www.codacy.com/), [FindBugs](http://findbugs.sourceforge.net/) and [CheckStyle](http://checkstyle.sourceforge.net/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
+
+Try to minimise compiler warnings. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why.
 
 ## Build tools / external dependencies
 
