@@ -32,7 +32,19 @@ The IntelliJ "Optimize imports" command helps to sorting them alphabetically and
 
 The use of static analysis is encouraged. Static analysis tools for Java include [SonarQube](https://www.sonarqube.org/), [Codacy](https://www.codacy.com/), [FindBugs](http://findbugs.sourceforge.net/) and [CheckStyle](http://checkstyle.sourceforge.net/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
 
-Try to minimise compiler warnings. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why.
+Try to minimise compiler warnings. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why. For example:
+
+```java
+public void frobulateFoos() {
+    LOGGER.info("Frobulating foos");
+
+    // LibFoo returns a raw list but every element is always a Foo
+    @SuppressWarnings("unchecked")
+    List<Foo> foos = (List<Foo>) fooService.getFoos();
+
+    foos.forEach(foo -> foo.frobulate());
+}
+```
 
 ## Build tools
 
