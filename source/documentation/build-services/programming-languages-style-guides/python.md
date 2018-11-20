@@ -1,6 +1,6 @@
 ---
 title: Writing Python at GDS
-last_reviewed_on: 2018-07-31
+last_reviewed_on: 2018-11-13
 review_in: 6 months
 ---
 
