@@ -1,0 +1,47 @@
+---
+title: Use containers
+last_reviewed_on: 2018-11-21
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+Containers abstract your apps away from the environment where they run. Unlike virtual machines (VM) containers do not need a full operating system (OS) or a virtual copy of the host server’s hardware to operate. For example, cloud services like Amazon Web Services (AWS) support [solutions with Kubernetes][1] and [using Docker][2].
+
+Containers operate with the minimum amount of system resources necessary to perform a set task. When compared to booting an entire OS using a traditional VM, containers:
+
+- are lightweight
+- start quickly
+- use minimal memory
+
+Containers allow your development team to deploy software efficiently and operations teams to manage those apps effectively.
+
+By using the [Infrastructure as code approach][3] you can easily:
+
+- build and maintain consistent environments
+- run your apps anywhere
+- isolate apps from the host server
+- provision and de-provision containers quickly
+
+While containers have clear advantages consider how:
+
+- you manage containers at scale
+- to apply security policies and procedures
+- your app benefits from using containers
+- whether using a VM may be more suitable in some circumstances
+
+The Service Manual has more information about [deciding how to host your service][4].
+
+## Further reading
+
+To find out more read:
+
+- [What is a Container?][5] - Package your code and run it anywhere
+- [Container Solutions][1] - tooling and infrastructure solutions for DevOps practitioners
+- [What is Docker?][2] - Docker lets you build, test, and deploy applications quickly
+
+[1]: https://aws.amazon.com/eks/
+[2]: https://aws.amazon.com/docker/
+[3]: https://www.gov.uk/service-manual/technology/deciding-how-to-host-your-service#choosing-a-hosting-option
+[4]: https://www.gov.uk/service-manual/technology/deciding-how-to-host-your-service
+[5]: https://aws.amazon.com/containers/
