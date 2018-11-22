@@ -1,0 +1,47 @@
+---
+title: Programming language style guides
+last_reviewed_on: 2017-11-20
+review_in: 6 months
+---
+
+## Programming language style guides
+
+This is a manual to accompany the
+[programming language recommendations](#programming-languages).
+
+Developers read code much more often than they write it. These guidelines
+are intended to improve the readability of code and make it consistent
+across GDS projects.
+
+A style guide is about consistency. Consistency with this style guide is
+important. Consistency within a project is more important. Consistency within
+one module or function is most important.
+
+But most importantly: know when to be inconsistent -- sometimes the style guide
+just doesn't apply. When in doubt, use your best judgement. Look at other
+examples and decide what looks best. And don't hesitate to ask!
+
+Some good reasons to ignore a particular guideline:
+
+- When applying the guideline would make the code less readable, even for
+  someone who is used to reading code that follows this style guide.
+- To be consistent with surrounding code that also breaks it (maybe for
+  historic reasons) -- although this is also an opportunity to clean up the
+  existing code.
+- Because the code in question predates the introduction of the guideline and
+  there is no other reason to be modifying that code.
+- When the code needs to remain compatible with older versions that
+  don't support the feature recommended by the style guide.
+
+There are consistent styles for:
+
+- [Ruby](#ruby) using govuk-lint 3.9.0
+- [Python](#python) projects
+- [Java](#java) code conventions and usage at GDS
+- [Node.js](#node-js) guidelines
+
+Some of the guidelines in the style guides are codified in a
+.editorconfig file. Place a copy of this
+file in your project’s repository to have tooling that supports
+[EditorConfig](http://editorconfig.org/) automatically adhere to the
+guidelines.
