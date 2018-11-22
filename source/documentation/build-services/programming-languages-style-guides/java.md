@@ -46,7 +46,7 @@ public void frobulateFoos() {
 }
 ```
 
-## Build tools
+#### Build tools
 
 Either Gradle or Maven should be used as the build tool.
 
