@@ -1,0 +1,35 @@
+---
+title: How to store source code
+last_reviewed_on: 2018-06-30
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+At GDS, we follow the principles set out in the Service Manual for managing the code, we write by:
+
+- [using version control](https://www.gov.uk/service-manual/technology/maintaining-version-control-in-coding)
+- [making source code open](https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable)
+
+You must keep secret data such as API keys or credentials closed and separate from source code. This information could allow someone to gain access to your system.
+
+## Use GitHub
+
+[GDS uses GitHub as its code repository](https://gdstechnology.blog.gov.uk/2016/05/31/how-we-use-git-at-the-government-digital-service/).
+
+Place new repositories for GDS services in the [alphagov](https://github.com/alphagov/) organisation on GitHub.
+
+You can use your personal GitHub account to access alphagov. Ask your tech lead or technical architect to invite you.
+
+To secure your Github repository, make sure you: 
+
+- configure two-factor authentication for your account
+- ensure Git repositories are backed up to another location (this should be a team responsibility) 
+- have considered encrypting your repository contents
+
+
+### How to to retire applications
+
+If an application is no longer used in production, you should [archive](https://help.github.com/articles/archiving-repositories/) its repository.
+
+Update the application’s README to detail why the repository has been archived, and link to a new location if the application has been superseded.
