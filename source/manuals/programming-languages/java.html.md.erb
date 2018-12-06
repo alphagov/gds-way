@@ -1,6 +1,6 @@
 ---
 title: Java style guide
-last_reviewed_on: 2017-07-14
+last_reviewed_on: 2018-11-09
 review_in: 6 months
 ---
 
@@ -16,13 +16,11 @@ We favour consistency across our code, so when considering using a new or differ
 
 Variable and field names should match the class they are instantiating, or have a descriptive name in the context of their use.
 
-Use the default code indenting in IntelliJ.
-
-Ensure line feeds are present at the ends of files.  This can be enabled as an option in IntelliJ: `Settings->Editor->Other->Ensure line feed at file end on save.`
+Use the [GDS Way EditorConfig file](editorconfig), which has settings for things like code indentation. Place a copy of this file named `.editorconfig` in the root of your project to have IntelliJ IDEA and some other editors automatically apply the settings. If your editor does not support EditorConfig, manually configure its settings to match.
 
 ## Dependency injection (DI)
 
-Some programmes use [Guice](https://github.com/google/guice) as a dependency injection framework, however, consider whether use of DI is appropriate for your project.
+Consider whether dependency injection is appropriate for your project before using it. Some programmes use the [Guice](https://github.com/google/guice) dependency injection framework.
 
 ## Imports
 
@@ -32,14 +30,28 @@ The IntelliJ "Optimize imports" command helps to sorting them alphabetically and
 
 ## Code checking
 
-Use of [Sonar](https://www.sonarqube.org/) for static analysis of code is encouraged.
+The use of static analysis is encouraged. Static analysis tools for Java include [SonarQube](https://www.sonarqube.org/), [Codacy](https://www.codacy.com/), [FindBugs](http://findbugs.sourceforge.net/) and [CheckStyle](http://checkstyle.sourceforge.net/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
 
-## Build tools / external dependencies
+Try to minimise compiler warnings. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why. For example:
+
+```java
+public void frobulateFoos() {
+    LOGGER.info("Frobulating foos");
+
+    // LibFoo returns a raw list but every element is always a Foo
+    @SuppressWarnings("unchecked")
+    List<Foo> foos = (List<Foo>) fooService.getFoos();
+
+    foos.forEach(foo -> foo.frobulate());
+}
+```
+
+## Build tools
 
 Either Gradle or Maven should be used as the build tool.
 
-Different programmes have differing requirements about where dependencies should be sourced from.
-
 ## Web frameworks
 
-We use [Dropwizard](http://www.dropwizard.io/) as our web framework of choice, using our own [logging extension](https://github.com/alphagov/dropwizard-logstash/)
+We use [Dropwizard](https://www.dropwizard.io/) as our web framework of choice.
+
+If you are sending logs to a service that requires them in a specific format, you may find our [dropwizard-logstash](https://github.com/alphagov/dropwizard-logstash) logging extension useful.
