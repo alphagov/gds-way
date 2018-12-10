@@ -1,6 +1,6 @@
 ---
 title: How to optimise frontend performance
-last_reviewed_on: 2018-06-06
+last_reviewed_on: 2018-12-07
 review_in: 6 months
 ---
 
@@ -17,12 +17,12 @@ For example:
 |Priority|Example|Action
 |---|---|---|
 |High|Position styles correctly|Set styles at the top and scripts at the bottom of a webpage|
-||Minimise HTTP requests|Minimise tiling icons, CSS and JavaScript files to reduce size and loading time|
+||Minimise HTTP requests|Minimise tiling icons, CSS and JavaScript files to reduce size and loading time [HTTP/1 only]|
 ||Compress static resources|Use [minification][] and [Gzip][] to compress CSS and JavaScript code|
 ||Set correct Headers|Set correct [Cache-Control][] and [ETag][] headers on assets for optimal caching|
 |Medium|Look for empty image `src` attributes|Avoid using empty image `src` attributes as some browsers always send requests to them, resulting in additional traffic|
 ||Minimise DNS lookups|Use fewer third-party domains to reduce the number of DNS lookups per page|
-||Maximise parallelisation|Serve static assets from a different subdomain so browsers can download more assets in parallel|
+||Maximise parallelisation|Serve static assets from a different subdomain so browsers can download more assets in parallel [HTTP/1 only]|
 ||Investigate [lazy loading][]|For pages with many images, only load images in the immediate browser viewport|
 ||Investigate the impact of loading multiple [@font-face][] assets|Investigate @font-face assets when dealing with common issues like [FOUT, FOIT and FOFT][]|
 |Low|Set images and sprites correctly|Set images and sprites horizontally as it’s easier for browsers to parse|
