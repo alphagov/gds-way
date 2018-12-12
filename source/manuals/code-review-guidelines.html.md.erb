@@ -1,12 +1,12 @@
 ---
 title: How to review code
-last_reviewed_on: 2018-06-04
+last_reviewed_on: 2018-12-11
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-Comprehensive reviews help to keep code maintainable and reusable, and reveal gaps in documentation. You should use the [GitHub review][] feature with [pull requests (PRs)][] wherever possible.
+Comprehensive reviews help to keep code maintainable and reusable, and reveal gaps in documentation. Use the [GitHub review][] feature with [pull requests (PRs)][] before merging code. The author is responsible for obtaining a code review, and merging the pull request.
 
 ## Good review practice
 
@@ -36,7 +36,7 @@ You should not:
 
 ## Programming style
 
-Good code should adhere to the principles of its language, for example [The Zen of Python][].
+Good code should adhere to the principles of its language. See [Programming language style guides][] for more information.
 
 You should consider if the code in a PR has:
 
@@ -76,7 +76,6 @@ You should consider if unit tests are enough, or if you need integration tests.
 
 You should consider whether code changes will impact the deployment process, and check that they:
 
-* are self-contained
 * do not adversely affect other applications and systems
 * do not have any potential security issues
 * will deploy properly
@@ -91,28 +90,18 @@ If you want to learn more about writing clearly for technical audiences you can 
 
 ## Further reading
 
-You can find out more about how to review code by reading:
-
-* [pull requests style guide for working on GOV.UK][]
-* [checklists for code authors and reviewers][]
-* [the social aspects of code review][]
-* [phrasing review comments positively][]
-* [collated feedback and data from a developer survey][]
-
-
+Find out more about writing and reviewing pull requests on the [GDS Tech Learning Pathway][].
 
 [GitHub review]: https://help.github.com/articles/about-pull-request-reviews/
 [pull requests (PRs)]: https://help.github.com/articles/about-pull-requests/
 [technical debt]: https://insidegovuk.blog.gov.uk/2018/02/19/classifying-and-measuring-tech-debt-in-gov-uk/
 [programming language style guides]: https://gds-way.cloudapps.digital/manuals/programming-languages.html
-[The Zen of Python]: https://www.python.org/dev/peps/pep-0020/
 [Travis CI]: https://travis-ci.org/
 [open source]: https://gds-way.cloudapps.digital/standards/publish-opensource-code.html
 [how to manage third party software dependencies here]: https://gds-way.cloudapps.digital/standards/tracking-dependencies.html
 [deploying software]: https://www.gov.uk/service-manual/technology/deploying-software-regularly
 [pull requests style guide for working on GOV.UK]: https://github.com/alphagov/styleguides/blob/master/pull-requests.md#reviewing-a-request
-[checklists for code authors and reviewers]: https://engineeringblog.yelp.com/2017/11/code-review-guidelines.html
-[the social aspects of code review]: https://mtlynch.io/human-code-reviews-1/
-[phrasing review comments positively]: https://codeahoy.com/2016/04/03/effective-code-reviews/
-[collated feedback and data from a developer survey]: http://www.bettercode.reviews/
+[GDS Tech Learning Pathway]: https://gds-tech-learning-pathway.cloudapps.digital/resources/other/code-reviews.html#code-reviews
+[Programming language style guides]: https://gds-way.cloudapps.digital/manuals/programming-languages.html
+
 [#ask-technical-writers Slack channel]: https://gds.slack.com/messages/CAD579Y1X/#
