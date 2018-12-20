@@ -25,7 +25,7 @@ Run your workshop with your team including your service’s:
 - delivery manager
 - technical representative(s)
 
-Your first workshop should not last longer than 1 1/2 hours and focus on creating some initial results. Iterate these first SLIs over time and adjust your team’s practices as needed.
+Your first workshop should not last longer than one and half hours and should focus on creating some initial results. Iterate these first SLIs over time and adjust your team’s practices as needed.
 
 Run the workshop as a whiteboard exercise to capture and focus your team’s view on your service. Doing this will generate a discussion about what’s important to your users.
 
@@ -41,37 +41,39 @@ When you run the workshop:
 
 ### 1. Prioritise your most important user journeys
 
-People use your service to achieve specific outcomes, they do this through user journeys. Define your most important user journeys.
+People use your service to complete user journeys to achieve specific outcomes. Define your most important user journeys.
 
-For example, in [Digital MarketPlace](https://www.digitalmarketplace.service.gov.uk/) the most important user journey is where suppliers submit their bids, for [GOV.UK Pay](https://www.payments.service.gov.uk/) it’s completing a payment. Your team will surface many user outcomes so prioritise 2 to 3 items to start with.
+For example, in [Digital MarketPlace](https://www.digitalmarketplace.service.gov.uk/) the most important user journey is where suppliers submit their bids. Your team will surface many user outcomes so prioritise 2 to 3 items to start with.
 
 ### 2. Map your user journeys
 
 Your product manager should lead your team in mapping your service’s user journeys, starting with the most important.
 
 ### 3. Define what good means to users
-Define what would “good” looks like for your service from your users perspective.
 
-For example, if you’re hosting a web service “good” to a user means your web service is “available” and “fast”. If your service provides a type of publishing platform, “good” can mean when they publish the data and if it’s live within a certain time (data freshness).
+Define what “good” looks like for your service from your users perspective.
+
+For example, if you’re hosting a web service, “good” means your web service is “available” and “fast”. If your service provides a type of publishing platform, “good” can mean how fast your service publishes data to live (data freshness).
 
 ### 4. Map out high-level system components
-A technical person in your team, like a developer or site reliability engineer (SRE) should draw a high-level system diagram for your service.
 
-The diagram should show the major system components for each user journey. This could be limited to 2 or 3 components or include multiple system-to-system interactions including 3rd party software providers.
+A technical person in your team, like a developer or site reliability engineer (SRE), should draw a high-level system diagram for your service.
+
+The diagram should show the major system components for each user journey. This could include only 2 or 3 components, or multiple system-to-system interactions including 3rd party software providers.
 
 ### 5. Define your SLIs
 
-Define potential SLIs and identify points in your service where you can measure them, reflecting your definition of what’s good to your users.
+Define potential SLIs and identify points in your service where you can measure them. These SLIs must reflect your user’s definition of good.
 
-Technical members of your team should contribute to where, how and what metrics are collected, these metrics will form your SLIs. Mark out your SLIs over a period of time, for example, a moving hourly window where your SLIs show system performance for the previous hour.
+Technical members of your team should contribute to where, how and what metrics they collect. These metrics will form your SLIs. Mark out your SLIs over a period of time, for example, a moving hourly window where your SLIs show system performance for the previous hour.
 
 ### 6. Create implementation tasks
 
-Your team’s technical lead(s) should break down your SLIs into tasks, for example using Trello, [PrivotalTracker](https://www.pivotaltracker.com/) or [Jira Software](https://www.atlassian.com/software/jira). Some teams create an [Agile epic](https://www.atlassian.com/agile/project-management/epics) to cover every task needed to carry out their SLIs and SLOs.
+Your team’s technical lead(s) seperate down your SLIs into tasks, for example using Trello, [Pivotal Tracker](https://www.pivotaltracker.com/) or [Jira Software](https://www.atlassian.com/software/jira). Some teams create an [Agile epic](https://www.atlassian.com/agile/project-management/epics) to cover every task needed to carry out their SLIs and SLOs.
 
 ### 7. Observe and iterate your SLIs
 
-After creating your SLI observe them over a period of time, for example 1 week. After this time iterate your SLIs to better understand your service’s performance and how they help your team make decisions.
+After creating your SLIs, observe them over a period of time (for example 1 week). After this time, iterate your SLIs to better understand your service’s performance and how the SLIs help your team make decisions.
 
 ## Case study: Reliability Engineering Observe team
 
@@ -88,18 +90,18 @@ The Observe team identified user journeys for their products. Observe users want
 - know how their service is doing - by viewing a dashboard
 - know if their service degrades
 - update an alert
-- be paged (alerted) when users are impacted
+- be paged (alerted) when an issue affects users
 - add new metrics
 - debug live issues
 - receive a ticket when there’s a hazard
 
-The team prioritised the three most important user journeys:
+The team prioritised the 3 most important user journeys:
 
 - know how their service is doing - by viewing a dashboard
-- be paged (alerted) when users are impacted
+- be paged (alerted) when an issue affects users
 - debug live issues
 
-The team developed SLIs for the most important user journey “knowing how their service performs (by viewing a dashboard)”.
+The team developed SLIs for the most important user journey: “Knowing how their service performs (by viewing a dashboard)”.
 
 ### Mapping user journeys
 
@@ -119,7 +121,7 @@ From a user’s perspective “good” in “choose a Grafana dashboard” means
 
 ### Mapping out high-level system components
 
-Observe mapped out the system components to accomplish the user journey “choose a Grafana dashboard”:
+Observe mapped out the system components to complete the user journey “choose a Grafana dashboard”:
 
 1. A user views a Grafana dashboard on their computer.
 1. The computer fetches data from a Grafana server running on [GOV.UK PaaS](https://www.cloud.service.gov.uk/).
@@ -133,14 +135,14 @@ Observe defined the SLI over 1 hour identifying:
 
 - the importance of successful requests
 - latency for the users
-- where these metrics could be collected
+- where the service collects metrics
 
 ### Defining the SLIs
 
 The first sets of SLIs are a percentage of:
 
 - successful ([status code is not 5xx](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_errors)) requests
-- requests that are responded within 2.5s
+- requests that the service responds to within 2.5s
 
 **Choosing a Grafana dashboard points of measurement:**
 
@@ -152,7 +154,7 @@ You could also represent this relationship using a formula:
 
 ### Creating tasks and iterating SLIs
 
-Observe created two related stories using Trello to gather metrics, displaying the SLIs on Grafana dashboards.
+Observe created 2 related stories using Trello to gather metrics, displaying the SLIs on Grafana dashboards.
 
 The Observe team have refined the percentage of successful requests responded within 2.5s to better reflect service status.
 
