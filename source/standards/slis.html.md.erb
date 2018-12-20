@@ -6,14 +6,14 @@ review_in: 6 months
 
 # <%= current_page.data.title %>
 
-Setting SLIs helps your service set realistic objectives and avoid over-committing resources on [Site Reliability Engineering (SRE)](https://landing.google.com/sre/), benefiting your service by:
+Setting SLIs helps you set realistic objectives for your service and avoid over-committing resources on [Site Reliability Engineering (SRE)](https://landing.google.com/sre/). SLIs benefit your service by:
 
 - defining [Service Level Objectives (SLO)](https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#indicators-o8seIAcZ) for your service’s user journeys
 - helping prioritise your work and improve your infrastructure
 - creating metrics to help [classify incidents (P1-P4)](https://gds-way.cloudapps.digital/standards/supporting-services.html)
 - measuring how your system performs in the medium to long term
 
-The SLIs you define must be specific to your service users’ experience, your SLIs should prompt SLOs and inform your Service Level Agreement (SLA).
+The SLIs you define must be specific to your service users’ experience. Your SLIs should prompt your SLOs and inform your Service Level Agreement (SLA).
 
 Read the [Google Site Reliability Engineering (SRE) manual](https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#indicators-o8seIAcZ) for more information about service level terminology.
 
@@ -25,11 +25,11 @@ Run your workshop with your team including your service’s:
 - delivery manager
 - technical representative(s)
 
-Your first workshop should not last longer than 1 1/2 hours and focus on creating some basic results. Iterate these SLIs over time adjusting your team’s practices as needed.
+Your first workshop should not last longer than 1 1/2 hours and focus on creating some imitial results. Iterate these first SLIs over time and adjust your team’s practices as needed.
 
-Run your workshop as a whiteboard exercise to capture and focus your team’s view on your service. Doing this will generate a discussion about what’s important to your users.
+Run the workshop as a whiteboard exercise to capture and focus your team’s view on your service. Doing this will generate a discussion about what’s important to your users.
 
-When running your workshop:
+When you run the workshop:
 
 1. Prioritise your most important user journeys.
 1. Map your user journeys.
@@ -41,9 +41,9 @@ When running your workshop:
 
 ### 1. Prioritise your most important user journeys
 
-People use your service to achieve specific outcomes, they do this through user journeys.
+People use your service to achieve specific outcomes, they do this through user journeys. Define your most important user journeys.
 
-Define your most important user journeys. For example, in [Digital MarketPlace](https://www.digitalmarketplace.service.gov.uk/) the most important user journey is where suppliers submit their bids, for [GOV.UK Pay](https://www.payments.service.gov.uk/) it’s completing a payment. Your team will surface many user outcomes so prioritise 2 to 3 items to start with.
+For example, in [Digital MarketPlace](https://www.digitalmarketplace.service.gov.uk/) the most important user journey is where suppliers submit their bids, for [GOV.UK Pay](https://www.payments.service.gov.uk/) it’s completing a payment. Your team will surface many user outcomes so prioritise 2 to 3 items to start with.
 
 ### 2. Map your user journeys
 
@@ -55,9 +55,9 @@ Define what would “good” looks like for your service from your users perspec
 For example, if you’re hosting a web service “good” to a user means your web service is “available” and “fast”. If your service provides a type of publishing platform, “good” can mean when they publish the data and if it’s live within a certain time (data freshness).
 
 ### 4. Map out high-level system components
-A technical person in your team, like a developer or site reliability engineer (SRE) should draw a high-level system diagram for your service showing the major system components for each user journey.
+A technical person in your team, like a developer or site reliability engineer (SRE) should draw a high-level system diagram for your service.
 
-This could be limited to 2 or 3 components or include multiple system-to-system interactions including 3rd party software providers.
+The diagram should show the major system components for each user journey. This could be limited to 2 or 3 components or include multiple system-to-system interactions including 3rd party software providers.
 
 ### 5. Define your SLIs
 
@@ -71,7 +71,7 @@ Your team’s technical lead(s) should break down your SLIs into tasks, for exam
 
 ### 7. Observe and iterate your SLIs
 
-After creating your SLI observe them over a period of time, for example 1 week. After this time iterate your SLIs to better understand how they help your team make decisions and your service’s performance.
+After creating your SLI observe them over a period of time, for example 1 week. After this time iterate your SLIs to better understand your service’s performance and how they help your team make decisions.
 
 ## Case study: Reliability Engineering Observe team
 
