@@ -1,82 +1,171 @@
 ---
-title: Service Level Indicators
-last_reviewed_on: 2018-09-17
+title: Run a Service Level Indicator (SLI) workshop
+last_reviewed_on: 2018-12-19
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-A **Service Level Indicator**, or SLI, is “A carefully defined quantitative
-measure of some aspect of the level of service that is provided” (*Site Reliability Engineering*,
-[Chapter 4](https://landing.google.com/sre/book/chapters/service-level-objectives.html#indicators-o8seIAcZ)).
-In other words, it is a specific instance of a metric you care about in your
-service.
+Setting SLIs helps you set realistic objectives for your service and avoid over-committing resources on [Site Reliability Engineering (SRE)](https://landing.google.com/sre/). SLIs benefit your service by:
 
-Common examples are measures like:
+- defining [Service Level Objectives (SLO)](https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#indicators-o8seIAcZ) for your service’s user journeys
+- helping prioritise your work and improve your infrastructure
+- creating metrics to help [classify incidents (P1-P4)](https://gds-way.cloudapps.digital/standards/supporting-services.html)
+- measuring how your system performs in the medium to long term
 
-* request latency
-* error rate
-* service availability
+The SLIs you define must be specific to your service users’ experience. Your SLIs should prompt your SLOs and inform your Service Level Agreement (SLA).
 
-A related concept is the **Service Level Objective**. This defines the target
-value for the SLO. For example, using the SLIs above, the SLOs might be:
+Read the [Google Site Reliability Engineering (SRE) manual](https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#indicators-o8seIAcZ) for more information about service level terminology.
 
-* 95% of requests served within .5 second
-* 0.1% error rate
-* 99.99% service availability
+## Run your workshop
 
-Some services may also have a **Service Level Agreement**, which is an official
-contract with the users and often includes consequences if the targets are not
-met.
+Run your workshop with your team including your service’s:
 
-The **error budget** is related to the SLO and represents the amount the service
-is allowed to deviate from 100% performance over a certain time period. For
-example, a service that has a target of 99.9% successful requests, and which
-serves 1 million requests a month, would have an error budget permitting 1000
-errors in that period.
+- product manager
+- delivery manager
+- technical representative(s)
 
-SLIs and SLOs can be a useful way of prioritising what needs to be worked on
-next. Comparing the actual values of the SLIs to the SLOs can determine whether
-action is needed in a particular area and how urgent it is.
+Your first workshop should not last longer than one and half hours and should focus on creating some initial results. Iterate these first SLIs over time and adjust your team’s practices as needed.
 
-## Choosing SLIs for your product
+Run the workshop as a whiteboard exercise to capture and focus your team’s view on your service. Doing this will generate a discussion about what’s important to your users.
 
-It is important to frame the discussion about which SLIs to choose in terms of
-the users. What do the users care about? What promises are you trying to uphold?
-When would users stop using the service because it's not reliable enough?
+When you run the workshop:
 
-Be careful not to choose too many SLIs; the Google SRE book recommends "a
-handful of representative indicators".
+1. [Prioritise your most important user journeys](#1-prioritise-your-most important-user-journeys).
+1. [Map your user journeys](#2-map-your-user-journeys).
+1. [Define what good means to users](#3-define-what-good-means-to-users).
+1. [Map out high-level system components](#4-map-out-high-level-system-components).
+1. [Define your SLIs](#5-define-your-slis).
+1. [Create implementation tasks](#6-create-implementation-tasks).
+1. [Observe and iterate your SLIs](#7-observe-and-iterate-your-slis).
 
-Think about how users interact with the system, and what would need to be
-measured for each indicator. How would you collect the data?
+### 1. Prioritise your most important user journeys
 
-For each SLI, you can then go on to choose the specific value you want to hit
-as the SLO. It is fine to iterate on these values; better to pick a broader
-target which can be tightened than to pick a target which is impossible to
-achieve because it is too strict.
+People use your service to complete user journeys to achieve specific outcomes. Define your most important user journeys.
 
-An SLI can have multiple thresholds. For instance, you might specify that 90% of
-requests are faster than 100 ms, and 99% of requests are faster than 400 ms.
+For example, in [Digital MarketPlace](https://www.digitalmarketplace.service.gov.uk/) the most important user journey is where suppliers submit their bids. Your team will surface many user outcomes so prioritise 2 to 3 items to start with.
 
-Document the rationale behind the chosen values - even if the choice is
-arbitrary to begin with, record that so that the team knows it is acceptable
-to iterate on them.
+### 2. Map your user journeys
 
-It may be helpful to set a standardised format for recording SLIs, SLOs and the
-rationale, including the code or pseudocode for measuring them. One example is
-as follows:
-> ### Service Name
-> Prometheus
-> ### Service Overview
-> Prometheus is the monitoring and alerting system operated by Reliability
-> Engineering. It scrapes metrics from applications, allows viewing of
-> dashboards in Grafana, and sends alerts via PagerDuty.
-> ### SLIs and SLOs
-> Category | SLI | SLO |
-> ----- | --- | --- |
-> **Alerts**<br>Latency | The proportion of pages successfully delivered to PagerDuty, as measured by alertmanager<br>`sum without (instance) (rate(alertmanager_notifications_failed_total{integration="pagerduty"}[5m])) / sum without(instance) (rate(alertmanager_notifications_total{integration="pagerduty"}[5m]))` | 99%
-> Availability | The proportion of uptime as measured by the `up` metric for alertmanager - at least one alertmanager is up.<br>`number of scrapes with at least one alertmanager / total number of scrapes` | 99.99% |
-> ### Rationale
-> This is an initial attempt at setting SLOs, and the values have been picked
-> based on best judgement.
+Your product manager should lead your team in mapping your service’s user journeys, starting with the most important.
+
+### 3. Define what good means to users
+
+Define what “good” looks like for your service from your users perspective.
+
+For example, if you’re hosting a web service, “good” means your web service is “available” and “fast”. If your service provides a type of publishing platform, “good” can mean how fast your service publishes data to live (data freshness).
+
+### 4. Map out high-level system components
+
+A technical person in your team, like a developer or site reliability engineer (SRE), should draw a high-level system diagram for your service.
+
+The diagram should show the major system components for each user journey. This could include only 2 or 3 components, or multiple system-to-system interactions including 3rd party software providers.
+
+### 5. Define your SLIs
+
+Define potential SLIs and identify points in your service where you can measure them. These SLIs must reflect your user’s definition of good.
+
+Technical members of your team should contribute to where, how and what metrics they collect. These metrics will form your SLIs. Mark out your SLIs over a period of time, for example, a moving hourly window where your SLIs show system performance for the previous hour.
+
+### 6. Create implementation tasks
+
+Your team’s technical lead(s) seperate down your SLIs into tasks, for example using Trello, [Pivotal Tracker](https://www.pivotaltracker.com/) or [Jira Software](https://www.atlassian.com/software/jira). Some teams create an [Agile epic](https://www.atlassian.com/agile/project-management/epics) to cover every task needed to carry out their SLIs and SLOs.
+
+### 7. Observe and iterate your SLIs
+
+After creating your SLIs, observe them over a period of time (for example 1 week). After this time, iterate your SLIs to better understand your service’s performance and how the SLIs help your team make decisions.
+
+## Case study: Reliability Engineering Observe team
+
+The Observe team organised a workshop in the form of a whiteboard exercise with their product manager, lead developer and technical architect to identify their first set of SLIs.
+
+**Whiteboard leading to the first set of SLIs:**
+
+![Whiteboard leading to the first set of SLIs](../images/sli-whiteboard.png)
+
+### Prioritising user journeys
+
+The Observe team identified user journeys for their products. Observe users want to:
+
+- know how their service is doing - by viewing a dashboard
+- know if their service degrades
+- update an alert
+- be paged (alerted) when an issue affects users
+- add new metrics
+- debug live issues
+- receive a ticket when there’s a hazard
+
+The team prioritised the 3 most important user journeys:
+
+- know how their service is doing - by viewing a dashboard
+- be paged (alerted) when an issue affects users
+- debug live issues
+
+The team developed SLIs for the most important user journey: “Knowing how their service performs (by viewing a dashboard)”.
+
+### Mapping user journeys
+
+Observe mapped the user journey for “choose a Grafana dashboard”. Users look at a [Grafana dashboard](https://reliability-engineering.cloudapps.digital/monitoring-alerts.html#display-create-and-edit-dashboards-using-grafana) to get a general understanding of system performance and then focus on individual graphs using the time axis to debug live issues.
+
+**User journey for choosing a Grafana dashboard:**
+
+![User journey for choosing a Grafana dashboard](../images/user-journey-for-choosing-a-grafana-dashboard.png)
+
+### Defining what good means
+
+From a user’s perspective “good” in “choose a Grafana dashboard” means the:
+
+- Grafana (web service) is available
+- data shown on the graph are near-real-time (live) and accurate
+- Grafana response is fast enough
+
+### Mapping out high-level system components
+
+Observe mapped out the system components to complete the user journey “choose a Grafana dashboard”:
+
+1. A user views a Grafana dashboard on their computer.
+1. The computer fetches data from a Grafana server running on [GOV.UK PaaS](https://www.cloud.service.gov.uk/).
+1. The Grafana server fetches data from a [Prometheus database](https://prometheus.io).
+
+**Choose a Grafana dashboard high-level system components:**
+
+![Choose a Grafana dashboard high-level system components](../images/choose-a-grafana-dashboard-high-level-system-components.png)
+
+Observe defined the SLI over 1 hour identifying:
+
+- the importance of successful requests
+- latency for the users
+- where the service collects metrics
+
+### Defining the SLIs
+
+The first sets of SLIs are a percentage of:
+
+- successful ([status code is not 5xx](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_errors)) requests
+- requests that the service responds to within 2.5s
+
+**Choosing a Grafana dashboard points of measurement:**
+
+![Choose a Grafana dashboard high-level system components](../images/choosing-a-grafana-dashboard-points-of-measurement.png)
+
+You could also represent this relationship using a formula:
+
+![Grafana dashboard points of measurement graph](../images/dashboard-points-of-measurement.png)
+
+### Creating tasks and iterating SLIs
+
+Observe created 2 related stories using Trello to gather metrics, displaying the SLIs on Grafana dashboards.
+
+The Observe team have refined the percentage of successful requests responded within 2.5s to better reflect service status.
+
+## Contact Reliability Engineering
+
+Contact Reliability Engineering for more information about running an SLI workshop by email using [reliability-engineering-tools-team@digital.cabinet-office.gov.uk](mailto:reliability-engineering-tools-team@digital.cabinet-office.gov.uk) or the [#reliability-eng Slack channel](https://gds.slack.com/messages/CAD6NP598/).
+
+## Further reading
+
+Find out more about SLIs and how to identify and create metrics by reading:
+
+- The [Google Site Reliability Engineering (SRE)](https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#indicators-o8seIAcZ) manual
+- [SRE fundamentals: SLIs, SLAs and SLOs](https://cloud.google.com/blog/products/gcp/sre-fundamentals-slis-slas-and-slos) - Google Cloud Platform blog
+- [The Sysadmin Approach to Service Management](https://landing.google.com/sre/sre-book/chapters/production-environment/) - Site Reliability Engineering by Google
