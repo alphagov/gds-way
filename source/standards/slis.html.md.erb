@@ -69,7 +69,7 @@ Technical members of your team should contribute to where, how and what metrics 
 
 ### 6. Create implementation tasks
 
-Your team’s technical lead(s) seperate down your SLIs into tasks, for example using Trello, [Pivotal Tracker](https://www.pivotaltracker.com/) or [Jira Software](https://www.atlassian.com/software/jira). Some teams create an [Agile epic](https://www.atlassian.com/agile/project-management/epics) to cover every task needed to carry out their SLIs and SLOs.
+Your team’s product or technical lead(s) seperate down your SLIs into tasks, for example using Trello, [Pivotal Tracker](https://www.pivotaltracker.com/) or [Jira Software](https://www.atlassian.com/software/jira). Some teams create an [Agile epic](https://www.atlassian.com/agile/project-management/epics) to cover every task needed to carry out their SLIs and SLOs.
 
 ### 7. Observe and iterate your SLIs
 
@@ -77,7 +77,7 @@ After creating your SLIs, observe them over a period of time (for example 1 week
 
 ## Case study: Reliability Engineering Observe team
 
-The Observe team organised a workshop in the form of a whiteboard exercise with their product manager, lead developer and technical architect to identify their first set of SLIs.
+The Observe team organised a workshop in the form of a whiteboard exercise with their product manager, tech lead and technical architect to identify their first set of SLIs.
 
 **Whiteboard leading to the first set of SLIs:**
 
@@ -105,7 +105,7 @@ The team developed SLIs for the most important user journey: “Knowing how thei
 
 ### Mapping user journeys
 
-Observe mapped the user journey for “choose a Grafana dashboard”. Users look at a [Grafana dashboard](https://reliability-engineering.cloudapps.digital/monitoring-alerts.html#display-create-and-edit-dashboards-using-grafana) to get a general understanding of system performance and then focus on individual graphs using the time axis to debug live issues.
+The team mapped the user journey for “choose a Grafana dashboard”. Users look at a [Grafana dashboard](https://reliability-engineering.cloudapps.digital/monitoring-alerts.html#display-create-and-edit-dashboards-using-grafana) to get a general understanding of system performance and then focus on individual graphs using the time axis to debug live issues.
 
 **User journey for choosing a Grafana dashboard:**
 
@@ -121,7 +121,7 @@ From a user’s perspective “good” in “choose a Grafana dashboard” means
 
 ### Mapping out high-level system components
 
-Observe mapped out the system components to complete the user journey “choose a Grafana dashboard”:
+The team mapped out the system components to complete the user journey “choose a Grafana dashboard”:
 
 1. A user views a Grafana dashboard on their computer.
 1. The computer fetches data from a Grafana server running on [GOV.UK PaaS](https://www.cloud.service.gov.uk/).
@@ -131,11 +131,10 @@ Observe mapped out the system components to complete the user journey “choose 
 
 ![Choose a Grafana dashboard high-level system components](../images/choose-a-grafana-dashboard-high-level-system-components.png)
 
-Observe defined the SLI over 1 hour identifying:
+The team defined the SLI over the last hour the service collected metrics, identifying:
 
 - the importance of successful requests
 - latency for the users
-- where the service collects metrics
 
 ### Defining the SLIs
 
@@ -154,9 +153,9 @@ You could also represent this relationship using a formula:
 
 ### Creating tasks and iterating SLIs
 
-Observe created 2 related stories using Trello to gather metrics, displaying the SLIs on Grafana dashboards.
+The team created 2 related stories using Trello to gather metrics, displaying the SLIs on Grafana dashboards.
 
-The Observe team have refined the percentage of successful requests responded within 2.5s to better reflect service status.
+The team has refined the percentage of successful requests responded within 2.5s to better reflect service status.
 
 ## Contact Reliability Engineering
 
