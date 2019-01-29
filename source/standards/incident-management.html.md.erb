@@ -1,0 +1,109 @@
+---
+title: How to manage technical incidents
+last_reviewed_on: 2018-12-18
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+GDS incident management focuses on restoring normal operations quickly with minimal impact on users.
+
+## Define incident priority
+
+Define incident priority levels for your service’s applications. For example potential incidents include:
+
+- security vulnerabilities
+- data or security breaches
+- system access problems
+- wider technical failures with possible reputational impact to GDS
+
+Assign a priority level to incidents based on their complexity, urgency and resolution time. Incident severity also determines response times and support level.
+
+### Incident priority table
+
+|Classification|Type|Example|Response time|Update frequency|
+|---|---|---|---|---|
+|P1|Critical|Complete outage|20 minutes (office and out of hours)|1 hour|
+|P2|Major|Substantial degradation of service|60 minutes (office and out of hours)|2 hours|
+|P3|Significant|Users experiencing intermittent or degraded service due to platform issue|2 hours (office hours only)|Once after 2 business days|
+|P4|Minor|Component failure that does not immediately impact a service|1 business day (office hours only)|Once after 5 business|
+
+## Develop an incident workflow
+
+Your team must understand what to do during an incident. Develop and document your incident workflow to reflect your service needs and team size.
+
+### Example workflow
+
+Follow a prepared workflow to manage an incident to minimise its impact on your team and service users.
+
+1. [Establish an incident lead](#1-establish-an-incident-lead).
+1. [Inform your team](#2-inform-your-team).
+1. [Prioritise the incident](#3-prioritise-the-incident).
+1. [Form a response team](#4-form-a-response-team).
+1. [Investigate](#5-investigate).
+1. [Communicate to a wider audience](#6-communicate-to-a-wider-audience).
+1. [Resolve the incident](#7-resolve-the-incident).
+
+#### 1. Establish an incident lead
+
+Establish who is your incident lead. Find out who noticed the problem and if anyone else is investigating and fixing it. If that person is you, assume the role of Incident Lead.
+
+#### 2. Inform your team
+
+Inform your team using your chosen tool, like [Slack](https://gds.slack.com). If the incident involves a data or security breach, notify the Cyber Security team. Contact them using the [#cyber-security-help Slack channel](https://gds.slack.com/messages/CCMPJKFDK/) or the [GDS Rotas app](https://rotas.cloudapps.digital/teams/cyber-security).
+
+#### 3. Prioritise the incident
+
+Prioritise the incident and start tracking actions, updates and communications. Teams like [GOV.UK PaaS](https://www.cloud.service.gov.uk/) and [Notify](https://www.notifications.service.gov.uk/) do this by creating a new incident report - copied from the [incident report template](https://docs.google.com/document/d/1WHDh7wzqVsKa2OVeBj2JU7Jm2Xc_iQJO2tm6i0DU1AQ/) - and use it to track updates and progress.
+
+####  4. Form a response team
+
+Form a team with both an incident lead and a communications lead. The communications lead will make sure relevant parties are updated according to the incident priority table.
+
+#### 5. Investigate
+
+Make sure you keep your incident report up to date. If the incident involves a data breach follow your team’s GDPR documentation.
+
+#### 6. Communicate to a wider audience
+
+If the incident is serious (P1 or P2) you’ll need to contact a wider GDS audience and potentially your service users.
+
+Your communications lead must manage:
+
+- external and internal communications
+- incident escalations
+
+**External and internal communications**
+
+Make sure internal and external parties, like Information Assurance (IA) or your service users are fully informed at every stage of your incident management process.
+
+For example, teams including [GOV.UK Platform as a Service (PaaS)](https://status.cloud.service.gov.uk/), [GOV.UK Notify](https://www.notifications.service.gov.uk/) and [GOV.UK Pay](https://www.payments.service.gov.uk/) use the [StatusPage service](https://www.statuspage.io/) to trigger notifications to subscribed users.
+
+**Incident escalations**
+
+Notify escalation contacts of all high priority incidents (P1/P2). Support Operations can help you decide your service’s escalation route and associated contact details.
+
+#### 7. Resolve the incident
+
+Hold an incident review following a [blameless post mortem culture](https://codeascraft.com/2012/05/22/blameless-postmortems/) so your service can improve. If the incident is a P1 or P2, add a row to the central [GDS incidents summary spreadsheet](https://docs.google.com/spreadsheets/d/1TmKiIAUr6EH1XZa5MJquSyHGZnQBjrORUJjs6l4TwHU) linking to your incident report document.
+
+## Example incident management process
+
+Read the GOV.UK PaaS and Digital Marketplace incident management processes:
+
+- GOV.UK PaaS [incident management process]()
+- Digital Marketplace [incident response manual]()
+
+
+## Further reading
+
+Read the [GDS Technical Incident and Management Process](https://docs.google.com/document/d/1VPMc64iCXyVhof9Yu8KyqjLdL_guIQLdOko7mtiP-h4/edit#heading=h.lusoi4mhjuim) document for more information. For example, you can read more about:
+
+- classifying incidents
+- routes to support
+- incident workflows - from request to resolution
+- roles in the Incident Team for P1 and P2
+
+## Contact Support Operations
+
+Contact the Support Operations team using the [#user-support Slack channel](https://gds.slack.com/messages/CADFJBDQU/details/#).
