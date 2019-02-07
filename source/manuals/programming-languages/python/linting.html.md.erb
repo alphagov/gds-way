@@ -14,7 +14,7 @@ This manual advises the use of the [Flake8][] all in one lint, codestyle and com
 
 ### What is Flake8?
 [Flake8][] is a command line utility that acts as a drop in replacement for the [pep8/ pycodestyle][pycodestyle] command line checker.
-It includes [pep8/ pycodestyle][pycodestyle] checks as well as adding [complexity checks][McCabe], and [linting][PyFlakes].
+It includes [pep8/ pycodestyle][pycodestyle] checks as well as adding [complexity checks][McCabe], and [linting][Pyflakes].
 If you're already using the [pep8/ pycodestyle][pycodestyle]checker you're most of the way there. If not then, never fear. You'll find everything
 you need on this page.
 
@@ -45,7 +45,7 @@ The last line of output should read:
 
 `> flake8_test/flake8_test_file.py:1:1: F401 'os' imported but unused`
 
-[PyFlakes][]  catches a linting error:
+[Pyflakes][]  catches a linting error:
 `F401 '<module>' imported but unused`
 
 This is because our file imports the `os` module but never uses it.
@@ -57,7 +57,7 @@ or `F841 local variable <name> is assigned to but never used` can indicate that 
 
 For a full list of error codes check out:
 
-* [PyFlakes error codes list][pyflakes-error-codes]
+* [Pyflakes error codes list][pyflakes-error-codes]
 * [pycodestyle error codes list][pycodestyle-error-codes-list]
 * [Flake8 error codes list][flake8-error-codes-list]
 
@@ -119,7 +119,7 @@ Note: you can also ignore rules on particular lines of code or files by adding a
 * [Digital Marketplace Config][DMAPI-flake8-config]: A production config to base off
 * [Digital Marketplace pinned requirements][DMAPI-requirements-dev]
 * [Flake8 Docs][Flake8]: The docs
-* [PyFlakes error codes list][pyflakes-error-codes]
+* [Pyflakes error codes list][pyflakes-error-codes]
 * [pycodestyle error codes list][pycodestyle-error-codes-list]
 * [Flake8 error codes list][flake8-error-codes-list]
 * [Flake8 plugins list][flake8-plugins]
@@ -134,7 +134,7 @@ Note: you can also ignore rules on particular lines of code or files by adding a
 
 [PyPI]: https://pypi.python.org/pypi
 [Flake8]: http://flake8.pycqa.org/en/latest/
-[PyFlakes]: https://github.com/pycqa/pyflakes
+[Pyflakes]: https://github.com/pycqa/pyflakes
 [McCabe]: https://pypi.python.org/pypi/mccabe
 [pycodestyle]: http://pep8.readthedocs.io
 [virtualenv]: https://virtualenv.pypa.io/en/stable/
