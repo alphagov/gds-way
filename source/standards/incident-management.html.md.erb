@@ -26,10 +26,10 @@ Assign a priority level to incidents based on their complexity, urgency and reso
 
 |Classification|Type|Example|Response time|Update frequency|
 |---|---|---|---|---|
-|P1|Critical|Complete outage|20 minutes (office and out of hours)|1 hour|
+|P1|Critical|Complete outage, or ongoing unauthorised access|20 minutes (office and out of hours)|1 hour|
 |P2|Major|Substantial degradation of service|60 minutes (office and out of hours)|2 hours|
 |P3|Significant|Users experiencing intermittent or degraded service due to platform issue|2 hours (office hours only)|Once after 2 business days|
-|P4|Minor|Component failure that does not immediately impact a service|1 business day (office hours only)|Once after 5 business|
+|P4|Minor|Component failure that does not immediately impact a service, or an unsuccessful DoS attempt|1 business day (office hours only)|Once after 5 business|
 
 ## Develop an incident workflow
 
@@ -37,7 +37,7 @@ Your team must understand what to do during an incident. Develop and document yo
 
 ### Example workflow
 
-Follow a prepared workflow to manage an incident to minimise its impact on your team and service users.
+Follow a prepared workflow to manage an incident to minimise its impact on your team and service users. Ensure that every step of the way is documented in writing using the [incident report template](https://docs.google.com/document/d/1WHDh7wzqVsKa2OVeBj2JU7Jm2Xc_iQJO2tm6i0DU1AQ/edit). 
 
 1. [Establish an incident lead](#1-establish-an-incident-lead).
 1. [Inform your team](#2-inform-your-team).
@@ -52,17 +52,17 @@ Follow a prepared workflow to manage an incident to minimise its impact on your 
 
 #### 1. Establish an incident lead
 
-Establish who is your incident lead. Find out who noticed the problem and if anyone else is investigating and fixing it. If that person is you, assume the role of Incident Lead.
+Establish who your incident lead is. Find out who noticed the problem and if anyone else is investigating and fixing it. If that person is you, assume the role of incident lead.
 
 #### 2. Inform your team
 
-Inform your team using your chosen tool, like [Slack](https://gds.slack.com). If the incident involves a data or security breach, notify the Cyber Security team. Contact them using the [#cyber-security-help Slack channel](https://gds.slack.com/messages/CCMPJKFDK/) or the [GDS Rotas app](https://rotas.cloudapps.digital/teams/cyber-security).
+Inform your team using your chosen tool, like [Slack](https://gds.slack.com). If the incident involves a data or security breach, notify the Cyber Security team who’ll help you manage the incident. Contact them using the [#cyber-security-help Slack channel](https://gds.slack.com/messages/CCMPJKFDK/) or the [GDS Rotas app](https://rotas.cloudapps.digital/teams/cyber-security).
 
 #### 3. Prioritise the incident
 
 Prioritise the incident and start tracking actions, updates and communications. Teams like [GOV.UK PaaS](https://www.cloud.service.gov.uk/) and [Notify](https://www.notifications.service.gov.uk/) do this by creating a new incident report - copied from the [incident report template](https://docs.google.com/document/d/1WHDh7wzqVsKa2OVeBj2JU7Jm2Xc_iQJO2tm6i0DU1AQ/) - and use it to track updates and progress.
 
-####  4. Form a response team
+####  4. Form an Incident Response team
 
 Form a team with both an incident lead and a communications lead. The communications lead will make sure relevant parties are updated according to the incident priority table.
 
@@ -121,6 +121,7 @@ Your communications lead must manage:
 - external and internal communications
 - incident escalations
 
+
 **External and internal communications**
 
 Make sure internal and external parties, like Information Assurance (IA) or your service users are fully informed at every stage of your incident management process.
@@ -141,13 +142,12 @@ Depending on the incident, the NCSC may be able to provide technical support.
 
 Hold an incident and lesson learned review following a [blameless post mortem culture](https://codeascraft.com/2012/05/22/blameless-postmortems/) so your service can improve. Add a row to the central [GDS incidents summary spreadsheet](https://docs.google.com/spreadsheets/d/1TmKiIAUr6EH1XZa5MJquSyHGZnQBjrORUJjs6l4TwHU) linking to your incident report document.
 
-## Example incident management process
+## Example incident management
 
 Read the GOV.UK PaaS and Digital Marketplace incident management processes:
 
-- GOV.UK PaaS [incident management process]()
-- Digital Marketplace [incident response manual]()
-
+- GOV.UK PaaS [incident management process](https://gds-way.cloudapps.digital/standards/incident-management.html#)
+- Digital Marketplace [incident response manual](https://gds-way.cloudapps.digital/standards/incident-management.html#)
 
 ## Further reading
 
