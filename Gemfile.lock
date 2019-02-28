@@ -6,7 +6,7 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.5.2)
+    addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     autoprefixer-rails (6.7.7.2)
       execjs
@@ -44,7 +44,7 @@ GEM
     fast_blank (1.0.0)
     fastimage (2.1.5)
     ffi (1.9.25)
-    govuk_tech_docs (1.7.0)
+    govuk_tech_docs (1.8.0)
       activesupport
       chronic (~> 0.10.2)
       middleman (~> 4.0)
