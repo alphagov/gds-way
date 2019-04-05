@@ -80,6 +80,10 @@ bundle exec middleman build
 This will create a `build` subfolder in the application folder which contains
 the HTML and asset files ready to be published.
 
+## Deploy
+
+Continuously deployed from master by the [multi-tenant Concourse](https://cd.gds-reliabilty.engineering) via the [internal-apps pipeline in the tech-ops repo](https://github.com/alphagov/tech-ops/blob/master/reliability-engineering/pipelines/internal-apps.yml).
+
 ## Licence
 
 Unless stated otherwise, the codebase is released under [the MIT License][mit].

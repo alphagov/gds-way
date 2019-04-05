@@ -2,14 +2,3 @@ language: ruby
 cache: bundler
 bundler_args: "--without development"
 script: bundle exec middleman build
-deploy:
-  provider: cloudfoundry
-  api: https://api.cloud.service.gov.uk
-  username: philip.potter+tech-docs-deployer@digital.cabinet-office.gov.uk
-  password:
-    secure: pp/+KIFBMzfTXXV2e5BkkbhQWdYB6e0gCgflc2QOnOvtHouByKswwVxgV6jYMAl6Nm+TebKQhCGXDihiQvw70uMQEY6N9lYRQLMe3DxXZxnZkGi38r/l1tYqvZWvb9m3ojVRu3neOQ1zwbkjwrGkF01n+2io1BTXAYXOacJ6UDk6BCdaUszEQe4gg5k8LGK5JgajI+Qsr9YfA9QGhv1ZQ15pTMUzk4pqZlbWJoOIAB8gDrX9gqoapPHeQWvr0I22qUdQhoMagLjdNS+AmGrrcJ0zyEtap3VHDj3cDnY/QiqBqXn0RZBYCHNy1wyZwfBCA/ujmcn/HdQqq5Kh7hO+wO6/tkJh1sko9/oqNh7FLbOeT5aRCcI/VoysWZZano5cFyARqI4JH9GAqmmZ3cCAkZCe0it+zjVC3o22omZ7OG0N5A08IyzwMPaY71zMH37OQULuZww0gmZ3YlKOieAnYALXElOdcs+Gv0YxA64zQe/Sub4bAI0pIb+62P05t2eyvthzkXCh22Az/EajKpHYhkGYC3xe0SkXls8KRBTLWauS0X5h02EkxE9Pgr1H0k0gqWMBZLcIPDjPv8MoiK7Ea7sH5Hj5PUMWehCMrb/O6fFv2SEAPZqJaVf8TPePqHiUtXXY28d8O4P+Yd3J+cwzlAp0thkhK7mScAEaVc0Ottw=
-  organization: gds-tech-ops
-  space: docs
-  on:
-    repo: alphagov/gds-way
-    branch: master
