@@ -1,6 +1,6 @@
 ---
 title: How to store and query logs
-last_reviewed_on: 2018-10-03
+last_reviewed_on: 2019-04-15
 review_in: 6 months
 ---
 
@@ -25,7 +25,7 @@ You should not need to store logs spanning long periods in your short-term query
 
 When storing logs, you should focus on long-term durability for compliance reasons or to identify long-term performance trends.
 
-You should be aware that ELK is not appropriate for long-term storage. There are other services which are less expensive and more reliable, for example if you use [Amazon Web Services (AWS)][] you could use [Amazon CloudWatch][] to run basic queries on older logs which may be a suitable solution.
+ELK is not appropriate for long-term storage. There are other services which are less expensive and more reliable, for example if you use [Amazon Web Services (AWS)][] you could use [Amazon CloudWatch][] to run basic queries on older logs which may be a suitable solution.
 
 ### Log shipping
 
@@ -37,7 +37,7 @@ If you have set up log shipping, you should consider:
 
 You could have one process to ship logs to your long-term archive, and a second process to fill a short-term query tool from the long-term archive, for example you could combine [Elasticsearch and Amazon Cloudwatch][]. This way you can be confident everything is safely stored.
 
-The Beats tools can detect periods of service unavailability. The Beats tools recall how much data is sent to your store and will resume sending data, where they left off, when your service comes back online. By using a protocol which is backpressure-aware Beats tools also won’t overload [Logstash][] with data.
+The Beats tools can detect periods of service unavailability. The Beats tools recall how much data is sent to your store and will resume sending data, where they left off, when your service comes back online. By using a protocol which is backpressure-aware Beats tools also will not overload [Logstash][] with data.
 
 
 [Logit]: https://logit.io/
