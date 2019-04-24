@@ -1,6 +1,6 @@
 ---
 title: How to manage third party software dependencies
-last_reviewed_on: 2018-10-10
+last_reviewed_on: 2019-04-23
 review_in: 6 months
 ---
 
@@ -14,27 +14,65 @@ You can read more about [managing software dependencies in the Service Manual][]
 
 Our [programming language style guides][] also contain language-specific advice about managing dependencies (for example, [managing Python dependencies][]).
 
+## Update dependencies frequently
+
+Update your dependencies frequently rather than in ‘big bang’ batches. This works well with [continuous delivery][] principles, ensuring the changes introduced are small and can be automatically tested. 
+
+Tools exist that will scan GitHub repositories and raise PRs when dependency updates are found. Teams at GDS are using:
+
+* [Dependabot][] - used by GOV.UK, GOV.UK Pay and GovWifi. The GOV.UK team manual contains [guidance on using dependabot][] and [how the PRs raised should be reviewed][]
+* [PyUp][] - a Python dependency checker. Used by Digital Marketplace and GOV.UK Notify, PyUp will monitor for updates and vulnerabilities
+* [Greenkeeper][] - a npm dependency checker used by the GOV.UK Verify team on the [Node.js client for the Verify Service Provider][]
+
+All the above tools are free to use on public repositories.
+
+### Docker base images
+
+Like dependencies, Docker base images are also frequently updated. If you run containers as part of your service, you should regularly rebuild your images (and base images) to include the latest updates. Automate this process where possible.
+
 ## Monitoring for vulnerabilities
 
-### Ruby - GOV.UK Gem Security Checker
+You should monitor for potential vulnerabilities in every layer of your technology stack. This is not straightforward but tooling exists to help. The Service Manual provides [guidance on browser technology, tooling and mailing lists you can subscribe to][].
 
-You should use the [GOV.UK Gem Security Checker][] alongside your regular code checks. This will help your team move any code vulnerabilities into the team’s work backlog. You can then:
+Most of the tooling that helps you stay on top of dependency updates will also highlight vulnerabilities. Additional tooling includes:
 
-* prioritise fixes relative to other project work
-* address vulnerabilities in private before making the fix public
+* [GitHub security alerts][] - This can be configured per repository in the settings tab of the GitHub UI. When GitHub discovers or is informed about a vulnerability, it will email an alert to the repository owner and users with admin access
+* [Snyk][] - Snyk is capable of detecting vulnerabilities in a variety of languages including all the [GDS supported programming languages][]. Snyk can be configured to raise PRs, email regular reports and alert you when new vulnerabilities are detected
 
-### Snyk
+### Docker images
 
-[Snyk][] is a dependency management tool which can [monitor code dependencies][] for security vulnerabilities. Using Snyk allows you to automatically check GitHub pull requests (PRs) for vulnerable dependencies and potentially create a pull request to fix them. It also supports the other languages that GDS uses, including Python, Java and JavaScript.
+Always use [official base images][]. Docker Hub regularly scans official images and the results can be viewed by logging into Docker Hub. If you do not regularly update your base image, you must ensure a manual process exists to monitor and prioritise fixes for vulnerabilities detected.
 
-> The GDS Way does not mandate the use of Snyk: please contribute any experience you have of other dependency management tools to this document.
+The Digital Marketplace team uses [Snyk container vulnerability management tooling][] to regularly scan base images.
 
-Snyk is being used successfully in the Digital Marketplace and GOV.UK Pay programmes. The Digital Marketplace uses Snyk as a pre-merge check on all pull requests for its public repositories. The developers also review the weekly report for new vulnerabilities, applying fixes manually instead of using Snyk's automatic pull request feature. The reports can be configured to ignore vulnerabilities that have no fix.
+## Minimising what you need to monitor
+
+Minimise the things you need to monitor by minimising dependencies where practically possible. For example, if running containers, make sure you pick the smallest base images. 
+
+Also consider managed solutions where possible. For example:
+
+* Use [GOV.UK PaaS buildpacks][] so you do not have to monitor for Operating System (OS), runtime or programming language vulnerabilities
+* Consider managed container orchestration technology such as [AWS Fargate][] or similar so you do not have to monitor for vulnerabilities in your OS or control plane
+
+This guidance is inline with the GDS Reliability Engineering strategic principle of [use fully managed cloud services by default][].
 
 [GDS supported programming languages]: /standards/programming-languages.html#content
 [managing software dependencies in the Service Manual]: https://www.gov.uk/service-manual/technology/managing-software-dependencies
 [programming language style guides]: /manuals/programming-languages.html
 [managing Python dependencies]: /manuals/programming-languages/python/python.html#dependencies
-[GOV.UK Gem Security Checker]: https://github.com/alphagov/govuk_security_audit
 [Snyk]: https://snyk.io/
 [monitor code dependencies]: https://snyk.io/features
+[continuous delivery]: https://gds-way.cloudapps.digital/standards/continuous-delivery.html
+[Dependabot]: https://dependabot.com/
+[guidance on using Dependabot]: https://docs.publishing.service.gov.uk/manual/manage-ruby-dependencies.html
+[how the PRs raised should be reviewed]: https://docs.publishing.service.gov.uk/manual/merge-pr.html#dependabot
+[PyUp]: https://pyup.io/
+[Greenkeeper]: https://greenkeeper.io/
+[Node.js client for the Verify Service Provider]: https://github.com/alphagov/passport-verify
+[guidance on browser technology, tooling and mailing lists you can subscribe to]: https://www.gov.uk/service-manual/technology/managing-software-dependencies#managing-risks-in-third-party-code
+[GitHub security alerts]: https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies
+[official base images]: https://docs.docker.com/docker-hub/official_images/
+[Snyk container vulnerability management tooling]: https://snyk.io/features/container-vulnerability-management/
+[GOV.UK PaaS buildpacks]: https://docs.cloud.service.gov.uk/guidance.html#responsibility-model
+[AWS Fargate]: https://aws.amazon.com/fargate/
+[use fully managed cloud services by default]: https://reliability-engineering.cloudapps.digital/documentation/strategy-and-principles/re-principles.html#3-use-fully-managed-cloud-services-by-default
