@@ -73,3 +73,11 @@ We use [Dropwizard](https://www.dropwizard.io/) as our web framework of choice.
 Dropwizard has built-in support for validating requests with Hibernate Validator. Use [Dropwizard’s validation](https://www.dropwizard.io/1.3.9/docs/manual/validation.html) in preference to rolling your own except in cases where Dropwizard’s built-in functionality cannot meet your validation requirements.
 
 If you are sending logs to a service that requires them in a specific format, you may find our [dropwizard-logstash](https://github.com/alphagov/dropwizard-logstash) logging extension useful.
+
+## JDK
+
+The [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html) is no longer free for production use. OpenJDK remains free to use (under the GPLv2 with the Classpath Exception) but Oracle only provide general-availability [OpenJDK builds](http://jdk.java.net/) for the latest release.
+
+The [AdoptOpenJDK](https://adoptopenjdk.net/) project (backed by big names including IBM and Microsoft) provides fully open-source pre-built OpenJDK binaries. For LTS releases (such as Java 8 and Java 11), AdoptOpenJDK have committed to releasing free updates for several years.
+
+In addition, AdoptOpenJDK has niceties such as being available in package repositories, having friendly installers for desktop use, and offering ready-made [Docker images containing OpenJDK](https://hub.docker.com/u/adoptopenjdk).
