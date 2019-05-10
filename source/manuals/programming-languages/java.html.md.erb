@@ -38,6 +38,12 @@ Be mindful that improvements to the Java standard library mean that some externa
 
 When using external libraries, favour those that play nicely with the Java standard library. For example, be wary of any library that introduces a new type that replicates the functionality of an existing type in the Java standard library without implementing the same interfaces (e.g. a list type that does not implement `java.util.List`).
 
+## Testing
+
+Use JUnit for unit tests (it can also be used for many integration tests). For new projects, use the latest [JUnit 5](https://junit.org/junit5/). It’s probably not worth migrating existing projects from [JUnit 4](https://junit.org/junit4/) to JUnit 5 while JUnit 4 is still supported.
+
+Use [Mockito](https://site.mockito.org/) for mocking. 
+
 ## Code checking
 
 The use of static analysis is encouraged. Static analysis tools for Java include [SonarQube](https://www.sonarqube.org/), [Codacy](https://www.codacy.com/), [FindBugs](http://findbugs.sourceforge.net/) and [CheckStyle](http://checkstyle.sourceforge.net/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
