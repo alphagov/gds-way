@@ -1,6 +1,6 @@
 ---
 title: Go style guide
-last_reviewed_on: 2016-11-18
+last_reviewed_on: 2019-05-15
 review_in: 6 months
 ---
 
@@ -23,17 +23,9 @@ You may also want to use [`golint`](https://github.com/golang/lint) which assess
 
 If you are writing concurrent code, use the [race detector](https://blog.golang.org/race-detector) to detect race conditions.
 
-## External dependencies
+## Dependency management
 
-There is no centrally-mandated dependency manager for Go, which means a few techniques have sprung up. These include:
-
-* tools like [godep](https://github.com/tools/godep) and [gom](https://github.com/mattn/gom), which ensure local copies of a dependency are checked out to a specific version
-* vendoring (ie copying source code in some manner to a location you control)
-* [gopkg.in](http://labix.org/gopkg.in), which provides a method of using versioned import paths
-
-We are currently evaluating `godep` and `gom` as tools for managing dependencies. While godep is probably more widely used,
-gom offers some conveniences for modifying `$GOPATH`, which is useful for isolating jenkins builds. If you are using a different
-CI process, godep may be sufficient for your needs.
+Go version 1.11 comes with built-in [modules](https://github.com/golang/go/wiki/Modules) system, which should be used where possible to keep the familiarity between different projects.
 
 ## Web frameworks
 
