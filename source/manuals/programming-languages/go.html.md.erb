@@ -1,6 +1,6 @@
 ---
 title: Go style guide
-last_reviewed_on: 2016-11-18
+last_reviewed_on: 2019-05-16
 review_in: 6 months
 ---
 
@@ -25,15 +25,20 @@ If you are writing concurrent code, use the [race detector](https://blog.golang.
 
 ## External dependencies
 
-There is no centrally-mandated dependency manager for Go, which means a few techniques have sprung up. These include:
+As of Go 1.11 there is an officially developed module system, which is finalized in Go 1.13: `go mod`.
 
-* tools like [godep](https://github.com/tools/godep) and [gom](https://github.com/mattn/gom), which ensure local copies of a dependency are checked out to a specific version
-* vendoring (ie copying source code in some manner to a location you control)
+A historical pain point of development in Go was the manipulation of `$GOPATH` which is no longer required when using `go mod`.
+
+There are several Go depency management tools in use at GDS, other than `go mod`:
+
+- [godep](https://github.com/tools/godep) (still in development)
+- [glide](https://github.com/Masterminds/glide) (no longer in development)
 * [gopkg.in](http://labix.org/gopkg.in), which provides a method of using versioned import paths
+* vendoring (ie copying source code in some manner to a location you control)
 
-We are currently evaluating `godep` and `gom` as tools for managing dependencies. While godep is probably more widely used,
-gom offers some conveniences for modifying `$GOPATH`, which is useful for isolating jenkins builds. If you are using a different
-CI process, godep may be sufficient for your needs.
+All new projects should use the officially developed `go mod` unless they have specific requirements not met by `go mod`
+
+Vendoring is still good practice in Go, as we cannot rely on open-source packages to be highly available, or permanent.
 
 ## Web frameworks
 
@@ -42,6 +47,8 @@ While it's difficult to provide any guidance that will be generally applicable, 
 The first is that Go's standard library is modern and powerful. If you just need simple HTTP routing and handling, the [`net/http` package will probably meet your needs](https://golang.org/doc/articles/wiki/).
 
 The second is that if `net/http` falls short, it's worth choosing something that integrates well with it. The [`gorilla`](http://www.gorillatoolkit.org/) toolkit provides some excellent additions to `net/http`.
+
+The third is that Go is not a language we use at GDS for developing fully-fledged web applications, eg rendering HTML. If you find yourself rendering HTML using Go, consider using a different GDS supported language.
 
 ## Channels
 
@@ -53,7 +60,7 @@ empty struct rather than boolean or int types.
 Using an empty struct declares that we're not interested in the value
 sent or received; only in its closed property.
 
-See http://talks.golang.org/2012/10things.slide#11
+See [this talk](http://talks.golang.org/2012/10things.slide#11)
 
 ```go
 func worker(quit <-chan struct{}, result chan<- int) {
@@ -81,3 +88,50 @@ func main() {
   fmt.Println("All done!")
 }
 ```
+
+## Testing
+
+There is some use across GDS of [gomega](https://onsi.github.io/gomega/) for matching, and [ginkgo](https://onsi.github.io/ginkgo/) for BDD testing.
+
+If you find yourself writing too much boilerplate when testing Go, consider reaching for these libraries.
+
+Gomega can help make your tests more readable:
+
+```
+err := doAThing() // this should fail
+Expect(err).Should(HaveOccurred())
+```
+
+And Ginkgo can help set up a test suite:
+
+```
+var _ = Describe("Something", func() {
+  It("should do a thing", func() {
+
+    Expect("hi").To(HaveLen(2))
+
+  })
+})
+```
+
+which can be run with:
+
+```
+ginkgo
+```
+
+Tests can be focused (using regular expressions), to speed up development:
+
+```
+ginkgo -focus 'a thing'
+```
+
+## Configuration parsing
+
+There are a number of tools in use at GDS for parsing configuration and arguments:
+
+- [alecthomas/kingpin](https://github.com/alecthomas/kingpin) for parsing simple command line arguments and environment variables
+- [urfave/cli](https://github.com/urfave/cli) for building more advanced CLI tools
+- [spf13/viper](https://github.com/spf13/viper) for parsing configuration files
+
+These tools can make it easier to accept configuration parameters and help to make your application self-documenting.
