@@ -25,15 +25,20 @@ If you are writing concurrent code, use the [race detector](https://blog.golang.
 
 ## External dependencies
 
-There is no centrally-mandated dependency manager for Go, which means a few techniques have sprung up. These include:
+As of Go 1.11 there is an officially developed module system, which is finalized in Go 1.13: `go mod`.
 
-* tools like [godep](https://github.com/tools/godep) and [gom](https://github.com/mattn/gom), which ensure local copies of a dependency are checked out to a specific version
-* vendoring (ie copying source code in some manner to a location you control)
+A historical pain point of development in Go was the manipulation of `$GOPATH` which is no longer required when using `go mod`.
+
+There are several Go depency management tools in use at GDS, other than `go mod`:
+
+- [godep](https://github.com/tools/godep) (still in development)
+- [glide](https://github.com/Masterminds/glide) (no longer in development)
 * [gopkg.in](http://labix.org/gopkg.in), which provides a method of using versioned import paths
+* vendoring (ie copying source code in some manner to a location you control)
 
-We are currently evaluating `godep` and `gom` as tools for managing dependencies. While godep is probably more widely used,
-gom offers some conveniences for modifying `$GOPATH`, which is useful for isolating jenkins builds. If you are using a different
-CI process, godep may be sufficient for your needs.
+All new projects should use the officially developed `go mod` unless they have specific requirements not met by `go mod`
+
+Vendoring is still good practice in Go, as we cannot rely on open-source packages to be highly available, or permanent.
 
 ## Web frameworks
 
