@@ -60,7 +60,7 @@ empty struct rather than boolean or int types.
 Using an empty struct declares that we're not interested in the value
 sent or received; only in its closed property.
 
-See http://talks.golang.org/2012/10things.slide#11
+See [this talk](http://talks.golang.org/2012/10things.slide#11)
 
 ```go
 func worker(quit <-chan struct{}, result chan<- int) {
