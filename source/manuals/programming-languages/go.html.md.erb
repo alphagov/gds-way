@@ -125,3 +125,13 @@ Tests can be focused (using regular expressions), to speed up development:
 ```
 ginkgo -focus 'a thing'
 ```
+
+## Configuration parsing
+
+There are a number of tools in use at GDS for parsing configuration and arguments:
+
+- [alecthomas/kingpin](https://github.com/alecthomas/kingpin) for parsing simple command line arguments and environment variables
+- [urfave/cli](https://github.com/urfave/cli) for building more advanced CLI tools
+- [spf13/viper](https://github.com/spf13/viper) for parsing configuration files
+
+These tools can make it easier to accept configuration parameters and help to make your application self-documenting.
