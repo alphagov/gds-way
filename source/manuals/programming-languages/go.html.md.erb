@@ -88,3 +88,40 @@ func main() {
   fmt.Println("All done!")
 }
 ```
+
+## Testing
+
+There is some use across GDS of [gomega](https://onsi.github.io/gomega/) for matching, and [ginkgo](https://onsi.github.io/ginkgo/) for BDD testing.
+
+If you find yourself writing too much boilerplate when testing Go, consider reaching for these libraries.
+
+Gomega can help make your tests more readable:
+
+```
+err := doAThing() // this should fail
+Expect(err).Should(HaveOccurred())
+```
+
+And Ginkgo can help set up a test suite:
+
+```
+var _ = Describe("Something", func() {
+  It("should do a thing", func() {
+
+    Expect("hi").To(HaveLen(2))
+
+  })
+})
+```
+
+which can be run with:
+
+```
+ginkgo
+```
+
+Tests can be focused (using regular expressions), to speed up development:
+
+```
+ginkgo -focus 'a thing'
+```
