@@ -1,6 +1,6 @@
 ---
 title: Git style guide
-last_reviewed_on: 2018-08-31
+last_reviewed_on: 2019-05-17
 review_in: 6 months
 ---
 
@@ -142,14 +142,19 @@ to use `git push -f` if and when you do use it.
 Let's say you're working on a branch, 'foobar', and you decide to force push
 to the remote. So you do this:
 
-    $ git push -f
+```
+$ git push -f
+```
 
 If anyone else has committed anything to your branch since you last pulled, you
 will blow their changes away.
 
 So for a bit of safety, if you ever need to force push please instead do:
 
-  $ git push --force-with-lease
+```
+$ git push --force-with-lease
+```
 
-`--force-with-lease` refuses to update a branch unless it is the state that we expect; i.e. nobody has updated the remote branch.
-See: https://developer.atlassian.com/blog/2015/04/force-with-lease/
+`--force-with-lease` [refuses to update a
+branch](https://developer.atlassian.com/blog/2015/04/force-with-lease/) unless
+it is the state that we expect; i.e. nobody has updated the remote branch.
