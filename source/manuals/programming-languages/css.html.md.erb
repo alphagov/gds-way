@@ -1,6 +1,6 @@
 ---
 title: CSS coding style
-last_reviewed_on: 2016-11-18
+last_reviewed_on: 2019-05-20
 review_in: 6 months
 ---
 
@@ -15,13 +15,11 @@ review_in: 6 months
 
 ## Whitespace
 
-Use soft tabs with a two space indent.
-
-**Why:** This follows the conventions used within our other projects.
+Use soft tabs with a 2 space indent. This follows the conventions we use in our other projects.
 
 ## Dimensions
 
-* Dimensions for layout should either use the [variables from the
+Dimensions for layout should either use the [variables from the
   frontend_toolkit][measurements.scss] or be in pixel values in multiples of `5px`.
 
   [measurements.scss]: https://github.com/alphagov/govuk_frontend_toolkit/blob/master/stylesheets/_measurements.scss
@@ -44,20 +42,20 @@ Use soft tabs with a two space indent.
   }
   ```
 
-  **Why:** consistent measurements are better at ensuring all elements on the
+  Consistent measurements are better at ensuring all elements on the
   page line up in a visually appealing manner. Pixels are used over `em` or `rem`
   because they are consistent and predictable.
 
-* Avoid using rem sizing
+### Avoid using rem sizing
 
-  **Why:** Firefox allows users to change the minimum allowed font-size which
+  Firefox allows users to change the minimum allowed font-size which
   forces the font-size on the `html` element to be at least that minimum. Rem
   sizes are worked out as a multiplier on the `html` elements font-size. Unless
-  you are sizing everything in rem units this can cause rems to be much much
+  you are sizing everything in rem units this can cause rems to be much
   bigger than you are expecting. See this [pull
   request](https://github.com/alphagov/frontend/pull/385) for details.
 
-  If you do use rems bear in mind they are not supported in IE6, 7 & 8 so you
+  If you do use rems bear in mind they are not supported in IE6, 7 or 8 so you
   will have to include a pixel value before each rem value for those browsers.
 
   ```css
@@ -79,14 +77,14 @@ in the frontend_toolkit][css3.scss].
 }
 ```
 
-**Why:** By keeping vendor prefixes in one place we can easily add or update
-the vendor prefixed properties in one place. We can also then remove them and
+By keeping vendor prefixes in one place we can easily add or update
+the vendor prefixed properties. We can also then remove them and
 add warnings to let future developers know they can remove the prefixes in the
-future when the vendor prefixed versions aren't needed.
+future when the vendor prefixed versions are not needed.
 
 ## Sass nesting
 
-* Always define parent reference selectors before defining child selectors
+Always define parent reference selectors before defining child selectors
 
   ```scss
   // Bad
@@ -116,12 +114,12 @@ future when the vendor prefixed versions aren't needed.
   }
   ```
 
-  **Why:** by putting parent reference selectors first it keeps the styling for
+  Putting parent reference selectors first keeps the styling for
   that element together. By putting styling for other elements in the middle you
   have to scroll around watching nesting levels to try and figure out what the
   `&` references.
 
-* Where possible rather than repeating selectors nest blocks together
+You should nest blocks together rather than repeating selectors where possible.
 
   ```scss
   // Bad
@@ -149,6 +147,6 @@ future when the vendor prefixed versions aren't needed.
   }
   ```
 
-  **Why:** by nesting selectors it is clearer for future developers to work out
+  By nesting selectors it is easier for future developers to work out
   that rules all affect the same elements. It also stops people accidentally
   adding unrelated selectors between related rules.
