@@ -9,144 +9,71 @@ review_in: 6 months
 ## Contents
 
 * [Whitespace](#whitespace)
-* [Dimensions](#dimensions)
-* [Bleeding edge features](#bleeding-edge-features)
+* [Spacing](#spacing)
+* [Vendor prefixing](#vendor-prefixing)
 * [Sass nesting](#sass-nesting)
 
 ## Whitespace
 
 Use soft tabs with a 2 space indent. This follows the conventions we use in our other projects.
 
-## Dimensions
+## Spacing
 
-Dimensions for layout should either use the [variables from the
-  frontend_toolkit][measurements.scss] or be in pixel values in multiples of `5px`.
+You should use the [GOV.UK Design System spacing scale](https://design-system.service.gov.uk/styles/spacing/).
 
-  [measurements.scss]: https://github.com/alphagov/govuk_frontend_toolkit/blob/master/stylesheets/_measurements.scss
+### Use with deprecated libraries
 
-  ```css
-  // Bad
-  .block {
-    margin: 28px;
-  }
-  .block {
-    padding: 12px 19px;
-  }
+If your project is not using the GOV.UK Design System, you should use the
+[variables from the frontend_toolkit][measurements.scss] or use pixel values in multiples of `5px`.
 
-  // Good
-  .block {
-    margin: $gutter;
-  }
-  .block {
-    padding: 10px 20px;
-  }
-  ```
+[measurements.scss]: https://github.com/alphagov/govuk_frontend_toolkit/blob/master/stylesheets/_measurements.scss
 
-  Consistent measurements are better at ensuring all elements on the
-  page line up in a visually appealing manner. Pixels are used over `em` or `rem`
-  because they are consistent and predictable.
+### Include fallbacks for rem spacing
 
-### Avoid using rem sizing
+Avoid using `rem` units for spacing.
 
-  Firefox allows users to change the minimum allowed font-size which
-  forces the font-size on the `html` element to be at least that minimum. Rem
-  sizes are worked out as a multiplier on the `html` elements font-size. Unless
-  you are sizing everything in rem units this can cause rems to be much
-  bigger than you are expecting. See this [pull
-  request](https://github.com/alphagov/frontend/pull/385) for details.
+If you are using the GOV.UK Design System without [compatibility mode](https://github.com/alphagov/govuk-frontend/blob/master/docs/installation/installing-with-npm.md#compatibility-mode) turned on, it will use `rem` units for font sizing with pixel fallback.
 
-  If you do use rems bear in mind they are not supported in IE6, 7 or 8 so you
-  will have to include a pixel value before each rem value for those browsers.
+This allows users to increase the size of the text on a page by adjusting the font size in their browser settings.
 
-  ```css
-  font-size: 12px;
-  font-size: 1.2rem; /* This line is ignored by IE6, 7 & 8 */
-  ```
-
-
-## Bleeding edge features
-
-When using bleeding edge features which require vendor prefixes use the [mixins
-in the frontend_toolkit][css3.scss].
-
-[css3.scss]: https://github.com/alphagov/govuk_frontend_toolkit/blob/master/stylesheets/_css3.scss
+If you do need to use `rem` units, include a fallback for browsers that do not support `rem` units.
 
 ```css
-.button {
-  @include border-radius(5px);
-}
+font-size: 12px;
+font-size: 1.2rem; // This line is ignored by older browsers
 ```
 
-By keeping vendor prefixes in one place we can easily add or update
-the vendor prefixed properties. We can also then remove them and
-add warnings to let future developers know they can remove the prefixes in the
-future when the vendor prefixed versions are not needed.
+#### Use with deprecated libraries
+
+You should avoid using `rem` units with [GOV.UK Template](https://github.com/alphagov/govuk_template).
+
+Since GOV.UK Template sets the font size at the root level, sizing with `rem` can be unpredicatable.
+
+## Vendor prefixing
+
+When using CSS features which require vendor prefixes use [autoprefixer](https://github.com/postcss/autoprefixer).
+
+You should [configure autoprefixer](https://github.com/postcss/autoprefixer#browsers) to target [our supported browsers](https://www.gov.uk/service-manual/technology/designing-for-different-browsers-and-devices#browsers-to-test-in).
 
 ## Sass nesting
 
-Always define parent reference selectors before defining child selectors
+Sass nesting should be avoided where possible.
 
-  ```scss
-  // Bad
-  a {
-    color: red;
+Over use of nesting can make searching for selectors difficult and can hide complicated CSS that should be simplified.
 
-    .span {
-      color: blue;
-    }
+Exceptions to this include pseudo selectors and JavaScript enabled classes.
 
-    &:hover {
-      color: pink;
-    }
-  }
+```scss
+.accordion {
+  // styles when the accordion is not enhanced here
+}
+.js-enabled {
+  .accordion {
+    // styles when the accordion is enhanced here
 
-  // Good
-  a {
-    color: red;
-
-    &:hover {
-      color: pink;
-    }
-
-    .span {
-      color: blue;
+    &:focus {
+      // ...
     }
   }
-  ```
-
-  Putting parent reference selectors first keeps the styling for
-  that element together. By putting styling for other elements in the middle you
-  have to scroll around watching nesting levels to try and figure out what the
-  `&` references.
-
-You should nest blocks together rather than repeating selectors where possible.
-
-  ```scss
-  // Bad
-  .header h1 {
-    font-weight: bold;
-  }
-  .header span {
-    color: lightgray;
-  }
-  .header .date {
-    color: blue;
-  }
-
-  // Good
-  .header {
-    h1 {
-      font-weight: bold;
-    }
-    span {
-      color: lightgray;
-    }
-    .date {
-      color: blue;
-    }
-  }
-  ```
-
-  By nesting selectors it is easier for future developers to work out
-  that rules all affect the same elements. It also stops people accidentally
-  adding unrelated selectors between related rules.
+}
+```
