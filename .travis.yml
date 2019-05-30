@@ -1,4 +1,0 @@
-language: ruby
-cache: bundler
-bundler_args: "--without development"
-script: bundle exec middleman build
