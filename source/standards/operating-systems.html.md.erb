@@ -16,6 +16,6 @@ You must also make sure your OS is:
 * up to date with the latest OS releases
 * able to run on a local VM
 
-GDS recommends LTS as the default choice for your VM, but you can use a standard release if you have a specific reason for doing so, for example if you need a newer kernel, or features not yet available in Ubuntu LTS.
+GDS recommends LTS as the default choice for your VM. If you are running the latest LTS release and there are newer features not available in that release, for instance newer kernels, consider using the official backports or trustworthy PPA sources rather than upgrading the whole OS to a standard (non-LTS) release. Care must be taken to ensure that these backports and other sources receive regular and timely security updates but this should be less burden than having to continually (every 6-9 months) update the OS on VMs.
 
-If you use standard Ubuntu, we recommend you migrate to the latest release within 3 months to ensure you stay within the support period, and receive security updates.
+If you do use standard Ubuntu, it is essential to migrate to the latest release within 3 months to ensure you stay within the support perid and receive security updates. This must be considered carefully when proposing adopting standard Ubuntu releases as it can affect the stability of your running service. Standard releases only receive security updates for 9 months after their initial release whereas LTS receives support for 5 years (or longer with paid-for extended support).
