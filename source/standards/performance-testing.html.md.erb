@@ -42,6 +42,8 @@ You do not need to fully hand code your tests because most load testing tools li
 
 Gatling is a popular load testing tool used by many teams at GDS including [GOV.UK](https://www.gov.uk/), [GOV.UK Pay](https://www.payments.service.gov.uk/), [GOV.UK Notify](https://www.notifications.service.gov.uk/) and [Digital Marketplace](https://www.digitalmarketplace.service.gov.uk/).
 
+When testing APIs or very simple web applications, [`vegeta`](https://github.com/tsenart/vegeta) is a tool used by [GOV.UK Notify](https:///www.notifications.service.gov.uk), and [GOV.UK PaaS](https://www.cloud.service.gov.uk), for automated performance testing. It can also be used interactively with [`angle-grinder`](https://github.com/rcoh/angle-grinder), or [`jaggr`](https://github.com/rs/jaggr) and [`jplot`](https://github.com/rs/jplot).
+
 ## Configure your test environment
 
 Test environments must resemble your production environment as far as possible so tests are accurate. Isolate test environments to stop them affecting your production environment.
