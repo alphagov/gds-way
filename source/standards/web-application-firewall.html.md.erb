@@ -1,46 +1,46 @@
 ---
 title: Use a web application firewall (WAF)
-last_reviewed_on: 2018-11-29
+last_reviewed_on: 2019-06-14
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-[Web application firewall (WAF)](https://www.owasp.org/index.php/Web_Application_Firewall) is an application layer protection for bi-directional web-based traffic. With WAF, you can track web traffic and use specific tools to configure access control for your web content. Doing this improves your service’s security monitoring and security position.
+A [web application firewall (WAF)](https://www.owasp.org/index.php/Web_Application_Firewall) is an application layer protection for bi-directional web-based traffic. With a WAF, you can track web traffic and use specific tools to configure access control for your web content. Doing this improves your service’s security monitoring and security position.
 
-## Why you should use WAF
+## Why you should use a WAF
 
-Your Continuous Integration (CI) and Continuous Deployment (CD) pipelines should include security tests in their workflows to identify any common vulnerabilities in your code. Some common vulnerabilities like [Cross-site Scripting (XSS)](https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)) and [XML command injection attacks](https://www.owasp.org/index.php/Testing_for_XML_Injection_(OTG-INPVAL-008)) are still possible in your production environments due to human error.
+Your continuous integration (CI) and continuous deployment (CD) pipelines should include security tests in their workflows to identify any common vulnerabilities in your code. Some common vulnerabilities like [Cross-site Scripting (XSS)](https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)) and [XML command injection attacks](https://www.owasp.org/index.php/Testing_for_XML_Injection_(OTG-INPVAL-008)) are still possible in your production environments due to human error.
 
 Combine WAF with CI and CD tools to reduce the risk from those tools, and provide enhanced layered security coverage for your service.
 
-You may also need to use WAF because of:
+You may also need to use a WAF because of:
 
 - GDS or departmental policies or standards
-- [Information Assurance (IA)](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) to minimise risk
+- [Information Assurance (IA)](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) requirements to minimise risk
 - [Payment Card Industry Data Security Standard (PCI DSS)](https://www.pcisecuritystandards.org/) compliance
 
-## When and how to use WAF
+## When and how to use a WAF
 
-Set up a baseline of tests in your project’s alpha phase to identify any security vulnerabilities. As your service’s features grow, extend your tests to cover new vulnerabilities you identify. For example, through exercises like [application threat modeling](https://www.owasp.org/index.php/Application_Threat_Modeling)
+Set up a baseline of tests in your project’s alpha phase to identify any security vulnerabilities. As your service’s features grow, extend your tests to cover new vulnerabilities you identify. For example, through exercises like [application threat modelling](https://www.owasp.org/index.php/Application_Threat_Modeling)
 
-[Good development practices](https://gds-way.cloudapps.digital/#how-to-build-software) should detect and fix common vulnerabilities before they reach production environments. Use WAF to track digital services vulnerabilities that an attacker could exploit.
+[Good development practices](https://gds-way.cloudapps.digital/#how-to-build-software) should detect and fix common vulnerabilities before they reach production environments. Use your WAF to track digital services vulnerabilities that an attacker could exploit.
 
 You should:
 
 - have an independent security audit in place
-- use established [logging techniques](https://gds-way.cloudapps.digital/manuals/logging.html#standard-field-names)
+- use established [logging techniques](https://gds-way.cloudapps.digital/manuals/logging.html)
 - encrypt data at rest as well as in transit
 - subscribe to and apply security patches
 - use query variables instead of plain text (stored procedure) to prevent [SQL injections](https://www.owasp.org/index.php/SQL_Injection)
 
-You should monitor the Open Web Application Security Project (OWASP) [top 10 most critical web application vulnerabilities](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project).
+You should monitor the Open Web Application Security Project (OWASP) [top 10 most critical web application vulnerabilities](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project) to keep up to date with the latest threats.
 
-Adopting WAF is not a formality and should align it with your other security monitoring solutions, like [Security Information Event Management (SIEM)](https://en.wikipedia.org/wiki/Security_information_and_event_management). When developing use cases you should also factor in the extra time and resources needed to configure WAF rules.
+Using a WAF should align with your other security monitoring features, like [Security Information Event Management (SIEM)](https://en.wikipedia.org/wiki/Security_information_and_event_management). When developing use cases you should also factor in the extra time and resources needed to configure WAF rules.
 
 ## Managing your WAF
 
-Identify any areas in your app not covered by your WAF and define measures to protect them like using:
+Identify any areas in your app not covered by your WAF and define measures to protect them, such as using:
 
 - [alerts](#alerts) - as part of your incident management strategy
 - [threat modelling](#threat-modelling) - to assess potential weaknesses in your environment
@@ -50,16 +50,16 @@ Identify any areas in your app not covered by your WAF and define measures to pr
 
 It’s not always possible to block a detected attack because some services need to process transactions for any user of that service. In these situations you should [raise events as alerts](https://reliability-engineering.cloudapps.digital/monitoring-alerts.html#metrics-and-alerting).
 
-When WAF alerts are raised, make sure you already have an incident policy including:
+When WAF alerts are raised, make sure you already have an incident policy in place, including:
 
-who should manage an alerts
-what their responsibilities are
-how to investigate an alert
-how to tune out false positives
+- who should manage an alerts
+- what their responsibilities are
+- how to investigate an alert
+- how to tune out false positives
 
 ### Threat modelling
 
-When your service matures, explore its architecture and conduct a threat modelling exercise to locate any specific threats to its environment.
+As your service matures, explore its architecture and conduct a threat modelling exercise to locate any specific threats to its environment.
 
 For threats you cannot reduce due to their complexity, cost of fixing or project deadlines, change your WAF rules or add new ones to provide reactive coverage.
 
@@ -77,7 +77,7 @@ For more information read the proposed architecture for [implementing a DDoS-res
 
 ## Case study GOV.UK Pay
 
-[GOV.UK Pay](https://www.payments.service.gov.uk/) use a [NAXSI WAF (pay-nginx-proxy)](https://github.com/alphagov/pay-nginx-proxy) for its Nginx, forked from the Home Office.
+[GOV.UK Pay](https://www.payments.service.gov.uk/) uses a [NAXSI WAF (pay-nginx-proxy)](https://github.com/alphagov/pay-nginx-proxy) for its Nginx, forked from the Home Office.
 
 GOV.UK Pay operates under the governance of [PCI compliance and DSS point 6.6](https://www.pcisecuritystandards.org/pdfs/infosupp_6_6_applicationfirewalls_codereviews.pdf) which states the need for web application scanning.
 
