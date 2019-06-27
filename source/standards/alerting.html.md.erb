@@ -1,6 +1,6 @@
 ---
 title: How to manage alerts
-last_reviewed_on: 2018-12-04
+last_reviewed_on: 2019-06-17
 review_in: 6 months
 ---
 
@@ -8,7 +8,7 @@ review_in: 6 months
 
 Your service should have a system in place to send automated alerts if its monitoring system detects a problem. Sending alerts help services meet service level agreements (SLAs).
 
-## When to send alerts
+## Sending alerts
 
 Your service should send an alert when your [service monitoring][] detects an issue that:
 
@@ -20,15 +20,22 @@ You should only send an alert for things that need action. This includes immedia
 
 Create alerts based on events affecting users, such as slow service requests or unavailable webpages. You should also track events like disks being full or almost full, or databases being down. These are both events that can lead to more serious alerts that do affect users.
 
-You must set up your alerts to distinguish between when something is wrong for a sustained period of time, rather than a brief issue caused by temporary network conditions. [Prometheus][] supports this by using the `for` parameter in its alerting rule, which indicates the condition has to be true for a set period of time before it triggers an alert.
+You must set up your alerts to distinguish between when something is wrong for a sustained period of time, and when it's a brief issue caused by temporary network conditions. [Prometheus][] supports this by using the `for` parameter in its alerting rule, which indicates the condition has to be true for a set period of time before it triggers an alert.
 
-If no action is needed, it should not be an alert. For example, an alert showing a system’s status is really a monitoring tool and you should use a dashboard to display this information instead. The GDS Way has more guidance on [how to monitor your service][].
+### When you should not send an alert
 
-Specific examples of issues that should not trigger an alert include an individual container instance dying or a single task invocation failing. This is because the systems running the architecture like [Amazon Elastic Container Service (Amazon ECS)][] or [Kubernetes][] will bring the instance back up, and the task will retry.
+You do not need to send an alert if no action is needed. For example, an alert showing a system's status is really a monitoring tool and you should use a dashboard to display this information instead. The GDS Way has more guidance on [how to monitor your service][].
+
+Specific examples of issues that should not trigger an alert include:
+
+* an individual container instance dying
+* a single task invocation failing
+
+This is because the systems running the architecture like [Amazon Elastic Container Service (Amazon ECS)][] or [Kubernetes][] will bring the instance back up, and the task will retry.
 
 Situations where there’s a long period of fewer than expected instances or repeated task failures should trigger alerts, as they show underlying problems.
 
-## How to prioritise alerts
+## Prioritising alerts
 
 You must prioritise alerts based on whether they need an immediate fix. It can help to class issues as:
 
@@ -61,6 +68,8 @@ For more information refer to the:
 * GDS way for [information about monitoring][]
 * Google SRE handbook to find out more about [site reliability engineering][]
 
+You can also read more on how the Reliability Engineering team [manages monitoring and alerts][].
+
 [service monitoring]: https://gds-way.cloudapps.digital/standards/monitoring.html
 [Google Site Reliability Engineering (SRE)]: https://landing.google.com/sre/book.html
 [PagerDuty]: https://www.pagerduty.com
@@ -75,3 +84,4 @@ For more information refer to the:
 [how to monitor your service]: https://gds-way.cloudapps.digital/standards/monitoring.html
 [Amazon Elastic Container Service (Amazon ECS)]: https://aws.amazon.com/ecs/
 [Kubernetes]: https://kubernetes.io/
+[manages monitoring and alerts]: https://reliability-engineering.cloudapps.digital/monitoring-alerts.html
