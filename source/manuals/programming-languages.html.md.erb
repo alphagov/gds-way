@@ -1,12 +1,12 @@
 ---
 title: Programming language style guides
-last_reviewed_on: 2018-12-06
+last_reviewed_on: 2019-07-08
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-This is a manual to accompany the
+You should read this guide alongside the
 [programming language recommendations](../standards/programming-languages.html).
 
 ## Code style guides
@@ -19,21 +19,21 @@ A style guide is about consistency. Consistency with this style guide is
 important. Consistency within a project is more important. Consistency within
 one module or function is most important.
 
-But most importantly: know when to be inconsistent -- sometimes the style guide
-just doesn't apply. When in doubt, use your best judgement. Look at other
-examples and decide what looks best. And don't hesitate to ask!
+But most importantly: know when it's ok to be inconsistent. Sometimes the style guide
+just does not apply. When in doubt, use your best judgement. Look at other
+examples and decide what looks best. And do not hesitate to ask if you're unsure.
 
-Some good reasons to ignore a particular guideline:
+Some good reasons to ignore a particular guideline include:
 
-- When applying the guideline would make the code less readable, even for
-  someone who is used to reading code that follows this style guide.
-- To be consistent with surrounding code that also breaks it (maybe for
+- when applying the guideline would make the code less readable, even for
+  someone who is used to reading code that follows this style guide
+- to be consistent with surrounding code that also breaks it (maybe for
   historic reasons) -- although this is also an opportunity to clean up the
-  existing code.
-- Because the code in question predates the introduction of the guideline and
-  there is no other reason to be modifying that code.
-- When the code needs to remain compatible with older versions that
-  don't support the feature recommended by the style guide.
+  existing code
+- when the code in question is older than the introduction of the guideline and
+  there is no reason to modify that code
+- when the code needs to remain compatible with older versions that
+  do not support the feature recommended by the style guide
 
 We've got a consistent style for:
 
@@ -49,5 +49,5 @@ We've got a consistent style for:
 Some of the guidelines in the style guides are codified in a
 [.editorconfig](programming-languages/editorconfig) file. Place a copy of this
 file in your project’s repository to have tooling that supports
-[EditorConfig](http://editorconfig.org/) automatically adhere to the
+[EditorConfig](http://editorconfig.org/) automatically meet the
 guidelines.
