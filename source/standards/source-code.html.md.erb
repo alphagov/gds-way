@@ -1,6 +1,6 @@
 ---
 title: How to store source code
-last_reviewed_on: 2019-01-09
+last_reviewed_on: 2019-07-11
 review_in: 6 months
 ---
 
@@ -11,20 +11,24 @@ At GDS, we follow the principles set out in the Service Manual for managing the 
 - [using version control](https://www.gov.uk/service-manual/technology/maintaining-version-control-in-coding)
 - [making source code open](https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable)
 
-You must [keep some data and code closed](https://www.gov.uk/government/publications/open-source-guidance/when-code-should-be-open-or-closed), including keys and credentials, algorithms used to detect fraud, and code or data that makes clear details of unannounced policy.
+You must [keep some data and code closed](https://www.gov.uk/government/publications/open-source-guidance/when-code-should-be-open-or-closed), including:
+
+- keys and credentials
+- algorithms used to detect fraud
+- code or data that makes clear details of unannounced policy
 
 ## Use GitHub
 
 [GDS uses GitHub as its code repository](https://gdstechnology.blog.gov.uk/2016/05/31/how-we-use-git-at-the-government-digital-service/).
 
-Place new repositories for GDS services in the [alphagov](https://github.com/alphagov/) organisation on GitHub.
+Put new repositories for GDS services in the [alphagov](https://github.com/alphagov/) organisation on GitHub.
 
-You can use your personal GitHub account to access alphagov. Ask your tech lead or technical architect to invite you.
+You can use your personal GitHub account to access alphagov. Ask your tech lead or technical architect to invite you. GDS will revoke your access to alphagov when you leave GDS.
 
 To secure your Github repository, make sure you:
 
 - configure two-factor authentication for your account
-- ensure Git repositories are backed up to another location (this should be a team responsibility)
+- backup Git repositories to another location (this should be a team responsibility)
 - have considered encrypting your repository contents
 - consider [protecting your master branch](https://help.github.com/articles/about-protected-branches/) to prevent changes being committed without a suitable review
 
@@ -32,4 +36,4 @@ To secure your Github repository, make sure you:
 
 If an application is no longer used in production, you should [archive](https://help.github.com/articles/archiving-repositories/) its repository.
 
-Update the application's README to detail why the repository has been archived, and link to a new location if the application has been superseded.
+Update the application's README to explain why the repository has been archived, and link to a new location if the application has been replaced by a newer application.
