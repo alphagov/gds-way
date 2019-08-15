@@ -169,14 +169,16 @@ code before. This can cause people to misunderstand what a line is doing.
 
 ## Modules
 
-Modules should be wrapped in a closure and attach themselves to the global
-`GOVUK` object.
+Avoid assigning modules to the `window` global scope.
+
+Bundlers such as [Rollup](https://rollupjs.org/) avoid the need to do this manually.
+
+To do this manually, wrap your code in a closure, then attach the module to the global scope with a namespace:
 
 ```javascript
 ;(function (global) {
   'use strict'
 
-  var $ = global.jQuery
   var GOVUK = global.GOVUK || {}
 
   ...
