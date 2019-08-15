@@ -241,36 +241,12 @@ makes it possible to test those functions in isolation.
 
 ## jQuery
 
-* Prefix jQuery objects with a `$`.
+Avoid jQuery in new projects.
 
-  ```javascript
-  // Bad
-  var list = $('.list')
+In older projects put together a plan to migrate away from jQuery.
 
-  //Good
-  var $list = $('.list')
-  ```
-
-  **Why:** for clarity between normal DOM objects and jQuery objects. This is
-  especially useful in function arguments as it is obvious a jQuery object needs
-  to be passed into that function.
-
-* Cache jQuery objects in varables.
-
-  ```javascript
-  // Bad
-  $('.list').click(...)
-  $('.list').addClass(...)
-
-  // Good
-  var $list = $('list')
-  $list.click(...)
-  $list.addClass(...)
-  ```
-
-  **Why:** DOM queries are slow operations, especially if they are complicated.
-  By caching the result of a jQuery object in a variable it reduces the number
-  of queries you have to perform on the document.
+**Why:** jQuery has been used to provide browser support for older browsers.
+The older versions of jQuery that we use have security vulnerabilities and are no longer maintained by the jQuery team.
 
 ## Method arguments
 
