@@ -19,6 +19,7 @@ review_in: 6 months
 * [Modules](#modules)
 * [Module structure](#module-structure)
 * [jQuery](#jquery)
+* [Supporting older browsers](#supporting-older-browsers)
 * [Method arguments](#method-arguments)
 * [Let the project define the style](#let-the-project-define-the-style)
 
@@ -249,6 +250,12 @@ In older projects put together a plan to migrate away from jQuery.
 
 **Why:** jQuery has been used to provide browser support for older browsers.
 The older versions of jQuery that we use have security vulnerabilities and are no longer maintained by the jQuery team.
+
+## Supporting older browsers
+
+Use native web APIs where possible.
+
+Use [feature detection](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/Feature_detection) before [polyfilling](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill), to support older browsers.
 
 ## Method arguments
 
