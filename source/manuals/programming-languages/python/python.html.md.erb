@@ -1,32 +1,52 @@
 ---
-title: Writing Python at GDS
-last_reviewed_on: 2019-05-23
+title: Python style guide
+last_reviewed_on: 2019-08-30
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-## About this manual
-
-This manual is designed to aid developers in writing Python code that is clear and consistent, within, and across,
-projects at GDS.
+This manual is designed to aid developers in writing Python code that is clear
+and consistent, within, and across, projects at GDS.
 
 
-## Coding standards
+## Code formatting
 
-We follow [PEP 8][]; where [PEP 8][] doesn't express a view (e.g. on the usage of language
-features such as metaclasses) we defer to the [Google Python style guide][GPSG].
-Use these as references unless
-something is explicitly mentioned in the [GDS Python Style Guide][GDSPSG].
-
-The [GDS Python Style Guide][GDSPSG] is the place for detailing GDS specific rules/exemptions to [PEP&nbsp;8][PEP 8]
-or the [Google Python style guide][GPSG]. An example of which is allowing a line length of 120 instead
-of 79.
-
-As always the rules in the [GDS Python Style Guide][GDSPSG] should be followed only in conjunction
-with the advice on consistency on the main [programming languages manual page][gds-way-code-style-guides].
+We follow [PEP 8][]; where [PEP 8][] doesn't express a view (e.g. on the usage of
+language features such as metaclasses) we defer to the [Google Python style guide][GPSG].
+Use these as references unless something is explicitly mentioned here. As
+always these rules should be followed only in conjunction with the advice on consistency
+on the main [programming languages manual page][gds-way-code-style-guides].
 
 If you want to add a new rule or exception please create a pull request against this repo.
+
+
+## Maximum line length
+
+[PEP 8] dictates a preferred maximum line length of <= 79. This is is a hangover from
+developing in a Unix terminal window. The vast majority of developers are now using an
+IDE which can handle a greater line length comfortably.
+
+Couple this with the fact that much of the time GDS developers are coding web apps and
+have to deal with nested `JSON` objects, ORM model definitions/ queries, and error/ url
+strings and this convention begins to show its age.
+
+```
+# Don't do
+
+if not models.Address.query(
+    models.Address.street_address_line_1
+    == user['address']['street_address_line_1']
+):
+    pass
+
+
+# Do
+
+if not models.Address.query(models.Address.street_address_line_1 == user['address']['street_address_line_1']):
+    pass
+```
+
 
 ## Linting
 
