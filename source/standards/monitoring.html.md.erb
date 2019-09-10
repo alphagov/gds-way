@@ -1,13 +1,13 @@
 ---
 title: How to monitor your service
-last_reviewed_on: 2019-03-08
+last_reviewed_on: 2019-09-10
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
 
-At GDS, we follow the Service Manual guidance on how to [monitor the status of services][] and set [performance metrics][]. 
+At GDS, we follow the Service Manual guidance on how to [monitor the status of services][] and set [performance metrics][].
 
 We recommend using [Pingdom][] to monitor your service’s availability. To further make sure your service is working, you should:
 
@@ -15,6 +15,8 @@ We recommend using [Pingdom][] to monitor your service’s availability. To furt
 * implement a tool to ensure user journeys are working as you expect
 * monitor applications for errors using an error tracking app such as [Sentry][]
 * implement configuration management to set up repeatable monitoring
+
+## Using metrics-based monitoring
 
 Collecting metrics on the performance of your service is useful for [capacity planning][] and autoscaling. You should apply metrics-based monitoring to measure aggregated numerical data about your service and create [Grafana][] dashboards to view metrics from your datasource, for example related to your infrastructure or application.
 
