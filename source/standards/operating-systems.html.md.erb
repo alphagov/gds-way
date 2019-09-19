@@ -1,14 +1,31 @@
 ---
 title: Operating systems for virtual machines
-last_reviewed_on: 2019-06-18
+last_reviewed_on: 2019-09-19
 review_in: 3 months
 ---
 
 # <%= current_page.data.title %>
 
-You should use [Ubuntu Long Term Support (LTS)](https://www.ubuntu.com/download/server) as an operating system (OS) for your virtual machine (VM).
+### Amazon Web Services Virtual Machines
+If you are using AWS (Amazon Web Services) EC2 ([Elastic Compute Cloud](https://aws.amazon.com/ec2/)) and don't have a requirement for a Debian-based system, you should use [Amazon Linux 2 LTS](https://aws.amazon.com/amazon-linux-2/release-notes/) (Long Term Support).
 
-You must apply hardening to your VM. For example, you should only use SSH keys _that are protected by a passphrase_ to access VMs. You should disable root SSH access and SSH access using a password.
+This operating system (OS) was forked from `RHEL`/`CentOS` and the primary package manager is `yum`, it is mantained by Amazon and includes a Kernel tuned for enhanced performance on EC2. See here for yum guidance: <http://yum.baseurl.org/wiki/Guides.html>
+
+The OS is available as a [virtual machine image](https://cdn.amazonlinux.com/os-images/latest/) and [Docker image](https://hub.docker.com/_/amazonlinux/) for testing.
+
+---
+
+### Non-AWS and Debian Virtual Machines
+If you are not using AWS or require a Debian-based operating system (OS), you should use [Ubuntu LTS](https://www.ubuntu.com/download/server) (Long Term Support) as an OS for your virtual machine (VM).
+
+GDS recommends using LTS (Long Term Support) versions as the default choice for your VM OS. If you are running the latest LTS release and there are newer features not available in that release, for instance newer kernels, consider using the official backports or trustworthy PPA sources rather than upgrading the whole OS to a standard (non-LTS) release. Care must be taken to ensure that these backports and other sources receive regular and timely security updates but this should be less burden than having to continually (every 6-9 months) update the OS on VMs.
+
+If you do use standard Ubuntu, it is essential to migrate to the latest release within 3 months to ensure you stay within the support period and receive security updates. This must be considered carefully when proposing adopting standard Ubuntu releases as it can affect the stability of your running service. Standard releases only receive security updates for 9 months after their initial release whereas LTS receives support for 5 years (or longer with paid-for extended support).
+
+## Hardening
+
+You must apply hardening to your VM.  
+For example, you should only use SSH keys _that are protected by a passphrase_ to access VMs. You should disable root SSH access and SSH access using a password.
 
 You must also make sure your OS is:
 
@@ -16,6 +33,8 @@ You must also make sure your OS is:
 * up to date with the latest OS releases
 * able to run on a local VM
 
-GDS recommends LTS as the default choice for your VM. If you are running the latest LTS release and there are newer features not available in that release, for instance newer kernels, consider using the official backports or trustworthy PPA sources rather than upgrading the whole OS to a standard (non-LTS) release. Care must be taken to ensure that these backports and other sources receive regular and timely security updates but this should be less burden than having to continually (every 6-9 months) update the OS on VMs.
+For EUD (End User Device) hardening principles, see this NCSC page:  
+<https://www.ncsc.gov.uk/collection/end-user-device-security/eud-overview/eud-security-principles>
 
-If you do use standard Ubuntu, it is essential to migrate to the latest release within 3 months to ensure you stay within the support period and receive security updates. This must be considered carefully when proposing adopting standard Ubuntu releases as it can affect the stability of your running service. Standard releases only receive security updates for 9 months after their initial release whereas LTS receives support for 5 years (or longer with paid-for extended support).
+For hardening information specific to `Ubuntu 18.04 LTS`, check out this NCSC security guidance:  
+<https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-guidance/ubuntu-18-04-lts>
