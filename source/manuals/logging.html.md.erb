@@ -1,12 +1,12 @@
 ---
 title: Setting up logging
-last_reviewed_on: 2019-02-20
+last_reviewed_on: 2019-09-10
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-This page contains informative advice for how to manage logs.  See
+This page contains information on how to manage logs.  See
 the [logging recommendation](../standards/logging.html) for specific
 recommendations.
 
@@ -23,21 +23,21 @@ We should use current logstash naming conventions, as documented in
   - the only guaranteed fields are `@timestamp` and `@version`
   - `@version` is always `1`
   - `@timestamp` is always an ISO-8601 formatted timestamp
-  - you shouldn't prefix field names with `@fields.`
+  - you should not prefix field names with `@fields.`
 
 We should use the
 [elastic beats naming conventions](https://www.elastic.co/guide/en/beats/libbeat/current/event-conventions.html).  In particular:
 
   - fields are lower case and `snake_case`
-  - use dots to group related metrics, eg `cpu.user` and `cpu.system`
+  - use dots to group related metrics, for example `cpu.user` and `cpu.system`
 
 An alternative to using dots to group related metrics is to use a
-nested document.  For example: `"cpu": {"user":30.0,"system":40.0}`
+nested document. For example: `"cpu": {"user":30.0,"system":40.0}`
 
 ### HTTP fields
 
 Lots of fields related to http access logs should be grouped under the
-`access` namespace.  Note that you don't need to provide every field,
+`access` namespace.  You do not need to provide every field,
 and some may be more convenient than others (for example, it might be
 easier to produce `url` rather than `path` and `query_string` from
 nginx access logs, but `path` and `query_string` might be easier from
