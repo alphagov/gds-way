@@ -1,6 +1,6 @@
 ---
 title: JavaScript coding style
-last_reviewed_on: 2017-01-01
+last_reviewed_on: 2019-09-27
 review_in: 6 months
 ---
 
@@ -19,6 +19,7 @@ review_in: 6 months
 * [Modules](#modules)
 * [Module structure](#module-structure)
 * [jQuery](#jquery)
+* [Supporting older browsers](#supporting-older-browsers)
 * [Method arguments](#method-arguments)
 * [Let the project define the style](#let-the-project-define-the-style)
 
@@ -147,36 +148,18 @@ Strict mode converts many mistakes, such as undefined variables, into errors
 which makes it easier to determine why things aren't working. It also forces
 scope so you don't accidently export globals.
 
-## Chaining
-
-Avoid creating long method chains.
-
-```javascript
-// Bad
-$('.something').find('.something-else').next('label').addClass('clickable').mousedown(doMousedownThing).click(doClickThing).click()
-
-// Good
-var $label = $('.something .something-else').next('label')
-
-$label.addClass('clickable')
-$label.mousedown(doMousedownthing)
-$label.click(doClickThing)
-doSomething()
-```
-
-**Why:** Long chains can be hard to understand for people who haven't read the
-code before. This can cause people to misunderstand what a line is doing.
-
 ## Modules
 
-Modules should be wrapped in a closure and attach themselves to the global
-`GOVUK` object.
+Avoid assigning modules to the `window` global scope.
+
+Bundlers such as [Rollup](https://rollupjs.org/) avoid the need to do this manually.
+
+To do this manually, wrap your code in a closure, then attach the module to the global scope with a namespace:
 
 ```javascript
 ;(function (global) {
   'use strict'
 
-  var $ = global.jQuery
   var GOVUK = global.GOVUK || {}
 
   ...
@@ -241,36 +224,19 @@ makes it possible to test those functions in isolation.
 
 ## jQuery
 
-* Prefix jQuery objects with a `$`.
+Avoid jQuery in new projects.
 
-  ```javascript
-  // Bad
-  var list = $('.list')
+In older projects put together a plan to migrate away from jQuery.
 
-  //Good
-  var $list = $('.list')
-  ```
+**Why:** jQuery had been used to provide browser support for older browsers.
+However, browser support for ES5 JavaScript is now widespread enough that a library like jQuery is unnecessary.
+The older versions of jQuery that we use have security vulnerabilities and are no longer maintained by the jQuery team.
 
-  **Why:** for clarity between normal DOM objects and jQuery objects. This is
-  especially useful in function arguments as it is obvious a jQuery object needs
-  to be passed into that function.
+## Supporting older browsers
 
-* Cache jQuery objects in varables.
+Use native web APIs where possible.
 
-  ```javascript
-  // Bad
-  $('.list').click(...)
-  $('.list').addClass(...)
-
-  // Good
-  var $list = $('list')
-  $list.click(...)
-  $list.addClass(...)
-  ```
-
-  **Why:** DOM queries are slow operations, especially if they are complicated.
-  By caching the result of a jQuery object in a variable it reduces the number
-  of queries you have to perform on the document.
+Use [feature detection](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/Feature_detection) before [polyfilling](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill), to support older browsers.
 
 ## Method arguments
 
