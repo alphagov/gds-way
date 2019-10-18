@@ -1,0 +1,174 @@
+---
+title: Threat modelling
+last_reviewed_on: 2019-10-18
+review_in: 3 months
+---
+
+# <%= current_page.data.title %>
+
+## An Explanation
+
+**What?** Threat modelling is a repeatable process for teams to find potential threats to services and products. This is conducted from the hypothetical attackers point of view, to analyse the priority assets, probable attack vectors, and likely vulnerabilities. Thus helping users to determine the associated risk.
+
+**When?** Working out the risks to a service in the early phases of a project can save time in the long run. Considering security early as part of your architecture can eliminate or avoid common security vulnerabilities. At GDS we prefer to conduct threat modelling exercises in the Discovery phase, since proposing changes at this stage is often less disruptive than when a service is in the process of being built or nearing its Production phase. However, threat modelling should be conducted at regular periods throughout the year.
+
+**Why?** Understanding the priority assets, potential vulnerabilities in the assets and threats to the service, enables you to highlight and prioritise risks using this methodology - which should help services to decide on appropriate mitigation strategies. There are three outcomes:
+1. Amend the proposed infrastructure proactively
+2. Monitor for risks reactively
+3. Capture the residual risk and report to stakeholders
+
+**ASSET** + **VULNERABILITY** + **THREAT** = **RISK**
+
+**Who?** There are no limits to who can be involved in a threat modelling session, however, the following is a recommendation:
+
+- Facilitator (Programme Team)
+- Information Assurance lead
+- Cyber Security analyst or security architect
+- One, or more, from the Programme Team:
+  - Technical Architect
+  - Lead Engineer
+  - Lead Developer
+
+---
+
+## Approach
+### Preparation
+
+This phase allows programme teams to prepare for the threat modelling by planning sessions and engagement with both [Information Assurance (IA) team] and [Cyber Security team].
+
+#### Submit a [Request for Information (RFI)] for a Threat Assessment
+It may be useful to submit an [RFI] to Cyber Security Threat Intelligence which will instigate the generation of a threat assessment for the specific asset. The threat assessment will provide a report detailing the threat actors that are assessed to have the capability and motivation to attack GDS, specifically the assets involved in the threat modelling. This focuses the programme team when constructing the attack trees, ensuring that non-viable threats are being discussed.
+
+#### Plan the Threat Modelling Sessions
+The programme team should allow for up to five days for the threat assessment to be completed. Additionally, a total of three threat modelling sessions, of two hours each, should be planned for the threat modelling. Although, teams are able to conduct the process in less, the recommended three sessions allows for adequate time to fully commit to following the process and subsequently getting maximum output from threat modelling.
+
+### Initial session
+
+For many, this may be the first exposure to threat modelling. The initial session should be introduced adequately to ensure all participants have a clear understanding of all aspects of threat modelling. This should include the below areas:
+
+#### Introduce all participants
+To understand the skills and expertise of those in attendance. This should include the roles as well as their experience with threat modelling.
+
+#### Explanation of threat modelling
+Ensure all participants understand what threat modelling is, why we are doing it and what we want as an output.
+
+#### Explain the process
+Each stage of the threat modelling process should be covered in order. It is important that the key outputs from each stage are also explained.
+
+![Process diagram: explain > draw architecture > work out threats > complete scoring sheet, optionally using attack trees][threat-modelling-process]
+
+#### Explain STRIDE categories
+This responsibility should be with the programme team, however, if required the programme team can request that the attending Cyber Security team member delivers this. The idea is to explain the concept of STRIDE as a methodology for categorising the threats and how it will be useful for threat modelling.
+
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Threat</th>
+      <th scope="col" class="govuk-table__header">Desired property</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Spoofing</th>
+      <td class="govuk-table__cell">Authenticity</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Tampering</th>
+      <td class="govuk-table__cell">Integrity</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Repudiation</th>
+      <td class="govuk-table__cell">Non-repudiability</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Information disclosure</th>
+      <td class="govuk-table__cell">Confidentiality</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Denial of Service</th>
+      <td class="govuk-table__cell">Availability</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Elevation of Privilege</th>
+      <td class="govuk-table__cell">Authorisation</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Explain the scoring system
+The scoring system should be fully explained to ensure complete and accurate scoring is conducted. [More information](#scoring-the-attack-trees) on scoring.
+
+#### Explain the essential Do’s and Don’ts
+- DO explain the stages fully and in order.
+- DO allow for adequate time.
+- DO ensure the architecture diagram is drawn out and visible to all.
+- DO draw out the attack trees.
+- DO list all attacks by different attackers on individual branches.
+- DO be as critical as is necessary when discussing vulnerabilities.
+- DON’T solutionise mitigations.
+- DON’T default to displaying architecture/attack trees on screens.
+- DON’T use internal bias because its ‘your work’ being scrutinised.
+
+### Discussing the architecture
+
+During this phase, participants should discuss the architecture in question to ensure a thorough understanding of what it is, what it provides, and what is valuable within it. The recommended method for success is to physically draw out the architecture diagram on a wall or board. This allows everybody to contribute to a more comprehensive discussion of the architecture, additionally, once completed it can be used as a clear reference for the remainder of the session.
+
+
+### Drawing the attack trees
+
+Once the architecture has been drawn up, you can work out how these vulnerabilities will be attacked and by whom.
+
+We use the attack tree methodology to logically draw out the attack paths that are likely to exploit our services. An attack path is the journey from the start of an attack, to the end. They should be simple branches of attacks that outline specific attack paths for specific attackers to enable us to score the attack trees as a result.
+
+Attack trees can be drawn out or visibly marked up rather than typed directly into a spreadsheet scoring card. This allows for a more collaborative approach to this part of the threat modelling and will likely produce more accurate results.
+
+### Scoring the attack trees
+
+Scoring the threat modelling can be done after the practical sessions. The scoring should be free of bias, this affords the service team a fair and accurate total threat score which takes into consideration the following:
+
+- The goal of the attack ([STRIDE](#explain-stride-categories))
+
+- The threat or potential attack to the service
+
+- Threat Actor Reward
+  - _From 0 to 5: 0 being no reward or impact, 5 being high threat actor reward or high impact - complete loss of service._
+
+- Threat Actor Difficulty
+  - _From 0 to 5: 0 being easy/trivial for threat actor to do, 5 being very difficult - new zero day required._
+
+- Mitigation Offset
+  - _This is an arbitrary value of the sum of any mitigation already present. If the mitigation completely eliminates the threat, this should equal the total (Threat Actor Reward - Threat Actor Difficulty)._
+
+Cyber Security has provided an attack tree [scoring template] (please make a copy) which has a built in formula to calculate the total scores. It is important that whilst this should contain concise attack paths for specific attacks, there should be enough detail to be able to refer back to, post threat modelling.
+
+### What to do with the results
+This is now the time for you to discuss the results of the threat modelling with [Information Assurance (IA) team] and decide on what, if any, mitigations will be implemented.
+
+The [Cyber Security team] are available to provide support in these discussions, as well as providing assistance in the security hardening of your service.
+
+Finally, try to include a feedback session on the threat modelling. This should be for your team so you can improve internally on how the sessions were conducted, who was involved or how people contributed.
+
+---
+
+## Next steps
+
+1. Discuss threat modelling with your team and decide who can go through the architecture.
+2. Submit an [Request for Information (RFI)] asking for threat modelling scoping.
+3. Arrange an initial session, inviting your lead from the [Information Assurance (IA) team] and someone from the [Cyber Security team].
+4. Book some time to note everything in a copy of the [scoring template] and score the threats.
+
+---
+
+## Feedback
+
+This process is flexible. if you'd like to suggest changes, [pull requests] are welcome or chat to the [Cyber Security team on Slack].
+
+
+[RFI]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/we-are-gds/enabling-portfolio/technology-operations/cyber-security/request-for-information
+[Request for Information (RFI)]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/we-are-gds/enabling-portfolio/technology-operations/cyber-security/request-for-information
+[Cyber Security team]: /standards/cyber-security-overview.html
+[Information Assurance (IA) team]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance
+[Cyber Security team on Slack]: https://gds.slack.com/messages/CCMPJKFDK
+[pull requests]: https://github.com/alphagov/gds-way/tree/master/source/manuals/threat-modelling.html.md.erb
+[threat-modelling-process]: images/threat-modelling-practical-session.png
+[scoring template]: https://docs.google.com/spreadsheets/d/1u22W_bUEPESvbMde-Q4syJLTen1OKIcE4ILk7wyaydM
