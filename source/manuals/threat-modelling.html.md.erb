@@ -6,6 +6,15 @@ review_in: 3 months
 
 # <%= current_page.data.title %>
 
+## High-level Process
+
+1. Discuss threat modelling with your team, decide who can facilitate the sessions and who can go through the architecture.
+2. Submit an [Request for Information (RFI)](#submit-a-request-for-information-rfi-for-a-threat-assessment) to then [Cyber Security team] asking for threat modelling scoping, the lead time is two weeks.
+3. Arrange two, two hour sessions - inviting your lead from the [Information Assurance (IA) team] and someone from the [Cyber Security team].
+4. Book time out, two hours is typical, to note everything in a copy of the [scoring template] and score the threats.
+
+---
+
 ## An Explanation
 
 **What?** Threat modelling is a repeatable process for teams to find potential threats to services and products. This is conducted from the hypothetical attackers point of view, to analyse the priority assets, probable attack vectors, and likely vulnerabilities. Thus helping users to determine the associated risk.
@@ -35,15 +44,18 @@ review_in: 3 months
 ## Approach
 ### Preparation
 
-This phase allows programme teams to prepare for the threat modelling by planning sessions and engagement with both Information Assurance (IA) team, via the Google site <https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance>, and [Cyber Security team] on their Slack channel: [https://gds.slack.com/messages/CCMPJKFDK](https://gds.slack.com/messages/CCMPJKFDK)
+This phase allows programme teams to prepare for the threat modelling by planning sessions and engagement with both [Information Assurance (IA) team] - contactable via the Google site <https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance> - and [Cyber Security team] on their Slack channel: [https://gds.slack.com/messages/CCMPJKFDK](https://gds.slack.com/messages/CCMPJKFDK)
 
-#### Submit a [Request for Information (RFI)] for a Threat Assessment
-Submit RFI - two weeks notice - reason for submitting/context for sessions
+#### Submit a Request For Information (RFI) for a threat assessment
+Submit an RFI to Cyber Security Threat Intelligence to generate a threat assessment, using this link: <https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/we-are-gds/enabling-portfolio/technology-operations/cyber-security/request-for-information>
 
-It may be useful to submit an [RFI] to Cyber Security Threat Intelligence which will instigate the generation of a threat assessment for the specific asset. The threat assessment will provide a report detailing the threat actors that are assessed to have the capability and motivation to attack GDS, specifically the assets involved in the threat modelling. This focuses the programme team when constructing the attack trees, ensuring that non-viable threats are being discussed.
+The output will provide a report detailing the threat actors that are assessed to have the capability and motivation to attack GDS. This focuses the threat modelling, focusing efforts on particular [STRIDE](#explain-stride-categories) categories, ensuring that only viable threats are being discussed.
 
-#### Plan the Threat Modelling Sessions
+The current lead time for submitting an RFI is two weeks, consider this when planning the threat modelling sessions.
+
+#### Plan the threat modelling sessions
 Three threat modelling sessions, of two hours each, should be planned for the threat modelling.
+The outline of each session is listed below.
 
 ---
 
@@ -103,7 +115,7 @@ This responsibility should be with the programme team, however, if required the 
 #### Explain the scoring system
 The scoring system should be fully explained to ensure complete and accurate scoring is conducted. [More information](#scoring-the-attack-trees) on scoring.
 
-#### Explain the essential Do’s and Don’ts
+#### Explain the essential do’s and don’ts
 - DO explain the stages fully and in order.
 - DO allow for adequate time.
 - DO ensure the architecture diagram is drawn out and visible to all.
@@ -154,6 +166,8 @@ Scoring the threat modelling can be done after the practical sessions. The scori
 
 Cyber Security has provided an attack tree [scoring template] (please make a copy) which has a built in formula to calculate the total scores. It is important that whilst this should contain concise attack paths for specific attacks, there should be enough detail to be able to refer back to, post threat modelling.
 
+Link to scoring template: <https://docs.google.com/spreadsheets/d/1u22W_bUEPESvbMde-Q4syJLTen1OKIcE4ILk7wyaydM>
+
 #### What to do with the results
 This is now the time for you to discuss the results of the threat modelling with [Information Assurance (IA) team] and decide on what, if any, mitigations will be implemented.
 
@@ -163,22 +177,10 @@ Finally, try to include a feedback session on the threat modelling. This should 
 
 ---
 
-## Next steps
-
-1. Discuss threat modelling with your team and decide who can go through the architecture.
-2. Submit an [Request for Information (RFI)] asking for threat modelling scoping.
-3. Arrange an initial session, inviting your lead from the [Information Assurance (IA) team] and someone from the [Cyber Security team].
-4. Book some time to note everything in a copy of the [scoring template] and score the threats.
-
----
-
 ## Feedback
 
 This process is flexible. If you'd like to suggest changes, [pull requests] are welcome or chat to the [Cyber Security team on Slack].
 
-
-[RFI]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/we-are-gds/enabling-portfolio/technology-operations/cyber-security/request-for-information
-[Request for Information (RFI)]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/we-are-gds/enabling-portfolio/technology-operations/cyber-security/request-for-information
 [Cyber Security team]: /standards/cyber-security-overview.html
 [Information Assurance (IA) team]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance
 [Cyber Security team on Slack]: https://gds.slack.com/messages/CCMPJKFDK
