@@ -13,6 +13,7 @@ review_in: 3 months
 **When?** Working out the risks to a service in the early phases of a project can save time in the long run. Considering security early as part of your architecture can eliminate or avoid common security vulnerabilities. At GDS we prefer to conduct threat modelling exercises in the Discovery phase, since proposing changes at this stage is often less disruptive than when a service is in the process of being built or nearing its Production phase. However, threat modelling should be conducted at regular periods throughout the year.
 
 **Why?** Understanding the priority assets, potential vulnerabilities in the assets and threats to the service, enables you to highlight and prioritise risks using this methodology - which should help services to decide on appropriate mitigation strategies. There are three outcomes:
+
 1. Amend the proposed infrastructure proactively
 2. Monitor for risks reactively
 3. Capture the residual risk and report to stakeholders
@@ -34,15 +35,19 @@ review_in: 3 months
 ## Approach
 ### Preparation
 
-This phase allows programme teams to prepare for the threat modelling by planning sessions and engagement with both [Information Assurance (IA) team] and [Cyber Security team].
+This phase allows programme teams to prepare for the threat modelling by planning sessions and engagement with both Information Assurance (IA) team, via the Google site <https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance>, and [Cyber Security team] on their Slack channel: [https://gds.slack.com/messages/CCMPJKFDK](https://gds.slack.com/messages/CCMPJKFDK)
 
 #### Submit a [Request for Information (RFI)] for a Threat Assessment
+Submit RFI - two weeks notice - reason for submitting/context for sessions
+
 It may be useful to submit an [RFI] to Cyber Security Threat Intelligence which will instigate the generation of a threat assessment for the specific asset. The threat assessment will provide a report detailing the threat actors that are assessed to have the capability and motivation to attack GDS, specifically the assets involved in the threat modelling. This focuses the programme team when constructing the attack trees, ensuring that non-viable threats are being discussed.
 
 #### Plan the Threat Modelling Sessions
-The programme team should allow for up to five days for the threat assessment to be completed. Additionally, a total of three threat modelling sessions, of two hours each, should be planned for the threat modelling. Although, teams are able to conduct the process in less, the recommended three sessions allows for adequate time to fully commit to following the process and subsequently getting maximum output from threat modelling.
+Three threat modelling sessions, of two hours each, should be planned for the threat modelling.
 
-### Initial session
+---
+
+### In session one:
 
 For many, this may be the first exposure to threat modelling. The initial session should be introduced adequately to ensure all participants have a clear understanding of all aspects of threat modelling. This should include the below areas:
 
@@ -109,12 +114,16 @@ The scoring system should be fully explained to ensure complete and accurate sco
 - DON’T default to displaying architecture/attack trees on screens.
 - DON’T use internal bias because its ‘your work’ being scrutinised.
 
-### Discussing the architecture
+---
+
+### In session two:
+
+#### Discussing the architecture
 
 During this phase, participants should discuss the architecture in question to ensure a thorough understanding of what it is, what it provides, and what is valuable within it. The recommended method for success is to physically draw out the architecture diagram on a wall or board. This allows everybody to contribute to a more comprehensive discussion of the architecture, additionally, once completed it can be used as a clear reference for the remainder of the session.
 
 
-### Drawing the attack trees
+#### Drawing the attack trees
 
 Once the architecture has been drawn up, you can work out how these vulnerabilities will be attacked and by whom.
 
@@ -122,7 +131,11 @@ We use the attack tree methodology to logically draw out the attack paths that a
 
 Attack trees can be drawn out or visibly marked up rather than typed directly into a spreadsheet scoring card. This allows for a more collaborative approach to this part of the threat modelling and will likely produce more accurate results.
 
-### Scoring the attack trees
+---
+
+### In session three:
+
+#### Scoring the attack trees
 
 Scoring the threat modelling can be done after the practical sessions. The scoring should be free of bias, this affords the service team a fair and accurate total threat score which takes into consideration the following:
 
@@ -141,7 +154,7 @@ Scoring the threat modelling can be done after the practical sessions. The scori
 
 Cyber Security has provided an attack tree [scoring template] (please make a copy) which has a built in formula to calculate the total scores. It is important that whilst this should contain concise attack paths for specific attacks, there should be enough detail to be able to refer back to, post threat modelling.
 
-### What to do with the results
+#### What to do with the results
 This is now the time for you to discuss the results of the threat modelling with [Information Assurance (IA) team] and decide on what, if any, mitigations will be implemented.
 
 The [Cyber Security team] are available to provide support in these discussions, as well as providing assistance in the security hardening of your service.
@@ -161,7 +174,7 @@ Finally, try to include a feedback session on the threat modelling. This should 
 
 ## Feedback
 
-This process is flexible. if you'd like to suggest changes, [pull requests] are welcome or chat to the [Cyber Security team on Slack].
+This process is flexible. If you'd like to suggest changes, [pull requests] are welcome or chat to the [Cyber Security team on Slack].
 
 
 [RFI]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/we-are-gds/enabling-portfolio/technology-operations/cyber-security/request-for-information
