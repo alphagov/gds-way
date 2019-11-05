@@ -1,7 +1,7 @@
 ---
 title: How to host a service
-last_reviewed_on: 2019-08-12
-review_in: 1 month
+last_reviewed_on: 2019-11-05
+review_in: 3 months
 ---
 
 # <%= current_page.data.title %>
@@ -9,6 +9,7 @@ review_in: 1 month
 At GDS you should use the following cloud platforms to host your service:
 
 * [GOV.UK Platform as a Service (PaaS)](https://cloud.service.gov.uk) to manage deployment of apps and services
+* [GDS Supported Platform](#gds-supported-platform-gsp) for apps and services that need greater flexibility over the platform on which they are deployed
 * [Amazon Web Services (AWS)](https://aws.amazon.com) for scalable computing, storage and deployment services
 
 We follow the [Government Cloud First policy](https://www.gov.uk/guidance/government-cloud-first-policy) and use Platform as a Service (PaaS) and Infrastructure as a Service (IaaS) solutions to host our services rather than using our own hardware.
@@ -45,8 +46,10 @@ Less common Amazon Web Services include:
   * [Amazon Simple Notification Service (SNS)](https://aws.amazon.com/sns/)
   * [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/)
 
-## Future platform
+## GDS Supported Platform (GSP)
 
-Reliability Engineering is working on an Alpha project to provide GDS apps with a common infrastructure platform built and operated using [Kubernetes](https://kubernetes.io/). The new platform will operate in parallel with [GOV.UK PaaS](https://www.cloud.service.gov.uk/).
+Reliability Engineering's [GDS Supported Platform](https://github.com/alphagov/gsp#gsp--) provides GDS apps with a common infrastructure built and operated using [Kubernetes](https://kubernetes.io/).
 
-If you're starting a new project or application contact Reliability Engineering by email using [reliability-engineering@digital.cabinet-office.gov.uk](mailto:reliability-engineering@digital.cabinet-office.gov.uk) or using the [#reliability-eng Slack channel](https://gds.slack.com/messages/CAD6NP598/#) about your needs before standing up new infrastructure.
+The new platform operates in parallel with [GOV.UK PaaS](https://www.cloud.service.gov.uk/), which you should use for services that don't have complex architectural requirements or bespoke security concerns.
+
+If you're starting a new project or application that does not meet the criteria for continuing to use the PaaS, contact Reliability Engineering by email using [reliability-engineering@digital.cabinet-office.gov.uk](mailto:reliability-engineering@digital.cabinet-office.gov.uk) or using the [#reliability-eng Slack channel](https://gds.slack.com/messages/CAD6NP598/#) about your needs before standing up new infrastructure.
