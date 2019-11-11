@@ -6,7 +6,9 @@ review_in: 6 months
 
 # <%= current_page.data.title %>
 
-The purpose of this style guide is to provide some conventions for creating Dockerfiles at GDS. It supplements the official [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
+The purpose of this style guide is to provide some conventions for creating
+production ready Dockerfiles at GDS. It supplements the official [Dockerfile
+reference](https://docs.docker.com/engine/reference/builder/).
 
 ## FROM
 
@@ -18,9 +20,13 @@ i.e. instead of
 
     FROM alpine:3.9
 
-use
+where `alpine` refers to the image name, and `3.9` refers to the "tag", a short
+label used to refer to a particular variant of an image, use
 
     FROM alpine@sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
+
+where "sha256@769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6`
+refers to a unique hash representing the particular variant of the image.
 
 The reason for this is the non-immutability of tags. The image referenced by a
 tag can be changed, reducing the repeatability of builds. `alpine:3.9` today
