@@ -44,7 +44,7 @@ GEM
     fast_blank (1.0.0)
     fastimage (2.1.7)
     ffi (1.11.2)
-    govuk_tech_docs (2.0.8)
+    govuk_tech_docs (2.0.9)
       activesupport
       chronic (~> 0.10.2)
       middleman (~> 4.0)
@@ -139,7 +139,7 @@ GEM
       tilt (>= 1.4.1, < 3)
     padrino-support (0.13.3.4)
       activesupport (>= 3.1)
-    parallel (1.18.0)
+    parallel (1.19.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
