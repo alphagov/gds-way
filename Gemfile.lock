@@ -44,7 +44,7 @@ GEM
     fast_blank (1.0.0)
     fastimage (2.1.7)
     ffi (1.11.2)
-    govuk_tech_docs (2.0.9)
+    govuk_tech_docs (2.0.10)
       activesupport
       chronic (~> 0.10.2)
       middleman (~> 4.0)
