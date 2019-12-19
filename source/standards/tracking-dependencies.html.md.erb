@@ -41,8 +41,7 @@ You should monitor for potential vulnerabilities in every layer of your technolo
 
 Most of the tooling that helps you stay on top of dependency updates will also highlight vulnerabilities. Additional tooling includes:
 
-* [GitHub security alerts][] - This can be configured per repository in the settings tab of the GitHub UI. When GitHub discovers or is informed about a vulnerability, it will email an alert to the repository owner and users with admin access.
-* [GitHub security alerts][] are turned on by default on public repositories and are being automatically turned on once a day for every Alphagov repository. If services wish to opt out of security advisories on their repository, they can [contact cyber security](https://gds.slack.com/archives/CCMPJKFDK) and then add the `no-security-advisories` tag to their repository.
+* [GitHub security alerts][] - When GitHub discovers or is informed about a vulnerability, it will email an alert to the repository owner and users with admin access. GitHub security alerts will be turned on for all Alphagov repositories. If services wish to opt out of security advisories on their repository, they can contact cyber security and then add the `no-security-advisories` tag to their repository.
 * [Snyk][] - Snyk is capable of detecting vulnerabilities in a variety of languages including all the [GDS supported programming languages][]. Snyk can be configured to raise PRs, email regular reports and alert you when new vulnerabilities are detected
 
 If you have an old repository that is receiving security alerts but it is not being worked on or maintained, you may wish to archive your repository instead.
