@@ -1,6 +1,6 @@
 ---
 title: Go style guide
-last_reviewed_on: 2019-05-16
+last_reviewed_on: 2019-12-19
 review_in: 6 months
 ---
 
@@ -19,26 +19,30 @@ You may also want to use [`golint`](https://github.com/golang/lint) which assess
 
 ## Code checking
 
-[`govet`](https://godoc.org/golang.org/x/tools/cmd/vet), which checks correctness, should be used as part of your build process.
+[`go vet`](https://golang.org/cmd/vet/), which checks correctness, should be used as part of your build process.
 
 If you are writing concurrent code, use the [race detector](https://blog.golang.org/race-detector) to detect race conditions.
 
 ## External dependencies
 
-As of Go 1.11 there is an officially developed module system, which is finalized in Go 1.13: `go mod`.
+As of Go 1.11 there is an [officially developed module system](https://blog.golang.org/using-go-modules), which is finalized in Go 1.13: `go mod`.
 
 A historical pain point of development in Go was the manipulation of `$GOPATH` which is no longer required when using `go mod`.
 
 There are several Go depency management tools in use at GDS, other than `go mod`:
 
-- [godep](https://github.com/tools/godep) (still in development)
+- [dep](https://golang.github.io/dep/) (no longer in development)
+- [godep](https://github.com/tools/godep) (no longer in development)
 - [glide](https://github.com/Masterminds/glide) (no longer in development)
 * [gopkg.in](http://labix.org/gopkg.in), which provides a method of using versioned import paths
 * vendoring (ie copying source code in some manner to a location you control)
 
 All new projects should use the officially developed `go mod` unless they have specific requirements not met by `go mod`
 
-Vendoring is still good practice in Go, as we cannot rely on open-source packages to be highly available, or permanent.
+Vendoring is still common practice in Go, but if you are using `go mod` with Go
+1.13+ then the go command will download and authenticate modules from the
+highly available [Go module mirror](https://golang.org/cmd/go/#hdr-Module_downloading_and_verification) and Go checksum database run by Google which
+alleviates the need to vendor your modules
 
 ## Web frameworks
 
