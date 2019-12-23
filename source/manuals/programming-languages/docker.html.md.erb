@@ -8,9 +8,9 @@ review_in: 6 months
 
 This style guide:
 
-provides some conventions for creating
+- provides some conventions for creating
 production-ready Dockerfiles at GDS
-supplements the official [Dockerfile
+- supplements the official [Dockerfile
 reference](https://docs.docker.com/engine/reference/builder/).
 
 ## Using tags and digests in FROM instructions
@@ -44,10 +44,10 @@ is the unique digest representing the particular variant of the image.
 To get the digest, run `docker pull <tag>`. For example,
 
 ```
-    $ docker pull alpine:3.9
-    3.9: Pulling from library/alpine
-    Digest: sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
-    Status: Image is up-to-date for alpine:3.9
+$ docker pull alpine:3.9
+3.9: Pulling from library/alpine
+Digest: sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
+Status: Image is up-to-date for alpine:3.9
 ```
 
 As [Dependabot(https://dependabot.com) has support for updating `FROM` lines
@@ -59,9 +59,9 @@ you can still use Dependabot to keep your images up-to-date.
 
 The program running as PID 1 inside a container is responsible for:
 
-cleaning up orphaned child processes
-handling signals
-returning the exit status from the container.
+- cleaning up orphaned child processes
+- handling signals
+- returning the exit status from the container.
 
 Most programs are unsuited to running as PID 1 inside a container. For
 example:
