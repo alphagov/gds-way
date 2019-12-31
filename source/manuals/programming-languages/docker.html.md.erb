@@ -1,6 +1,6 @@
 ---
 title: Dockerfile guidance
-last_reviewed_on: 2019-12-17
+last_reviewed_on: 2019-12-31
 review_in: 6 months
 ---
 
@@ -9,7 +9,7 @@ review_in: 6 months
 This style guide:
 
 * provides some conventions for creating production-ready Dockerfiles at GDS
-* supplements the official [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
+* supplements the official [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 
 ## Using tags and digests in FROM instructions
 
@@ -51,7 +51,7 @@ Digest: sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
 Status: Image is up-to-date for alpine:3.9
 ```
 
-As [Dependabot(https://dependabot.com) has support for updating `FROM` lines
+As [Dependabot](https://dependabot.com) has [support for updating `FROM` lines
 which use digests](https://github.com/dependabot/dependabot-core/pull/100),
 you can still use Dependabot to keep your images up-to-date.
 
@@ -73,7 +73,7 @@ example:
   down cleanly
 * `node` does not reap orphaned child processes whose parent has exited
 
-[Tini](https://github.com/krallin/tini)) provides a program suitable for
+[Tini](https://github.com/krallin/tini) provides a program suitable for
 running as PID 1 inside the container. You can use Tini to avoid the problems
 highlighted above. Tini is included by default with the Docker runtime or
 Alpine Linux images.
@@ -96,7 +96,7 @@ ENTRYPOINT ["tini", "-e", "143", "--"]
 The instructions `RUN`, `CMD` and `ENTRYPOINT` have 2 forms:
 
 * freeform text (for example `CMD “run -x”`)
-* an array-style (for example `CMD [“run”, “-x”]`).
+* an array-style (for example `CMD [“run”, “-x”]`)
 
 You should use the array-style syntax where possible.
 
@@ -113,3 +113,4 @@ For more information about the special role of PID 1:
 * [avoid running NodeJS as PID 1 under Docker images](https://www.elastic.io/nodejs-as-pid-1-under-docker-images/)
 * [docker-node best practices - Handling Kernel Signals](https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#handling-kernel-signals)
 * [Docker and the PID 1 zombie reaping problem](https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/)
+
