@@ -1,7 +1,7 @@
 ---
 title: RSpec coding style
-last_reviewed_on: 2019-05-09
-review_in: 6 months
+last_reviewed_on: 2020-01-06
+review_in: 3 months
 ---
 
 # <%= current_page.data.title %>
@@ -20,16 +20,16 @@ We use RSpec to write both unit and integration tests for Ruby code.
 
 ## Why RSpec?
 
-[RSpec is the most popular test framework for Ruby][ruby-toolbox], and is [recommended for Rails][gorails].
+When it comes to unit tests [RSpec is the most popular test framework for Ruby][ruby-toolbox], and is [recommended for Rails][gorails] .
+For integration tests, there is another popular alternative to RSpec, [Cucumber][cucumber].
 
-This explains why we use RSpec for our unit tests. For integration tests, there is another popular alternative to RSpec, and that is Cucumber.
-
-Many GOV.UK applications have some or all of their integration tests written in Cucumber. However, we are gradually moving away from Cucumber in favour of using RSpec, for reasons outlined in this article: [How we write readable feature tests with RSpec][chris-zetter-blogpost].
+Many GOV.UK applications have some or all of their integration tests written in Cucumber. However, we are gradually moving away from Cucumber in favour of using RSpec, for reasons outlined in [How we write readable feature tests with RSpec][chris-zetter-blogpost].
 
 Essentially, using RSpec for both BDD and TDD requires less of a context switch than using a separate tool for BDD.
 
 [ruby-toolbox]: https://www.ruby-toolbox.com/categories/testing_frameworks
 [gorails]: https://gorails.com/tool_categories/test-frameworks/tools
+[cucumber]: https://cucumber.io/
 [chris-zetter-blogpost]: https://about.futurelearn.com/blog/how-we-write-readable-feature-tests-with-rspec
 
 ## How to configure RSpec
