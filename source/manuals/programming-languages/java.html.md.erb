@@ -32,6 +32,17 @@ You should not use any wildcard imports.  You can configure IntelliJ to explicit
 
 The IntelliJ “Optimize Imports” command sorts imports and removes any that are unused. Before committing some changes, you can select all the classes in the modified files pane and then use this command to fix the imports for just the classes you modified.
 
+## Optionals
+
+If a getter may return `null`, you should usually return an `Optional` instead.
+
+You almost never need to use the `isPresent()` method on an `Optional`. Use `ifPresent(…)`, `ifPresentOrElse(…)`, `map(…)` or `flatMap(…)` instead. See DZone Java Zone’s article _[
+Optional isPresent() Is Bad for You](https://dzone.com/articles/optional-ispresent-is-bad-for-you)_ for more details.
+
+Optionals work best when used in a functional style, which can take time to learn. The DZone Java Zone article _[
+26 Reasons Why Using Optional Correctly Is Not Optional
+](https://dzone.com/articles/using-optional-correctly-is-not-optional)_ has some guidance.
+
 ## Prefer functionality in the Java standard library
 
 Where possible, use functionality from the Java standard library rather than external libraries.
