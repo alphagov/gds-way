@@ -61,6 +61,10 @@ Use [Mockito](https://site.mockito.org/) for mocking. If you’re still using Mo
 
 We encourage the use of static analysis. Static analysis tools for Java include [SonarQube](https://www.sonarqube.org/), [Codacy](https://www.codacy.com/), [FindBugs](http://findbugs.sourceforge.net/) and [CheckStyle](http://checkstyle.sourceforge.net/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
 
+If possible, configure your static analysis tools using configuration files and keep these in your project repositories. This makes your settings more portable and makes it easier to perform the same checks in different places (for example, in a cloud service and on your own computer).
+
+Some cloud-based static analysis tools, including Codacy, can work directly with GitHub repositories. Only grant a tool access to your repositories if it has been approved by an information assurance review.
+
 Try to minimise compiler warnings. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why. For example:
 
 ```java
