@@ -31,3 +31,10 @@ github_repo: alphagov/gds-way
 # Ownership for page reviews
 default_owner_slack: '#gds-way'
 owner_slack_workspace: gds
+
+redirects:
+  /standards/publish-opensource-code.html: /standards/source-code.html#publish-open-source-code
+  /standards/git.html: /standards/source-code.html#working-with-git
+  /standards/cyber-security-overview.html: /standards/technical-operations.html#cyber-security
+  /standards/reliability-engineering.html: /standards/technical-operations.html#reliability-engineering
+  /standards/testing-with-rspec.html: /manuals/programming-languages/ruby.html#testing-with-rspec
