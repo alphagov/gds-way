@@ -1,6 +1,34 @@
 ---
+layout: core
 title: The GDS Way
 ---
+
+<% content_for :sidebar do %>
+<ul>
+    <li><a href='#the-gds-way'>The GDS Way</a>
+        <ul>
+            <li><a href='#about-the-gds-way'>About the GDS way</a></li>
+            <li><a href='#how-to-add-new-guidance'>How to add new guidance</a></li>
+            <li><a href='#the-gds-way-forum'>The GDS Way Forum</a></li>
+        </ul>
+    </li>
+    <li><a href="#software-development">Software development</a>
+        <%= partial 'partials/nav-software-development' %>
+    </li>
+    <li><a href="#version-control-and-deployments">Version control and deployments</a>
+        <%= partial 'partials/nav-version-control-deployments' %>
+    </li>
+    <li><a href="#hosting-and-infrastructure">Hosting and infrastructure</a>
+        <%= partial 'partials/nav-hosting-infrastructure' %>
+    </li>
+    <li><a href="#logging-monitoring-and-alerting">Logging, monitoring and alerting</a>
+        <%= partial 'partials/nav-logging-monitoring-alerting' %>
+    </li>
+    <li><a href="#operating-a-service">Operating a service</a>
+        <%= partial 'partials/nav-operating-a-service' %>
+    </li>
+</ul>
+<% end %>
 
 # <%= current_page.data.title %>
 
@@ -30,76 +58,6 @@ All decisions are made in alignment with [Service Manual](https://www.gov.uk/ser
 Products at GDS in discovery or alpha development phases must [follow instructions set out in the Service Manual](https://www.gov.uk/service-manual/agile-delivery) and also have the option to follow the standards in this repository.
 
 Products in beta and live phases must follow both the [instructions set out in the Service Manual](https://www.gov.uk/service-manual/agile-delivery) and the standards in this repository.
-
-## Ways of working
-
-GDS works on the highest priorities while supporting its live services and adjusting its plans when priorities change. To do this GDS uses agile at scale to plan and carry out its work in a quarterly planning cycle, find out:
-
-- [how GDS uses quarterly planning](../ways-of-working/quarterly-planning.html)
-
-## Standards
-
-Standards are based on formal decisions made by the [GDS Way Forum](#the-gds-way-forum) and have an expiry date. Expiry dates ensure decisions are reviewed to check their continued relevance for GDS.
-
-### How to build software
-
-The following standards help you build your service, for example choosing consistent names or an appropriate programming language. Find out how to:
-
-- [use continuous delivery](standards/continuous-delivery.html)
-- [name software products](standards/naming-software-products.html)
-- [choosing programming languages](standards/programming-languages.html)
-- [store source code](standards/source-code.html)
-- [manage third party software dependencies](standards/tracking-dependencies.html)
-- [optimise frontend performance](standards/optimise-frontend-perf.html)
-- [track technical debt](standards/technical-debt.html)
-- [test your Ruby code with RSpec](standards/testing-with-rspec.html)
-- [check if your service is ready for production](standards/production-readiness.html)
-- [understand the risks to your service](standards/understanding-risks.html)
-- [document architecture decisions](standards/architecture-decisions.html)
-
-### How to operate services
-
-These standards enable us to maintain a consistent operating environment across our services. Find out how to:
-
-- [host a service](standards/hosting.html)
-- [manage DNS records for your service](standards/dns-hosting.html)
-- [monitor your service](standards/monitoring.html)
-- [configure operating systems for virtual machines](standards/operating-systems.html)
-- [manage alerts](standards/alerting.html)
-- [run a Service Level Indicator (SLI) workshop](standards/slis.html)
-- [send email notifications](standards/sending-email.html)
-- [store and query logs](standards/logging.html)
-- [do penetration tests](standards/how-to-do-penetration-tests.html)
-- [manage access to your third-party service accounts](standards/accounts-with-third-parties.html)
-- [publish open source code](standards/publish-opensource-code.html)
-- [have effective pull requests](standards/pull-requests.html)
-- [write good commits](standards/git.html)
-- [use configuration management](standards/configuration-management.html)
-- [run performance tests](standards/performance-testing.html)
-- [use data stores](standards/data-stores.html)
-- [use a web application firewall (WAF)](standards/web-application-firewall.html)
-
-You can also contact:
-
-* [Cyber Security](standards/cyber-security-overview.html) making it easier for GDS to provide secure services
-* [Reliability Engineering](standards/reliability-engineering.html) about their shared platform to distribute tools and services
-
-### Incident management
-
-Incident management at GDS focuses on restoring operations as quickly as possible. Find out how:
-
-- [GDS provides user support](standards/user-support.html) for service teams and users
-- [to manage technical incidents](standards/incident-management.html) for your service
-
-## Manuals
-
-Manuals are informative guides, not necessarily based on any formal decision or standard:
-
-- [programming language style guides](manuals/programming-languages.html)
-- [licensing](manuals/licensing.html)
-- [how to review code](manuals/code-review-guidelines.html)
-- [accessibility](manuals/accessibility.html)
-- [writing READMEs](manuals/readme-guidance.html)
 
 ## How to add new guidance
 
@@ -155,3 +113,23 @@ The Forum reviews:
 ### Contact The GDS Way Forum
 
 Contact the GDS Way Forum using the [#gds-way Slack channel](https://gds.slack.com/messages/gds-way/) or by email at <a href="mailto:the-gds-way@digital.cabinet-office.gov.uk?subject=feedback">the-gds-way@digital.cabinet-office.gov.uk</a>.
+
+## Software development
+
+<%= partial 'partials/nav-software-development' %>
+
+## Version control and deployments
+
+<%= partial 'partials/nav-version-control-deployments' %>
+
+## Hosting and infrastructure
+
+<%= partial 'partials/nav-hosting-infrastructure' %>
+
+## Logging, monitoring and alerting
+
+<%= partial 'partials/nav-logging-monitoring-alerting' %>
+
+## Operating a service
+
+<%= partial 'partials/nav-operating-a-service' %>
