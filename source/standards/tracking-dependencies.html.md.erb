@@ -16,7 +16,7 @@ Our [programming language style guides][] also contain language-specific advice 
 
 ## Update dependencies frequently
 
-Update your dependencies frequently rather than in ‘big bang’ batches. This works well with [continuous delivery][] principles, ensuring the changes introduced are small and can be automatically tested. 
+Update your dependencies frequently rather than in ‘big bang’ batches. This works well with [continuous delivery][] principles, ensuring the changes introduced are small and can be automatically tested.
 
 Tools exist that will scan GitHub repositories and raise PRs when dependency updates are found. Teams at GDS are using:
 
@@ -25,6 +25,11 @@ Tools exist that will scan GitHub repositories and raise PRs when dependency upd
 * [Greenkeeper][] - a npm dependency checker used by the GOV.UK Verify team on the [Node.js client for the Verify Service Provider][]
 
 All the above tools are free to use on public repositories.
+
+Dependabot has been turned on by GitHub for all repositories that are active, public and have not been forked.
+
+The Cyber Security team will review the repositories that do not have dependency management in use and will turn on Dependabot where required. Service teams are free to use a different tool such as [Snyk](https://snyk.io/), but will need to add a `no-dependabot` tag to their repository for monitoring purposes. You can [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK) if you have any questions or need help.
+
 
 ### Docker base images
 
@@ -36,8 +41,12 @@ You should monitor for potential vulnerabilities in every layer of your technolo
 
 Most of the tooling that helps you stay on top of dependency updates will also highlight vulnerabilities. Additional tooling includes:
 
-* [GitHub security alerts][] - This can be configured per repository in the settings tab of the GitHub UI. When GitHub discovers or is informed about a vulnerability, it will email an alert to the repository owner and users with admin access
+* [GitHub security alerts][] - When GitHub discovers or is informed about a vulnerability, it will email an alert to the repository owner and users with admin access. GitHub security alerts will be turned on for all Alphagov repositories. If services wish to opt out of security advisories on their repository, they can contact cyber security and then add the `no-security-advisories` tag to their repository.
 * [Snyk][] - Snyk is capable of detecting vulnerabilities in a variety of languages including all the [GDS supported programming languages][]. Snyk can be configured to raise PRs, email regular reports and alert you when new vulnerabilities are detected
+
+If you have an old repository that is receiving security alerts but it is not being worked on or maintained, you may wish to archive your repository instead.
+
+The Cyber Security team has created a Splunk dashboard. This gives service teams visibility of vulnerabilities in their repositories. To allow for your repositories to be categorised correctly in the Splunk dashboard, please ensure you tag your repository with the service name. If you would like to access the dashboard [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK).
 
 ### Docker images
 
@@ -47,7 +56,7 @@ The Digital Marketplace team uses [Snyk container vulnerability management tooli
 
 ## Minimising what you need to monitor
 
-Minimise the things you need to monitor by minimising dependencies where practically possible. For example, if running containers, make sure you pick the smallest base images. 
+Minimise the things you need to monitor by minimising dependencies where practically possible. For example, if running containers, make sure you pick the smallest base images.
 
 Also consider managed solutions where possible. For example:
 

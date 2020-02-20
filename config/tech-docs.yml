@@ -15,7 +15,7 @@ header_links:
 enable_search: true
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
-ga_tracking_id: UA-111409592-1
+# ga_tracking_id: UA-111409592-1
 
 # Table of contents depth – how many levels to include in the table of contents.
 # If your ToC is too long, reduce this number and we'll only show higher-level
@@ -31,3 +31,10 @@ github_repo: alphagov/gds-way
 # Ownership for page reviews
 default_owner_slack: '#gds-way'
 owner_slack_workspace: gds
+
+redirects:
+  /standards/publish-opensource-code.html: /standards/source-code.html#publish-open-source-code
+  /standards/git.html: /standards/source-code.html#working-with-git
+  /standards/cyber-security-overview.html: /standards/technical-operations.html#cyber-security
+  /standards/reliability-engineering.html: /standards/technical-operations.html#reliability-engineering
+  /standards/testing-with-rspec.html: /manuals/programming-languages/ruby.html#testing-with-rspec

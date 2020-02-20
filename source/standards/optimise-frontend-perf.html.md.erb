@@ -1,6 +1,6 @@
 ---
 title: How to optimise frontend performance
-last_reviewed_on: 2019-06-14
+last_reviewed_on: 2020-02-07
 review_in: 6 months
 ---
 
@@ -16,17 +16,16 @@ For example:
 
 |Priority|Example|Action
 |---|---|---|
-|High|Position styles correctly|Set styles at the top and scripts at the bottom of a webpage|
+|High|Position styles correctly|Set styles at the top of the page and `defer` scripts |
 ||Minimise HTTP requests|Minimise tiling icons, CSS and JavaScript files to reduce size and loading time [HTTP/1.1 only]|
-||Compress static resources|Use [minification][] and [Gzip][] to compress CSS and JavaScript code|
+||Compress static resources|Use [minification][], [Gzip][], and [Brotli][] to compress CSS and JavaScript code|
 ||Set correct Headers|Set correct [Cache-Control][] and [ETag][] headers on assets for optimal caching|
 |Medium|Look for empty image `src` attributes|Avoid using empty image `src` attributes as some browsers always send requests to them, resulting in additional traffic|
-||Minimise DNS lookups|Use fewer third-party domains to reduce the number of DNS lookups per page|
-||Maximise parallelisation|Serve static assets from a different subdomain so browsers can download more assets in parallel [HTTP/1.1 only]|
+||Minimise TCP connections |Use fewer third-party domains to reduce the number of DNS + TCP + SSL negotiations per page |
 ||Investigate [lazy loading][]|For pages with many images, only load images in the immediate browser viewport|
-||Investigate the impact of loading multiple [@font-face][] assets|Investigate @font-face assets when dealing with common issues like [FOUT, FOIT and FOFT][]|
+||Investigate the impact of loading [@font-face][] assets on perceived performance |Investigate the CSS `font-display` property for managing common issues like [FOUT, FOIT and FOFT][]|
 |Low|Set images and sprites correctly|Set images and sprites horizontally as it’s easier for browsers to parse|
-||Reduce cookie size|Because every cookie is sent with each HTTP request, consider using a cookie-free domain for static assets [HTTP/1.1 only]|
+||Reduce cookie size|Because every cookie is sent with each HTTP request, consider using a cookie-free domain for static assets [HTTP/1.1 only]. Enable HTTP/2 to enable [HPACK][] header compression |
 ||[AJAX][] requests using JSON|Avoid adding too much data to a JSON Object because this causes performance errors with parsing|
 ||Investigate using [WebSockets][]|Consider using WebSockets rather than [XMLHttpRequest][], because an HTTP request packet has 1,684 bytes of overhead, compared to 8 bytes for a WebSocket packet|
 ||Investigate using a service worker| Consider using a service worker to cache critical assets on users machines instead of transferring them over the network
@@ -54,11 +53,12 @@ Consider automating common tasks like:
 
 ## Automate testing
 
-You can automate frontend performance testing during deployment using third-party services such as:
+You can automate frontend performance testing using third-party services such as:
 
 - WebPagetest
 - Google PageSpeed Insights
 - SpeedCurve
+- Sitespeed.io
 
 You should [set a performance budget][] for your website’s pages. Once you’ve set a performance budget, test to check your website’s pages stay within your budget. There are many tools available to do this, such as:
 
@@ -104,3 +104,5 @@ The Service Manual has more suggestions about [how you can test frontend perform
 [Improving web app performance with the Chrome DevTools Timeline and Profiles]: https://addyosmani.com/blog/performance-optimisation-with-timeline-profiles/
 [how you can test frontend performance]: https://www.gov.uk/service-manual/technology/how-to-test-frontend-performance
 [Google Web Fundamentals: Optimizing Content Efficiency]: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/
+[Brotli]: https://github.com/google/brotli
+[HPACK]: https://blog.cloudflare.com/hpack-the-silent-killer-feature-of-http-2/

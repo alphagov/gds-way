@@ -1,12 +1,12 @@
 ---
 title: How to host a service
-last_reviewed_on: 2019-08-12
+last_reviewed_on: 2020-01-06
 review_in: 1 month
 ---
 
 # <%= current_page.data.title %>
 
-At GDS you should use the following cloud platforms to host your service:
+At GDS, you should use the following cloud platforms to host your service:
 
 * [GOV.UK Platform as a Service (PaaS)](https://cloud.service.gov.uk) to manage deployment of apps and services
 * [Amazon Web Services (AWS)](https://aws.amazon.com) for scalable computing, storage and deployment services
@@ -18,15 +18,16 @@ Our choice of cloud platforms:
 * are highly scalable and available to meet the needs of service users
 * have automated tools for GDS administrators to manage their environments
 
-Please read the [Service Manual](https://www.gov.uk/service-manual/technology/deciding-how-to-host-your-service) for more information on how to host your service.
+See the [Service Manual](https://www.gov.uk/service-manual/technology/deciding-how-to-host-your-service) for more information on how to host your service.
 
 ## Consider vendor switching costs
 
-AWS has a large number of available services. Some services such as compute capacity, email and file storage, are common to other providers like Microsoft Azure and Google Cloud Platform. Other services are specific to AWS.
+AWS has a large number of available services. Some services, such as compute capacity and email and file storage, are common to other providers like Microsoft Azure and Google Cloud Platform. Other services are specific to AWS.
 
-You should be aware that it’s generally easier, quicker and cheaper to switch from common AWS services to other suppliers than from AWS-only services. For example, if you migrate a web API service to another provider it would be harder if the API was built using [Amazon API Gateway](https://aws.amazon.com/api-gateway/) instead of as a traditional web application and then deployed to EC2.
+You should be aware that it’s generally easier, quicker and cheaper to switch from common AWS services to other suppliers than from AWS-only services. For example, it is more difficult to migrate a web API service to another provider if the API is built using [Amazon API Gateway](https://aws.amazon.com/api-gateway/) instead of as a traditional web application and then deployed to EC2.
 
-A good use of a less common service would be to use a Lambda function to ship [AWS CloudTrail](https://aws.amazon.com/cloudtrail/) activity logs to a log provider such as Logit. It wouldn’t make sense to rewrite a Lambda function to run on EC2 hardware because this wouldn’t reduce your switching costs.
+You could also use a Lambda function to ship [AWS
+CloudTrail](https://aws.amazon.com/cloudtrail/) activity logs to a log provider such as Logit. It would not make sense to rewrite a Lambda function to run on EC2 hardware because this would not reduce your switching costs.
 
 Core AWS services that are common with its biggest competitors include:
 
@@ -45,8 +46,5 @@ Less common Amazon Web Services include:
   * [Amazon Simple Notification Service (SNS)](https://aws.amazon.com/sns/)
   * [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/)
 
-## Future platform
 
-Reliability Engineering is working on an Alpha project to provide GDS apps with a common infrastructure platform built and operated using [Kubernetes](https://kubernetes.io/). The new platform will operate in parallel with [GOV.UK PaaS](https://www.cloud.service.gov.uk/).
-
-If you're starting a new project or application contact Reliability Engineering by email using [reliability-engineering@digital.cabinet-office.gov.uk](mailto:reliability-engineering@digital.cabinet-office.gov.uk) or using the [#reliability-eng Slack channel](https://gds.slack.com/messages/CAD6NP598/#) about your needs before standing up new infrastructure.
+If you're starting a new project or application, contact Reliability Engineering by email using [reliability-engineering@digital.cabinet-office.gov.uk](mailto:reliability-engineering@digital.cabinet-office.gov.uk) or using the [#reliability-eng Slack channel](https://gds.slack.com/messages/CAD6NP598/#) to discuss your needs before implementing new infrastructure.
