@@ -18,6 +18,16 @@ We favour consistency across our code, so make sure that you have the agreement 
 
 Variable and field names should match the class they are instantiating, or have a descriptive name reflecting the context of their use.
 
+You can use `var` in Java 10 onwards with local variables to remove the duplication between class name and variable name.
+
+```java
+// Java 9
+CheckResponse checkResponse = service.getCheckResponse(...)
+
+// Java 10+
+var checkResponse = service.getCheckResponse(...)
+```
+
 Always use curly braces around the body of an `if` statement, even if it’s only a single line.
 
 Use the [GDS Way EditorConfig file](editorconfig), which has settings for things like code indentation. Place a copy of this file named `.editorconfig` in the root of your project to have IntelliJ IDEA and some other editors automatically apply the settings. If your editor does not support EditorConfig, manually configure its settings to match.
