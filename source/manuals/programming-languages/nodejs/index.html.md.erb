@@ -253,6 +253,75 @@ const callback = filename => (err, data) => {
 };
 ```
 
+#### Async functions
+
+If your version of Node is above 7.10.0 you should use async functions, and the await keyword, to organise your asynchronous code. This will make it easier to read and write.
+
+```
+// without async/await
+const getUserFromCreds = function (username, password) {
+  return getUserIdFromAuth(username, password)
+    .then(userId => {
+      return getUserFromApi(userId);
+    })
+    .then(user => {
+      return {
+        'id': user.id,
+        'name': user.name,
+        'age': user.ageInYears      
+      };
+    })
+    .catch(e => {
+      console.log(e);
+    });
+}
+
+// with async/await
+const getUserFromCreds = async function (username, password) {
+  try {
+    const userId = await getUserIdFromAuth(username, password);
+    const user = await getUserFromApi(userId);
+
+    return {
+      'id': user.id,
+      'name': user.name,
+      'age': user.ageInYears
+    };
+  } catch(e) {
+    console.log(e);
+  }
+}
+```
+
+The `await` keyword will pause execution until its promise fulfills. This means a sequence of awaited promises can only execute in the order they're declared.
+
+If you need your promises to execute non-sequentially, you can instantiate them separately from when you await them (see [the downsides of async/await on MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await#The_downsides_of_asyncawait) for more on this pattern):
+
+```
+const getUserFromCreds = async function (username, password) {
+  try {
+    // use await to make this promise blocking
+    await userId = getUserIdFromAuth(username, password);
+
+    // start other promises running before awaiting
+    const avatarPromise = getAvatarForUser(userId);
+    const userPromise = getUserFromApi(userId);
+
+    const avatarImgUrl = await avatarPromise;
+    const user = await userPromise;
+
+    return {
+      'id': userId,
+      'name': user.name,
+      'age': user.ageInYears,
+      'avatar': avatarImgUrl
+    };
+  } catch(e) {
+    console.log(e);
+  }
+}
+```
+
 
 ### Functional programming
 
