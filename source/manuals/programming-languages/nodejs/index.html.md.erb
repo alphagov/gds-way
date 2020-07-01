@@ -295,7 +295,7 @@ const getUserFromCreds = async function (username, password) {
 
 The `await` keyword will pause execution until its promise fulfills. This means a sequence of awaited promises can only execute in the order they're declared.
 
-If you need your promises to execute non-sequentially, you can instantiate them separately from when you await them (see [the downsides of async/await on MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await#The_downsides_of_asyncawait) for more on this pattern):
+If you have multiple promises, you should try to [instantiate them separately from when you await them](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await#The_downsides_of_asyncawait), otherwise each promise will be forced to wait for the previous one. Example:
 
 ```
 const getUserFromCreds = async function (username, password) {
