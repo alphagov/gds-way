@@ -286,9 +286,27 @@ const getUserFromCreds = async function (username, password) {
 }
 ```
 
-The `await` keyword will pause execution until its promise fulfills. This means a sequence of awaited promises can only execute in the order they're declared.
+The `await` keyword will pause execution until its promise fulfills. This means a sequence of awaited promises can only execute in the order they're declared, each being forced to wait for the previous one.
 
-If you have multiple promises, you should try to [instantiate them separately from when you await them](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await#The_downsides_of_asyncawait), otherwise each promise will be forced to wait for the previous one. Example:
+The promises API provides several [methods for managing sequences of promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Static_methods), which can be used to solve this problem, for example:
+
+```js
+const getUserFromCreds = async function (username, password) {
+  // use await to make this promise blocking
+  const userId = await getUserIdFromAuth(username, password);
+
+  const [ avatarImgUrl, user ] = await Promise.all([ getAvatarForUser(userId), getUserFromApi(userId) ]);
+
+  return {
+    'id': userId,
+    'name': user.name,
+    'age': user.ageInYears,
+    'avatar': avatarImgUrl
+  };
+}
+```
+
+If none of those offer the control needed, you can also [instantiate promises separately from when you await them](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await#The_downsides_of_asyncawait), for example:
 
 ```js
 const getUserFromCreds = async function (username, password) {
