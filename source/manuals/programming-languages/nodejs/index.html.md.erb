@@ -271,25 +271,18 @@ const getUserFromCreds = function (username, password) {
         'age': user.ageInYears      
       };
     })
-    .catch(e => {
-      console.log(e);
-    });
 }
 
 // with async/await
 const getUserFromCreds = async function (username, password) {
-  try {
-    const userId = await getUserIdFromAuth(username, password);
-    const user = await getUserFromApi(userId);
+  const userId = await getUserIdFromAuth(username, password);
+  const user = await getUserFromApi(userId);
 
-    return {
-      'id': user.id,
-      'name': user.name,
-      'age': user.ageInYears
-    };
-  } catch(e) {
-    console.log(e);
-  }
+  return {
+    'id': user.id,
+    'name': user.name,
+    'age': user.ageInYears
+  };
 }
 ```
 
@@ -299,26 +292,22 @@ If you have multiple promises, you should try to [instantiate them separately fr
 
 ```js
 const getUserFromCreds = async function (username, password) {
-  try {
-    // use await to make this promise blocking
-    const userId = await getUserIdFromAuth(username, password);
+  // use await to make this promise blocking
+  const userId = await getUserIdFromAuth(username, password);
 
-    // start other promises running before awaiting
-    const avatarPromise = getAvatarForUser(userId);
-    const userPromise = getUserFromApi(userId);
+  // start other promises running before awaiting
+  const avatarPromise = getAvatarForUser(userId);
+  const userPromise = getUserFromApi(userId);
 
-    const avatarImgUrl = await avatarPromise;
-    const user = await userPromise;
+  const avatarImgUrl = await avatarPromise;
+  const user = await userPromise;
 
-    return {
-      'id': userId,
-      'name': user.name,
-      'age': user.ageInYears,
-      'avatar': avatarImgUrl
-    };
-  } catch(e) {
-    console.log(e);
-  }
+  return {
+    'id': userId,
+    'name': user.name,
+    'age': user.ageInYears,
+    'avatar': avatarImgUrl
+  };
 }
 ```
 
