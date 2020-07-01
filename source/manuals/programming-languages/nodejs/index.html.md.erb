@@ -301,7 +301,7 @@ If you have multiple promises, you should try to [instantiate them separately fr
 const getUserFromCreds = async function (username, password) {
   try {
     // use await to make this promise blocking
-    await userId = getUserIdFromAuth(username, password);
+    const userId = await getUserIdFromAuth(username, password);
 
     // start other promises running before awaiting
     const avatarPromise = getAvatarForUser(userId);
