@@ -1,6 +1,6 @@
 ---
 title: Using Node.js at GDS
-last_reviewed_on: 2019-11-07
+last_reviewed_on: 2020-07-01
 review_in: 6 months
 ---
 
@@ -251,6 +251,82 @@ const callback = filename => (err, data) => {
   }
   //...
 };
+```
+
+#### Use of `async`/`await`
+
+If your version of Node is above 7.10.0 you should use async functions, and the await keyword, to organise your asynchronous code. This will make your code easier to read and write.
+
+```js
+// without async/await
+const getUserFromCreds = function (username, password) {
+  return getUserIdFromAuth(username, password)
+    .then(userId => {
+      return getUserFromApi(userId);
+    })
+    .then(user => {
+      return {
+        'id': user.id,
+        'name': user.name,
+        'age': user.ageInYears      
+      };
+    })
+}
+
+// with async/await
+const getUserFromCreds = async function (username, password) {
+  const userId = await getUserIdFromAuth(username, password);
+  const user = await getUserFromApi(userId);
+
+  return {
+    'id': user.id,
+    'name': user.name,
+    'age': user.ageInYears
+  };
+}
+```
+
+The `await` keyword will pause execution until its promise fulfills. This means a sequence of awaited promises can only execute in the order they're declared, each being forced to wait for the previous one.
+
+The promises API provides several [methods for managing sequences of promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Static_methods), which can be used to solve this problem, for example:
+
+```js
+const getUserFromCreds = async function (username, password) {
+  // use await to make this promise blocking
+  const userId = await getUserIdFromAuth(username, password);
+
+  const [ avatarImgUrl, user ] = await Promise.all([ getAvatarForUser(userId), getUserFromApi(userId) ]);
+
+  return {
+    'id': userId,
+    'name': user.name,
+    'age': user.ageInYears,
+    'avatar': avatarImgUrl
+  };
+}
+```
+
+If none of those offer the control needed, you can also [instantiate promises separately from when you await them](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await#The_downsides_of_asyncawait), for example:
+
+```js
+const getUserFromCreds = async function (username, password) {
+  // use await to make this promise blocking
+  const userId = await getUserIdFromAuth(username, password);
+
+  // start other promises running before awaiting
+  const avatarPromise = getAvatarForUser(userId);
+  const userPromise = getUserFromApi(userId);
+
+  const avatarImgUrl = await avatarPromise;
+  const user = await userPromise;
+
+  return {
+    'id': userId,
+    'name': user.name,
+    'age': user.ageInYears,
+    'avatar': avatarImgUrl
+  };
+}
 ```
 
 
