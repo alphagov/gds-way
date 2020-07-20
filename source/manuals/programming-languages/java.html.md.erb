@@ -114,6 +114,13 @@ public void frobulateFoos() {
 }
 ```
 
+## Dependencies
+Try to keep up to date with the latest versions of your external dependencies. Older dependencies often contain security vulnerabilities. If you wait to upgrade your dependencies, you may find you have to make large version jumps to lots of dependencies at once, which can be painful. Frequent, smaller updates are almost always preferable.
+
+Dependabot (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Don’t merge a dependency upgrade unless it passes your automated tests.
+
+Dependabot makes assumptions about version numbers that not all dependencies follow. This can cause it to open pull requests that update to beta versions, release candidates or even alternative variants of the dependency. Always have a human sense-check each Dependabot pull request before merging.
+
 ## Build tools
 
 You should use either Gradle or Maven as the build tool.
