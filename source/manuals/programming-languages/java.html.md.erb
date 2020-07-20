@@ -84,7 +84,11 @@ Agree with your team to what extent you permit comments in your code. It’s oft
 
 ## Testing
 
-Use JUnit for unit tests. It can also be used for many integration tests. For new projects, use the latest [JUnit 5](https://junit.org/junit5/). It’s probably not worth migrating existing projects from [JUnit 4](https://junit.org/junit4/) to JUnit 5 while JUnit 4 is still supported.
+Use JUnit for unit tests. It can also be used for many integration tests.
+
+The latest [JUnit 5](https://junit.org/junit5/) is not a drop-in replacement for [JUnit 4](https://junit.org/junit4/). The [JUnit Vintage test engine](https://junit.org/junit5/docs/current/user-guide/#migrating-from-junit4) makes it possible to run JUnit 4 tests within JUnit 5, though not all JUnit 4 features are supported. If you use lots of JUnit 4 rules and alternative runners, or rely on other testing libraries that integrate with JUnit 4, you will have to make more changes. Teams within GDS have found it typically takes a few days to upgrade a project from JUnit 4 to JUnit 5. JUnit 4 continues to be maintained.
+
+For new projects, use JUnit 5 unless you have a reason not to.
 
 Use [Mockito](https://site.mockito.org/) for mocking. If you’re still using Mockito 2, upgrading to Mockito 3 should be straightforward because there are no breaking changes.
 
