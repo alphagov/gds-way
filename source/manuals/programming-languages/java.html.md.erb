@@ -45,6 +45,32 @@ Optionals work best when used in a functional style, which can take time to lear
 26 Reasons Why Using Optional Correctly Is Not Optional
 ](https://dzone.com/articles/using-optional-correctly-is-not-optional)_ has some guidance.
 
+## Local variable type inference (the var keyword)
+
+You can use `var` in Java 10 onwards with local variables to have the compiler infer the type. This is especially good when invoking a constructor:
+
+```java
+// Java 9
+ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+// Java 10+
+var outputStream = new ByteArrayOutputStream();
+```
+
+It can also remove duplication where the class name and the variable name are the same:
+
+```java
+// Java 9
+CheckResponse checkResponse = service.getCheckResponse(...);
+
+// Java 10+
+var checkResponse = service.getCheckResponse(...);
+```
+
+Be mindful that `var` hides the type of the variable. If the variable name makes the type obvious, this usually isn’t a problem. But if it is not clear from either the variable name or the right-hand side of the assignment, it might be better to explicitly write the type.
+
+The [OpenJDK project has some style guidelines for local variable type inference](https://openjdk.java.net/projects/amber/LVTIstyle.html). Oracle’s [introduction to local variable type inference](https://developer.oracle.com/java/jdk-10-local-variable-type-inference.html) also contains some recommendations.
+
 ## Prefer functionality in the Java standard library
 
 Where possible, use functionality from the Java standard library rather than external libraries.
