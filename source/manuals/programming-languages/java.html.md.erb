@@ -79,6 +79,9 @@ Keep in mind that improvements to the Java standard library mean that some exter
 
 When using external libraries, favour those which complement the Java standard library. For example, be wary of any library which introduces a new type that replicates the functionality of an existing type in the Java standard library without implementing the same interfaces (for example, a list type which does not implement `java.util.List`).
 
+## Comments
+Agree with your team to what extent you permit comments in your code. It’s often possible to [make code more readable so it doesn’t need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html).
+
 ## Testing
 
 Use JUnit for unit tests. It can also be used for many integration tests. For new projects, use the latest [JUnit 5](https://junit.org/junit5/). It’s probably not worth migrating existing projects from [JUnit 4](https://junit.org/junit4/) to JUnit 5 while JUnit 4 is still supported.
