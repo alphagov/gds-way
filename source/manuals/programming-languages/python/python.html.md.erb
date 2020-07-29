@@ -15,7 +15,7 @@ and consistent, within, and across, projects at GDS.
 * [Dependencies](#dependencies)
 * [Updating this manual](#updating-this-manual)
 
-### Code formatting
+## Code formatting
 
 We follow [PEP 8][]; where [PEP 8][] doesn't express a view (e.g. on the usage of
 language features such as metaclasses) we defer to the [Google Python style guide][GPSG].
@@ -53,10 +53,10 @@ if not models.Address.query(models.Address.street_address_line_1 == user['addres
 ```
 
 
-### Linting
+## Linting
 
 
-#### Flake8
+### Flake8
 
 This manual advises the use of the [Flake8][] all in one lint, codestyle and complexity checker.
 
@@ -68,7 +68,7 @@ If you're already using the [pep8/pycodestyle][pycodestyle]checker you're most o
 you need on this page.
 
 
-#### How to use Flake8
+### How to use Flake8
 
 Implementation of [Flake8][] will depend on whether the repository you want to run the checks on is a module or an application,
 and how your dependencies and automated test ci is set up.
@@ -76,7 +76,7 @@ and how your dependencies and automated test ci is set up.
 You'll want to add the [Flake8][] module (available from [PyPI][]) to your 'dev' or 'test' requirements/ dependencies.
 You'll then likely want to run it before you run your unit tests.
 
-#### Example usage
+### Example usage
 
 For a quick example run the below code (assuming you have [`virtualenv`][virtualenv] installed)
 
@@ -111,7 +111,7 @@ For a full list of error codes check out:
 
 
 
-#### Plugins
+### Plugins
 Flake8 has been designed to be extensible and as such has spawned numerous plugins. They're worth a look to see if
 any would be particularly beneficial to your
 code base.
@@ -122,7 +122,7 @@ or warnings for upcoming deprecations.
 A list can be found [by performing a PyPI search.][flake8-plugins]
 
 
-#### Flake8 per file ignores
+### Flake8 per file ignores
 
 A particularly useful feature of Flake8 is the ability to specify rule
 exemptions on a per directory, per file, or per regex match basis.
@@ -135,7 +135,7 @@ The feature is documented in the Flake8 options documentation, under
 [here][DMAPI-flake8-config].
 
 
-#### Common Configuration
+### Common Configuration
 
 Digital Marketplace is already running the latest version of [Flake8][] on all
 of its repos.  You can find an example of their configuration in the root of
@@ -163,7 +163,7 @@ are.
 Note: you can also ignore rules on particular lines of code or files by adding a `# noqa` comment - see [flake8's noqa syntax][flake8-noqa].
 
 
-#### Linting resources
+### Linting resources
 
 * [Python Slack][slack-python]: If you need a hand getting set up
 * [Digital Marketplace Config][DMAPI-flake8-config]: A production config to base off
@@ -173,7 +173,7 @@ Note: you can also ignore rules on particular lines of code or files by adding a
 * [Flake8 plugins list][flake8-plugins]
 
 
-### Dependencies
+## Dependencies
 
 A Python application project typically brings together Python packages from PyPI, with
 others written in-house (or otherwise not distributed via PyPI).
@@ -210,7 +210,7 @@ an end-product such as an application or a bundle of scripts. In general, you sh
 when creating a Python system that sits at the top of the dependency pyramid; otherwise there is a danger of creating
 version conflicts.
 
-#### Applications
+### Applications
 
 These recommendations apply wherever you need a reproducible set of dependencies, such
 as a complete web application, perhaps with many dependencies and sub-dependencies. It also
@@ -264,7 +264,7 @@ dependencies.
 
 List dependencies only needed for development or testing into a separate `requirements-dev.txt` file.
 
-#### Libraries
+### Libraries
 
 This recommendation applies to any Python repository that intended to be installable (into
 a virtual environment, a container, or onto bare metal) as a dependency of some larger system
@@ -303,7 +303,7 @@ or in a `requirements-dev.txt` ([example](https://github.com/alphagov/digitalmar
 file otherwise.
 
 
-### Updating this manual
+## Updating this manual
 
 This manual is not presumed to be infallible or beyond dispute.
 If you think something is missing or if you'd like to see something changed then:
