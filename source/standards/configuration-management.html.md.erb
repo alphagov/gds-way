@@ -20,6 +20,27 @@ Use [Terraform][] to configure third party cloud infrastructure like Amazon Web 
 
 Terraform supports a [large number of providers][], and you can configure it to support multiple environments with different parameters. See the [govuk-aws][] repository as an example.
 
+### Versioning
+
+Due to the high rate of change in many cloud provider offerings we
+recommend you keep your Terraform versions and codebases up to date. A
+version manager such as [tfenv](https://github.com/tfutils/tfenv),
+already used by a number of GDS teams, can help you with supporting
+multiple versions.
+
+### Code analysis
+
+There are a number of Terraform focused static analysis tools in use at
+GDS. While none of them are yet ubiquitous they can help ensure your
+code is more idiomatic, consistent and secure and you should consider the
+benefits they could bring to your build pipelines.
+
+ * [checkov](https://github.com/bridgecrewio/checkov) - "detects security and compliance misconfigurations"
+
+ * [tfsec](https://github.com/liamg/tfsec) - "spots potential security issues"
+
+ * [tflint](https://github.com/terraform-linters/tflint) "linter focused on possible errors, best practices, etc."
+
 ## Further reading
 
 Find out more about configuration management in the [Service Manual][].
