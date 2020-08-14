@@ -109,7 +109,8 @@ requesting, ask in the `#cyber-security-help` Slack channel.
 ### Dropwizard
 
 The [dropwizard-logstash] library will set things up for you using the
-standard names. Splunk will be able to ingest this format.
+standard names. Splunk will be able to ingest this format but the ingestion
+route may differ as Splunk Cloud does not support syslog inputs.
 
 ### GOV.UK PaaS (Cloud Foundry)
 
@@ -135,6 +136,3 @@ drain logs into it from your app.
 [Reliability Engineering documentation]: https://reliability-engineering.cloudapps.digital/#logging
 [Payment Card Industry Data Security Standard (PCI-DSS)]: https://www.pcisecuritystandards.org/pci_security/
 [Amazon CloudWatch]: https://aws.amazon.com/cloudwatch/
-[Logstash HTTP output]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-http.html
-[HEC]: https://docs.splunk.com/Documentation/Splunk/latest/Data/HECExamples
-[Fluentd to HEC]: https://github.com/splunk/fluent-plugin-splunk-hec
