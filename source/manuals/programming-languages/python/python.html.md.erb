@@ -62,7 +62,7 @@ This manual advises the use of the [Flake8][] all in one lint, codestyle and com
 
 #### What is Flake8?
 [Flake8][] is a command line utility that acts as a drop in replacement for the [pep8/pycodestyle][pycodestyle] command line checker.
-It includes [pep8/pycodestyle][pycodestyle] checks as well as adding [complexity checks][McCabe], and [linting][Pyflakes].
+It includes pep8/pycodestyle checks as well as adding [complexity checks][McCabe], and [linting][Pyflakes].
 If you're already using the [pep8/pycodestyle][pycodestyle]checker you're most of the way there. If not then, never fear. You'll find everything
 you need on this page.
 
@@ -72,7 +72,7 @@ you need on this page.
 Implementation of [Flake8][] will depend on whether the repository you want to run the checks on is a module or an application,
 and how your dependencies and automated test ci is set up.
 
-You'll want to add the [Flake8][] module (available from [PyPI][]) to your 'dev' or 'test' requirements/ dependencies.
+You'll want to add the Flake8 module (available from [PyPI][]) to your 'dev' or 'test' requirements/ dependencies.
 You'll then likely want to run it before you run your unit tests.
 
 ### Example usage
@@ -130,8 +130,8 @@ Commonly it's used for ignoring unused imports in module level `__init__.py`
 files or imports not being at the top of a file in settings files or scripts.
 
 The feature is documented in the Flake8 options documentation, under
-[per-file-ignores][flake8-per-file-ignores]. You can also see an example
-[here][DMAPI-flake8-config].
+[per-file-ignores][flake8-per-file-ignores]. You can also see an example in the 
+[Digital Marketplace API repo][DMAPI-flake8-config].
 
 
 ### Common Configuration
@@ -175,7 +175,7 @@ Note: you can also ignore rules on particular lines of code or files by adding a
 ## Dependencies
 
 A Python application project typically brings together Python packages from PyPI, with
-others written in-house (or otherwise not distributed via PyPI).
+others written in-house (or otherwise not distributed through PyPI).
 
 These packages are the applications immediate dependencies. Additionally, any
 package can have its own immediate dependencies, where they draw on other
