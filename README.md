@@ -21,7 +21,7 @@ Although a single page of HTML is generated the markdown is spread across
 multiple files to make it easier to manage. They can be found in
 `source/documentation`.
 
-A new markdown file isn't automatically included in the generated output. If we
+A new markdown file is not automatically included in the generated output. If we
 add a new markdown file at the location `source/documentation/agile/scrum.md`,
 the following snippet in `source/index.html.md.erb`, includes it in the
 generated output.
@@ -46,7 +46,7 @@ Whilst writing documentation we can run a middleman server to preview how the
 published version will look in the browser. After saving a change the preview in
 the browser will automatically refresh.
 
-The preview is only available on our own computer. Others won't be able to
+The preview is only available on our own computer. Others will not be able to
 access it if they are given the link.
 
 Type the following to start the server:
@@ -82,7 +82,7 @@ the HTML and asset files ready to be published.
 
 ## Deploy
 
-Continuously deployed from master by the [multi-tenant Concourse](https://cd.gds-reliabilty.engineering) via the [internal-apps pipeline in the tech-ops repo](https://github.com/alphagov/tech-ops/blob/master/reliability-engineering/pipelines/internal-apps.yml).
+Continuously deployed from master by the [multi-tenant Concourse](https://cd.gds-reliabilty.engineering) using the [internal-apps pipeline in the tech-ops repo](https://github.com/alphagov/tech-ops/blob/master/reliability-engineering/pipelines/internal-apps.yml).
 
 ## Licence
 
