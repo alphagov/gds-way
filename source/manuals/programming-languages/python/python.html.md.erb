@@ -17,7 +17,8 @@ and consistent, within, and across, projects at GDS.
 
 ## Code formatting
 
-We follow [PEP 8][]; where [PEP 8][] doesn't express a view (for example, on the usage of
+
+We follow [PEP 8][]; where PEP 8 doesn't express a view (e.g. on the usage of
 language features such as metaclasses) we defer to the [Google Python style guide][GPSG].
 Use these as references unless something is explicitly mentioned here. As
 always these rules should be followed only in conjunction with the advice on consistency
@@ -63,7 +64,7 @@ This manual advises the use of the [Flake8][] all in one lint, codestyle and com
 
 #### What is Flake8?
 [Flake8][] is a command line utility that acts as a drop in replacement for the [pep8/pycodestyle][pycodestyle] command line checker.
-It includes [pep8/pycodestyle][pycodestyle] checks as well as adding [complexity checks][McCabe], and [linting][Pyflakes].
+It includes pep8/pycodestyle checks as well as adding [complexity checks][McCabe], and [linting][Pyflakes].
 If you're already using the [pep8/pycodestyle][pycodestyle]checker you're most of the way there. If not then, never fear. You'll find everything
 you need on this page.
 
@@ -73,7 +74,7 @@ you need on this page.
 Implementation of [Flake8][] will depend on whether the repository you want to run the checks on is a module or an application,
 and how your dependencies and automated test ci is set up.
 
-You'll want to add the [Flake8][] module (available from [PyPI][]) to your 'dev' or 'test' requirements/ dependencies.
+You'll want to add the Flake8 module (available from [PyPI][]) to your 'dev' or 'test' requirements/ dependencies.
 You'll then likely want to run it before you run your unit tests.
 
 ### Example usage
@@ -131,8 +132,8 @@ Commonly it's used for ignoring unused imports in module level `__init__.py`
 files or imports not being at the top of a file in settings files or scripts.
 
 The feature is documented in the Flake8 options documentation, under
-[per-file-ignores][flake8-per-file-ignores]. You can also see an example
-[here][DMAPI-flake8-config].
+[per-file-ignores][flake8-per-file-ignores]. You can also see an example in the 
+[Digital Marketplace API repo][DMAPI-flake8-config].
 
 
 ### Common Configuration
