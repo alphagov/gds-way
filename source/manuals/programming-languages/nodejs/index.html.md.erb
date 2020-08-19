@@ -34,9 +34,9 @@ These are even-numbered versions (for example, Node.js 10.x or 12.x). However, i
 to keep an eye on the [Node.js LTS Schedule] as to when versions move in and out
 of LTS.
 
-> Don't use the `--harmony`, `--experimental-modules` or other in-progress feature flags
+> Do not use the `--harmony`, `--experimental-modules` or other in-progress feature flags
 
-*Staged* or *in-progress* features aren't considered stable by the Node implementors.
+*Staged* or *in-progress* features are not considered stable by the Node implementors.
 
 > Specify the supported version of Node.js in your `package.json`.
 
@@ -107,7 +107,7 @@ See also:
 
 > Use `const` and `let`, avoid `var`
 
-Embrace immutability (more below) and don't let
+Embrace immutability (more below) and do not let
 [hoisting](http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html#declarations_names_and_hoisting)
 confuse you.
 
@@ -148,7 +148,7 @@ notation:
 const foo = x => y => z => (x * y) + z;
 ```
 
-Be aware that because anonymous functions don't have a name, a stack trace
+Be aware that because anonymous functions do not have a name, a stack trace
 will be harder to read when debugging. Also remember that arrow functions keep
 their context's `this`.
 
@@ -178,9 +178,9 @@ class Rectangle {
 > Use asynchronous versions of the Node.js API functions whenever possible.
 
 For instance, avoid `readFileSync` but instead use `readFile`. Even if your code
-is less readable as a result and that particular piece of code doesn't need to
-be asynchronous (because you can't proceed until you've read that file anyway),
-it won't block other server threads. However if your program doesn't use
+is less readable as a result and that particular piece of code does not need to
+be asynchronous (because you cannot proceed until you've read that file anyway),
+it will not block other server threads. However if your program does not use
 concurrency, synchronous versions are sometimes preferable as they are more
 readable and less heavy on the operating system.
 
@@ -370,7 +370,7 @@ like a missing file). Bugs that are caught by exceptions should be logged and
 the execution stopped, and the supervisor will restart the process. Use the
 built-in `Error` object instead of custom types. It makes logging easier.
 
-Your application shouldn't trust any input, for example from a file or an
+Your application should not trust any input, for example from a file or an
 API. So the application should handle all operational errors and recover from
 them.
 
@@ -378,7 +378,7 @@ them.
 
 > Offload Node's server as much as possible
 
-Don't expose Node's HTTP server to the public. Use a reverse proxy to serve
+Do not expose Node's HTTP server to the public. Use a reverse proxy to serve
 static assets, and cache content as much as possible. Implement adequate
 supervising: [pm2](http://pm2.keymetrics.io/) is recommended for Node.js-specific
 servers.
@@ -410,7 +410,7 @@ that a Node developer would have trouble reading your code is advised against.
 If you find yourself looking for an <abbr
 title="model-view-controller">MVC</abbr> framework or if you need an <abbr
 title="object relationship manager">ORM</abbr> to manage records in a database,
-[you probably shouldn't be using Node.js in the first
+[you probably should not be using Node.js in the first
 place](/standards/programming-languages.html#javascript).
 
 
@@ -452,19 +452,19 @@ for (let i=0,j=0;i<10 && j<10;j++,i=(j==10)?i+1:i,j=(j==10)?j=0:j,console.log(i,
 
 ## Node Package Manager (<abbr title="Node package manager">NPM</abbr>)
 
-> Don't reinvent the wheel, but don't over-use the amount of external code you
+> Do not reinvent the wheel, but do not over-use the amount of external code you
   import.
 
 Using other people's code is a risk. NPM is no exception and is arguably worse
 than other package managers as the small granularity of packages leads to a very
 large number of dependencies. Your application may easily end up relying on
-software written by hundreds of different people, most of whom you don't know.
+software written by hundreds of different people, most of whom you do not know.
 
 However, given that it's impossible not to depend on foreign code, you should do
 your best to reduce the risks involved:
 
 - avoid relying on packages for functionality you can easily implement yourself,
-  especially if a package has a lot of functionality you don't need.
+  especially if a package has a lot of functionality you do not need.
 - empirically check the trustworthiness of a package you wish to use: check
   its popularity, author reputation and so on.
 - Use tools like [GitHub security alerts](https://help.github.com/en/github/managing-security-vulnerabilities/about-security-alerts-for-vulnerable-dependencies) or [Snyk](https://snyk.io/) to check packages for vulnerabilities
@@ -480,9 +480,9 @@ default, but be careful when upgrading or adding a new package. Tools like
 [Greenkeeper](https://greenkeeper.io/) can be useful to automatically check
 dependencies as part of your continuous integration.
 
-> Regularly check for unused dependencies, and make sure you don't have dev dependencies in production
+> Regularly check for unused dependencies, and make sure you do not have dev dependencies in production
 
-Don't slow down your deployments with unused code.
+Do not slow down your deployments with unused code.
 
 > If you build modules you think could be useful for others, publish them on npm
 

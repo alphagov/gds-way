@@ -43,7 +43,7 @@ There are [official guides for most of the popular editors](http://standardjs.co
 
 ### Why standard?
 
-Linting rules can be a contentious subject, and a lot of them are down to personal preference. The core idea of standard is to be opinionated and limit the amount of initial bikeshedding discussions around which linting rules to pick, because in the end, it's not as important which rules you pick as it is to just be consistent about it. This is why we chose standard: because we want to be consistent about how we write code, but don't want to spend unnecessary time picking different rules (which all have valid points).
+Linting rules can be a contentious subject, and a lot of them are down to personal preference. The core idea of standard is to be opinionated and limit the amount of initial bikeshedding discussions around which linting rules to pick, because in the end, it's not as important which rules you pick as it is to just be consistent about it. This is why we chose standard: because we want to be consistent about how we write code, but do not want to spend unnecessary time picking different rules (which all have valid points).
 
 The standard docs have a [complete list of rules and some reasoning behind them](http://standardjs.com/rules.html).
 
@@ -111,7 +111,7 @@ Use soft tabs with a two space indent.
 
 ## CoffeeScript
 
-Don't use CoffeeScript.
+Do not use CoffeeScript.
 
 **Why:** It's an extra abstraction and introduces another
 language for developers to learn. Using JavaScript gives us guaranteed
@@ -129,7 +129,7 @@ behaviour.
 
 ## Styling elements
 
-Don't apply styles directly inside JavaScript. You should only ever apply CSS
+Do not apply styles directly inside JavaScript. You should only ever apply CSS
 classes and style from there.
 
 **Why:** This reduces the risk of clobbering user stylesheets and mixing
@@ -143,8 +143,8 @@ You should add the `'use strict'` statement to the top of your module functions.
 **Why:** This enables [strict
 mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode).
 Strict mode converts many mistakes, such as undefined variables, into errors
-which makes it easier to determine why things aren't working. It also forces
-scope so you don't accidently export globals.
+which makes it easier to determine why things are not working. It also forces
+scope so you do not accidentally export globals.
 
 ## Modules
 
@@ -253,7 +253,7 @@ function addAutoSubmitToInput (input, options) {
 }
 ```
 
-**Why:** by using named options you don't necessarily have to read the
+**Why:** by using named options you do not necessarily have to read the
 internals of the method being called to work out what the arguments mean. Given
 a call to `addAutoSubmitToInput($input, './search', 20, false)` you would have
 to go to that method to find out what `20` or `false` mean. A call to
