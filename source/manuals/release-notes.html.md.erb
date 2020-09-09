@@ -6,16 +6,9 @@ review_in: 6 months
 
 # <%= current_page.data.title %>
 
-For software systems which third parties depend on it's important to communicate clearly about changes to the functionality, semantics or syntax of your service. 
+When you make changes to code that will affect third parties, you should also publish a release note that clearly explains what’s changed about your service’s functionality, semantics or syntax.
 
-What needs release notes?
-
-- Microservices consumed only by internal clients - release notes optional
-- Public APIs used by third parties - release notes recommended
-- Software artefacts distributed as binaries (eg. API client libraries) - release notes recommended
-- SaaS services which are primarily used by people rather than via APIs - release notes optional
-
-In these circumstances you should publish a release note that tells users what’s changed and how that may impact their use of the service.
+You do not need to publish a release note if your service is used only internally, or used by people rather than through an API.
 
 You can publish a release note as either a:
 
