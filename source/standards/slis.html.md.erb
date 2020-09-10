@@ -147,19 +147,21 @@ The first sets of SLIs are a percentage of:
 - successful ([status code is not 5xx](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_errors)) requests
 - requests that the service responds to within 2.5s
 
-#### Choosing a Grafana dashboard: points of measurement
-
-![Choose a Grafana dashboard high-level system components](../images/choosing-a-grafana-dashboard-points-of-measurement.png)
-
 You could also represent this relationship using a formula:
 
 ![Grafana dashboard points of measurement graph](../images/dashboard-points-of-measurement.png)
 
+#### Choosing a Grafana dashboard: points of measurement
+
+The team looked at the components to figure out the best place to collect data for their SLIs. They looked for the point closest to the end user, so that the metrics would be representative of their experience. For example, if the dashboard was loading slowly for users, the SLI would reflect this accurately. In this case, the team collected data using a component called the PaaS Prometheus Exporter, which was closest to the end user:
+
+![Choose a Grafana dashboard high-level system components](../images/choosing-a-grafana-dashboard-points-of-measurement.png)
+
 ### Creating tasks and iterating SLIs
 
-The team created 2 related stories using Trello to gather metrics, displaying the SLIs on Grafana dashboards.
+The team created 2 related stories to gather metrics, displaying the SLIs on Grafana dashboards.
 
-The team has refined the percentage of successful requests responded within 2.5s to better reflect service status.
+The team has since refined the percentage of successful requests responded within 2.5s to better reflect service status.
 
 ## Contact Reliability Engineering
 
