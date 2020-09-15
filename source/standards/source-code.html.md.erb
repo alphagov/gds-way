@@ -1,6 +1,6 @@
 ---
 title: How to store source code
-last_reviewed_on: 2020-02-05
+last_reviewed_on: 2020-09-15
 review_in: 6 months
 ---
 
@@ -53,9 +53,10 @@ To secure your Github repository, make sure you:
 
 - configure two-factor authentication for your account
 - have considered encrypting your repository contents
-- consider [protecting your master branch](https://help.github.com/articles/about-protected-branches/) to prevent changes being committed without a suitable review
+- consider [protecting your main branch](https://help.github.com/articles/about-protected-branches/) to prevent changes being committed without a suitable review
 
-You can also consider backing up your Git repositories to another location (this should be a team responsibility).
+You can also consider backing up your Git repositories to another location (this should be a team responsibility). If you are using AWS to host your service
+[AWS CodeCommit](https://aws.amazon.com/codecommit/) is one option.
 
 ### How to retire applications
 
@@ -161,7 +162,7 @@ commands like git merge and git revert.
 ### Branching/merging conventions
 
 You may often choose to work on a particular feature on a "feature branch"
-rather than directly on `master`. Indeed, given how cheap branches are in Git,
+rather than directly on `main`. Indeed, given how cheap branches are in Git,
 [using branches](http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging) is positively encouraged.
 
 You are encouraged to make liberal use of Git's [history rewriting
@@ -169,7 +170,7 @@ features](http://git-scm.com/book/en/Git-Tools-Rewriting-History) while working
 locally, in order to arrange your commits into appropriate logical chunks that
 will make sense to your fellow developers. In particular, you may find
 `git rebase --interactive` very useful. You are also encouraged to avoid merge
-commits and use git rebase master instead. However, you should not rewrite commits
+commits and use `git rebase main` instead. However, you should not rewrite commits
 that have been pushed unless you:
 
   * are very sure that no-one else will be affected by you rewriting the
@@ -185,12 +186,12 @@ The smaller commits should still be logical chunks, but this will give context
 for a more specific change and make git tools like `annotate` and `log` more
 useful.
 
-When merging from a feature branch to master (or any other mainline development
+When merging from a feature branch to main (or any other mainline development
 branch), in particular one that has previously been shared with colleagues, you
 should use `git merge`'s `--no-ff` option to preserve evidence of your feature
 branch in the repository history. This advice may be freely ignored for smaller
 local feature branches for which a fast-forward merge will look like any other
-routine development work on `master`.
+routine development work on `main`.
 
 ### Do not use `git push -f`, use `--force-with-lease` instead
 
