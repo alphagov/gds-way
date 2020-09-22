@@ -12,6 +12,9 @@ header_links:
   Documentation: /
   GitHub: https://github.com/alphagov/gds-way
 
+footer_links: 
+  Accessibility: /accessibility.html
+
 enable_search: true
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
