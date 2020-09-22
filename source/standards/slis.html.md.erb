@@ -149,6 +149,10 @@ The first sets of SLIs are a percentage of:
 
 You could also represent this relationship using a formula:
 
+The availability per hour of the SLI is the number of total requests minus the number of 5xx requests divided by the number of total requests multiplied by 100%.
+
+The latency per hour of the SLI is the number of requests within 2.5 seconds divided by the number of total requests multiplied by 100%.
+
 ![Grafana dashboard points of measurement graph](../images/dashboard-points-of-measurement.png)
 
 #### Choosing a Grafana dashboard: points of measurement
