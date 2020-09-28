@@ -1,0 +1,145 @@
+# Threat Modelling
+
+## What's a threat?
+
+To complete threat modelling, you’ll need to know what assets you are trying to protect. It could be a user database, a deployment pipeline or the integrity of web form submissions.
+
+A threat is an action that causes denial, alteration or disclosure of your assets.
+
+## What's threat modelling?
+
+Starts with an [interactive exercise] to surface hypothetical threats or vulnerabilities in a system. [STRIDE] is used to help look at different aspects.
+
+[Scoring] is then done to work out if a threat is valid and prioritise them.
+
+Having identified a valid threat, there are [3 possible responses to threats].
+
+## Why's it necessary?
+
+Information and computer security is typically broken up into 3 main pillars, known as the CIA triad:
+
+### Confidentiality
+- Information accessible to authorised people
+
+### Integrity
+- Information that's correct
+
+### Availability
+- Information available when needed
+
+If one or more of these pillars are abused or neglected, a security incident could occur.
+
+The opposite of the CIA triad is sometimes known as the DAD triad:
+
+- If confidentiality is affected, **d**isclosure occurs.
+- If integrity is affected, **a**lteration occurs.
+- If availability is affected, **d**enial occurs.
+
+Here is a fun, alternative look at the [CIA and DAD triads, explained with Lord of the Rings references].
+
+## Interactive exercise
+
+The purpose of this exercise is to talk through the architecture or the user journey with people in a session, allowing for questions and answers.
+
+In person, flows are typically drawn up on a whiteboard, followed by questions and post-its of potential threats stuck at relevant points.
+
+Remotely, [Jamboard] can be used to add virtual, potential threats, post-its on-top of a digital diagram.
+
+Use of STRIDE to help question various aspects.
+
+## STRIDE
+
+A model of threats developed by Microsoft. It’s a mnemonic for splitting security threats into 6 categories.
+
+It's a useful tool to think about different potential attacks or vulnerabilities.
+
+
+|Threat|Security Control|
+|-|-|
+|**S**poofing|Authenticity|
+|**T**ampering|Integrity|
+|**R**epudiation|Non-repudiability|
+|**I**nformation Disclosure|Confidentiality|
+|**D**enial of Service|Availability|
+|**E**levation of Privilege|Authorisation|
+
+### Spoofing
+Occurs where malicious actors use another person's user credentials without their knowledge.
+
+Also includes attacks where other systems mimic or disguise as others, such as IP address spoofing in DNS amplification attacks.
+
+The desired property is authenticity, meaning an event or action is trustworthy and genuine.
+
+### Tampering
+Only authorised users should be able to modify a system or the data it uses.
+
+The desired property is integrity, meaning an event or action is valid and correct.
+
+### Repudiation
+The ability to refuse that something is correct.
+
+The desired property is non-repudiation, meaning an action or event is inadmissible by a person or system.
+
+Examples of a non-reputable control is biometric authentication or mutual TLS.
+
+### Information Disclosure
+Data is made available to those that shouldn’t have it, such as passwords or personal data of someone else.
+
+The desired property is confidentiality, where data is only available to those who are authorised to view or alter it.
+
+### Denial of Service (DoS)
+Data is unavailable for its intended audience.
+
+The desired property is availability, where data is always available when those authorised to view or alter it expect it to be.
+
+Distributed Denial of Service (DDoS) is a form of DoS where multiple entities are responsible for inappropriate traffic leading to overwhelmed services.
+
+### Elevation of Privilege
+Data is available to unintended or unauthenticated users.
+
+The desired property is authorisation, where data is only available when those expected to be able view or alter it.
+
+## Scoring
+
+Once threats are discovered, there is Google Sheet template you can copy to use for noting down a threat, the most likely actor, scoring, and tracking mitigation.
+
+The template sheet with notes is here:
+[[PROGRAMME - PRODUCT] Threat Modelling Scoring [template]](https://docs.google.com/spreadsheets/d/1u22W_bUEPESvbMde-Q4syJLTen1OKIcE4ILk7wyaydM/edit#gid=0)
+
+Scoring is useful to prioritise what's valid and what should be looked into first.
+
+Difficulty is a rating between 0 (very easy) to 5 (hard), it should take into account how hard it would be to gain access and any costs associated to perform the attack.
+
+Reward is a rating between 0 (low) to 5 (high), it's how valuable the outcome is to the threat actor.
+
+The final score equals reward minus difficulty, so a high score is worse than a low one.
+
+## Response to threats
+
+There are 3 main responses that GDS uses against threats:
+
+### Mitigate
+Implement a preventive control, such as an architectural change, to eliminate the vulnerability or block the threat.
+
+### Monitor
+A reactive control to detect if a threat occurs, this is about controlling a situation and limiting damage or loss by finding out about an attack early.
+
+### Acknowledge the risk
+Acknowledging the risk, but not planning any action, can help with resourcing any future mitigation or deciding to accept a risk as the cost of the mitigation outweighs the maximum cost of a threat.
+
+## Additional tools and links
+
+- [GDS threat modelling Google Slides introduction], that can be used when starting a session
+- [OWASP Application Threat Modelling]
+- [Mario Areias - Threat Modelling the Death Star] YouTube video example
+
+
+[Scoring]: #scoring
+[STRIDE]: #stride
+[3 possible responses to threats]: #response-to-threats
+[interactive exercise]: #interactive-exercise
+[GDS threat modelling Google Slides introduction]: https://docs.google.com/presentation/d/1wwnPaVq9zryJFhHP9DIKEMrMh6Ts37d7_ApHnt5EFpE
+[Jamboard]: https://jamboard.google.com/
+[CIA and DAD triads, explained with Lord of the Rings references]: https://squirreltb.wordpress.com/2015/11/17/the-cia-and-dad-triad/
+[OWASP Application Threat Modelling]: https://owasp.org/www-community/Application_Threat_Modeling
+[Mario Areias - Threat Modelling the Death Star]: https://www.youtube.com/watch?v=ivmfZ6vGkEs&feature=youtu.be
