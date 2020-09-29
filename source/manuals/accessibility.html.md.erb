@@ -36,11 +36,19 @@ This is why [semantic markup](https://html.com/semantic-markup/) and good headin
 
 Accessibility testing tools such as [aXe](https://www.deque.com/axe/) and [Lighthouse](https://developers.google.com/web/tools/lighthouse/) are useful for finding issues, but [automated testing can only find around 30% of likely accessibility problems](https://alphagov.github.io/accessibility-tool-audit/). Automated testing shouldn’t be the only accessibility testing carried out on a service, it should also be tested with real users.
 
+### Testing with assistive technologies
+
+Test your service with assistive technologies throughout development, especially when you introduce a significant feature or make any major change. You should test in [the assistive technology and browser combinations listed in the service manual](https://www.gov.uk/service-manual/technology/testing-with-assistive-technologies).
+
+You can use [Assistiv Labs](https://assistivlabs.com/) to test your service with JAWS and NVDA. Contact Matt Hobbs (Head of Frontend) to request an account.
+
+Read more about [using JAWS](https://webaim.org/articles/jaws/), [using NVDA](https://webaim.org/articles/nvda/) and [using VoiceOver](https://webaim.org/articles/voiceover/).
+
 ### Browser compatibility testing
 
 Services should be thoroughly tested in all browsers they are required to be compatible with, including mobile devices and accessibility tools such as screen readers. Emulated browser testing services are available, but some testing on real mobile devices is also recommended.
 
-For reference, these are the [browsers that GOV.UK is required to be compatible with](https://www.gov.uk/service-manual/technology/designing-for-different-browsers-and-devices) and a service should also work with these [assistive technologies](https://www.gov.uk/service-manual/technology/testing-with-assistive-technologies#which-assistive-technologies-to-test-with).
+For reference, these are the [browsers that GOV.UK is required to be compatible with](https://www.gov.uk/service-manual/technology/designing-for-different-browsers-and-devices).
 
 ### Test content served by third party systems
 
