@@ -1,6 +1,6 @@
 ---
 title: Building accessible services
-last_reviewed_on: 2020-06-24
+last_reviewed_on: 2020-09-30
 review_in: 3 months
 ---
 
@@ -110,8 +110,12 @@ Services should have a responsive layout in order to work on any screen size. In
 
 Pages that provide detailed interaction for the user must be built with accessibility in mind. If page elements are updated dynamically using JavaScript you should use attributes such as aria-controls and aria-live so screen reader users are informed when page content changes.
 
-### Images without alt text
+### Image alt text and captions
 
-Non sighted users cannot understand an image without meaningful alternative text (alt text). Alt text should concisely convey the intent of the image and not necessarily describe it fully.
+Images should be described using words for people that cannot see them.
 
-For example, the alt text "a hearty Christmas feast" may be more helpful in conveying the intent of an image than "a plate with turkey, roast potatoes, stuffing, gravy, sprouts and carrots". However, an image with empty alt text is better than an image with no alt attribute at all.
+To make an image's description available to everyone the image should be described in the body text. The image's `alt` attribute should then be left empty.
+
+If an image is purely decorative it does not need to be described in the body text and does not need any description in the `alt` text.
+
+Captions using the `figcaption` element are sometimes not read aloud by screenreaders when the image has a blank `alt` text. Do not use the caption to describe your image - the description should be put in the body text.
