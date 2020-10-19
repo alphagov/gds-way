@@ -18,13 +18,13 @@ if [[ ! -f Staticfile.auth ]]; then
 fi
 echo "OK!"
 
-# Check that we're on master, or there's an environment variable set to override
+# Check that we're on main, or there's an environment variable set to override
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 echo "Checking branch..."
-if [[ $BRANCH != "master" ]] && [[ $I_REALISE_I_AM_NOT_ON_MASTER != "y" ]]; then
-  error "Current branch is not master, cowardly refusing to deploy"
-  error "To force override, run this again with I_REALISE_I_AM_NOT_ON_MASTER=y"
+if [[ $BRANCH != "main" ]] && [[ $I_REALISE_I_AM_NOT_ON_MAIN != "y" ]]; then
+  error "Current branch is not main, cowardly refusing to deploy"
+  error "To force override, run this again with I_REALISE_I_AM_NOT_ON_MAIN=y"
   exit 1
 fi
 echo "OK!"
