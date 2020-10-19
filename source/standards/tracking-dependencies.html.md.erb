@@ -39,6 +39,12 @@ The Cyber Security team will review the repositories that do not have dependency
 
 Like dependencies, Docker base images are also frequently updated. If you run containers as part of your service, you should regularly rebuild your images (and base images) to include the latest updates. Automate this process where possible.
 
+### Specifying Docker image tags
+
+The GDS Way Dockerfile guidance contains advice on how
+to use [Docker image tags](https://gds-way.cloudapps.digital/manuals/programming-languages/docker.html#using-tags-and-digests-in-from-instructions)
+to specify the exact container image version to use.
+
 ## Monitor for vulnerabilities
 
 You should monitor for potential vulnerabilities in every layer of your technology stack. This is not straightforward but tooling exists to help. The Service Manual provides [guidance on browser technology, tooling and mailing lists you can subscribe to][].
