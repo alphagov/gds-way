@@ -23,9 +23,11 @@ review_in: 3 months
 
 ## Linting
 
-We follow [standardjs](http://standardjs.com/), an opinionated JavaScript linter.
+We follow [standardjs](http://standardjs.com/), an opinionated JavaScript linter. In cases where [standard conflicts with a service's browser support](#when-to-use-standardx) we use [standardx][].
 
 All JavaScript files follow its conventions, and it typically runs on CI to ensure that new pull requests are in line with them.
+
+[standardx]: https://github.com/standard/standardx
 
 ## Running standard manually
 
@@ -34,12 +36,24 @@ To check the whole codebase, run:
 ```bash
 npx standard
 ```
-
 ### Running standard in your editor
 
 Easier than running standard manually is to install it as a plugin in your editor. This way, it will run automatically while you work, catching errors as they happen on a per-file basis.
 
 There are [official guides for most of the popular editors](http://standardjs.com/index.html#text-editor-plugins).
+
+### When to use standardx
+
+You should use [standardx][] when the standard's rule set conflicts with the browsers your project supports. For example, the [no-var](https://eslint.org/docs/rules/no-var) rule in standard - which prefers `let` or `const` over `var` - prevents JavaScript usage in versions of Internet Explorer < 11. Adopting this rule would mean explicitly breaking JavasScript for those browsers.
+
+Once installed you can then override standard rules with an [`.eslintrc`][eslintrc] file or an `eslintConfig` entry in package.json ([example][govuk-warnings]).
+
+You should be cautious to only make use of standardx to resolve compatibility issues and not as a means to adjust rules to individual preferences.
+
+Note: you may find that using standardx complicates integration with text editors.
+
+[eslintrc]: https://eslint.org/docs/user-guide/configuring
+[govuk-warnings]: https://github.com/alphagov/govuk_publishing_components/commit/ea7f0becc76f73780b6cb33701bea9e58f15f91a
 
 ### Why standard?
 
