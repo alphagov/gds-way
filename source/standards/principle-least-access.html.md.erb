@@ -1,0 +1,46 @@
+---
+title: Principle of Least Privilege
+last_reviewed_on: 2020-11-27
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+The [principle of least privilege](https://nvd.nist.gov/800-53/Rev4/control/AC-6) involves setting up user accounts so they can only access and use the information they need for specific tasks. This can also apply to processes and individuals who might have to switch between normal access and the increased access of a superuser account as part of their work.
+
+Examples of privileged or higher security access are:
+
+- root access
+- updating operating systems
+- performing “sudo” operations
+- accessing high secret credentials
+- committing to repositories
+
+You should use the principle of least privilege if you:
+
+- need to grant required access rights to different users according to the nature of their job
+- want to use different permissions for day-to-day tasks from those required for security-critical (privileged) tasks
+- want to limit collateral damage when a normal user account gets compromised
+
+Your team should:
+
+- make users aware of this policy and have a process for them to request changes to access as needed
+- define roles for users and grant required privileges, or access rights, for those roles
+- create the roles or credentials with the least possible privilege, with only necessary permissions required for normal users to perform their day-to-day jobs
+- use the role or credentials with the least possible privilege as the default option
+- use just-in-time (JIT) access provisioning to grant users an on-demand, time-limited privileged role or security token to access the privileged resources
+- make sure session time of the privileged access is set to no more than 12 hours, and/or terminates when the user logs out of their laptop
+- establish an audit trail for the use of privileged access
+
+## Examples
+
+For human-readable secrets, such as a username and password, you should set up a separate secret or [password manager](https://www.ncsc.gov.uk/collection/passwords/password-manager-buyers-guide). An example of a secrets manager is [LastPass](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/news/freelastpass-passwordmanager) which you can use to store system-critical credentials, and restrict the number of people who can access this store according to their roles in the team.
+
+If you’re using the gds-users account to log into your AWS accounts, you should assume a read-only role by default. You should only assume an admin role when absolutely necessary for a specific task. You should set up the admin account so that the session timeout is less than 12 hours. You should send the audit trail of admin access to the Cyber Security team. Use the Cyber Security Slack channel ([#cyber-security-help](https://gds.slack.com/archives/CCMPJKFDK)) to set up the audit trail.
+
+
+## Further Guidance
+
+- [NCSC - 10 steps to cyber security](https://www.ncsc.gov.uk/collection/10-steps-to-cyber-security?curPage=/collection/10-steps-to-cyber-security/the-10-steps/managing-user-privileges)
+- [NCSC - privileged user management](https://www.ncsc.gov.uk/guidance/introduction-identity-and-access-management#section_6)
+- [NIST Special Publication 800-53 -  AC-6 least privilege](https://nvd.nist.gov/800-53/Rev4/control/AC-6)
