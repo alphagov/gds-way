@@ -36,11 +36,35 @@ This is why [semantic markup](https://html.com/semantic-markup/) and good headin
 
 Accessibility testing tools such as [aXe](https://www.deque.com/axe/) and [Lighthouse](https://developers.google.com/web/tools/lighthouse/) are useful for finding issues, but [automated testing can only find around 30% of likely accessibility problems](https://alphagov.github.io/accessibility-tool-audit/). Automated testing shouldn’t be the only accessibility testing carried out on a service, it should also be tested with real users.
 
-### Browser compatibility testing
+### Testing with assistive technologies
 
-Services should be thoroughly tested in all browsers they are required to be compatible with, including mobile devices and accessibility tools such as screen readers. Emulated browser testing services are available, but some testing on real mobile devices is also recommended.
+Test your service with assistive technologies throughout development, especially when you introduce a significant feature or make any major change. You should test in [the assistive technology and browser combinations listed in the Service Manual](https://www.gov.uk/service-manual/technology/testing-with-assistive-technologies).
 
-For reference, these are the [browsers that GOV.UK is required to be compatible with](https://www.gov.uk/service-manual/technology/designing-for-different-browsers-and-devices) and a service should also work with these [assistive technologies](https://www.gov.uk/service-manual/technology/testing-with-assistive-technologies#what-to-test).
+WebAIM have some useful articles that explain how to test with some screen readers:
+
+- [Testing with screen readers](https://webaim.org/articles/screenreader_testing/)
+- [Using JAWS (Windows)](https://webaim.org/articles/jaws/)
+- [Using NVDA (Windows)](https://webaim.org/articles/nvda/)
+- [Using VoiceOver (macOS)](https://webaim.org/articles/voiceover/)
+- [Using VoiceOver (iOS)](https://webaim.org/articles/voiceover/mobile)
+
+You can run VoiceOver training on macOS by going to System Preferences > Accessibility > VoiceOver > Open VoiceOver Training…
+
+#### Using Assistiv Labs to test with assistive technologies
+
+You can use [Assistiv Labs](https://assistivlabs.com/) to test your service with JAWS and NVDA.
+
+Contact the Head of the Frontend community to request an account.
+
+We have been assured by Assistiv Labs that the Virtual Machine (VM) is deleted when you exit, however in the interests of security and to make sure we do not leak any personal data or sensitive material:
+
+- treat the VM you are using as if it was a shared device – like using a public computer in an internet cafe or library
+- do not use it to test any confidential or secret service, or services containing content that is considered sensitive
+- do not use any credentials from live systems with access to "real data" during your testing
+- do not sign in to any accounts, unless those accounts are used solely for the purposes of testing (for example, a test account in an integration or staging environment)
+- make configuration changes to the system through your own device rather than the VM
+
+You should also make sure you understand how using the service affects any other requirements for your service, such as PCI (Payment Card Industry) compliance, and assess any additional risks. You can speak to your service's information assurance lead or the GDS Privacy Team for specific guidance.
 
 ### Test content served by third party systems
 
