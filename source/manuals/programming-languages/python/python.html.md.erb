@@ -1,7 +1,7 @@
 ---
 title: Python style guide
-last_reviewed_on: 2020-06-04
-review_in: 6 months
+last_reviewed_on: 2021-01-05
+review_in: 3 months
 ---
 
 # <%= current_page.data.title %>
@@ -70,9 +70,9 @@ you need on this page.
 ### How to use Flake8
 
 Implementation of [Flake8][] will depend on whether the repository you want to run the checks on is a module or an application,
-and how your dependencies and automated test ci is set up.
+and how your dependencies, automated testing, and continiuous integration are set up.
 
-You'll want to add the Flake8 module (available from [PyPI][]) to your 'dev' or 'test' requirements/ dependencies.
+You'll want to add the Flake8 module (available from [PyPI][]) to your 'dev' or 'test' requirements/dependencies.
 You'll then likely want to run it before you run your unit tests.
 
 ### Example usage
@@ -101,7 +101,7 @@ Unused imports are considered a bad thing because they pollute the namespace, in
 developer needs to keep track of.
 
 Unused imports are a fairly simple example but errors like `F811 redefinition of unused <name> from line <N>`
-or `F841 local variable <name> is assigned to but never used` can indicate that there are real problems with the code, and that it may not be acting as expected.
+or `F841 local variable <name> is assigned to but never used` can indicate there are real problems with the code, and it may not be acting as expected.
 
 For a full list of error codes check out:
 
@@ -109,17 +109,15 @@ For a full list of error codes check out:
 * [Flake8 error codes list][flake8-error-codes-list]
 
 
-
 ### Plugins
-Flake8 has been designed to be extensible and as such has spawned numerous plugins. They're worth a look to see if
-any would be particularly beneficial to your
-code base.
+
+Flake8 has been designed to be extensible and has numerous plugins. They're worth a look to see if
+any would be particularly beneficial to your code base.
 
 Examples include checks for requiring copyright/licensing strings, requiring docstrings
 or warnings for upcoming deprecations.
 
 A list can be found [by performing a PyPI search.][flake8-plugins]
-
 
 ### Flake8 per file ignores
 
