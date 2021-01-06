@@ -1,12 +1,12 @@
 ---
 title: Performance testing
-last_reviewed_on: 2020-06-26
+last_reviewed_on: 2021-01-05
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-Make sure your service performs the way users need it to. If your service does not perform as expected when there are extra loads it will impact your users.
+Make sure your service performs the way users need it to. If your service does not perform as expected under extra load it will impact your users.
 
 You should run performance tests to check how your service performs in certain situations. For example, during a [denial-of-service attack (DoS attack)](https://www.ncsc.gov.uk/guidance/denial-service-dos-guidance-collection).
 
@@ -14,7 +14,7 @@ The Service Manual has more information about why you need to [test your service
 
 ## Plan your tests
 
-Plan and scope your test whether you're testing the entire service or specific user journeys.
+Plan and scope your test. Are you testing the entire service or specific user journeys? Which downstream services will the test impact?
 
 ### Estimate costs
 
@@ -50,7 +50,7 @@ Test environments must resemble your production environment as far as possible s
 
 Consider how to [monitor service performance](https://gds-way.cloudapps.digital/standards/monitoring.html) during the load test. Your service will likely already have dashboards and graphs set up for common metrics such as CPU and memory utilization. Decide if your current metrics are sufficient or if you need to turn on additional logging or configure profiling traces.
 
-Perform practice runs of your tests to make sure they work as expected. You may need to disable  [Cross-Site Request Forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) tokens and rate limiting in your test environment.
+Perform practice runs of your tests to make sure they work as expected. You may need to disable [Cross-Site Request Forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) tokens and rate limiting in your test environment.
 
 ## Run your tests
 
@@ -74,7 +74,7 @@ You can fix common problems like inefficient database queries by introducing laz
 
 Problems with your infrastructure can be harder to resolve. For example, if your service is read-heavy you can introduce additional caching to improve performance.
 
-You can scale infrastructure vertically by adding more power, for example upgrading CPUs, memory or storage. You can also scale  horizontally by adding additional instances of your service’s components. You can only do this if your service supports this type of scaling.
+You can scale infrastructure vertically by adding more power, for example upgrading CPUs, memory or storage. You can also scale horizontally by adding additional instances of your service’s components. You can only do this if your service supports this type of scaling.
 
 [The Twelve-Factor App](https://12factor.net/) provides more information on how to scale your infrastructure and build SaaS.
 
@@ -88,7 +88,7 @@ Performance testing helps determine if you’re using the correct machine instan
 
 ## Performance testing for serverless environments
 
-Testing can help you tune serverless components’ performance. For example, Amazon prices [AWS Lambda](https://aws.amazon.com/lambda/) on the number of function executions, allocated memory and estimated execution time.
+Testing can help you tune serverless components’ performance. For example, Amazon prices [AWS Lambda](https://aws.amazon.com/lambda/) on the number of function executions, allocated memory and estimated execution time. The [AWS Lambda Power Tuning tool](https://github.com/alexcasalboni/aws-lambda-power-tuning) provides performance data at different Lambda configurations and can help you right-size your functions.
 
 Performance testing will help determine if a function is taking longer to execute because it does not have enough memory allocated, or is over-provisioned with memory and costing more than necessary.
 
