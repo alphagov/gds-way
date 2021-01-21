@@ -20,7 +20,7 @@ We generally use [IntelliJ IDEA](https://www.jetbrains.com/idea/) within GDS. Us
 
 Variable and field names should match the names of their types (for example, an `InputStream` could be named `inputStream` or `is`), or have descriptive names reflecting the context of their use (for example, a `Set<String>` where each `String` is a username could be named `usernames`).
 
-Always use curly braces around the body of an `if` statement, even if it’s only a single line.
+Always use curly braces around the body of an `if`, `else`, `for`, `do` or `while` statement, even if it’s only a single line. Follow the Kernighan and Ritchie (K&R) ‘Egyptian brackets’ style where there is no line break before the opening brace. See the [braces section of the Google Java style guide](https://google.github.io/styleguide/javaguide.html#s4.1-braces) for more details.
 
 Use the [GDS Way EditorConfig file](editorconfig), which has settings for things like code indentation. Place a copy of this file named `.editorconfig` in the root of your project to have IntelliJ IDEA and some other editors automatically apply the settings. If your editor does not support EditorConfig, manually configure its settings to match.
 
