@@ -36,6 +36,22 @@ You should not use any wildcard imports. Wildcard imports can cause existing cod
 
 You can configure IntelliJ to explicitly import all classes and static methods in Preferences → Editor → Code Style → Java → Imports with “Class count to use import with *” and “Names count to use static import with *” both set to a very high number, for example, 1000.
 
+Static imports should be avoided in most cases because the names of methods and constants often do not make sense without the context of the type they’re from.
+
+Static imports are appropriate in some cases. Tests often read more fluently when assertion and matcher methods, which are well known and widely understood, are statically imported. For example, compare:
+
+```
+Assert.assertThat(actual, Is.is(expected));
+```
+
+… to:
+
+```
+assertThat(actual, is(expected));
+```
+
+Similarly, `Math.max(…)`, `Math.PI` and `ChronoUnit.DAYS` could be statically imported because their names make sense on their own. However, `LocalDate.of(…)` should not be statically imported because the type it comes from is crucial for comprehension.
+
 The IntelliJ “Optimize Imports” command sorts imports and removes any that are unused. Before committing some changes, you can select all the classes in the modified files pane and then use this command to fix the imports for just the classes you modified.
 
 ## Optionals
