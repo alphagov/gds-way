@@ -1,6 +1,6 @@
 ---
 title: Java style guide
-last_reviewed_on: 2020-07-14
+last_reviewed_on: 2021-01-20
 review_in: 6 months
 ---
 
@@ -52,7 +52,7 @@ assertThat(actual, is(expected));
 
 Similarly, `Math.max(…)`, `Math.PI` and `ChronoUnit.DAYS` could be statically imported because their names make sense on their own. However, `LocalDate.of(…)` should not be statically imported because the type it comes from is crucial for comprehension.
 
-The IntelliJ “Optimize Imports” command sorts imports and removes any that are unused. Before committing some changes, you can select all the classes in the modified files pane and then use this command to fix the imports for just the classes you modified.
+The IntelliJ ‘Optimize Imports’ command sorts imports and removes any that are unused. Before committing some changes, you can select all the classes in the modified files pane and then use this command to fix the imports for just the classes you modified.
 
 ## Optionals
 
@@ -83,10 +83,10 @@ It can also remove duplication where the class name and the variable name are th
 
 ```java
 // Java 9
-CheckResponse checkResponse = service.getCheckResponse(...);
+CheckResponse checkResponse = service.getCheckResponse();
 
 // Java 10+
-var checkResponse = service.getCheckResponse(...);
+var checkResponse = service.getCheckResponse();
 ```
 
 Be mindful that `var` hides the type of the variable. If the variable name makes the type obvious, this usually isn’t a problem. But if it is not clear from either the variable name or the right-hand side of the assignment, it might be better to explicitly write the type.
