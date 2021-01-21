@@ -58,6 +58,8 @@ The IntelliJ “Optimize Imports” command sorts imports and removes any that a
 
 If a getter may return `null`, you should usually return an `Optional` instead.
 
+`Optional` is intended to only to represent the absence of a result: do not use it for fields or method parameters. Java language architect [Brian Goetz posted a StackOverflow answer explaining the intent of `Optional`](https://stackoverflow.com/questions/26327957/should-java-8-getters-return-optional-type/26328555#26328555) with further reasoning.
+
 You almost never need to use the `isPresent()` method on an `Optional`. Use `ifPresent(…)`, `ifPresentOrElse(…)`, `map(…)` or `flatMap(…)` instead. See DZone Java Zone’s article _[
 Optional isPresent() Is Bad for You](https://dzone.com/articles/optional-ispresent-is-bad-for-you)_ for more details.
 
