@@ -1,24 +1,26 @@
 ---
 title: Java style guide
-last_reviewed_on: 2020-07-14
+last_reviewed_on: 2021-01-20
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-The purpose of this style guide is to provide some conventions for working on Java code within GDS. The old [Sun/Oracle Java style guide](https://www.oracle.com/technetwork/java/index-135089.html) and the more recent [Google Java style guide](https://google.github.io/styleguide/javaguide.html) are useful starting points.
+The purpose of this style guide is to provide some conventions for working on Java code within GDS.
 
-The more far-reaching _[Java for Small Teams](https://ncrcoe.gitbooks.io/java-for-small-teams/)_ ebook can be read online at no cost. While not free, _Effective Java_ by Joshua Bloch is also an excellent resource. The GDS Library has physical copies of the book.
+The [Google Java style guide](https://google.github.io/styleguide/javaguide.html) is a good starting point. The old [Sun/Oracle Java style guide](https://www.oracle.com/technetwork/java/index-135089.html) is still largely relevant but it has not been updated since 1999 and does not reflect recent changes to the language.
+
+The more far-reaching _[Java for Small Teams](https://ncrcoe.gitbooks.io/java-for-small-teams/)_ ebook can be read online at no cost. While not free, _Effective Java_ by Joshua Bloch is also an excellent resource. The GDS Library has physical copies of the book or you can buy a copy using the Learning and Development budget (see the [books page on the wiki](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/cross-gds-social/book-club-library)).
+
+While the above resources are good guides, they may conflict with either each other or your team’s established practices. We favour consistency across our code, so make sure that you have the agreement of your team when considering using a new or different method or paradigm to those currently in use.
 
 We generally use [IntelliJ IDEA](https://www.jetbrains.com/idea/) within GDS. Using it consistently helps when pairing and mob programming. GDS is not able to purchase licences of the commercial editions of IntelliJ IDEA.
 
-We favour consistency across our code, so make sure that you have the agreement of your team when considering using a new or different method or paradigm to those currently in use.
-
 ## Code formatting
 
-Variable and field names should match the class they are instantiating, or have a descriptive name reflecting the context of their use.
+Variable and field names should match the names of their types (for example, an `InputStream` could be named `inputStream` or `is`), or have descriptive names reflecting the context of their use (for example, a `Set<String>` where each `String` is a username could be named `usernames`).
 
-Always use curly braces around the body of an `if` statement, even if it’s only a single line.
+Always use curly braces around the body of an `if`, `else`, `for`, `do` or `while` statement, even if it’s only a single line. Follow the Kernighan and Ritchie (K&R) ‘Egyptian brackets’ style where there is no line break before the opening brace. See the [braces section of the Google Java style guide](https://google.github.io/styleguide/javaguide.html#s4.1-braces) for more details.
 
 Use the [GDS Way EditorConfig file](editorconfig), which has settings for things like code indentation. Place a copy of this file named `.editorconfig` in the root of your project to have IntelliJ IDEA and some other editors automatically apply the settings. If your editor does not support EditorConfig, manually configure its settings to match.
 
@@ -30,13 +32,33 @@ Consider whether a dependency injection framework is appropriate for your projec
 
 ## Imports
 
-You should not use any wildcard imports.  You can configure IntelliJ to explicitly import all classes and static methods in Preferences → Editor → Code Style → Java → Imports with “Class count to use import with *” and “Names count to use static import with *” both set to a very high number, for example, 1000.
+You should not use any wildcard imports. Wildcard imports can cause existing code to break if a new type is added to a package with the same name as a type in another package. This infamously happened with Java SE 1.2, which introduced `java.util.List` when there was already `java.awt.List`, breaking any classes that used `List` and imported both `java.util.*` and `java.awt.*`.
 
-The IntelliJ “Optimize Imports” command sorts imports and removes any that are unused. Before committing some changes, you can select all the classes in the modified files pane and then use this command to fix the imports for just the classes you modified.
+You can configure IntelliJ to explicitly import all classes and static methods in Preferences → Editor → Code Style → Java → Imports with “Class count to use import with *” and “Names count to use static import with *” both set to a very high number, for example, 1000.
+
+Static imports should be avoided in most cases because the names of methods and constants often do not make sense without the context of the type they’re from.
+
+Static imports are appropriate in some cases. Tests often read more fluently when assertion and matcher methods, which are well known and widely understood, are statically imported. For example, compare:
+
+```
+Assert.assertThat(actual, Is.is(expected));
+```
+
+… to:
+
+```
+assertThat(actual, is(expected));
+```
+
+Similarly, `Math.max(…)`, `Math.PI` and `ChronoUnit.DAYS` could be statically imported because their names make sense on their own. However, `LocalDate.of(…)` should not be statically imported because the type it comes from is crucial for comprehension.
+
+The IntelliJ ‘Optimize Imports’ command sorts imports and removes any that are unused. Before committing some changes, you can select all the classes in the modified files pane and then use this command to fix the imports for just the classes you modified.
 
 ## Optionals
 
 If a getter may return `null`, you should usually return an `Optional` instead.
+
+`Optional` is intended to only to represent the absence of a result: do not use it for fields or method parameters. Java language architect [Brian Goetz posted a StackOverflow answer explaining the intent of `Optional`](https://stackoverflow.com/questions/26327957/should-java-8-getters-return-optional-type/26328555#26328555) with further reasoning.
 
 You almost never need to use the `isPresent()` method on an `Optional`. Use `ifPresent(…)`, `ifPresentOrElse(…)`, `map(…)` or `flatMap(…)` instead. See DZone Java Zone’s article _[
 Optional isPresent() Is Bad for You](https://dzone.com/articles/optional-ispresent-is-bad-for-you)_ for more details.
@@ -61,10 +83,10 @@ It can also remove duplication where the class name and the variable name are th
 
 ```java
 // Java 9
-CheckResponse checkResponse = service.getCheckResponse(...);
+CheckResponse checkResponse = service.getCheckResponse();
 
 // Java 10+
-var checkResponse = service.getCheckResponse(...);
+var checkResponse = service.getCheckResponse();
 ```
 
 Be mindful that `var` hides the type of the variable. If the variable name makes the type obvious, this usually isn’t a problem. But if it is not clear from either the variable name or the right-hand side of the assignment, it might be better to explicitly write the type.
