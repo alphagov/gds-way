@@ -110,7 +110,6 @@ User journey for choosing a Grafana dashboard:
 2. The user chooses a graph on the dashboard.
 3. The user drills down (accesses data at a lower level in the hierarchy of the data structure) to see more details about the graph. 
 
-![User journey for choosing a Grafana dashboard](../images/user-journey-for-choosing-a-grafana-dashboard.png)
 
 ### Defining what good means
 
@@ -130,7 +129,6 @@ The team mapped out the system components to complete the user journey “choose
 
 #### Choosing a Grafana dashboard: high-level system components
 
-![Choose a Grafana dashboard high-level system components](../images/choose-a-grafana-dashboard-high-level-system-components.png)
 
 The team defined the SLI over the last hour the service collected metrics, identifying:
 
@@ -150,13 +148,11 @@ The availability per hour of the SLI is the number of total requests minus the n
 
 The latency per hour of the SLI is the number of requests within 2.5 seconds divided by the number of total requests multiplied by 100%.
 
-![Grafana dashboard points of measurement graph](../images/dashboard-points-of-measurement.png)
 
 #### Choosing a Grafana dashboard: points of measurement
 
 The team looked at the components to figure out the best place to collect data for their SLIs. They looked for the point closest to the end user, so that the metrics would be representative of their experience. For example, if the dashboard was loading slowly for users, the SLI would reflect this accurately. In this case, the team collected data using a component called the PaaS Prometheus Exporter, which was closest to the end user:
 
-![Choose a Grafana dashboard high-level system components](../images/choosing-a-grafana-dashboard-points-of-measurement.png)
 
 ### Creating tasks and iterating SLIs
 
