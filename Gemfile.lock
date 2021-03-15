@@ -13,7 +13,6 @@ GEM
     backports (3.20.2)
     chronic (0.10.2)
     chunky_png (1.4.0)
-    coderay (1.1.3)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -44,8 +43,7 @@ GEM
     fast_blank (1.0.0)
     fastimage (2.2.3)
     ffi (1.15.0)
-    govuk_tech_docs (2.2.0)
-      activesupport
+    govuk_tech_docs (2.2.1)
       chronic (~> 0.10.2)
       middleman (~> 4.0)
       middleman-autoprefixer (~> 2.10.0)
@@ -55,11 +53,8 @@ GEM
       middleman-sprockets (~> 4.0.0)
       middleman-syntax (~> 3.2.0)
       nokogiri
-      openapi3_parser (~> 0.5.0)
-      pry
+      openapi3_parser (~> 0.9.0)
       redcarpet (~> 3.5.0)
-      sass
-      sprockets (~> 4.0.0)
     haml (5.2.1)
       temple (>= 0.8.0)
       tilt
@@ -75,7 +70,6 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
     memoist (0.16.2)
-    method_source (1.0.0)
     middleman (4.3.11)
       coffee-script (~> 2.2)
       haml (>= 4.0.5)
@@ -133,8 +127,9 @@ GEM
     nokogiri (1.11.2)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
-    openapi3_parser (0.5.2)
+    openapi3_parser (0.9.0)
       commonmarker (~> 0.17)
+      psych (~> 3.1)
     padrino-helpers (0.13.3.4)
       i18n (~> 0.6, >= 0.6.7)
       padrino-support (= 0.13.3.4)
@@ -142,9 +137,7 @@ GEM
     padrino-support (0.13.3.4)
       activesupport (>= 3.1)
     parallel (1.20.1)
-    pry (0.14.0)
-      coderay (~> 1.1)
-      method_source (~> 1.0)
+    psych (3.3.1)
     public_suffix (4.0.6)
     racc (1.5.2)
     rack (2.2.3)
