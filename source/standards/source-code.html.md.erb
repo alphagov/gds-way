@@ -66,6 +66,29 @@ Update the application's README to explain why the repository has been archived,
 
 ## Working with Git
 
+### Default branch name
+
+Your repository's default branch should be called `main`.
+
+To configure git to use `main` for new repositories, first make sure you are using git 2.28 or later, then run:
+
+    git config --global init.defaultBranch main
+
+To migrate existing repositories from `master` to `main`, you can use
+[GitHub's branch renaming
+tool](https://github.com/github/renaming#renaming-existing-branches).
+
+Before you rename your default branch, you should consider the impact this will have on:
+
+ - internal users
+ - external users
+ - your continuous integration (CI) system (for example, Concourse pipelines or GitHub actions)
+
+You can configure some CI systems to check out the default branch rather than hardcoding a branch name:
+
+ - [GitHub Actions](https://github.blog/changelog/2020-07-22-github-actions-better-support-for-alternative-default-branch-names/) supports a `$default-branch` macro
+ - [concourse-git-resource](https://github.com/concourse/git-resource): if you do not set `branch`, it will check out the default branch
+
 ### Commit messages
 
 Writing good commit messages is important. Not just for yourself, but for other
