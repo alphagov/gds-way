@@ -9,14 +9,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: '2.6'
+        bundler-cache: true
     - name: Set up Node
       uses: actions/setup-node@v1
       with:
         node-version: '12'
     - name: Build and test
       run: |
-        bundle install --without development
         bundle exec middleman build
