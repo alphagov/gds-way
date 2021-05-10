@@ -164,3 +164,27 @@ The [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.
 The [AdoptOpenJDK](https://adoptopenjdk.net/) project (backed by big names including IBM and Microsoft) provides fully open-source pre-built OpenJDK binaries. For LTS releases (such as Java 8 and Java 11), AdoptOpenJDK have committed to releasing free updates for several years.
 
 In addition, AdoptOpenJDK has benefits such as being available in package repositories, having friendly installers for desktop use, and offering ready-made [Docker images containing OpenJDK](https://hub.docker.com/u/adoptopenjdk).
+
+## Publishing artifacts
+
+We recommend publishing artifacts (for which the source is already public) to [Maven Central](https://search.maven.org/).
+
+You should _not_ use Maven Central to publish artifacts for which the source is closed or contains other proprietary assets, as it is a public repository with anonymous access.
+
+### Claiming group ids
+
+You will need to claim one or more [group ids](https://maven.apache.org/guides/mini/guide-naming-conventions.html) in order to publish an artifact to Maven Central. The central repository is run and operated by Sonatype, and you will need to register for an account on their JIRA instance to request control of a group id.
+
+The credentials used to create this account will be used during the publishing process, and should be stored safely and in accordance with any programme-specific guidance.
+
+You should follow Sonatype's [guidance](https://central.sonatype.org/publish/publish-guide/) on registering for and claiming a group id such as `uk.gov.example`. It is likely that you will be asked to prove your identity as a government actor, to prevent malicious parties publishing artifacts and claiming that they have been issued by the UK government.
+
+### Signing artifacts
+
+Sonatype requires that artifacts published to their repository have been signed with a published GPG key. Each programme that wants to publish artifacts should create their own GPG key, publish it to a public keyserver, then store the private key safely and in accordance with any programme-specific guidance.
+
+The key and its associated passphrase will be used during the publishing process. This will require making it available safely to the task runner, for example Concourse, that is performing the deployment.
+
+We recommend additionally publishing the public keys elsewhere, for example as a public GitHub repository, so that a third-party user knows an artifact is signed by a key that we have declared we use for signing.
+
+Sonatype publishes build-tool-specific guidance for publishing and releasing artifacts on Maven Central. GDS primarily uses [Maven](https://central.sonatype.org/publish/publish-maven/) and [Gradle](https://central.sonatype.org/publish/publish-gradle/) as their build tools.
