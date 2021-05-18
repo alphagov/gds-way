@@ -78,6 +78,10 @@ is your only output option:
 * [Logstash HTTP output] and [HEC]
 * [Fluentd to HEC]
 
+## Filtering out sensitive information
+
+You should ensure that sensitive information, such as query paramenters containing [personally identifiable information (PII)], is filterered out before logs are shipped. Make use of log filtering mechanisms which may be present in the application framework you are using, [such as in Ruby on Rails].
+
 ## Structured logging
 
 In order to allow for rich querying of log data you should ensure that your logs
@@ -138,3 +142,5 @@ drain logs into it from your app.
 [Logstash HTTP output]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-http.html
 [HEC]: https://docs.splunk.com/Documentation/Splunk/latest/Data/HECExamples
 [Fluentd to HEC]: https://github.com/splunk/fluent-plugin-splunk-hec
+[personally identifiable information (PII)]: https://en.wikipedia.org/wiki/Personal_data
+[such as in Ruby on Rails]: https://guides.rubyonrails.org/action_controller_overview.html#log-filtering
