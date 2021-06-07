@@ -41,3 +41,4 @@ redirects:
   /standards/cyber-security-overview.html: /standards/cdio-pillars.html#cdio-security
   /standards/reliability-engineering.html: /standards/cdio-pillars.html#reliability-engineering
   /standards/testing-with-rspec.html: /manuals/programming-languages/ruby.html#testing-with-rspec
+  /standards/technical-operations.html: /standards/cdio-pillars.html
