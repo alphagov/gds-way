@@ -1,7 +1,7 @@
 ---
 title: JavaScript coding style
-last_reviewed_on: 2020-06-25
-review_in: 3 months
+last_reviewed_on: 2020-11-25
+review_in: 12 months
 ---
 
 # <%= current_page.data.title %>
@@ -23,23 +23,37 @@ review_in: 3 months
 
 ## Linting
 
-We follow [standardjs](http://standardjs.com/), an opinionated JavaScript linter.
+We follow [standardjs](http://standardjs.com/), an opinionated JavaScript linter. In cases where [standard conflicts with a service's browser support](#when-to-use-standardx) we use [standardx][].
+
 All JavaScript files follow its conventions, and it typically runs on CI to ensure that new pull requests are in line with them.
 
-## Running standard manually
+[standardx]: https://github.com/standard/standardx
+
+### Running standard manually
 
 To check the whole codebase, run:
 
 ```bash
-npm install --global standard
-standard
+npx standard
 ```
-
 ### Running standard in your editor
 
 Easier than running standard manually is to install it as a plugin in your editor. This way, it will run automatically while you work, catching errors as they happen on a per-file basis.
 
-There are [official guides for most of the popular editors](http://standardjs.com/index.html#text-editor-plugins).
+There are [official guides for most of the popular editors](http://standardjs.com/index.html#are-there-text-editor-plugins).
+
+### When to use standardx
+
+You should use [standardx][] when the standard's rule set conflicts with the browsers your project supports. For example, the [no-var](https://eslint.org/docs/rules/no-var) rule in standard - which prefers `let` or `const` over `var` - prevents JavaScript usage in versions of Internet Explorer < 11. Adopting this rule would mean explicitly breaking JavaScript for those browsers.
+
+Once installed you can then override standard rules with an [`.eslintrc`][eslintrc] file or an `eslintConfig` entry in package.json ([example][govuk-warnings]).
+
+You should be cautious to only make use of standardx to resolve compatibility issues and not as a means to adjust rules to individual preferences.
+
+Note: you may find that using standardx complicates integration with text editors.
+
+[eslintrc]: https://eslint.org/docs/user-guide/configuring
+[govuk-warnings]: https://github.com/alphagov/govuk_publishing_components/commit/ea7f0becc76f73780b6cb33701bea9e58f15f91a
 
 ### Why standard?
 
@@ -105,17 +119,13 @@ Use soft tabs with a two space indent.
   })
   ```
 
-  **Why:** This lets future developers know how to interact with objects and
-  sets the appropriate affordances. It also follows the conventions of the
-  standard library.
+**Why:** This lets future developers know how to interact with objects and sets the appropriate affordances. It also follows the conventions of the standard library.
 
 ## CoffeeScript
 
 Do not use CoffeeScript.
 
-**Why:** It's an extra abstraction and introduces another
-language for developers to learn. Using JavaScript gives us guaranteed
-performance characteristics and more well known support paths.
+**Why:** It's an extra abstraction and introduces another language for developers to learn. Using JavaScript gives us guaranteed performance characteristics and more well known support paths.
 
 ## HTML class hooks
 
@@ -123,18 +133,13 @@ When attaching JavaScript to the DOM use a `.js-` prefix for the HTML classes.
 
 Eg `js-hidden` or `js-tab`.
 
-**Why:** This makes it completely transparent what the class is used for within
-the HTML. It also makes it much easier to search in a project to remove old
-behaviour.
+**Why:** This makes it completely transparent what the class is used for within the HTML. It also makes it much easier to search in a project to remove old behaviour.
 
 ## Styling elements
 
-Do not apply styles directly inside JavaScript. You should only ever apply CSS
-classes and style from there.
+Do not apply styles directly inside JavaScript. You should only ever apply CSS classes and style from there.
 
-**Why:** This reduces the risk of clobbering user stylesheets and mixing
-concerns across different code bases. Also see [HTML class
-hooks](#html-class-hooks).
+**Why:** This reduces the risk of clobbering user stylesheets and mixing concerns across different code bases. Also see [HTML class hooks](#html-class-hooks).
 
 ## Strict mode
 
@@ -142,9 +147,8 @@ You should add the `'use strict'` statement to the top of your module functions.
 
 **Why:** This enables [strict
 mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode).
-Strict mode converts many mistakes, such as undefined variables, into errors
-which makes it easier to determine why things are not working. It also forces
-scope so you do not accidentally export globals.
+
+Strict mode converts many mistakes, such as undefined variables, into errors which makes it easier to determine why things are not working. It also forces scope so you do not accidentally export globals.
 
 ## Modules
 
@@ -170,17 +174,11 @@ To do this manually, wrap your code in a closure, then attach the module to the 
 })(window); // eslint-disable-line semi
 ```
 
-**Why:** attaching to the `GOVUK` object keeps us from polluting the global
-namespace. Checking for or creating the `GOVUK` object means the module can
-be reused on any project (internal or external) without having to modify it.
-You get the benefits of [strict mode](#strict-mode) which include stopping your
-module from leaking variables into the global scope.
-The [IIFE](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) should be wrapped with semicolons to ensure no issues with concatenation can happen.
+**Why:** attaching to the `GOVUK` object keeps us from polluting the global namespace. Checking for or creating the `GOVUK` object means the module can be reused on any project (internal or external) without having to modify it. You get the benefits of [strict mode](#strict-mode) which include stopping your module from leaking variables into the global scope. The [IIFE](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) should be wrapped with semicolons to ensure no issues with concatenation can happen.
 
 ## Module structure
 
-Module logic should be broken down into small testable functions. The functions
-should be exposed as methods on the module rather than hidden inside a closure.
+Module logic should be broken down into small testable functions. The functions should be exposed as methods on the module rather than hidden inside a closure.
 
 ```javascript
 // Bad
@@ -214,11 +212,7 @@ GOVUK.myModule = {
 }
 ```
 
-**Why:** Having small well named functions lets developers who are unfamiliar
-with the code understand what is going on faster. Having logic in small
-functions makes it easier to unit test each of those functions to prove they
-performs as expected. Having those functions exposed as methods on the module
-makes it possible to test those functions in isolation.
+**Why:** Having small well named functions lets developers who are unfamiliar with the code understand what is going on faster. Having logic in small functions makes it easier to unit test each of those functions to prove they performs as expected. Having those functions exposed as methods on the module makes it possible to test those functions in isolation.
 
 ## jQuery
 
@@ -226,9 +220,7 @@ Avoid jQuery in new projects.
 
 In older projects put together a plan to migrate away from jQuery.
 
-**Why:** jQuery had been used to provide browser support for older browsers.
-However, browser support for ES5 JavaScript is now widespread enough that a library like jQuery is unnecessary.
-The older versions of jQuery that we use have security vulnerabilities and are no longer maintained by the jQuery team.
+**Why:** jQuery had been used to provide browser support for older browsers. However, browser support for ES5 JavaScript is now widespread enough that a library like jQuery is unnecessary. The older versions of jQuery that we use have security vulnerabilities and are no longer maintained by the jQuery team.
 
 ## Supporting older browsers
 
@@ -253,12 +245,10 @@ function addAutoSubmitToInput (input, options) {
 }
 ```
 
-**Why:** by using named options you do not necessarily have to read the
-internals of the method being called to work out what the arguments mean. Given
-a call to `addAutoSubmitToInput($input, './search', 20, false)` you would have
-to go to that method to find out what `20` or `false` mean. A call to
-`addAutoSubmitToInput($input, { action: './search', timeout: 20, debug: false
-})` gives you context as to what the arguments mean. It also makes it
-easier to refactor arguments without having to change all method calls.
+**Why:** by using named options you do not necessarily have to read the internals of the method being called to work out what the arguments mean.
+
+Given a call to `addAutoSubmitToInput($input, './search', 20, false)` you would have to go to that method to find out what `20` or `false` mean.
+
+A call to `addAutoSubmitToInput($input, { action: './search', timeout: 20, debug: false })` gives you context as to what the arguments mean. It also makes it easier to refactor arguments without having to change all method calls.
 
 [Connascence of naming is a weaker form of connascence than connascence of position](http://en.wikipedia.org/wiki/Connascence_%28computer_programming%29#Types_of_connascence).

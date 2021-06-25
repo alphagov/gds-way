@@ -1,7 +1,7 @@
 ---
 title: Python style guide
-last_reviewed_on: 2020-06-04
-review_in: 6 months
+last_reviewed_on: 2021-04-08
+review_in: 3 months
 ---
 
 # <%= current_page.data.title %>
@@ -70,9 +70,9 @@ you need on this page.
 ### How to use Flake8
 
 Implementation of [Flake8][] will depend on whether the repository you want to run the checks on is a module or an application,
-and how your dependencies and automated test ci is set up.
+and how your dependencies, automated testing, and continiuous integration are set up.
 
-You'll want to add the Flake8 module (available from [PyPI][]) to your 'dev' or 'test' requirements/ dependencies.
+You'll want to add the Flake8 module (available from [PyPI][]) to your 'dev' or 'test' requirements/dependencies.
 You'll then likely want to run it before you run your unit tests.
 
 ### Example usage
@@ -101,7 +101,7 @@ Unused imports are considered a bad thing because they pollute the namespace, in
 developer needs to keep track of.
 
 Unused imports are a fairly simple example but errors like `F811 redefinition of unused <name> from line <N>`
-or `F841 local variable <name> is assigned to but never used` can indicate that there are real problems with the code, and that it may not be acting as expected.
+or `F841 local variable <name> is assigned to but never used` can indicate there are real problems with the code, and it may not be acting as expected.
 
 For a full list of error codes check out:
 
@@ -109,17 +109,15 @@ For a full list of error codes check out:
 * [Flake8 error codes list][flake8-error-codes-list]
 
 
-
 ### Plugins
-Flake8 has been designed to be extensible and as such has spawned numerous plugins. They're worth a look to see if
-any would be particularly beneficial to your
-code base.
+
+Flake8 has been designed to be extensible and has numerous plugins. They're worth a look to see if
+any would be particularly beneficial to your code base.
 
 Examples include checks for requiring copyright/licensing strings, requiring docstrings
 or warnings for upcoming deprecations.
 
 A list can be found [by performing a PyPI search.][flake8-plugins]
-
 
 ### Flake8 per file ignores
 
@@ -146,7 +144,7 @@ Commonly a configuration file will live in the root of the package. By default [
 
 ```
 [flake8]
-# Rule definitions: http://flake8.pycqa.org/en/latest/user/error-codes.html
+# Rule definitions: https://flake8.pycqa.org/en/latest/user/error-codes.html
 # D203: 1 blank line required before class docstring
 # W503: line break before binary operator
 exclude = venv*,__pycache__,node_modules,bower_components,migrations
@@ -316,7 +314,7 @@ of how likely your proposal is of being accepted as a pull request even before y
 
 [github-gds-way]: https://github.com/alphagov/gds-way
 [gds-way-deps]: /software-development/tracking-dependencies
-[github-gds-way-readme-making-changes]: https://github.com/alphagov/gds-way/blob/master/README.md#making-changes
+[github-gds-way-readme-making-changes]: https://github.com/alphagov/gds-way/blob/main/README.md#making-changes
 [gds-way-code-style-guides]: /software-development/style-guides
 [slack-python]: https://gds.slack.com/messages/python
 [linting]: linting.html
@@ -327,25 +325,25 @@ of how likely your proposal is of being accepted as a pull request even before y
 [PEP373]: https://www.python.org/dev/peps/pep-0373/
 [GPSG]: https://google.github.io/styleguide/pyguide.html
 [PEP 8]: https://www.python.org/dev/peps/pep-0008/
-[Flake8]: http://flake8.pycqa.org/en/latest/
-[pycodestyle]: http://pycodestyle.pycqa.org/en/latest/
+[Flake8]: https://flake8.pycqa.org/en/latest/
+[pycodestyle]: https://pycodestyle.pycqa.org/en/latest/
 [Pyflakes]: https://github.com/pycqa/pyflakes
-[McCabe]: https://pypi.python.org/pypi/mccabe
+[McCabe]: https://pypi.org/project/mccabe/
 [dm-deps-commit]: https://github.com/alphagov/digitalmarketplace-api/commit/95ac12206d26e6b219dd381dd63641c33467afbd
 [dm-deps-commit-makefile]: https://github.com/alphagov/digitalmarketplace-api/commit/95ac12206d26e6b219dd381dd63641c33467afbd#diff-b67911656ef5d18c4ae36cb6741b7965
 [snyk.io]: https://snyk.io/
 [setup-deps]: https://docs.python.org/3/distutils/setupscript.html#relationships-between-distributions-and-packages
 [PEP 440]: https://www.python.org/dev/peps/pep-0440/#direct-references
 
-[DMAPI-flake8-config]: https://github.com/alphagov/digitalmarketplace-api/blob/master/.flake8
+[DMAPI-flake8-config]: https://github.com/alphagov/digitalmarketplace-api/blob/main/.flake8
 [WikiCyclomatic_complexity]: https://en.wikipedia.org/wiki/Cyclomatic_complexity
-[PyPI]: https://pypi.python.org/pypi
+[PyPI]: https://pypi.org/
 [Pyflakes]: https://github.com/pycqa/pyflakes
 
-[flake8-per-file-ignores]: http://flake8.pycqa.org/en/latest/user/options.html#cmdoption-flake8-per-file-ignores
-[flake8-plugins]: https://pypi.python.org/pypi?%3Aaction=search&term=flake8-&submit=search
+[flake8-per-file-ignores]: https://flake8.pycqa.org/en/latest/user/options.html#cmdoption-flake8-per-file-ignores
+[flake8-plugins]: https://pypi.org/search/?q=flake8-
 
-[pyflakes-error-codes]: http://flake8.pycqa.org/en/latest/user/error-codes.html
-[pycodestyle-error-codes-list]: http://pep8.readthedocs.io/en/latest/intro.html#error-codes
-[flake8-error-codes-list]: http://flake8.pycqa.org/en/latest/user/error-codes.html
-[flake8-noqa]: http://flake8.pycqa.org/en/latest/user/violations.html#in-line-ignoring-errors
+[pyflakes-error-codes]: https://flake8.pycqa.org/en/latest/user/error-codes.html
+[pycodestyle-error-codes-list]: https://pep8.readthedocs.io/en/latest/intro.html#error-codes
+[flake8-error-codes-list]: https://flake8.pycqa.org/en/latest/user/error-codes.html
+[flake8-noqa]: https://flake8.pycqa.org/en/latest/user/violations.html#in-line-ignoring-errors

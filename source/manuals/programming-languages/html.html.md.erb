@@ -1,6 +1,6 @@
 ---
 title: HTML coding style
-last_reviewed_on: 2020-03-06
+last_reviewed_on: 2020-10-01
 review_in: 6 months
 ---
 
@@ -15,34 +15,16 @@ Tools such as GOV.UK Frontend, that are used to help build services, may have
 Therefore, you will need to test your code in different browsers depending on
 which part of GDS you are working in.
 
-Whatever your level of browser support, HTML should be written in such a way
-that older browsers see an appropriate fallback or warning message. For example,
-some browsers do not support the `<video>` element, so you should ensure that
-some contextual information is included (the `<p>` element in this example):
-
-```html
-<video width="320" height="240" controls>
-  <source src="movie.mp4" type="video/mp4">
-  <source src="movie.ogg" type="video/ogg">
-  <p>Unable to load video. Please upgrade your browser.</p>
-</video>
-```
-
-When using HTML5 elements such as `<main>`, ensure that you include a
-[shim that allows them to be styled](https://github.com/aFarkas/html5shiv) in
-legacy browsers. Include the script inside a `<!--[if lt IE 9]><![endif]-->`
-conditional comment so that modern browsers do not download them.
-
-Your page should work with just HTML, before adding any CSS or JavaScript. Read
+Your page should work with only HTML, before adding any CSS or JavaScript. Read
 [building a resilient frontend using progressive enhancement](https://www.gov.uk/service-manual/technology/using-progressive-enhancement).
 
 ## Document structure
 
-Use HTML5 to structure your page semantically. Use ARIA roles to help
+Use HTML5 to structure your page semantically. Use [ARIA roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) to help
 older assistive technologies map the sections correctly.
 
-Léonie Watson explains [why using ARIA landmark roles in this way delivers the
-best experience for screen reader users](http://tink.uk/screen-readers-aria-roles-html5-support/).
+Léonie Watson explains [how to use ARIA landmark roles to deliver the
+best experience for screen reader users](https://tink.uk/screen-readers-aria-html5-too-much-information/).
 
 This document does not prescribe whether to use single or double quotes in attributes,
 whether to omit values from attributes that do not need them or whether to add
@@ -60,7 +42,7 @@ and any global navigation you may have.
 
 A "Skip to main content" link should be added to help screen reader and keyboard
 users skip past your general site navigation and get straight to the content.
-You can use the [GOV.UK skip link component from the design system](https://design-system.service.gov.uk/components/skip-link/)
+You can use the [skip link component from the GOV.UK Design System](https://design-system.service.gov.uk/components/skip-link/)
 for this.
 
 ### Sectioned content
@@ -78,13 +60,13 @@ Example:
 
 ```html
 <section aria-labelledby="introduction">
-    <h1 id="introduction">Introduction</h1>
-    <p>People have been catching fish for food since before recorded history...</p>
+  <h2 id="introduction">Introduction</h2>
+  <p>People have been catching fish for food since before recorded history...</p>
 </section>
 
 <section aria-labelledby="equipment">
-    <h1 id="equipment">Equipment</h1>
-    <p>The first thing you'll need is a fishing rod or pole that you find comfortable
+  <h2 id="equipment">Equipment</h2>
+  <p>The first thing you'll need is a fishing rod or pole that you find comfortable
     and is strong enough for the kind of fish you're expecting to try to land...</p>
 </section>
 ```
@@ -122,13 +104,16 @@ There should only be one `<h1>` element in a page.
 ### Text emphasis
 
 Italics should be avoided according to the [GOV.UK content style guide](https://www.gov.uk/guidance/style-guide).
+
 Bold can be used sparingly, but can make large blocks of text difficult to read.
 
 Semantically, words voiced with emphasis can be marked up with `<em>`, whereas
-words conveying a sense or urgency or warning should be marked up with `<strong>`.
-In theory, screen readers could adopt a different tone of voice for this markup,
-though none of the major ones currently do. Browsers traditionally render these
-in italics and bold respectively, so you may need to override `em` to not use italics.
+words conveying a sense or urgency or warning should be marked up with
+`<strong>`. In theory screen readers could adopt a different tone of voice for
+this markup, though none of the major ones currently do.
+
+Browsers will render `em` in italics and `strong` in bold by default, so you may
+need to override `em` to not use italics.
 
 As a rule, avoid using `<i>` or `<b>`, which are only useful in rare cases. It
 is usually better to use the `font-style` and `font-weight` CSS properties.
@@ -137,13 +122,13 @@ is usually better to use the `font-style` and `font-weight` CSS properties.
 
 Read the [Design System's Images section](https://design-system.service.gov.uk/styles/images/).
 
-### Buttons vs Links
+### Buttons vs links
 
 Links should be used for navigating to another page. Buttons should be used for submitting forms
 or interactions within the page (for example, expanding an element). Empty links (`<a href="#">`)
-should therefore be avoided.
+should be avoided.
 
-Links should not open new tabs or windows by default, but if users choose to to so (through keyboard
+Links should not open new tabs or windows by default, but if users choose to do so (through keyboard
 shortcuts or right-click context menu) then we should respect their choice.
 
 ### Visually hidden elements
@@ -156,7 +141,8 @@ Do not use `display: none` on this text, as this will get ignored by screen read
 
 Instead, use CSS which ensures the text gets 'conceptually' rendered, even if the result
 is not visible on the screen. You can use the
-[Sass mixins from govuk-frontend](https://github.com/alphagov/govuk-frontend/blob/master/src/govuk/utilities/_visually-hidden.scss).
+[Sass mixins from govuk-frontend](https://github.com/alphagov/govuk-frontend/blob/master/src/govuk/utilities/_visually-hidden.scss)
+or the classes `govuk-visually-hidden` and `govuk-visually-hidden-focusable`.
 
 Visually hidden text is often a sign that something can be simplified or made visible to
 benefit sighted users too, so should be used sparingly.

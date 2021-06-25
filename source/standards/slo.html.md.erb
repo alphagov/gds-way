@@ -1,6 +1,6 @@
 ---
 title: Make data-driven decisions with service level objectives
-last_reviewed_on: 2020-03-05
+last_reviewed_on: 2021-04-26
 review_in: 6 months
 ---
 
@@ -8,7 +8,7 @@ review_in: 6 months
 
 Service level objectives (SLOs) set out a target level for your service’s reliability. Using SLOs helps you make data-driven decisions about the [opportunity cost](https://www.investopedia.com/terms/o/opportunitycost.asp) of reliability work.
 
-You can use service level objectives (SLOs) and error budgets alongside [service level indicators](https://gds-way.cloudapps.digital/standards/slis.html) (SLIs) to help you make better decisions.
+You can use SLOs and error budgets alongside [service level indicators](https://gds-way.cloudapps.digital/standards/slis.html) (SLIs) to help you make better decisions.
 
 SLOs help you decide how to prioritise reliability work, such as bug fixes and architectural improvements, by stating the problem in a user-centric way. For example, ‘this bug affects 10% of users’ or ‘this will provide a faster experience for the users by 500ms’.
 
@@ -23,7 +23,7 @@ Current performance based on SLIs is usually a good place to start, especially i
 
 ### Your dependencies
 
-You’ll need to know the SLOs for other services that your service relies on. For example, your [hosting provider](https://gds-way.cloudapps.digital/standards/hosting.html) or any other components that are important to your users’ experience.
+You’ll need to know the SLOs for services your service relies on. For example, your [hosting provider](https://gds-way.cloudapps.digital/standards/hosting.html) or any other components that are important to your users’ experience.
 
 
 ### User satisfaction
@@ -33,7 +33,7 @@ You’ll need to be aware of current user satisfaction levels. SLOs give users a
 
 If your users are happy with the availability and latency of your service you can set your SLOs based on your current SLIs.
 
-In other cases, your user expectations will drive a set of SLOs the service’s current architecture may not achieve. You can reduce the gap between expectations and your SLO by using techniques like [ratcheting](https://martinfowler.com/articles/useOfMetrics.html#MetricsAsARatchet).
+In other cases, your user expectations will lead to a set of SLOs the service’s current architecture may not achieve. You can reduce the gap between expectations and your SLOs by using techniques like [ratcheting](https://martinfowler.com/articles/useOfMetrics.html#MetricsAsARatchet).
 
 
 ## Setting your first SLOs
@@ -41,7 +41,7 @@ In other cases, your user expectations will drive a set of SLOs the service’s 
 
 ### Use the SLIs as a reference
 
-Your SLIs will give you a good idea of how your current platform is doing and give you a baseline to reference to.
+Your SLIs will give you a good idea of how your current platform is doing and give you a baseline reference.
 
 
 ### Choose a time window
@@ -68,17 +68,12 @@ An error budget is usually expressed as a percentage rather than an absolute val
 
 435/1000x100% = 43.5%
 
-of its error budget
+of its error budget.
 
 If your error rate, which is the number of bad requests in this case, is less than 1,000 you’ve met your error budget.
 
 
 ### SLO burn rate and alerts
-
-This image  is a way of visualising your error budget against your error rate threshold. It tells you whether a service is experiencing abnormally high incident or error rates, and whether you need to take urgent action.
-
-![alt_text](../images/slo-burn-rate.png "image_tooltip")
-
 
 SLO burn rate is how fast, relative to the SLO, the service consumes the error budget.  An alerting window is defined to capture errors accumulated within this period before alerting.
 
@@ -201,7 +196,7 @@ Your team should agree on the SLOs and error budget policies. It’s useful to g
 *   delivery manager
 *   technical architect
 *   developers
-*   Tech Ops and SRE team members
+*   site reliability engineers
 
 
 ### Continuous improvement of SLOs

@@ -1,6 +1,6 @@
 ---
 title: How to manage alerts
-last_reviewed_on: 2020-09-01
+last_reviewed_on: 2021-04-28
 review_in: 6 months
 ---
 
@@ -16,7 +16,7 @@ Your service should send an alert when your [service monitoring][] detects an is
 * requires action to fix
 * lasts for a sustained period of time
 
-You should only send an alert for things that need action. This includes immediate action for critical or high priority alerts, or less urgent alerts. Alert text should be specific and [include actionable information][]. You should not include sensitive material in this text.
+You should only send an alert for things that need action. Alert text should be specific and [include actionable information][]. You should not include sensitive material.
 
 Create alerts based on events affecting users, such as slow service requests or unavailable webpages. You should also track events like disks being full or almost full, or databases being down. These are both events that can lead to more serious alerts that do affect users.
 
@@ -39,10 +39,10 @@ Situations where there’s a long period of fewer than expected instances or rep
 
 You must prioritise alerts based on whether they need an immediate fix. It can help to class issues as:
 
-* interrupting - need immediate investigate and resolution
+* interrupting - need immediate investigation and resolution
 * non-interrupting - do not need immediate resolution
 
-The [Google Site Reliability Engineering (SRE)][] handbook classifies “interrupting” issues as “pages”, and “non-interrupting” issues as “tickets”. Put non-interrupting alerts into a ticket queue for your support team to solve. Keep the ticket queue and team backlog separate to avoid confusion. You should specify an SLA for how long both types of alert take to resolve.
+The [Google Site Reliability Engineering (SRE)][site reliability engineering] handbook classifies “interrupting” issues as “pages”, and “non-interrupting” issues as “tickets”. Put non-interrupting alerts into a ticket queue for your support team to solve. Keep the ticket queue and team backlog separate to avoid confusion. You should specify an SLA for how long both types of alert take to resolve.
 
 You should manage alerts using a dedicated tool which will allow you to:
 
@@ -71,13 +71,12 @@ For more information refer to the:
 You can also read more on how the Reliability Engineering team [manages monitoring and alerts][].
 
 [service monitoring]: https://gds-way.cloudapps.digital/standards/monitoring.html
-[Google Site Reliability Engineering (SRE)]: https://landing.google.com/sre/book.html
 [PagerDuty]: https://www.pagerduty.com
 [Zendesk]: https://www.zendesk.com
 [Smashing]: https://github.com/Smashing/smashing
 [BlinkenJS]: https://github.com/alphagov/blinkenjs
 [information about monitoring]: https://gds-way.cloudapps.digital/standards/monitoring.html
-[site reliability engineering]: https://landing.google.com/sre/book/index.html
+[site reliability engineering]: https://sre.google/sre-book/table-of-contents/
 [more information on how to write alerts]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
 [include actionable information]: https://response.pagerduty.com/oncall/alerting_principles/#alert-content
 [Prometheus]: https://prometheus.io/

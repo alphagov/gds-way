@@ -1,6 +1,6 @@
 ---
 title: How to manage third party software dependencies
-last_reviewed_on: 2020-01-06
+last_reviewed_on: 2021-04-29
 review_in: 6 months
 ---
 
@@ -18,7 +18,7 @@ Our [programming language style guides][] also contain language-specific advice 
 
 Update your dependencies frequently rather than in ‘big bang’ batches. This works well with [continuous delivery][] principles and makes sure the changes introduced are small and can be automatically tested.
 
-There are tools which scan GitHub repositories and raise PRs when they find dependency updates. Teams at GDS are using:
+There are tools which scan GitHub repositories and raise pull requests (PRs) when they find dependency updates. Teams at GDS are using:
 
 * [Dependabot][] - used by GOV.UK, GOV.UK Pay, GovWifi and Digital Marketplace. The GOV.UK docs contain [guidance on using Dependabot][] and [how the PRs raised should be reviewed][]
     > Note: this is separate from the [security-only updates provided automatically by GitHub Dependabot].
@@ -27,8 +27,7 @@ There are tools which scan GitHub repositories and raise PRs when they find depe
 
     > Note: we have not enabled "Treat PR approval as a request to merge", as this would lead to a surprising behaviour at the point of approval.
 
-* [PyUp][] - a Python dependency checker. Used by Digital Marketplace and GOV.UK Notify, PyUp will monitor for updates and vulnerabilities
-* [Greenkeeper][] - an npm dependency checker used by the GOV.UK Verify team on the [Node.js client for the Verify Service Provider][]
+* [PyUp][] - a Python dependency checker. Used by GOV.UK Notify, PyUp will monitor for updates and vulnerabilities
 
 All the above tools are free to use on public repositories.
 
@@ -39,6 +38,12 @@ The Cyber Security team will review the repositories that do not have dependency
 ### Rebuild Docker base images
 
 Like dependencies, Docker base images are also frequently updated. If you run containers as part of your service, you should regularly rebuild your images (and base images) to include the latest updates. Automate this process where possible.
+
+### Specifying Docker image tags
+
+The GDS Way Dockerfile guidance contains advice on how
+to use [Docker image tags](https://gds-way.cloudapps.digital/manuals/programming-languages/docker.html#using-tags-and-digests-in-from-instructions)
+to specify the exact container image version to use.
 
 ## Monitor for vulnerabilities
 
@@ -76,7 +81,7 @@ Also consider managed solutions where possible. For example:
 This guidance is in line with the GDS Reliability Engineering strategic principle of [using fully managed cloud services by default][].
 
 [Dependabot's auto-approve-and-merge facility]: https://dependabot.com/blog/automatic-pull-request-merging/
-[security-only updates provided automatically by GitHub Dependabot]: https://help.github.com/en/github/managing-security-vulnerabilities/about-security-alerts-for-vulnerable-dependencies#alerts-and-automated-security-updates-for-vulnerable-dependencies
+[security-only updates provided automatically by GitHub Dependabot]: https://docs.github.com/en/github/managing-security-vulnerabilities/about-alerts-for-vulnerable-dependencies#alerts-and-automated-security-updates-for-vulnerable-dependencies
 [GDS supported programming languages]: /standards/programming-languages.html#content
 [managing software dependencies in the Service Manual]: https://www.gov.uk/service-manual/technology/managing-software-dependencies
 [programming language style guides]: /manuals/programming-languages.html
@@ -88,7 +93,6 @@ This guidance is in line with the GDS Reliability Engineering strategic principl
 [guidance on using Dependabot]: https://docs.publishing.service.gov.uk/manual/manage-ruby-dependencies.html
 [how the PRs raised should be reviewed]: https://docs.publishing.service.gov.uk/manual/merge-pr.html#dependabot
 [PyUp]: https://pyup.io/
-[Greenkeeper]: https://greenkeeper.io/
 [Node.js client for the Verify Service Provider]: https://github.com/alphagov/passport-verify
 [guidance on browser technology, tooling and mailing lists you can subscribe to]: https://www.gov.uk/service-manual/technology/managing-software-dependencies#managing-risks-in-third-party-code
 [GitHub security alerts]: https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies
