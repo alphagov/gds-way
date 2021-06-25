@@ -1,6 +1,6 @@
 ---
 title: Threat Modelling
-last_reviewed_on: 2020-09-28
+last_reviewed_on: 2021-06-25
 review_in: 6 months
 ---
 
@@ -8,21 +8,131 @@ review_in: 6 months
 
 ## What's a threat?
 
-To complete threat modelling, you’ll need to know what assets you are trying to protect. It could be a user database, a deployment pipeline or the integrity of web form submissions.
-
-A threat is an action that causes denial, alteration or disclosure of your assets.
+A threat is an action that causes denial, alteration or disclosure of your
+assets that you are trying to protect. It could be a user database, a deployment
+pipeline or the integrity of web form submissions.
 
 ## What's threat modelling?
 
-Starts with an [interactive exercise] to surface hypothetical threats or vulnerabilities in a system. [STRIDE] is used to help look at different aspects.
+Threat modelling is analysing a service to raise potential information security
+and privacy issues.
 
-[Scoring] is then done to work out if a threat is valid and prioritise them.
+The best time to perform threat modelling activities is during the design phase;
+however, it can be done anytime and should become a continuous process in your
+service team.
 
-Having identified a valid threat, there are [3 possible responses to threats].
+Within the Cabinet Office and GDS, we follow the [Threat Modeling Manifesto]'s
+four questions:
+
+1. What are we working on?
+2. What can go wrong?
+3. What are we going to do about it?
+4. Did we do a good enough job?
+
+We answer most of the above over three sessions, with time between allowing for
+asynchronous input.
+
+### 1. Threat Discovery
+
+Threat discovery is looking to answer the “What are we working on?” and part of
+the “What can go wrong?” question.
+
+We use an interactive exercise to talk through and explain the system or
+architecture. Someone from the service team will need to lead this part. Try to
+keep the scope small; it may be more effective to break a service down and
+perform multiple threat modelling activities.
+
+The group of people involved typically includes the development team, cyber
+security and information assurance colleagues; however, working with people in
+the product and user research space often provides more varied perspectives.
+
+As part of the interactive exercise, we surface hypothetical threats or
+vulnerabilities in a service. We use [STRIDE] to help us look at different
+aspects and ensure a rounded view of all threats.
+
+#### 1.1 Interactive Exercise
+
+The purpose of this exercise is to talk through the service, architecture or the
+user journey with people in a session, allowing for questions and answers.
+
+In-person, diagrams are typically drawn up on a whiteboard, followed by
+questions and post-its of potential threats stuck at relevant points.
+
+Remotely, [Jamboard] can be used to add virtual post-its on top of the digital
+diagrams.
+
+### 2. Threat Analysis
+
+Threat analysis looks to finalise the answer to the “What can go wrong?”
+question. We use a scoring methodology to determine if a threat is valid and
+prioritise them against each other.
+
+#### 2.1 Scoring
+
+After discovery, you can copy a Google Sheet template to use for noting down
+threats, the most likely actor, scoring, and tracking mitigation.
+
+The template sheet with notes is here:
+[[PROGRAMME - PRODUCT] Threat Modelling Scoring [template]](https://docs.google.com/spreadsheets/d/1u22W_bUEPESvbMde-Q4syJLTen1OKIcE4ILk7wyaydM/edit#gid=0)
+
+Scoring is useful to prioritise what's valid and what should be looked into
+first.
+
+The *difficulty* is a rating between 0 (very easy) to 5 (hard); it should take
+into account how hard it would be to gain access and any costs associated with
+performing the attack.
+
+The *reward* is a rating between 0 (low) to 5 (high); it’s how valuable the
+outcome is to the threat actor.
+
+The final score equals reward minus difficulty, so a high score is worse than a
+low one.
+
+### 3. Threat Response
+
+Threat response looks to answer the “What are we going to do about it?”
+question.
+
+It may be helpful to add the outputs to your bug or ticket tracking system.
+
+There are three typical responses to threats:
+
+#### 3.1 Mitigate
+Implement a preventive control, such as an architectural change, to eliminate
+the vulnerability or block the threat.
+
+#### 3.2 Monitor
+Monitoring is a reactive control to detect if a threat occurs; it controls a
+situation and limits damage or loss by finding out about an attack early.
+
+#### 3.3 Acknowledge the risk
+Acknowledging the risk but not planning any immediate action; can help with
+resourcing any future mitigation or deciding to accept a risk as the cost of the
+mitigation outweighs the maximum cost of a threat.
+
+### 4. Did we do a good enough job?
+
+After completing the threat modelling activity sessions, you should set some
+time to review the threat modelling outputs regularly. This is to see whether
+you are improving the security and taking the mitigations forward; it’s also
+important to consider any new threats.
+
+A recommendation is to perform this review within your service team every two
+months; 90 minutes is usually sufficient, but the time you need may vary
+depending on the scope of your threat modelling.
+
+You should consider running the threat modelling sessions every year or when
+there are significant architectural changes planned.
 
 ## Why's it necessary?
 
-Information and computer security is typically broken up into 3 main pillars, known as the CIA triad:
+Adam Shostack has a great short video on this: [Why Threat Model?].
+
+Adam explains that we threat model to anticipate problems when it's inexpensive
+to deal with them.
+
+How do you know what a problem is? Information and computer security is
+often broken up into three main pillars, known as the CIA triad:
 
 ### Confidentiality
 - Information accessible to authorised people
@@ -33,7 +143,8 @@ Information and computer security is typically broken up into 3 main pillars, kn
 ### Availability
 - Information available when needed
 
-If one or more of these pillars are abused or neglected, a security incident could occur.
+Abuse or neglect of one or more of these pillars could lead to a security
+incident.
 
 The opposite of the CIA triad is sometimes known as the DAD triad:
 
@@ -41,23 +152,16 @@ The opposite of the CIA triad is sometimes known as the DAD triad:
 - If integrity is affected, **a**lteration occurs.
 - If availability is affected, **d**enial occurs.
 
-Here is a fun, alternative look at the [CIA and DAD triads, explained with Lord of the Rings references].
-
-## Interactive exercise
-
-The purpose of this exercise is to talk through the architecture or the user journey with people in a session, allowing for questions and answers.
-
-In person, flows are typically drawn up on a whiteboard, followed by questions and post-its of potential threats stuck at relevant points.
-
-Remotely, [Jamboard] can be used to add virtual, potential threats, post-its on-top of a digital diagram.
-
-Use of STRIDE to help question various aspects.
+Here is a fun, alternative look at the
+[CIA and DAD triads, explained with Lord of the Rings references].
 
 ## STRIDE
 
-A model of threats developed by Microsoft. It’s a mnemonic for splitting security threats into 6 categories.
+A model of threats developed by Microsoft. It’s a mnemonic for splitting
+security threats into six categories.
 
-It's a useful tool to think about different potential attacks or vulnerabilities.
+It's a helpful tool to think about different potential attacks or
+vulnerabilities.
 
 
 |Threat|Security Control|
@@ -70,81 +174,62 @@ It's a useful tool to think about different potential attacks or vulnerabilities
 |**E**levation of Privilege|Authorisation|
 
 ### Spoofing
-Occurs where malicious actors use another person's user credentials without their knowledge.
+It occurs where malicious actors use another person's user credentials without
+their knowledge.
 
-Also includes attacks where other systems mimic or disguise as others, such as IP address spoofing in DNS amplification attacks.
+It also includes attacks where other systems mimic or disguise as others, such
+as IP address spoofing in DNS amplification attacks.
 
-The desired property is authenticity, meaning an event or action is trustworthy and genuine.
+The desired property is authenticity, meaning an event or action is trustworthy
+and genuine.
 
 ### Tampering
 Only authorised users should be able to modify a system or the data it uses.
 
-The desired property is integrity, meaning an event or action is valid and correct.
+The desired property is integrity, meaning an event or action is valid and
+correct.
 
 ### Repudiation
 The ability to refuse that something is correct.
 
-The desired property is non-repudiation, meaning an action or event is inadmissible by a person or system.
+The desired property is non-repudiation, meaning an action or event is not easy
+to deny by a person or system.
 
-Examples of a non-reputable control is biometric authentication or mutual TLS.
+Examples of a non-reputable control are biometric authentication or mutual TLS.
 
 ### Information Disclosure
-Data is made available to those that shouldn’t have it, such as passwords or personal data of someone else.
+Data is made available to those that shouldn’t have it, such as passwords or
+personal data of someone else.
 
-The desired property is confidentiality, where data is only available to those who are authorised to view or alter it.
+The desired property is confidentiality, where data is only available to those
+who are authorised to view or alter it.
 
 ### Denial of Service (DoS)
 Data is unavailable for its intended audience.
 
-The desired property is availability, where data is always available when those authorised to view or alter it expect it to be.
+The desired property is availability, where data is always available when those
+authorised to view or alter it expect it to be.
 
-Distributed Denial of Service (DDoS) is a form of DoS where multiple entities are responsible for inappropriate traffic leading to overwhelmed services.
+Distributed Denial of Service (DDoS) is a form of DoS where multiple entities
+are responsible for inappropriate traffic leading to overwhelmed services.
 
 ### Elevation of Privilege
 Data is available to unintended or unauthenticated users.
 
-The desired property is authorisation, where data is only available when those expected to be able view or alter it.
-
-## Scoring
-
-Once threats are discovered, there is Google Sheet template you can copy to use for noting down a threat, the most likely actor, scoring, and tracking mitigation.
-
-The template sheet with notes is here:
-[[PROGRAMME - PRODUCT] Threat Modelling Scoring [template]](https://docs.google.com/spreadsheets/d/1u22W_bUEPESvbMde-Q4syJLTen1OKIcE4ILk7wyaydM/edit#gid=0)
-
-Scoring is useful to prioritise what's valid and what should be looked into first.
-
-Difficulty is a rating between 0 (very easy) to 5 (hard), it should take into account how hard it would be to gain access and any costs associated to perform the attack.
-
-Reward is a rating between 0 (low) to 5 (high), it's how valuable the outcome is to the threat actor.
-
-The final score equals reward minus difficulty, so a high score is worse than a low one.
-
-## Response to threats
-
-There are 3 main responses that GDS uses against threats:
-
-### Mitigate
-Implement a preventive control, such as an architectural change, to eliminate the vulnerability or block the threat.
-
-### Monitor
-A reactive control to detect if a threat occurs, this is about controlling a situation and limiting damage or loss by finding out about an attack early.
-
-### Acknowledge the risk
-Acknowledging the risk, but not planning any action, can help with resourcing any future mitigation or deciding to accept a risk as the cost of the mitigation outweighs the maximum cost of a threat.
+The desired property is authorisation, where data is only available to those
+expected to view or alter it.
 
 ## Additional tools and links
 
-- [GDS threat modelling Google Slides introduction], that can be used when starting a session
+- [Threat modelling Google Slides introduction] that can be used when starting a session
 - [OWASP Application Threat Modelling]
 - [Mario Areias - Threat Modelling the Death Star] YouTube video example
 
 
-[Scoring]: #scoring
+[Why Threat Model?]: https://www.youtube.com/watch?v=YP4mNRXGcks
+[Threat Modeling Manifesto]: https://www.threatmodelingmanifesto.org/
 [STRIDE]: #stride
-[3 possible responses to threats]: #response-to-threats
-[interactive exercise]: #interactive-exercise
-[GDS threat modelling Google Slides introduction]: https://docs.google.com/presentation/d/1wwnPaVq9zryJFhHP9DIKEMrMh6Ts37d7_ApHnt5EFpE
+[Threat modelling Google Slides introduction]: https://docs.google.com/presentation/d/1wwnPaVq9zryJFhHP9DIKEMrMh6Ts37d7_ApHnt5EFpE
 [Jamboard]: https://jamboard.google.com/
 [CIA and DAD triads, explained with Lord of the Rings references]: https://squirreltb.wordpress.com/2015/11/17/the-cia-and-dad-triad/
 [OWASP Application Threat Modelling]: https://owasp.org/www-community/Application_Threat_Modeling
