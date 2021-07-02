@@ -1,6 +1,6 @@
 ---
 title: Using Node.js at GDS
-last_reviewed_on: 2020-07-01
+last_reviewed_on: 2021-07-02
 review_in: 6 months
 ---
 
@@ -30,11 +30,11 @@ that there will sometimes be valid exceptions.
 > Only use Long Term Support (<abbr title="Long term support">LTS</abbr>)
 versions of Node.js.
 
-These are even-numbered versions (for example, Node.js 10.x or 12.x). However, it is important
+These are even-numbered versions (for example, Node.js 12.x or 14.x). However, it is important
 to keep an eye on the [Node.js LTS Schedule] as to when versions move in and out
 of LTS.
 
-> Do not use the `--harmony`, `--experimental-modules` or other in-progress feature flags
+> Do not use the `--harmony`, `--experimental-vm-modules` or other in-progress feature flags
 
 *Staged* or *in-progress* features are not considered stable by the Node implementors.
 
@@ -255,7 +255,7 @@ const callback = filename => (err, data) => {
 
 #### Use of `async`/`await`
 
-If your version of Node is above 7.10.0 you should use async functions, and the await keyword, to organise your asynchronous code. This will make your code easier to read and write.
+You should use async functions, and the await keyword, to organise your asynchronous code. This will make your code easier to read and write.
 
 ```js
 // without async/await
@@ -407,6 +407,10 @@ that a Node developer would have trouble reading your code is advised against.
 
 > Use Express for web applications, avoid lesser-known frameworks
 
+Koa can be used as an alternative if it better fits your requirements, though
+you should consult [Koa vs Express](https://github.com/koajs/koa/blob/master/docs/koa-vs-express.md)
+to inform that decision.
+
 If you find yourself looking for an <abbr
 title="model-view-controller">MVC</abbr> framework or if you need an <abbr
 title="object relationship manager">ORM</abbr> to manage records in a database,
@@ -469,7 +473,7 @@ your best to reduce the risks involved:
   its popularity, author reputation and so on.
 - Use tools like [GitHub security alerts](https://help.github.com/en/github/managing-security-vulnerabilities/about-security-alerts-for-vulnerable-dependencies) or [Snyk](https://snyk.io/) to check packages for vulnerabilities
 
-> Use `npm init`, `npm start`, `npm script` and so on.
+> Use `npm init`, `npm start`, `npm ci`, NPM scripts and so on
 
 Making full use of NPM's features will simplify your continuous integration and deployment.
 
@@ -496,10 +500,6 @@ versions of Node.js.
 - [I’m harvesting credit card numbers and passwords from your site. Here’s how.](https://hackernoon.com/im-harvesting-credit-card-numbers-and-passwords-from-your-site-here-s-how-9a8cb347c5b5)
 - [you might not need gulp or grunt](https://medium.freecodecamp.org/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8).
 
-## Starting a new project
-
-We recommend starting any new project with the [GDS Node.JS boilerplate](https://github.com/alphagov/gds-nodejs-boilerplate). It makes it easier to create new serves and follows the advice given here. Is also includes the GOV.UK styles and templates, StandardJS, grunt and snyk.
-
 ## Further reading
 
 In the GDS context, the guidelines provided in the links below are advisory
@@ -518,9 +518,9 @@ This manual is not presumed to be infallible or beyond dispute. If you think som
 
 [github-gds-way]: https://github.com/alphagov/gds-way
 [github-gds-way-readme-making-changes]: https://github.com/alphagov/gds-way/blob/main/README.md#making-changes
-[StandardJS]: https://standardjs.com/
-[ESLint]: https://eslint.org/
-[Node.js LTS Schedule]: https://github.com/nodejs/Release
+[StandardJS]: https://standardjs.com
+[ESLint]: https://eslint.org
+[Node.js LTS Schedule]: https://github.com/nodejs/Release#release-schedule
 [#Nodejs]: https://gds.slack.com/messages/nodejs
 [node.cool]: https://github.com/sindresorhus/awesome-nodejs
 [Node.js ES2015 support]: https://node.green/
