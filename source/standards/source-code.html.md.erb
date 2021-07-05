@@ -37,7 +37,7 @@ Your open source code project should:
 
 * publish packages to relevant language specific repositories such as [PyPI - the Python Package Index][] or [RubyGems][]
 * post contributors' guidelines in a contributing file, like the [Go repository][]
-* set up any tests to run in a public continuous integration environment using tools such as [Travis CI][], [CircleCI][] or [Jenkins][]
+* set up any tests to run in a public continuous integration environment using tools such as [Github Actions](#using-github-actions-and-workflows), [Travis CI][], [CircleCI][] or [Jenkins][]
 
 You could also provide a mailing list so people can discuss your project.
 
@@ -63,6 +63,32 @@ You can also consider backing up your Git repositories to another location (this
 If an application is no longer used in production, you should [archive its repository](https://help.github.com/articles/archiving-repositories/).
 
 Update the application's README to explain why the repository has been archived, and link to a new location if the application has been superseded.
+
+### Using Github Actions and workflows
+
+Alphagov repositories can be configured to use [GitHub Actions](https://docs.github.com/en/actions) for CI/CD jobs, for example running unit tests or deploying a static site.
+
+Actions and workflows can be powerful, so take care to follow best security practice.
+
+Ensure the repository permissions follow [the principle of least privilege](/standards/principle-least-access.html).
+Set workflow permissions to read-only by default, and disable all actions on repositories that are not using them (this will hide the 'Actions' tab from the repository menu).
+
+If your repository has external contributors, [ensure they do not have permissions to add workflows or trigger workflow runs](https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks).
+
+If your workflow interacts with another resource (for example AWS or DockerHub), consider setting up a dedicated account or role, with permissions limited to the scope of the action.
+
+[Create your own local actions](https://docs.github.com/en/actions/creating-actions/about-actions) wherever possible. If using GitHub-owned actions, [pin to a specific version](https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#using-release-management-for-your-custom-actions).
+Third-party actions should only be used if:
+
+- The provider is verified by GitHub (for example, [aws-actions](https://github.com/aws-actions))
+- The action is complex enough that you cannot write your own local action
+- You have fully reviewed the code in the version of the third-party action you will be using
+- You have pinned the specific version in your workflow and in the repository settings, using a Git commit SHA
+- The third-party action is actively maintained, well-documented and tested ([follow the guidance on third party dependencies](/standards/tracking-dependencies.html)).
+
+Note that for public repositories, the output of workflow runs is visible to everyone. Do not use workflows if this output could be considered sensitive.
+
+Consider creating a Workflow Template in the [alphagov workflow folder](https://github.com/alphagov/.github/tree/main/workflow-templates) if you need to share a similar workflow between many repositories.
 
 ## Working with Git
 
