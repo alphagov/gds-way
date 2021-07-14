@@ -8,7 +8,7 @@ review_in: 6 months
 
 The purpose of this style guide is to provide some conventions for working on Java code within GDS.
 
-The [Google Java style guide](https://google.github.io/styleguide/javaguide.html) is a good starting point. The old [Sun/Oracle Java style guide](https://www.oracle.com/technetwork/java/index-135089.html) is still largely relevant but it has not been updated since 1999 and does not reflect recent changes to the language.
+The [Google Java style guide](https://google.github.io/styleguide/javaguide.html) is a good starting point. The old [Sun/Oracle Java style guide](https://www.oracle.com/java/technologies/cc-java-programming-language.html) is still largely relevant but it has not been updated since 1999 and does not reflect recent changes to the language.
 
 The more far-reaching _[Java for Small Teams](https://ncrcoe.gitbooks.io/java-for-small-teams/)_ ebook can be read online at no cost. While not free, _Effective Java_ by Joshua Bloch is also an excellent resource. The GDS Library has physical copies of the book or you can buy a copy using the Learning and Development budget (see the [books page on the wiki](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/cross-gds-social/book-club-library)).
 
@@ -116,7 +116,7 @@ Use [Mockito](https://site.mockito.org/) for mocking. If you’re still using Mo
 
 ## Code checking
 
-We encourage the use of static analysis. Static analysis tools for Java include [SonarQube](https://www.sonarqube.org/), [Codacy](https://www.codacy.com/), [FindBugs](http://findbugs.sourceforge.net/) and [CheckStyle](http://checkstyle.sourceforge.net/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
+We encourage the use of static analysis. Static analysis tools for Java include [SonarQube](https://www.sonarqube.org/), [Codacy](https://www.codacy.com/), [FindBugs](http://findbugs.sourceforge.net/) and [CheckStyle](https://checkstyle.sourceforge.io/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
 
 If possible, configure your static analysis tools using configuration files and keep these in your project repositories. This makes your settings more portable and makes it easier to perform the same checks in different places (for example, in a cloud service and on your own computer).
 
@@ -159,7 +159,7 @@ If you are sending logs to a service that requires them in a specific format, yo
 
 ## JDK
 
-The [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html) is no longer free for production use. OpenJDK remains free to use (under the GPLv2 with the Classpath Exception) but Oracle only provide general-availability [OpenJDK builds](http://jdk.java.net/) for the latest release.
+The [Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) is no longer free for production use. OpenJDK remains free to use (under the GPLv2 with the Classpath Exception) but Oracle only provide general-availability [OpenJDK builds](http://jdk.java.net/) for the latest release.
 
 The [AdoptOpenJDK](https://adoptopenjdk.net/) project (backed by big names including IBM and Microsoft) provides fully open-source pre-built OpenJDK binaries. For LTS releases (such as Java 8 and Java 11), AdoptOpenJDK have committed to releasing free updates for several years.
 
