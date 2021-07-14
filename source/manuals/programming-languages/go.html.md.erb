@@ -8,8 +8,8 @@ review_in: 6 months
 
 The purpose of this style guide is to provide some conventions for working on Go code within GDS. There are already good resources on writing Go code, which are worth reading first:
 
-* [Effective Go](https://golang.org/doc/effective_go.html)
-* [Code Review Comments](https://code.google.com/p/go-wiki/wiki/CodeReviewComments) (documenting points that have been raised in Google code reviews)
+* [Effective Go](https://golang.org/doc/effective_go)
+* [Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments) (documenting points that have been raised in Google code reviews)
 
 ## Code formatting
 
@@ -41,7 +41,7 @@ All new projects should use the officially developed `go mod` unless they have s
 
 Vendoring is still common practice in Go, but if you are using `go mod` with Go
 1.13+ then the go command will download and authenticate modules from the
-highly available [Go module mirror](https://golang.org/cmd/go/#hdr-Module_downloading_and_verification) and Go checksum database run by Google which
+highly available [Go module mirror](https://pkg.go.dev/cmd/go#hdr-Configuration_for_downloading_non_public_code) and Go checksum database run by Google which
 alleviates the need to vendor your modules
 
 ## Web frameworks
@@ -50,7 +50,7 @@ While it's difficult to provide any guidance that will be generally applicable, 
 
 The first is that Go's standard library is modern and powerful. If you just need simple HTTP routing and handling, the [`net/http` package will probably meet your needs](https://golang.org/doc/articles/wiki/).
 
-The second is that if `net/http` falls short, it's worth choosing something that integrates well with it. The [`gorilla`](http://www.gorillatoolkit.org/) toolkit provides some excellent additions to `net/http`.
+The second is that if `net/http` falls short, it's worth choosing something that integrates well with it. The [`gorilla`](https://www.gorillatoolkit.org/) toolkit provides some excellent additions to `net/http`.
 
 The third is that Go is not a language we use at GDS for developing fully-fledged web applications, eg rendering HTML. If you find yourself rendering HTML using Go, consider using a different GDS supported language.
 
@@ -64,7 +64,7 @@ empty struct rather than boolean or int types.
 Using an empty struct declares that we're not interested in the value
 sent or received; only in its closed property.
 
-See [this talk](http://talks.golang.org/2012/10things.slide#11)
+See [this talk](https://talks.golang.org/2012/10things.slide#11)
 
 ```go
 func worker(quit <-chan struct{}, result chan<- int) {

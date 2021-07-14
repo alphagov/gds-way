@@ -288,7 +288,7 @@ const getUserFromCreds = async function (username, password) {
 
 The `await` keyword will pause execution until its promise fulfills. This means a sequence of awaited promises can only execute in the order they're declared, each being forced to wait for the previous one.
 
-The promises API provides several [methods for managing sequences of promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Static_methods), which can be used to solve this problem, for example:
+The promises API provides several [methods for managing sequences of promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#static_methods), which can be used to solve this problem, for example:
 
 ```js
 const getUserFromCreds = async function (username, password) {
@@ -306,7 +306,7 @@ const getUserFromCreds = async function (username, password) {
 }
 ```
 
-If none of those offer the control needed, you can also [instantiate promises separately from when you await them](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await#The_downsides_of_asyncawait), for example:
+If none of those offer the control needed, you can also [instantiate promises separately from when you await them](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await#handling_asyncawait_slowdown), for example:
 
 ```js
 const getUserFromCreds = async function (username, password) {
@@ -380,7 +380,7 @@ them.
 
 Do not expose Node's HTTP server to the public. Use a reverse proxy to serve
 static assets, and cache content as much as possible. Implement adequate
-supervising: [pm2](http://pm2.keymetrics.io/) is recommended for Node.js-specific
+supervising: [pm2](https://pm2.keymetrics.io/) is recommended for Node.js-specific
 servers.
 
 ## Transpiling
@@ -391,7 +391,7 @@ Avoid anything that compiles to JavaScript (except for static type checking, see
 below). Examples to avoid include CoffeeScript, PureScript and [many others](https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS).
 
 If you would like to use static typing consider using JavaScript extensions like
-[TypeScript](http://www.typescriptlang.org/), or [Flow](https://flow.org/). This
+[TypeScript](https://www.typescriptlang.org/), or [Flow](https://flow.org/). This
 has the advantage of making it easier to prevent runtime errors, by adding type
 information to variables or parameters and transpiling the source to JavaScript,
 reporting errors when wrong types are used.
@@ -415,7 +415,7 @@ If you find yourself looking for an <abbr
 title="model-view-controller">MVC</abbr> framework or if you need an <abbr
 title="object relationship manager">ORM</abbr> to manage records in a database,
 [you probably should not be using Node.js in the first
-place](/standards/programming-languages.html#javascript).
+place](/standards/programming-languages.html#frontend-development).
 
 
 ## Libraries
@@ -423,7 +423,7 @@ place](/standards/programming-languages.html#javascript).
 > Avoid libraries that produce esoteric code, or that have a steep learning curve
 
 Using advanced libraries can make code very hard to read for developers not familiar
-with them, as useful as they may be. For instance, [Ramda](http://ramdajs.com/)
+with them, as useful as they may be. For instance, [Ramda](https://ramdajs.com/)
 lets you write:
 
 ```js
@@ -489,7 +489,7 @@ Do not slow down your deployments with unused code.
 > If you build modules you think could be useful for others, publish them on npm
 
 Because [Open Source is a Good
-Thing](https://gdstechnology.blog.gov.uk/category/open-source/).
+Thing](https://technology.blog.gov.uk/category/open-source/).
 
 > Published modules should be tested and supported on the last two current LTS
 versions of Node.js.
@@ -498,9 +498,9 @@ versions of Node.js.
 
 - [Controlling the Node.js security risk of npm dependencies](https://blog.risingstack.com/controlling-node-js-security-risk-npm-dependencies/)
 - [I’m harvesting credit card numbers and passwords from your site. Here’s how.](https://hackernoon.com/im-harvesting-credit-card-numbers-and-passwords-from-your-site-here-s-how-9a8cb347c5b5)
-- [you might not need gulp or grunt](https://medium.freecodecamp.org/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8).
+- [you might not need gulp or grunt](https://www.freecodecamp.org/news/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8/).
 
-## Further reading
+## Further reading or information
 
 In the GDS context, the guidelines provided in the links below are advisory
 only. The guidance provided here takes precedence in case of conflicts.
@@ -508,16 +508,8 @@ only. The guidance provided here takes precedence in case of conflicts.
 * **[Node best practices]** — A comprehensive guide to Node.js best practices
 * **[node.cool]** — A curated list of Node.js packages and resources by Sindre Sorhus
 * **[JS documentation]** — MDN's definitive JS docs
+* **[#Nodejs]** – community's Slack channel
 
-## Updating this manual
-This manual is not presumed to be infallible or beyond dispute. If you think something is missing or if you'd like to see something changed then:
-
-1. _(optional)_ Start with the [#Nodejs] community's Slack channel to see what other developers think. You will then understand how likely it is that your proposal will be accepted as a pull request before you complete any work.
-2. Check out the making changes section of the [GDS Way repo][github-gds-way-readme-making-changes].
-3. Create a pull request against [GDS Tech repo][github-gds-way].
-
-[github-gds-way]: https://github.com/alphagov/gds-way
-[github-gds-way-readme-making-changes]: https://github.com/alphagov/gds-way/blob/main/README.md#making-changes
 [StandardJS]: https://standardjs.com
 [ESLint]: https://eslint.org
 [Node.js LTS Schedule]: https://github.com/nodejs/Release#release-schedule
