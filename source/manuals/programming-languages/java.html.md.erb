@@ -116,6 +116,8 @@ Keep in mind that improvements to the Java standard library mean that some exter
 
 When using external libraries, favour those which complement the Java standard library. For example, be wary of any library which introduces a new type that replicates the functionality of an existing type in the Java standard library without implementing the same interfaces (for example, a list type which does not implement `java.util.List`).
 
+Make sure any external library you use is appropriate for your purposes and avoid relying on internal implementation details of external libraries. If your IDE’s code completion suggests a method from an external library, make sure it’s a supported part of the library’s defined API.
+
 ## Comments
 Agree with your team to what extent you permit comments in your code. It’s often possible to [make code more readable so it doesn’t need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html).
 
