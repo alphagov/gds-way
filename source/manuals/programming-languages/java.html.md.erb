@@ -93,6 +93,19 @@ var checkResponse = service.getCheckResponse();
 
 Be mindful that `var` hides the type of the variable. If the variable name makes the type obvious, this usually isn’t a problem. But if it is not clear from either the variable name or the right-hand side of the assignment, it might be better to explicitly write the type.
 
+If you are using the diamond operator in an assignment, you will usually find that updating it to use `var` also requires you to replace the diamond operator with the appropriate generic type parameter:
+
+```java
+// usernames is Set<String>
+Set<String> usernames = new HashSet<>();
+
+// usernames is HashSet<Object> (probably not what you want)
+var usernames = new HashSet<>();
+
+// usernames is HashSet<String>
+var usernames = new HashSet<String>();
+```
+
 The [OpenJDK project has some style guidelines for local variable type inference](https://openjdk.java.net/projects/amber/LVTIstyle.html). Oracle’s [introduction to local variable type inference](https://developer.oracle.com/java/jdk-10-local-variable-type-inference.html) also contains some recommendations.
 
 ## Prefer functionality in the Java standard library
