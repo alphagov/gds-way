@@ -1,6 +1,6 @@
 ---
 title: Dockerfile guidance
-last_reviewed_on: 2021-01-21
+last_reviewed_on: 2021-07-21
 review_in: 6 months
 ---
 
@@ -55,6 +55,34 @@ As [Dependabot](https://dependabot.com) has [support for updating `FROM` lines
 which use digests](https://github.com/dependabot/dependabot-core/pull/100),
 you can still use Dependabot to keep your images up-to-date.
 
+## Using multi-stage builds
+
+Using [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) enables the drastic
+reduction of image sizes, which in turn decreases the time taken to launch the container. There can be many stages
+within a Dockerfile. The result is a single layer image which discards the previous unrequired layers that were
+used in the compilation steps.
+
+As an example;
+
+```
+FROM golang:1.16 AS builder
+WORKDIR /go/src/github.com/alphagov/paas-aiven-broker/
+RUN git clone https://github.com/alphagov/paas-aiven-broker.git .
+RUN go mod download
+RUN go build
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+COPY --from=builder /go/src/github.com/alphagov/paas-aiven-broker/paas-aiven-broker .
+COPY --from=builder /go/src/github.com/alphagov/paas-aiven-broker/paas-aiven-broker/examples/config.json .
+CMD ["./paas-aiven-broker", "-config", "config.json"]
+```
+
+Building from this Dockerfile requires no changes to the existing build process e.g. `docker build -t myimage:latest .`
+
+It is also possible to stop the build at a specific stage using a command such as
+`docker build --target builder -t myimage:development .` which then enables running the container locally to debug the image.
 
 ## Running programs as process ID (PID) 1
 
