@@ -1,6 +1,6 @@
 ---
 title: Java style guide
-last_reviewed_on: 2021-01-20
+last_reviewed_on: 2021-07-21
 review_in: 6 months
 ---
 
@@ -10,11 +10,11 @@ The purpose of this style guide is to provide some conventions for working on Ja
 
 The [Google Java style guide](https://google.github.io/styleguide/javaguide.html) is a good starting point. The old [Sun/Oracle Java style guide](https://www.oracle.com/java/technologies/cc-java-programming-language.html) is still largely relevant but it has not been updated since 1999 and does not reflect recent changes to the language.
 
-The more far-reaching _[Java for Small Teams](https://ncrcoe.gitbooks.io/java-for-small-teams/)_ ebook can be read online at no cost. While not free, _Effective Java_ by Joshua Bloch is also an excellent resource. The GDS Library has physical copies of the book or you can buy a copy using the Learning and Development budget (see the [books page on the wiki](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/cross-gds-social/book-club-library)).
+The more far-reaching _[Java for Small Teams](https://ncrcoe.gitbooks.io/java-for-small-teams/)_ ebook can be read online at no cost. While not free, _[Effective Java](https://www.oreilly.com/library/view/effective-java/9780134686097/)_ by Joshua Bloch is also an excellent resource. The GDS Library has physical copies of the book or you can buy a copy using the Learning and Development budget (see the [books page on the wiki](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/cross-gds-social/book-club-library)).
 
 While the above resources are good guides, they may conflict with either each other or your team’s established practices. We favour consistency across our code, so make sure that you have the agreement of your team when considering using a new or different method or paradigm to those currently in use.
 
-We generally use [IntelliJ IDEA](https://www.jetbrains.com/idea/) within GDS. Using it consistently helps when pairing and mob programming. GDS is not able to purchase licences of the commercial editions of IntelliJ IDEA.
+We generally use [IntelliJ IDEA](https://www.jetbrains.com/idea/) within GDS. Using it consistently helps when pairing and mob programming. GDS have purchased licences for the commercial editions of IntelliJ IDEA for some teams. 
 
 ## Code formatting
 
@@ -32,9 +32,11 @@ Consider whether a dependency injection framework is appropriate for your projec
 
 ## Imports
 
-You should not use any wildcard imports. Wildcard imports can cause existing code to break if a new type is added to a package with the same name as a type in another package. This infamously happened with Java SE 1.2, which introduced `java.util.List` when there was already `java.awt.List`, breaking any classes that used `List` and imported both `java.util.*` and `java.awt.*`.
+You should not use any wildcard imports. Wildcard imports can cause existing code to break if a new type is added to a package with the same name as a type in another package.
 
-You can configure IntelliJ to explicitly import all classes and static methods in Preferences → Editor → Code Style → Java → Imports with “Class count to use import with *” and “Names count to use static import with *” both set to a very high number, for example, 1000.
+This infamously happened with Java SE 1.2, which introduced `java.util.List` when there was already `java.awt.List`, breaking any classes that used `List` and imported both `java.util.*` and `java.awt.*`.
+
+You should configure IntelliJ to explicitly import all classes and static methods in Preferences → Editor → Code Style → Java → Imports with “Class count to use import with *” and “Names count to use static import with *” both set to a very high number, for example 1000.
 
 Static imports should be avoided in most cases because the names of methods and constants often do not make sense without the context of the type they’re from.
 
@@ -60,7 +62,7 @@ If a getter may return `null`, you should usually return an `Optional` instead.
 
 `Optional` is intended to only to represent the absence of a result: do not use it for fields or method parameters. Java language architect [Brian Goetz posted a StackOverflow answer explaining the intent of `Optional`](https://stackoverflow.com/questions/26327957/should-java-8-getters-return-optional-type/26328555#26328555) with further reasoning.
 
-You almost never need to use the `isPresent()` method on an `Optional`. Use `ifPresent(…)`, `ifPresentOrElse(…)`, `map(…)` or `flatMap(…)` instead. See DZone Java Zone’s article _[
+You almost never need to use the `isPresent()` or `isEmpty()` methods on an `Optional`. Use `ifPresent(…)`, `ifPresentOrElse(…)`, `map(…)` or `flatMap(…)` instead. See DZone Java Zone’s article _[
 Optional isPresent() Is Bad for You](https://dzone.com/articles/optional-ispresent-is-bad-for-you)_ for more details.
 
 Optionals work best when used in a functional style, which can take time to learn. The DZone Java Zone article _[
@@ -91,6 +93,19 @@ var checkResponse = service.getCheckResponse();
 
 Be mindful that `var` hides the type of the variable. If the variable name makes the type obvious, this usually isn’t a problem. But if it is not clear from either the variable name or the right-hand side of the assignment, it might be better to explicitly write the type.
 
+If you are using the diamond operator in an assignment, you will usually find that updating it to use `var` also requires you to replace the diamond operator with the appropriate generic type parameter:
+
+```java
+// usernames is Set<String>
+Set<String> usernames = new HashSet<>();
+
+// usernames is HashSet<Object> (probably not what you want)
+var usernames = new HashSet<>();
+
+// usernames is HashSet<String>
+var usernames = new HashSet<String>();
+```
+
 The [OpenJDK project has some style guidelines for local variable type inference](https://openjdk.java.net/projects/amber/LVTIstyle.html). Oracle’s [introduction to local variable type inference](https://developer.oracle.com/java/jdk-10-local-variable-type-inference.html) also contains some recommendations.
 
 ## Prefer functionality in the Java standard library
@@ -101,8 +116,10 @@ Keep in mind that improvements to the Java standard library mean that some exter
 
 When using external libraries, favour those which complement the Java standard library. For example, be wary of any library which introduces a new type that replicates the functionality of an existing type in the Java standard library without implementing the same interfaces (for example, a list type which does not implement `java.util.List`).
 
+Make sure any external library you use is appropriate for your purposes and avoid relying on internal implementation details of external libraries. If your IDE’s code completion suggests a method from an external library, make sure it’s a supported part of the library’s defined API.
+
 ## Comments
-Agree with your team to what extent you permit comments in your code. It’s often possible to [make code more readable so it doesn’t need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html).
+Agree with your team to what extent you permit comments in your code. It’s often possible to [make code more readable so it doesn’t need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html). Comments rarely need to describe _what_ some code is doing or _how_ it’s doing it. Comments explaining _why_ the code is doing something, particularly if it’s non-obvious or requires external contextual knowledge, may be helpful.
 
 ## Testing
 
@@ -139,17 +156,19 @@ public void frobulateFoos() {
 ## Dependencies
 Try to keep up to date with the latest versions of your external dependencies. Older dependencies often contain security vulnerabilities. If you wait to upgrade your dependencies, you may find you have to make large version jumps to lots of dependencies at once, which can be painful. Frequent, smaller updates are almost always preferable.
 
-Dependabot (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Don’t merge a dependency upgrade unless it passes your automated tests.
+[Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/about-dependabot-security-updates) (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Don’t merge a dependency upgrade unless it passes your automated tests.
 
 Dependabot makes assumptions about version numbers that not all dependencies follow. This can cause it to open pull requests that update to beta versions, release candidates or even alternative variants of the dependency. Always have a human sense-check each Dependabot pull request before merging.
 
+There have been cases of bad actors raising malicious pull requests on repositories that appear to come from Dependabot. Make sure a pull request really comes from Dependabot before merging.
+
 ## Build tools
 
-You should use either Gradle or Maven as the build tool. Use recent versions if you can.
+You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apache.org/) as the build tool. Use recent versions if you can.
 
 ## Web frameworks
 
-We use [Dropwizard](https://www.dropwizard.io/) as our web framework of choice.
+The [Dropwizard](https://www.dropwizard.io/) web framework is used widely within GDS.
 
 Dropwizard 2.0 was released at the end of 2019. There is a [guide for migrating from Dropwizard 1.3.x to 2.0.x](https://github.com/dropwizard/dropwizard/wiki/Upgrade-guide-1.3.x-to-2.0.x). Teams within GDS have found the upgrade straightforward.
 
@@ -165,19 +184,21 @@ The [AdoptOpenJDK](https://adoptopenjdk.net/) project (backed by big names inclu
 
 In addition, AdoptOpenJDK has benefits such as being available in package repositories, having friendly installers for desktop use, and offering ready-made [Docker images containing OpenJDK](https://hub.docker.com/u/adoptopenjdk).
 
+[Amazon Corretto](https://aws.amazon.com/corretto/) is a free OpenJDK distribution. The [AWS Lamdba runtimes for Java](https://docs.aws.amazon.com/lambda/latest/dg/lambda-java.html) use Corretto.
+
 ## Publishing artifacts
 
 We recommend publishing artifacts (for which the source is already public) to [Maven Central](https://search.maven.org/).
 
 You should _not_ use Maven Central to publish artifacts for which the source is closed or contains other proprietary assets, as it is a public repository with anonymous access.
 
-### Claiming group ids
+### Claiming group IDs
 
-You will need to claim one or more [group ids](https://maven.apache.org/guides/mini/guide-naming-conventions.html) in order to publish an artifact to Maven Central. The central repository is run and operated by Sonatype, and you will need to register for an account on their JIRA instance to request control of a group id.
+You will need to claim one or more [group IDs](https://maven.apache.org/guides/mini/guide-naming-conventions.html) in order to publish an artifact to Maven Central. The central repository is run and operated by Sonatype, and you will need to register for an account on their Jira instance to request control of a group ID.
 
 The credentials used to create this account will be used during the publishing process, and should be stored safely and in accordance with any programme-specific guidance.
 
-You should follow Sonatype's [guidance](https://central.sonatype.org/publish/publish-guide/) on registering for and claiming a group id such as `uk.gov.example`. It is likely that you will be asked to prove your identity as a government actor, to prevent malicious parties publishing artifacts and claiming that they have been issued by the UK government.
+You should follow [Sonatype’s guidance on registering for and claiming a group ID](https://central.sonatype.org/publish/publish-guide/) such as `uk.gov.example`. It is likely that you will be asked to prove your identity as a government actor, to prevent malicious parties publishing artifacts and claiming that they have been issued by the UK government.
 
 ### Signing artifacts
 
@@ -187,4 +208,4 @@ The key and its associated passphrase will be used during the publishing process
 
 We recommend additionally publishing the public keys elsewhere, for example as a public GitHub repository, so that a third-party user knows an artifact is signed by a key that we have declared we use for signing.
 
-Sonatype publishes build-tool-specific guidance for publishing and releasing artifacts on Maven Central. GDS primarily uses [Maven](https://central.sonatype.org/publish/publish-maven/) and [Gradle](https://central.sonatype.org/publish/publish-gradle/) as their build tools.
+Sonatype publishes build-tool-specific guidance for publishing and releasing artifacts on Maven Central.
