@@ -35,7 +35,7 @@ build pipelines
 
 ### Back up your data
 
-You should back up your data. How often you back up will depend on your [Recovery Point Objective (RPO)](https://cloud.google.com/architecture/dr-scenarios-planning-guide#basics_of_dr_planning). An RPO determines what you consider an acceptable loss of data between the last backup and the point of data loss. For example, if you back up your data nightly, your RPO is 24 hours, the length of time between the backups. In practice, many modern database service cloud providers provide [point-in-time recovery](https://docs.aws.amazon.com/aws-backup/latest/devguide/point-in-time-recovery.html) from backups. This can result in an RPO of around 5 minutes or less.
+You should back up your data. How often you back up will depend on your [Recovery Point Objective (RPO)](https://cloud.google.com/architecture/dr-scenarios-planning-guide#basics_of_dr_planning). An RPO determines what you consider an acceptable loss of data between the last backup and the point of data loss. For example, if you determine that up to 24 hours of data loss is an acceptable risk, you will only need to backup your data once daily. For lower RPOs (minutes or seconds), you should use [continuous backups and point-in-time recovery](https://docs.aws.amazon.com/aws-backup/latest/devguide/point-in-time-recovery.html) services that most modern cloud providers offer.
 
 ### Have cold or offline backups
 
@@ -62,7 +62,9 @@ An RTO of one week is not likely to be acceptable for services where there would
 
 Your disaster recovery strategy will depend on your specific service requirements. You may need different strategies for different parts of your service. The more immediate and more automatic the strategy, the greater the complexity and the cost of running your service is likely to be. The [Plan for Disaster Recovery article from AWS](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/plan-for-disaster-recovery-dr.html) covers some common recovery patterns.
 
-Make sure you discuss and agree your RTOs and RPOs with risk and service owners. 
+### Agree your RPOs and RTOs with risk and service owners
+
+Make sure you discuss and agree your RPOs and RTOs with risk and service owners. Not only is their expertise key to decision making, but it's vital they understand what will happen and why in the event of a disaster.
 
 ## Test your disaster recovery plans
 
