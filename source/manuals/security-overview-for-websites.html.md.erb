@@ -86,8 +86,8 @@ If your service uses a Content Management System (CMS), like WordPress or Joomla
 Consider setting up a patching schedule with the development team or supplier to manage the patching process.
 You may want to:
 
-  - introduce this as a formal item in any governance meetings.
-  - consider including any periods where you may want to pause or defer patches if you are concerned about availability during key events.
+  - introduce this as a formal item in any governance meetings
+  - consider including any periods where you may want to pause or defer patches if you are concerned about availability during key events
 
 If you are using Infrastructure-as-a-Service (IaaS) or Platform-as-a-Service (PaaS), you may want to set up a regular pipeline that gets the latest updates, tests your website or application with those, and then pushes the tested updates to your live environment.
 
@@ -205,7 +205,7 @@ A security.txt file helps malware or security researchers contact the Cyber Secu
 Make it more difficult to exploit a weakness in your service which could cause you an incident by enabling a Web Application Firewall (WAF).
 
 If you have dynamic content that takes user input, you should enable AWS WAF and apply appropriate rules.
-For example, if you are running WordPress, you may want to enable the managed PHP and “AWSManagedRulesWordPressRuleSet” rulesets, but “AWSManagedRulesWindowsRuleSet” is likely inappropriate.
+For example, if you are running WordPress, you may want to enable the managed PHP and “AWSManagedRulesWordPressRuleSet” rulesets, but “AWSManagedRulesWindowsRuleSet” is likely inappropriate as WordPress does not typically run on Windows.
 
 Even if you do not have dynamic content, a WAF - even one with no enabled rules - can be helpful if you have ever have an incident in future by allowing for quick configuration.
 
@@ -225,7 +225,7 @@ You likely need to configure the following:
   - DRT IAM (Identity and Access Management) role
   - Route53 DNS health check(s)
   - blank WAF(s)
-  - Proactive Engagement - ask the [CDIO Cyber Security] team for contact information to input here.
+  - Proactive Engagement - ask the [CDIO Cyber Security] team for contact information to input here
 
 ### Why?
 
