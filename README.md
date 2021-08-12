@@ -82,7 +82,7 @@ the HTML and asset files ready to be published.
 
 ## Deploy
 
-Continuously deployed from main by the [multi-tenant Concourse](https://cd.gds-reliabilty.engineering) using the [internal-apps pipeline in the tech-ops repo](https://github.com/alphagov/tech-ops/blob/master/reliability-engineering/pipelines/internal-apps.yml).
+Continuously deployed from main by the [multi-tenant Concourse](https://cd.gds-reliability.engineering) with the pipeline defined in [ci/pipeline.yaml](https://github.com/alphagov/gds-way/blob/main/ci/pipeline.yaml).
 
 ## Licence
 
