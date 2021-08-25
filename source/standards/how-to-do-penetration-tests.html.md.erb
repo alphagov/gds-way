@@ -1,6 +1,6 @@
 ---
 title: How to do penetration tests
-last_reviewed_on: 2021-06-04
+last_reviewed_on: 2021-08-25
 review_in: 6 months
 ---
 
@@ -27,8 +27,10 @@ An IT Health Check or security review can include:
 * external network penetration tests
 * server build reviews
 * code reviews
-* social engineering
+* infrastructure-as-code reviews
+* AWS configuration reviews
 * red team engagements
+* vulnerability scans
 
 Before testing, you should define:
 
@@ -39,12 +41,15 @@ Before testing, you should define:
 * any specific technical capabilities to allow third-party testers to complete testing, for example, experience working with AWS security groups
 * the specific technical scope of the test including IP addresses, URLs and GitHub repositories
 * technical documentation and tools that can assist with testing and understanding of the application, for example Swagger/Postman documentation for API tests
+
  
 ## Schedule a test
 
 To schedule a test, [contact the IA team](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance).
 
 If you plan to test any application, you must contact the IA team at least 3 months in advance so they can organise the procurement for you.
+
+If you are planning to request a test to be carried out by the [CDIO Cyber Security team](https://gds.slack.com/archives/CCMPJKFDK), the information listed in the [scope your test section](#scope-your-test) and the [prepare for your test section](#prepare-for-your-test) will need to be entered into a Rules of Engagement document where a scope can be agreed and signed off by both parties. As with the IA team, at least 3 months advanced notice is required to ensure the test can be scheduled that suits project timelines.
 
 ## Prepare for your test
 
@@ -56,13 +61,14 @@ To prepare your test environment you should:
 
 * give the tester all the credentials, certificates and authentication they need to start immediately
 * provide a technical person to contact in case the tester has any queries
+* note down and if necessary, add the IP addresses of the testers to any allow-lists, being sure to remove them when testing has finished
 * create temporary credentials for testers (testers should provide their own SSH public keys)
 * give the tester the privileges required for the test, such as sudo access where appropriate
-* notify your service providers in advance, for example by [emailing GOV.UK PaaS Support](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk)
+* notify your service providers in advance, for example by [emailing GOV.UK PaaS Support](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) - note that in most cases AWS do not require advanced permission for penetration tests on your applications
 * give the tester a distribution list of approved report recipients
 
 ## What to do after testing
 
 After your test, you should meet with the IA team to discuss the test results. You can then prioritise work to mitigate any issues identified in the test and schedule a retest if needed.
 
-Teams should work with the [Cyber Security team](https://gds.slack.com/archives/CCMPJKFDK), who can give advice, fix any issues and take appropriate further action when required.
+Teams should work with the [CDIO Cyber Security team](https://gds.slack.com/archives/CCMPJKFDK), who can give advice, consult on fixing any issues and take appropriate further action when required.
