@@ -1,0 +1,31 @@
+name: bundle-release-gds-way
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: bundle-gds-way
+        run: |
+          wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+          echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+        
+          sudo apt-get update
+          
+          sudo apt-get install -y ruby=1:2.7+1
+          sudo apt-get install -y nodejs=10.19.0~dfsg-3ubuntu1
+          sudo apt-get install -y cf7-cli
+          
+          sudo gem install bundler:1.17.2
+          
+          bundle install --without development
+          bundle exec middleman build
+          
+          cf login -a https://api.cloud.service.gov.uk -u ${{ secrets.CF_EMAIL }} -p ${{ secrets.CF_PASSWORD }} -o gds-tech-ops -s docs
+        
+          cf push -f ./manifest.yml
