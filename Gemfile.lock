@@ -42,7 +42,7 @@ GEM
     fast_blank (1.0.1)
     fastimage (2.2.5)
     ffi (1.15.4)
-    govuk_tech_docs (2.4.3)
+    govuk_tech_docs (3.0.0)
       autoprefixer-rails (~> 10.2)
       chronic (~> 0.10.2)
       middleman (~> 4.0)
