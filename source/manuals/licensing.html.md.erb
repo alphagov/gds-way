@@ -1,20 +1,47 @@
 ---
 title: Licensing
-last_reviewed_on: 2021-10-12
+last_reviewed_on: 2021-10-20
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
+Any public repository must include a licence that details the terms under which
+the code or documentation is available to be used or modified.
+
+## Language
+
+From [The Guardian and Observer style guide][guardian-style]:
+
+> In British English, licence is the noun and license the verb. So you need a
+> licence to run a licensed bar, or you may need to visit the off-licence.
+
+Some examples of this:
+
+* Use the British English spelling of the noun _licence_, not the US English
+  spelling of _license_ (for example "you need a licence to drive a car.")
+* When talking about the permissions that a licence grants, or the act of using
+  a licence, use _license_ (for example "your pet shop needs to be licensed.")
+* When using a proper name, use the appropriate spelling for that thing (e.g.
+  the [MIT License][mit-license].)
+
+So you would _license_ your software under a particular _licence_, such as the
+_MIT License_.
+
 ## Guidelines for repositories containing code
 
-Each repository should include a licence file. This should be called `LICENCE` or `LICENCE.md`. "License" is the US English spelling.
+### Specifying the licence
 
-GitHub.com will still show licence details for the British English spelling.
+Each repository should include a licence file. This should be called `LICENCE`
+or `LICENCE.md`.
 
-You should specify the licence and link to it in the repository’s README. It’s
-typical to include this information at the very end of a README under a
-‘Licence’ heading.
+GitHub's guidance for [including an open source licence in your
+repository][gh-licence-guidance] uses the US English spelling of _license_, but
+will still show licence details for the British English spelling.
+
+You should specify the licence and link to it in the repository's
+[README][readme]. It's typical to include this information at the very end of a
+README under a ‘Licence’ heading.
 
 ### Use MIT
 
@@ -44,7 +71,7 @@ There is a good example of a licence in the [pay-adminusers][pay-licence] repo.
 ## Guidelines for repositories that are open documentation
 
 Some repositories will produce websites serving documentation. The GDS Way is
-an example of this. In addition to the MIT license for the code in the
+an example of this. In addition to the MIT License for the code in the
 repository, you should include the [Open Government Licence (OGL)][ogl-licence]
 for the documentation.
 
@@ -57,3 +84,6 @@ The [GDS Way][gds-way] repo is a good example of licensing open documentation.
 [pay-licence]: https://github.com/alphagov/pay-adminusers/blob/master/LICENCE
 [ogl-licence]: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 [gds-way]: https://github.com/alphagov/gds-way
+[gh-licence-guidance]: https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository#including-an-open-source-license-in-your-repository
+[readme]: /manuals/readme-guidance.html
+[guardian-style]: https://www.theguardian.com/guardian-observer-style-guide-l
