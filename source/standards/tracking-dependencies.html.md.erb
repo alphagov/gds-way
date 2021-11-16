@@ -1,6 +1,6 @@
 ---
 title: How to manage third party software dependencies
-last_reviewed_on: 2021-04-29
+last_reviewed_on: 2021-11-16
 review_in: 6 months
 ---
 
@@ -31,9 +31,29 @@ There are tools which scan GitHub repositories and raise pull requests (PRs) whe
 
 All the above tools are free to use on public repositories.
 
+The CDIO Cyber Security team will review the repositories that do not have dependency management in use and will turn on Dependabot where required. Service teams are free to use a different tool such as [Snyk](https://snyk.io/), but will need to add a `no-dependabot` tag to their repository for monitoring purposes. You can [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK) if you have any questions or need help.
 
-The Cyber Security team will review the repositories that do not have dependency management in use and will turn on Dependabot where required. Service teams are free to use a different tool such as [Snyk](https://snyk.io/), but will need to add a `no-dependabot` tag to their repository for monitoring purposes. You can [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK) if you have any questions or need help.
+## Monitor for vulnerabilities
 
+You should monitor for potential vulnerabilities in every layer of your technology stack. This is not straightforward but tooling exists to help. The Service Manual provides [guidance on browser technology, tooling and mailing lists you can subscribe to][].
+
+Most of the tooling that helps you stay on top of dependency updates will also highlight vulnerabilities. Additional tooling includes:
+
+### [GitHub security alerts][]
+
+When GitHub discovers or is informed about a vulnerability, it will email an alert to the repository owner and users with admin access. GitHub security alerts will be turned on for all Alphagov repositories. If services wish to opt out of security advisories on their repository, they can contact Cyber Security and then add the `no-security-advisories` tag to their repository.
+
+### [Snyk][]
+
+Snyk is capable of detecting vulnerabilities in a variety of languages including all the [GDS supported programming languages][]. You can configure Snyk to raise PRs, email regular reports and alert you when new vulnerabilities are detected.
+
+If you have an old repository that is receiving security alerts but is not being worked on or maintained, you may wish to archive your repository instead.
+
+### Splunk dashboards
+
+The Cyber Security team has created a Splunk dashboard. This gives service teams visibility of vulnerabilities in their repositories. To allow for your repositories to be categorised correctly in the Splunk dashboard, please make sure you tag your repository with the service name. If you would like to access the dashboard, [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK).
+
+## Managing Docker dependencies
 
 ### Rebuild Docker base images
 
@@ -44,24 +64,6 @@ Like dependencies, Docker base images are also frequently updated. If you run co
 The GDS Way Dockerfile guidance contains advice on how
 to use [Docker image tags](https://gds-way.cloudapps.digital/manuals/programming-languages/docker.html#using-tags-and-digests-in-from-instructions)
 to specify the exact container image version to use.
-
-## Monitor for vulnerabilities
-
-You should monitor for potential vulnerabilities in every layer of your technology stack. This is not straightforward but tooling exists to help. The Service Manual provides [guidance on browser technology, tooling and mailing lists you can subscribe to][].
-
-Most of the tooling that helps you stay on top of dependency updates will also highlight vulnerabilities. Additional tooling includes:
-
-[GitHub security alerts][]
-
-When GitHub discovers or is informed about a vulnerability, it will email an alert to the repository owner and users with admin access. GitHub security alerts will be turned on for all Alphagov repositories. If services wish to opt out of security advisories on their repository, they can contact Cyber Security and then add the `no-security-advisories` tag to their repository.
-
-[Snyk][]
-
-Snyk is capable of detecting vulnerabilities in a variety of languages including all the [GDS supported programming languages][]. You can configure Snyk to raise PRs, email regular reports and alert you when new vulnerabilities are detected.
-
-If you have an old repository that is receiving security alerts but is not being worked on or maintained, you may wish to archive your repository instead.
-
-The Cyber Security team has created a Splunk dashboard. This gives service teams visibility of vulnerabilities in their repositories. To allow for your repositories to be categorised correctly in the Splunk dashboard, please make sure you tag your repository with the service name. If you would like to access the dashboard, [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK).
 
 ### Use official Docker base images
 
@@ -80,7 +82,7 @@ Also consider managed solutions where possible. For example:
 
 This guidance is in line with the GDS Reliability Engineering strategic principle of [using fully managed cloud services by default][].
 
-[Dependabot's auto-approve-and-merge facility]: https://dependabot.com/blog/automatic-pull-request-merging/
+[Dependabot's auto-approve-and-merge facility]: https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions
 [security-only updates provided automatically by GitHub Dependabot]: https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/about-alerts-for-vulnerable-dependencies
 [GDS supported programming languages]: /standards/programming-languages.html#content
 [managing software dependencies in the Service Manual]: https://www.gov.uk/service-manual/technology/managing-software-dependencies
