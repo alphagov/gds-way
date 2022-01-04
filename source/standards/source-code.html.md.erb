@@ -70,12 +70,20 @@ Alphagov repositories can be configured to use [GitHub Actions](https://docs.git
 
 Actions and workflows can be powerful, so take care to follow best security practice.
 
-Ensure the repository permissions follow [the principle of least privilege](/standards/principle-least-access.html).
-Set workflow permissions to read-only by default, and disable all actions on repositories that are not using them (this will hide the 'Actions' tab from the repository menu).
+Ensure the repository permissions follow [the principle of least privilege](/standards/principle-least-access.html) by:
+
+- disabling Actions entirely on repositories that do not use it (this will hide the 'Actions' tab from the repository menu)
+- setting workflow permissions to read-only by default
+- setting [granular permissions in the workflow YAML](https://docs.github.com/actions/reference/authentication-in-a-workflow#modifying-the-permissions-for-the-github_token) where appropriate
+- [using environments to restrict access to secrets](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#environment-secrets)
 
 If your repository has external contributors, [ensure they do not have permissions to add workflows or trigger workflow runs](https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks).
 
 If your workflow interacts with another resource (for example AWS or DockerHub), consider setting up a dedicated account or role, with permissions limited to the scope of the action.
+
+Consider protecting the `.github/workflows` folder by using [a CODEOWNERS file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) and requiring review from CODEOWNERS for merges into protected branches.
+
+Consider creating a Workflow Template in the [alphagov workflow folder](https://github.com/alphagov/.github/tree/main/workflow-templates) if you need to share a similar workflow between many repositories.
 
 [Create your own local actions](https://docs.github.com/en/actions/creating-actions/about-actions) wherever possible. If using GitHub-owned actions, [pin to a specific version](https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#using-release-management-for-your-custom-actions).
 Third-party actions should only be used if:
@@ -86,9 +94,9 @@ Third-party actions should only be used if:
 - You have pinned the specific version in your workflow and in the repository settings, using a Git commit SHA
 - The third-party action is actively maintained, well-documented and tested ([follow the guidance on third party dependencies](/standards/tracking-dependencies.html)).
 
-Note that for public repositories, the output of workflow runs is visible to everyone. Do not use workflows if this output could be considered sensitive.
+You can enforce this in the settings for Actions by choosing ['Allow select actions'](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-specific-actions-to-run) and then 'Allow actions created by GitHub' and 'Allow Marketplace actions by verified creators' as required.
 
-Consider creating a Workflow Template in the [alphagov workflow folder](https://github.com/alphagov/.github/tree/main/workflow-templates) if you need to share a similar workflow between many repositories.
+Note that for public repositories, the output of workflow runs is visible to everyone. Do not use workflows if this output could be considered sensitive.
 
 ## Working with Git
 
