@@ -82,7 +82,7 @@ the HTML and asset files ready to be published.
 
 ## Deploy
 
-Continuously deployed from main by the [multi-tenant Concourse](https://cd.gds-reliability.engineering) with the pipeline defined in [ci/pipeline.yaml](https://github.com/alphagov/gds-way/blob/main/ci/pipeline.yaml).
+This repo is continuously deployed from the `main` branch by GitHub Actions, using the workflow defined in [`/.github/workflows/bundle_and_release.yml`](/.github/workflows/bundle_and_release.yml).
 
 ## Licence
 
