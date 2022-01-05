@@ -82,7 +82,7 @@ the HTML and asset files ready to be published.
 
 ## Deploy
 
-This repo is continuously deployed from the `main` branch by GitHub Actions, using the workflow defined in [`/.github/workflows/bundle_and_release.yml`](https://github.com/alphagov/gds-way/blob/main/.github/workflows/bundle_and_release.yml).
+This repo is continuously deployed from the `main` branch by GitHub Actions, using the workflow defined in [`/.github/workflows/bundle_and_release.yml`](/.github/workflows/bundle_and_release.yml).
 
 ## Licence
 
