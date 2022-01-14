@@ -32,7 +32,7 @@ Consider whether a dependency injection framework is appropriate for your projec
 
 ## Imports
 
-You should not use any wildcard imports. Wildcard imports can cause existing code to break if a new type is added to a package with the same name as a type in another package.
+Wildcard imports should be avoided. They can cause existing code to break if a new type is added to a package with the same name as a type in another package.
 
 This infamously happened with Java SE 1.2, which introduced `java.util.List` when there was already `java.awt.List`, breaking any classes that used `List` and imported both `java.util.*` and `java.awt.*`.
 
