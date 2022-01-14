@@ -80,6 +80,8 @@ Ensure the repository permissions follow [the principle of least privilege](/sta
 If your repository has external contributors, [ensure they do not have permissions to add workflows or trigger workflow runs](https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks).
 
 If your workflow interacts with another resource (for example AWS or DockerHub), consider setting up a dedicated account or role, with permissions limited to the scope of the action.
+Use temporary credentials in preference to storing long-lived credentials in a secret.
+In particular, when accessing AWS you must [authenticate using the OpenID Connect token][GHA-AWS-OIDC] and not using an IAM User's access key and secret access key.
 
 Consider protecting the `.github/workflows` folder by using [a CODEOWNERS file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) and requiring review from CODEOWNERS for merges into protected branches.
 
@@ -276,7 +278,6 @@ $ git push --force-with-lease
 branch](https://blog.developer.atlassian.com/force-with-lease/) unless
 it is the state that we expect, which is that nobody has updated the remote branch.
 
-[make our source code open and reusable]: https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable
 [GOV.UK Frontend]: https://github.com/alphagov/govuk-frontend
 [MIT and OGL licence file]: https://gds-way.cloudapps.digital/manuals/licensing.html
 [Specification for CPAN Changes files]: https://metacpan.org/pod/CPAN::Changes::Spec
@@ -287,7 +288,7 @@ it is the state that we expect, which is that nobody has updated the remote bran
 [Go repository]: https://golang.org/CONTRIBUTORS
 [keeping some data and code closed]: https://www.gov.uk/government/publications/open-source-guidance/when-code-should-be-open-or-closed
 [how to open previously closed code and your responsibilities for maintaining open code]: https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable
-[Open Government Licence (OGL)]: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 [Go repository]: https://golang.org/CONTRIBUTORS
 [guidance for writing a README]: /manuals/readme-guidance.html
 [GOV.UK Frontend issues]: https://github.com/alphagov/govuk-frontend/issues
+[GHA-AWS-OIDC]: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
