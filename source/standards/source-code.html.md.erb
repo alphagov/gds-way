@@ -82,6 +82,7 @@ If your repository has external contributors, [ensure they do not have permissio
 If your workflow interacts with another resource (for example AWS or DockerHub), consider setting up a dedicated account or role, with permissions limited to the scope of the action.
 Use temporary credentials in preference to storing long-lived credentials in a secret.
 In particular, when accessing AWS you must [authenticate using the OpenID Connect token][GHA-AWS-OIDC] and not using an IAM User's access key and secret access key.
+You should also specify the branch you expect to be deploying from (for example, `main`) in your IAM role to make sure code cannot be deployed from untrusted branches.
 
 Consider protecting the `.github/workflows` folder by using [a CODEOWNERS file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) and requiring review from CODEOWNERS for merges into protected branches.
 
