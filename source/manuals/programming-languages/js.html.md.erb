@@ -1,6 +1,6 @@
 ---
 title: JavaScript coding style
-last_reviewed_on: 2020-11-25
+last_reviewed_on: 2022-01-24
 review_in: 12 months
 ---
 
@@ -42,7 +42,7 @@ Easier than running standard manually is to install it as a plugin in your edito
 
 There are [official guides for most of the popular editors](http://standardjs.com/index.html#are-there-text-editor-plugins).
 
-### When to use standardx
+### When to use standardx
 
 You should use [standardx][] when the standard's rule set conflicts with the browsers your project supports. For example, the [no-var](https://eslint.org/docs/rules/no-var) rule in standard - which prefers `let` or `const` over `var` - prevents JavaScript usage in versions of Internet Explorer < 11. Adopting this rule would mean explicitly breaking JavaScript for those browsers.
 
@@ -88,8 +88,7 @@ Use soft tabs with a two space indent.
   **Why:** Descriptive names help future developers pick up parts of the code
   faster without having to read it all.
 
-* Use camelCase when naming objects, functions, and instances. Use PascalCase
-  when naming constructors or classes.
+* Use camelCase when naming objects, functions, and instances.
 
   ```javascript
   // Bad
@@ -101,7 +100,11 @@ Use soft tabs with a two space indent.
   var thisIsMyObject = {}
   var thisIsMyVariable = 'thing'
   function thisIsMyFunction() { ... }
+  ```
 
+* Use PascalCase when naming constructors or classes.
+
+  ```javascript
   // Bad
   function user (options) {
     this.name = options.name
