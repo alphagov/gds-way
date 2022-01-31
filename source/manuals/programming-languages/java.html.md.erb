@@ -1,6 +1,6 @@
 ---
 title: Java style guide
-last_reviewed_on: 2021-07-21
+last_reviewed_on: 2022-01-14
 review_in: 6 months
 ---
 
@@ -10,11 +10,11 @@ The purpose of this style guide is to provide some conventions for working on Ja
 
 The [Google Java style guide](https://google.github.io/styleguide/javaguide.html) is a good starting point. The old [Sun/Oracle Java style guide](https://www.oracle.com/java/technologies/cc-java-programming-language.html) is still largely relevant but it has not been updated since 1999 and does not reflect recent changes to the language.
 
-The more far-reaching _[Java for Small Teams](https://ncrcoe.gitbooks.io/java-for-small-teams/)_ ebook can be read online at no cost. While not free, _[Effective Java](https://www.oreilly.com/library/view/effective-java/9780134686097/)_ by Joshua Bloch is also an excellent resource. The GDS Library has physical copies of the book or you can buy a copy using the Learning and Development budget (see the [books page on the wiki](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/cross-gds-social/book-club-library)).
+The more far-reaching _[Java for Small Teams](https://ncrcoe.gitbooks.io/java-for-small-teams/)_ ebook can be read online at no cost. While not free, _[Effective Java](https://www.oreilly.com/library/view/effective-java/9780134686097/)_ by Joshua Bloch is also an excellent resource. The GDS Library has physical copies of the book or you can buy a copy using the Learning and Development budget (see the [books page on the wiki](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/clubs-and-networks/book-clublibrary)).
 
 While the above resources are good guides, they may conflict with either each other or your team’s established practices. We favour consistency across our code, so make sure that you have the agreement of your team when considering using a new or different method or paradigm to those currently in use.
 
-We generally use [IntelliJ IDEA](https://www.jetbrains.com/idea/) within GDS. Using it consistently helps when pairing and mob programming. GDS have purchased licences for the commercial editions of IntelliJ IDEA for some teams. 
+We generally use [IntelliJ IDEA](https://www.jetbrains.com/idea/) within GDS. Using it consistently helps when ensemble programming (pairing and mobbing). GDS have purchased licences for the commercial editions of IntelliJ IDEA for some teams. 
 
 ## Code formatting
 
@@ -24,7 +24,7 @@ Always use curly braces around the body of an `if`, `else`, `for`, `do` or `whil
 
 Use the [GDS Way EditorConfig file](editorconfig), which has settings for things like code indentation. Place a copy of this file named `.editorconfig` in the root of your project to have IntelliJ IDEA and some other editors automatically apply the settings. If your editor does not support EditorConfig, manually configure its settings to match.
 
-Some Java teams within GDS have had success using the [Spotless](https://github.com/diffplug/spotless) auto-formatter. As a somewhat opinionated code formatter, it may want to make lots of changes if added to an existing project, so you may wish to configure it to match your existing conventions. For a new project, it’s probably easiest to use its default settings.
+Some Java teams within GDS have had success using the [Spotless](https://github.com/diffplug/spotless) auto-formatter. Some of the formatting styles supported by Spotless are quite opinionated and may want to make lots of changes if added to an existing project. The `ratchetFrom` option makes Spotless only format changed files (though this can require it to check out a lot of code in some cases, which may have performance implications if used as part of a build pipeline). Alternatively, you may wish to configure Spotless to match your existing conventions. For a new project, it’s probably easiest to use a style’s default settings.
 
 ## Dependency injection (DI)
 
@@ -32,7 +32,7 @@ Consider whether a dependency injection framework is appropriate for your projec
 
 ## Imports
 
-You should not use any wildcard imports. Wildcard imports can cause existing code to break if a new type is added to a package with the same name as a type in another package.
+Wildcard imports should be avoided. They can cause existing code to break if a new type is added to a package with the same name as a type in another package.
 
 This infamously happened with Java SE 1.2, which introduced `java.util.List` when there was already `java.awt.List`, breaking any classes that used `List` and imported both `java.util.*` and `java.awt.*`.
 
@@ -91,7 +91,7 @@ CheckResponse checkResponse = service.getCheckResponse();
 var checkResponse = service.getCheckResponse();
 ```
 
-Be mindful that `var` hides the type of the variable. If the variable name makes the type obvious, this usually isn’t a problem. But if it is not clear from either the variable name or the right-hand side of the assignment, it might be better to explicitly write the type.
+Be mindful that `var` hides the type of the variable. If the variable name makes the type obvious, this usually is not a problem. But if it is not clear from either the variable name or the right-hand side of the assignment, it might be better to explicitly write the type.
 
 If you are using the diamond operator in an assignment, you will usually find that updating it to use `var` also requires you to replace the diamond operator with the appropriate generic type parameter:
 
@@ -112,14 +112,14 @@ The [OpenJDK project has some style guidelines for local variable type inference
 
 Where possible, use functionality from the Java standard library rather than external libraries.
 
-Keep in mind that improvements to the Java standard library mean that some external libraries which were popular in the past now add less value. For example, while Joda-Time was significantly better than the date and time libraries built into older Java versions, the `java.time` package introduced in Java 8 renders it redundant. Similarly, [Google’s Guava](https://github.com/google/guava) is very useful (and recommended) but the unmodifiable collections built in to Java 9 largely remove the need for Guava’s immutable collections.
+Keep in mind that improvements to the Java standard library mean that some external libraries which were popular in the past now add less value. For example, while Joda-Time was significantly better than the date and time libraries built into older Java versions, the `java.time` package introduced in Java 8 renders it redundant. Similarly, [Google’s Guava](https://github.com/google/guava) is very useful (and recommended) but the unmodifiable collections built in to Java 9 largely remove the need for Guava’s immutable collections. The [HttpClient](https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html) introduced in Java 11 is good enough that you might not need a third party one.
 
-When using external libraries, favour those which complement the Java standard library. For example, be wary of any library which introduces a new type that replicates the functionality of an existing type in the Java standard library without implementing the same interfaces (for example, a list type which does not implement `java.util.List`).
+When using external libraries, favour those which complement the Java standard library. For example, consider a library that introduces an object that behaves like a list. If this type does not implement `java.util.List`, it will not automatically benefit from the standard library’s support for features like streams.
 
 Make sure any external library you use is appropriate for your purposes and avoid relying on internal implementation details of external libraries. If your IDE’s code completion suggests a method from an external library, make sure it’s a supported part of the library’s defined API.
 
 ## Comments
-Agree with your team to what extent you permit comments in your code. It’s often possible to [make code more readable so it doesn’t need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html). Comments rarely need to describe _what_ some code is doing or _how_ it’s doing it. Comments explaining _why_ the code is doing something, particularly if it’s non-obvious or requires external contextual knowledge, may be helpful.
+Agree with your team to what extent you permit comments in your code. It’s often possible to [make code more readable so it does not need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html). Comments rarely need to describe _what_ some code is doing or _how_ it’s doing it. Comments explaining _why_ the code is doing something, particularly if it’s non-obvious or requires external contextual knowledge, may be helpful.
 
 ## Testing
 
@@ -129,7 +129,7 @@ The latest [JUnit 5](https://junit.org/junit5/) is not a drop-in replacement for
 
 For new projects, use JUnit 5 unless you have a reason not to.
 
-Use [Mockito](https://site.mockito.org/) for mocking. If you’re still using Mockito 2, upgrading to Mockito 3 should be straightforward because there are no breaking changes.
+Use [Mockito](https://site.mockito.org/) for mocking. If you’re still using Mockito 2 or 3, upgrading to Mockito 4 should be straightforward: Mockito 3 contains no breaking changes and Mockito 4 only removes deprecated APIs.
 
 ## Code checking
 
@@ -137,7 +137,7 @@ We encourage the use of static analysis. Static analysis tools for Java include 
 
 If possible, configure your static analysis tools using configuration files and keep these in your project repositories. This makes your settings more portable and makes it easier to perform the same checks in different places (for example, in a cloud service and on your own computer).
 
-Some cloud-based static analysis tools, including Codacy, can work directly with GitHub repositories. Only grant a tool access to your repositories if it has been approved by an information assurance review.
+Some cloud-based static analysis tools, including Codacy, can work directly with GitHub repositories. Only grant a tool access to your repositories if it has been approved by an information assurance review. The Digital Identity programme has approval to use [SonarCloud](https://sonarcloud.io/) on public repos.
 
 Try to minimise compiler warnings. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why. For example:
 
@@ -149,14 +149,14 @@ public void frobulateFoos() {
     @SuppressWarnings("unchecked")
     List<Foo> foos = (List<Foo>) fooService.getFoos();
 
-    foos.forEach(foo -> foo.frobulate());
+    foos.forEach(Foo::frobulate);
 }
 ```
 
 ## Dependencies
 Try to keep up to date with the latest versions of your external dependencies. Older dependencies often contain security vulnerabilities. If you wait to upgrade your dependencies, you may find you have to make large version jumps to lots of dependencies at once, which can be painful. Frequent, smaller updates are almost always preferable.
 
-[Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/about-dependabot-security-updates) (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Don’t merge a dependency upgrade unless it passes your automated tests.
+[Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/about-dependabot-security-updates) (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Do not merge a dependency upgrade unless it passes your automated tests.
 
 Dependabot makes assumptions about version numbers that not all dependencies follow. This can cause it to open pull requests that update to beta versions, release candidates or even alternative variants of the dependency. Always have a human sense-check each Dependabot pull request before merging.
 
@@ -164,7 +164,7 @@ There have been cases of bad actors raising malicious pull requests on repositor
 
 ## Build tools
 
-You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apache.org/) as the build tool. Use recent versions if you can.
+You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apache.org/) as the build tool. Use recent versions if you can. Maven now supports the [Bill of Materials (BOM)](https://www.jvt.me/posts/2021/08/28/java-bom/) concept, which can simplify dependency management (Gradle also supports Maven BOMs).
 
 ## Web frameworks
 
@@ -178,13 +178,17 @@ If you are sending logs to a service that requires them in a specific format, yo
 
 ## JDK
 
-The [Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) is no longer free for production use. OpenJDK remains free to use (under the GPLv2 with the Classpath Exception) but Oracle only provide general-availability [OpenJDK builds](http://jdk.java.net/) for the latest release.
+Try to use recent versions of Java. If you are starting a new Java project, do not use anything older than the latest long-term support (LTS) releae of Java unless you have a good reason (for example, compatibility issues). If you are currently using an older LTS version of Java, you should be planning to upgrade to something newer. Different Java vendors have different support lifecycles for different Java releases.
 
-The [AdoptOpenJDK](https://adoptopenjdk.net/) project (backed by big names including IBM and Microsoft) provides fully open-source pre-built OpenJDK binaries. For LTS releases (such as Java 8 and Java 11), AdoptOpenJDK have committed to releasing free updates for several years.
+Recent versions of the [Oracle JDK can be used free of charge](https://blogs.oracle.com/java/post/free-java-license) for commercial and production purposes under the terms of a bespoke licence. OpenJDK is open source under the [GPLv2 with the Classpath Exception](https://openjdk.java.net/legal/gplv2+ce.html) but Oracle only provide general-availability [OpenJDK builds](http://jdk.java.net/) for the latest release.
 
-In addition, AdoptOpenJDK has benefits such as being available in package repositories, having friendly installers for desktop use, and offering ready-made [Docker images containing OpenJDK](https://hub.docker.com/u/adoptopenjdk).
+The [Adoptium](https://adoptium.net/) (formerly AdoptOpenJDK) project (part of the [Eclipse Foundation](https://www.eclipse.org/)) provides fully open-source TCK-certified pre-built OpenJDK binaries under the name Eclipse Temurin. For LTS releases (such as Java 8, 11 and 17), Adoptium have committed to releasing free updates for several years.
 
-[Amazon Corretto](https://aws.amazon.com/corretto/) is a free OpenJDK distribution. The [AWS Lamdba runtimes for Java](https://docs.aws.amazon.com/lambda/latest/dg/lambda-java.html) use Corretto.
+In addition, Temurin has benefits such as being available in package repositories, having friendly installers for desktop use, and offering ready-made [Docker images containing OpenJDK](https://hub.docker.com/_/eclipse-temurin).
+
+[Amazon Corretto](https://aws.amazon.com/corretto/) is a free OpenJDK distribution. The [AWS Lamdba runtimes for Java](https://docs.aws.amazon.com/lambda/latest/dg/lambda-java.html) use Corretto. Newer Java versions have significantly faster cold start times, which can be beneficial for Lambda.
+
+If you are lucky enough to have a shiny new M1 Mac, you may wish to use an OpenJDK distribution that runs natively on Apple Silicon. Adoptium have only provided Temurin builds for Apple Silicon since Java 17 but [Azul have native Apple Silicon runtimes for older Java versions](https://www.azul.com/downloads/?os=macos&architecture=arm-64-bit&package=jdk).
 
 ## Publishing artifacts
 
@@ -202,7 +206,7 @@ You should follow [Sonatype’s guidance on registering for and claiming a group
 
 ### Signing artifacts
 
-Sonatype requires that artifacts published to their repository have been signed with a published GPG key. Each programme that wants to publish artifacts should create their own GPG key, publish it to a public keyserver, then store the private key safely and in accordance with any programme-specific guidance.
+Sonatype requires that artifacts published to their repository have been signed with a published GPG key. Each programme that wants to publish artifacts should create their own GPG key, [publish it to a public keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key), then store the private key safely and in accordance with any programme-specific guidance.
 
 The key and its associated passphrase will be used during the publishing process. This will require making it available safely to the task runner, for example Concourse, that is performing the deployment.
 
