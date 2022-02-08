@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#! /bin/bash
 
 set -e
 
-bundle check || bundle install
+docker build . --tag gds-way
 
-bundle exec middleman server
+docker run --rm -p 4567:4567 -p 35729:35729 -v $(pwd):/usr/src/docs -it gds-way
