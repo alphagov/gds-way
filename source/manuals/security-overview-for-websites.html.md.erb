@@ -1,6 +1,6 @@
 ---
 title: Security overview for websites
-last_reviewed_on: 2021-09-30
+last_reviewed_on: 2022-02-23
 review_in: 6 months
 ---
 
@@ -113,12 +113,11 @@ Consider removing notification ability or restricting it to designated recipient
 ## 6. Security Headers
 ### Must Do
 
-Enable relevant security headers to help your users' browsers understand what your service should be doing:
+Configure appropriate security headers to help your users' browsers understand what your service should be doing:
 
 |HTTP Header|Notes
 |---|---|
 |Strict-Transport-Security| Also known as HTTP Strict Transport Security (HSTS), tells browsers to enforce HTTPS |
-|Expect-CT| Tells browsers to check the certificate transparency logs, which helps determine the legitimacy of a HTTPS connection |
 |Content-Security-Policy| [see below for details on CSP] |
 |X-Content-Type-Options|When set to “nosniff” it tells browsers not to assume a content type|
 |X-Frame-Options|Can defend against clickjacking|
@@ -127,7 +126,9 @@ Enable relevant security headers to help your users' browsers understand what yo
 |Cross-Origin-Embedder-Policy|Sets the permission for how assets are loaded|
 |Cross-Origin-Opener-Policy|^|
 |Cross-Origin-Resource-Policy|^|
-|X-XSS-Protection|Enables older browsers' functionality to prevent XSS (cross-site scripting)|
+|Feature-Policy|*Partially deprecated* (see [OWASP guidance on Feature-Policy](https://owasp.org/www-project-secure-headers/#feature-policy)). Previously used to specify features the browser could access, primarily replaced with `Permissions-Policy`|
+|Expect-CT|*Deprecated* (see [OWASP guidance on Expect-CT](https://owasp.org/www-project-secure-headers/#expect-ct)). Previously used by browsers to check the certificate transparency logs, which helps determine the legitimacy of a HTTPS connection. It is no longer needed as a response header|
+|X-XSS-Protection|*Deprecated* (see [OWASP guidance on X-XSS-Protection](https://owasp.org/www-project-secure-headers/#x-xss-protection)). Previously used to mitigate XSS (cross-site scripting), this has been deprecated and should be set to `0` to disable the functionality in older browsers|
 
 Remove/disable the “Server” header; this is slightly contradictory to the [NCSC’s Secure by Design principle](https://www.ncsc.gov.uk/information/secure-default) of “security through obscurity should be avoided” but it does make it more challenging to target your service.
 
@@ -153,7 +154,7 @@ Implement origin access controls so that the origin cannot be impacted directly.
 If you are using CloudFront:
 
 1. Consider limiting the edge locations if you only expect traffic originating from the UK.
-2. Set up AWS Shield Advanced (it’s paid for and already available in Cabinet Office’s AWS environment), see [AWS DDoS Response Team]
+2. Set up AWS Shield Advanced (it’s paid for and already available in Cabinet Office’s AWS environment), see [AWS Shield Response Team]
 3. Contact the [CDIO Cyber Security] team to send logs and get access to Splunk - see the [logging](/standards/logging.html) page for more details.
 4. Consider setting up AWS Origin Shield if you expect international traffic.
 
@@ -193,7 +194,7 @@ See [vulnerability disclosure] for information on how to configure.
 
 You can find an example of implementing a redirect using Lambda@Edge in the [alphagov/aws-lambda-at-edge-examples] GitHub repo.
 
-You can check the configuration using <https://gotsecuritytxt.com/query>.
+You can check the configuration using <https://findsecuritycontacts.com/query>.
 
 ### Why?
 
@@ -213,12 +214,12 @@ Make sure you test after enabling WAF rules so they do not impact usability.
 
 See more information on the [Use a web application firewall (WAF)](/standards/web-application-firewall.html) page.
 
-## 12. AWS DDoS Response Team
+## 12. AWS Shield Response Team
 ### Should Do
 
 If you use the Cabinet Office AWS environment:
 
-Enable the AWS DDoS Response Team (DRT) against applicable resources like CloudFront and Application Load Balancers (ALBs) - see the [Amazon documentation on Shield Advanced and the DRT](https://docs.aws.amazon.com/waf/latest/developerguide/authorize-DRT.html).
+Enable the AWS Shield Response Team (SRT), previously known as DDoS Response Team (DRT), against applicable resources like CloudFront and Application Load Balancers (ALBs) - see the [Amazon documentation on Shield Advanced and the SRT](https://docs.aws.amazon.com/waf/latest/developerguide/authorize-DRT.html).
 
 You likely need to configure the following:
 
@@ -229,7 +230,7 @@ You likely need to configure the following:
 
 ### Why?
 
-The Cabinet Office pays for an enhanced service (Shield Advanced), enabling AWS to support us when DDoS attacks impact our web services. This allows us to utilise AWS’ expertise and take some of the pressure off when there’s an incident. Without this, your website or service may be unavailable for longer while mitigating malicious activity.
+The Cabinet Office pays for an enhanced service (Shield Advanced), enabling AWS to support us when certain attacks impact our web services. This allows us to utilise AWS’ expertise and take some of the pressure off when there’s an incident. Without this, your website or service may be unavailable for longer while mitigating malicious activity.
 
 ## 13. Vulnerability Scanning
 ### Should Do
@@ -267,7 +268,7 @@ Remote analytics, such as Google Analytics, introduces a vulnerability to your s
 
 [Access Control]: #1-access-control
 [see below for details on CSP]: #9-content-security-policy
-[AWS DDoS Response Team]: #12-aws-ddos-response-team
+[AWS Shield Response Team]: #12-aws-shield-response-team
 [Backup Static Origin]: #14-backup-static-origin
 [alphagov/aws-lambda-at-edge-examples]: https://github.com/alphagov/aws-lambda-at-edge-examples
 [alphagov/browser-listener]: https://github.com/alphagov/browser-listener
