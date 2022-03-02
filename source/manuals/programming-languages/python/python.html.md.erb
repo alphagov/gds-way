@@ -240,25 +240,11 @@ breaking changes to your build.
 Your pinned dependencies should be fully specified in a file called `requirements.txt`, and checked
 into your version control system (VCS). For projects with only a small number of dependencies, maintaining
 this manually (for example, installing with `pip install`, then using `pip freeze`) may be adequate.
+    
+For larger projects, GDS recommends using [pip-tools][pip-tools] for managing dependencies.
 
-For larger projects, GDS recommends the following approach, which was developed after various issues
-were found in current mainstream tooling (see [this commit message][dm-deps-commit], and note also the
-[lack of support for specifying VCS dependencies](https://github.com/jazzband/pip-tools/issues/355)
-in `pip-compile`).
-
-Put your top-level requirements in a `requirements-app.txt` file.
-
-Use a "freeze" script (as seen in [this Makefile][dm-deps-commit-makefile]) to generate the
-fully specified `requirements.txt`, which is used whenever you need to pip-install the
-dependencies.
-
-* The script creates a temporary virtualenv, pip-installs the `requirements-app.txt` and
-  pip-freezes the result as `requirements.txt`.
-
-> The Makefile freeze script we currently have is constructed such that your `requirements-app.txt`
-> file can only contain pinned version numbers for your application's immediate dependencies. This is
-> not a particularly desirable feature: in principle we only demand that the final `requirements.txt`
-> has no ambiguity and ends up containing pinned versions for all dependencies.
+Put your top-level requirements in a `requirements.in` file, and then use `pip-compile` to generate a
+`requirements.txt` file. Both the .in and .txt files should be commited to your repository.
 
 List dependencies only needed for development or testing into a separate `requirements-dev.txt` file.
 
@@ -314,9 +300,8 @@ file otherwise.
 [Flake8]: https://flake8.pycqa.org/en/latest/
 [pycodestyle]: https://pycodestyle.pycqa.org/en/latest/
 [Pyflakes]: https://github.com/pycqa/pyflakes
+[pip-tools]: https://github.com/jazzband/pip-tools
 [McCabe]: https://pypi.org/project/mccabe/
-[dm-deps-commit]: https://github.com/alphagov/digitalmarketplace-api/commit/95ac12206d26e6b219dd381dd63641c33467afbd
-[dm-deps-commit-makefile]: https://github.com/alphagov/digitalmarketplace-api/commit/95ac12206d26e6b219dd381dd63641c33467afbd#diff-76ed074a9305c04054cdebb9e9aad2d818052b07091de1f20cad0bbac34ffb52
 [snyk.io]: https://snyk.io/
 [setup-deps]: https://docs.python.org/3/distutils/setupscript.html#relationships-between-distributions-and-packages
 [PEP 440]: https://www.python.org/dev/peps/pep-0440/#direct-references
