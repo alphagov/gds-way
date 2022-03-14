@@ -1,6 +1,6 @@
 ---
 title: Python style guide
-last_reviewed_on: 2021-07-13
+last_reviewed_on: 2022-03-14
 review_in: 6 months
 owner_slack: '#python'
 ---
@@ -13,8 +13,8 @@ and consistent, within, and across, projects at GDS.
 * [Code formatting](#code-formatting)
 * [Maximum line length of 120 characters](#maximum-line-length-of-120-characters)
 * [Linting](#linting)
+* [Environments](#environments)
 * [Dependencies](#dependencies)
-* [Updating this manual](#updating-this-manual)
 
 ## Code formatting
 
@@ -170,6 +170,18 @@ Note: you can also ignore rules on particular lines of code or files by adding a
 * [Flake8 error codes list][flake8-error-codes-list]
 * [Flake8 plugins list][flake8-plugins]
 
+
+## Environments
+
+Use [Pyenv](https://github.com/pyenv/pyenv) to manage different versions of Python you have installed.
+For more information see [Intro to pyenv](https://realpython.com/intro-to-pyenv)
+
+Use the pyev plugin [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) to manage virtual python environment.
+For more information see [Python virtual environment primer](https://realpython.com/python-virtual-environments-a-primer/)
+
+We recommend using [direnv](https://direnv.net/) to manage environment variables. 
+This ensures project specific variables do not clutter your main environment or the environment of other projects.
+direnv uses `.envrc` for general project specific variables and you can use a non version controlled `.secrets` to store sensitive information.
 
 ## Dependencies
 
