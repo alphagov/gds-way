@@ -1,6 +1,6 @@
 ---
 title: Using Node.js at GDS
-last_reviewed_on: 2021-07-02
+last_reviewed_on: 2022-03-15
 review_in: 6 months
 owner_slack: '#nodejs'
 ---
@@ -51,7 +51,6 @@ See the general [JavaScript style guide for linting guidance](https://github.com
 
 ## Project directory structure
 
-
 > Organise files around features, not roles
 
 The following structure means you don’t require lots of context switching to find related functions and your `require` statements don’t need overly complicated paths.
@@ -75,17 +74,16 @@ Use these files to `require` all the modules functions.
 
 ```js
 // product/index.js
-const product = require('./product');
+const product = require('./product')
 
 module.exports = {
   create: product.create
-};
+}
 ```
 
 > Store test files within the implementation
 
-Keeping tests in the same directory makes them easier to find and more obvious when a test is missing. Keep the project's global test config and setup scripts in a separate `test` directory.
-
+Keeping tests in the same directory makes them easier to find and more obvious when a test is missing. Keep the project’s global test config and setup scripts in a separate `test` directory.
 
 ```
 ├── test
@@ -96,7 +94,6 @@ Keeping tests in the same directory makes them easier to find and more obvious w
 |   ├── product.spec.js
 |   └── product.njk
 ```
-
 
 See also:
 
@@ -112,7 +109,6 @@ Embrace immutability (more below) and do not let
 [hoisting](http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html#declarations_names_and_hoisting)
 confuse you.
 
-
 ### Functions
 
 > Prefer `function` for top-level function declarations and `=>` for function literals
@@ -120,38 +116,37 @@ confuse you.
 ```js
 // Use:
 const foo = function (x) {
-  //...
-};
+  // ...
+}
 
-// avoid:
+// Avoid:
 const foo = x => {
-  //...
-};
-
+  // ...
+}
 
 // Use:
-map(item => Math.sqrt(item), array);
+map(item => Math.sqrt(item), array)
 
-// avoid:
-map(function (item) { return Math.sqrt(item) }, array);
+// Avoid:
+map(function (item) { return Math.sqrt(item) }, array)
 ```
 
 Acceptable exceptions include single expression functions, such as
 
 ```js
-const collatz = n => (n % 2) ? (n / 2) : ((3 * n) + 1);
+const collatz = n => (n % 2) ? (n / 2) : ((3 * n) + 1)
 ```
 
 or curryied functions, which are more readable using the arrow
 notation:
 
 ```js
-const foo = x => y => z => (x * y) + z;
+const foo = x => y => z => (x * y) + z
 ```
 
 Be aware that because anonymous functions do not have a name, a stack trace
 will be harder to read when debugging. Also remember that arrow functions keep
-their context's `this`.
+their context’s `this`.
 
 ### Classes
 
@@ -161,18 +156,16 @@ There are many different ways to define classes in JavaScript. `class` has been 
 
 ```js
 class Rectangle {
-  constructor(height, width) {
-    this.height = height;
-    this.width = width;
+  constructor (height, width) {
+    this.height = height
+    this.width = width
   }
+
   area () {
-    return this.width * this.height;
+    return this.width * this.height
   }
 }
 ```
-
-
-
 
 ### Asynchronous code
 
@@ -180,7 +173,7 @@ class Rectangle {
 
 For instance, avoid `readFileSync` but instead use `readFile`. Even if your code
 is less readable as a result and that particular piece of code does not need to
-be asynchronous (because you cannot proceed until you've read that file anyway),
+be asynchronous (because you cannot proceed until you’ve read that file anyway),
 it will not block other server threads. However if your program does not use
 concurrency, synchronous versions are sometimes preferable as they are more
 readable and less heavy on the operating system.
@@ -190,15 +183,14 @@ readable and less heavy on the operating system.
 ```js
 // Prefer:
 const pwdReadCallback = function (err, data) {
-  //...
-};
-fs.readFile('/etc/passwd', pwdReadCallback);
+  // ...
+}
+fs.readFile('/etc/passwd', pwdReadCallback)
 
 // over:
 fs.readFile('/etc/passwd', (err, data) => {
-  //...
+  // ...
 }
-
 
 // Another example:
 
@@ -206,22 +198,22 @@ const done = function (resolve, reject) {
   return () => {
     try {
       // Do something that might fail
-      resolve('all went well');
+      resolve('Success - all went well')
     } catch (err) {
-      reject(err);
+      reject(err)
     }
-  };
-};
+  }
+}
 
 const waitAndSee = function (resolve, reject) {
-  setTimeout(done(resolve, reject), 2500);
-};
+  setTimeout(done(resolve, reject), 2500)
+}
 
-const log = status => message => console.log(status + ': ' + message);
+const log = status => message => console.log(status + ': ' + message)
 
 new Promise(waitAndSee)
   .then(log('Success'))
-  .catch(log('Failure'));
+  .catch(log('Failure'))
 ```
 
 This will avoid "callback hell" and encourage organising callback functions
@@ -230,28 +222,28 @@ tests for those functions.
 
 ```js
 const pwdReadCallback = function (err, data) {
-  //...
-};
+  // ...
+}
 const userLoggedInCallback = function (authToken) {
-  //...
-};
+  // ...
+}
 const dbRequestResultCallback = function (req, res) {
-  //...
-};
+  // ...
+}
 ```
 
 Separating out a callback may pose a problem when it needs its original scope. This can be handled by currying the callback:
 
 ```js
-fs.readFile(filename, callback(filename));
+fs.readFile(filename, callback(filename))
 
 const callback = filename => (err, data) => {
   if (err) {
-    console.log(`failed reading ${filename}.`);
-    throw err;
+    console.log(`Failed reading ${filename}.`)
+    throw err
   }
-  //...
-};
+  // ...
+}
 ```
 
 #### Use of `async`/`await`
@@ -259,51 +251,51 @@ const callback = filename => (err, data) => {
 You should use async functions, and the await keyword, to organise your asynchronous code. This will make your code easier to read and write.
 
 ```js
-// without async/await
+// Without async/await:
 const getUserFromCreds = function (username, password) {
   return getUserIdFromAuth(username, password)
     .then(userId => {
-      return getUserFromApi(userId);
+      return getUserFromApi(userId)
     })
     .then(user => {
       return {
-        'id': user.id,
-        'name': user.name,
-        'age': user.ageInYears      
-      };
+        id: user.id,
+        name: user.name,
+        age: user.ageInYears
+      }
     })
 }
 
-// with async/await
+// With async/await:
 const getUserFromCreds = async function (username, password) {
-  const userId = await getUserIdFromAuth(username, password);
-  const user = await getUserFromApi(userId);
+  const userId = await getUserIdFromAuth(username, password)
+  const user = await getUserFromApi(userId)
 
   return {
-    'id': user.id,
-    'name': user.name,
-    'age': user.ageInYears
-  };
+    id: user.id,
+    name: user.name,
+    age: user.ageInYears
+  }
 }
 ```
 
-The `await` keyword will pause execution until its promise fulfills. This means a sequence of awaited promises can only execute in the order they're declared, each being forced to wait for the previous one.
+The `await` keyword will pause execution until its promise fulfills. This means a sequence of awaited promises can only execute in the order they’re declared, each being forced to wait for the previous one.
 
 The promises API provides several [methods for managing sequences of promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#static_methods), which can be used to solve this problem, for example:
 
 ```js
 const getUserFromCreds = async function (username, password) {
-  // use await to make this promise blocking
-  const userId = await getUserIdFromAuth(username, password);
+  // Use await to make this promise blocking:
+  const userId = await getUserIdFromAuth(username, password)
 
-  const [ avatarImgUrl, user ] = await Promise.all([ getAvatarForUser(userId), getUserFromApi(userId) ]);
+  const [avatarImgUrl, user] = await Promise.all([getAvatarForUser(userId), getUserFromApi(userId)])
 
   return {
-    'id': userId,
-    'name': user.name,
-    'age': user.ageInYears,
-    'avatar': avatarImgUrl
-  };
+    id: userId,
+    name: user.name,
+    age: user.ageInYears,
+    avatar: avatarImgUrl
+  }
 }
 ```
 
@@ -311,29 +303,28 @@ If none of those offer the control needed, you can also [instantiate promises se
 
 ```js
 const getUserFromCreds = async function (username, password) {
-  // use await to make this promise blocking
-  const userId = await getUserIdFromAuth(username, password);
+  // Use await to make this promise blocking:
+  const userId = await getUserIdFromAuth(username, password)
 
-  // start other promises running before awaiting
-  const avatarPromise = getAvatarForUser(userId);
-  const userPromise = getUserFromApi(userId);
+  // Start other promises running before awaiting:
+  const avatarPromise = getAvatarForUser(userId)
+  const userPromise = getUserFromApi(userId)
 
-  const avatarImgUrl = await avatarPromise;
-  const user = await userPromise;
+  const avatarImgUrl = await avatarPromise
+  const user = await userPromise
 
   return {
-    'id': userId,
-    'name': user.name,
-    'age': user.ageInYears,
-    'avatar': avatarImgUrl
-  };
+    id: userId,
+    name: user.name,
+    age: user.ageInYears,
+    avatar: avatarImgUrl
+  }
 }
 ```
 
-
 ### Functional programming
 
-> Use JavaScript's functional programming features
+> Use JavaScript’s functional programming features
 
 JavaScript has the advantage that it offers functional programming concepts
 natively, like functions as first-class objects, higher-order functions (like
@@ -353,12 +344,10 @@ Remain aware that JavaScript is not just a functional language and you will
 most probably have to mix functional and object-oriented concepts, which can
 be tricky to get right.
 
-
 More guidance:
 
 - [An Introduction to Functional JavaScript](https://www.sitepoint.com/introduction-functional-javascript/)
 - [JavaScript Allongé](https://leanpub.com/javascriptallongesix/read)
-
 
 ## Errors
 
@@ -375,11 +364,11 @@ Your application should not trust any input, for example from a file or an
 API. So the application should handle all operational errors and recover from
 them.
 
-## Node.js's HTTP server
+## Node.js’s HTTP server
 
-> Offload Node's server as much as possible
+> Offload Node’s server as much as possible
 
-Do not expose Node's HTTP server to the public. Use a reverse proxy to serve
+Do not expose Node’s HTTP server to the public. Use a reverse proxy to serve
 static assets, and cache content as much as possible. Implement adequate
 supervising: [pm2](https://pm2.keymetrics.io/) is recommended for Node.js-specific
 servers.
@@ -418,7 +407,6 @@ title="object relationship manager">ORM</abbr> to manage records in a database,
 [you probably should not be using Node.js in the first
 place](/standards/programming-languages.html#frontend-development).
 
-
 ## Libraries
 
 > Avoid libraries that produce esoteric code, or that have a steep learning curve
@@ -432,21 +420,20 @@ R.cond([
  [R.is(Number), R.identity],
  [R.is(String), parseInt],
  [R.T, R.always(NaN)]
-]);
+])
 ```
 
-which is compact and useful, but not easily understood up by a developer not
-familiar with it.
+This is compact and useful, but not easily understood up by a developer not
+familiar with Ramda.
 
 Generally, readable code is better than compact or advanced code. Optimisation
 can lead to very arcane code, so should only be used when necessary.
-
 
 ```js
 // Prefer:
 for (let i = 0; i < 10; i += 1) {
   for (let j = 0; j < 10; j += 1) {
-    console.log(i, j);
+    console.log(i, j)
   }
 }
 
@@ -454,18 +441,17 @@ for (let i = 0; i < 10; i += 1) {
 for (let i=0,j=0;i<10 && j<10;j++,i=(j==10)?i+1:i,j=(j==10)?j=0:j,console.log(i,j)){}
 ```
 
-
 ## Node Package Manager (<abbr title="Node package manager">NPM</abbr>)
 
 > Do not reinvent the wheel, but do not over-use the amount of external code you
   import.
 
-Using other people's code is a risk. NPM is no exception and is arguably worse
+Using other people’s code is a risk. NPM is no exception and is arguably worse
 than other package managers as the small granularity of packages leads to a very
 large number of dependencies. Your application may easily end up relying on
 software written by hundreds of different people, most of whom you do not know.
 
-However, given that it's impossible not to depend on foreign code, you should do
+However, given that it’s impossible not to depend on foreign code, you should do
 your best to reduce the risks involved:
 
 - avoid relying on packages for functionality you can easily implement yourself,
@@ -476,7 +462,7 @@ your best to reduce the risks involved:
 
 > Use `npm init`, `npm start`, `npm ci`, NPM scripts and so on
 
-Making full use of NPM's features will simplify your continuous integration and deployment.
+Making full use of NPM’s features will simplify your continuous integration and deployment.
 
 > Lock down dependencies
 
@@ -508,8 +494,8 @@ only. The guidance provided here takes precedence in case of conflicts.
 
 * **[Node best practices]** — A comprehensive guide to Node.js best practices
 * **[node.cool]** — A curated list of Node.js packages and resources by Sindre Sorhus
-* **[JS documentation]** — MDN's definitive JS docs
-* **[#Nodejs]** – community's Slack channel
+* **[JS documentation]** — MDN’s definitive JS docs
+* **[#Nodejs]** – community’s Slack channel
 
 [StandardJS]: https://standardjs.com
 [ESLint]: https://eslint.org
