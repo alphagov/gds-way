@@ -1,6 +1,6 @@
 ---
 title: Disaster Recovery
-last_reviewed_on: 2021-07-26
+last_reviewed_on: 2022-04-29
 review_in: 6 months
 ---
 
@@ -9,18 +9,23 @@ review_in: 6 months
 The [GOV.UK Service Manual](https://www.gov.uk/service-manual) describes how you should [design your service to maximise uptime](https://www.gov.uk/service-manual/technology/uptime-and-availability-keeping-your-service-online).
 However, it is inevitable that your service will experience unscheduled downtime at some point, which could have a serious impact on users. You must plan your response for when this happens.
 
-## Planning for disaster recovery
+## What is disaster recovery?
 
-In digital services, a disaster is a significant event that either disrupts your service or completely prevents you from providing it. A disaster can have various causes, including:
+In digital services, a disaster is a major, unplanned event that completely prevents you from providing your service to your users.
+
+A disaster may also be an incident. However, whereas an incident will be handled as part of your [incident management process](/standards/incident-management.html), some events may impact your service to such an extent that they need to be planned for in advance to ensure you can continue to provide your service if they occurred.
+
+Examples might be:
 
 - a cloud provider suffering a serious regional outage
-- accidental or malicious destruction
+- accidental or malicious data loss
+- a security compromise resulting in the disclosure of sensitive information
 
-A disaster recovery plan details how you will recover from these serious incidents.
+Disaster recovery planning is the process of identifying the kinds of events that might make your service completely unavailable, understanding the likelihood and the impact of them occurring, planning what we would do if they occurred, and testing that our recovery plans work.
 
 ### Understand risks and threats to your service
 
-You should work with the [Information Assurance (IA)](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/operations/information-assurance) and [Cyber Security](https://gds-way.cloudapps.digital/standards/cdio-pillars.html#cdio-security) teams to understand the risks to your service. This will help you build a more resilient and secure digital service.
+You should work with the [Information Assurance (IA)](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/gds-operations/information-services/information-assurance) and [Cyber Security](https://gds-way.cloudapps.digital/standards/cdio-pillars.html#cdio-security) teams to understand the risks to your service. This will help you build a more resilient and secure digital service.
 
 You should also work with risk and service owners to plan for the worst-case scenarios. This is particularly important for your data, as loss or theft of data is disastrous for most services.
 
@@ -32,6 +37,16 @@ Make sure you consider how [disruption to or unavailability of your dependencies
 build pipelines
 - external library and container registries (for example, RubyGems, PyPI or Docker Hub)
 - secrets management providers
+
+#### Disaster planning workshops
+
+You might find it useful to run a disaster planning workshop to help identify the risks to your service. This should involve important service stakeholders, Information Assurance and Cyber Security colleagues, as well as product and technical members of your delivery team. The more involvement you have from different disciplines the more likely you will be to identify all the risks and understand them.
+
+You should use a whiteboard or an online alternative for the workshop. Start with a technical architecture diagram of your service to help visualise dependencies and important assets, such as data stores. Then, either individually or in small groups, identify as many disaster scenarios as possible, raising sticky notes on the diagram for each one.
+
+Once you have identified the risks to your service, the workshop members should go through each scenario and score each one in terms of the likelihood of them happening and the potential impact on the service if they occurred. A 0-5 scoring system is usually adequate for this. Again, the scoring will be more accurate the more disciplines are involved. An overall score can then be calculated for each scenario by multiplying likelihood and impact.
+
+When all the scenarios have been scored, you will be left with a set of disaster scenarios that can be placed in priority order. You will need to decide what to do about each risk. You may need to draw up a plan for how you would recover if the scenario occurred. Alternatively, you may decide to do some work ahead of time to reduce the likelihood or impact of the event occurring. If the likelihood and impact are very low, you may decide to accept the risk and do nothing.
 
 ### Back up your data
 
