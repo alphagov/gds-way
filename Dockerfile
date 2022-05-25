@@ -1,4 +1,4 @@
-FROM ruby:2.6.6-buster
+FROM ruby:2.7.6-buster
 
 EXPOSE 4567:4567
 EXPOSE 35729:35729
@@ -9,6 +9,7 @@ COPY ./Gemfile /usr/src/gems
 
 RUN apt-get update && apt-get install -y nodejs
 
+ENV BUNDLE_FORCE_RUBY_PLATFORM=true
 RUN bundle check || bundle install
 
 WORKDIR /usr/src/docs

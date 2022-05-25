@@ -170,6 +170,3 @@ DEPENDENCIES
   govuk_tech_docs
   tzinfo-data
   wdm (~> 0.1.0)
-
-BUNDLED WITH
-   1.17.2
