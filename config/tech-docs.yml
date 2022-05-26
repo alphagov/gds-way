@@ -39,8 +39,5 @@ redirects:
   /standards/publish-opensource-code.html: /standards/source-code/#publish-open-source-code
   /standards/git.html: /standards/source-code/#working-with-git
   /standards/source-code.html: /standards/source-code/
-  /standards/cyber-security-overview.html: /standards/cdio-pillars.html#cdio-security
-  /standards/reliability-engineering.html: /standards/cdio-pillars.html#reliability-engineering
   /standards/testing-with-rspec.html: /manuals/programming-languages/ruby.html#testing-with-rspec
-  /standards/technical-operations.html: /standards/cdio-pillars.html
   /standards/secrets-ACL.html: /standards/secrets-acl.html
