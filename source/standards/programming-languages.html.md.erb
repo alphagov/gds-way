@@ -1,6 +1,6 @@
 ---
 title: Programming languages
-last_reviewed_on: 2021-10-12
+last_reviewed_on: 2022-07-14
 review_in: 6 months
 ---
 
@@ -35,10 +35,14 @@ GDS projects using Node.js include:
 - [GOV.UK Frontend](https://github.com/alphagov/govuk-frontend)
 - [GOV.UK Pay](https://www.payments.service.gov.uk/)
 - [GOV.UK PaaS](https://www.cloud.service.gov.uk/) (TypeScript)
+- [GOV.UK Prototype Kit](https://govuk-prototype-kit.herokuapp.com/docs)
 - [Passport Verify](https://github.com/alphagov/passport-verify) (TypeScript)
+- [GOV.UK Sign In](https://www.sign-in.service.gov.uk/) - see [repositories in TypeScript][di-ts] and [in JavaScript][di-js]
 
-You can use Node.js to render a web interface for your service, but you should
-not use it to implement any significant ‘application logic’. For example,
+[di-ts]: https://github.com/search?l=TypeScript&q=user%3Aalphagov+topic%3Adigital-identity&type=Repositories
+[di-js]: https://github.com/search?l=JavaScript&q=user%3Aalphagov+topic%3Adigital-identity&type=Repositories
+
+You can use Node.js to render a web interface for your service. For example,
 GOV.UK Pay has created thin, client-facing applications that do not store
 data (although they may retrieve data from an API).
 
@@ -62,6 +66,9 @@ We've chosen these languages because they are successfully used by
 teams at the moment, and we are confident in how to host and operate
 applications written in them. You should carry out new
 development in one of these languages.
+
+We are also currently exploring the use of Node.js in the backend for
+serverless systems, particularly in the Digital Identity programme.
 
 ### Python
 
