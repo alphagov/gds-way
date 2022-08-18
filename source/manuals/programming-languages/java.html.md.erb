@@ -120,7 +120,11 @@ When using external libraries, favour those which complement the Java standard l
 Make sure any external library you use is appropriate for your purposes and avoid relying on internal implementation details of external libraries. If your IDE’s code completion suggests a method from an external library, make sure it’s a supported part of the library’s defined API.
 
 ## Comments
-Agree with your team to what extent you permit comments in your code. It’s often possible to [make code more readable so it does not need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html). Comments rarely need to describe _what_ some code is doing or _how_ it’s doing it. Comments explaining _why_ the code is doing something, particularly if it’s non-obvious or requires external contextual knowledge, may be helpful.
+Agree with your team to what extent you permit comments in your code. Some teams look more favourably on method-level and class-level Javadoc describing the context and responsibility of code, rather than inline comments.
+
+It’s often possible to [make code more readable so it does not need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html). The book _[Clean Code](https://www.oreilly.com/library/view/clean-code-a/9780136083238/)_ by Robert C Martin (O’Reilly, 2008) has some advice on how to do this.
+
+Comments rarely need to describe _what_ some code is doing or _how_ it’s doing it. Comments explaining _why_ the code is doing something, particularly if it’s non-obvious or requires external contextual knowledge, may be helpful.
 
 ## Testing
 
