@@ -82,7 +82,7 @@ ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 var outputStream = new ByteArrayOutputStream();
 ```
 
-It can also remove duplication where the class name and the variable name are the same:
+It can also remove duplication where the return type and the variable name are the same:
 
 ```java
 // Java 9
@@ -92,7 +92,7 @@ CheckResponse checkResponse = service.getCheckResponse();
 var checkResponse = service.getCheckResponse();
 ```
 
-Be mindful that `var` hides the type of the variable. If the variable name makes the type obvious, this usually is not a problem. But if it is not clear from either the variable name or the right-hand side of the assignment, it might be better to explicitly write the type.
+Be mindful that `var` hides the type of the variable. If the variable name makes the type obvious, this is usually not a problem. But if it is not clear from either the variable name or the right-hand side of the assignment, it might be better to explicitly write the type.
 
 If you are using the diamond operator in an assignment, you will usually find that updating it to use `var` also requires you to replace the diamond operator with the appropriate generic type parameter:
 
