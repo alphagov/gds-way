@@ -1,6 +1,6 @@
 ---
 title: Java style guide
-last_reviewed_on: 2022-01-14
+last_reviewed_on: 2022-08-15
 review_in: 6 months
 owner_slack: '#java'
 ---
@@ -82,7 +82,7 @@ ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 var outputStream = new ByteArrayOutputStream();
 ```
 
-It can also remove duplication where the class name and the variable name are the same:
+It can also remove duplication where the return type and the variable name are the same:
 
 ```java
 // Java 9
@@ -92,7 +92,7 @@ CheckResponse checkResponse = service.getCheckResponse();
 var checkResponse = service.getCheckResponse();
 ```
 
-Be mindful that `var` hides the type of the variable. If the variable name makes the type obvious, this usually is not a problem. But if it is not clear from either the variable name or the right-hand side of the assignment, it might be better to explicitly write the type.
+Be mindful that `var` hides the type of the variable. If the variable name makes the type obvious, this is usually not a problem. But if it is not clear from either the variable name or the right-hand side of the assignment, it might be better to explicitly write the type.
 
 If you are using the diamond operator in an assignment, you will usually find that updating it to use `var` also requires you to replace the diamond operator with the appropriate generic type parameter:
 
@@ -107,7 +107,7 @@ var usernames = new HashSet<>();
 var usernames = new HashSet<String>();
 ```
 
-The [OpenJDK project has some style guidelines for local variable type inference](https://openjdk.java.net/projects/amber/LVTIstyle.html). Oracle’s [introduction to local variable type inference](https://developer.oracle.com/java/jdk-10-local-variable-type-inference.html) also contains some recommendations.
+The [OpenJDK project has some style guidelines for local variable type inference](https://openjdk.org/projects/amber/guides/lvti-style-guide). Oracle’s [introduction to local variable type inference](https://developer.oracle.com/java/jdk-10-local-variable-type-inference.html) also contains some recommendations.
 
 ## Prefer functionality in the Java standard library
 
@@ -120,7 +120,11 @@ When using external libraries, favour those which complement the Java standard l
 Make sure any external library you use is appropriate for your purposes and avoid relying on internal implementation details of external libraries. If your IDE’s code completion suggests a method from an external library, make sure it’s a supported part of the library’s defined API.
 
 ## Comments
-Agree with your team to what extent you permit comments in your code. It’s often possible to [make code more readable so it does not need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html). Comments rarely need to describe _what_ some code is doing or _how_ it’s doing it. Comments explaining _why_ the code is doing something, particularly if it’s non-obvious or requires external contextual knowledge, may be helpful.
+Agree with your team to what extent you permit comments in your code. Some teams look more favourably on method-level and class-level Javadoc describing the context and responsibility of code, rather than inline comments.
+
+It’s often possible to [make code more readable so it does not need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html). The book _[Clean Code](https://www.oreilly.com/library/view/clean-code-a/9780136083238/)_ by Robert C Martin (O’Reilly, 2008) has some advice on how to do this.
+
+Comments rarely need to describe _what_ some code is doing or _how_ it’s doing it. Comments explaining _why_ the code is doing something, particularly if it’s non-obvious or requires external contextual knowledge, may be helpful.
 
 ## Testing
 
@@ -171,7 +175,7 @@ You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apa
 
 The [Dropwizard](https://www.dropwizard.io/) web framework is used widely within GDS.
 
-Dropwizard 2.0 was released at the end of 2019. There is a [guide for migrating from Dropwizard 1.3.x to 2.0.x](https://github.com/dropwizard/dropwizard/wiki/Upgrade-guide-1.3.x-to-2.0.x). Teams within GDS have found the upgrade straightforward.
+Dropwizard 2.0 was released at the end of 2019. There is a [guide for migrating from Dropwizard 1.3.x to 2.0.x](https://www.dropwizard.io/en/release-2.0.x/manual/upgrade-notes/upgrade-notes-2_0_x.html). Teams within GDS have found the upgrade straightforward.
 
 Dropwizard has built-in support for validating requests with Hibernate Validator. Use [Dropwizard’s validation](https://www.dropwizard.io/en/stable/manual/validation.html) in preference to rolling your own except in cases where Dropwizard’s built-in functionality cannot meet your validation requirements.
 
@@ -179,7 +183,9 @@ If you are sending logs to a service that requires them in a specific format, yo
 
 ## JDK
 
-Try to use recent versions of Java. If you are starting a new Java project, do not use anything older than the latest long-term support (LTS) release of Java unless you have a good reason (for example, compatibility issues). If you are currently using an older LTS version of Java, you should be planning to upgrade to something newer. Different Java vendors have different support lifecycles for different Java releases.
+If you are starting a new Java project, do not use anything older than the latest long-term support (LTS) release of Java unless you have a good reason (for example, compatibility issues).
+
+If you are currently using an older LTS version of Java, you should be planning to upgrade to something newer. Different Java vendors have different support lifecycles for different Java releases.
 
 Recent versions of the [Oracle JDK can be used free of charge](https://blogs.oracle.com/java/post/free-java-license) for commercial and production purposes under the terms of a bespoke licence. OpenJDK is open source under the [GPLv2 with the Classpath Exception](https://openjdk.java.net/legal/gplv2+ce.html) but Oracle only provide general-availability [OpenJDK builds](https://jdk.java.net/) for the latest release.
 
@@ -195,7 +201,7 @@ If you are lucky enough to have a shiny new M1 Mac, you may wish to use an OpenJ
 
 We recommend publishing artifacts (for which the source is already public) to [Maven Central](https://search.maven.org/).
 
-You should _not_ use Maven Central to publish artifacts for which the source is closed or contains other proprietary assets, as it is a public repository with anonymous access.
+You should _not_ use Maven Central to publish artifacts for which the source is closed or contains other proprietary assets, as it is a public repository with anonymous access. If you need to publish private artifacts for internal use, consider running your own [Sonatype Nexus Repository](https://www.sonatype.com/products/nexus-repository).
 
 ### Claiming group IDs
 
