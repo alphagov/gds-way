@@ -46,10 +46,25 @@ To preview or build the website, we need to use the terminal.
 Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm],
 and the [Bundler gem][bundler].
 
-In the application folder type the following to install the required gems:
+Clone the repository using:
 
 ```
-bundle install
+git clone https://github.com/alphagov/gds-way.git
+cd gds-way
+```
+
+> **Note**
+> M1 Mac users must run additional commands to tell bundler to use libraries relating to the specific architecture:
+> ```
+> bundle lock --add-platform arm64-darwin-21
+> bundle config --local specific_platform true
+> bundle config --local build.ffi --enable-libffi-alloc
+> ```
+
+Then in the application folder type the following to install the required gems:
+
+```
+bundle install --path vendor/bundle
 ```
 
 ### Preview
