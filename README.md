@@ -1,19 +1,8 @@
 # Technical Documentation
 
-## Getting started
+## Contributing
 
-To preview or build the website, we need to use the terminal.
-
-Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm],
-and the [Bundler gem][bundler].
-
-In the application folder type the following to install the required gems:
-
-```
-bundle install
-```
-
-## Making documentation changes
+### Making documentation changes
 
 To make changes edit the source files in the `source` folder.
 
@@ -33,7 +22,7 @@ generated output.
 Including files manually like this lets us specify the position they appear in
 the page.
 
-## Raising and merging PRs to this repo
+### Raising and merging PRs to this repo
 
 To submit changes to this repo, raise a PR in the usual way and these will be regularly reviewed by The GDS Way forum group that meets once a month.  Reviewing and merging PRs at any time is fine, the forum will also review merged PRs as part of its regular meeting.
 
@@ -41,15 +30,29 @@ Any open non-draft PRs that have been more than 1 month without further comments
 
 There is a GDS Slack channel `#gds-way` where these are discussed.
 
-
-## Making functional changes
+### Making functional changes
 
 The GDS Way is built from the [Tech Docs Template](https://github.com/alphagov/tech-docs-template)
 repository. Any functional changes and bug fixes should be made to that project first, then follow the
 instructions [here](https://github.com/alphagov/tech-docs-template#updating-a-project-to-use-the-latest-template)
 to update the GDS Way.
 
-## Preview
+## Running Locally
+
+### Getting started
+
+To preview or build the website, we need to use the terminal.
+
+Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm],
+and the [Bundler gem][bundler].
+
+In the application folder type the following to install the required gems:
+
+```
+bundle install
+```
+
+### Preview
 
 Whilst writing documentation we can run a middleman server to preview how the
 published version will look in the browser. After saving a change the preview in
@@ -75,7 +78,7 @@ If all goes well something like the following output will be displayed:
 
 You should now be able to view a live preview at http://localhost:4567.
 
-## Build
+### Build
 
 If you want to publish the website without using a build script you may need to
 build the static HTML files.
