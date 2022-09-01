@@ -2,25 +2,25 @@
 
 ## Contributing
 
-### Making documentation changes
+### Making documentation changes (using the Github interface)
 
-To make changes edit the source files in the `source` folder.
+At the bottom of each page of the [hosted GDS Way](https://gds-way.cloudapps.digital/) there is a `View source` link. This link will take you to to the corresponding [Github](https://github.com/alphagov/gds-way) page where you can use the pencil icon (:pencil:) in the interface to propose edits to a page.
 
-Although a single page of HTML is generated the markdown is spread across
-multiple files to make it easier to manage. They can be found in
-`source/documentation`.
+Once you have made your changes you can write a description, click the green `Propose changes` button, and on the following page clickj the green `Create pull request` button.
 
-A new markdown file is not automatically included in the generated output. If we
-add a new markdown file at the location `source/documentation/agile/scrum.md`,
-the following snippet in `source/index.html.md.erb`, includes it in the
-generated output.
+### Making documentation changes (locally)
 
-```
-<%= partial 'documentation/agile/scrum' %>
-```
+To make changes edit the source files in the [source](source) folder.
 
-Including files manually like this lets us specify the position they appear in
-the page.
+The bulk of the documentaion that makes up the GDS Way can be found in files located in the `source/standards` and `source/manuals` directories.
+
+### Adding documentation
+
+You can add a new file to the source folder (or an appropriate sub-folder) to create a new page.
+
+It is probably easiest to copy an existing file and change the name if you are new to writing text in [markdown](https://www.markdownguide.org/).
+
+You then need to manually add your new page to one of the menu files in [source/partials/_nav...](source/partials/_nav...) for it to appear in one of the menus.
 
 ### Raising and merging PRs to this repo
 
