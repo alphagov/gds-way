@@ -1,0 +1,33 @@
+---
+title: Use data stores
+last_reviewed_on: 2022-09-08
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+When designing your services you may need to use a data store, for example to collect and store data, such as user details or web analytics data.
+As well as supporting your service or app to run, the data may have other downstream uses, such as for analytics and reporting.
+ It is prudent to consider building analytics into your service at the early stages.
+For advice on this, reach out to GDS Data Services team using the #data-services Slack channel.
+
+Read [the Service Manual](https://www.gov.uk/service-manual/technology) for more information about choosing technology, development, integration, hosting, testing, security and maintenance.
+
+## Documenting our data stores
+
+The Government Digital Service (GDS) is digital by default, producing and collecting various data. Under the new Government Cyber Security Strategy and the associated Cyber Assessment Framework (CAF),
+ there is a requirement relating to effectively managing our data stores (also referred to as data assets). The [Data Protection Act](https://www.gov.uk/data-protection) (UK’s implementation of the General Data Protection Regulation (GDPR))
+  also requires us to understand the data we hold and how it is used.
+
+Some of these data stores are captured in this GDS data management audit conducted in 2022 by GDS Data Services. The premise was to create a
+[Github repository](https://github.com/alphagov/gds-data-management) of data sources with named owners,
+in the hope that a federated approach would create accountable owners to maintain it. Each data source has an associated markdown document
+which describes characteristics of the data organised, by GDS teams.
+
+If you create a data source / data set during your time at GDS you are obliged to (under the CAF and Data Protection Act) document it in this [repository](https://github.com/alphagov/gds-data-management):
+
+1. Fill in a copy of the [data management template](https://github.com/alphagov/gds-data-management/blob/main/templates/dmt_make_a_copy.md) for your dataset
+
+2. Place the resulting document under the [organisation](https://github.com/alphagov/gds-data-management/tree/main/organisation) folder in this repository, under a new folder for the team that is responsible for the data. If a folder does not exist then create one.
+
+This data is useful for your colleagues across GDS and also for GDS the Information Assurance team.
