@@ -1,6 +1,6 @@
 ---
 title: Principle of Least Privilege
-last_reviewed_on: 2021-07-13
+last_reviewed_on: 2022-09-20
 review_in: 6 months
 ---
 
@@ -34,7 +34,7 @@ Your team should:
 
 ## Examples
 
-For human-readable secrets, such as a username and password, you should set up a separate secret or [password manager](https://www.ncsc.gov.uk/collection/passwords/password-manager-buyers-guide). An example of a secrets manager is [LastPass](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/news/freelastpass-passwordmanager) which you can use to store system-critical credentials, and restrict the number of people who can access this store according to their roles in the team.
+For human-readable secrets, such as a username and password, you should set up a separate secret or [password manager](https://www.ncsc.gov.uk/collection/passwords/password-manager-buyers-guide). 
 
 If you’re using the gds-users account to log into your AWS accounts, you should assume a read-only role by default. You should only assume an admin role when absolutely necessary for a specific task. You should set up the admin account so that the session timeout is less than 12 hours. You should send the audit trail of admin access to the Cyber Security team. Use the Cyber Security Slack channel ([#cyber-security-help](https://gds.slack.com/archives/CCMPJKFDK)) to set up the audit trail.
 
