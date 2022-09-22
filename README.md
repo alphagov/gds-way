@@ -1,39 +1,28 @@
 # Technical Documentation
 
-## Getting started
+## Contributing
 
-To preview or build the website, we need to use the terminal.
+### Making documentation changes (using the Github interface)
 
-Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm],
-and the [Bundler gem][bundler].
+At the bottom of each page of the [hosted GDS Way](https://gds-way.cloudapps.digital/) there is a `View source` link. This link will take you to to the corresponding [Github](https://github.com/alphagov/gds-way) page where you can use the pencil icon (:pencil:) in the interface to propose edits to a page.
 
-In the application folder type the following to install the required gems:
+Once you have made your changes you can write a description, click the green `Propose changes` button, and on the following page clickj the green `Create pull request` button.
 
-```
-bundle install
-```
+### Making documentation changes (locally)
 
-## Making documentation changes
+To make changes edit the source files in the [source](source) folder.
 
-To make changes edit the source files in the `source` folder.
+The bulk of the documentaion that makes up the GDS Way can be found in files located in the `source/standards` and `source/manuals` directories.
 
-Although a single page of HTML is generated the markdown is spread across
-multiple files to make it easier to manage. They can be found in
-`source/documentation`.
+### Adding documentation
 
-A new markdown file is not automatically included in the generated output. If we
-add a new markdown file at the location `source/documentation/agile/scrum.md`,
-the following snippet in `source/index.html.md.erb`, includes it in the
-generated output.
+You can add a new file to the source folder (or an appropriate sub-folder) to create a new page.
 
-```
-<%= partial 'documentation/agile/scrum' %>
-```
+It is probably easiest to copy an existing file and change the name if you are new to writing text in [markdown](https://www.markdownguide.org/).
 
-Including files manually like this lets us specify the position they appear in
-the page.
+You then need to manually add your new page to one of the menu files in [source/partials/_nav...](source/partials/_nav...) for it to appear in one of the menus.
 
-## Raising and merging PRs to this repo
+### Raising and merging PRs to this repo
 
 To submit changes to this repo, raise a PR in the usual way and these will be regularly reviewed by The GDS Way forum group that meets once a month.  Reviewing and merging PRs at any time is fine, the forum will also review merged PRs as part of its regular meeting.
 
@@ -41,15 +30,44 @@ Any open non-draft PRs that have been more than 1 month without further comments
 
 There is a GDS Slack channel `#gds-way` where these are discussed.
 
-
-## Making functional changes
+### Making functional changes
 
 The GDS Way is built from the [Tech Docs Template](https://github.com/alphagov/tech-docs-template)
 repository. Any functional changes and bug fixes should be made to that project first, then follow the
 instructions [here](https://github.com/alphagov/tech-docs-template#updating-a-project-to-use-the-latest-template)
 to update the GDS Way.
 
-## Preview
+## Running Locally
+
+### Getting started
+
+To preview or build the website, we need to use the terminal.
+
+Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm],
+and the [Bundler gem][bundler].
+
+Clone the repository using:
+
+```
+git clone https://github.com/alphagov/gds-way.git
+cd gds-way
+```
+
+> **Note**
+> M1 Mac users must run additional commands to tell bundler to use libraries relating to the specific architecture:
+> ```
+> bundle lock --add-platform arm64-darwin-21
+> bundle config --local specific_platform true
+> bundle config --local build.ffi --enable-libffi-alloc
+> ```
+
+Then in the application folder type the following to install the required gems:
+
+```
+bundle install --path vendor/bundle
+```
+
+### Preview
 
 Whilst writing documentation we can run a middleman server to preview how the
 published version will look in the browser. After saving a change the preview in
@@ -75,7 +93,7 @@ If all goes well something like the following output will be displayed:
 
 You should now be able to view a live preview at http://localhost:4567.
 
-## Build
+### Build
 
 If you want to publish the website without using a build script you may need to
 build the static HTML files.
