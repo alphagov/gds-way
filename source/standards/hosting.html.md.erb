@@ -1,6 +1,6 @@
 ---
 title: How to host a service
-last_reviewed_on: 2021-12-13
+last_reviewed_on: 2022-07-26
 review_in: 6 months
 ---
 
@@ -26,6 +26,12 @@ We don’t have any agreed practices for hosting using containers, but currently
 * GOV.UK Verify and GOV.UK Pay are running in AWS ECS Fargate
 * GOV.UK are replatforming to Kubernetes and we expect more codified practices to come out of that
 
+## Serverless hosting
+
+We similarly don’t have agreed practices for serverless hosting, but currently:
+
+* GOV.UK Sign In is running using AWS Lambda, DynamoDB, API Gateway, and similar serverless services
+
 ## Consider vendor switching costs
 
 AWS has a large number of available services. Some services, such as compute capacity and email and file storage, are common to other cloud providers. Other services are specific to AWS.
@@ -34,5 +40,3 @@ You should be aware that it’s generally easier, quicker and cheaper to switch 
 
 You could also use a Lambda function to ship [AWS
 CloudTrail](https://aws.amazon.com/cloudtrail/) activity logs to a log provider such as Logit. It would not make sense to rewrite a Lambda function to run on EC2 hardware because this would not reduce your switching costs.
-
-If you're starting a new project or application, contact Reliability Engineering by email using [reliability-engineering@digital.cabinet-office.gov.uk](mailto:reliability-engineering@digital.cabinet-office.gov.uk) or using the [#reliability-eng Slack channel](https://gds.slack.com/messages/CAD6NP598/#) to discuss your needs before implementing new infrastructure.
