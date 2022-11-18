@@ -1,7 +1,7 @@
 ---
 title: Using Node.js at GDS
-last_reviewed_on: 2022-10-26
-review_in: 30 days
+last_reviewed_on: 2022-11-24
+review_in: 6 months
 owner_slack: '#nodejs'
 ---
 
@@ -364,6 +364,28 @@ Your application should not trust any input, for example from a file or an
 API. So the application should handle all operational errors and recover from
 them.
 
+## Security
+
+> Maintain [NodeJS Security best practices].
+
+Use the LTS version.
+
+If using the core HTTP Server, make sure all routes have error handling. Without error handling a DoS attack is possible. Using a framework should mitigate this as it should set default values for timeouts on idle requests.
+
+Use `npm ci` over `npm install` as this enforces the use of the lockfile so that inconsistencies between the lockfile and package.json are represented as errors and not ignored.
+
+Don’t [Monkey Patch] existing properties in runtime to change expected behaviour. This can cause side effects in core NodeJS modules and the libraries you are using. For example:
+
+```js
+// Dont do this.
+Array.prototype.push = function (item) {
+  // overriding the global Array[].push
+};
+```
+
+An extensive list of security mitigations can be found on the [NodeJS Security best practices]
+
+
 ## Node.js’s HTTP server
 
 > Offload Node’s server as much as possible
@@ -492,6 +514,7 @@ versions of Node.js.
 In the GDS context, the guidelines provided in the links below are advisory
 only. The guidance provided here takes precedence in case of conflicts.
 
+* **[NodeJS Security best practices]** - A guide to security best practices by the Node working group.
 * **[Node best practices]** — A comprehensive guide to Node.js best practices
 * **[node.cool]** — A curated list of Node.js packages and resources by Sindre Sorhus
 * **[JS documentation]** — MDN’s definitive JS docs
@@ -505,3 +528,6 @@ only. The guidance provided here takes precedence in case of conflicts.
 [Node.js ES2015 support]: https://node.green/
 [JS documentation]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 [Node best practices]: https://github.com/goldbergyoni/nodebestpractices
+[NodeJS Security best practices]: https://nodejs.org/en/docs/guides/security/
+[Monkey Patch]: https://en.wikipedia.org/wiki/Monkey_patch
+
