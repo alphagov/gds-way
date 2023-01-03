@@ -1,0 +1,41 @@
+name: Build and test
+
+on:
+  pull_request:
+  workflow_call:
+    inputs:
+      upload-artifact:
+        default: false
+        required: false
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+        bundler-cache: true
+
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+
+    - name: Build and test
+      run: |
+        bundle exec middleman build
+
+    # Share data between the build and deploy jobs so we don't need to run `npm run build` again on deploy
+    # Upload the deploy folder as an artifact so it can be downloaded and used in the deploy job
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      if: ${{ inputs.upload-artifact }}
+      with:
+          name: build
+          path: deploy/**
+          retention-days: 1
