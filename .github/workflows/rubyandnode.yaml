@@ -1,4 +1,4 @@
-name: Ruby and Node
+name: test
 
 on:
   pull_request: {}
