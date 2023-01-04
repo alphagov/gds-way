@@ -60,7 +60,7 @@ jobs:
           CF_USERNAME: ${{ secrets.CF_EMAIL }}
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
         run: |
-          cf api https://api.cloud.service.gov.uk 
+          cf api https://api.cloud.service.gov.uk
           cf auth
           cf target -o gds-tech-ops -s docs
 
