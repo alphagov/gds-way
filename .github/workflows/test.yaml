@@ -13,16 +13,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
 
     - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@09c10210cc6e998d842ce8433cd9d245933cd797
       with:
         ruby-version: '2.7'
         bundler-cache: true
 
     - name: Set up Node
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516
       with:
         node-version: '12'
 
@@ -33,7 +33,7 @@ jobs:
     # Share data between the build and deploy jobs so we don't need to run `npm run build` again on deploy
     # Upload the deploy folder as an artifact so it can be downloaded and used in the deploy job
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@83fd05a356d7e2593de66fc9913b3002723633cb
       if: ${{ inputs.upload-artifact }}
       with:
           name: build

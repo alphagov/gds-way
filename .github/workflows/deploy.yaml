@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Pre-deploy checks
-        uses: actions/github-script@v6
+        uses: actions/github-script@d556feaca394842dc55e4734bf3bb9f685482fa0
         with:
           script: |
             // Check that the code to be deployed is the latest code on the branch on GitHub
@@ -39,7 +39,7 @@ jobs:
             }
 
       - name: Download build artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@9782bd6a9848b53b110e712e20e42d89988822b7
         with:
           name: build
 
