@@ -46,40 +46,15 @@ users skip past your general site navigation and get straight to the content.
 You can use the [skip link component from the GOV.UK Design System](https://design-system.service.gov.uk/components/skip-link/)
 for this.
 
-### Sectioned content
-
-Use the `<section>` tag to represent standalone, thematic groupings of content
-where a more specific semantic element would not be appropriate.
-
-Examples of sections would be chapters, or various tabbed pages in a tabbed dialog box,
-or a home page split into sections such as introduction, news items and contact information.
-
-You should add an `aria-labelledby` attribute linking to the id of the heading
-that identifies that section.
-
-Example:
-
-```html
-<section aria-labelledby="introduction">
-  <h2 id="introduction">Introduction</h2>
-  <p>People have been catching fish for food since before recorded history...</p>
-</section>
-
-<section aria-labelledby="equipment">
-  <h2 id="equipment">Equipment</h2>
-  <p>The first thing you'll need is a fishing rod or pole that you find comfortable
-    and is strong enough for the kind of fish you're expecting to try to land...</p>
-</section>
-```
-
 ### Navigational elements
 
 Use `<nav role="navigation">` to wrap groups of links that are not already in
 another context (for example, `<footer>`). Common examples of navigation sections are
 menus, tables of contents, and indexes.
 
-As with `<section>`, it is advisable to use `aria-labelledby` to label your `<nav>`.
-This helps to distinguish different `<nav>` blocks in the page.
+If you use more than one `<nav>` block in your page it is advisable to use
+`aria-labelledby` to label each one, to make clear the type of navigation
+contained by each.
 
 The GOV.UK blog has [more information regarding the use of the `<nav>` tag](https://insidegovuk.blog.gov.uk/2013/07/03/rethinking-navigation/).
 
@@ -93,6 +68,31 @@ Examples include author information, related links and related content.
 ### Footer
 
 `<footer role="contentinfo">` should be used for the footer of the site.
+
+### Region landmarks
+
+Region landmarks can be used when you need to create a new type of landmark.
+
+You can create region landmarks by using the `<section>` tag with an
+`aria-labelledby` attribute linking to the id of the heading that identifies
+it.
+
+Region landmarks should only be used where:
+
+- users will likely want to be able to navigate to the grouping easily and to
+  have it listed in a summary of the page
+- none of the existing HTML5 tags or ARIA landmark roles used for document
+  structure would correctly identify the grouping
+
+The use of region landmarks should be limited, as too many landmarks can dilute
+their usefulness in quickly navigating to important areas of a page. If you
+find there are many custom landmarks then the page’s structure should be
+re-examined.
+
+Note that use of `aria-labelledby` to assign an [accessible
+name](https://www.tpgi.com/what-is-an-accessible-name/) is required for region
+landmarks. Without an accessible name `<section>` tags are semantically the
+same as `<div>` tags.
 
 ## Individual element guidance
 
