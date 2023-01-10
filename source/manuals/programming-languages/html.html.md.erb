@@ -52,9 +52,12 @@ Use `<nav role="navigation">` to wrap groups of links that are not already in
 another context (for example, `<footer>`). Common examples of navigation sections are
 menus, tables of contents, and indexes.
 
-If you use more than one `<nav>` block in your page it is advisable to use
-`aria-labelledby` to label each one, to make clear the type of navigation
-contained by each.
+If you use more than one `<nav>` block in your page it is advisable to give
+each one an [accessible name](https://www.tpgi.com/what-is-an-accessible-name/) using
+[aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby)
+or
+[aria-label](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label),
+to make clear the type of navigation contained by each.
 
 The GOV.UK blog has [more information regarding the use of the `<nav>` tag](https://insidegovuk.blog.gov.uk/2013/07/03/rethinking-navigation/).
 
@@ -71,28 +74,24 @@ Examples include author information, related links and related content.
 
 ### Region landmarks
 
-Region landmarks can be used when you need to create a new type of landmark.
+Use region landmarks to surface important areas of a page where it's not
+appropriate to use any of the other types of landmarks.
 
-You can create region landmarks by using the `<section>` tag with an
-`aria-labelledby` attribute linking to the id of the heading that identifies
-it.
+You can create region landmarks by using the `<section>` tag. The `<section>` must
+have an [accessible name](https://www.tpgi.com/what-is-an-accessible-name/), which can be provided using the
+[aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby)
+or
+[aria-label](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label)
+attributes. [A `<section>` tag without an accessible name is semantically the same
+as a `<div>` tag](https://w3c.github.io/html-aam/#el-section).
 
-Region landmarks should only be used where:
-
-- users will likely want to be able to navigate to the grouping easily and to
-  have it listed in a summary of the page
-- none of the existing HTML5 tags or ARIA landmark roles used for document
-  structure would correctly identify the grouping
+Region landmarks should only be used where users will likely want to be able to
+navigate to the grouping easily and to have it listed in a summary of the page.
 
 The use of region landmarks should be limited, as too many landmarks can dilute
 their usefulness in quickly navigating to important areas of a page. If you
 find there are many custom landmarks then the page’s structure should be
 re-examined.
-
-Note that use of `aria-labelledby` to assign an [accessible
-name](https://www.tpgi.com/what-is-an-accessible-name/) is required for region
-landmarks. Without an accessible name `<section>` tags are semantically the
-same as `<div>` tags.
 
 ## Individual element guidance
 
