@@ -126,6 +126,8 @@ It’s often possible to [make code more readable so it does not need comments](
 
 Comments rarely need to describe _what_ some code is doing or _how_ it’s doing it. Comments explaining _why_ the code is doing something, particularly if it’s non-obvious or requires external contextual knowledge, may be helpful.
 
+When deciding whether or not something is non-obvious enough to require a comment, bear in mind that you are probably more familiar with the code you’re writing than most people who read it will be. Questions and misunderstandings from code reviewers can act as a guide (but keep in mind that other remedies such as renaming variables or methods may be better than adding comments).
+
 ## Testing
 
 Use JUnit for unit tests. It can also be used for many integration tests.
