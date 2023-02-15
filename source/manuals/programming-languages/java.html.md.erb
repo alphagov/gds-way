@@ -136,7 +136,9 @@ As an alternative to comments, commit messages can be a good place for describin
 
 Use JUnit for unit tests. It can also be used for many integration tests.
 
-The latest [JUnit 5](https://junit.org/junit5/) is not a drop-in replacement for [JUnit 4](https://junit.org/junit4/). The [JUnit Vintage test engine](https://junit.org/junit5/docs/current/user-guide/#migrating-from-junit4) makes it possible to run JUnit 4 tests within JUnit 5, though not all JUnit 4 features are supported. If you use lots of JUnit 4 rules and alternative runners, or rely on other testing libraries that integrate with JUnit 4, you will have to make more changes. Teams within GDS have found it typically takes a few days to upgrade a project from JUnit 4 to JUnit 5. JUnit 4 continues to be maintained.
+The latest [JUnit 5](https://junit.org/junit5/) is not a drop-in replacement for [JUnit 4](https://junit.org/junit4/). The [JUnit Vintage test engine](https://junit.org/junit5/docs/current/user-guide/#migrating-from-junit4) makes it possible to run JUnit 4 tests within JUnit 5, though not all JUnit 4 features are supported. If you use lots of JUnit 4 rules and alternative runners, or rely on other testing libraries that integrate with JUnit 4, you will have to make more changes. Teams within GDS have found it typically takes a few days to upgrade a project from JUnit 4 to JUnit 5 (keeping the test classes as JUnit 4 where possible). JUnit 4 continues to be maintained.
+
+When you upgrade from JUnit 4 to JUnit 5, have a strategy for gradually making more and more of your test classes use JUnit 5. A good rule is to write all new test classes in JUnit 5 and to migrate over existing ones when you need to make major changes to them (generally it’s best to do the migration in a separate pull request first before making other changes).
 
 For new projects, use JUnit 5 unless you have a reason not to.
 
