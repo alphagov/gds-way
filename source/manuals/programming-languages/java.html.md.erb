@@ -177,6 +177,8 @@ Dependabot makes assumptions about version numbers that not all dependencies fol
 
 There have been cases of bad actors raising malicious pull requests on repositories that appear to come from Dependabot. Make sure a pull request really comes from Dependabot before merging.
 
+Dependabot only deals with direct dependencies, not transitive dependencies. Even if Dependabot thinks your project’s dependencies are fully up to date, you may still have outdated transitive dependencies (which may contain security vulnerabilities).
+
 ## Build tools
 
 You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apache.org/) as the build tool. Use recent versions if you can. Maven now supports the [Bill of Materials (BOM)](https://www.jvt.me/posts/2021/08/28/java-bom/) concept, which can simplify dependency management (Gradle also supports Maven BOMs).
