@@ -130,6 +130,8 @@ When deciding whether or not something is non-obvious enough to require a commen
 
 Outdated comments can be worse than no comments at all because they may be misleading. Consider this before adding a comment and always keep comments up to date when changing code.
 
+As an alternative to comments, commit messages can be a good place for describing why a particular piece of code was added, removed or modified. Tools like `git-blame` are built into most IDEs, allowing a developer to easily pull up the commit messages for revisions to a particular line of code. The age of each commit provides an indication of whether the commit message may be outdated.
+
 ## Testing
 
 Use JUnit for unit tests. It can also be used for many integration tests.
