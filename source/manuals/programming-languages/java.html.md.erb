@@ -167,6 +167,8 @@ public void frobulateFoos() {
 ```
 
 ## Dependencies
+Teams should agree their own rules for how to approve new dependencies and where dependencies can retrieved from (for example, [Maven Central](https://search.maven.org/)). When deciding whether or not to add a new dependency, consider its trustworthiness, longevity and licence.
+
 Try to keep up to date with the latest versions of your external dependencies. Older dependencies often contain security vulnerabilities. If you wait to upgrade your dependencies, you may find you have to make large version jumps to lots of dependencies at once, which can be painful. Frequent, smaller updates are almost always preferable.
 
 [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/about-dependabot-security-updates) (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Do not merge a dependency upgrade unless it passes your automated tests.
