@@ -1,6 +1,6 @@
 ---
 title: Java style guide
-last_reviewed_on: 2022-08-15
+last_reviewed_on: 2023-02-15
 review_in: 6 months
 owner_slack: '#java'
 ---
@@ -11,7 +11,7 @@ The purpose of this style guide is to provide some conventions for working on Ja
 
 The [Google Java style guide](https://google.github.io/styleguide/javaguide.html) is a good starting point. The old [Sun/Oracle Java style guide](https://www.oracle.com/java/technologies/cc-java-programming-language.html) is still largely relevant but it has not been updated since 1999 and does not reflect recent changes to the language.
 
-The more far-reaching _[Java for Small Teams](https://ncrcoe.gitbooks.io/java-for-small-teams/)_ ebook can be read online at no cost. While not free, _[Effective Java](https://www.oreilly.com/library/view/effective-java/9780134686097/)_ by Joshua Bloch is also an excellent resource. The GDS Library has physical copies of the book or you can buy a copy using the Learning and Development budget (see the [books page on the wiki](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/clubs-and-networks/book-clublibrary)).
+The more far-reaching _[Java for Small Teams](https://ncrcoe.gitbooks.io/java-for-small-teams/)_ ebook can be read online at no cost. While not free, _[Effective Java](https://www.pearson.com/en-gb/subject-catalog/p/effective-java/P200000000138/9780134685991/)_ by Joshua Bloch (Addison-Wesley, 2017) is also an excellent resource. The GDS Library has physical copies of the book or you can buy a copy using the Learning and Development budget (see the [books page on the wiki](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/clubs-and-networks/book-clublibrary)).
 
 While the above resources are good guides, they may conflict with either each other or your team’s established practices. We favour consistency across our code, so make sure that you have the agreement of your team when considering using a new or different method or paradigm to those currently in use.
 
@@ -122,23 +122,31 @@ Make sure any external library you use is appropriate for your purposes and avoi
 ## Comments
 Agree with your team to what extent you permit comments in your code. Some teams look more favourably on method-level and class-level Javadoc describing the context and responsibility of code, rather than inline comments.
 
-It’s often possible to [make code more readable so it does not need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html). The book _[Clean Code](https://www.oreilly.com/library/view/clean-code-a/9780136083238/)_ by Robert C Martin (O’Reilly, 2008) has some advice on how to do this.
+It’s often possible to [make code more readable so it does not need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html). The book _[Clean Code](https://www.pearson.com/en-gb/subject-catalog/p/clean-code-a-handbook-of-agile-software-craftsmanship/P200000009044/9780132350884)_ by Robert C Martin (Pearson, 2008) has some advice on how to do this.
 
 Comments rarely need to describe _what_ some code is doing or _how_ it’s doing it. Comments explaining _why_ the code is doing something, particularly if it’s non-obvious or requires external contextual knowledge, may be helpful.
+
+When deciding whether or not something is non-obvious enough to require a comment, bear in mind that you are probably more familiar with the code you’re writing than most people who read it will be. Questions and misunderstandings from code reviewers can act as a guide (but keep in mind that other remedies such as renaming variables or methods may be better than adding comments).
+
+Outdated comments can be worse than no comments at all because they may be misleading. Consider this before adding a comment and always keep comments up to date when changing code.
+
+As an alternative to comments, commit messages can be a good place for describing why a particular piece of code was added, removed or modified. Tools like `git-blame` are built into most IDEs, allowing a developer to easily pull up the commit messages for revisions to a particular line of code. The age of each commit provides an indication of whether the commit message may be outdated.
 
 ## Testing
 
 Use JUnit for unit tests. It can also be used for many integration tests.
 
-The latest [JUnit 5](https://junit.org/junit5/) is not a drop-in replacement for [JUnit 4](https://junit.org/junit4/). The [JUnit Vintage test engine](https://junit.org/junit5/docs/current/user-guide/#migrating-from-junit4) makes it possible to run JUnit 4 tests within JUnit 5, though not all JUnit 4 features are supported. If you use lots of JUnit 4 rules and alternative runners, or rely on other testing libraries that integrate with JUnit 4, you will have to make more changes. Teams within GDS have found it typically takes a few days to upgrade a project from JUnit 4 to JUnit 5. JUnit 4 continues to be maintained.
+The latest [JUnit 5](https://junit.org/junit5/) is not a drop-in replacement for [JUnit 4](https://junit.org/junit4/). The [JUnit Vintage test engine](https://junit.org/junit5/docs/current/user-guide/#migrating-from-junit4) makes it possible to run JUnit 4 tests within JUnit 5, though not all JUnit 4 features are supported. If you use lots of JUnit 4 rules and alternative runners, or rely on other testing libraries that integrate with JUnit 4, you will have to make more changes. Teams within GDS have found it typically takes a few days to upgrade a project from JUnit 4 to JUnit 5 (keeping the test classes as JUnit 4 where possible). JUnit 4 continues to be maintained.
+
+When you upgrade from JUnit 4 to JUnit 5, have a strategy for gradually making more and more of your test classes use JUnit 5. A good rule is to write all new test classes in JUnit 5 and to migrate over existing ones when you need to make major changes to them (generally it’s best to do the migration in a separate pull request first before making other changes).
 
 For new projects, use JUnit 5 unless you have a reason not to.
 
-Use [Mockito](https://site.mockito.org/) for mocking. If you’re still using Mockito 2 or 3, upgrading to Mockito 4 should be straightforward: Mockito 3 contains no breaking changes and Mockito 4 only removes deprecated APIs.
+Use [Mockito](https://site.mockito.org/) for mocking. If you’re still using an older version, upgrading should be fairly straightforward: Mockito 3 contains no breaking changes, Mockito 4 only removes deprecated APIs and Mockito 5 mainly changes internals.
 
 ## Code checking
 
-We encourage the use of static analysis. Static analysis tools for Java include [SonarQube](https://www.sonarqube.org/), [Codacy](https://www.codacy.com/), [FindBugs](http://findbugs.sourceforge.net/) and [CheckStyle](https://checkstyle.sourceforge.io/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
+We encourage the use of static analysis. Static analysis tools for Java include [SonarQube](https://www.sonarqube.org/), [Codacy](https://www.codacy.com/) and [CheckStyle](https://checkstyle.sourceforge.io/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
 
 If possible, configure your static analysis tools using configuration files and keep these in your project repositories. This makes your settings more portable and makes it easier to perform the same checks in different places (for example, in a cloud service and on your own computer).
 
@@ -159,6 +167,8 @@ public void frobulateFoos() {
 ```
 
 ## Dependencies
+Teams should agree their own rules for how to approve new dependencies and where dependencies can retrieved from (for example, [Maven Central](https://search.maven.org/)). When deciding whether or not to add a new dependency, consider its trustworthiness, longevity and licence.
+
 Try to keep up to date with the latest versions of your external dependencies. Older dependencies often contain security vulnerabilities. If you wait to upgrade your dependencies, you may find you have to make large version jumps to lots of dependencies at once, which can be painful. Frequent, smaller updates are almost always preferable.
 
 [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/about-dependabot-security-updates) (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Do not merge a dependency upgrade unless it passes your automated tests.
@@ -166,6 +176,8 @@ Try to keep up to date with the latest versions of your external dependencies. O
 Dependabot makes assumptions about version numbers that not all dependencies follow. This can cause it to open pull requests that update to beta versions, release candidates or even alternative variants of the dependency. Always have a human sense-check each Dependabot pull request before merging.
 
 There have been cases of bad actors raising malicious pull requests on repositories that appear to come from Dependabot. Make sure a pull request really comes from Dependabot before merging.
+
+Dependabot only deals with direct dependencies, not transitive dependencies. Even if Dependabot thinks your project’s dependencies are fully up to date, you may still have outdated transitive dependencies (which may contain security vulnerabilities).
 
 ## Build tools
 
@@ -213,7 +225,7 @@ You should follow [Sonatype’s guidance on registering for and claiming a group
 
 ### Signing artifacts
 
-Sonatype requires that artifacts published to their repository have been signed with a published GPG key. Each programme that wants to publish artifacts should create their own GPG key, [publish it to a public keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key), then store the private key safely and in accordance with any programme-specific guidance.
+Sonatype requires that artifacts published to their repository have been signed with a published GPG key. Each programme that wants to publish artifacts should create their own GPG key, [publish it to a public keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key) ([keys.openpgp.org](https://keys.openpgp.org/) is recommended), then store the private key safely and in accordance with any programme-specific guidance.
 
 The key and its associated passphrase will be used during the publishing process. This will require making it available safely to the task runner, for example Concourse, that is performing the deployment.
 
