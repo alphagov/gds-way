@@ -43,8 +43,12 @@ to update the GDS Way.
 
 To preview or build the website, we need to use the terminal.
 
+#### Install Ruby and Bundler
+
 Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm],
 and the [Bundler gem][bundler].
+
+#### Clone the repository
 
 Clone the repository using:
 
@@ -53,18 +57,43 @@ git clone https://github.com/alphagov/gds-way.git
 cd gds-way
 ```
 
-> **Note**
-> M1 Mac users must run additional commands to tell bundler to use libraries relating to the specific architecture:
-> ```
-> bundle lock --add-platform arm64-darwin-21
-> bundle config --local specific_platform true
-> bundle config --local build.ffi --enable-libffi-alloc
-> ```
+#### Additional commands for Apple silicon
 
+If you are using a Mac with Apple silicon (such as an M1 chip), you must run additional commands.
+
+> **Note**
+> If you are using an Intel Mac, skip this and go to the ‘Install the required gems’ step.
+
+Tell Bundler to use libraries relating to the Apple silicon architecture:
+
+```
+ bundle lock --add-platform arm64-darwin-21
+ bundle config --local specific_platform true
+ bundle config --local build.ffi --enable-libffi-alloc
+```
+
+We need to make sure the EventMachine gem is built with OpenSSL from [Homebrew](https://brew.sh/) and not the default macOS version of OpenSSL.
+
+First, install OpenSSL 1.1:
+
+```
+brew install openssl@1.1
+```
+
+Do not worry if Homebrew says OpenSSL 1.1 is already installed.
+
+Then tell your Mac to use the Homebrew installation of OpenSSL 1.1 when looking for packages (this will last until you end your terminal session):
+
+```
+export PKG_CONFIG_PATH=$(brew --prefix openssl@1.1)/lib/pkgconfig
+```
+
+#### Install the required gems
 Then in the application folder type the following to install the required gems:
 
 ```
-bundle install --path vendor/bundle
+bundle config set path 'vendor/bundle'
+bundle install
 ```
 
 ### Preview
