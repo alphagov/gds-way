@@ -1,6 +1,6 @@
 # Host to use for canonical URL generation (without trailing slash)
-host: https://gds-way.cloudapps.digital
-service_link: /
+host: https://alphagov.github.io
+service_link: /gds-way
 
 # Header-related options
 show_govuk_logo: false
@@ -35,9 +35,10 @@ github_branch: main
 default_owner_slack: '#gds-way'
 owner_slack_workspace: gds
 
+# Are these still needed?
 redirects:
-  /standards/publish-opensource-code.html: /standards/source-code/#publish-open-source-code
-  /standards/git.html: /standards/source-code/#working-with-git
-  /standards/source-code.html: /standards/source-code/
-  /standards/testing-with-rspec.html: /manuals/programming-languages/ruby.html#testing-with-rspec
-  /standards/secrets-ACL.html: /standards/secrets-acl.html
+  /gds-way/standards/publish-opensource-code.html: /gds-way/standards/source-code/#publish-open-source-code
+  /gds-way/standards/git.html: /gds-way/standards/source-code/#working-with-git
+  /gds-way/standards/source-code.html: /gds-way/standards/source-code/
+  /gds-way/standards/testing-with-rspec.html: /gds-way/manuals/programming-languages/ruby.html#testing-with-rspec
+  /gds-way/standards/secrets-ACL.html: /gds-way/standards/secrets-acl.html
