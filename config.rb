@@ -6,6 +6,8 @@ require 'html-proofer'
 GovukTechDocs.configure(self)
 
 set :layout, 'custom'
+set :relative_links, true
+activate :relative_assets
 
 after_build do |builder|
   begin
