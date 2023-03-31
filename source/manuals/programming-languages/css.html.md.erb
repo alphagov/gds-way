@@ -31,26 +31,11 @@ You should use the [GOV.UK Design System spacing scale](https://design-system.se
 
 If your project is not using the GOV.UK Design System, you should use pixel values in multiples of `5px`.
 
-### Include fallbacks for rem spacing
+### Use `rem` units for font size, but not for spacing
 
-Avoid using `rem` units for spacing.
+Use `rem` units for font sizing wherever possible. This allows users to increase the size of the text on a page by adjusting the font size in their browser settings.
 
-If you are using the GOV.UK Design System without [compatibility mode](https://frontend.design-system.service.gov.uk/compatibility-mode/) turned on, it will use `rem` units for font sizing with pixel fallback.
-
-This allows users to increase the size of the text on a page by adjusting the font size in their browser settings.
-
-If you do need to use `rem` units, include a fallback for browsers that do not support `rem` units.
-
-```css
-font-size: 12px;
-font-size: 1.2rem; /* This line is ignored by older browsers */
-```
-
-#### Using `rem` units with deprecated libraries
-
-You should avoid using `rem` units with [GOV.UK Template](https://github.com/alphagov/govuk_template).
-
-Since GOV.UK Template sets the font size at the root level, sizing with `rem` can be unpredicatable.
+Avoid using `rem` units for spacing - use `px` instead.
 
 ## Vendor prefixing
 
