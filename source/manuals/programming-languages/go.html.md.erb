@@ -1,7 +1,7 @@
 ---
 title: Go style guide
-last_reviewed_on: 2022-08-30
-review_in: 6 months
+last_reviewed_on: 2023-04-17
+review_in: 12 months
 owner_slack: '#golang'
 ---
 
@@ -51,7 +51,7 @@ While it's difficult to provide any guidance that will be generally applicable, 
 
 The first is that Go's standard library is modern and powerful. If you just need simple HTTP routing and handling, the [`net/http` package will probably meet your needs](https://golang.org/doc/articles/wiki/).
 
-The second is that if `net/http` falls short, it's worth choosing something that integrates well with it. The [`gorilla`](https://www.gorillatoolkit.org/) toolkit provides some excellent additions to `net/http`.
+The second is that if `net/http` falls short, it's worth choosing something that integrates well with it.
 
 The third is that Go is not a language we use at GDS for developing fully-fledged web applications, eg rendering HTML. If you find yourself rendering HTML using Go, consider using a different GDS supported language.
 
@@ -135,7 +135,7 @@ ginkgo -focus 'a thing'
 
 There are a number of tools in use at GDS for parsing configuration and arguments:
 
-- [alecthomas/kingpin](https://github.com/alecthomas/kingpin) for parsing simple command line arguments and environment variables
+- [alecthomas/kingpin](https://github.com/alecthomas/kingpin) (not actively maintained) for parsing simple command line arguments and environment variables
 - [urfave/cli](https://github.com/urfave/cli) for building more advanced CLI tools
 - [spf13/viper](https://github.com/spf13/viper) for parsing configuration files
 
