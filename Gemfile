@@ -12,4 +12,4 @@ gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 gem 'govuk_tech_docs'
 
 # Include linter to check for dead internal links
-gem 'html-proofer'
+gem 'html-proofer', '~> 3.19.4'

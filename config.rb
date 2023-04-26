@@ -17,14 +17,12 @@ after_build do |builder|
             /search/ # Provided by tech-docs gem but has a "broken" link from html-proofer's point of view
         ],
         :url_ignore => [
-            "https://github.com/alphagov/centralised-security-logging-service"
+            "https://github.com/alphagov/centralised-security-logging-service",
+            "https://gdshelpdesk.digital.cabinet-office.gov.uk",
+            "https://gds-way.cloudapps.digital/standards/secrets-acl.html",
+            /https:\/\/github.com\//
         ]
       })
-
-      proofer.before_request do |request|
-        # We get rate-limited by GitHub so pause between checking GitHub links
-        sleep 2 if request.base_url == "https://github.com/"
-      end
 
       proofer.run
   rescue RuntimeError => e

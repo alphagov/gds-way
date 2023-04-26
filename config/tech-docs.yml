@@ -38,6 +38,5 @@ owner_slack_workspace: gds
 redirects:
   /standards/publish-opensource-code.html: /standards/source-code/index.html#publish-open-source-code
   /standards/git.html: /standards/source-code/working-with-git.html
-  /standards/cyber-security-overview.html: /standards/cdio-pillars.html#cdio-security
   /standards/testing-with-rspec.html: /manuals/programming-languages/ruby.html#testing-with-rspec
   /standards/secrets-ACL.html: /standards/secrets-acl.html
