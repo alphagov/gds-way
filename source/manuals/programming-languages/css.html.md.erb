@@ -1,6 +1,6 @@
 ---
 title: CSS coding style
-last_reviewed_on: 2022-02-10
+last_reviewed_on: 2023-04-03
 review_in: 12 months
 owner_slack: '#frontend'
 ---
@@ -31,26 +31,15 @@ You should use the [GOV.UK Design System spacing scale](https://design-system.se
 
 If your project is not using the GOV.UK Design System, you should use pixel values in multiples of `5px`.
 
-### Include fallbacks for rem spacing
+## Use `rem` units strategically
 
-Avoid using `rem` units for spacing.
+As a general rule, per [Josh W. Comeau's _The Surprising Truth About Pixels and Accessibility_] (https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/#strategic-unit-deployment-6):
 
-If you are using the GOV.UK Design System without [compatibility mode](https://frontend.design-system.service.gov.uk/compatibility-mode/) turned on, it will use `rem` units for font sizing with pixel fallback.
+> When picking between pixels and rems, here's the question you should be asking yourself: Should this value scale up as the user increases their browser's default font size?
 
-This allows users to increase the size of the text on a page by adjusting the font size in their browser settings.
+Use `rem` units for `font-size` wherever possible.
 
-If you do need to use `rem` units, include a fallback for browsers that do not support `rem` units.
-
-```css
-font-size: 12px;
-font-size: 1.2rem; /* This line is ignored by older browsers */
-```
-
-#### Using `rem` units with deprecated libraries
-
-You should avoid using `rem` units with [GOV.UK Template](https://github.com/alphagov/govuk_template).
-
-Since GOV.UK Template sets the font size at the root level, sizing with `rem` can be unpredicatable.
+You should generally avoid using `rem` for padding or border-width if these are likely to cause layout or readability issues when the font-size increases.
 
 ## Vendor prefixing
 
