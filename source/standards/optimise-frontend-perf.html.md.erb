@@ -1,7 +1,7 @@
 ---
 title: How to optimise frontend performance
 owner_slack: '#frontend'
-last_reviewed_on: 2022-08-24
+last_reviewed_on: 2023-05-02
 review_in: 6 months
 ---
 
@@ -56,11 +56,11 @@ Consider automating common tasks like:
 
 You can automate frontend performance testing using third-party services such as:
 
-- WebPagetest
-- Google PageSpeed Insights
-- SpeedCurve
-- Sitespeed.io
-- Calibreapp
+- [WebPageTest][]
+- [Google PageSpeed Insights][]
+- [SpeedCurve][]
+- [Sitespeed.io][]
+- [Calibre][]
 
 ## Using Speedcurve to automate frontend performance testing
 
@@ -78,10 +78,10 @@ Contact the Head of Frontend or a Lead Frontend Developer to request an account.
 
 You should [set a performance budget][] for your website’s pages. Once you’ve set a performance budget, test to check your website’s pages stay within your budget. There are many tools available to do this, such as:
 
-- Webpack performance
-- performance-budget
-- PSI - PageSpeed Insights with reporting
-- Google Lighthouse
+- [Webpack Performance][]
+- [performance-budget][]
+- [psi (PageSpeed Insights Reporting for Node)][]
+- [Google Lighthouse][]
 
 ## Further reading
 
@@ -97,7 +97,7 @@ You can find out more about improving your website’s frontend performance by r
 The Service Manual has more suggestions about [how you can test frontend performance][].
 
 [frontend performance]: https://www.gov.uk/service-manual/technology/how-to-test-frontend-performance
-[minification]: https://minifycode.com/
+[minification]: https://web.dev/reduce-network-payloads-using-text-compression/
 [Gzip]: https://web.dev/optimizing-content-efficiency-optimize-encoding-and-transfer/#text_compression_with_gzip
 [Cache-Control]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
 [ETag]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag
@@ -113,9 +113,8 @@ The Service Manual has more suggestions about [how you can test frontend perform
 [Gulp]: https://gulpjs.com/
 [Speedcurve]: https://www.speedcurve.com/
 [Real user monitoring]: https://insidegovuk.blog.gov.uk/2021/06/16/how-real-user-monitoring-will-improve-gov-uk-for-everyone/
-[npm-scripts]: https://css-tricks.com/why-npm-scripts/
 [Continuous Delivery (CD) and Continuous Integration (CI) workflow]: https://www.gov.uk/service-manual/technology/deploying-software-regularly
-[Google PageSpeed]: https://developers.google.com/speed/pagespeed/module/
+[Google PageSpeed Insights]: https://pagespeed.web.dev/
 [set a performance budget]: https://www.gov.uk/service-manual/technology/how-to-test-frontend-performance#set-a-performance-budget
 [web.dev - Fast load times]: https://web.dev/fast/
 [Setting a performance budget]: https://timkadlec.com/2013/01/setting-a-performance-budget/
@@ -128,3 +127,10 @@ The Service Manual has more suggestions about [how you can test frontend perform
 [HPACK]: https://blog.cloudflare.com/hpack-the-silent-killer-feature-of-http-2/
 [QPACK]: https://quicwg.org/base-drafts/rfc9204.html
 [Cumulative Layout Shift (CLS)]: https://web.dev/cls/
+[WebPageTest]: https://www.webpagetest.org/
+[Sitespeed.io]: https://www.sitespeed.io/
+[Calibre]: https://calibreapp.com/
+[Webpack Performance]: https://webpack.js.org/configuration/performance/
+[performance-budget]: https://www.npmjs.com/package/performance-budget
+[psi (PageSpeed Insights Reporting for Node)]: https://github.com/GoogleChromeLabs/psi
+[Google Lighthouse]: https://github.com/GoogleChrome/lighthouse
