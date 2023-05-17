@@ -36,8 +36,7 @@ default_owner_slack: '#gds-way'
 owner_slack_workspace: gds
 
 redirects:
-  /standards/publish-opensource-code.html: /standards/source-code/#publish-open-source-code
-  /standards/git.html: /standards/source-code/#working-with-git
-  /standards/source-code.html: /standards/source-code/
+  /standards/publish-opensource-code.html: /standards/source-code/index.html#publish-open-source-code
+  /standards/git.html: /standards/source-code/working-with-git.html
   /standards/testing-with-rspec.html: /manuals/programming-languages/ruby.html#testing-with-rspec
   /standards/secrets-ACL.html: /standards/secrets-acl.html

@@ -11,3 +11,5 @@ gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 # Include the tech docs gem
 gem 'govuk_tech_docs'
 
+# Include linter to check for dead internal links
+gem 'html-proofer', '~> 3.19.4'
