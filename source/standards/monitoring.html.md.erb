@@ -1,6 +1,6 @@
 ---
 title: How to monitor your service
-last_reviewed_on: 2023-03-22
+last_reviewed_on: 2023-06-08
 review_in: 3 months
 ---
 
@@ -19,7 +19,7 @@ We recommend using [Pingdom][] to monitor your service’s availability from out
 
 Collecting metrics on the performance of your service is useful for [capacity planning][] and autoscaling. You should apply metrics-based monitoring to measure aggregated numerical data about your service and create [Grafana][] dashboards to view metrics from your datasource, for example related to your infrastructure or application.
 
-Reliability Engineering ran a beta on using [Prometheus][] as the operational metrics service for GDS. Read the [reliability engineering docs][] to find out more.
+We recommend using [Prometheus][] to gather metrics and monitor your service, as this is what many GDS teams are using. Amazon provides a [Managed Prometheus service][], which you may wish to use instead of hosting Prometheus yourself. You may also consider using [CloudWatch Metrics][] instead for simpler use-cases where the complexity of Prometheus is not required.
 
 [monitor the status of services]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
 [performance metrics]: https://www.gov.uk/service-manual/measuring-success/how-to-set-performance-metrics-for-your-service
@@ -29,4 +29,5 @@ Reliability Engineering ran a beta on using [Prometheus][] as the operational me
 [capacity planning]: https://www.gov.uk/service-manual/technology/test-your-services-performance#start-with-capacity-planning
 [Grafana]: https://grafana.com/
 [Prometheus]: https://prometheus.io/
-[reliability engineering docs]: https://reliability-engineering.cloudapps.digital/monitoring-alerts.html
+[CloudWatch Metrics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html
+[Managed Prometheus service]: https://aws.amazon.com/prometheus/
