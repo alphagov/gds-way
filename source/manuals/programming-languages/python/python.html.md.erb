@@ -1,6 +1,6 @@
 ---
 title: Python style guide
-last_reviewed_on: 2022-10-10
+last_reviewed_on: 2023-07-19
 review_in: 6 months
 owner_slack: '#python'
 ---
@@ -20,8 +20,7 @@ and consistent, within, and across, projects at GDS.
 
 We follow [PEP 8][]; where PEP 8 does not express a view (for example, on the usage of
 language features such as metaclasses) we defer to the [Google Python style guide][GPSG].
-Use these as references unless something is explicitly mentioned here. As
-always these rules should be followed only in conjunction with the advice on consistency
+Use these as references unless something is explicitly mentioned here. These rules should be followed in conjunction with the advice on consistency
 on the main [programming languages manual page][gds-way-code-style-guides].
 
 If you want to add a new rule or exception please create a pull request against this repo.
@@ -30,7 +29,7 @@ If you want to add a new rule or exception please create a pull request against 
 
 [PEP 8] dictates a preferred maximum line length of <= 79. This is is a hangover from
 developing in a Unix terminal window. The vast majority of developers are now using an
-IDE which can handle a greater line length comfortably.
+IDE which can handle a greater line length.
 
 Couple this with the fact that much of the time GDS developers are coding web apps and
 have to deal with nested `JSON` objects, ORM model definitions/ queries, and error/ url
@@ -152,13 +151,13 @@ use_parentheses=True
 
 ## Environments
 
-Use [Pyenv](https://github.com/pyenv/pyenv) to manage different versions of Python you have installed.
+This manual advises the use of [Pyenv](https://github.com/pyenv/pyenv) to manage different versions of Python you have installed.
 For more information see [Intro to pyenv](https://realpython.com/intro-to-pyenv)
 
 Use the pyev plugin [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) to manage virtual python environment.
 For more information see [Python virtual environment primer](https://realpython.com/python-virtual-environments-a-primer/)
 
-We recommend using [direnv](https://direnv.net/) to manage environment variables. 
+[direnv](https://direnv.net/) is used to manage environment variables. 
 This ensures project specific variables do not clutter your main environment or the environment of other projects.
 direnv uses `.envrc` for general project specific variables and you can use a non version controlled `.secrets` to store sensitive information.
 
