@@ -1,4 +1,4 @@
-FROM ruby:2.7.6-buster
+FROM ruby:3.0.6-buster
 
 EXPOSE 4567:4567
 EXPOSE 35729:35729
