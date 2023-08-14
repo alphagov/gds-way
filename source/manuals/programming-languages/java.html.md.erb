@@ -107,7 +107,7 @@ var usernames = new HashSet<>();
 var usernames = new HashSet<String>();
 ```
 
-The [OpenJDK project has some style guidelines for local variable type inference](https://openjdk.org/projects/amber/guides/lvti-style-guide). Oracle’s [introduction to local variable type inference](https://developer.oracle.com/java/jdk-10-local-variable-type-inference.html) also contains some recommendations.
+The [OpenJDK project has some style guidelines for local variable type inference](https://openjdk.org/projects/amber/guides/lvti-style-guide). Oracle’s [introduction to local variable type inference](https://developer.oracle.com/learn/technical-articles/jdk-10-local-variable-type-inference) also contains some recommendations.
 
 ## Prefer functionality in the Java standard library
 
@@ -146,11 +146,11 @@ Use [Mockito](https://site.mockito.org/) for mocking. If you’re still using an
 
 ## Code checking
 
-We encourage the use of static analysis. Static analysis tools for Java include [SonarQube](https://www.sonarqube.org/), [Codacy](https://www.codacy.com/) and [CheckStyle](https://checkstyle.sourceforge.io/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
+We encourage the use of static analysis. Static analysis tools for Java include [SonarQube](https://www.sonarsource.com/products/sonarqube/), [Codacy](https://www.codacy.com/) and [CheckStyle](https://checkstyle.sourceforge.io/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
 
 If possible, configure your static analysis tools using configuration files and keep these in your project repositories. This makes your settings more portable and makes it easier to perform the same checks in different places (for example, in a cloud service and on your own computer).
 
-Some cloud-based static analysis tools, including Codacy, can work directly with GitHub repositories. Only grant a tool access to your repositories if it has been approved by an information assurance review. The Digital Identity programme has approval to use [SonarCloud](https://sonarcloud.io/) on public repos.
+Some cloud-based static analysis tools, including Codacy, can work directly with GitHub repositories. Only grant a tool access to your repositories if it has been approved by an information assurance review. The Digital Identity programme has approval to use [SonarCloud](https://www.sonarsource.com/products/sonarcloud/) on public repos.
 
 Try to minimise compiler warnings. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why. For example:
 
@@ -167,11 +167,11 @@ public void frobulateFoos() {
 ```
 
 ## Dependencies
-Teams should agree their own rules for how to approve new dependencies and where dependencies can retrieved from (for example, [Maven Central](https://search.maven.org/)). When deciding whether or not to add a new dependency, consider its trustworthiness, longevity and licence.
+Teams should agree their own rules for how to approve new dependencies and where dependencies can retrieved from (for example, [Maven Central](https://central.sonatype.com/)). When deciding whether or not to add a new dependency, consider its trustworthiness, longevity and licence.
 
 Try to keep up to date with the latest versions of your external dependencies. Older dependencies often contain security vulnerabilities. If you wait to upgrade your dependencies, you may find you have to make large version jumps to lots of dependencies at once, which can be painful. Frequent, smaller updates are almost always preferable.
 
-[Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/about-dependabot-security-updates) (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Do not merge a dependency upgrade unless it passes your automated tests.
+[Dependabot](https://docs.github.com/en/code-security/dependabot) (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Do not merge a dependency upgrade unless it passes your automated tests.
 
 Dependabot makes assumptions about version numbers that not all dependencies follow. This can cause it to open pull requests that update to beta versions, release candidates or even alternative variants of the dependency. Always have a human sense-check each Dependabot pull request before merging.
 
@@ -199,7 +199,7 @@ If you are starting a new Java project, do not use anything older than the lates
 
 If you are currently using an older LTS version of Java, you should be planning to upgrade to something newer. Different Java vendors have different support lifecycles for different Java releases.
 
-Recent versions of the [Oracle JDK can be used free of charge](https://www.oracle.com/downloads/licenses/no-fee-license.html) for commercial and production purposes under the terms of a bespoke licence. OpenJDK is open source under the [GPLv2 with the Classpath Exception](https://openjdk.java.net/legal/gplv2+ce.html) but Oracle only provide general-availability [OpenJDK builds](https://jdk.java.net/) for the latest release.
+Recent versions of the [Oracle JDK can be used free of charge](https://www.oracle.com/downloads/licenses/no-fee-license.html) for commercial and production purposes under the terms of a bespoke licence. OpenJDK is open source under the [GPLv2 with the Classpath Exception](https://openjdk.org/legal/gplv2+ce.html) but Oracle only provide general-availability [OpenJDK builds](https://jdk.java.net/) for the latest release.
 
 The [Adoptium](https://adoptium.net/) (formerly AdoptOpenJDK) project (part of the [Eclipse Foundation](https://www.eclipse.org/)) provides fully open-source TCK-certified pre-built OpenJDK binaries under the name Eclipse Temurin. For LTS releases (such as Java 8, 11 and 17), Adoptium have committed to releasing free updates for several years.
 
@@ -211,9 +211,9 @@ If you are lucky enough to have a shiny new M1 Mac, you may wish to use an OpenJ
 
 ## Publishing artifacts
 
-We recommend publishing artifacts (for which the source is already public) to [Maven Central](https://search.maven.org/).
+We recommend publishing artifacts (for which the source is already public) to [Maven Central](https://central.sonatype.com/).
 
-You should _not_ use Maven Central to publish artifacts for which the source is closed or contains other proprietary assets, as it is a public repository with anonymous access. If you need to publish private artifacts for internal use, consider running your own [Sonatype Nexus Repository](https://www.sonatype.com/products/nexus-repository).
+You should _not_ use Maven Central to publish artifacts for which the source is closed or contains other proprietary assets, as it is a public repository with anonymous access. If you need to publish private artifacts for internal use, consider running your own [Sonatype Nexus Repository](https://www.sonatype.com/products/sonatype-nexus-repository).
 
 ### Claiming group IDs
 
