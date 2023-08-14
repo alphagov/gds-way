@@ -37,7 +37,7 @@ Wildcard imports should be avoided. They can cause existing code to break if a n
 
 This infamously happened with Java SE 1.2, which introduced `java.util.List` when there was already `java.awt.List`, breaking any classes that used `List` and imported both `java.util.*` and `java.awt.*`.
 
-You should configure IntelliJ to explicitly import all classes and static methods in Preferences → Editor → Code Style → Java → Imports with “Class count to use import with *” and “Names count to use static import with *” both set to a very high number, for example 1000.
+You should configure IntelliJ to explicitly import all classes and static methods in Settings → Editor → Code Style → Java → Imports with “Class count to use import with *” and “Names count to use static import with *” both set to a very high number, for example 1000.
 
 Static imports should be avoided in most cases because the names of methods and constants often do not make sense without the context of the type they’re from.
 
