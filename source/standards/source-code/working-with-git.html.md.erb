@@ -142,20 +142,24 @@ commands like git merge and git revert.
 
 ## Branching/merging conventions
 
-You may often choose to work on a particular feature on a "feature branch" rather than directly on `main`. Indeed, given how cheap branches are in Git, [using branches](http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging) is positively encouraged.
+You should develop on a short-lived "feature" [branch](https://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging) rather than directly on the trunk branch, which is usually `main` or `master`, unless there is a compelling reason to do otherwise.
 
-You are encouraged to make liberal use of Git's [history rewriting features](http://git-scm.com/book/en/Git-Tools-Rewriting-History) while working locally, in order to arrange your commits into appropriate logical chunks that will make sense to your fellow developers. In particular, you may find `git rebase --interactive` very useful. You are also encouraged to avoid merge commits and use `git rebase main` instead.
+For example if your repository has many binary files, the `git diff` will not provide useful change information, and you may choose to collaborate directly on the trunk branch.
 
-However, you should not rewrite commits that have been pushed unless you:
+You should prefer organising your commits as small, self-contained changes rather than having a single commit per pull-request. Ideally, each commit should represent a coherent set of changes and pass all of your project's tests and static analysis.
+This will make your changes easier for other people to understand them at review time.
 
-  * are very sure that no-one else will be affected by you rewriting the branch history
-  * have an extremely good reason. For example: someone has committed sensitive information (personally identifiable data, passwords and suchlike) and it needs purging from history
+You may need to update your feature branch with the latest changes from the trunk branch when you have multiple people contributing to the same repository.
+In this case, you should use [`git rebase`](https://docs.github.com/en/get-started/using-git/about-git-rebase) with the trunk branch name.
+This applies your local changes on top of the most recent changes to the trunk branch, rather than creating a merge commit on your feature branch, which keeps the history linear and makes it easier to review.
 
-When in doubt you should err towards smaller commits, which can be rebased together later. It's harder to break large commits out into smaller chunks.
+Git allows you to [rewrite local changes](https://git-scm.com/book/en/Git-Tools-Rewriting-History) by combining commits, splitting commits apart, changing commit messages and many more operations.
 
-The smaller commits should still be logical chunks, but this will give context for a more specific change and make git tools like `annotate` and `log` more useful.
+You should not rewrite commits that have been merged or pushed to the trunk branch unless there is a compelling reason such as committing personally identifiable information or application secrets.
+In this case you should communicate this to affected staff within GDS, so they know to update their local working copy.
 
-When merging from a feature branch to main (or any other mainline development branch), in particular one that has previously been shared with colleagues, you should use `git merge`'s `--no-ff` option to preserve evidence of your feature branch in the repository history. This advice may be freely ignored for smaller local feature branches for which a fast-forward merge will look like any other routine development work on `main`.
+You should use `git merge` with `--no-ff` if you are manually merging a feature branch into your repository's trunk branch rather than GitHub's own merge capability.
+This option preserves evidence of your feature branch in the repository history by creating a merge commit even if your changes could be simply applied to the trunk branch.
 
 ## Do not use `git push -f`, use `--force-with-lease` instead
 
