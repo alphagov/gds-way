@@ -161,6 +161,10 @@ In this case you should communicate this to affected staff within GDS, so they k
 You should use `git merge` with `--no-ff` if you are manually merging a feature branch into your repository's trunk branch rather than GitHub's own merge capability.
 This option preserves evidence of your feature branch in the repository history by creating a merge commit even if your changes could be simply applied to the trunk branch.
 
+You should use the merge strategy that best suits the context of your team and project.
+Rebasing changes onto your trunk branch maintains a linear history but commits are not guaranteed to be in time order.
+Merging changes creates a merge commit which is useful as a known integration point for a change but the repository history becomes non-linear.
+
 ## Do not use `git push -f`, use `--force-with-lease` instead
 
 Force pushing in git is a subject that attracts all kinds of religious
