@@ -21,7 +21,7 @@ after_build do |builder|
         ],
         :url_ignore => [
             "https://gdshelpdesk.digital.cabinet-office.gov.uk",
-            "https://gds-way.cloudapps.digital/standards/secrets-acl.html",
+            "https://alphagov.github.io/gds-way/standards/secrets-acl.html",
             /https:\/\/github.com\//
         ]
       })
