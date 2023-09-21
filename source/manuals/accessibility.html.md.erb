@@ -1,13 +1,13 @@
 ---
 title: Building accessible services
-last_reviewed_on: 2023-03-08
+last_reviewed_on: 2023-10-13
 review_in: 6 months
 owner_slack: '#accessibility-community'
 ---
 
 # <%= current_page.data.title %>
 
-Government services must be accessible to everyone. This includes anyone with a visual, hearing, speech, motor or learning impairment. This also includes anyone with a temporary or situational disability, such as a person with a broken arm or working in a loud environment.
+Government services must be accessible to everyone. This includes anyone with a visual, hearing, speech, motor, learning or cognitive impairment. This also includes anyone with a temporary or situational disability, such as a person with a broken arm or working in a loud environment.
 
 Building a service with accessibility in mind not only allows those with access needs to use your service, it also improves the service for everyone else. An accessibility problem with a website can be something that affects everyone, not just people who can only access the web with a keyboard or screen reader.
 
@@ -74,7 +74,7 @@ We have been assured by Assistiv Labs that the Virtual Machine (VM) is deleted w
 - do not sign in to any accounts, unless those accounts are used solely for the purposes of testing (for example, a test account in an integration or staging environment)
 - make configuration changes to the system through your own device rather than the VM
 
-You should also make sure you understand how using the service affects any other requirements for your service, such as PCI (Payment Card Industry) compliance, and assess any additional risks. You can speak to your service’s information assurance lead or the GDS Privacy Team for specific guidance.
+You should also make sure you understand how using Assistiv Labs affects any other requirements for your service, such as PCI (Payment Card Industry) compliance, and assess any additional risks. You can speak to your service’s information assurance lead or the GDS Privacy Team for specific guidance.
 
 ### Test content served by third party systems
 
@@ -84,7 +84,7 @@ If a service is built using an existing or third party system, such as a content
 
 Services should be tested by real users to evaluate how accessible they are. This can be with members of the public as well as specialist organisations who provide accessibility testing services.
 
-You can test your service using an [accessibility empathy lab](https://gds.blog.gov.uk/2018/06/20/creating-the-uk-governments-accessibility-empathy-lab/), such as the one at GDS, which is designed to provide a simulation of using the web with accessibility issues so developers can better understand what this is like.
+You can test your service using an [accessibility lab](https://gds.blog.gov.uk/2018/06/20/creating-the-uk-governments-accessibility-empathy-lab/), such as the one in the GDS London office, which is designed to provide a simulation of using the web with accessibility issues so developers can better understand what this is like.
 
 Testing with real users can be a time consuming process. It is recommended that this is done only after other accessibility testing takes place.
 
@@ -94,7 +94,7 @@ The [GOV.UK Design System](https://design-system.service.gov.uk/) is a collectio
 
 While it may not have a full set of components for every service, it provides a solid foundation to work from that can be expanded to suit a service’s individual needs.
 
-You can also use the [GOV.UK Prototype Kit](https://govuk-prototype-kit.herokuapp.com/) to create working prototypes, share ideas with people and conduct user research.
+You can also use the [GOV.UK Prototype Kit](https://prototype-kit.service.gov.uk) to create working prototypes, share ideas with people and conduct user research.
 
 ## Specific guidance
 
@@ -152,6 +152,6 @@ Images should be described using words for people that cannot see them.
 
 To make an image’s description available to everyone the image should be described in the body text. The image’s `alt` attribute should then be left empty.
 
-If an image is purely decorative it does not need to be described in the body text and does not need any description in the `alt` text.
+If an image is purely decorative it does not need to be described in the body text and the `alt` attribute should be left empty.
 
 Captions using the `figcaption` element are sometimes not read aloud by screenreaders when the image has a blank `alt` text. Do not use the caption to describe your image - the description should be put in the body text.
