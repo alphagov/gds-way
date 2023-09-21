@@ -2,7 +2,7 @@
 title: Building accessible services
 last_reviewed_on: 2023-10-13
 review_in: 6 months
-owner_slack: '#accessibility-community'
+owner_slack: "#accessibility-community"
 ---
 
 # <%= current_page.data.title %>
@@ -37,7 +37,16 @@ This is why [semantic markup](https://html.com/semantic-markup/) and good headin
 
 ### Automated testing
 
-Accessibility testing tools such as [aXe](https://www.deque.com/axe/) and [Lighthouse](https://developers.google.com/web/tools/lighthouse/) are useful for finding issues, but [automated testing can only find around 30% of likely accessibility problems](https://alphagov.github.io/accessibility-tool-audit/). Automated testing shouldn’t be the only accessibility testing carried out on a service, it should also be tested with real users.
+Automated accessibility testing tools are useful for finding issues, but [automated testing can only find around 30% of likely accessibility problems](https://alphagov.github.io/accessibility-tool-audit/). Automated testing shouldn’t be the only accessibility testing carried out on a service, it should also be tested with real users.
+
+Popular tools for automated accessibility testing include:
+
+- [Axe](https://www.deque.com/axe/)
+- [Lighthouse](https://developers.google.com/web/tools/lighthouse/) (which uses Axe for its accessibility tests, and can be run from Chrome Devtools without the need for additional installation)
+- [WAVE](https://wave.webaim.org/)
+- [ARC Toolkit](https://www.tpgi.com/arc-platform/arc-toolkit/)
+
+You may find it useful to include automated accessibility testing as part of your [continuous delivery](/standards/continuous-delivery.html) workflow.
 
 ### Testing with assistive technologies
 
