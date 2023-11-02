@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
+      with:
+        fetch-depth: 0 # Fetch entire history, because config.ru relies on it
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@09c10210cc6e998d842ce8433cd9d245933cd797
