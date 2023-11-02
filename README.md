@@ -136,6 +136,18 @@ bundle exec middleman build
 This will create a `build` subfolder in the application folder which contains
 the HTML and asset files ready to be published.
 
+### Check external links
+
+If you want to verify that all of the external links in every page work (i.e.
+do not return an HTTP error code), use the `check_links.rb` script.
+
+```
+bundle exec ruby check_links.rb
+```
+
+This script is automatically run as part of CI, but skipped on the main branch
+(so that the main branch can always be deployed).
+
 ## Deploy
 
 This repo is continuously deployed from the `main` branch by GitHub Actions, using the workflow defined in [`/.github/workflows/bundle_and_release.yml`](/.github/workflows/bundle_and_release.yml).
