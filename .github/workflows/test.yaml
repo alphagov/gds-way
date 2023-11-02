@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
       with:
-        fetch-depth: 0 # Fetch entire history, because config.ru relies on it
+        fetch-depth: 0 # Fetch entire history, because the check_links.rb script relies on it
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@09c10210cc6e998d842ce8433cd9d245933cd797
@@ -27,9 +27,12 @@ jobs:
       with:
         node-version: '12'
 
-    - name: Build and test
-      run: |
-        bundle exec middleman build
+    - name: Build
+      run: bundle exec middleman build
+    
+    - name: Check external links
+      if: ${{ github.ref != 'refs/heads/main' }}
+      run: bundle exec ruby check_links.rb
 
     # Share data between the build and deploy jobs so we don't need to run `npm run build` again on deploy
     # Upload the deploy folder as an artifact so it can be downloaded and used in the deploy job
