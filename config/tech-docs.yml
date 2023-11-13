@@ -1,5 +1,5 @@
 # Host to use for canonical URL generation (without trailing slash)
-host: https://gds-way.cloudapps.digital
+host: https://gds-way.digital.cabinet-office.gov.uk
 service_link: /
 
 # Header-related options
@@ -35,6 +35,7 @@ github_branch: main
 default_owner_slack: '#gds-way'
 owner_slack_workspace: gds
 
+# Are these still needed?
 redirects:
   /standards/publish-opensource-code.html: /standards/source-code/index.html#publish-open-source-code
   /standards/git.html: /standards/source-code/working-with-git.html

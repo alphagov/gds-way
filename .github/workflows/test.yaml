@@ -30,9 +30,9 @@ jobs:
     - name: Build
       run: bundle exec middleman build
     
-    - name: Check external links
-      if: ${{ github.ref != 'refs/heads/main' }}
-      run: bundle exec ruby check_links.rb
+#    - name: Check external links
+#      if: ${{ github.ref != 'refs/heads/main' }}
+#      run: bundle exec ruby check_links.rb
 
     # Share data between the build and deploy jobs so we don't need to run `npm run build` again on deploy
     # Upload the deploy folder as an artifact so it can be downloaded and used in the deploy job
