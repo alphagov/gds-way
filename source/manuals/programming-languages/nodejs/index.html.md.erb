@@ -414,11 +414,24 @@ that a Node developer would have trouble reading your code is advised against.
 
 ## Frameworks
 
-> Use Express for web applications, avoid lesser-known frameworks
+It is important to remember that we use the
+[govuk-frontend](https://github.com/alphagov/govuk-frontend) to build pages on websites
+at GDS. This restricts the choice of webservers to ones that easily support rendering
+content using [Nunjucks](https://mozilla.github.io/nunjucks/). This rules out many
+currently popular webservers that use React or other templating approaches.
 
-Koa can be used as an alternative if it better fits your requirements, though
-you should consult [Koa vs Express](https://github.com/koajs/koa/blob/master/docs/koa-vs-express.md)
-to inform that decision.
+> Use Koa or Express for web applications, avoid lesser-known frameworks
+
+Express is widely used at GDS. It is the oldest Node.js webserver framework and there is a
+wide range of examples and helper libraries available on the wider internet. However is has
+less support for more modern JavaScript features, most notable support for `await/async`.
+These issues require extra workarounds.
+
+Koa can be used as an alternative if it better fits your requirements.
+
+[Koa vs Express](https://github.com/koajs/koa/blob/master/docs/koa-vs-express.md) is a good comparison guide to help
+ inform that decision.
+
 
 If you find yourself looking for an <abbr
 title="model-view-controller">MVC</abbr> framework or if you need an <abbr
