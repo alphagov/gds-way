@@ -1,6 +1,6 @@
 ---
 title: Threat Modelling
-last_reviewed_on: 2022-08-19
+last_reviewed_on: 2023-11-21
 review_in: 6 months
 ---
 
@@ -239,6 +239,14 @@ Data is available to unintended or unauthenticated users.
 
 The desired property is authorisation, where data is only available to those
 expected to view or alter it.
+
+## Examples
+
+Looking at the GOV.UK Pay service as an example; Pay is likely to attract attention from organised criminal groups and lower-level hackers/script kiddies who have financial motivations. Organised criminal groups are capable of a level of attack sophistication that would mean zero-day exploits, and more advanced techniques like replay attacks, and would be willing to use supply chain attacks as a route for access. State actors are likely to be less interested in Pay, except for disruptive actions to render the service unavailable.
+
+Applying this threat model, Pay requires a good level of cyber security (in addition to it's PCI-DSS requirements) and regular scanning/penetration testing is necessary to ensure that both basic cyber hygience and more advanced attacks are accounted for.
+
+This would contrast with a service like GOV.UK, where the threat is likely to be state sponsored or affiliated threats and lower-level hackers/script kiddies using common toolsets/bots with political/reputational motivations.
 
 ## Additional tools and links
 
