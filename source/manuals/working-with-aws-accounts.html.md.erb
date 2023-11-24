@@ -1,0 +1,344 @@
+---
+title: Working with AWS accounts
+last_reviewed_on: 2023-11-24
+review_in: 12 months
+---
+
+# <%= current_page.data.title %>
+
+Most teams in GDS use [Amazon Web Services (AWS)](https://aws.amazon.com/) as their infrastructure provider. GDS teams manage their own AWS accounts, but users must first sign into a shared base AWS account called `gds-users`. They can then assume roles in their team's AWS account to perform administrative tasks using [AWS's cross-account access pattern](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html).
+
+## Request AWS user access
+
+People joining GDS do not automatically have access to [Amazon Web Services
+(AWS)][]. To grant a user access to AWS you’ll need to add them to the
+`gds-users` base account. Once the user has an IAM user in the `gds-users`
+account they can assume roles in team specific accounts using [Amazon's
+cross-account access pattern][].
+
+### Requesting a new AWS user
+
+To add a user to the `gds-users` base account, complete the "Request user access"
+section of the [request an AWS account form][]. The user can request this
+themselves or someone else can request it on their behalf.
+
+Once the request is submitted it will be reviewed by members of the [AWS user
+management codeowners team][]. If accepted the request will be merged and a
+new IAM user will be added to the `gds-users` account.
+
+The user will then receive an automated email containing instructions on how to
+log in and set their credentials.
+
+### Signing in to your `gds-users` user for the first time
+
+The automated welcome email will contain instructions on how to access your new
+AWS user. It also provides an initial password that you will need to change the
+first time you sign in. You must also add an MFA device to your AWS user.
+
+Start by signing in to [the AWS console][].
+
+You will be prompted to change your password after you first sign in. Please
+note __the new password must be at least 16 characters long__. If your choose a
+password shorter than 16 characters you will get an error saying you don’t have
+permission to change password.
+
+### Adding an MFA device
+
+You must enable Multi-factor Authentication (MFA) on your `gds-users` user,
+otherwise you will not be able to assume roles in other AWS accounts.
+
+You may add up to 8 MFA devices. However, note that __MFA device names must be
+prefixed with your IAM username (usually your email addres)__, otherwise you
+will receive a permissions error.
+
+You can add MFA devices by clicking your username in the top right corner and
+selecting "Security credentials".
+
+![Top right menu image](../images/working-with-aws-accounts/top-right-menu.png)
+
+On the "My security credentials" page scroll down to the "Multi-factor
+authentication (MFA)" section and click "Assign MFA device".
+
+The device name _must_ be prefixed with your IAM username, which is usually your
+email address. If you do not do this you will receive a permissions error.
+
+You will usually want to add the "Authenticator app" device type for things like
+Google Authenticator and Yubikeys, but you may want to choose "Security Key" if
+you are adding a FIDO device.
+
+Click Next.
+
+![Assign MFA device image](../images/working-with-aws-accounts/assign-mfa-device.png)
+
+On the "Set up device" page you can choose to either display the QR code for
+apps like Google Authenticator or "Show secret key" if you are using something
+like a Yubikey with ykman.
+
+Once you have added the code to your MFA device or app you will need to input
+two consecutive one-time codes from your device and click "Add MFA".
+
+![Set up MFA device image](../images/working-with-aws-accounts/set-up-mfa-device.png)
+
+If you have done this correctly you should now see a device listed in the MFA
+section of the "My security credentials" page.
+
+![MFA devices image](../images/working-with-aws-accounts/mfa-devices.png)
+
+You should test that you can sign out and back in again successfully, and that
+you are prompted for an MFA code.
+
+Further guidance on adding MFA can be found [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html).
+
+[Amazon Web Services (AWS)]: https://aws.amazon.com/
+[Amazon's cross-account access pattern]: https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html
+[request an AWS account form]: https://gds-request-an-aws-account.cloudapps.digital
+[AWS user management codeowners team]: https://github.com/orgs/alphagov/teams/aws-user-management-account-users-codeowners
+[the AWS Console]: https://gds-users.signin.aws.amazon.com/console
+
+## Access AWS Accounts
+
+After a user is added to the GDS base account it’s the individual teams’ responsibility to grant that user access to any [team specific roles][].
+
+Once setup is complete users can access AWS using the AWS Console or the command line.
+
+### Use AWS Console
+
+<ul>
+  <li>
+    Sign in to the GDS base account at:
+    <a href="https://gds-users.signin.aws.amazon.com/console">https://gds-users.signin.aws.amazon.com/console</a>
+    <details>
+      <summary><small>Screenshot of the sign in page</small></summary>
+      <img src="/images/working-with-aws-accounts/aws-base-account-signin-form.png" alt="Screenshot of the sign in page">
+    </details>
+  </li>
+  <li>
+    From the top right dropdown menu, select **Switch Role**
+    <details>
+      <summary><small>Screenshot of the switch role menu item</small></summary>
+      <img src="/images/working-with-aws-accounts/aws-switch-role-menu.png" alt="Screenshot of the sign in page">
+    </details>
+  </li>
+  <li>
+    Complete **Account** with account or <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#AboutAccountAlias">account alias</a> and the role you're switching to
+    <details>
+      <summary><small>Screenshot of the switch role page</small></summary>
+      <img src="/images/working-with-aws-accounts/aws-switch-role-form.png" alt="Screenshot of the sign in page">
+    </details>
+  </li>
+</ul>
+
+###  Use the command line
+
+There are several command line tools you can use to work with AWS, such as:
+
+* [AWS Command Line Interface (AWS CLI)][] - to manage your AWS services
+* [AWS Shell][] - an integrated shell for working with the AWS CLI
+* [Terraform][] - for building, changing, and versioning infrastructure
+
+These tools need credentials to access AWS. We recommend using [gds-cli][] to manage your credentials.
+
+#### Installing gds-cli
+
+[gds-cli][] needs to be installed and available on your `PATH`. The
+easiest way to do this is via Homebrew: `brew install alphagov/gds/gds-cli`.
+
+When you run `gds aws <some-role>` for the first time, it will prompt for your
+Access Key ID and Secret Access Key for AWS access and store them
+using [aws-vault][].
+
+You can find your `aws_access_key_id` and `aws_secret_access_key` by logging into the GDS base account using the [AWS Console][].
+
+If you get MFA codes from your phone, run `gds config yubikey false`
+
+#### Using gds-cli
+
+To use `gds-cli`, run `gds aws` to list all available accounts, then
+select one to access with `gds aws <some-role>`.
+
+Further usage instructions can be found in the [gds-cli README](https://github.com/alphagov/gds-cli#usage).
+
+[Amazon Web Services (AWS)]: https://aws.amazon.com/
+[process called assuming roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
+[request an AWS account form]: https://gds-request-an-aws-account.cloudapps.digital/
+[AWS Command Line Interface (AWS CLI)]: https://aws.amazon.com/cli/
+[AWS Shell]: https://github.com/awslabs/aws-shell
+[Terraform]: https://www.terraform.io/
+[AWS Console]: https://gds-users.signin.aws.amazon.com/console
+[creating, modifying, and viewing Access Keys (Console)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey
+[Multi-Factor Authentication (MFA)]: https://aws.amazon.com/iam/details/mfa/
+[Terraform]: https://www.terraform.io/
+[AWS Security Token Service (STS)]: https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html
+[AWS CLI]: https://aws.amazon.com/cli/
+[AWS CLI documentation]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
+[Creating an AWS credentials file]: #creating-an-aws-credentials-file
+[aws-vault]: https://github.com/99designs/aws-vault#readme
+[gds-cli]: https://github.com/alphagov/gds-cli
+[maximum session duration]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+[team specific roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
+
+## Create AWS Accounts
+
+GDS teams can request as many AWS accounts as required, for example one production and one non-production account.
+
+Using multiple AWS accounts allows GDS teams to:
+
+- enforce administrative isolation between workloads
+- minimize the impact of security breaches
+- isolate audit data in separate accounts
+
+AWS Answers has more information about [AWS Multiple Account Security Strategy][].
+
+### Request an account
+
+To request an AWS account complete and submit the [request an AWS account form][].
+
+Reliability Engineering will confirm if your account can be included in GDS AWS billing and perform the initial account setup.
+
+Once your account is created you’ll receive an email with the account ID and will be able to assume an administrative role from [the GDS users base account][].
+
+### Set up an account
+
+Your new account will come with a GDS created `bootstrap` role which has full admin rights.
+
+All users in the [Request an AWS account form][] will be able to assume the bootstrap role from [the GDS users base account][].
+
+You should use the bootstrap role to set up your new account following your
+team’s best practices, for example using [Terraform][].
+
+As part of your account setup, ensure your users can assume
+roles with permissions relevant to their role.
+
+Remove the bootstrap role once you’ve added a properly configured admin role.
+
+
+[Amazon Web Services (AWS)]: https://aws.amazon.com/
+[AWS Multiple Account Security Strategy]: https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/
+[request an AWS account form]: https://gds-request-an-aws-account.cloudapps.digital/
+[the GDS users base account]: https://gds-users.signin.aws.amazon.com/console
+[guidance on managing cross account access]: https://gds-way-aws-preview.cloudapps.digital/standards/aws-account-management.html
+[Terraform]: https://www.terraform.io/
+[accessing aws accounts]: access-aws-accounts.html
+
+## Manage AWS accounts
+
+If you’re setting up a new AWS account and your team want to use cross-account access use the `gds-users` account as your base account.
+
+Use multiple AWS accounts to:
+
+* enforce administrative isolation between workloads
+* minimize the impact of security breaches
+* isolate audit data in separate accounts
+
+By having separate AWS accounts for production and test workloads teams can restrict the security impact of a compromised AWS credential.
+
+To avoid managing several sets of AWS credentials for multiple accounts, teams should use roles and cross-account access. AWS describe this approach as [multiple account security strategy][].
+
+### Cross account access
+
+AWS cross account access allows user accounts held in the `gds-users` base account to access resources in target AWS account’s created by your team.
+
+Access to resources within a target AWS account is controlled using [AWS Identity and Access Management (IAM)][] roles managed within that AWS account.
+
+IAM roles establish trust relationships between the target’s (trusting) AWS account and the GDS base (trusted) AWS account.
+
+#### Manage Access to Resources
+
+Users exist in the GDS base account and have permission to assume a role into a target account. The target account defines the roles users in the base account can assume, for example a Data Analyst:
+
+![Assume Role Diagram](../images/working-with-aws-accounts/assume-role.svg)
+
+#### The Trust Relationship (Assume Role Policy)
+
+The trust relationship describes what entities can assume the role (principles) and imposes conditions on how and when those entities can assume the role. An [AWS principle][] can be a user account, an AWS account or a role, principle entities are expressed as an [Amazon Resource Name (ARN)][].
+
+Use conditions to enforce the presence of Multifactor authentication (MFA), for example restricting access to particular IP addresses or particular times of the day.
+
+It’s strongly recommended not to trust an AWS base account. Trusting an AWS base account allows all of the entities within that base account to assume that particular role.
+
+Example Trust Relationship policy:
+
+    {
+      "Version": "2012-10-17",
+      "Statement": {
+        "Effect": "Allow",
+        "Principal": { "AWS": "arn:aws:iam::123456789012:user/example.user@digital.cabinet-office.gov.uk" },
+        "Action": "sts:AssumeRole",
+        "Condition": { "Bool": { "aws:MultiFactorAuthPresent": "true" } }
+      }
+    }
+
+#### Resource Permissions (Policies)
+
+Access to resources are managed through [IAM Policies][] which can be custom built or defined by Amazon. Design your roles around the permissions people need to complete a task.
+
+Amazon provides some [examples of AWS policies][] related to IAM permissions.
+
+#### Manage "admin" permissions
+
+It is strongly recommended that anyone supporting an AWS account in an
+engineering capacity should have admin access.  Admin access should allow an
+engineer to completely recreate any given resource running in the account.
+
+In AWS one can restrict access to resources by only allowing only certain permissions:
+
+```
+data "aws_iam_policy_document" "admin" {
+  statement {
+    actions = [
+      "route53:*",
+    ]
+     resources = ["*"]
+    effect    = "Allow"
+  }
+}
+```
+
+This should be done where we do not want services to be run for proprietary
+service proliferation reasons, not for security reasons. The use case for this
+is so that we can manage what AWS services we consume, for instance not
+allowing people to spin up an AWS Neptune database.
+
+Services can be managed at the organisation level using service control
+policies, but this is not something we currently use. More information can be
+found [here](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html).
+
+It is an anti-pattern for administrators to not have full IAM permissions.  The
+reasoning behind this decision is that it prevents untracked access to things.
+However in practice it leads to the use of shared users and roles rather than
+the creation of a single user and/or role for a given purpose, which violates
+the principle of least privilege.
+
+#### Name IAM roles
+
+For IAM roles attached to human IAM users, they should have descriptive names
+and ideally conform to the following (except for extenuating circumstances):
+
+- Admin: Can do everything in the account including IAM administration
+- Trusted user: Can do most things in the account excluding IAM administration
+- Read only: Can read things in the account but not perform any side-effects;
+            should NOT be able to do things like `ssm:DescribeParameters`
+
+[multiple account security strategy]: https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/
+[accessing aws accounts]: access-aws-accounts.html
+[AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+[AWS principle]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
+[Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+[IAM Policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+[examples of AWS policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html
+
+## Delete AWS accounts
+
+When your team no longer requires an AWS account, contact Reliability Engineering using the [#Reliability-eng Slack Channel](https://gds.slack.com/messages/CAD6NP598/convo/CAD6NP598-1540294660.000100/).
+
+GDS teams are responsible for managing their own leavers’ process.
+
+## Remove access to AWS accounts
+
+When someone no longer requires access to AWS (for example, because they've left GDS or your team) remove them from the `gds-users` base account using the **Request user removal** section of the:
+
+[Request an AWS account form](https://gds-request-an-aws-account.cloudapps.digital/).
+
+Before you request someone's removal make sure they do not need access to AWS in another team within GDS.
+
+GDS teams are responsible for managing their own leavers’ process.
