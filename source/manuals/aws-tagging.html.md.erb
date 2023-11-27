@@ -40,12 +40,12 @@ In future, we may wish to consider mechanisms such as alerting on untagged resou
 
  - `Product`: for example `GOV.UK` or `DSP`
  - `System`: the name of the software system (for example `Authentication` or `Identity proofing and verification core`. Avoid abbreviations)
- - `Service`: used to describe the function of a particular resource (for example: `account management`, `session storage`, `front end`)
  - `Environment`: should be one of `production`, `staging`, `integration`, or `development`.
  - `Owner`: an email address for an owner for the resource. For dev environments, this will be an individual email address; elsewhere it will be a group address.
 
 ### Optional
 
+ - `Service`: used to describe the function of a particular resource (for example: `account management`, `session storage`, `front end`)
  - `Source`: the URL(s) for any source code repositories related to this resource, separated by spaces
  - `Exposure` : should specify the level of exposure the resource has to determine its attack surface area. (for example `internal` or `external`)
  - `Data Classification` : should specify the highest data classification level the resource handles. This will help internal security teams to know what level of controls to apply and help focus on the resources with greatest level of risk.
