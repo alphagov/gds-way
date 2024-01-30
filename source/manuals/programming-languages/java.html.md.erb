@@ -27,6 +27,18 @@ Use the [GDS Way EditorConfig file](editorconfig), which has settings for things
 
 Some Java teams within GDS have had success using the [Spotless](https://github.com/diffplug/spotless) auto-formatter. Some of the formatting styles supported by Spotless are quite opinionated and may want to make lots of changes if added to an existing project. The `ratchetFrom` option makes Spotless only format changed files (though this can require it to check out a lot of code in some cases, which may have performance implications if used as part of a build pipeline). Alternatively, you may wish to configure Spotless to match your existing conventions. For a new project, it’s probably easiest to use a style’s default settings.
 
+## Java EE and Jakarta EE
+
+[Java EE](https://www.oracle.com/java/technologies/java-ee-glance.html) (Enterprise Edition), a collection of APIs used by many server-side Java applications, was spun out from Oracle and handed over to the [Eclipse Foundation](https://www.eclipse.org/), who renamed it [Jakarta EE](https://jakarta.ee/) due to not having the rights to the Java trademark (Jakarta is the largest city on the island of Java).
+
+Beginning with version 9, Jakarta EE switched from using the `javax` package namespace to the `jakarta` package namespace, instantly breaking all applications that referenced the old package names.
+
+Migrating from Java EE to Jakarta EE is hard. Many libraries and frameworks use Java EE or Jakarta EE so migrating completely may involve updating many of your dependencies to new versions that work with Jakarta EE (if they exist).
+
+Some libraries and frameworks make this a little easier by having two parallel versions, one that works with Java EE and one that works with Jakarta EE, while being otherwise equivalent. This makes it possible to upgrade to the latest Java EE version of a dependency and then migrate across to its Jakarta EE equivalent in two separate steps.
+
+If you are starting a new project, use Jakarta EE only from the outset unless you have a compelling reason not to.
+
 ## Dependency injection (DI)
 
 Consider whether a dependency injection framework is appropriate for your project before using it. Some programmes use the [Guice](https://github.com/google/guice) dependency injection framework.
