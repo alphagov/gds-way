@@ -189,6 +189,8 @@ Try to keep up to date with the latest versions of your external dependencies. O
 
 Dependabot makes assumptions about version numbers that not all dependencies follow. This can cause it to open pull requests that update to beta versions, release candidates or even alternative variants of the dependency. Always have a human sense-check each Dependabot pull request before merging.
 
+If you are not ready to upgrade to a particular version of a dependency, tell Dependabot to ignore that version by using a [dependabot.yml](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file) file. A comment in the file explaining why it has been ignored can be useful. Using a dependabot.yml file is preferable to using `@dependabot ignore` commands because it’s much more visible and it’s also easier to tell Dependabot to stop ignoring a version upgrade. 
+
 There have been cases of bad actors raising malicious pull requests on repositories that appear to come from Dependabot. Make sure a pull request really comes from Dependabot before merging.
 
 Dependabot only deals with direct dependencies, not transitive dependencies. Even if Dependabot thinks your project’s dependencies are fully up to date, you may still have outdated transitive dependencies (which may contain security vulnerabilities).
