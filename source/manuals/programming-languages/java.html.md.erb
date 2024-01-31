@@ -251,7 +251,7 @@ You should follow [Sonatype’s guidance on registering for and claiming a group
 
 ### Signing artifacts
 
-Sonatype requires that artifacts published to their repository have been signed with a published GPG key. Each programme that wants to publish artifacts should create their own GPG key, [publish it to a public keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key) ([keys.openpgp.org](https://keys.openpgp.org/) is recommended), then store the private key safely and in accordance with any programme-specific guidance.
+Sonatype requires that artifacts published to their repository have been signed with a published GPG key. Each programme that wants to publish artifacts should create their own GPG key, [publish it to a public keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key) ([keys.openpgp.org](https://keys.openpgp.org/) and [keyserver.ubuntu.com](https://keyserver.ubuntu.com/) are recommended), then store the private key safely and in accordance with any programme-specific guidance.
 
 The key and its associated passphrase will be used during the publishing process. This will require making it available safely to the task runner, for example Concourse, that is performing the deployment.
 
