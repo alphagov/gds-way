@@ -213,9 +213,19 @@ Dropwizard has built-in support for validating requests with Hibernate Validator
 
 ## JDK
 
-If you are starting a new Java project, do not use anything older than the latest long-term support (LTS) release of Java unless you have a good reason (for example, compatibility issues).
+### Use long-term support (LTS) releases
 
-If you are currently using an older LTS version of Java, you should be planning to upgrade to something newer. Different Java vendors have different support lifecycles for different Java releases.
+New major versions of the JDK are released twice a year (in March and September). Every two years, Oracle release a long-term support (LTS) version, which is maintained and receives updates for several years. Most other Java vendors follow Oracle’s lead, though their exact support lifecycles vary. Non-LTS releases usually stop receiving updates as soon as the next major version comes out. Within the Java ecosystem, many libraries and tools only really support and test against LTS releases.
+
+For this reason, it is highly recommended to use an LTS release of Java. If you choose to use non-LTS releases, be aware that you will have to perform major version upgrades every six months and risk being stranded if libraries and tools you rely on are not prompt in adding support for the latest Java release.
+
+If you are starting a new Java project, do not use anything older than the latest LTS release unless you have a good reason (for example, compatibility issues).
+
+If you are currently using an older LTS release, you should be planning to upgrade to a later LTS version. There is usually an overlap of several years when both the current and some previous LTS releases are supported. Use this time wisely and balance the risk of upgrading before your tools and dependencies fully support a new LTS release against the risk of leaving the upgrade to the last minute. Bear in mind that your dependencies may stop supporting an LTS release before your JDK vendor does.
+
+In general, upgrading between recent Java versions is a lot easier than it was a few years ago, due to better encapsulation within the JDK itself (making it harder for libraries to depend on implementation details that change from version to version) and because the ecosystem has gotten used to the rapid release schedule.
+
+### JDKs from different vendors
 
 Recent versions of the [Oracle JDK can be used free of charge](https://www.oracle.com/downloads/licenses/no-fee-license.html) for commercial and production purposes under the terms of a bespoke licence. OpenJDK is open source under the [GPLv2 with the Classpath Exception](https://openjdk.org/legal/gplv2+ce.html) but Oracle only provide general-availability [OpenJDK builds](https://jdk.java.net/) for the latest release.
 
