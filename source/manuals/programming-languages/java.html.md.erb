@@ -205,7 +205,9 @@ You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apa
 
 The [Dropwizard](https://www.dropwizard.io/) web framework is used widely within GDS.
 
-Dropwizard 3.0.0 and Dropwizard 4.0.0 were released simutaneously in March 2023. They have equivalent functionality but Dropwizard 3 continues to use Java EE and the `javax` package namespace while Dropwizard 4 migrates to [Jakarta EE](https://jakarta.ee/) and the `jakarta` package namespace (Jakarta EE is the successor to Java EE). It is easier to [upgrade to Dropwizard 3.0.x](https://www.dropwizard.io/en/release-3.0.x/manual/upgrade-notes/upgrade-notes-3_0_x.html) than to [upgrade to Dropwizard 4.0.x](https://www.dropwizard.io/en/release-4.0.x/manual/upgrade-notes/upgrade-notes-4_0_x.html). Dropwizard 2.1.x (but not Dropwizard 2.0.x) continues to be supported.
+Dropwizard 3.0.0 and Dropwizard 4.0.0 were released simutaneously in March 2023. They have equivalent functionality but Dropwizard 3 continues to use Java EE and the `javax` package namespace while Dropwizard 4 migrates to [Jakarta EE](https://jakarta.ee/) and the `jakarta` package namespace (Jakarta EE is the successor to Java EE). It is easier to [upgrade to Dropwizard 3.0.x](https://www.dropwizard.io/en/release-3.0.x/manual/upgrade-notes/upgrade-notes-3_0_x.html) than to [upgrade to Dropwizard 4.0.x](https://www.dropwizard.io/en/release-4.0.x/manual/upgrade-notes/upgrade-notes-4_0_x.html).
+
+[Dropwizard 2 is no longer supported as of 31 January 2024.](https://github.com/dropwizard/dropwizard/discussions/7880)
 
 Dropwizard has built-in support for validating requests with Hibernate Validator. Use [Dropwizard’s validation](https://www.dropwizard.io/en/stable/manual/validation.html) in preference to rolling your own except in cases where Dropwizard’s built-in functionality cannot meet your validation requirements.
 
