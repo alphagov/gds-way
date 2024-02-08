@@ -20,18 +20,23 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f # v3.4.0
-    - name: Setup Ruby and install gems
-      uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1 # v1.144.2
-      with:
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Build middleman site
-      run: bundle exec middleman build
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@253fd476ed429e83b7aae64a92a75b4ceb1a17cf # v1.0.7
-      with:
-        path: 'build'
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@73e62e651178eeba977de2dc9f4c7645b3d01015 # v2.0.0
+      - name: Checkout repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.0
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@22fdc77bf4148f810455b226c90fb81b5cbc00a7 # v1.171.0
+        with:
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Build middleman site
+        run: bundle exec middleman build
+      - name: Fix permissions
+        run: |
+          chmod -v -R +rX "_site/" | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: "build"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@decdde0ac072f6dcbe43649d82d9c635fff5b4e4 # v4.0.4
