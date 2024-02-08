@@ -1,6 +1,6 @@
 ---
 title: Java style guide
-last_reviewed_on: 2023-08-14
+last_reviewed_on: 2024-01-19
 review_in: 6 months
 owner_slack: '#java'
 ---
@@ -15,7 +15,7 @@ The more far-reaching _[Java for Small Teams](https://ncrcoe.gitbooks.io/java-fo
 
 While the above resources are good guides, they may conflict with either each other or your team’s established practices. We favour consistency across our code, so make sure that you have the agreement of your team when considering using a new or different method or paradigm to those currently in use.
 
-We generally use [IntelliJ IDEA](https://www.jetbrains.com/idea/) within GDS. Using it consistently helps when ensemble programming (pairing and mobbing). GDS have purchased licences for the commercial editions of IntelliJ IDEA for some teams. 
+We generally use [IntelliJ IDEA](https://www.jetbrains.com/idea/) within GDS. Using it consistently helps when ensemble programming (pairing and mobbing). GDS have purchased licences for the commercial editions of IntelliJ IDEA for some teams. Some features of IntelliJ IDEA like [Code With Me](https://www.jetbrains.com/code-with-me/) and [JetBrains AI](https://www.jetbrains.com/ai/) have not passed an information assurance review and must not be used.
 
 ## Code formatting
 
@@ -27,9 +27,23 @@ Use the [GDS Way EditorConfig file](editorconfig), which has settings for things
 
 Some Java teams within GDS have had success using the [Spotless](https://github.com/diffplug/spotless) auto-formatter. Some of the formatting styles supported by Spotless are quite opinionated and may want to make lots of changes if added to an existing project. The `ratchetFrom` option makes Spotless only format changed files (though this can require it to check out a lot of code in some cases, which may have performance implications if used as part of a build pipeline). Alternatively, you may wish to configure Spotless to match your existing conventions. For a new project, it’s probably easiest to use a style’s default settings.
 
+## Java EE and Jakarta EE
+
+[Java EE](https://www.oracle.com/java/technologies/java-ee-glance.html) (Enterprise Edition), a collection of APIs used by many server-side Java applications, was spun out from Oracle and handed over to the [Eclipse Foundation](https://www.eclipse.org/), who renamed it [Jakarta EE](https://jakarta.ee/) due to not having the rights to the Java trademark (Jakarta is the largest city on the island of Java).
+
+Beginning with version 9, Jakarta EE switched from using the `javax` package namespace to the `jakarta` package namespace, instantly breaking all applications that referenced the old package names.
+
+Migrating from Java EE to Jakarta EE is hard. Many libraries and frameworks use Java EE or Jakarta EE so migrating completely may involve updating many of your dependencies to new versions that work with Jakarta EE (if they exist).
+
+Some libraries and frameworks make this a little easier by having two parallel versions, one that works with Java EE and one that works with Jakarta EE, while being otherwise equivalent. This makes it possible to upgrade to the latest Java EE version of a dependency and then migrate across to its Jakarta EE equivalent in two separate steps.
+
+If you are starting a new project, use Jakarta EE only from the outset unless you have a compelling reason not to.
+
 ## Dependency injection (DI)
 
-Consider whether a dependency injection framework is appropriate for your project before using it. Some programmes use the [Guice](https://github.com/google/guice) dependency injection framework.
+Consider whether a dependency injection framework is appropriate for your project before using it.
+
+Some programmes use the [Guice](https://github.com/google/guice) dependency injection framework. There are two current versions of Guice: [Guice 6.0.0](https://github.com/google/guice/wiki/Guice600) supports Java EE and the `javax` package namespace while [Guice 7.0.0](https://github.com/google/guice/wiki/Guice700) supports only Jakarta EE and the `jakarta` package namespace.
 
 ## Imports
 
@@ -109,6 +123,10 @@ var usernames = new HashSet<String>();
 
 The [OpenJDK project has some style guidelines for local variable type inference](https://openjdk.org/projects/amber/guides/lvti-style-guide). Oracle’s [introduction to local variable type inference](https://developer.oracle.com/learn/technical-articles/jdk-10-local-variable-type-inference) also contains some recommendations.
 
+## Records
+
+Java 16 introduced record classes, which provide an excellent way to model immutable data with a concise syntax that eliminates the need to write tedious and error-prone code for basic functionality. [Dev.java has a good introduction to records.](https://dev.java/learn/records/)
+
 ## Prefer functionality in the Java standard library
 
 Where possible, use functionality from the Java standard library rather than external libraries.
@@ -146,7 +164,7 @@ Use [Mockito](https://site.mockito.org/) for mocking. If you’re still using an
 
 ## Code checking
 
-We encourage the use of static analysis. Static analysis tools for Java include [SonarQube](https://www.sonarsource.com/products/sonarqube/), [Codacy](https://www.codacy.com/) and [CheckStyle](https://checkstyle.sourceforge.io/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
+We encourage the use of static analysis. Static analysis tools for Java include [SonarQube](https://www.sonarsource.com/products/sonarqube/), [Codacy](https://www.codacy.com/), [CheckStyle](https://checkstyle.sourceforge.io/) and [CodeQL](https://codeql.github.com/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
 
 If possible, configure your static analysis tools using configuration files and keep these in your project repositories. This makes your settings more portable and makes it easier to perform the same checks in different places (for example, in a cloud service and on your own computer).
 
@@ -167,17 +185,21 @@ public void frobulateFoos() {
 ```
 
 ## Dependencies
-Teams should agree their own rules for how to approve new dependencies and where dependencies can retrieved from (for example, [Maven Central](https://central.sonatype.com/)). When deciding whether or not to add a new dependency, consider its trustworthiness, longevity and licence.
+Teams should agree their own rules for how to approve new dependencies and where dependencies can retrieved from (for example, [Maven Central](https://central.sonatype.com/)). When deciding whether or not to add a new dependency, consider its trustworthiness, longevity, licence and whether it appears to be actively maintained.
 
 Try to keep up to date with the latest versions of your external dependencies. Older dependencies often contain security vulnerabilities. If you wait to upgrade your dependencies, you may find you have to make large version jumps to lots of dependencies at once, which can be painful. Frequent, smaller updates are almost always preferable.
 
-[Dependabot](https://docs.github.com/en/code-security/dependabot) (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Do not merge a dependency upgrade unless it passes your automated tests.
+[Dependabot](https://docs.github.com/en/code-security/dependabot) (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Do not merge a dependency upgrade unless it passes your automated tests. If it’s a major upgrade, monitor for any problems after it’s deployed.
 
 Dependabot makes assumptions about version numbers that not all dependencies follow. This can cause it to open pull requests that update to beta versions, release candidates or even alternative variants of the dependency. Always have a human sense-check each Dependabot pull request before merging.
+
+If you are not ready to upgrade to a particular version of a dependency, tell Dependabot to ignore that version by using a [dependabot.yml](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file) file. A comment in the file explaining why it has been ignored can be useful. Using a dependabot.yml file is preferable to using `@dependabot ignore` commands because it’s much more visible and it’s also easier to tell Dependabot to stop ignoring a version upgrade. 
 
 There have been cases of bad actors raising malicious pull requests on repositories that appear to come from Dependabot. Make sure a pull request really comes from Dependabot before merging.
 
 Dependabot only deals with direct dependencies, not transitive dependencies. Even if Dependabot thinks your project’s dependencies are fully up to date, you may still have outdated transitive dependencies (which may contain security vulnerabilities).
+
+When viewing a Maven POM file, IntelliJ IDEA can warn you if your transitive dependencies have reported security vulnerabilities.
 
 ## Build tools
 
@@ -187,23 +209,33 @@ You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apa
 
 The [Dropwizard](https://www.dropwizard.io/) web framework is used widely within GDS.
 
-Dropwizard 3.0.0 and Dropwizard 4.0.0 were released simutaneously in March 2023. They have equivalent functionality but Dropwizard 3 continues to use Java EE and the `javax` package namespace while Dropwizard 4 migrates to [Jakarta EE](https://jakarta.ee/) and the `jakarta` package namespace (Jakarta EE is the successor to Java EE). [Upgrading to Dropwizard 3.0.x](https://www.dropwizard.io/en/release-3.0.x/manual/upgrade-notes/upgrade-notes-3_0_x.html) should be fairly straightforward while [upgrading to Dropwizard 4.0.x](https://www.dropwizard.io/en/release-4.0.x/manual/upgrade-notes/upgrade-notes-4_0_x.html) will be more involved. Dropwizard 2.1.x (but not Dropwizard 2.0.x) continues to be supported.
+Dropwizard 3.0.0 and Dropwizard 4.0.0 were released simutaneously in March 2023. They have equivalent functionality but Dropwizard 3 continues to use Java EE and the `javax` package namespace while Dropwizard 4 migrates to [Jakarta EE](https://jakarta.ee/) and the `jakarta` package namespace (Jakarta EE is the successor to Java EE). It is easier to [upgrade to Dropwizard 3.0.x](https://www.dropwizard.io/en/release-3.0.x/manual/upgrade-notes/upgrade-notes-3_0_x.html) than to [upgrade to Dropwizard 4.0.x](https://www.dropwizard.io/en/release-4.0.x/manual/upgrade-notes/upgrade-notes-4_0_x.html).
+
+[Dropwizard 2 is no longer supported as of 31 January 2024.](https://github.com/dropwizard/dropwizard/discussions/7880)
 
 Dropwizard has built-in support for validating requests with Hibernate Validator. Use [Dropwizard’s validation](https://www.dropwizard.io/en/stable/manual/validation.html) in preference to rolling your own except in cases where Dropwizard’s built-in functionality cannot meet your validation requirements.
 
-If you are sending logs to a service that requires them in a specific format, you may find our [dropwizard-logstash](https://github.com/alphagov/dropwizard-logstash) logging extension useful.
-
 ## JDK
 
-If you are starting a new Java project, do not use anything older than the latest long-term support (LTS) release of Java unless you have a good reason (for example, compatibility issues).
+### Use long-term support (LTS) releases
 
-If you are currently using an older LTS version of Java, you should be planning to upgrade to something newer. Different Java vendors have different support lifecycles for different Java releases.
+New major versions of the JDK are released twice a year (in March and September). Every two years, Oracle release a long-term support (LTS) version, which is maintained and receives updates for several years. Most other Java vendors follow Oracle’s lead, though their exact support lifecycles vary. Non-LTS releases usually stop receiving updates as soon as the next major version comes out. Within the Java ecosystem, many libraries and tools only really support and test against LTS releases.
+
+For this reason, it is highly recommended to use an LTS release of Java. If you choose to use non-LTS releases, be aware that you will have to perform major version upgrades every six months and risk being stranded if libraries and tools you rely on are not prompt in adding support for the latest Java release.
+
+If you are starting a new Java project, do not use anything older than the latest LTS release unless you have a good reason (for example, compatibility issues).
+
+If you are currently using an older LTS release, you should be planning to upgrade to a later LTS version. There is usually an overlap of several years when both the current and some previous LTS releases are supported. Use this time wisely and balance the risk of upgrading before your tools and dependencies fully support a new LTS release against the risk of leaving the upgrade to the last minute. Bear in mind that your dependencies may stop supporting an LTS release before your JDK vendor does.
+
+In general, upgrading between recent Java versions is a lot easier than it was a few years ago, due to better encapsulation within the JDK itself (making it harder for libraries to depend on implementation details that change from version to version) and because the ecosystem has gotten used to the rapid release schedule.
+
+### JDKs from different vendors
 
 Recent versions of the [Oracle JDK can be used free of charge](https://www.oracle.com/downloads/licenses/no-fee-license.html) for commercial and production purposes under the terms of a bespoke licence. OpenJDK is open source under the [GPLv2 with the Classpath Exception](https://openjdk.org/legal/gplv2+ce.html) but Oracle only provide general-availability [OpenJDK builds](https://jdk.java.net/) for the latest release.
 
-The [Adoptium](https://adoptium.net/) (formerly AdoptOpenJDK) project (part of the [Eclipse Foundation](https://www.eclipse.org/)) provides fully open-source TCK-certified pre-built OpenJDK binaries under the name Eclipse Temurin. For LTS releases (such as Java 8, 11 and 17), Adoptium have committed to releasing free updates for several years.
+The [Adoptium](https://adoptium.net/) (formerly AdoptOpenJDK) project (part of the [Eclipse Foundation](https://www.eclipse.org/)) provides fully open-source TCK-certified pre-built OpenJDK binaries under the name Eclipse Temurin. For LTS releases (such as Java 8, 11, 17 and 21), Adoptium have committed to releasing free updates for several years.
 
-In addition, Temurin has benefits such as being available in package repositories, having friendly installers for desktop use, and offering ready-made [Docker images containing OpenJDK](https://hub.docker.com/_/eclipse-temurin).
+In addition, Temurin has benefits such as being available in package repositories, having friendly installers for desktop use, and offering ready-made [Docker images containing OpenJDK](https://hub.docker.com/_/eclipse-temurin). It’s easy to [install Temurin on your computer](https://adoptium.net/en-GB/installation/) for development purposes using [Homebrew](https://brew.sh/) or similar.
 
 [Amazon Corretto](https://aws.amazon.com/corretto/) is a free OpenJDK distribution. The [AWS Lamdba runtimes for Java](https://docs.aws.amazon.com/lambda/latest/dg/lambda-java.html) use Corretto. Newer Java versions have significantly faster cold start times, which can be beneficial for Lambda.
 
@@ -223,10 +255,10 @@ You should follow [Sonatype’s guidance on registering for and claiming a group
 
 ### Signing artifacts
 
-Sonatype requires that artifacts published to their repository have been signed with a published GPG key. Each programme that wants to publish artifacts should create their own GPG key, [publish it to a public keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key) ([keys.openpgp.org](https://keys.openpgp.org/) is recommended), then store the private key safely and in accordance with any programme-specific guidance.
+Sonatype requires that artifacts published to their repository have been signed with a published GPG key. Each programme that wants to publish artifacts should create their own GPG key, [publish it to a public keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key) ([keys.openpgp.org](https://keys.openpgp.org/) and [keyserver.ubuntu.com](https://keyserver.ubuntu.com/) are recommended), then store the private key safely and in accordance with any programme-specific guidance.
 
 The key and its associated passphrase will be used during the publishing process. This will require making it available safely to the task runner, for example Concourse, that is performing the deployment.
 
 We recommend additionally publishing the public keys elsewhere, for example as a public GitHub repository, so that a third-party user knows an artifact is signed by a key that we have declared we use for signing.
 
-Sonatype publishes build-tool-specific guidance for publishing and releasing artifacts on Maven Central.
+Sonatype publishes [build-tool-specific guidance for publishing and releasing artifacts on Maven Central](https://central.sonatype.org/publish/publish-guide/#deployment).
