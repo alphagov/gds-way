@@ -29,7 +29,7 @@ jobs:
     - name: Build middleman site
       run: bundle exec middleman build
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@253fd476ed429e83b7aae64a92a75b4ceb1a17cf # v1.0.7
+      uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
       with:
         path: 'build'
     - name: Deploy to GitHub Pages
