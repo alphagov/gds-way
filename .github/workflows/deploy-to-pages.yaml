@@ -14,7 +14,12 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  build:
+    uses: ./.github/workflows/test.yaml
+    with:
+      upload-artifact: true
   deploy:
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
