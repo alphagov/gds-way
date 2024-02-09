@@ -16,11 +16,10 @@ begin
       :assume_extension => true,
       :allow_hash_href => true,
       :check_internal_hash => true,
-      :empty_alt_ignore => true,
-      :file_ignore => [
+      :ignore_files => [
           /search/ # Provided by tech-docs gem but has a "broken" link from html-proofer's point of view
       ],
-      :url_ignore => [
+      :ignore_urls => [
           "https://gdshelpdesk.digital.cabinet-office.gov.uk",
           "https://gds-way.cloudapps.digital/standards/secrets-acl.html",
           /https:\/\/github.com\//
