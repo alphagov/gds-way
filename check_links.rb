@@ -16,7 +16,6 @@ begin
       :assume_extension => true,
       :allow_hash_href => true,
       :check_internal_hash => true,
-      :ignore_empty_alt => true,
       :ignore_files => [
           /search/ # Provided by tech-docs gem but has a "broken" link from html-proofer's point of view
       ],
