@@ -56,7 +56,7 @@ You'll then likely want to run it alongside your unit tests.
 
 #### Ruff ignores
 
-Ruff can ignore particular lines or files. You can 
+Ruff can ignore particular lines or files. You can
 
 A particularly useful feature of ruff is the ability to specify rule exemptions on a
 per directory or file.
@@ -70,7 +70,7 @@ You can also see an example in the [Notifications API repo][Notify-API-pyproject
 
 #### Common Configuration
 
-Notify is already running the latest verions of [Black][] and [Ruff][] on all 
+Notify is already running the latest verions of [Black][] and [Ruff][] on all
 of its repos. You can find an example of their configuration in the root of any
 repo in the [`pyproject.toml` file][Notify-API-pyproject].
 
@@ -102,8 +102,8 @@ exclude = [
 ```
 
 In the above file we exclude directories we want the checker to ignore completely,
-ignore specific rules we disagree with, set the maximum line length and set the target
-python version.
+include optional linting such as applying isort rules to ensure imports are sorted
+for minimal git diffs, set the maximum line length and set the target python version.
 
 Note: you can also ignore rules on particular lines of code or files by adding a `# noqa`
 comment - see [ruff's noqa syntax][ruff-error-suppression].
@@ -112,31 +112,6 @@ comment - see [ruff's noqa syntax][ruff-error-suppression].
 
 * [Notify Config][Notify-API-pyproject]: A production config to base off
 * [Ruff error codes list][ruff-error-codes-list]
-    
-### isort
-    
-[isort][] is a command line tool that sorts and formats imports. It groups the imports according to pep8 recommendations, and
-automatically sorts imports and lines alphabetically to keep git diffs sensible.
-
-You can run `isort` locally to fix imports before commiting. 
-You should add a check-only command to your test script to ensure imports are correct on PRs.
-
-```bash
-isort --check-only
-```
-   
-Here's an example configuration, as taken from the `setup.cfg` file in [notify's API repo][notify-isort-cfg].
-    
-```
-[isort]
-line_length=80
-indent='    '
-multi_line_output=3
-known_third_party=notifications_utils,notifications_python_client
-known_first_party=app,tests
-include_trailing_comma=True
-use_parentheses=True
-```
 
 ## Environments
 
@@ -146,7 +121,7 @@ For more information see [Intro to pyenv](https://realpython.com/intro-to-pyenv)
 Use the pyev plugin [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) to manage virtual python environment.
 For more information see [Python virtual environment primer](https://realpython.com/python-virtual-environments-a-primer/)
 
-[direnv](https://direnv.net/) is used to manage environment variables. 
+[direnv](https://direnv.net/) is used to manage environment variables.
 This ensures project specific variables do not clutter your main environment or the environment of other projects.
 direnv uses `.envrc` for general project specific variables and you can use a non version controlled `.secrets` to store sensitive information.
 
@@ -219,7 +194,7 @@ breaking changes to your build.
 Your pinned dependencies should be fully specified in a file called `requirements.txt`, and checked
 into your version control system (VCS). For projects with only a small number of dependencies, maintaining
 this manually (for example, installing with `pip install`, then using `pip freeze`) may be adequate.
-    
+
 For larger projects, GDS recommends using [pip-tools][pip-tools] for managing dependencies.
 
 Put your top-level requirements in a `requirements.in` file, and then use `pip-compile` to generate a
@@ -282,6 +257,3 @@ file otherwise.
 [ruff-error-suppression]: https://docs.astral.sh/ruff/linter/#error-suppression
 [ruff-error-codes-list]: https://docs.astral.sh/ruff/rules/
 [Notify-api-pyproject]: https://github.com/alphagov/notifications-api/blob/0f4f6ce1e4f3fb22731ca426e8a17a2b154e3f8f/pyproject.toml
-
-[isort]: https://pypi.org/project/isort/
-[notify-isort-cfg]: https://github.com/alphagov/notifications-api/blob/e497cbbec657606d62d8fb90255f5b68ec7f7ac2/setup.cfg#L12-L19
