@@ -18,10 +18,12 @@ and consistent, within, and across, projects at GDS.
 
 ## Code formatting
 
-We follow [PEP 8][]; where PEP 8 does not express a view (for example, on the usage of
+We use [Black][] to format our code. Black is an opinionated formatter that follows
+[PEP 8][]; where Black and PEP 8 do not express a view (for example, on the usage of
 language features such as metaclasses) we defer to the [Google Python style guide][GPSG].
-Use these as references unless something is explicitly mentioned here. These rules should be followed in conjunction with the advice on consistency
-on the main [programming languages manual page][gds-way-code-style-guides].
+Use these as references unless something is explicitly mentioned here. These rules
+should be followed in conjunction with the advice on consistency on the main
+[programming languages manual page][gds-way-code-style-guides].
 
 If you want to add a new rule or exception please create a pull request against this repo.
 
@@ -35,94 +37,81 @@ Couple this with the fact that much of the time GDS developers are coding web ap
 have to deal with nested `JSON` objects, ORM model definitions/ queries, and error/ url
 strings and this convention begins to show its age.
 
-```
-Do not do
-
-if not models.Address.query(
-    models.Address.street_address_line_1
-    == user['address']['street_address_line_1']
-):
-    pass
-
-
-Do
-
-if not models.Address.query(models.Address.street_address_line_1 == user['address']['street_address_line_1']):
-    pass
-```
-
 
 ## Linting
 
 
-### Flake8
+### Ruff
 
-This manual advises the use of the [Flake8][] command line checker as an all in one lint, codestyle and complexity checker.
+This manual advises the use of the [Ruff][] command line checker as an all in one lint,
+codestyle and complexity checker.
 
-#### How to use Flake8
+#### How to use Ruff
 
-Implementation of [Flake8][] will depend on whether the repository you want to run the checks on is a module or an application,
-and how your dependencies, automated testing, and continiuous integration are set up.
-
-First you should add the Flake8 module (available from [PyPI][]) to your 'dev' or 'test' requirements/dependencies.
+First you should add the Ruff module (available from [PyPI][]) to your 'dev' or 'test'
+requirements/dependencies.
 
 You'll then likely want to run it alongside your unit tests.
 
-#### Plugins
 
-Flake8 has been designed to be extensible and has numerous plugins. They're worth a look to see if
-any would be particularly beneficial to your code base.
+#### Ruff ignores
 
-Examples include checks for requiring copyright/licensing strings, requiring docstrings
-or warnings for upcoming deprecations.
+Ruff can ignore particular lines or files. You can 
 
-A list can be found [by performing a PyPI search.][flake8-plugins]
-
-#### Flake8 per file ignores
-
-A particularly useful feature of Flake8 is the ability to specify rule
-exemptions on a per directory, per file, or per regex match basis.
+A particularly useful feature of ruff is the ability to specify rule exemptions on a
+per directory or file.
 
 Commonly it's used for ignoring unused imports in module level `__init__.py`
 files or imports not being at the top of a file in settings files or scripts.
 
-The feature is documented in the Flake8 options documentation, under
-[per-file-ignores][flake8-per-file-ignores]. You can also see an example in the 
-[Digital Marketplace API repo][DMAPI-flake8-config].
+The feature is documented in the Ruff documentation, under [per-file-ignores][ruff-ignore-files].
+You can also see an example in the [Notifications API repo][Notify-API-pyproject].
 
 
 #### Common Configuration
 
-Digital Marketplace is already running the latest version of [Flake8][] on all
-of its repos.  You can find an example of their configuration in the root of
-any repo in the [`.flake8` file][DMAPI-flake8-config].
+Notify is already running the latest verions of [Black][] and [Ruff][] on all 
+of its repos. You can find an example of their configuration in the root of any
+repo in the [`pyproject.toml` file][Notify-API-pyproject].
 
-
-Commonly a configuration file will live in the root of the package. By default [Flake8][] will look for a
-`.flake8` file in each directory.
+Commonly a `pyproject.toml` configuration file will live in the root of the package.
+It will contain separate sections for each tool the repository needs
 
 ```
-[flake8]
-# Rule definitions: https://flake8.pycqa.org/en/latest/user/error-codes.html
-# D203: 1 blank line required before class docstring
-# W503: line break before binary operator
-exclude = venv*,__pycache__,node_modules,bower_components,migrations
-ignore = D203,W503
-max-complexity = 9
-max-line-length = 120
+[tool.black]
+line-length = 120
+
+[tool.ruff]
+line-length = 120
+
+target-version = "py311"
+
+select = [
+    "E",  # pycodestyle
+    "W",  # pycodestyle
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C90",  # mccabe cyclomatic complexity
+    "G",  # flake8-logging-format
+]
+ignore = []
+exclude = [
+    "migrations/versions/"
+]
 ```
 
-In the above file we exclude directories we want the checker to ignore completely, ignore specific rules we disagree with,
-set the maximum line length and set the maximum complexity. We've also included comments detailing what the specific exclusions
-are.
+In the above file we exclude directories we want the checker to ignore completely,
+ignore specific rules we disagree with, set the maximum line length and set the target
+python version.
 
-Note: you can also ignore rules on particular lines of code or files by adding a `# noqa` comment - see [flake8's noqa syntax][flake8-noqa].
+Note: you can also ignore rules on particular lines of code or files by adding a `# noqa`
+comment - see [ruff's noqa syntax][ruff-error-suppression].
 
-#### Additional flake8 resources
+#### Additional linting resources
 
-* [Digital Marketplace Config][DMAPI-flake8-config]: A production config to base off
-* [Flake8 error codes list][flake8-error-codes-list]
-* [Flake8 plugins list][flake8-plugins]
+* [Notify Config][Notify-API-pyproject]: A production config to base off
+* [Ruff error codes list][ruff-error-codes-list]
     
 ### isort
     
@@ -285,15 +274,14 @@ file otherwise.
 [snyk.io]: https://snyk.io/
 [setup-deps]: https://docs.python.org/3.11/distutils/setupscript.html#relationships-between-distributions-and-packages
 
+[Black]: https://black.readthedocs.io/en/stable/
 [PEP 8]: https://www.python.org/dev/peps/pep-0008/
 [PEP 440]: https://www.python.org/dev/peps/pep-0440/#direct-references
 
-[Flake8]: https://flake8.pycqa.org/en/latest/
-[DMAPI-flake8-config]: https://github.com/alphagov/digitalmarketplace-api/blob/main/.flake8
-[flake8-per-file-ignores]: https://flake8.pycqa.org/en/latest/user/options.html#cmdoption-flake8-per-file-ignores
-[flake8-plugins]: https://pypi.org/search/?q=plugin&o=-zscore&c=Framework+%3A%3A+Flake8
-[flake8-error-codes-list]: https://flake8.pycqa.org/en/latest/user/error-codes.html
-[flake8-noqa]: https://flake8.pycqa.org/en/latest/user/violations.html#in-line-ignoring-errors
+[ruff-ignore-files]: https://docs.astral.sh/ruff/settings/#lint_per-file-ignores
+[ruff-error-suppression]: https://docs.astral.sh/ruff/linter/#error-suppression
+[ruff-error-codes-list]: https://docs.astral.sh/ruff/rules/
+[Notify-api-pyproject]: https://github.com/alphagov/notifications-api/blob/0f4f6ce1e4f3fb22731ca426e8a17a2b154e3f8f/pyproject.toml
 
 [isort]: https://pypi.org/project/isort/
 [notify-isort-cfg]: https://github.com/alphagov/notifications-api/blob/e497cbbec657606d62d8fb90255f5b68ec7f7ac2/setup.cfg#L12-L19
