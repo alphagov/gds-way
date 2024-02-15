@@ -1,7 +1,6 @@
 ---
 title: Programming languages
-last_reviewed_on: 2023-03-02
-review_in: 6 months
+last_reviewed_on: 2024-02-15
 ---
 
 # <%= current_page.data.title %>
@@ -59,7 +58,6 @@ Our core languages for backend development are:
 - [Java](/manuals/programming-languages/java.html)
 - [Python](/manuals/programming-languages/python/python.html)
 - [Ruby](/manuals/programming-languages/ruby.html)
-- [Go](/manuals/programming-languages/go.html)
 
 We've chosen these languages because they are successfully used by
 teams at the moment, and we are confident in how to host and operate
@@ -80,16 +78,21 @@ production.
 
 ### Go
 
-We built the GOV.UK router using Go, and it's the core language for [Cloud
-Foundry](https://www.cloudfoundry.org/), which GOV.UK PaaS uses.
+Go is no longer a core backend development language in GDS.
 
-Go is an appropriate language for systems programming, like proxying, routing,
-and transforming HTTP requests. However you should only write these sorts of components if there is no alternative maintained open source tool available.
+The only Go service currently in production operation is the [GOV.UK
+router][router], and it is the core language for [Cloud
+Foundry](https://www.cloudfoundry.org/), which GOV.UK PaaS uses, although
+GOV.UK PaaS is being [decommissioned][pass-decom]. As such, the knowledge and
+experience of building and running services in Go is small and decreasing.
 
-Go has a feature complete standard library, good concurrency primitives and is
-a memory safe language. These features make it a good choice for backend
-application which aggregate or transform APIs, or have performance
-requirements.
+Go _may_ be an appropriate language for instances of systems programming, like
+proxying, routing, and transforming HTTP requests. However you should only
+write these sorts of components if there is no alternative maintained open
+source tool available.
+
+[router]: https://github.com/alphagov/router
+[pass-decom]: https://gds.blog.gov.uk/2022/07/12/why-weve-decided-to-decommission-gov-uk-paas-platform-as-a-service/
 
 ### Languages we do not use for new projects
 
