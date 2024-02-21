@@ -8,7 +8,7 @@ review_in: 12 months
 
 Most teams in GDS use [Amazon Web Services (AWS)](https://aws.amazon.com/) as their infrastructure provider. GDS teams in GOV.UK and DSP manage their own AWS accounts, but users must first sign into a shared base AWS account called `gds-users`. They can then assume roles in their team's AWS account to perform administrative tasks using [AWS's cross-account access pattern](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html).
 
-Note GOV.UK One Login has its own AWS organisation separate from GDS / Cabinet Office accounts. That is managed by the program and separate guidance applies.
+Note that GOV.UK One Login has its own AWS Organization separate from GDS / Cabinet Office accounts. That is managed by the programme, and separate guidance applies.
 
 ## Request AWS user access
 
@@ -111,21 +111,21 @@ Once setup is complete users can access AWS using the AWS Console or the command
     <a href="https://gds-users.signin.aws.amazon.com/console">https://gds-users.signin.aws.amazon.com/console</a>
     <details>
       <summary><small>Screenshot of the sign in page</small></summary>
-      <img src="/images/working-with-aws-accounts/aws-base-account-signin-form.png" alt="Screenshot of the sign in page">
+      <img src="/images/working-with-aws-accounts/aws-base-account-signin-form.png" alt="Screenshot showing AWS Sign-in screen. The 'Account ID or alias' box is filled out with 'gds-users'. 'IAM user name' and 'password' boxes are ready to fill out.">
     </details>
   </li>
   <li>
     From the top right dropdown menu, select **Switch Role**
     <details>
       <summary><small>Screenshot of the switch role menu item</small></summary>
-      <img src="/images/working-with-aws-accounts/aws-switch-role-menu.png" alt="Screenshot of the sign in page">
+      <img src="/images/working-with-aws-accounts/aws-switch-role-menu.png" alt="Screenshot of the switch role menu, with 'Switch Role' appearing underneath the 'My Security Credentials' menu item.">
     </details>
   </li>
   <li>
     Complete **Account** with account or <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#AboutAccountAlias">account alias</a> and the role you're switching to
     <details>
       <summary><small>Screenshot of the switch role page</small></summary>
-      <img src="/images/working-with-aws-accounts/aws-switch-role-form.png" alt="Screenshot of the sign in page">
+      <img src="/images/working-with-aws-accounts/aws-switch-role-form.png" alt="Screenshot of the switch role page with 'Account', 'Role' and 'Display name' boxes ready to fill out.">
     </details>
   </li>
 </ul>
@@ -332,8 +332,6 @@ and ideally conform to the following (except for extenuating circumstances):
 ## Delete AWS accounts
 
 When your team no longer requires an AWS account, contact Reliability Engineering using the [#Reliability-eng Slack Channel](https://gds.slack.com/messages/CAD6NP598/convo/CAD6NP598-1540294660.000100/).
-
-GDS teams are responsible for managing their own leavers’ process.
 
 ## Remove access to AWS accounts
 
