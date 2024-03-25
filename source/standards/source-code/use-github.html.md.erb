@@ -52,12 +52,16 @@ Consider protecting the `.github/workflows` folder by using [a CODEOWNERS file](
 Consider creating a Workflow Template in the [alphagov workflow folder](https://github.com/alphagov/.github/tree/main/workflow-templates) if you need to share a similar workflow between many repositories.
 
 [Create your own local actions](https://docs.github.com/en/actions/creating-actions/about-actions) wherever possible. If using GitHub-owned actions, [pin to a specific version](https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#using-release-management-for-your-custom-actions).
+Pinned versions should include the semver version in a comment next to the SHA, helping humans understand which versions we are pinned to.
+Where possible, allow automated dependency management tools to scan these version comments and suggest updates.
+
 Third-party actions should only be used if:
 
 - The provider is verified by GitHub (for example, [aws-actions](https://github.com/aws-actions))
 - The action is complex enough that you cannot write your own local action
 - You have fully reviewed the code in the version of the third-party action you will be using
 - You have pinned the specific version in your workflow and in the repository settings, using a Git commit SHA
+- You have included the semver version in a comment next to the SHA, helping humans understand the version and automated tools report on what is out of date
 - The third-party action is actively maintained, well-documented and tested ([follow the guidance on third party dependencies](/standards/tracking-dependencies.html)).
 
 You can enforce this in the settings for Actions by choosing ['Allow select actions'](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-specific-actions-to-run) and then 'Allow actions created by GitHub' and 'Allow Marketplace actions by verified creators' as required.
