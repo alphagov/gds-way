@@ -6,17 +6,21 @@ review_in: 6 months
 
 # <%= current_page.data.title %>
 
-[GDS uses GitHub as its code repository](https://technology.blog.gov.uk/2016/05/31/how-we-use-git-at-the-government-digital-service/).
+GDS uses the [alphagov] organisation on [GitHub] to collaborate on code. The GOV.UK One Login programme uses [govuk-one-login].
 
-Put new repositories for GDS services in the [alphagov](https://github.com/alphagov/) organisation on GitHub.
+### Getting access to `alphagov`
 
-You can use your personal GitHub account to access alphagov but please ensure that you also link your GDS email address to your account. Ask your tech lead or technical architect to invite you. GDS will revoke your access to alphagov when you leave GDS.
+You can use your personal GitHub account to access alphagov if you wish.
 
-To secure your Github repository, make sure you:
+All github user accounts added to `alphagov` *must* be [connected](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/adding-an-email-address-to-your-github-account) with a valid `digital.cabinet-office.gov.uk` email address. Accounts not connected to a valid email address will be removed from `alphagov`.
 
-- configure two-factor authentication for your account
-- have considered [encrypting some of the repository's contents](/standards/storing-credentials.html#team-credentials)
-- consider [protecting your main branch](https://docs.github.com/en/github/administering-a-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) to prevent changes being committed without a suitable review
+You must also set up two-factor authentication on your account.
+
+To join `alphagov` ask your tech lead or technical architect to invite you. Make sure you've connected your GDS email address to your account first, otherwise your account will be removed.
+
+### Configuring github repositories
+
+Consider [protecting your main branch](https://docs.github.com/en/github/administering-a-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) to prevent changes being committed without a suitable review.
 
 You can also consider backing up your Git repositories to another location (this should be a team responsibility). If you are using AWS to host your service
 [AWS CodeCommit](https://aws.amazon.com/codecommit/) is one option.
@@ -86,3 +90,7 @@ You should use your `@digital.cabinet-office.gov.uk` email during the sign up pr
 
 * [How to store source code](index.html)
 * [Working with Git](working-with-git.html)
+
+[GitHub]: https://technology.blog.gov.uk/2016/05/31/how-we-use-git-at-the-government-digital-service/
+[alphagov]: https://github.com/alphagov/
+[govuk-one-login]: https://github.com/govuk-one-login
