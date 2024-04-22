@@ -8,7 +8,6 @@ begin
     .split("\0")
     .filter { |path| path.start_with? "source/" }
     .map { |path| path.delete_prefix("source/").delete_suffix(".erb").delete_suffix(".md") }
-    .map { |path| "https://gds-way.cloudapps.digital/#{path}" }
 
   proofer = HTMLProofer.check_directory(
     "build",
@@ -21,7 +20,6 @@ begin
       ],
       :ignore_urls => [
           "https://gdshelpdesk.digital.cabinet-office.gov.uk",
-          "https://gds-way.cloudapps.digital/standards/secrets-acl.html",
           /https:\/\/github.com\//
       ].concat(new_urls)
     }
