@@ -161,7 +161,7 @@ The documentation is [© Crown copyright][copyright] and available under the ter
 of the [Open Government 3.0][ogl] licence.
 
 [rvm]: https://www.ruby-lang.org/en/documentation/installation/#managers
-[bundler]: http://bundler.io/
+[bundler]: https://bundler.io/
 [mit]: LICENCE
-[copyright]: http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/
-[ogl]: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+[copyright]: https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/
+[ogl]: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
