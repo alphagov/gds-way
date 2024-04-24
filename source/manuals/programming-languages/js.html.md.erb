@@ -24,7 +24,7 @@ owner_slack: '#frontend'
 
 ## Linting
 
-We follow [standardjs](http://standardjs.com/), an opinionated JavaScript linter. In cases where [standard conflicts with a service's browser support](#when-to-use-standardx) we use [standardx][].
+We follow [standardjs](https://standardjs.com/), an opinionated JavaScript linter. In cases where [standard conflicts with a service's browser support](#when-to-use-standardx) we use [standardx][].
 
 All JavaScript files follow its conventions, and it typically runs on CI to ensure that new pull requests are in line with them.
 
@@ -41,7 +41,7 @@ npx standard
 
 Easier than running standard manually is to install it as a plugin in your editor. This way, it will run automatically while you work, catching errors as they happen on a per-file basis.
 
-There are [official guides for most of the popular editors](http://standardjs.com/index.html#are-there-text-editor-plugins).
+There are [official guides for most of the popular editors](https://standardjs.com/index.html#are-there-text-editor-plugins).
 
 ### When to use standardx
 
@@ -60,9 +60,9 @@ Note: you may find that using standardx complicates integration with text editor
 
 Linting rules can be a contentious subject, and a lot of them are down to personal preference. The core idea of standard is to be opinionated and limit the amount of initial bikeshedding discussions around which linting rules to pick, because in the end, it's not as important which rules you pick as it is to just be consistent about it. This is why we chose standard: because we want to be consistent about how we write code, but do not want to spend unnecessary time picking different rules (which all have valid points).
 
-The standard docs have a [complete list of rules and some reasoning behind them](http://standardjs.com/rules.html).
+The standard docs have a [complete list of rules and some reasoning behind them](https://standardjs.com/rules.html).
 
-Standard is also [widely used (warning: large file)](https://github.com/feross/standard-packages/blob/master/all.json) (which means community familiarity) and has a [good ecosystem of plugins](http://standardjs.com/awesome.html).
+Standard is also [widely used (warning: large file)](https://github.com/feross/standard-packages/blob/master/all.json) (which means community familiarity) and has a [good ecosystem of plugins](https://standardjs.com/awesome.html).
 
 If we decide to move away from it, standard is effectively just a preconfigured bundle of eslint, so it can easily be replaced by switching to a generic `.eslintrc` setup.
 
@@ -255,4 +255,4 @@ Given a call to `addAutoSubmitToInput($input, './search', 20, false)` you would 
 
 A call to `addAutoSubmitToInput($input, { action: './search', timeout: 20, debug: false })` gives you context as to what the arguments mean. It also makes it easier to refactor arguments without having to change all method calls.
 
-[Connascence of naming is a weaker form of connascence than connascence of position](http://en.wikipedia.org/wiki/Connascence_%28computer_programming%29#Types_of_connascence).
+[Connascence of naming is a weaker form of connascence than connascence of position](https://en.wikipedia.org/wiki/Connascence_%28computer_programming%29#Types_of_connascence).
