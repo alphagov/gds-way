@@ -27,6 +27,8 @@ There are tools which scan GitHub repositories and raise pull requests (PRs) whe
 
     > Note: we have not enabled "Treat PR approval as a request to merge", as this would lead to a surprising behaviour at the point of approval.
 
+    > Note: GOV.UK has implemented [RFC-167][] which allows automatic patching of all dependencies in certain cases.
+
 * [PyUp][] - a Python dependency checker. Used by GOV.UK Notify, PyUp will monitor for updates and vulnerabilities
 
 All the above tools are free to use on public repositories.
@@ -100,3 +102,4 @@ Also consider managed solutions where possible. For example:
 [Snyk container vulnerability management tooling]: https://snyk.io/product/container-vulnerability-management/
 [GOV.UK PaaS buildpacks]: https://docs.cloud.service.gov.uk/deploying_apps.html#buildpacks
 [AWS Fargate]: https://aws.amazon.com/fargate/
+[RFC-167]: https://github.com/alphagov/govuk-rfcs/blob/main/rfc-167-auto-patch-dependencies.md
