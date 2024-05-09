@@ -1,7 +1,7 @@
 ---
 title: How to optimise frontend performance
-owner_slack: '#frontend'
-last_reviewed_on: 2023-05-02
+owner_slack: "#frontend"
+last_reviewed_on: 2024-05-10
 review_in: 6 months
 ---
 
@@ -11,27 +11,25 @@ You should focus on [frontend performance][] when developing your service’s we
 
 ## Prioritise performance tasks
 
-You can optimise your site’s frontend performance by prioritising tasks that will improve your site speed. Prioritise things you must do (high) over medium or low priority (nice to have) tasks.
+You can optimise your site’s frontend performance by prioritising tasks that will improve your site speed. Prioritise things you must do (high) over nice to have (medium or low priority) tasks.
 
 For example:
 
-|Priority|Example|Action
-|---|---|---|
-|#High|Position styles correctly|Set styles at the top of the page and `defer` scripts |
-||Minimise HTTP requests|Minimise tiling icons, CSS and JavaScript files to reduce size and loading time [HTTP/1.1 only]|
-||Compress static resources|Use [minification][], [Gzip][], and [Brotli][] to compress CSS and JavaScript code|
-||Set correct Headers|Set correct [Cache-Control][] and [ETag][] headers on assets for optimal caching|
-|#Medium|Look for empty image `src` attributes|Avoid using empty image `src` attributes as some browsers always send requests to them, resulting in additional traffic|
-||Include `width` and `height` attributes on images to minimise layout thrashing | Make sure to include these attributes to improve visual stability and the [Cumulative Layout Shift (CLS)][] metric
-||Minimise TCP connections |Use fewer third-party domains to reduce the number of DNS + TCP + SSL negotiations per page |
-||Investigate [lazy loading][]|For pages with many images, only load images in the immediate browser viewport|
-||Investigate the impact of loading [@font-face][] assets on perceived performance |Investigate the CSS `font-display` property for managing common issues like [FOUT, FOIT and FOFT][]|
-|#Low|Set images and sprites correctly|Set images and sprites horizontally as it’s easier for browsers to parse|
-||Reduce cookie size|Because every cookie is sent with each HTTP request, consider using a cookie-free domain for static assets [HTTP/1.1 only]. Enable HTTP/2 to enable [HPACK][] header compression or HTTP/3 for [QPACK][] |
-||Investigate using a Content Delivery Network (CDN) | A CDN will improve site performance by using a network of servers to deliver resources to users. The user will get delivered resources from the server that is located nearest to the user. A CDN is well-suited to handling heavy traffic and traffic spikes.
-||[AJAX][] requests using JSON|Avoid adding too much data to a JSON Object because this causes performance errors with parsing|
-||Investigate using [WebSockets][]|Consider using WebSockets rather than [XMLHttpRequest][], because an HTTP request packet has 1,684 bytes of overhead, compared to 8 bytes for a WebSocket packet|
-||Investigate using a service worker| Consider using a service worker for fine grain cache control of critical assets on users machines instead of transferring them over the network
+| Priority | Example                                                                          | Action                                                                                                                                                                                                                                                         |
+| -------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| #High    | Position assets correctly                                                        | [Set styles at the top of the page][] and [`defer` scripts][].                                                                                                                                                                                                 |
+|          | Compress static resources                                                        | [Minify][] CSS and JavaScript and use a compression algorithm like [Gzip][] and [Brotli][] on assets.                                                                                                                                                          |
+|          | Set correct Headers                                                              | Set correct [Cache-Control][] and [ETag][] headers on assets for optimal caching.                                                                                                                                                                              |
+| #Medium  | Include `width` and `height` attributes on images to minimise layout thrashing   | Make sure to include these attributes to improve visual stability and the [Cumulative Layout Shift (CLS)][] metric.                                                                                                                                            |
+|          | Minimise TCP connections                                                         | Use fewer third-party domains to reduce the number of DNS + TCP + SSL negotiations per page.                                                                                                                                                                   |
+|          | Investigate [lazy loading][]                                                     | For pages with many images, only load images in the immediate browser viewport.                                                                                                                                                                                |
+|          | Investigate the impact of loading [@font-face][] assets on perceived performance | Use the CSS `font-display` property or other [font-loading strategies][] to manage common issues like [FOUT, FOIT and FOFT][].                                                                                                                                 |
+|          | Minimise HTTP requests                                                           | Minimise the number of CSS and JavaScript files to reduce size and loading time.                                                                                                                                                                               |
+| #Low     | Reduce cookie size                                                               | Because every cookie is sent with each HTTP request, enable HTTP/2 to enable HPACK header compression or HTTP/3 for QPACK.                                                                                                                                     |
+|          | Investigate using a Content Delivery Network (CDN)                               | A CDN will improve site performance by using a network of servers to deliver resources to users. The user will get delivered resources from the server that is located nearest to the user. A CDN is well-suited to handling heavy traffic and traffic spikes. |
+|          | Keep JSON payloads small                                                         | Avoid adding too much data to JSON objects, as parsing them can be slow.                                                                                                                                                                                       |
+|          | Investigate using [WebSockets][]                                                 | Consider using WebSockets rather than [XMLHttpRequest][]for tasks involving streaming from the server - an HTTP request packet has 1,684 bytes of overhead, compared to 8 bytes for a WebSocket packet.                                                        |
+|          | Investigate using a service worker                                               | Consider [using a service worker][] for fine grain cache control of critical assets on users’ machines instead of transferring them over the network.                                                                                                          |
 
 ## Automate optimisation
 
@@ -70,7 +68,7 @@ Speedcurve provides an extensive set of tools to test your service such as the f
 
 - Test from different locations and different browsers.
 - Schedule regular tests using tools like Google Lighthouse and Webpage Test.
-- [Real user monitoring][] which allows you to collect data that shows you how your real users experience the speed of your site.
+- [Real user monitoring][], which allows you to collect data that shows you how your real users experience the speed of your site.
 
 Contact a Lead Frontend Developer to request an account.
 
@@ -134,3 +132,9 @@ The Service Manual has more suggestions about [how you can test frontend perform
 [performance-budget]: https://www.npmjs.com/package/performance-budget
 [psi (PageSpeed Insights Reporting for Node)]: https://github.com/GoogleChromeLabs/psi
 [Google Lighthouse]: https://github.com/GoogleChrome/lighthouse
+[Set styles at the top of the page]: https://csswizardry.com/2013/01/front-end-performance-for-web-designers-and-front-end-developers/#section:styles-at-the-top-scripts-at-the-bottom
+[`defer` scripts]: https://calendar.perfplanet.com/2016/prefer-defer-over-async/
+[Minify]: https://web.dev/reduce-network-payloads-using-text-compression/
+[Brotli]: https://github.com/google/brotli
+[font-loading strategies]: https://www.zachleat.com/web/comprehensive-webfonts/
+[using a service worker]: https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
