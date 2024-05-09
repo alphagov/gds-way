@@ -83,11 +83,20 @@ You should [set a performance budget][] for your website’s pages. Once you’v
 
 ## Code splitting
 
-You should [concatenate your Javascript and CSS files](https://csswizardry.com/2023/10/the-three-c-concatenate-compress-cache/) by default, as this minimises the number of requests and makes compression more effective. However, you may benefit from splitting your code into multiple bundles in some cases:
+You should [concatenate your Javascript and CSS files][] by default, as this minimises the number of requests and makes compression more effective. However, you may benefit from splitting your code into multiple bundles in some cases:
 
 - if a specific feature is only used sporadically, it may make sense to split it out and only load it on pages where it is needed.
 - if some of your code is updated more regularly than others, it may make sense to split it out so that less frequently updated code is still cached.
 
+## Use HTTP/2 or above
+
+HTTP/2 is supported in all of the [Service Manual’s browsers to test in][]. It improves speed for most users by allowing browsers to:
+
+- Download multiple resources at once
+- Compress cookies in request headers
+- Prioritise specific assets for download.
+
+You should also consider enabling HTTP/3. While this isn’t supported as widely as HTTP/2, it is supported by most of the Service Manual browsers and it solves an issue with HTTP/2 that affects users with slow connections.
 
 ## Further reading
 
@@ -146,3 +155,5 @@ The Service Manual has more suggestions about [how you can test frontend perform
 [Brotli]: https://github.com/google/brotli
 [font-loading strategies]: https://www.zachleat.com/web/comprehensive-webfonts/
 [using a service worker]: https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
+[concatenate your Javascript and CSS files]: https://csswizardry.com/2023/10/the-three-c-concatenate-compress-cache/
+[Service Manual’s browsers to test in]: https://www.gov.uk/service-manual/technology/designing-for-different-browsers-and-devices
