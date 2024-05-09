@@ -24,7 +24,7 @@ For example:
 |          | Minimise TCP connections                                                         | Use fewer third-party domains to reduce the number of DNS + TCP + SSL negotiations per page.                                                                                                                                                                   |
 |          | Investigate [lazy loading][]                                                     | For pages with many images, only load images in the immediate browser viewport.                                                                                                                                                                                |
 |          | Investigate the impact of loading [@font-face][] assets on perceived performance | Use the CSS `font-display` property or other [font-loading strategies][] to manage common issues like [FOUT, FOIT and FOFT][].                                                                                                                                 |
-|          | Minimise HTTP requests                                                           | Minimise the number of CSS and JavaScript files to reduce size and loading time.                                                                                                                                                                               |
+|          | Minimise HTTP requests                                                           | Minimise the number of CSS and JavaScript files to reduce size and loading time. See ‘Code splitting’ below.                                                                                                                                                   |
 | #Low     | Reduce cookie size                                                               | Because every cookie is sent with each HTTP request, enable HTTP/2 to enable HPACK header compression or HTTP/3 for QPACK.                                                                                                                                     |
 |          | Investigate using a Content Delivery Network (CDN)                               | A CDN will improve site performance by using a network of servers to deliver resources to users. The user will get delivered resources from the server that is located nearest to the user. A CDN is well-suited to handling heavy traffic and traffic spikes. |
 |          | Keep JSON payloads small                                                         | Avoid adding too much data to JSON objects, as parsing them can be slow.                                                                                                                                                                                       |
@@ -80,6 +80,14 @@ You should [set a performance budget][] for your website’s pages. Once you’v
 - [performance-budget][]
 - [psi (PageSpeed Insights Reporting for Node)][]
 - [Google Lighthouse][]
+
+## Code splitting
+
+You should [concatenate your Javascript and CSS files](https://csswizardry.com/2023/10/the-three-c-concatenate-compress-cache/) by default, as this minimises the number of requests and makes compression more effective. However, you may benefit from splitting your code into multiple bundles in some cases:
+
+- if a specific feature is only used sporadically, it may make sense to split it out and only load it on pages where it is needed.
+- if some of your code is updated more regularly than others, it may make sense to split it out so that less frequently updated code is still cached.
+
 
 ## Further reading
 
