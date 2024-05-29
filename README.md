@@ -43,10 +43,22 @@ to update the GDS Way.
 
 To preview or build the website, we need to use the terminal.
 
+You can use the Dockerfile provided:
+
+```
+docker build . -t gds-way
+docker run --rm -p 4567:4567 -p 35729:35729 -v $(pwd):/usr/src/docs -it gds-way
+```
+
+Otherwise, the following steps will get Middleman running locally.
+
 #### Install Ruby and Bundler
 
 Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm],
 and the [Bundler gem][bundler].
+
+A [.ruby-version](./.ruby-version) file is provided for use with [rbenv][].
+If you update it, please update the [Dockerfile](./Dockerfile).
 
 #### Clone the repository
 
@@ -161,6 +173,7 @@ The documentation is [© Crown copyright][copyright] and available under the ter
 of the [Open Government 3.0][ogl] licence.
 
 [rvm]: https://www.ruby-lang.org/en/documentation/installation/#managers
+[rbenv]: https://github.com/rbenv/rbenv
 [bundler]: https://bundler.io/
 [mit]: LICENCE
 [copyright]: https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/
