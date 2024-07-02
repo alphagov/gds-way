@@ -4,7 +4,7 @@ service_link: /
 
 # Header-related options
 show_govuk_logo: false
-service_name: The GDS Way
+service_name: <span class="gds-logo">GDS</span> The GDS Way
 description: Technical standards and guidance used by teams building software at GDS
 
 # Links to show on right-hand-side of header
