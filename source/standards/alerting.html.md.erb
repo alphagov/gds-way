@@ -1,12 +1,12 @@
 ---
 title: How to manage alerts
-last_reviewed_on: 2023-06-08
+last_reviewed_on: 2024-06-27
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-Your service should have a system in place to send automated alerts if its monitoring system detects a problem. Sending alerts help services meet service level agreements (SLAs).
+Your service should have a system in place to send automated alerts if its monitoring system(s) detects a problem. Sending alerts help services meet service level agreements (SLAs), and provide awareness of suspicious activity to enable incident response.
 
 ## Sending alerts
 
@@ -15,6 +15,7 @@ Your service should send an alert when your [service monitoring][] detects an is
 * affects service users
 * requires action to fix
 * lasts for a sustained period of time
+* indicates compromise or suspicious activity (such as multiple failed login attempts or unrecognised escalation of privilege)
 
 You should only send an alert for things that need action. Alert text should be specific and [include actionable information][]. You should not include sensitive material.
 
@@ -41,6 +42,7 @@ You must prioritise alerts based on whether they need an immediate fix. It can h
 
 * interrupting - need immediate investigation and resolution
 * non-interrupting - do not need immediate resolution
+* security-related - may indicate compromise of the system
 
 The [Google Site Reliability Engineering (SRE)][site reliability engineering] handbook classifies “interrupting” issues as “pages”, and “non-interrupting” issues as “tickets”. Put non-interrupting alerts into a ticket queue for your support team to solve. Keep the ticket queue and team backlog separate to avoid confusion. You should specify an SLA for how long both types of alert take to resolve.
 
@@ -55,6 +57,7 @@ Recommended tools are:
 
 - [PagerDuty][] to send high-priority / interrupting alerts
 - [Zendesk][] to manage non-interrupting alerts as tickets
+- [Splunk][] to manage security-related alerts
 
 You can also configure these tools to send alert notifications using email or Slack. However, you should only use email and Slack as additions to your primary alerting tool. If alerts only go to email or Slack, people may ignore, overlook, filter them out, or treat them like spam.
 
@@ -71,6 +74,7 @@ For more information refer to the:
 [service monitoring]: /standards/monitoring.html
 [PagerDuty]: https://www.pagerduty.com
 [Zendesk]: https://www.zendesk.com
+[Splunk]: https://splunk.com
 [Smashing]: https://github.com/Smashing/smashing
 [BlinkenJS]: https://github.com/alphagov/blinkenjs
 [information about monitoring]: /standards/monitoring.html
