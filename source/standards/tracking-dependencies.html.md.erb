@@ -1,6 +1,6 @@
 ---
 title: How to manage third party software dependencies
-last_reviewed_on: 2023-06-08
+last_reviewed_on: 2024-06-27
 review_in: 6 months
 ---
 
@@ -20,7 +20,7 @@ Update your dependencies frequently rather than in ‘big bang’ batches. This 
 
 There are tools which scan GitHub repositories and raise pull requests (PRs) when they find dependency updates. Teams at GDS are using:
 
-* [Dependabot][] - used by GOV.UK, GOV.UK Pay, GovWifi and Digital Marketplace. The GOV.UK docs contain [guidance on using Dependabot][] and [how the PRs raised should be reviewed][]
+* [Dependabot][] - used by GOV.UK, and GOV.UK Pay. The GOV.UK docs contain [guidance on using Dependabot][] and [how the PRs raised should be reviewed][]
     > Note: this is separate from the [security-only updates provided automatically by GitHub Dependabot].
 
     > Note: repos requiring at least one approving review for PRs cannot, and should not, use [Dependabot's auto-approve-and-merge facility].
@@ -33,7 +33,7 @@ There are tools which scan GitHub repositories and raise pull requests (PRs) whe
 
 All the above tools are free to use on public repositories.
 
-The CDIO Cyber Security team will review the repositories that do not have dependency management in use and will turn on Dependabot where required. Service teams are free to use a different tool such as [Snyk](https://snyk.io/), but will need to add a `no-dependabot` tag to their repository for monitoring purposes. You can [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK) if you have any questions or need help.
+The COD Cyber Security team will review the repositories that do not have dependency management in use and will turn on Dependabot where required. Service teams are free to use a different tool such as [Snyk](https://snyk.io/), but will need to add a `no-dependabot` tag to their repository for monitoring purposes. You can [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK) if you have any questions or need help.
 
 ## Monitor for vulnerabilities
 
