@@ -1,6 +1,6 @@
 ---
 title: Use a web application firewall (WAF)
-last_reviewed_on: 2023-06-08
+last_reviewed_on: 2023-06-27
 review_in: 6 months
 ---
 
@@ -17,8 +17,10 @@ Combining a WAF with CI and CD tools reduces the risk from those tools, and prov
 You may also need to use a WAF because of:
 
 - GDS or departmental policies or standards
-- [Information Assurance (IA)](https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/gds-operations/information-services/information-assurance) requirements to minimise risk
+- HMG Standards such as the [Cyber Assessment Framework][] (NCSC) or [Secure by Design Principles][] (CDDO)
+- [Information Security][] requirements to minimise risk
 - [Payment Card Industry Data Security Standard (PCI DSS)](https://www.pcisecuritystandards.org/) compliance
+- they are generally considered basic practice for protecting public web applications
 
 ## When and how to use a WAF
 
@@ -75,9 +77,9 @@ For more information read the proposed architecture for [implementing a DDoS-res
 
 GOV.UK Pay operates under the governance of [PCI compliance and DSS point 6.6](https://www.pcisecuritystandards.org/pdfs/infosupp_6_6_applicationfirewalls_codereviews.pdf) which states the need for web application scanning.
 
-## Contact Cyber Security
+## Contact GDS Information Security or COD Cyber Security
 
-Contact the security architects in the GDS Cyber Security team by email at [cyber.security@digital.cabinet-office.gov.uk](mailto:cyber.security@digital.cabinet-office.gov.uk) or use the [#cyber-security-help Slack channel](https://gds.slack.com/messages/CCMPJKFDK/) for help and advice.
+Contact GDS [Information Security][] or the security architects in the COS Cyber Security team by email at [cyber.security@digital.cabinet-office.gov.uk](mailto:cyber.security@digital.cabinet-office.gov.uk) or use the [#cyber-security-help Slack channel](https://gds.slack.com/messages/CCMPJKFDK/) for help and advice.
 
 ## Further reading
 
@@ -86,3 +88,9 @@ To find out more about WAF refer to:
 - [Open Web Application Security Project (OWASP)](https://owasp.org/) the OWASP Foundation
 - [WASC OWASP Web Application Firewall](https://wiki.owasp.org/index.php/WASC_OWASP_Web_Application_Firewall_Evaluation_Criteria_Project) Evaluation Criteria Project
 - [National Cyber Security Centre (NCSC)](https://www.ncsc.gov.uk/) guidance
+
+## References
+
+- [Information Security]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/directorates-and-groups/cto-and-ciso-office/information-security
+- [Cyber Assessment Framework]: https://www.ncsc.gov.uk/collection/cyber-assessment-framework/introduction-to-caf
+- [Secure by Design Principles]: https://www.security.gov.uk/guidance/secure-by-design/
