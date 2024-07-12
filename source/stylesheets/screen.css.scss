@@ -1,2 +1,18 @@
+$govuk-font-family: "Helvetica neue", arial, sans-serif;
+
 @import "govuk_tech_docs";
 @import "modules/page-banner";
+
+.gds-logo {
+  background: #2F88C9;
+  color: white;
+  padding: 0.2em 0.4em;
+  margin-right: 0.4em;
+  font-weight: normal;
+}
+
+.govuk-header__container {
+  padding: 15px 0 8px 0;
+  margin-bottom: -10px;
+  border-bottom: 10px solid #2F88C9;
+}
