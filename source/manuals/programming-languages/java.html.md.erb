@@ -69,7 +69,7 @@ assertThat(actual, is(expected));
 
 Similarly, `Math.max(…)`, `Math.PI` and `ChronoUnit.DAYS` could be statically imported because their names make sense on their own. However, `LocalDate.of(…)` should not be statically imported because the type it comes from is crucial for comprehension.
 
-The IntelliJ ‘Optimize Imports’ command sorts imports and removes any that are unused. Before committing some changes, you can select all the classes in the modified files pane and then use this command to fix the imports for just the classes you modified.
+The IntelliJ ‘Optimize Imports’ (Ctrl+Option+O) command (in the Code menu) sorts imports and removes any that are unused. Before committing, you can select all the changed classes (for example, in the [changes view](https://www.jetbrains.com/help/idea/managing-changelists.html) of the commit [tool window](https://www.jetbrains.com/help/idea/tool-windows.html) or the modified files pane of the [commit dialogue](https://www.jetbrains.com/help/idea/commit-changes-dialog.html)) and then use this command to fix the imports for just the classes you modified.
 
 ## Optionals
 
