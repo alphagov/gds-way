@@ -1,6 +1,6 @@
 ---
 title: How to manage technical incidents
-last_reviewed_on: 2023-11-20
+last_reviewed_on: 2024-07-29
 review_in: 6 months
 ---
 
@@ -8,7 +8,7 @@ review_in: 6 months
 
 GDS incident management focuses on restoring normal operations quickly with minimal impact on users.
 
-Technical incidents may also be cyber security or data loss incidents. You must report all suspected or actual cyber security incidents to the COD Cyber Security team and to the GDS Information Security team. You must report all actual or suspected data breach incidents to the GDS Information Management team. These requirements should be included in your service manual/guides/processes. Check the GDS Wiki for current contact details.
+Technical incidents may also be cyber security or data loss incidents. You must report all suspected or actual cyber security incidents to the [CO:D Cyber Security team] and to the [GDS Information Security team]. You must report all actual or suspected data breach incidents to the [GDS Information Management team]. These requirements should be included in your service manual/guides/processes.
 
 ## Define incident priority
 
@@ -24,7 +24,7 @@ Define technical incident priority levels for your service’s applications. For
 
 Assign a priority level to incidents based on their complexity, urgency and resolution time. Incident severity also determines response times and support level.
 
-### Incident priority table
+### Example incident priority table
 
 |Classification|Type|Example|Response time|Update frequency|
 |---|---|---|---|---|
@@ -58,7 +58,13 @@ Establish who your incident lead is. Find out who noticed the problem and if any
 
 #### 2. Inform your team
 
-Inform your team using your chosen tool, like [Slack](https://gds.slack.com). If the incident involves a data or security breach, notify the relevant team(s) who’ll help you manage the incident. You can use the [#cyber-security-help Slack channel](https://gds.slack.com/messages/CCMPJKFDK/) to contact COD Cyber.
+Inform your team using your chosen tool, like [Slack](https://gds.slack.com). If the incident involves a data or security breach, you must also notify:
+
+- The [CO:D Cyber Security team]. You can also use the [#cyber-security-help Slack channel](https://gds.slack.com/messages/CCMPJKFDK/) to contact CO:D Cyber within normal working hours.
+- The [GDS Information Security team].
+- The [GDS Information Management team].
+
+
 
 #### 3. Prioritise the incident
 
@@ -131,7 +137,7 @@ Your communications lead must manage:
 
 **External and internal communications**
 
-Make sure internal and external parties, like Information Assurance (IA) or your service users are fully informed at every stage of your incident management process.
+Make sure internal and external parties, like Information Security or your service users are fully informed at every stage of your incident management process.
 
 For example, teams including [GOV.UK Platform as a Service (PaaS)](https://status.cloud.service.gov.uk/), [GOV.UK Notify](https://www.notifications.service.gov.uk/) and [GOV.UK Pay](https://www.payments.service.gov.uk/) use the [StatusPage service](https://www.atlassian.com/software/statuspage) to trigger notifications to subscribed users.
 
@@ -139,7 +145,7 @@ Post regular updates to the status of an incident in the [#incident Slack channe
 
 **Incident escalations**
 
-Notify escalation contacts of all high priority incidents (P1/P2). [Support Operations](https://gds.slack.com/messages/CADFJBDQU/details/#) can help you decide your service’s escalation route and associated contact details.
+Notify internal escalation contacts of all high priority incidents (P1/P2). Contact the [GDS Information Security team] if you need help defining the escalation route for your service.
 
 **Report cyber security incidents**
 
@@ -153,10 +159,8 @@ Hold an incident and lesson learned review following a [blameless post mortem cu
 
 ## Example incident management
 
-Read the GOV.UK PaaS and Digital Marketplace incident management processes (note that the Digital Marketplace is now run by the Crown Commercial Service, but the incident management guideance was created when it was part of GDS/CDIO):
-
 - GOV.UK PaaS [incident management process](https://team-manual.cloud.service.gov.uk/incident_management/incident_process/)
-- Digital Marketplace [incident response manual](https://alphagov.github.io/digitalmarketplace-manual/2nd-line-runbook/incidents.html)
+- GOV.UK [incident response guidance](https://docs.publishing.service.gov.uk/manual/incident-management-guidance.html)
 
 ## Further reading
 
@@ -167,10 +171,10 @@ Read the [GDS Technical Incident Management Framework and Process](https://docs.
 - incident workflows - from request to resolution
 - roles in the Incident Team for P1 and P2
 
-## Contact Support Operations
 
-Contact the Support Operations team using the [#user-support Slack channel](https://gds.slack.com/messages/CADFJBDQU/details/#).
-
-[^1]: Note that this document can only be accessed by people within GDS.
+[^1]: Note that the incident report template document can only be accessed by people within GDS.
 
 [incident-report-template]: https://docs.google.com/document/d/1YDA13RU6wicXoKgDv5VucJe3o_Z0k_Qhug9EJC_XdSE/
+[CO:D Cyber Security team]: https://sites.google.com/cabinetoffice.gov.uk/cybersecurity/report-an-incident
+[GDS Information Security team]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/directorates-and-groups/cto-and-ciso-office/information-security
+[GDS Information Management team]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/information-management
