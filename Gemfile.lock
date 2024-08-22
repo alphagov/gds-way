@@ -156,8 +156,6 @@ GEM
       rouge (~> 3.2)
     minitest (5.22.2)
     multi_json (1.15.0)
-    nokogiri (1.16.5-arm-linux)
-      racc (~> 1.4)
     nokogiri (1.16.5-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.5-x86_64-darwin)
@@ -189,8 +187,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
-    rexml (3.2.8)
-      strscan (>= 3.0.9)
+    rexml (3.3.6)
+      strscan
     rouge (3.30.0)
     ruby-rc4 (0.1.5)
     sass (3.4.25)
@@ -221,7 +219,6 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
-  arm64-linux
   x86_64-darwin-21
   x86_64-darwin-22
   x86_64-linux
