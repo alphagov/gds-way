@@ -24,47 +24,95 @@ owner_slack: '#frontend'
 
 ## Linting
 
-We follow [standardjs](https://standardjs.com/), an opinionated JavaScript linter. In cases where [standard conflicts with a service's browser support](#when-to-use-standardx) we use [standardx][].
+As a base, we follow conventions established by the [standardjs][] project. 
+They allow us to be consistent about how we write code while reducing the time spend debating which linting rules to pick.
 
-All JavaScript files follow its conventions, and it typically runs on CI to ensure that new pull requests are in line with them.
+Depending on their needs, projects may complement this initial set of rules with extra linting, for example:
 
-[standardx]: https://github.com/standard/standardx
+- other [ESLint][] plugins, like [es-x][] to check API compatibility with browsers your project supports
+- [Prettier][] to enforce further code formatting conventions
 
-### Running standard manually
+You should be cautious to only amend the initial set of rules to resolve compatibility issues, and not as a means to adjust rules to individual preferences.
 
-To check the whole codebase, run:
+**Why**: Linting ensures consistency in the codebase and picks up on well-known issues. Using an opinionated set of rules allows us to limit time spend picking rules, focusing instead on getting consistency, which is more important.
 
-```bash
+[standardjs]: https://standardjs.com/
+[ESLint]: https://eslint.org/
+[es-x]: https://github.com/eslint-community/eslint-plugin-es-x
+[Prettier]: https://prettier.io/docs/en/cli.html
+
+### Tools
+
+#### StandardJS's command line interface
+
+If you're not looking to make any amends to the StandardJS conventions, you can use [StandardJS' `standard` command line interface][standard-cli] to lint files in your repository without extra set up.
+
+```
 npx standard
 ```
-### Running standard in your editor
 
-Easier than running standard manually is to install it as a plugin in your editor. This way, it will run automatically while you work, catching errors as they happen on a per-file basis.
+[standard-cli]: https://standardjs.com/#usage
 
-There are [official guides for most of the popular editors](https://standardjs.com/index.html#are-there-text-editor-plugins).
+#### standardx
 
-### When to use standardx
-
-You should use [standardx][] when the standard's rule set conflicts with the browsers your project supports. For example, the [no-var](https://eslint.org/docs/rules/no-var) rule in standard - which prefers `let` or `const` over `var` - prevents JavaScript usage in versions of Internet Explorer < 11. Adopting this rule would mean explicitly breaking JavaScript for those browsers.
+If the StandardJS rule set conflicts with the browsers your project supports, you can use [standardx][] to amend which rules are running. 
 
 Once installed you can then override standard rules with an [`.eslintrc`][eslintrc] file or an `eslintConfig` entry in package.json ([example][govuk-warnings]).
 
-You should be cautious to only make use of standardx to resolve compatibility issues and not as a means to adjust rules to individual preferences.
-
-Note: you may find that using standardx complicates integration with text editors.
-
-[eslintrc]: https://eslint.org/docs/user-guide/configuring
+[standardx]: https://github.com/standard/standardx
+[eslintrc]: https://eslint.org/docs/v8.x/use/configure/configuration-files
 [govuk-warnings]: https://github.com/alphagov/govuk_publishing_components/commit/ea7f0becc76f73780b6cb33701bea9e58f15f91a
 
-### Why standard?
+#### ESLint
 
-Linting rules can be a contentious subject, and a lot of them are down to personal preference. The core idea of standard is to be opinionated and limit the amount of initial bikeshedding discussions around which linting rules to pick, because in the end, it's not as important which rules you pick as it is to just be consistent about it. This is why we chose standard: because we want to be consistent about how we write code, but do not want to spend unnecessary time picking different rules (which all have valid points).
+ESLint is the most widely used JavaScript linter, and actually what StandardJS uses under the hood. 
+Using it directly allows you to benefit from other plugins in the ESLint ecosystem to complement standard conventions, 
+and keep up to date with newer rules, for example related to newer language features.
 
-The standard docs have a [complete list of rules and some reasoning behind them](https://standardjs.com/rules.html).
+Standard can be integrated by adding the `eslint-config-standard` to your ESLint configuration. 
 
-Standard is also [widely used (warning: large file)](https://github.com/feross/standard-packages/blob/master/all.json) (which means community familiarity) and has a [good ecosystem of plugins](https://standardjs.com/awesome.html).
+When adding extra ESLint plugins, most come with a `recommended` configuration that's worth using as a starter, rather than deciding on each rule individually. You can then add or remove rules as needs arise during the life of your project. In that area, automatically fixable rules are especially cheap to try out, as the tools will take care of updating your code for you.
 
-If we decide to move away from it, standard is effectively just a preconfigured bundle of eslint, so it can easily be replaced by switching to a generic `.eslintrc` setup.
+#### Prettier
+
+Prettier's only preoccupation is with [code formatting, not code quality][prettier-comparison]. 
+It can be used as a complement to ESLint for further automated formatting, with much more advanced decisions in terms of indentation, spaces, or line breaks.
+It runs as a separate command (`npx prettier`) and the [`eslint-config-prettier`][prettier-linters] ensures there'll be no conflicts between the rules of ESLint and the formatting of Prettier.
+
+[prettier-comparison]: https://prettier.io/docs/en/comparison
+[prettier-linters]: https://prettier.io/docs/en/integrating-with-linters
+
+### When to run linting
+
+#### On CI
+
+Running standard in CI ensures that all pull requests meet our code conventions before getting merged on the `main` branch.
+You should have this configured as part of your project.
+
+#### Through pre-commit Git hooks
+
+Waiting for CI to know if the code follows the convention can take a bit of time.
+A pre-commit Git hook allows to get quicker feedback, directly on developers' machines.
+Errors that are automatically fixable can be fixed at that stage without human intervention, reducing the effort of linting for developers.
+
+Tools like [Husky][] and [lint-staged][] can help consistently run linting before commit by respectively:
+
+- setting up the hooks when dependencies get installed
+- running linting on the files staged for commit and adding any fixes to the current commit
+
+[Husky]: https://typicode.github.io/husky/
+[lint-staged]: https://www.npmjs.com/package/lint-staged
+
+#### In editors
+
+To get even quicker feedback, editor plugins can highlight issues while editing files.
+They can correct automatically fixable errors on save, saving further development effort.
+
+Each of the tools previously listed has plugins to help integrate with editors:
+
+- [StandardJS editor plugins](https://standardjs.com/#are-there-text-editor-plugins)
+- [ESLint editor plugins](https://eslint.org/docs/latest/use/integrations#editors)
+- [Prettier editor plugins](https://prettier.io/docs/en/editors)
 
 ## Whitespace
 
