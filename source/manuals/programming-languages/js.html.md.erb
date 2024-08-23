@@ -126,56 +126,62 @@ If you're using [Prettier](#prettier), this will be set up for you. Otherwise, y
 
 ## Naming conventions
 
-* Avoid single letter names. Be descriptive with your naming.
+Follow the following conventions when naming symbols in your JavaScript code.
+
+**Why:** The naming of objects in the code helps developers know how to interact with them. It also follows the conventions of the standard library.
+
+### Variables, functions and parameters
+
+Use [camelCase](http://eslint.org/docs/rules/camelcase) when naming variables, functions and parameters.
 
   ```javascript
   // Bad
-  var n = 'thing'
-  function q () { ... }
+  const this_is_my_object = {}
+  const THISIsMyVariable = 'thing'
+  function ThisIsMyFunction(this_is_a_param) { ... }
 
   // Good
-  var name = 'thing'
-  function query () { ... }
+  const thisIsMyObject = {}
+  const thisIsMyVariable = 'thing'
+  function thisIsMyFunction(thisIsAParam) { ... }
   ```
 
-  **Why:** Descriptive names help future developers pick up parts of the code
-  faster without having to read it all.
+### Classes and constructors
 
-* Use camelCase when naming objects, functions, and instances.
+Use PascalCase when naming classes or constructors.
 
   ```javascript
   // Bad
-  var this_is_my_object = {}
-  var THISIsMyVariable = 'thing'
-  function ThisIsMyFunction() { ... }
-
-  // Good
-  var thisIsMyObject = {}
-  var thisIsMyVariable = 'thing'
-  function thisIsMyFunction() { ... }
-  ```
-
-* Use PascalCase when naming constructors or classes.
-
-  ```javascript
-  // Bad
-  function user (options) {
+  class user {
+    constructor(options) {
     this.name = options.name
   }
-  var Bob = new user({
+  function profile(options) {
+    this.user = options.user
+  }
+  const Bob = new user({
     name: 'Bob Parr'
+  })
+  const BobProfile = new profile({
+    user: Bob
   })
 
   // Good
-  function User(options) {
-    this.name = options.name
+  class User {
+    constructor(options) {
+      this.name = options.name
+    }
   }
-  var bob = new User({
+  function Profile(options) {
+    this.user = options.user
+  }
+  const bob = new User({
     name: 'Bob Parr'
   })
+  const bobProfile = new Profile({
+    user: bob
+  })
   ```
-
-**Why:** This lets future developers know how to interact with objects and sets the appropriate affordances. It also follows the conventions of the standard library.
 
 ## CoffeeScript
 
