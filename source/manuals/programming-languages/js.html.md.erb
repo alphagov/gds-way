@@ -244,12 +244,12 @@ function myModule ($element) {
   function submitThing () { ... }
   function getArgumentsForThing () { ... }
 
-  $element.click(submitThing)
+  $element.addEventListener('click', submitThing)
 }
 
 // Good
 function MyModule ($element) {
-  $element.click($.bind(this.submitThing, this))
+  $element.addEventListener('click', this.submitThing.bind(this))
 }
 MyModule.prototype.showThing = function () { ... }
 MyModule.prototype.hideThing = function () { ... }
@@ -263,7 +263,7 @@ GOVUK.myModule = {
   submitThing: function () { ... },
   getArgumentsForThing: function () { ... },
   init: function ($element) {
-    $element.click(GOVUK.myModule.submitThing)
+    $element.addEventListener('click', this.submitThing.bind(this))
   }
 }
 ```
