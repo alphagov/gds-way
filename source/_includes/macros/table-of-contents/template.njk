@@ -1,0 +1,30 @@
+{# just like x-govuk-sub-navigation but expands all children #}
+<nav class="x-govuk-sub-navigation{%- if params.classes %} {{ params.classes }}{% endif %}" aria-labelledby="sub-navigation-heading"
+  {% if params.items %}
+  {%- for attribute, value in params.attributes %} {{ attribute }}="{{value}}"{% endfor %}>
+  <h2 class="govuk-visually-hidden" id="sub-navigation-heading">{{ params.visuallyHiddenTitle or "Sections in this document" }}</h2>
+  {% for theme, items in params.items | groupby("theme") %}
+  {% if theme != "undefined" %}
+  <h3 class="x-govuk-sub-navigation__theme">{{ theme }}</h3>
+  {% endif %}
+  <ul class="x-govuk-sub-navigation__section">
+  {% for item in items %}
+    {% if item %}
+    <li class="x-govuk-sub-navigation__section-item{% if item.current %} x-govuk-sub-navigation__section-item--current{% endif %}">
+      <a class="x-govuk-sub-navigation__link" href="{{ item.href }}"{% if item.current %} aria-current="true"{% endif %}>{{ item.text }}</a>
+      {% if item.children | length > 0 %}
+      <ul class="x-govuk-sub-navigation__section x-govuk-sub-navigation__section--nested">
+      {% for child in item.children %}
+        <li class="x-govuk-sub-navigation__section-item">
+          <a class="x-govuk-sub-navigation__link" href="{{ child.href }}"{% if child.current %} aria-current="true"{% endif %}>{{ child.text }}</a>
+        </li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+    </li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+{% endfor %}
+{% endif %}
+</nav>

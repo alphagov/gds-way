@@ -1,0 +1,24 @@
+{
+  "name": "gds-way",
+  "version": "1.0.0",
+  "description": "Documenting the specific technology, tools and processes that Government Digital Service (GDS) teams use.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "npx eleventy --serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alphagov/gds-way.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alphagov/gds-way/issues"
+  },
+  "homepage": "https://github.com/alphagov/gds-way#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@x-govuk/govuk-eleventy-plugin": "^6.2.5",
+    "eleventy-plugin-toc": "^1.1.5"
+  }
+}
