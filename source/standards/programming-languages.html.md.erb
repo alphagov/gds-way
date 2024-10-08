@@ -79,9 +79,23 @@ production.
 
 ### Languages we do not use for new projects
 
+#### Scala
+
 We used Scala in the early days of GDS. GOV.UK Licensing is the only remaining
 application written in Scala but we've found it hard to support because of a lack
 of skills in GDS. Do not use Scala for new projects.
+
+#### Go
+
+Go is no longer a core backend development language in GDS.
+
+The only Go service currently in production operation is the [GOV.UK
+Foundry](https://www.cloudfoundry.org/), which was used by GOV.UK PaaS.
+
+PaaS has now been [decommissioned][pass-decom].
+
+[router]: https://github.com/alphagov/router
+[pass-decom]: https://gds.blog.gov.uk/2022/07/12/why-weve-decided-to-decommission-gov-uk-paas-platform-as-a-service/
 
 ## Using other languages
 
