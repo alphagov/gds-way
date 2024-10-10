@@ -1,0 +1,46 @@
+---
+title: Breaking down work
+last_reviewed_on: 2024-10-10
+review_in: 6 months
+---
+# <%= current_page.data.title %>
+
+Working sustainably in small batches and performing regular releases is considered [industry best practice](https://en.wikipedia.org/wiki/DevOps_Research_and_Assessment#DORA_Four_Key_Metrics).
+It reduces the risk of errors being introduced, makes delivery of value more predictable, and enables us to learn faster.
+
+Our perception of value is not just putting working software and new features into the hands of users. It’s also:
+
+- Learning about user needs.
+- Improving operational resilience.
+- Minimising [toil](https://sre.google/sre-book/eliminating-toil/).
+- Reducing cost of change.
+
+We should aim to break down our work into independently releaseable pieces that each deliver their own value.
+
+## Why break down work?
+
+There are many reasons why working in smaller batches provides an advantage in software development.
+
+- It articulates value. If we are able to clearly state where the value is in a piece of work then we are more able to break it down into valuable milestones.
+- It reduces waste. Code that is written but not integrated and being used is wasted effort, and we want to minimise that waste.
+- It promotes predictable delivery. We often need to know when a feature is likely to be complete and having clear regular milestones facilitates those conversations with evidence rather than estimates.
+- It enables fast feedback. We can learn a lot from regularly releasing our code to production environments even if the effects are not visible to users. We also get feedback on our code design because well-written code will be easier to iterate on.
+- It boosts team morale. The unit of delivery is the team, and delivering value regularly is much better for morale than working on big-bang releases for months at a time.
+
+## How do we break down work?
+
+- [Example mapping](https://cucumber.io/blog/bdd/example-mapping-introduction/). Splitting up a large feature into individual capabilities will demonstrate where the dependencies are, which are the most valuable, and the subsequent ideal ordering.
+- Get work live as soon as you can. Deploy changes safely behind feature toggles or limited to lower (non-production) environments to get fast feedback on the thing you've changed. For example, you might integrate your code with a third-party service but discard the result rather than take action; Martin Fowler calls this [dark launching](https://martinfowler.com/bliki/DarkLaunching.html).
+- Finish one thing at a time. Having too much work in progress (WIP) reduces the team's ability to react to change and feedback, and it's much better to avoid context switching. If your team has lots of work in flight because there are lots of blockers, then work with your delivery colleagues to establish why this is happening.
+- Loosely coupled components and systems. Systems that need to be changed together will block each other, so try to build systems that have well-defined contracts but also operate under the robustness principle (be conservative in what you send, liberal in what you accept). For example, do not rely on ordering for JSON objects and ignore unexpected fields rather than cause an error.
+- Failing early and safely. Working in small batches reduces risk of bugs, but when those bugs do happen it's much easier to roll back a small change than a large one. Your team should be aspiring to some form of automated rollback in case of errors in production environments, such as blue-green deployments or canary releases.
+
+## Further reading
+
+Find out more about breaking down work:
+
+- [Why breaking down work is important][breaking down work] - an expanded version of this page
+- [Software has diseconomies of scale – not economies of scale][scale]
+
+[breaking down work]: https://blog.probablyfine.co.uk/2024/09/27/why-breaking-down-work-is-important.html
+[scale]: https://www.allankelly.net/archives/472/software-has-diseconomies-of-scale-not/
