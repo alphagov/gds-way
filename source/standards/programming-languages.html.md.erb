@@ -101,6 +101,26 @@ We used Scala in the early days of GDS. GOV.UK Licensing is the only remaining
 application written in Scala but we've found it hard to support because of a lack
 of skills in GDS. Do not use Scala for new projects.
 
+## Mobile Development
+
+For developing mobile apps, we use:
+- [Swift](https://www.swift.org/) for [iOS](https://developer.apple.com/)
+- [Kotlin](https://developer.android.com/kotlin) for [Android](https://developer.android.com/).
+
+To give users the expected experience on their respective platform, we prefer to use the native languages over frameworks such as Flutter or .NET MAUI.
+
+### Swift
+
+The default Swift version is generally tied to the version of Xcode you're using, i.e Xcode 16 defaults to Swift 6. 
+The version of Swift used will generally be the most recent one when work on the project begins. 
+
+The iOS target should also be considered - for government apps, a range of n - 5 or n - 3 is generally a good starting point (n being the latest major release of iOS)
+This should be discussed during planning and investigation as certain iOS features may not be available in earlier versions which could be crucial to your app's behaviour.
+
+### Kotlin 
+ 
+// TODO: Fill in specific Kotlin/Android Studio versions/ OS targets?
+
 ## Using other languages
 
 There will be sensible reasons to not follow the above guidance on languages.
