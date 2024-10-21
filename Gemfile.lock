@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    Ascii85 (1.1.0)
+    Ascii85 (1.1.1)
     activesupport (7.0.8.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
@@ -10,14 +10,15 @@ GEM
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     afm (0.2.2)
-    async (2.6.3)
-      console (~> 1.10)
+    async (2.11.0)
+      console (~> 1.25, >= 1.25.2)
       fiber-annotation
-      io-event (~> 1.1)
+      io-event (~> 1.5, >= 1.5.1)
       timers (~> 4.1)
     autoprefixer-rails (10.4.16.0)
       execjs (~> 2)
     backports (3.24.1)
+    bigdecimal (3.1.8)
     chronic (0.10.2)
     chunky_png (1.4.0)
     coffee-script (2.4.1)
@@ -38,9 +39,10 @@ GEM
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
     concurrent-ruby (1.2.3)
-    console (1.21.0)
+    console (1.25.2)
       fiber-annotation
-      fiber-local
+      fiber-local (~> 1.1)
+      json
     contracts (0.16.1)
     dotenv (3.0.2)
     em-websocket (0.5.3)
@@ -55,7 +57,9 @@ GEM
     fastimage (2.3.0)
     ffi (1.16.3)
     fiber-annotation (0.2.0)
-    fiber-local (1.0.0)
+    fiber-local (1.1.0)
+      fiber-storage
+    fiber-storage (0.1.0)
     govuk_tech_docs (3.5.0)
       autoprefixer-rails (~> 10.2)
       chronic (~> 0.10.2)
@@ -77,7 +81,7 @@ GEM
       concurrent-ruby (~> 1.0)
     hashery (2.1.2)
     hashie (3.6.0)
-    html-proofer (5.0.8)
+    html-proofer (5.0.9)
       addressable (~> 2.3)
       async (~> 2.1)
       nokogiri (~> 1.13)
@@ -89,7 +93,8 @@ GEM
     http_parser.rb (0.8.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    io-event (1.2.3)
+    io-event (1.5.1)
+    json (2.7.2)
     kramdown (2.4.0)
       rexml
     listen (3.9.0)
@@ -151,8 +156,6 @@ GEM
       rouge (~> 3.2)
     minitest (5.22.2)
     multi_json (1.15.0)
-    nokogiri (1.16.5-arm-linux)
-      racc (~> 1.4)
     nokogiri (1.16.5-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.5-x86_64-darwin)
@@ -174,7 +177,7 @@ GEM
       hashery (~> 2.0)
       ruby-rc4
       ttfunk
-    public_suffix (5.0.4)
+    public_suffix (5.0.5)
     racc (1.7.3)
     rack (2.2.8.1)
     rack-livereload (0.3.17)
@@ -184,7 +187,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
-    rexml (3.2.6)
+    rexml (3.3.6)
+      strscan
     rouge (3.30.0)
     ruby-rc4 (0.1.5)
     sass (3.4.25)
@@ -194,14 +198,16 @@ GEM
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
+    strscan (3.1.0)
     temple (0.10.3)
     thor (1.2.2)
     tilt (2.0.11)
     timers (4.3.5)
     toml (0.3.0)
       parslet (>= 1.8.0, < 3.0.0)
-    ttfunk (1.7.0)
-    typhoeus (1.4.0)
+    ttfunk (1.8.0)
+      bigdecimal (~> 3.1)
+    typhoeus (1.4.1)
       ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -209,18 +215,17 @@ GEM
       execjs (>= 0.3.0, < 3)
     webrick (1.8.1)
     yell (2.2.2)
-    zeitwerk (2.6.11)
+    zeitwerk (2.6.14)
 
 PLATFORMS
   arm64-darwin-21
-  arm64-linux
   x86_64-darwin-21
   x86_64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
   govuk_tech_docs
-  html-proofer (~> 5.0.8)
+  html-proofer (~> 5.0.9)
   tzinfo-data
   wdm (~> 0.1.0)
 
