@@ -1,6 +1,6 @@
 ---
 title: How to store and query logs
-last_reviewed_on: 2024-06-27
+last_reviewed_on: 2024-10-21
 review_in: 6 months
 ---
 
@@ -89,10 +89,9 @@ You should ensure that sensitive information, such as query parameters containin
 In order to allow for rich querying of log data you should ensure that your logs
 are in a structured format.
 
-### Stuctured logging with Splunk
-
-[Splunk] automatically parses JSON log lines. Other formats may need [specific
-field extracts] configured in Splunk.
+[Splunk] can automatically parse many common types of structured data such as CSV, JSON, and XML. 
+A range of add-ons can be found on [Splunkbase](https://splunkbase.splunk.com/) to parse data from commonly used technologies such as AWS, Azure, Palo Alto Firewalls, and more. 
+Other formats may need [field extractions] to be configured in Splunk.
 
 For interoperability with pre-built apps and alerting, it is beneficial to align
 your logs to the [Splunk CIM (Common Information Model)].
@@ -108,7 +107,7 @@ names for data, for example:
 
 Access control for GDS users is managed by the IT Service Desk, use the
 [helpdesk] to request access. If you're unsure what role you should be
-requesting, ask in the `#cyber-security-help` Slack channel.
+requesting, ask in the `#splunk` Slack channel.
 
 ## Advice for particular frameworks or platforms
 
@@ -125,13 +124,18 @@ There is [broker documentation] describing how drain logs to Splunk via
 The [GOV.UK PaaS Logging] documentation will help you configure Logit and
 drain logs into it from your app.
 
+### Contact
+
+Any questions regarding storing and querying logs should be directed to 
+the `#splunk` Slack channel in the first instance.
+
 [helpdesk]: https://gdshelpdesk.digital.cabinet-office.gov.uk
 [Splunk]: https://gds.splunkcloud.com
 [archive data to your own S3 bucket]: https://docs.splunk.com/Documentation/SplunkCloud/latest/Admin/DataSelfStorage?ref=hk#Configure_self_storage_locations
 [Splunk CIM (Common Information Model)]: https://docs.splunk.com/Documentation/CIM/latest/User/Overview
 [`Web` CIM]: https://docs.splunk.com/Documentation/CIM/latest/User/Web
 [2023 IBM data breach study]: https://www.ibm.com/account/reg/us-en/signup?formid=urx-52258
-[specific field extracts]: https://docs.splunk.com/Documentation/Splunk/latest/Data/Extractfieldsfromfileswithstructureddata
+[field extractions]: https://docs.splunk.com/Documentation/Splunk/latest/Data/Extractfieldsfromfileswithstructureddata
 [broker documentation]: https://github.com/alphagov/tech-ops/blob/master/cyber-security/components/csls-splunk-broker/docs/user-guide.md
 [Centralised Security Logging Service (CSLS)]: https://github.com/alphagov/centralised-security-logging-service
 [dropwizard-logstash]: https://github.com/alphagov/dropwizard-logstash
