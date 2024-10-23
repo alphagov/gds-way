@@ -11,6 +11,13 @@ This style guide:
 * provides some conventions for creating production-ready Dockerfiles at GDS
 * supplements the official [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 
+## Why we use Dockerfile
+
+The [Open Container Initiative](https://opencontainers.org/) started in June 2015, and is an open governance structure for creating open standards around container formats.
+Docker were one of the first movers in this space. Their documentation defined the de facto standard and then delegated to the OCI.
+
+The [OCI's documentation on Containerfile](https://github.com/containers/common/blob/main/docs/Containerfile.5.md) is derived from Docker's Dockerfile documentation.
+
 ## Using tags and digests in FROM instructions
 
 The `FROM` instruction specifies the starting image for your Docker image build.
@@ -55,6 +62,14 @@ As [Dependabot](https://dependabot.com) has [support for updating `FROM` lines
 which use digests](https://github.com/dependabot/dependabot-core/pull/100),
 you can still use Dependabot to keep your images up-to-date.
 
+To ensure the intended version is documented, please include it as a comment above the FROM statement, e.g.
+
+```
+# alpine:3.9
+FROM alpine@sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
+...
+```
+
 ## Using multi-stage builds
 
 Using [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) enables the drastic
@@ -65,13 +80,16 @@ used in the compilation steps.
 As an example;
 
 ```
+# golang@sha256:5f6a4662de3efc6d6bb812d02e9de3d8698eea16b8eb7281f03e6f3e8383018e
 FROM golang:1.16 AS builder
 WORKDIR /go/src/github.com/alphagov/paas-aiven-broker/
 RUN git clone https://github.com/alphagov/paas-aiven-broker.git .
 RUN go mod download
 RUN go build
 
-FROM alpine:latest
+# alpine:3.9
+FROM alpine@sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
+
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /go/src/github.com/alphagov/paas-aiven-broker/paas-aiven-broker .

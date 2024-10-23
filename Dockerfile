@@ -1,4 +1,5 @@
-FROM ruby:3.1.3-buster
+# 3.1.3-buster
+FROM ruby@sha256:55cd5fab4140db7a04f46921eafcd941be95f6c5687b01154d43e75479ba0fe9 
 
 EXPOSE 4567:4567
 EXPOSE 35729:35729
