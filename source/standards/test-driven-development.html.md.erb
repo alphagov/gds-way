@@ -1,0 +1,36 @@
+---
+title: Test-driven development (TDD)
+last_reviewed_on: 2024-10-21
+review_in: 6 months
+---
+# <%= current_page.data.title %>
+
+GDS advocates for agile software development practices because we believe that flexibility and responsiveness-to-change are key to building software that meets the needs of our users.
+
+Test-driven development (TDD) is a core agile software development practice which aims to build flexibility and correctness into production software.
+
+Kent Beck, the author of Extreme Programming Explained, describes [TDD][canon-tdd] as .
+
+The process starts with a set of desired behaviours for a piece of code. This list could include happy-path behaviours, error cases, and interaction points with other components.
+
+The inner-loop of TDD is also commonly referred to as "Red-Green-Refactor"; red to represent a failing test, green to represent all passing tests, and refactoring only when all tests are passing.
+
+<%= partial 'partials/svg-tdd-red-green-refactor' %>
+
+### Red
+Turn exactly one item on the list into an actual, concrete, runnable test. This test should fail when you run it.
+
+### Green
+Change the code to make all tests, including the new test, pass. If you discover that you are missing a behaviour or test, add them to the list
+
+
+### Refactor
+
+Improve the design and implementation of the code by removing duplication, utilising well known patterns and structures.
+
+
+These steps are repeated until your set of behaviours is exhausted.
+
+## Why we recommend it
+
+[canon-tdd]: https://tidyfirst.substack.com/p/canon-tdd
