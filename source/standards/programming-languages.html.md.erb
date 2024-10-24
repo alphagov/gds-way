@@ -107,19 +107,23 @@ For developing mobile apps, we use:
 - [Swift](https://www.swift.org/) for [iOS](https://developer.apple.com/)
 - [Kotlin](https://developer.android.com/kotlin) for [Android](https://developer.android.com/).
 
-To give users the expected experience on their respective platform, we prefer to use the native languages over frameworks such as Flutter or .NET MAUI.
+To give users the expected experience on their respective platform, we prefer to use the native languages over cross-platform solutions. 
 
 ### Swift
 
-The default Swift version is generally tied to the version of Xcode you're using, i.e Xcode 16 defaults to Swift 6. 
-The version of Swift used will generally be the most recent one when work on the project begins. 
+When starting a new app project, you'll likely want to use the most recent version of Swift which will be installed with Xcode.
+
+Deciding on which iOS version you want to support is a more important version and is a tradeoff between making the app accessible to as many devices as possible without compromising security.
 
 The iOS target should also be considered - for government apps, a range of n - 5 or n - 3 is generally a good starting point (n being the latest major release of iOS)
 This should be discussed during planning and investigation as certain iOS features may not be available in earlier versions which could be crucial to your app's behaviour.
 
 ### Kotlin 
  
-// TODO: Fill in specific Kotlin/Android Studio versions/ OS targets?
+When satrting a new app, you'll likely want to use the latest version of Kotlin, which is installed along with Android Studio. 
+
+It will be more important to decide on which versions of Android you want to support - as with iOS above, it is a tradeoff between trying to support as many devices as possible and keeping the app accessible without compromising security. 
+This is also made more difficult on Android due to the range of devices available.
 
 ## Using other languages
 
