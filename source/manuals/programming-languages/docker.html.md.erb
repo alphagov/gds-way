@@ -27,7 +27,8 @@ A tag is a short label you can use to reference an image.
 For example:
 
 ```
-FROM alpine:3.9
+# 3.9
+FROM alpine
 ```
 
 where:
@@ -38,11 +39,15 @@ where:
 As you cannot rely on the tag pointing to the exact same image over time, you
 should instead use a digest, which identifies the image by a hash of its
 contents. This makes sure that you are always referencing the image that you
-expect.
+expect.  Add a comment above the FROM line with the intended tag and version.
+Though dependabot will not use this, please update it when the digest changes
+so that it is possible to understand the magnitude of the change by knowing
+the significance of the version change.
 
 For example:
 
 ```
+# alpine:3.9
 FROM alpine@sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
 ```
 
@@ -67,6 +72,7 @@ The standard implies that you may only specify one or the other.  Do not specify
 both as the behaviour may vary across different platforms.
 
 ```
+# alpine:3.9
 FROM alpine@sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
 ...
 ```
@@ -81,12 +87,14 @@ used in the compilation steps.
 As an example;
 
 ```
-FROM golang@sha256:5f6a4662de3efc6d6bb812d02e9de3d8698eea16b8eb7281f03e6f3e8383018e AS builder
+# golang:bullseye
+FROM golang@sha256:ecb3fe70e1fd6cef4c5c74246a7525c3b7d59c48ea0589bbb0e57b1b37321fb9 AS builder
 WORKDIR /go/src/github.com/alphagov/paas-aiven-broker/
 RUN git clone https://github.com/alphagov/paas-aiven-broker.git .
 RUN go mod download
 RUN go build
 
+# alpine:3.9
 FROM alpine@sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
 
 RUN apk --no-cache add ca-certificates
