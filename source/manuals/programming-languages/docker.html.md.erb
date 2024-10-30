@@ -71,7 +71,9 @@ both as the behaviour may vary across different platforms.
 
 Instead, the recommended way to keep track of the intended version is to add it in a line above FROM as a comment.
 
-Please double-check that the digest and the commented version are consistent each time you upgrade, as dependabot does not have perfect capability at either identifying the magnitude of the upgrade, or necessarily updating the commented pin.
+Please double-check that the digest and the commented version are consistent each time you upgrade, as dependabot does not have perfect capability at either identifying the magnitude of the upgrade.
+
+It will also not update the comment automatically, so this will need modifying on any dependabot-raised pull requests.
 ```
 # alpine:3.9
 FROM alpine@sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
