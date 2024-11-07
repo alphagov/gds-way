@@ -1,6 +1,6 @@
 ---
 title: How to store source code
-last_reviewed_on: 2023-11-02
+last_reviewed_on: 2024-11-07
 review_in: 12 months
 ---
 
@@ -26,17 +26,21 @@ The Service Manual explains [how to open previously closed code and your respons
 When you publish open source code, your project must:
 
 * include a README, using [guidance for writing a README][]
-* have useful and informative commit messages about why a change was made
-* provide a changelog, for example the [specification for CPAN Changes files][]
+* have useful and informative [commit messages][] about why a change was made
 * include an [MIT and OGL licence file][]
-* link to a public list of known issues and bugs, for example [GOV.UK Frontend issues][]
 * have an email address to submit security related bug reports
+
+If your changes will impact third parties, your project must also:
+
+* provide a changelog, optionally also providing a template for making changes. See the [GOV.UK Frontend changelog template][] for an example
+* provide [release notes][]
+* link to a public list of known issues and bugs, for example [GOV.UK Frontend issues][]
 * list a version number compatible with [Semantic Versioning][]
 
 Your open source code project should:
 
-* publish packages to relevant language specific repositories such as [PyPI - the Python Package Index][] or [RubyGems][]
-* post contributors' guidelines in a contributing file, like the [Go repository][]
+* when appropriate, publish packages to relevant language specific repositories such as [PyPI - the Python Package Index][] or [RubyGems][]
+* post contributors’ guidelines in a contributing file, like the [GOV.UK Frontend repository][]
 * set up any tests to run in a public continuous integration environment using tools such as [Github Actions](use-github.html#using-github-actions-and-workflows)
 
 You could also provide a mailing list so people can discuss your project.
@@ -48,13 +52,14 @@ You could also provide a mailing list so people can discuss your project.
 
 [GOV.UK Frontend]: https://github.com/alphagov/govuk-frontend
 [MIT and OGL licence file]: /manuals/licensing.html
-[Specification for CPAN Changes files]: https://metacpan.org/pod/CPAN::Changes::Spec
+[GOV.UK Frontend changelog template]: https://github.com/alphagov/govuk-frontend/blob/main/docs/contributing/CHANGELOG_TEMPLATE.md
+[release notes]: /manuals/release-notes.html
 [Semantic Versioning]: https://semver.org/spec/v2.0.0.html
 [PyPI - the Python Package Index]: https://pypi.org/
 [RubyGems]: https://rubygems.org/
-[Go repository]: https://golang.org/CONTRIBUTORS
+[GOV.UK Frontend repository]: https://github.com/alphagov/govuk-frontend/blob/main/CONTRIBUTING.md
 [keeping some data and code closed]: https://www.gov.uk/government/publications/open-source-guidance/when-code-should-be-open-or-closed
 [how to open previously closed code and your responsibilities for maintaining open code]: https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable
-[Go repository]: https://golang.org/CONTRIBUTORS
 [guidance for writing a README]: /manuals/readme-guidance.html
+[commit messages]: working-with-git.html#commit-messages
 [GOV.UK Frontend issues]: https://github.com/alphagov/govuk-frontend/issues
