@@ -1,0 +1,41 @@
+---
+title: Diagrams as code
+last_reviewed_on: 2024-11-13
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+Code can be used to define the content, structure and appearance of a diagram which can then be rendered, instead of using a drawing tool directly. This approach is known as "diagrams as code".
+
+## What are diagrams for?
+
+> A good diagram enables you to more easily convey your design to others, and it provides a focus for your creative, as well as your technical thinking.
+
+https://www.ncsc.gov.uk/blog-post/drawing-good-architecture-diagrams
+
+There are many ways to create a diagram, from pen and paper or whiteboard through to specialist diagramming software. The right tool will depend on the circumstances, but it's always worth considering a diagram generated from code.
+
+Diagrams are a form of documentation, and some teams already use a '[docs as code](https://technology.blog.gov.uk/2017/08/25/why-we-use-a-docs-as-code-approach-for-technical-documentation/)' approach. Diagrams as code builds on the rationale and benefits of docs as code, including
+
+* keeping documentation close to source code
+* ease of change
+* a workflow to review changes
+* version history
+* consistency
+
+### Diagrams as code tools
+
+Assuming you already [use GitHub](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/use-github.html) then you can [use Mermaid in Markdown files](https://github.blog/developer-skills/github/include-diagrams-markdown-files-mermaid/).
+
+The [Mermaid Live Editor](https://mermaid.live/) is a good way of trying out Mermaid, and seeing diagrams rendered from code in real time.
+
+### Open source diagrams as code
+
+Consider making the code for your diagrams open in the same way as [your other source code](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/index.html#publish-open-source-code).
+
+### Sequence diagrams as code
+
+A [sequence diagram](https://en.wikipedia.org/wiki/Sequence_diagram) is used to show how different entities in a system interact with each other and can be a useful way of designing new functionality or documenting existing behaviour.
+
+[Mermaid can render sequence diagrams](https://mermaid.js.org/syntax/sequenceDiagram.html). See the [GOV.UK Forms GitHub repo](https://github.com/alphagov/forms/tree/main/diagrams/sequence-diagrams) for some examples.
