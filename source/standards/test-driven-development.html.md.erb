@@ -1,0 +1,96 @@
+---
+title: Test-driven development (TDD)
+last_reviewed_on: 2024-10-21
+review_in: 6 months
+---
+# <%= current_page.data.title %>
+
+GDS advocates for agile software development practices because we believe that flexibility and responsiveness-to-change are key to building software that meets the needs of our users.
+
+Test-driven development (TDD) is a core agile software development practice which aims to build flexibility and correctness into production software.
+
+The process starts with a set of desired behaviours for a piece of code. This list could include happy-path behaviours, error cases, and interaction points with other components.
+
+The inner-loop of TDD is also commonly referred to as "Red-Green-Refactor"; red to represent a failing test, green to represent all passing tests, and refactoring only when all tests are passing.
+
+<%= partial 'partials/svg-tdd-red-green-refactor' %>
+
+### Red - write a failing test
+
+Turn exactly one item on the list into an actual, concrete, runnable test. This test should fail when you run it, and it should fail in the way you expect.
+
+If it fails unexpectedly, that could indicate a functionality gap or a misimplementation. For example, setting a field as immutable when you expect to mutate it on later interactions.
+
+### Green - make all tests pass
+
+Change the code to make all tests, including the new test, pass. If you discover that you are missing a behaviour or test, add it to the list. 
+
+Tests should pass in a timely manner and slow-running tests should be investigated in the refactoring stage. You may choose to reduce the size of your test case or decompose the functionality into multiple, separately testable, components.
+
+### Refactor - iterate on your design
+
+Improve the design and implementation of the code by removing duplication, utilising well known patterns and structures.
+
+This is where the majority of software design happens. You have code that behaves as specified in the tests and that is your safety net for iterating the models and structures of the code to best represent the software's needs at that particular time.
+
+You should also let yourself be guided by the tests you've written; if a test is hard to write or you find yourself having to update many tests to support a new test without using automated refactoring tools, then take a step back examine why.
+
+These steps are repeated until your set of behaviours is exhausted.
+
+## Why we recommend it
+
+The advantage of writing the tests before the implementation is that the behaviour of the code you will write is defined first, rather than implementing the change and retroactively applying tests.
+
+A test-first approach gives you quick feedback on the design of your code - if your code is becoming difficult to test or has many dependencies, these are signals that you likely need to refactor.
+
+> For each desired change, make the change easy (warning: this may be hard), then make the easy change - Kent Beck
+
+TDD naturally lends itself to our recommended approach to [breaking down work](/standards/breaking-down-work.html). If you are careful about introducing feature toggles so that code can be "dark launched" into production environments, TDD can give you a robust and reliable iterative workflow.
+
+For example, if you are defining a new component, you could first define the interface, integrate a "do nothing" or noop version of that component into the live codebase, and then iterate on that implementation or another implementation safely.
+
+TDD is also a great tool for cultivating a testing mindset in teams. Practicing these techniques and concepts will teach how to approach a problem with the curiosity (what does this code do if I give it these inputs?) and skepticism (does this code really do what it's supposed to?) necessary for building robust and resilient user-facing software.
+
+## What if we can't do TDD?
+
+The most valuable output of the TDD process is not the code itself but the tight feedback loops that allow you to reflect and the iterative design decisions that you make along the way.
+
+If doing what Kent Beck calls [canon TDD][canon-tdd] is not possible, for whatever reason, that's okay as long as you have another mechanism for realising the fast feedback and incremental delivery advantages that TDD does provide.
+
+## Beyond TDD
+
+TDD works best when the feedback loops are fast. For unit testing, which should be subsecond, and component integration testing, the TDD process is very effective.
+
+However, it is less effective for testing processes with longer feedback loops such as feature acceptance testing across multiple components, especially if you are unable to run those tests locally before pushing your code.
+
+As systems get more complex, we usually cannot enumerate and emulate all possible interactions within unit and integration tests. Exploratory testing, done collaboratively and built on a solid foundation of fast tests, can help a team tease out unknown or unexpected behaviours of their system.
+
+## Useful resources
+
+### Getting started
+
+If you're struggling to write your first test, consider the approach of [Zero-One-Many][zero-one-many]: start with the empty case, then consider the singular case, then generalise to many kinds of inputs.
+
+For example, if you were processing some kind of file input, handle the empty case first (what if the file has no lines?), then the singular case (what if the file has a single line?), and then generalise.
+
+### Getting better
+
+TDD is a skill like any other, and one which you can develop your fluency with through practice.
+
+Try working through some example problems while adding a constraint such as [TDD-As-If-You-Meant-It][tdd-as-if-you-meant-it], where you can only write code in your test package, and any production code must be refactored out rather than written directly. This constraint reframes the TDD approach by forcing you to write tests first rather than retrofitting them onto the existing production code.
+
+You could also look at GeePaw Hill's [Many More Much Smaller Steps][mmmss], which advocates for framing work as a composition of a lot of smaller, and therefore safer, changes than a few large, and therefore risky, changes.
+
+### Books and blogposts
+
+- [Growing Object-Oriented Software, Guided By Tests][goos] - Nat Pryce & Steve Freeman
+- [Test-Driven Development By Example][tddbe] - Kent Beck
+- [TDD][tddjg] - Jason Gorman
+
+[canon-tdd]: https://tidyfirst.substack.com/p/canon-tdd
+[zero-one-many]: https://www.agilealliance.org/resources/sessions/test-driven-development-guided-by-zombies/
+[tdd-as-if-you-meant-it]: https://github.com/sf105/tdd-as-if-you-meant-it
+[mmmss]: https://www.geepawhill.org/2021/10/26/mmmss-a-closer-look-at-steps/
+[goos]: https://www.oreilly.com/library/view/growing-object-oriented-software/9780321574442/
+[tddbe]: https://www.oreilly.com/library/view/test-driven-development/0321146530/
+[tddjg]: https://codemanship.co.uk/papers.html
