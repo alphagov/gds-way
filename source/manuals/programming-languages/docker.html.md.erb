@@ -22,35 +22,10 @@ The [OCI's documentation on Containerfile](https://github.com/containers/common/
 
 The `FROM` instruction specifies the starting image for your Docker image build.
 
-A tag is a short label you can use to reference an image.
+A tag is a short label you can use to reference an image, often referencing a version number.
 
-For example:
-
-```
-FROM alpine:3.9
-```
-
-where:
-
-* `alpine` is the image name
-* `3.9` is the tag
-
-As you cannot rely on the tag pointing to the exact same image over time, you
-should instead use a digest, which identifies the image by a hash of its
-contents. This makes sure that you are always referencing the image that you
-expect.  Add a comment above the FROM line with the intended tag and version.
-Though dependabot will not use this, please update it when the digest changes
-so that it is possible to understand the magnitude of the change by knowing
-the significance of the version change.
-
-For example:
-
-```
-FROM alpine@sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
-```
-
-Where `sha256@769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6`
-is the unique digest representing the particular variant of the image.
+As you cannot rely on the tag pointing to the exact same image over time, you should instead use a digest, which identifies the image by a hash of its contents.
+This makes sure that you are always referencing the image that you expect.
 
 To get the digest, run `docker pull <tag>`. For example:
 
@@ -61,8 +36,8 @@ Digest: sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
 Status: Image is up-to-date for alpine:3.9
 ```
 
-As [Dependabot](https://dependabot.com) has [support for updating `FROM` lines
-which use digests](https://github.com/dependabot/dependabot-core/pull/100),
+As [Dependabot](https://dependabot.com) has
+[support for updating `FROM` lines which use digests](https://github.com/dependabot/dependabot-core/pull/100),
 you can still use Dependabot to keep your images up-to-date.
 
 If you specify both the tag and the digest, then the digest takes precedence.
@@ -70,15 +45,16 @@ The standard implies that you may only specify one or the other.  Do not specify
 both as the behaviour may vary across different platforms.
 
 Instead, the recommended way to keep track of the intended version is to add it in a line above FROM as a comment.
+For example:
 
-Please double-check that the digest and the commented version are consistent each time you upgrade, as dependabot does not have perfect capability at either identifying the magnitude of the upgrade.
-
-It will also not update the comment automatically, so this will need modifying on any dependabot-raised pull requests.
 ```
 # alpine:3.9
 FROM alpine@sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
 ...
 ```
+
+Please double-check that the digest and the commented version are consistent each time you upgrade, as Dependabot does not have perfect capability at either identifying the magnitude of the upgrade.
+It will also not update the comment automatically, so this will need modifying on any dependabot-raised pull requests.
 
 ## Using multi-stage builds
 
