@@ -9,3 +9,16 @@ a[href^="https://gds.slack.com/"]::before
   content: "\1F512\00a0";  // padlock
   display: inline-block;  // avoid text-decoration propagation
 }
+
+.govuk-header__logo::before {
+  content: "GDS";
+  font-family: "Helvetica neue", arial, sans-serif;
+  font-size: 1.2em;
+  background: #2F88C9;
+  color: white;
+  padding: 0.4em 0.7em;
+  margin-right: 0.8em;
+  font-weight: normal;
+  letter-spacing: -0.02em;
+  float: left;
+}
