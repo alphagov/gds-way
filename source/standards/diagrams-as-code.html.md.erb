@@ -31,9 +31,24 @@ Since the source of the diagram provides a text based representation of the gene
 
 ## Diagrams as code tools
 
+### Mermaid
+
 Assuming you already [use GitHub](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/use-github.html) then you can [use Mermaid in Markdown files](https://github.blog/developer-skills/github/include-diagrams-markdown-files-mermaid/).
 
 The [Mermaid Live Editor](https://mermaid.live/) is a good way of trying out Mermaid, and seeing diagrams rendered from code in real time.
+
+> Mermaid will automatically insert the aria-roledescription and, if provided in the diagram text by the diagram author, the accessible title and description.
+— [Mermaid Accessibility Options](https://mermaid.js.org/config/accessibility.html)
+
+This works in a similar way to the `alt` attribute of an `<img>` element.
+
+```
+graph LR
+  accTitle: Accessible Title
+  accDescr: Accessible Description
+```
+
+We should consider [contributing to Mermaid](https://mermaid.js.org/community/contributing.html) if there are aspects of its accessibility we are able to improve.
 
 ## Open source diagrams as code
 
