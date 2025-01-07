@@ -71,6 +71,25 @@ This has several benefits, such as:
 
 However, teams should adjust their policy on this approach depending on the risk tolerance of the codebase, team, or programme.
 
+## Pair programming and version control
+
+Almost all version control systems, including Git, are oriented around a single-author-per-change model. This doesn't completely align with collaborative development practices.
+
+A convention has emerged, and is supported by GitHub, to use the [`Co-authored-by`](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors) trailer on commit messages to flag that multiple people have worked on a change.
+
+For example, if you had two or more contributing as part of a pair or ensemble, you would structure your commit message like:
+
+```
+TICKET-123: Add a new feature
+
+Co-authored-by: person.one@example.com
+Co-authored-by: person.two@example.com
+```
+
+This is visible within the normal Git log and within GitHub too; you will see multiple people attached to a change in the UI.
+
+You should use your work email address in the `Co-authored-by` trailer.
+
 ## Further reading
 
 - Pairing and code review guidelines for [GOV.UK Pay](https://manual.payments.service.gov.uk/manual/development-processes/pairing-principles.html)
