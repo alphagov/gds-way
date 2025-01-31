@@ -209,9 +209,11 @@ You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apa
 
 The [Dropwizard](https://www.dropwizard.io/) web framework is used widely within GDS.
 
-Dropwizard 3.0.0 and Dropwizard 4.0.0 were released simutaneously in March 2023. They have equivalent functionality but Dropwizard 3 continues to use Java EE and the `javax` package namespace while Dropwizard 4 migrates to [Jakarta EE](https://jakarta.ee/) and the `jakarta` package namespace (Jakarta EE is the successor to Java EE). It is easier to [upgrade to Dropwizard 3.0.x](https://www.dropwizard.io/en/release-3.0.x/manual/upgrade-notes/upgrade-notes-3_0_x.html) than to [upgrade to Dropwizard 4.0.x](https://www.dropwizard.io/en/release-4.0.x/manual/upgrade-notes/upgrade-notes-4_0_x.html).
+Dropwizard 3.0.0 and Dropwizard 4.0.0 were released simutaneously in March 2023. They have equivalent functionality but Dropwizard 3 continues to use Java EE and the `javax` package namespace while Dropwizard 4 migrates to [Jakarta EE](https://jakarta.ee/) and the `jakarta` package namespace (Jakarta EE is the successor to Java EE).
 
-[Dropwizard 2 is no longer supported as of 31 January 2024.](https://github.com/dropwizard/dropwizard/discussions/7880)
+[Dropwizard 2 is no longer supported as of 31 January 2024.](https://github.com/dropwizard/dropwizard/discussions/7880) If you are still using Dropwizard 2, [upgrade to Dropwizard 3](https://www.dropwizard.io/en/release-3.0.x/manual/upgrade-notes/upgrade-notes-3_0_x.html) rather than trying to upgrade directly to Dropwizard 4.
+
+If you are using Dropwizard 3, you can consider trying to [upgrade to Dropwizard 4](https://www.dropwizard.io/en/release-4.0.x/manual/upgrade-notes/upgrade-notes-4_0_x.html). You may find you have to upgrade some (but not all) of your other dependencies from versions that use Java EE to versions that use Jakarta EE.
 
 Dropwizard has built-in support for validating requests with Hibernate Validator. Use [Dropwizard’s validation](https://www.dropwizard.io/en/stable/manual/validation.html) in preference to rolling your own except in cases where Dropwizard’s built-in functionality cannot meet your validation requirements.
 
