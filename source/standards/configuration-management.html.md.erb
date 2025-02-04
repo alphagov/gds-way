@@ -68,6 +68,14 @@ benefits they could bring to your build pipelines.
 
  * [tofu test](https://opentofu.org/docs/cli/commands/test/) - "performs tests written for OpenTofu IaC"
 
+## CloudFormation and CDK
+
+Amazon Web Services provide two tools in the field of IaC. [CloudFormation] being more traditional YAML manifests or
+[CDK] being more of an SDK library for developers to program their way into configuration.
+
+Both are limited to only cover AWS infrastrcuture, and woould not be much use outside of that echosystem - for instance,
+configuring GitHub or Dynatrace would require you to invest in additional tooling such as [OpenTofu].
+
 ## Further reading
 
 Find out more about configuration management in the [Service Manual][].
@@ -83,3 +91,5 @@ Find out more about configuration management in the [Service Manual][].
 [govuk-aws]: https://github.com/alphagov/govuk-aws
 [large number of providers]: https://www.terraform.io/docs/language/providers/index.html
 [OpenTofu]: https://opentofu.org/
+[CloudFormation]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html
+[CDK]: https://docs.aws.amazon.com/cdk/v2/guide/home.html
