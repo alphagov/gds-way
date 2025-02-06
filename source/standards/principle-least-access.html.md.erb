@@ -6,7 +6,7 @@ review_in: 6 months
 
 # <%= current_page.data.title %>
 
-The [principle of least privilege][polp] involves setting up user accounts so they can only access and use the information they need for specific tasks. This can also apply to processes and individuals who might have to switch between normal access and the increased access of a superuser account as part of their work.
+The [principle of least privilege][polp] requires you to consider what permissions actors in your system need. For robotic or computer actors, like your deployment pipeline, this can be fairly easy to scope. Likewise, your end-users will have a clearly defined set of permissions they need to use your service.
 
 All access provisioned for use within GDS must be provided on a least privilege basis.
 
@@ -15,7 +15,7 @@ Examples of privileged or higher security access are:
 - root access
 - updating operating systems
 - performing “sudo” operations
-- accessing high secret credentials
+- accessing secret credentials
 - committing to repositories
 
 You should use the principle of least privilege if you:
