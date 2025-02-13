@@ -57,11 +57,9 @@ You should [configure autoprefixer](https://github.com/postcss/autoprefixer#brow
 
 ## Sass nesting
 
-Sass nesting should be avoided where possible.
+Sass nesting should be avoided where possible, with the exception of pseudo selectors and classes introduced by JavaScript.
 
-Over use of nesting can make searching for selectors difficult and can hide complicated CSS that should be simplified.
-
-Exceptions to this include pseudo selectors and JavaScript enabled classes.
+While nesting can help readability and reduce repetition, over use can make searching for selectors difficult and can hide complicated CSS that should be simplified.
 
 ```scss
 .accordion {
