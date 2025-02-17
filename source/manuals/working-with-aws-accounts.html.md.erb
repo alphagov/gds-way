@@ -8,7 +8,10 @@ review_in: 12 months
 
 Teams in GDS should use [Amazon Web Services (AWS)](https://aws.amazon.com/) as their core infrastructure provider. GDS uses multiple AWS Organizations. You can find more details about how the core GDS AWS Platform is managed on the [GDS Hub](https://engineering-enablement.gds-reliability.engineering/interim-org-platform.html). GDS teams in GOV.UK and DSP manage their own AWS accounts, but users must first sign into a shared base AWS account called `gds-users`. They can then assume roles in their team's AWS account to perform administrative tasks using [AWS's cross-account access pattern](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html).
 
-Note that GOV.UK One Login has its own AWS Organization separate from GDS / Cabinet Office accounts. That is managed by the programme, and separate guidance applies.
+Note that GOV.UK One Login has its own AWS organisation, managed by the Digital Identity directorate.
+More information is available in the
+[#di-aws-control-tower](https://gds.slack.com/archives/C04UJ0F91QA)
+Slack channel, and the guidance here does not apply.
 
 ## Request AWS user access
 
