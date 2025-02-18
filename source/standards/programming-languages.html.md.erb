@@ -26,7 +26,6 @@ This should make it easier for developers to:
 The Service Manual has information on
 [using client-side JavaScript][manual_js]. For server-side JavaScript we use [Node.js][nodejs].
 
-
 [nodejs]: https://nodejs.org/
 [manual_js]: https://www.gov.uk/service-manual/technology/using-progressive-enhancement
 
@@ -38,18 +37,18 @@ GDS projects using Node.js include:
 - [GOV.UK Prototype Kit](https://govuk-prototype-kit.herokuapp.com/docs)
 - [GOV.UK One Login](https://www.sign-in.service.gov.uk/) - see [repositories in TypeScript][di-ts] and [in JavaScript][di-js]
 
-[di-ts]: https://github.com/search?l=TypeScript&q=user%3Aalphagov+topic%3Adigital-identity&type=Repositories
-[di-js]: https://github.com/search?l=JavaScript&q=user%3Aalphagov+topic%3Adigital-identity&type=Repositories
+[di-ts]: https://github.com/search?l=TypeScript&q=user%3Agovuk-one-login+topic%3Adigital-identity&type=Repositories
+[di-js]: https://github.com/search?l=JavaScript&q=user%3Agovuk-one-login+topic%3Adigital-identity&type=Repositories
 
 You can use Node.js to render a web interface for your service. For example,
 GOV.UK Pay has created thin, client-facing applications that do not store
 data (although they may retrieve data from an API).
 
-You can use [TypeScript](https://www.typescriptlang.org/) when teams think it's
+You can use [TypeScript](https://www.typescriptlang.org/) when teams think it’s
 appropriate. For example, the GOV.UK PaaS team uses TypeScript
 because they are used to working with a statically typed, compiled language,
 and they think the compilation and static-analysis tooling is better for
-their workflow. There's more information about TypeScript on the
+their workflow. There’s more information about TypeScript on the
 [Node.js page](/manuals/programming-languages/nodejs/).
 
 ## Backend development
@@ -59,18 +58,16 @@ Our core languages for backend development are:
 - [Java](/manuals/programming-languages/java.html)
 - [Python](/manuals/programming-languages/python/python.html)
 - [Ruby](/manuals/programming-languages/ruby.html)
+- [JavaScript / Node.js](/manuals/programming-languages/nodejs/index.html)
 
-We've chosen these languages because they are successfully used by
+We’ve chosen these languages because they are successfully used by
 teams at the moment, and we are confident in how to host and operate
 applications written in them. You should carry out new
 development in one of these languages.
 
-We are also currently exploring the use of Node.js in the backend for
-serverless systems, particularly in the Digital Identity programme.
-
 ### Python
 
-You should write new Python projects in Python 3. 
+You should write new Python projects in Python 3.
 [Python 2 reached end of life in 2020][PEP373]. Python 3 is now well-supported
 by application frameworks and libraries, and is commonly used in
 production.
@@ -98,23 +95,39 @@ source tool available.
 ### Languages we do not use for new projects
 
 We used Scala in the early days of GDS. GOV.UK Licensing is the only remaining
-application written in Scala but we've found it hard to support because of a lack
+application written in Scala but we’ve found it hard to support because of a lack
 of skills in GDS. Do not use Scala for new projects.
+
+## Mobile Development
+
+For developing mobile apps, we use:
+- [Swift](https://www.swift.org/) for [iOS](https://developer.apple.com/)
+- [Kotlin](https://kotlinlang.org/) for [Android](https://developer.android.com/).
+
+To give users the expected experience on their respective platform, we prefer to use the native languages over cross-platform solutions. 
+
+### Swift
+
+When starting a new app project, you'll likely want to use the most recent version of Swift which will be installed with Xcode.
+
+### Kotlin 
+ 
+We prefer to develop Android apps using the latest stable version of Kotlin. 
 
 ## Using other languages
 
 There will be sensible reasons to not follow the above guidance on languages.
-For example when you're:
+For example when you’re:
 
 - extending an existing codebase or ecosystem
 - scripting in a particular environment
-- experimenting during an alpha (with an expectation that it's replaced by something we have more confidence in for beta)
+- experimenting during an alpha (with an expectation that it’s replaced by something we have more confidence in for beta)
 - working in a very specific or unusual problem domain, like heavy use of WebSockets
 
-The set of languages we're comfortable supporting will change over time.
+The set of languages we’re comfortable supporting will change over time.
 
 If you want to use a new language, talk to your Head of Technology and then create
 a prototype. If it goes well you can [open a pull request](/standards/pull-requests.html) to change this document.
 
-If you're having problems using one of the languages we support, open a pull request to
+If you’re having problems using one of the languages we support, open a pull request to
 document the issues.

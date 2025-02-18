@@ -1,6 +1,6 @@
 ---
 title: Java style guide
-last_reviewed_on: 2024-07-23
+last_reviewed_on: 2025-01-13
 review_in: 6 months
 owner_slack: '#java'
 ---
@@ -31,7 +31,7 @@ Some Java teams within GDS have had success using the [Spotless](https://github.
 
 [Java EE](https://www.oracle.com/java/technologies/java-ee-glance.html) (Enterprise Edition), a collection of APIs used by many server-side Java applications, was spun out from Oracle and handed over to the [Eclipse Foundation](https://www.eclipse.org/), who renamed it [Jakarta EE](https://jakarta.ee/) due to not having the rights to the Java trademark (Jakarta is the largest city on the island of Java).
 
-Beginning with version 9, Jakarta EE switched from using the `javax` package namespace to the `jakarta` package namespace, instantly breaking all applications that referenced the old package names.
+Beginning with version 9, Jakarta EE switched from using the `javax` package namespace to the `jakarta` package namespace, instantly breaking all applications that referenced the old package names.  (Be aware that other APIs — including some that are part of Java Standard Edition — also use the `javax` package namespace.)
 
 Migrating from Java EE to Jakarta EE is hard. Many libraries and frameworks use Java EE or Jakarta EE so migrating completely may involve updating many of your dependencies to new versions that work with Jakarta EE (if they exist).
 
@@ -121,11 +121,11 @@ var usernames = new HashSet<>();
 var usernames = new HashSet<String>();
 ```
 
-The [OpenJDK project has some style guidelines for local variable type inference](https://openjdk.org/projects/amber/guides/lvti-style-guide). Oracle’s [introduction to local variable type inference](https://developer.oracle.com/learn/technical-articles/jdk-10-local-variable-type-inference) also contains some recommendations.
+The [OpenJDK project has some style guidelines for local variable type inference](https://openjdk.org/projects/amber/guides/lvti-style-guide). Oracle’s [guide to local variable type inference](https://docs.oracle.com/en/java/javase/21/language/local-variable-type-inference.html) also contains some recommendations.
 
 ## Records
 
-Java 16 introduced record classes, which provide an excellent way to model immutable data with a concise syntax that eliminates the need to write tedious and error-prone code for basic functionality. [Dev.java has a good introduction to records.](https://dev.java/learn/records/)
+Java 16 introduced record classes, which provide an excellent way to model immutable data with a concise syntax that eliminates the need to write tedious and error-prone code for basic functionality. Records also support pattern matching. [Dev.java has a good introduction to records.](https://dev.java/learn/records/)
 
 ## Prefer functionality in the Java standard library
 
@@ -164,11 +164,11 @@ Use [Mockito](https://site.mockito.org/) for mocking. If you’re still using an
 
 ## Code checking
 
-We encourage the use of static analysis. Static analysis tools for Java include [SonarQube](https://www.sonarsource.com/products/sonarqube/), [Codacy](https://www.codacy.com/), [CheckStyle](https://checkstyle.sourceforge.io/) and [CodeQL](https://codeql.github.com/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
+We encourage the use of static analysis. Static analysis tools for Java include [CodeQL](https://codeql.github.com/), [SonarQube Server](https://www.sonarsource.com/products/sonarqube/), [Codacy](https://www.codacy.com/) and [CheckStyle](https://checkstyle.sourceforge.io/). However, be aware that such tools can detect an overwhelming number of problems if applied to an existing project, which tends to result in their checks being ignored.
 
 If possible, configure your static analysis tools using configuration files and keep these in your project repositories. This makes your settings more portable and makes it easier to perform the same checks in different places (for example, in a cloud service and on your own computer).
 
-Some cloud-based static analysis tools, including Codacy, can work directly with GitHub repositories. Only grant a tool access to your repositories if it has been approved by an information assurance review. The Digital Identity programme has approval to use [SonarCloud](https://www.sonarsource.com/products/sonarcloud/) on public repos.
+Some cloud-based static analysis tools, including Codacy, can work directly with GitHub repositories. Only grant a tool access to your repositories if it has been approved by an information assurance review. The Digital Identity programme has approval to use [SonarQube Cloud](https://www.sonarsource.com/products/sonarcloud/) on public repos.
 
 Try to minimise compiler warnings. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why. For example:
 
@@ -209,9 +209,11 @@ You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apa
 
 The [Dropwizard](https://www.dropwizard.io/) web framework is used widely within GDS.
 
-Dropwizard 3.0.0 and Dropwizard 4.0.0 were released simutaneously in March 2023. They have equivalent functionality but Dropwizard 3 continues to use Java EE and the `javax` package namespace while Dropwizard 4 migrates to [Jakarta EE](https://jakarta.ee/) and the `jakarta` package namespace (Jakarta EE is the successor to Java EE). It is easier to [upgrade to Dropwizard 3.0.x](https://www.dropwizard.io/en/release-3.0.x/manual/upgrade-notes/upgrade-notes-3_0_x.html) than to [upgrade to Dropwizard 4.0.x](https://www.dropwizard.io/en/release-4.0.x/manual/upgrade-notes/upgrade-notes-4_0_x.html).
+Dropwizard 3.0.0 and Dropwizard 4.0.0 were released simutaneously in March 2023. They have equivalent functionality but Dropwizard 3 continues to use Java EE and the `javax` package namespace while Dropwizard 4 migrates to [Jakarta EE](https://jakarta.ee/) and the `jakarta` package namespace (Jakarta EE is the successor to Java EE).
 
-[Dropwizard 2 is no longer supported as of 31 January 2024.](https://github.com/dropwizard/dropwizard/discussions/7880)
+[Dropwizard 2 is no longer supported as of 31 January 2024.](https://github.com/dropwizard/dropwizard/discussions/7880) If you are still using Dropwizard 2, [upgrade to Dropwizard 3](https://www.dropwizard.io/en/release-3.0.x/manual/upgrade-notes/upgrade-notes-3_0_x.html) rather than trying to upgrade directly to Dropwizard 4.
+
+If you are using Dropwizard 3, you can consider trying to [upgrade to Dropwizard 4](https://www.dropwizard.io/en/release-4.0.x/manual/upgrade-notes/upgrade-notes-4_0_x.html). You may find you have to upgrade some (but not all) of your other dependencies from versions that use Java EE to versions that use Jakarta EE.
 
 Dropwizard has built-in support for validating requests with Hibernate Validator. Use [Dropwizard’s validation](https://www.dropwizard.io/en/stable/manual/validation.html) in preference to rolling your own except in cases where Dropwizard’s built-in functionality cannot meet your validation requirements.
 

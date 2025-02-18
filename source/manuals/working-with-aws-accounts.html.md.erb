@@ -1,14 +1,17 @@
 ---
 title: Working with AWS accounts
-last_reviewed_on: 2023-11-24
+last_reviewed_on: 2025-02-18
 review_in: 12 months
 ---
 
 # <%= current_page.data.title %>
 
-Most teams in GDS use [Amazon Web Services (AWS)](https://aws.amazon.com/) as their infrastructure provider. GDS teams in GOV.UK and DSP manage their own AWS accounts, but users must first sign into a shared base AWS account called `gds-users`. They can then assume roles in their team's AWS account to perform administrative tasks using [AWS's cross-account access pattern](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html).
+Teams in GDS should use [Amazon Web Services (AWS)](https://aws.amazon.com/) as their core infrastructure provider. GDS uses multiple AWS Organizations. You can find more details about how the core GDS AWS Platform is managed on the [GDS Hub](https://engineering-enablement.gds-reliability.engineering/interim-org-platform.html). GDS teams in GOV.UK and DSP manage their own AWS accounts, but users must first sign into a shared base AWS account called `gds-users`. They can then assume roles in their team's AWS account to perform administrative tasks using [AWS's cross-account access pattern](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html).
 
-Note that GOV.UK One Login has its own AWS Organization separate from GDS / Cabinet Office accounts. That is managed by the programme, and separate guidance applies.
+Note that GOV.UK One Login has its own AWS organisation, managed by the Digital Identity directorate.
+More information is available in the
+[#di-aws-control-tower](https://gds.slack.com/archives/C04UJ0F91QA)
+Slack channel, and the guidance here does not apply.
 
 ## Request AWS user access
 
@@ -197,9 +200,9 @@ AWS Answers has more information about [AWS Multiple Account Security Strategy][
 
 ### Request an account
 
-To request an AWS account complete and submit the [request an AWS account form][].
+To request an AWS account, follow the [instructions on the GDS Engineering Hub](https://engineering-enablement.gds-reliability.engineering/interim-org-platform.html#account-vending-creating-a-new-account).
 
-Reliability Engineering will confirm if your account can be included in GDS AWS billing and perform the initial account setup.
+The GDS Engineering Enablement Team will confirm if your account can be included in GDS AWS billing and perform the initial account setup.
 
 Once your account is created you’ll receive an email with the account ID and will be able to assume an administrative role from [the GDS users base account][].
 
@@ -334,7 +337,7 @@ and ideally conform to the following (except for extenuating circumstances):
 
 ## Delete AWS accounts
 
-When your team no longer requires an AWS account, contact Reliability Engineering using the [#Reliability-eng Slack Channel](https://gds.slack.com/messages/CAD6NP598/convo/CAD6NP598-1540294660.000100/).
+When your team no longer requires an AWS account, contact the Engineering Enablement Team using the [#gds-engineering-enablement Slack Channel](https://gds.slack.com/messages/C05DC0SJ6UW).
 
 ## Remove access to AWS accounts
 

@@ -1,0 +1,63 @@
+---
+title: Diagrams as code
+last_reviewed_on: 2024-12-19
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+Code can be used to define the content, structure and appearance of a diagram which can then be rendered, instead of using a drawing tool directly. This approach is known as "diagrams as code".
+
+## What are diagrams for?
+
+> A good diagram enables you to more easily convey your design to others, and it provides a focus for your creative, as well as your technical thinking.
+
+— [Drawing good architecture diagrams](https://www.ncsc.gov.uk/blog-post/drawing-good-architecture-diagrams) tips from NCSC
+
+There are many ways to create a diagram, from pen and paper or whiteboard through to specialist diagramming software. The right tool will depend on the circumstances, including what the diagram is for and who needs to be able to contribute to it, but it's always worth considering a diagram generated from code.
+
+Diagrams are a form of documentation, and some teams already use a '[docs as code](https://technology.blog.gov.uk/2017/08/25/why-we-use-a-docs-as-code-approach-for-technical-documentation/)' approach. Diagrams as code builds on the rationale and benefits of docs as code, including
+
+* keeping documentation close to source code
+* ease of change
+* a workflow to review changes
+* version history
+* consistency
+
+## Accessibility
+
+Refer to [guidance on making images or charts accessible](https://www.gov.uk/guidance/publishing-accessible-documents).
+
+Since the source of the diagram provides a text based representation of the generated image, this probably makes it more accessible than a diagram drawn through a graphic editor. It may be preferable to signpost users to get to the source of the diagram rather than duplicating it alongside the diagram itself.
+
+## Diagrams as code tools
+
+### Mermaid
+
+Assuming you already [use GitHub](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/use-github.html) then you can [use Mermaid in Markdown files](https://github.blog/developer-skills/github/include-diagrams-markdown-files-mermaid/).
+
+The [Mermaid Live Editor](https://mermaid.live/) is a good way of trying out Mermaid, and seeing diagrams rendered from code in real time.
+
+> Mermaid will automatically insert the aria-roledescription and, if provided in the diagram text by the diagram author, the accessible title and description.
+
+— [Mermaid Accessibility Options](https://mermaid.js.org/config/accessibility.html)
+
+This works in a similar way to the `alt` attribute of an `<img>` element.
+
+```
+graph LR
+  accTitle: Accessible Title
+  accDescr: Accessible Description
+```
+
+We should consider [contributing to Mermaid](https://mermaid.js.org/community/contributing.html) if there are aspects of its accessibility we are able to improve.
+
+## Open source diagrams as code
+
+Consider making the code for your diagrams open in the same way as [your other source code](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/index.html#publish-open-source-code).
+
+## Sequence diagrams as code
+
+A [sequence diagram](https://en.wikipedia.org/wiki/Sequence_diagram) is used to show how different entities in a system interact with each other and can be a useful way of designing new functionality or documenting existing behaviour.
+
+[Mermaid can render sequence diagrams](https://mermaid.js.org/syntax/sequenceDiagram.html). See the [GOV.UK Forms GitHub repo](https://github.com/alphagov/forms/tree/main/diagrams/sequence-diagrams) for some examples.

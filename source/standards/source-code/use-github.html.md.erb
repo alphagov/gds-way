@@ -1,6 +1,6 @@
 ---
 title: Use GitHub
-last_reviewed_on: 2023-12-08
+last_reviewed_on: 2024-11-20
 review_in: 6 months
 ---
 
@@ -60,11 +60,13 @@ Consider creating a Workflow Template in the [alphagov workflow folder](https://
 If using GitHub-owned actions, [pin to a specific version](https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#using-release-management-for-your-custom-actions) and [configure Dependabot to keep your actions up to date](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot#example-dependabotyml-file-for-github-actions) by adding a comment on the same line with the tag the commitsha represents. For example:
 
 ```
-- uses: actions/checkout@01aecccf739ca6ff86c0539fbc67a7a5007bbc81 #v2.1.0
+- uses: actions/checkout@01aecccf739ca6ff86c0539fbc67a7a5007bbc81 # v2.1.0
 ```
 
 Pinned versions should include the semver version in a comment next to the SHA, helping humans understand which versions we are pinned to.
 Where possible, allow automated dependency management tools to scan these version comments and suggest updates.
+
+Please double-check that the digest and the commented version are consistent each time you upgrade, as dependabot does not have perfect capability at either identifying the magnitude of the upgrade, or necessarily updating the commented pin.
 
 Third-party actions should only be used if:
 
