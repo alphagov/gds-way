@@ -203,9 +203,9 @@ or application. It may be applicable to repositories that provide scripts to be 
 developers or other end-users, but is not recommended for code that's intended to be deployed
 on its own into the cloud.
 
-Use a [`setup.py`][setup-deps]
-to specify the dependencies of your library, and the version ranges with which it
-can be reasonably expected to work.
+Use a [`pyproject.toml`][pyproject-toml] to specify your library's configuration.
+When specifying the dependencies of your library and the version ranges with which it
+can be reasonably expected to work:
 
 - The range you choose will depend on the guarantees each dependency makes about
   backward-compatibility. For example, if you're currently using version 1.3.1 of
@@ -238,7 +238,7 @@ file otherwise.
 [GPSG]: https://google.github.io/styleguide/pyguide.html
 
 [snyk.io]: https://snyk.io/
-[setup-deps]: https://docs.python.org/3.11/distutils/setupscript.html#relationships-between-distributions-and-packages
+[pyproject-toml]: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 [pip-tools]: https://pip-tools.readthedocs.io/en/stable/
 
 [Black]: https://black.readthedocs.io/en/stable/
