@@ -1,6 +1,6 @@
 ---
 title: Python style guide
-last_reviewed_on: 2024-02-14
+last_reviewed_on: 2025-02-14
 review_in: 12 months
 owner_slack: '#python'
 ---
@@ -18,9 +18,9 @@ and consistent, within, and across, projects at GDS.
 
 ## Code formatting
 
-We use [Black][] to format our code. Black is an opinionated formatter that follows
-[PEP 8][]; where Black and PEP 8 do not express a view (for example, on the usage of
-language features such as metaclasses) we defer to the [Google Python style guide][GPSG].
+We use [Ruff][] to format our code. Ruff aims for cross compatibility with the popular
+opionionated formatter Black. Where Ruff and PEP 8 do not express a view (for example, on
+the usage of language features such as metaclasses) we defer to the [Google Python style guide][GPSG].
 Use these as references unless something is explicitly mentioned here. These rules
 should be followed in conjunction with the advice on consistency on the main
 [programming languages manual page][gds-way-code-style-guides].
@@ -43,8 +43,8 @@ strings and this convention begins to show its age.
 
 ### Ruff
 
-This manual advises the use of the [Ruff][] command line checker as an all in one lint,
-codestyle and complexity checker.
+This manual advises the use of the [Ruff][] command line checker as an all in one formatter,
+linter, codestyle and complexity checker.
 
 #### How to use Ruff
 
@@ -65,23 +65,16 @@ Commonly it's used for ignoring unused imports in module level `__init__.py`
 files or imports not being at the top of a file in settings files or scripts.
 
 The feature is documented in the Ruff documentation, under [per-file-ignores][ruff-ignore-files].
-You can also see an example in the [Notifications API repo][Notify-API-pyproject].
+You can also see an example in the [Notifications API repo][Notify-API-ruff-toml].
 
 
 #### Common Configuration
 
-Notify is already running the latest verions of [Black][] and [Ruff][] on all
+Notify is already running the latest verions of [Ruff][] on all
 of its repos. You can find an example of their configuration in the root of any
-repo in the [`pyproject.toml` file][Notify-API-pyproject].
-
-Commonly a `pyproject.toml` configuration file will live in the root of the package.
-It will contain separate sections for each tool the repository needs
+repo in the [`ruff.toml` file][Notify-API-ruff-toml].
 
 ```
-[tool.black]
-line-length = 120
-
-[tool.ruff]
 line-length = 120
 
 target-version = "py311"
@@ -97,7 +90,7 @@ select = [
 ]
 ignore = []
 exclude = [
-    "migrations/versions/"
+    "migrations/versions/", ...
 ]
 ```
 
@@ -110,7 +103,7 @@ comment - see [ruff's noqa syntax][ruff-error-suppression].
 
 #### Additional linting resources
 
-* [Notify Config][Notify-API-pyproject]: A production config to base off
+* [Notify Config][Notify-API-ruff-toml]: A production config to base off
 * [Ruff error codes list][ruff-error-codes-list]
 
 ## Environments
@@ -256,4 +249,4 @@ file otherwise.
 [ruff-ignore-files]: https://docs.astral.sh/ruff/settings/#lint_per-file-ignores
 [ruff-error-suppression]: https://docs.astral.sh/ruff/linter/#error-suppression
 [ruff-error-codes-list]: https://docs.astral.sh/ruff/rules/
-[Notify-api-pyproject]: https://github.com/alphagov/notifications-api/blob/0f4f6ce1e4f3fb22731ca426e8a17a2b154e3f8f/pyproject.toml
+[Notify-api-ruff-toml]: https://github.com/alphagov/notifications-api/blob/main/ruff.toml
