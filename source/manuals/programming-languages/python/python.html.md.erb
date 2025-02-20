@@ -108,15 +108,17 @@ comment - see [ruff's noqa syntax][ruff-error-suppression].
 
 ## Environments
 
-This manual advises the use of [Pyenv](https://github.com/pyenv/pyenv) to manage different versions of Python you have installed.
-For more information see [Intro to pyenv](https://realpython.com/intro-to-pyenv)
+This manual advises the use of [uv](uv-readme) to manage different versions of Python you have installed.
 
-Use the pyev plugin [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) to manage virtual python environment.
+To create virtual environments call `uv venv -p python3.13` from your project root directory. This will
+create a virtual environment with that specific python version in a folder called `.venv`. This folder
+should be excluded in your `.gitignore` file.
 For more information see [Python virtual environment primer](https://realpython.com/python-virtual-environments-a-primer/)
 
 [direnv](https://direnv.net/) is used to manage environment variables.
 This ensures project specific variables do not clutter your main environment or the environment of other projects.
 direnv uses `.envrc` for general project specific variables and you can use a non version controlled `.secrets` to store sensitive information.
+We recommend you put `source .venv/bin/activate` in your `.envrc` file to ensure your virtual environment is always activated.
 
 ## Dependencies
 
@@ -186,11 +188,12 @@ breaking changes to your build.
 
 Your pinned dependencies should be fully specified in a file called `requirements.txt`, and checked
 into your version control system (VCS). For projects with only a small number of dependencies, maintaining
-this manually (for example, installing with `pip install`, then using `pip freeze`) may be adequate.
+this manually (for example, installing with `uv pip install`, then using `pip freeze`) may be adequate.
 
-For larger projects, GDS recommends using [pip-tools][pip-tools] for managing dependencies.
+GDS recommends using [uv][uv-readme] for managing dependencies.
 
-Put your top-level requirements in a `requirements.in` file, and then use `pip-compile` to generate a
+Put your top-level requirements in a `requirements.in` file, and then use
+`uv pip compile requirements_for_test.in -o requirements_for_test.txt` to generate a
 `requirements.txt` file. Both the .in and .txt files should be commited to your repository.
 
 List dependencies only needed for development or testing into a separate `requirements-dev.txt` file.
@@ -239,11 +242,12 @@ file otherwise.
 
 [snyk.io]: https://snyk.io/
 [pyproject-toml]: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
-[pip-tools]: https://pip-tools.readthedocs.io/en/stable/
 
 [Black]: https://black.readthedocs.io/en/stable/
 [PEP 8]: https://www.python.org/dev/peps/pep-0008/
 [PEP 440]: https://www.python.org/dev/peps/pep-0440/#direct-references
+
+[uv-readme]: https://docs.astral.sh/uv/
 
 [ruff]: https://docs.astral.sh/ruff
 [ruff-ignore-files]: https://docs.astral.sh/ruff/settings/#lint_per-file-ignores
