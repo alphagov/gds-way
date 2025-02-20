@@ -1,6 +1,6 @@
 ---
 title: Python style guide
-last_reviewed_on: 2024-02-14
+last_reviewed_on: 2025-02-14
 review_in: 12 months
 owner_slack: '#python'
 ---
@@ -18,9 +18,9 @@ and consistent, within, and across, projects at GDS.
 
 ## Code formatting
 
-We use [Black][] to format our code. Black is an opinionated formatter that follows
-[PEP 8][]; where Black and PEP 8 do not express a view (for example, on the usage of
-language features such as metaclasses) we defer to the [Google Python style guide][GPSG].
+We use [Ruff][] to format our code. Ruff aims for cross compatibility with the popular
+opionionated formatter Black. Where Ruff and PEP 8 do not express a view (for example, on
+the usage of language features such as metaclasses) we defer to the [Google Python style guide][GPSG].
 Use these as references unless something is explicitly mentioned here. These rules
 should be followed in conjunction with the advice on consistency on the main
 [programming languages manual page][gds-way-code-style-guides].
@@ -43,8 +43,8 @@ strings and this convention begins to show its age.
 
 ### Ruff
 
-This manual advises the use of the [Ruff][] command line checker as an all in one lint,
-codestyle and complexity checker.
+This manual advises the use of the [Ruff][] command line checker as an all in one formatter,
+linter, codestyle and complexity checker.
 
 #### How to use Ruff
 
@@ -65,23 +65,16 @@ Commonly it's used for ignoring unused imports in module level `__init__.py`
 files or imports not being at the top of a file in settings files or scripts.
 
 The feature is documented in the Ruff documentation, under [per-file-ignores][ruff-ignore-files].
-You can also see an example in the [Notifications API repo][Notify-API-pyproject].
+You can also see an example in the [Notifications API repo][Notify-API-ruff-toml].
 
 
 #### Common Configuration
 
-Notify is already running the latest verions of [Black][] and [Ruff][] on all
+Notify is already running the latest verions of [Ruff][] on all
 of its repos. You can find an example of their configuration in the root of any
-repo in the [`pyproject.toml` file][Notify-API-pyproject].
-
-Commonly a `pyproject.toml` configuration file will live in the root of the package.
-It will contain separate sections for each tool the repository needs
+repo in the [`ruff.toml` file][Notify-API-ruff-toml].
 
 ```
-[tool.black]
-line-length = 120
-
-[tool.ruff]
 line-length = 120
 
 target-version = "py311"
@@ -97,7 +90,7 @@ select = [
 ]
 ignore = []
 exclude = [
-    "migrations/versions/"
+    "migrations/versions/", ...
 ]
 ```
 
@@ -110,20 +103,22 @@ comment - see [ruff's noqa syntax][ruff-error-suppression].
 
 #### Additional linting resources
 
-* [Notify Config][Notify-API-pyproject]: A production config to base off
+* [Notify Config][Notify-API-ruff-toml]: A production config to base off
 * [Ruff error codes list][ruff-error-codes-list]
 
 ## Environments
 
-This manual advises the use of [Pyenv](https://github.com/pyenv/pyenv) to manage different versions of Python you have installed.
-For more information see [Intro to pyenv](https://realpython.com/intro-to-pyenv)
+This manual advises the use of [uv](uv-readme) to manage different versions of Python you have installed.
 
-Use the pyev plugin [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) to manage virtual python environment.
+To create virtual environments call `uv venv -p python3.13` from your project root directory. This will
+create a virtual environment with that specific python version in a folder called `.venv`. This folder
+should be excluded in your `.gitignore` file.
 For more information see [Python virtual environment primer](https://realpython.com/python-virtual-environments-a-primer/)
 
 [direnv](https://direnv.net/) is used to manage environment variables.
 This ensures project specific variables do not clutter your main environment or the environment of other projects.
 direnv uses `.envrc` for general project specific variables and you can use a non version controlled `.secrets` to store sensitive information.
+We recommend you put `source .venv/bin/activate` in your `.envrc` file to ensure your virtual environment is always activated.
 
 ## Dependencies
 
@@ -193,11 +188,12 @@ breaking changes to your build.
 
 Your pinned dependencies should be fully specified in a file called `requirements.txt`, and checked
 into your version control system (VCS). For projects with only a small number of dependencies, maintaining
-this manually (for example, installing with `pip install`, then using `pip freeze`) may be adequate.
+this manually (for example, installing with `uv pip install`, then using `pip freeze`) may be adequate.
 
-For larger projects, GDS recommends using [pip-tools][pip-tools] for managing dependencies.
+GDS recommends using [uv][uv-readme] for managing dependencies.
 
-Put your top-level requirements in a `requirements.in` file, and then use `pip-compile` to generate a
+Put your top-level requirements in a `requirements.in` file, and then use
+`uv pip compile requirements_for_test.in -o requirements_for_test.txt` to generate a
 `requirements.txt` file. Both the .in and .txt files should be commited to your repository.
 
 List dependencies only needed for development or testing into a separate `requirements-dev.txt` file.
@@ -210,9 +206,9 @@ or application. It may be applicable to repositories that provide scripts to be 
 developers or other end-users, but is not recommended for code that's intended to be deployed
 on its own into the cloud.
 
-Use a [`setup.py`][setup-deps]
-to specify the dependencies of your library, and the version ranges with which it
-can be reasonably expected to work.
+Use a [`pyproject.toml`][pyproject-toml] to specify your library's configuration.
+When specifying the dependencies of your library and the version ranges with which it
+can be reasonably expected to work:
 
 - The range you choose will depend on the guarantees each dependency makes about
   backward-compatibility. For example, if you're currently using version 1.3.1 of
@@ -245,15 +241,16 @@ file otherwise.
 [GPSG]: https://google.github.io/styleguide/pyguide.html
 
 [snyk.io]: https://snyk.io/
-[setup-deps]: https://docs.python.org/3.11/distutils/setupscript.html#relationships-between-distributions-and-packages
-[pip-tools]: https://pip-tools.readthedocs.io/en/stable/
+[pyproject-toml]: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 
 [Black]: https://black.readthedocs.io/en/stable/
 [PEP 8]: https://www.python.org/dev/peps/pep-0008/
 [PEP 440]: https://www.python.org/dev/peps/pep-0440/#direct-references
 
+[uv-readme]: https://docs.astral.sh/uv/
+
 [ruff]: https://docs.astral.sh/ruff
 [ruff-ignore-files]: https://docs.astral.sh/ruff/settings/#lint_per-file-ignores
 [ruff-error-suppression]: https://docs.astral.sh/ruff/linter/#error-suppression
 [ruff-error-codes-list]: https://docs.astral.sh/ruff/rules/
-[Notify-api-pyproject]: https://github.com/alphagov/notifications-api/blob/0f4f6ce1e4f3fb22731ca426e8a17a2b154e3f8f/pyproject.toml
+[Notify-api-ruff-toml]: https://github.com/alphagov/notifications-api/blob/main/ruff.toml
