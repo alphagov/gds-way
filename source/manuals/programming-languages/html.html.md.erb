@@ -27,13 +27,7 @@ enhancement](https://www.gov.uk/service-manual/technology/using-progressive-enha
 
 ## Document structure
 
-Use HTML5 to structure your page semantically. Use [ARIA
-roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) to
-help older assistive technologies map the sections correctly.
-
-Léonie Watson explains [how to use ARIA landmark roles to deliver the best
-experience for screen reader
-users](https://tink.uk/screen-readers-aria-html5-too-much-information/).
+Use HTML5 to structure your page semantically.
 
 This document does not prescribe whether to use single or double quotes in
 attributes, whether to omit values from attributes that do not need them or
@@ -42,12 +36,12 @@ adopt should be consistent throughout your code.
 
 ### Header
 
-`<header role="banner">` should be used to contain your home link, branding,
-search, and any global navigation you may have.
+`<header>` should be used to contain your home link, branding, search, and any
+global navigation you may have.
 
 ### Main content
 
-`<main role="main">` should be used to identify the main content of your page.
+`<main>` should be used to identify the main content of your page.
 
 A "Skip to main content" link should be added to help screen reader and keyboard
 users skip past your general site navigation and get straight to the content.
@@ -56,9 +50,9 @@ System](https://design-system.service.gov.uk/components/skip-link/) for this.
 
 ### Navigational elements
 
-Use `<nav role="navigation">` to wrap groups of links that are not already in
-another context (for example, `<footer>`). Common examples of navigation
-sections are menus, tables of contents, and indexes.
+Use `<nav>` to wrap groups of links that are not already in another context (for
+example, `<footer>`). Common examples of navigation sections are menus, tables
+of contents, and indexes.
 
 If you use more than one `<nav>` block in your page it is advisable to give each
 one an [accessible name](https://www.tpgi.com/what-is-an-accessible-name/) using
@@ -72,15 +66,14 @@ tag](https://insidegovuk.blog.gov.uk/2013/07/03/rethinking-navigation/).
 
 ### Aside
 
-`<aside role="complementary">` should be used for content related to the primary
-content of the webpage, but which does not constitute the primary content of the
-page.
+`<aside>` should be used for content related to the primary content of the
+webpage, but which does not constitute the primary content of the page.
 
 Examples include author information, related links and related content.
 
 ### Footer
 
-`<footer role="contentinfo">` should be used for the footer of the site.
+`<footer>` should be used for the footer of the site.
 
 ### Region landmarks
 
@@ -103,6 +96,28 @@ navigate to the grouping easily and to have it listed in a summary of the page.
 You can already use headings and the other landmarks to identify sections of the
 page. Region landmarks should be used only when those are proven not to work
 well enough and doing so saves users more effort than it adds.
+
+### Supporting older browsers with ARIA landmark roles
+
+The semantic HTML elements mentioned above have implicit [ARIA
+roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles).
+Some older browsers, such as Internet Explorer, do not support these implicit
+roles, or support them inconsistently. If this is the case for one of your
+supported browsers, you should make the roles explicit, for example:
+
+```html
+<header role="banner"></header>
+<nav role="navigation"></nav>
+<main role="main"></main>
+<aside role="complementary"></aside>
+<section role="region" aria-labelledby="section-heading"></section>
+<footer role="contentinfo"></footer>
+```
+
+Check [HTML5 Accessibility](https://www.html5accessibility.com/#support) to
+determine whether you need to do this. Léonie Watson explains [how to use ARIA
+landmark roles to deliver the best experience for screen reader
+users](https://tink.uk/screen-readers-aria-html5-too-much-information/).
 
 ## Individual element guidance
 
