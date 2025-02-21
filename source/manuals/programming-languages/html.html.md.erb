@@ -131,15 +131,13 @@ There should only be one `<h1>` element in a page.
 
 Italics should be avoided. Bold can be used sparingly, but can make large blocks
 of text difficult to read. There is guidance on how to use bold and alternatives
-to italics in the [GOV.UK content style
-guide](https://www.gov.uk/guidance/style-guide).
+to italics in the [GOV.UK content style guide][govuk-style-guide].
 
 Semantically, words voiced with emphasis can be marked up with `<em>`, whereas
 words conveying a sense or urgency or warning should be marked up with
 `<strong>`. Currently [none of the major screen readers change their tone of
-voice when reading emphasised
-text](https://www.tpgi.com/screen-readers-support-for-text-level-html-semantics/),
-but in theory they could.
+voice when reading emphasised text][screen-reader-semantics], but in theory they
+could.
 
 Browsers will render `em` in italics and `strong` in bold by default, so you may
 need to override `em` to not use italics.
@@ -150,7 +148,7 @@ is usually better to use the `font-style` and `font-weight` CSS properties.
 ### Images
 
 Follow the guidance in the [Design System's Images
-section](https://design-system.service.gov.uk/styles/images/).
+section][design-system-images].
 
 ### Buttons vs links
 
@@ -172,11 +170,16 @@ readers.
 
 Instead, use CSS which ensures the text gets 'conceptually' rendered, even if
 the result is not visible on the screen. You can use the [Sass mixins from
-govuk-frontend](https://github.com/alphagov/govuk-frontend/blob/master/src/govuk/utilities/_visually-hidden.scss)
-or the classes `govuk-visually-hidden` and `govuk-visually-hidden-focusable`.
+govuk-frontend][visually-hidden-mixins] or the classes `govuk-visually-hidden`
+and `govuk-visually-hidden-focusable`.
 
 Visually hidden text is often a sign that something can be simplified or made
 visible to benefit sighted users too, so should be used sparingly.
+
+[govuk-style-guide]: https://www.gov.uk/guidance/style-guide
+[screen-reader-semantics]: https://www.tpgi.com/screen-readers-support-for-text-level-html-semantics/
+[design-system-images]: https://design-system.service.gov.uk/styles/images/
+[visually-hidden-mixins]: https://github.com/alphagov/govuk-frontend/blob/master/src/govuk/utilities/_visually-hidden.scss
 
 ## Formatting
 
