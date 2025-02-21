@@ -43,7 +43,7 @@ global navigation you may have.
 A “Skip to main content” link should be added to help screen reader and keyboard
 users bypass your general site navigation and get straight to the content. You
 can use the [skip link component from the GOV.UK Design
-System](https://design-system.service.gov.uk/components/skip-link/) for this.
+System][skip-link-component] for this.
 
 ### Navigational elements
 
@@ -52,14 +52,11 @@ example, `<footer>`). Common examples of navigation sections are menus, tables
 of contents, and indexes.
 
 If you use more than one `<nav>` block in your page it is advisable to give each
-one an [accessible name](https://www.tpgi.com/what-is-an-accessible-name/) using
-[aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby)
-or
-[aria-label](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label),
-to make clear the type of navigation contained by each.
+one an [accessible name][accessible-name] using [aria-labelledby][] or
+[aria-label][], to make clear the type of navigation contained by each.
 
-The GOV.UK blog has [more information regarding the use of the `<nav>`
-tag](https://insidegovuk.blog.gov.uk/2013/07/03/rethinking-navigation/).
+The GOV.UK blog has [more information regarding the use of the
+`<nav>`tag][nav-tag].
 
 ### Aside
 
@@ -78,14 +75,10 @@ Use region landmarks to surface important areas of a page where it's not
 appropriate to use any of the other types of landmarks.
 
 You can create region landmarks by using the `<section>` tag. The `<section>`
-must have an [accessible
-name](https://www.tpgi.com/what-is-an-accessible-name/), which can be provided
-using the
-[aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby)
-or
-[aria-label](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label)
-attributes. [A `<section>` tag without an accessible name is semantically the
-same as a `<div>` tag](https://w3c.github.io/html-aam/#el-section).
+must have an [accessible name][accessible-name], which can be provided using the
+[aria-labelledby][] or [aria-label][] attributes. [A `<section>` tag without an
+accessible name is semantically the same as a `<div>`
+tag][section-tag-without-name].
 
 Region landmarks should only be used where users will likely want to be able to
 navigate to the grouping easily and to have it listed in a summary of the page.
@@ -97,10 +90,10 @@ well enough and doing so saves users more effort than it adds.
 ### Supporting older browsers with ARIA landmark roles
 
 The semantic HTML elements mentioned above have implicit [ARIA
-roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles).
-Some older browsers, such as Internet Explorer, do not support these implicit
-roles, or support them inconsistently. If this is the case for one of your
-supported browsers, you should make the roles explicit, for example:
+roles][aria-roles]. Some older browsers, such as Internet Explorer, do not
+support these implicit roles, or support them inconsistently. If this is the
+case for one of your supported browsers, you should make the roles explicit, for
+example:
 
 ```html
 <header role="banner"></header>
@@ -111,10 +104,19 @@ supported browsers, you should make the roles explicit, for example:
 <footer role="contentinfo"></footer>
 ```
 
-Check [HTML5 Accessibility](https://www.html5accessibility.com/#support) to
-determine whether you need to do this. Léonie Watson explains [how to use ARIA
-landmark roles to deliver the best experience for screen reader
-users](https://tink.uk/screen-readers-aria-html5-too-much-information/).
+Check [HTML5 Accessibility][html5-accessibility] to determine whether you need
+to do this. Léonie Watson explains [how to use ARIA landmark roles to deliver
+the best experience for screen reader users][aria-leonie-watson].
+
+[skip-link-component]: https://design-system.service.gov.uk/components/skip-link/
+[accessible-name]: https://www.tpgi.com/what-is-an-accessible-name/
+[aria-label]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label
+[aria-labelledby]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby
+[nav-tag]: https://insidegovuk.blog.gov.uk/2013/07/03/rethinking-navigation/
+[section-tag-without-name]: https://w3c.github.io/html-aam/#el-section
+[aria-roles]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles
+[html5-accessibility]: https://www.html5accessibility.com/#support
+[aria-leonie-watson]: https://tink.uk/screen-readers-aria-html5-too-much-information/
 
 ## Individual element guidance
 
