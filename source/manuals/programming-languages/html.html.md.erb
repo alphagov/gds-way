@@ -125,15 +125,17 @@ There should only be one `<h1>` element in a page.
 
 ### Text emphasis
 
-Italics should be avoided according to the [GOV.UK content style
+Italics should be avoided. Bold can be used sparingly, but can make large blocks
+of text difficult to read. There is guidance on how to use bold and alternatives
+to italics in the [GOV.UK content style
 guide](https://www.gov.uk/guidance/style-guide).
-
-Bold can be used sparingly, but can make large blocks of text difficult to read.
 
 Semantically, words voiced with emphasis can be marked up with `<em>`, whereas
 words conveying a sense or urgency or warning should be marked up with
-`<strong>`. In theory screen readers could adopt a different tone of voice for
-this markup, though none of the major ones currently do.
+`<strong>`. Currently [none of the major screen readers change their tone of
+voice when reading emphasised
+text](https://www.tpgi.com/screen-readers-support-for-text-level-html-semantics/),
+but in theory they could.
 
 Browsers will render `em` in italics and `strong` in bold by default, so you may
 need to override `em` to not use italics.
