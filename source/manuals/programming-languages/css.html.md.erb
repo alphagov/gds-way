@@ -17,15 +17,85 @@ owner_slack: '#frontend'
 
 ## Linting
 
-Your project should conform to GDS CSS/Sass linting rules, these are published as a [stylelint](https://stylelint.io) configuration: [stylint-config-gds](https://github.com/alphagov/stylelint-config-gds).
+Your project should conform to GDS CSS/Sass linting rules. These are published as a [stylelint][] configuration: [stylelint-config-gds][].
+
+Depending on your project needs, you may complement this initial set of rules with extra linting, for example:
+
+- other [stylelint plugins][]
+- [Prettier][] to enforce further code formatting conventions
+
+**Why**: Linting ensures consistency in the codebase and picks up on well-known issues. Using an shared set of rules across GDS ensures familiar conventions from one project to another.
+
+[stylelint]: https://stylelint.io
+[stylelint-config-gds]: https://github.com/alphagov/stylelint-config-gds
+[stylelint plugins]: https://stylelint.io/awesome-stylelint/#plugins
+[Prettier]: https://prettier.io/docs/en/cli.html
+
+### Tools
+
+#### Stylelint
+
+Stylelint is a widely used linter for CSS and CSS-like languages, like Sass. It focuses on checking code quality rather than code formatting. Its system of shareable configurations allows to share sets of rules to check your project against and plugins extends the rules it provides out of the box.
+
+`stylelint-config-gds` is a shareable config for Stylelint, providing the rules your code should follow, both for CSS and Sass files (each as separate configuration).
+
+In addition to this shared set of rules, you can use extra stylelint plugins or add rules as needs arise during the life of your project. In that area, automatically fixable rules are especially cheap to try out, as the tools will take care of updating your code for you.
+
+#### Prettier
+
+Prettier's only preoccupation is with [code formatting, not code quality][prettier-comparison]. 
+It can be used as a complement to Stylelint for further automated formatting, with much more advanced decisions in terms of indentation, spaces, or line breaks.
+
+It runs as a separate command (`npx prettier`) and the should be no conflicts between the Stylelint rules and the formatting of Prettier.
+
+[prettier-comparison]: https://prettier.io/docs/en/comparison
+
+### When to run linting
+
+#### On CI
+
+Running linting in CI ensures that all pull requests meet our code conventions before getting merged on the `main` branch.
+You should have this configured as part of your project.
+
+#### Through pre-commit Git hooks
+
+Waiting for CI to know if the code follows the convention can take a bit of time.
+A pre-commit Git hook allows to get quicker feedback, directly on developers' machines.
+Errors that are automatically fixable can be fixed at that stage without human intervention, reducing the effort of linting for developers.
+
+Tools like [Husky][] and [lint-staged][] can help consistently run linting before commit by respectively:
+
+- setting up the hooks when dependencies get installed
+- running linting on the files staged for commit and adding any fixes to the current commit
+
+[Husky]: https://typicode.github.io/husky/
+[lint-staged]: https://www.npmjs.com/package/lint-staged
+
+#### In editors
+
+To get even quicker feedback, editor plugins can highlight issues while editing files.
+They can correct automatically fixable errors on save, saving further development effort.
+
+Each of the tools previously listed has plugins to help integrate with editors:
+
+- [Stylelint editor plugins](https://stylelint.io/awesome-stylelint/#editor-integrations)
+- [Prettier editor plugins](https://prettier.io/docs/en/editors)
 
 ## Whitespace
 
-Use soft tabs with a 2 space indent. This follows the conventions we use in our other projects.
+Use soft tabs with a two space indent.
+
+If you're using [Prettier](#prettier), this will be set up for you. Otherwise, you may want to configure a [`.editorconfig` file][editorconfig] accordingly.
+
+**Why:** This follows the conventions used within our other projects.
+
+[editorconfig]: https://editorconfig.org/
 
 ## Spacing
 
-You should use the [GOV.UK Design System spacing scale](https://design-system.service.gov.uk/styles/spacing/).
+The [GOV.UK Design System spacing scale](https://design-system.service.gov.uk/styles/spacing/) should be preferred before picking custom spacing values for your project.
+
+If you do add custom values in your project, ensure the new values are consistent with the GOV.UK Design System spacing scale (ie. are pixel values in multiples of `5px`).
 
 ### Use with deprecated libraries
 
@@ -49,11 +119,9 @@ You should [configure autoprefixer](https://github.com/postcss/autoprefixer#brow
 
 ## Sass nesting
 
-Sass nesting should be avoided where possible.
+Sass nesting should be avoided where possible, with the exception of pseudo selectors and classes introduced by JavaScript.
 
-Over use of nesting can make searching for selectors difficult and can hide complicated CSS that should be simplified.
-
-Exceptions to this include pseudo selectors and JavaScript enabled classes.
+While nesting can help readability and reduce repetition, over use can make searching for selectors difficult and can hide complicated CSS that should be simplified.
 
 ```scss
 .accordion {
