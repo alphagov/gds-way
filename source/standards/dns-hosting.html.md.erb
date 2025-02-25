@@ -31,3 +31,18 @@ You can read more about [service domains and DNS][] in the Service Manual.
 [Amazon Route 53]: https://aws.amazon.com/route53/
 [Google Cloud DNS]: https://cloud.google.com/dns/
 [service domains and DNS]: https://www.gov.uk/service-manual/technology/get-a-domain-name
+
+## Production and non-production domain names
+
+Your non-production domains should be subdomains of your production domain.
+
+For example, if you service can be found at `myservice.service.gov.uk`, then you might also have Route 53 records for your other environments, such as:
+
+* `staging.myservice.service.gov.uk`
+* `dev.myservice.service.gov.uk`
+
+You can manage all of these records from your production Route 53 configuration pipeline, even though they relate to other environments.
+
+If your service has more complex needs you may alternatively
+[delegate](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-routing-traffic-for-subdomains.html)
+the zone for a subdomain to an AWS account that relates specifically to that environment.
