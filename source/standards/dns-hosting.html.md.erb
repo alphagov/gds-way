@@ -46,3 +46,20 @@ You can manage all of these records from your production Route 53 configuration 
 If your service has more complex needs you may alternatively
 [delegate](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-routing-traffic-for-subdomains.html)
 the zone for a subdomain to an AWS account that relates specifically to that environment.
+
+## Internal GDS services
+
+Internal GDS services must be hosted on subdomains of the `digital.cabinet-office.gov.uk` domain.
+
+> [!TIP]
+> This domain is likely to change as part of GDS moving to DSIT.
+
+Once you have
+[configured your Route 53 hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingNewSubdomain.html),
+you'll need to use the
+[GDS IT Help Desk](https://gdshelpdesk.digital.cabinet-office.gov.uk/helpdesk)
+to request delegation of your subdomain - choose:
+
+* IT Requests
+* Changes - Request & Support
+* DNS
