@@ -1,12 +1,12 @@
 ---
 title: Principle of Least Privilege
-last_reviewed_on: 2024-06-27
+last_reviewed_on: 2025-02-06
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-The [principle of least privilege][polp] involves setting up user accounts so they can only access and use the information they need for specific tasks. This can also apply to processes and individuals who might have to switch between normal access and the increased access of a superuser account as part of their work.
+The [principle of least privilege][polp] is succinctly defined as "Every program and every privileged user of the system should operate using the least amount of privilege necessary to complete the job." It requires you to consider what permissions actors in your system need. For robotic or computer actors, like your deployment pipeline, this can be fairly easy to scope. Likewise, your end-users will have a clearly defined set of permissions they need to use your service.
 
 All access provisioned for use within GDS must be provided on a least privilege basis.
 
@@ -15,7 +15,7 @@ Examples of privileged or higher security access are:
 - root access
 - updating operating systems
 - performing “sudo” operations
-- accessing high secret credentials
+- accessing secret credentials
 - committing to repositories
 
 You should use the principle of least privilege if you:
@@ -32,7 +32,7 @@ Your team should:
 - create the roles or credentials with the least possible privilege, with only necessary permissions required for normal users to perform their day-to-day jobs
 - use the role or credentials with the least possible privilege as the default option
 - use just-in-time (JIT) access provisioning to grant users an on-demand, time-limited privileged role or security token to access the privileged resources
-- make sure session time of the privileged access is set to no more than 12 hours, and/or terminates when the user logs out of their laptop
+- make sure session time of the privileged access (in non-development environments) is set to no more than 30 minutes, and/or terminates when the user logs out of their laptop
 - establish an audit trail for the use of privileged access
 - ensure approval and use of privileged accounts is kept to the absolute minimum necessary for a user to perform their job role
 - in cases where JIT access is not implemented for users with privileged access that have critical business impact, implement a documeneted periodic review (cadence to be defined) of the need to continually have these privileged access granted to confirmed users
@@ -44,7 +44,7 @@ It's important to recognise opportunities for privilege creep / accumulation and
 
 For human-readable secrets, such as a username and password, you should set up a separate secret or [password manager](https://www.ncsc.gov.uk/collection/passwords/password-manager-buyers-guide). 
 
-If you’re using the gds-users account to log into your AWS accounts, you should assume a read-only role by default. You should only assume an admin role when absolutely necessary for a specific task. You should set up the admin account so that the session timeout is less than 12 hours. You should send the audit trail of admin access to the Cyber Security team. Use the Cyber Security Slack channel ([#cyber-security-help](https://gds.slack.com/archives/CCMPJKFDK)) to set up the audit trail.
+If you’re using the gds-users account to log into your AWS accounts, you should assume a read-only role by default. You should only assume an admin role when absolutely necessary for a specific task. You should set up the admin account so that the session timeout is less than 30 minutes. You should send the audit trail of admin access to the Cyber Security team. Use the Cyber Security Slack channel ([#cyber-security-help](https://gds.slack.com/archives/CCMPJKFDK)) to set up the audit trail.
 
 
 ## Further Guidance
@@ -52,5 +52,6 @@ If you’re using the gds-users account to log into your AWS accounts, you shoul
 - [NCSC - 10 steps to cyber security](https://www.ncsc.gov.uk/collection/10-steps)
 - [NCSC - privileged user management](https://www.ncsc.gov.uk/guidance/introduction-identity-and-access-management#section_6)
 - [NIST Special Publication 800-53 - AC-6 least privilege][polp]
+- [Government cyber policy - B2 identity and access control](https://www.security.gov.uk/policy-and-guidance/government-cyber-security-policy-handbook/principle-b2-identity-and-access-control/)
 
-[polp]: https://csrc.nist.gov/Projects/risk-management/sp800-53-controls/release-search
+[polp]: https://csf.tools/reference/nist-sp-800-53/r5/ac/ac-6/
