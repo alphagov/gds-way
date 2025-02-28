@@ -10,7 +10,6 @@ To ensure users can connect to your service, you'll need accurate Domain Name Sy
 
 For services [hosted on AWS](./hosting.html) you should use [Amazon Route 53][] as a cloud DNS web service.
 
-> [!INFO]
 > Some services dual-host their DNS using [Google Cloud DNS][] for high nameserver availability.
 > This adds complexity and risk, so do a careful analysis of how it could affect overall reliability first.
 
@@ -30,7 +29,6 @@ For example, if you service can be found at `myservice.service.gov.uk`, then you
 * `staging.myservice.service.gov.uk`
 * `dev.myservice.service.gov.uk`
 
-> [!TIP]
 > In this example it's important to avoid setting cookies for the entire domain `myservice.service.gov.uk`.
 > Always follow the
 > [OWASP guidance on cookie domains](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#domain-and-path-attributes)
@@ -48,7 +46,6 @@ the zone for a subdomain to an AWS account that relates specifically to that env
 
 Internal GDS services must be hosted on subdomains of the `digital.cabinet-office.gov.uk` domain.
 
-> [!TIP]
 > This domain is likely to change as part of GDS moving to DSIT.
 
 Once you have
