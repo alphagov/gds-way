@@ -6,13 +6,13 @@
 
 At the bottom of each page of the [hosted GDS Way](https://gds-way.digital.cabinet-office.gov.uk/) there is a `View source` link. This link will take you to to the corresponding [Github](https://github.com/alphagov/gds-way) page where you can use the pencil icon (:pencil:) in the interface to propose edits to a page.
 
-Once you have made your changes you can write a description, click the green `Propose changes` button, and on the following page clickj the green `Create pull request` button.
+Once you have made your changes you can write a description, click the green `Propose changes` button, and on the following page click the green `Create pull request` button.
 
 ### Making documentation changes (locally)
 
 To make changes edit the source files in the [source](source) folder.
 
-The bulk of the documentaion that makes up the GDS Way can be found in files located in the `source/standards` and `source/manuals` directories.
+The bulk of the documentation that makes up the GDS Way can be found in files located in the `source/standards` and `source/manuals` directories.
 
 ### Adding documentation
 
@@ -20,11 +20,11 @@ You can add a new file to the source folder (or an appropriate sub-folder) to cr
 
 It is probably easiest to copy an existing file and change the name if you are new to writing text in [markdown](https://www.markdownguide.org/).
 
-You then need to manually add your new page to one of the menu files in [source/partials/_nav...](source/partials/_nav...) for it to appear in one of the menus.
+You then need to manually add your new page to one of the menu files in [source/partials/\_nav...](source/partials/_nav...) for it to appear in one of the menus.
 
 ### Raising and merging PRs to this repo
 
-To submit changes to this repo, raise a PR in the usual way and these will be regularly reviewed by The GDS Way forum group that meets once a month.  Reviewing and merging PRs at any time is fine, the forum will also review merged PRs as part of its regular meeting.
+To submit changes to this repo, raise a PR in the usual way and these will be regularly reviewed by The GDS Way forum group that meets once a month. Reviewing and merging PRs at any time is fine, the forum will also review merged PRs as part of its regular meeting.
 
 Any open non-draft PRs that have been more than 1 month without further comments, suggestions or alterations will be merged by the forum group unless there is an explicit "DO NOT MERGE" somewhere in the title or description.
 
@@ -101,6 +101,7 @@ export PKG_CONFIG_PATH=$(brew --prefix openssl@1.1)/lib/pkgconfig
 ```
 
 #### Install the required gems
+
 Then in the application folder type the following to install the required gems:
 
 ```
