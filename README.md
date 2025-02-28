@@ -34,7 +34,7 @@ There is a GDS Slack channel `#gds-way` where these are discussed.
 
 The GDS Way is built from the [Tech Docs Template](https://github.com/alphagov/tech-docs-template)
 repository. Any functional changes and bug fixes should be made to that project first, then follow the
-instructions [here](https://github.com/alphagov/tech-docs-template#updating-a-project-to-use-the-latest-template)
+instructions [here](https://github.com/alphagov/tdt-documentation/blob/main/source/maintain_project/use_latest_template/index.html.md.erb)
 to update the GDS Way.
 
 ## Running Locally
@@ -163,7 +163,7 @@ This script is automatically run as part of CI, but skipped on the main branch
 
 ## Deploy
 
-This repo is continuously deployed from the `main` branch by GitHub Actions, using the workflow defined in [`/.github/workflows/bundle_and_release.yml`](/.github/workflows/bundle_and_release.yml).
+This repo is continuously deployed from the `main` branch by GitHub Actions, using the workflow defined in [`/.github/workflows/deploy-to-pages.yml`](/.github/workflows/deploy-to-pages.yaml).
 
 ## Licence
 
