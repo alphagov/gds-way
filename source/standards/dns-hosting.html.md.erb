@@ -30,6 +30,14 @@ For example, if you service can be found at `myservice.service.gov.uk`, then you
 * `staging.myservice.service.gov.uk`
 * `dev.myservice.service.gov.uk`
 
+> [!TIP]
+> In this example it's important to avoid setting cookies for the entire domain `myservice.service.gov.uk`.
+> Always follow the
+> [OWASP guidance on cookie domains](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#domain-and-path-attributes)
+> such as to avoid using the `Domain` cookie attribute.
+>
+> You can also consider ensuring full separation using the domain hierarchy, for example by putting your production service on `www.myservice.service.gov.uk`.
+
 You can manage all of these records from your production Route 53 configuration pipeline, even though they relate to other environments.
 
 If your service has more complex needs you may alternatively
