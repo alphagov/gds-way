@@ -4,36 +4,52 @@
 
 ### Making documentation changes (using the Github interface)
 
-At the bottom of each page of the [hosted GDS Way][gds-way] there is a `View source` link. This link will take you to to the corresponding [Github][repo] page where you can use the pencil icon (:pencil:) in the interface to propose edits to a page.
+At the bottom of each page of the [hosted GDS Way][gds-way] there is a `View
+source` link. This link will take you to to the corresponding [Github][repo]
+page where you can use the pencil icon (:pencil:) in the interface to propose
+edits to a page.
 
-Once you have made your changes you can write a description, click the green `Propose changes` button, and on the following page click the green `Create pull request` button.
+Once you have made your changes you can write a description, click the green
+`Propose changes` button, and on the following page click the green `Create pull
+request` button.
 
 ### Making documentation changes (locally)
 
 To make changes edit the source files in the [source](source) folder.
 
-The bulk of the documentation that makes up the GDS Way can be found in files located in the `source/standards` and `source/manuals` directories.
+The bulk of the documentation that makes up the GDS Way can be found in files
+located in the `source/standards` and `source/manuals` directories.
 
 ### Adding documentation
 
-You can add a new file to the source folder (or an appropriate sub-folder) to create a new page.
+You can add a new file to the source folder (or an appropriate sub-folder) to
+create a new page.
 
-It is probably easiest to copy an existing file and change the name if you are new to writing text in [markdown][].
+It is probably easiest to copy an existing file and change the name if you are
+new to writing text in [markdown][].
 
-You then need to manually add your new page to one of the menu files in [source/partials/\_nav...](source/partials/_nav...) for it to appear in one of the menus.
+You then need to manually add your new page to one of the menu files in
+[source/partials/\_nav...](source/partials/_nav...) for it to appear in one of
+the menus.
 
 ### Raising and merging PRs to this repo
 
-To submit changes to this repo, raise a PR in the usual way and these will be regularly reviewed by The GDS Way forum group that meets once a month. Reviewing and merging PRs at any time is fine, the forum will also review merged PRs as part of its regular meeting.
+To submit changes to this repo, raise a PR in the usual way and these will be
+regularly reviewed by The GDS Way forum group that meets once a month. Reviewing
+and merging PRs at any time is fine, the forum will also review merged PRs as
+part of its regular meeting.
 
-Any open non-draft PRs that have been more than 1 month without further comments, suggestions or alterations will be merged by the forum group unless there is an explicit "DO NOT MERGE" somewhere in the title or description.
+Any open non-draft PRs that have been more than 1 month without further
+comments, suggestions or alterations will be merged by the forum group unless
+there is an explicit "DO NOT MERGE" somewhere in the title or description.
 
 There is a GDS Slack channel `#gds-way` where these are discussed.
 
 ### Making functional changes
 
 The GDS Way is built from the [Tech Docs Template][tech-docs-template]
-repository. Any functional changes and bug fixes should be made to that project first, then follow the [instructions to update the GDS Way][updating-tech-docs].
+repository. Any functional changes and bug fixes should be made to that project
+first, then follow the [instructions to update the GDS Way][updating-tech-docs].
 
 ## Running Locally
 
@@ -41,7 +57,8 @@ repository. Any functional changes and bug fixes should be made to that project 
 
 To preview or build the website, we need to use the terminal.
 
-If you have Docker, you can run the website locally using the [startup script](./startup.sh) provided:
+If you have Docker, you can run the website locally using the [startup
+script](./startup.sh) provided:
 
 ```zsh
 ./startup.sh
@@ -51,11 +68,11 @@ Otherwise, the following steps will get Middleman running locally.
 
 #### Install Ruby and Bundler
 
-Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm],
-and the [Bundler gem][bundler].
+Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm], and
+the [Bundler gem][bundler].
 
-A [.ruby-version](./.ruby-version) file is provided for use with [rbenv][].
-If you update it, please update the [Dockerfile](./Dockerfile).
+A [.ruby-version](./.ruby-version) file is provided for use with [rbenv][]. If
+you update it, please update the [Dockerfile](./Dockerfile).
 
 #### Clone the repository
 
@@ -117,8 +134,8 @@ the HTML and asset files ready to be published.
 
 ### Check external links
 
-If you want to verify that all of the external links in every page work (i.e.
-do not return an HTTP error code), use the `check_links.rb` script.
+If you want to verify that all of the external links in every page work (i.e. do
+not return an HTTP error code), use the `check_links.rb` script.
 
 ```zsh
 bundle exec ruby check_links.rb
@@ -129,15 +146,17 @@ This script is automatically run as part of CI, but skipped on the main branch
 
 ## Deploy
 
-This repo is continuously deployed from the `main` branch by GitHub Actions, using the workflow defined in [`/.github/workflows/deploy-to-pages.yaml`](/.github/workflows/deploy-to-pages.yaml).
+This repo is continuously deployed from the `main` branch by GitHub Actions,
+using the workflow defined in
+[`/.github/workflows/deploy-to-pages.yaml`](/.github/workflows/deploy-to-pages.yaml).
 
 ## Licence
 
 Unless stated otherwise, the codebase is released under [the MIT License][mit].
 This covers both the codebase and any sample code in the documentation.
 
-The documentation is [© Crown copyright][copyright] and available under the terms
-of the [Open Government 3.0][ogl] licence.
+The documentation is [© Crown copyright][copyright] and available under the
+terms of the [Open Government 3.0][ogl] licence.
 
 [gds-way]: https://gds-way.digital.cabinet-office.gov.uk/
 [repo]: https://github.com/alphagov/gds-way
