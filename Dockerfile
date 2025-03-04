@@ -1,4 +1,4 @@
- # 3.1.3-buster
+# 3.4
 FROM ruby@sha256:d780a9b44dc5e57a4968d3e4b086bbdd9b595f06d747da10b29e568386fe1dd9
 
 EXPOSE 4567:4567
