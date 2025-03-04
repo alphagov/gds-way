@@ -43,11 +43,10 @@ to update the GDS Way.
 
 To preview or build the website, we need to use the terminal.
 
-You can use the Dockerfile provided:
+If you have Docker, you can run the website locally using the [startup script](./startup.sh) provided:
 
-```
-docker build . -t gds-way
-docker run --rm -p 4567:4567 -p 35729:35729 -v $(pwd):/usr/src/docs -it gds-way
+```zsh
+./startup.sh
 ```
 
 Otherwise, the following steps will get Middleman running locally.
