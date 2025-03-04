@@ -33,9 +33,7 @@ There is a GDS Slack channel `#gds-way` where these are discussed.
 ### Making functional changes
 
 The GDS Way is built from the [Tech Docs Template](https://github.com/alphagov/tech-docs-template)
-repository. Any functional changes and bug fixes should be made to that project first, then follow the
-instructions [here](https://github.com/alphagov/tdt-documentation/blob/main/source/maintain_project/use_latest_template/index.html.md.erb)
-to update the GDS Way.
+repository. Any functional changes and bug fixes should be made to that project first, then follow the [instructions to update the GDS Way](https://github.com/alphagov/tdt-documentation/blob/main/source/maintain_project/use_latest_template/index.html.md.erb).
 
 ## Running Locally
 
