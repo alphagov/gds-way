@@ -63,7 +63,7 @@ If you update it, please update the [Dockerfile](./Dockerfile).
 
 Clone the repository using:
 
-```
+```zsh
 git clone https://github.com/alphagov/gds-way.git
 cd gds-way
 ```
@@ -72,7 +72,7 @@ cd gds-way
 
 Then in the application folder type the following to install the required gems:
 
-```
+```zsh
 bundle config set path 'vendor/bundle'
 bundle install
 ```
@@ -88,13 +88,13 @@ access it if they are given the link.
 
 Type the following to start the server:
 
-```
+```zsh
 bundle exec middleman server
 ```
 
 If all goes well something like the following output will be displayed:
 
-```
+```zsh
 == The Middleman is loading
 == LiveReload accepting connections from ws://192.168.0.8:35729
 == View your site at "http://Laptop.local:4567", "http://192.168.0.8:4567"
@@ -110,7 +110,7 @@ build the static HTML files.
 
 Type the following to build the HTML:
 
-```
+```zsh
 bundle exec middleman build
 ```
 
@@ -122,7 +122,7 @@ the HTML and asset files ready to be published.
 If you want to verify that all of the external links in every page work (i.e.
 do not return an HTTP error code), use the `check_links.rb` script.
 
-```
+```zsh
 bundle exec ruby check_links.rb
 ```
 
