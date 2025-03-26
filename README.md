@@ -32,8 +32,7 @@ There is a GDS Slack channel `#gds-way` where these are discussed.
 
 ### Making functional changes
 
-The GDS Way is built from the [Tech Docs Template][tech-docs-template]
-repository. Any functional changes and bug fixes should be made to that project first, then follow the [instructions to update the GDS Way][updating-tech-docs].
+The GDS Way is built from the [Tech Docs Template][tech-docs-template] repository. Any functional changes and bug fixes should be made to that project first, then follow the [instructions to update the GDS Way][updating-tech-docs].
 
 ## Running Locally
 
@@ -51,11 +50,9 @@ Otherwise, the following steps will get Middleman running locally.
 
 #### Install Ruby and Bundler
 
-Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm],
-and the [Bundler gem][bundler].
+Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm], and the [Bundler gem][bundler].
 
-A [.ruby-version](./.ruby-version) file is provided for use with [rbenv][].
-If you update it, please update the [Dockerfile](./Dockerfile).
+A [.ruby-version](./.ruby-version) file is provided for use with [rbenv][]. If you update it, please update the [Dockerfile](./Dockerfile).
 
 #### Clone the repository
 
@@ -77,12 +74,9 @@ bundle install
 
 ### Preview
 
-Whilst writing documentation we can run a middleman server to preview how the
-published version will look in the browser. After saving a change the preview in
-the browser will automatically refresh.
+Whilst writing documentation we can run a middleman server to preview how the published version will look in the browser. After saving a change the preview in the browser will automatically refresh.
 
-The preview is only available on our own computer. Others will not be able to
-access it if they are given the link.
+The preview is only available on our own computer. Others will not be able to access it if they are given the link.
 
 Type the following to start the server:
 
@@ -103,8 +97,7 @@ You should now be able to view a live preview at http://localhost:4567.
 
 ### Build
 
-If you want to publish the website without using a build script you may need to
-build the static HTML files.
+If you want to publish the website without using a build script you may need to build the static HTML files.
 
 Type the following to build the HTML:
 
@@ -112,20 +105,17 @@ Type the following to build the HTML:
 bundle exec middleman build
 ```
 
-This will create a `build` subfolder in the application folder which contains
-the HTML and asset files ready to be published.
+This will create a `build` subfolder in the application folder which contains the HTML and asset files ready to be published.
 
 ### Check external links
 
-If you want to verify that all of the external links in every page work (i.e.
-do not return an HTTP error code), use the `check_links.rb` script.
+If you want to verify that all of the external links in every page work (i.e. do not return an HTTP error code), use the `check_links.rb` script.
 
 ```zsh
 bundle exec ruby check_links.rb
 ```
 
-This script is automatically run as part of CI, but skipped on the main branch
-(so that the main branch can always be deployed).
+This script is automatically run as part of CI, but skipped on the main branch (so that the main branch can always be deployed).
 
 ## Deploy
 
@@ -133,11 +123,9 @@ This repo is continuously deployed from the `main` branch by GitHub Actions, usi
 
 ## Licence
 
-Unless stated otherwise, the codebase is released under [the MIT License][mit].
-This covers both the codebase and any sample code in the documentation.
+Unless stated otherwise, the codebase is released under [the MIT License][mit]. This covers both the codebase and any sample code in the documentation.
 
-The documentation is [© Crown copyright][copyright] and available under the terms
-of the [Open Government 3.0][ogl] licence.
+The documentation is [© Crown copyright][copyright] and available under the terms of the [Open Government 3.0][ogl] licence.
 
 [gds-way]: https://gds-way.digital.cabinet-office.gov.uk/
 [repo]: https://github.com/alphagov/gds-way
