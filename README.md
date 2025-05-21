@@ -4,7 +4,7 @@
 
 ### Making documentation changes (using the Github interface)
 
-At the bottom of each page of the [hosted GDS Way][gds-way] there is a `View source` link. This link will take you to to the corresponding [Github][repo] page where you can use the pencil icon (:pencil:) in the interface to propose edits to a page.
+At the bottom of each page of the [hosted GDS Way][gds-way] there is a `View source` link. This link will take you to the corresponding [Github][repo] page where you can use the pencil icon (:pencil:) in the interface to propose edits to a page.
 
 Once you have made your changes you can write a description, click the green `Propose changes` button, and on the following page click the green `Create pull request` button.
 
