@@ -129,7 +129,7 @@ Once setup is complete users can access AWS using the AWS Console or the command
     </details>
   </li>
   <li>
-    Complete **Account** with account or <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#AboutAccountAlias">account alias</a> and the role you're switching to
+    Complete **Account** with account or <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html">account alias</a> and the role you're switching to
     <details>
       <summary><small>Screenshot of the switch role page</small></summary>
       <img src="/images/working-with-aws-accounts/aws-switch-role-form.png" alt="Screenshot of the switch role page with 'Account', 'Role' and 'Display name' boxes ready to fill out.">
@@ -222,7 +222,7 @@ Remove the bootstrap role once you’ve added a properly configured admin role.
 
 
 [Amazon Web Services (AWS)]: https://aws.amazon.com/
-[AWS Multiple Account Security Strategy]: https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/
+[AWS Multiple Account Security Strategy]: https://d1.awsstatic.com/aws-answers/AWS_Multi_Account_Security_Strategy.pdf
 [request an AWS account form]: https://request-an-aws-account.gds-reliability.engineering/
 [the GDS users base account]: https://gds-users.signin.aws.amazon.com/console
 [Terraform]: https://www.terraform.io/
@@ -327,7 +327,7 @@ and ideally conform to the following (except for extenuating circumstances):
 - Read only: Can read things in the account but not perform any side-effects;
             should NOT be able to do things like `ssm:DescribeParameters`
 
-[multiple account security strategy]: https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/
+[multiple account security strategy]: https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/organizing-your-aws-environment.html
 [accessing aws accounts]: access-aws-accounts.html
 [AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
 [AWS principle]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html

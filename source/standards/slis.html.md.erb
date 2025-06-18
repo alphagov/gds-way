@@ -69,7 +69,7 @@ Technical members of your team should contribute to where, how and what metrics 
 
 ### 6. Create implementation tasks
 
-Your team’s product or technical lead(s) seperate down your SLIs into tasks, for example using Trello, [Pivotal Tracker](https://www.pivotaltracker.com/) or [Jira Software](https://www.atlassian.com/software/jira). Some teams create an [Agile epic](https://www.atlassian.com/agile/project-management/epics) to cover every task needed to carry out their SLIs and SLOs.
+Your team’s product or technical lead(s) seperate down your SLIs into tasks, for example using Trello or [Jira Software](https://www.atlassian.com/software/jira). Some teams create an [Agile epic](https://www.atlassian.com/agile/project-management/epics) to cover every task needed to carry out their SLIs and SLOs.
 
 ### 7. Observe and iterate your SLIs
 
@@ -103,12 +103,11 @@ The team developed SLIs for the most important user journey: “Knowing how thei
 
 The team mapped the user journey for “choose a Grafana dashboard”. Users look at a [Grafana dashboard](https://grafana.com/dashboards) to get a general understanding of system performance and then focus on individual graphs using the time axis to debug live issues.
 
-
 User journey for choosing a Grafana dashboard:
 
 1. The user chooses a dashboard from a list of dashboards.
 2. The user chooses a graph on the dashboard.
-3. The user drills down (accesses data at a lower level in the hierarchy of the data structure) to see more details about the graph. 
+3. The user drills down (accesses data at a lower level in the hierarchy of the data structure) to see more details about the graph.
 
 
 ### Defining what good means
@@ -129,7 +128,6 @@ The team mapped out the system components to complete the user journey “choose
 
 #### Choosing a Grafana dashboard: high-level system components
 
-
 The team defined the SLI over the last hour the service collected metrics, identifying:
 
 - the importance of successful requests
@@ -148,11 +146,9 @@ The availability per hour of the SLI is the number of total requests minus the n
 
 The latency per hour of the SLI is the number of requests within 2.5 seconds divided by the number of total requests multiplied by 100%.
 
-
 #### Choosing a Grafana dashboard: points of measurement
 
 The team looked at the components to figure out the best place to collect data for their SLIs. They looked for the point closest to the end user, so that the metrics would be representative of their experience. For example, if the dashboard was loading slowly for users, the SLI would reflect this accurately. In this case, the team collected data using a component called the PaaS Prometheus Exporter, which was closest to the end user.
-
 
 ### Creating tasks and iterating SLIs
 
