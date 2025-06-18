@@ -10,7 +10,20 @@ begin
     .map { |path| path.delete_prefix("source/").delete_suffix(".erb").delete_suffix(".md") }
 
   individual_exceptions = [
-    "https://docs.google.com/presentation/d/1LHLKPclfrn5KVFrFd2WqyPOYpS6wXklE4Lexb2rJNW0/"
+    "https://www.cloudflare.com/en-gb/learning/dns/dnssec/how-dnssec-works/",
+    "https://docs.google.com/presentation/d/1LHLKPclfrn5KVFrFd2WqyPOYpS6wXklE4Lexb2rJNW0/",
+    "https://dzone.com/articles/optional-ispresent-is-bad-for-you",
+    "https://dzone.com/articles/using-optional-correctly-is-not-optional",
+    "https://go.dev/talks/2012/10things.slide#11",
+    "https://securityheaders.com",
+    "https://stackoverflow.com/questions/26327957/should-java-8-getters-return-optional-type/26328555#26328555",\
+    "https://www.cloudflare.com/en-gb/learning/dns/dnssec/how-dnssec-works/",
+    "https://www.etsy.com/codeascraft/blameless-postmortems/",
+    "https://www.sciencedirect.com/science/article/abs/pii/S0950584909000123",
+    "https://www.ncsc.gov.uk/guidance/introduction-identity-and-access-management#section_6",
+    "https://www.sciencedirect.com/science/article/abs/pii/S0950584909000123",
+    "https://intranet.cabinetoffice.gov.uk/it-data-and-security/cyber-and-information-security-services/",
+    "https://intranet.cabinetoffice.gov.uk/it-data-and-security/cyber-and-information-security-services/threat-modelling/",
   ]
 
   proofer = HTMLProofer.check_directory(
@@ -23,8 +36,13 @@ begin
           /search/ # Provided by tech-docs gem but has a "broken" link from html-proofer's point of view
       ],
       :ignore_urls => [
-          "https://gdshelpdesk.digital.cabinet-office.gov.uk",
-          /https:\/\/github.com\//
+        %r{https://gds.splunkcloud.com},
+        %r{https://gdshelpdesk.digital.cabinet-office.gov.uk/},
+        %r{https://github.com/},
+        %r{https://www.cnvc.org/},
+        %r{https://securityheaders.com/},
+        %r{https://www.webpagetest.org/},
+        %r{https://www.pingdom.com/}
     ].concat(individual_exceptions)
      .concat(new_urls)
     }
