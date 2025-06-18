@@ -10,13 +10,15 @@ begin
     .map { |path| path.delete_prefix("source/").delete_suffix(".erb").delete_suffix(".md") }
 
   individual_exceptions = [
+    "https://architecturechronicles.substack.com/p/what-is-connascence",
     "https://www.cloudflare.com/en-gb/learning/dns/dnssec/how-dnssec-works/",
     "https://docs.google.com/presentation/d/1LHLKPclfrn5KVFrFd2WqyPOYpS6wXklE4Lexb2rJNW0/",
     "https://dzone.com/articles/optional-ispresent-is-bad-for-you",
     "https://dzone.com/articles/using-optional-correctly-is-not-optional",
     "https://go.dev/talks/2012/10things.slide#11",
     "https://securityheaders.com",
-    "https://stackoverflow.com/questions/26327957/should-java-8-getters-return-optional-type/26328555#26328555",\
+    "https://stackoverflow.com/questions/26327957/should-java-8-getters-return-optional-type/26328555#26328555",
+    "https://tidyfirst.substack.com/p/canon-tdd",
     "https://www.cloudflare.com/en-gb/learning/dns/dnssec/how-dnssec-works/",
     "https://www.etsy.com/codeascraft/blameless-postmortems/",
     "https://www.sciencedirect.com/science/article/abs/pii/S0950584909000123",
