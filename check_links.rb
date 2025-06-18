@@ -9,6 +9,10 @@ begin
     .filter { |path| path.start_with? "source/" }
     .map { |path| path.delete_prefix("source/").delete_suffix(".erb").delete_suffix(".md") }
 
+  individual_exceptions = [
+    "https://docs.google.com/presentation/d/1LHLKPclfrn5KVFrFd2WqyPOYpS6wXklE4Lexb2rJNW0/"
+  ]
+
   proofer = HTMLProofer.check_directory(
     "build",
     {
@@ -21,7 +25,8 @@ begin
       :ignore_urls => [
           "https://gdshelpdesk.digital.cabinet-office.gov.uk",
           /https:\/\/github.com\//
-      ].concat(new_urls)
+    ].concat(individual_exceptions)
+     .concat(new_urls)
     }
   )
 
@@ -29,3 +34,4 @@ begin
 rescue RuntimeError => e
   abort e.to_s
 end
+
