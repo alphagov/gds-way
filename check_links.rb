@@ -29,6 +29,9 @@ begin
   proofer = HTMLProofer.check_directory(
     "build",
     {
+      typhoeus: {
+        headers: { "User-Agent" => "Mozilla/5.0 (Android 14; Mobile; LG-M255; rv:122.0) Gecko/122.0 Firefox/122.0" }
+      },
       :assume_extension => true,
       :allow_hash_href => true,
       :check_internal_hash => true,
