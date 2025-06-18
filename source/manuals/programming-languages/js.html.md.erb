@@ -23,7 +23,7 @@ owner_slack: '#frontend'
 
 ## Linting
 
-As a base, we follow conventions established by the [standardjs][] project. 
+As a base, we follow conventions established by the [standardjs][] project.
 They allow us to be consistent about how we write code while reducing the time spend debating which linting rules to pick.
 
 Depending on their needs, projects may complement this initial set of rules with extra linting, for example:
@@ -54,7 +54,7 @@ npx standard
 
 #### standardx
 
-If the StandardJS rule set conflicts with the browsers your project supports, you can use [standardx][] to amend which rules are running. 
+If the StandardJS rule set conflicts with the browsers your project supports, you can use [standardx][] to amend which rules are running.
 
 Once installed you can then override standard rules with an [`.eslintrc`][eslintrc] file or an `eslintConfig` entry in package.json ([example][govuk-warnings]).
 
@@ -64,17 +64,17 @@ Once installed you can then override standard rules with an [`.eslintrc`][eslint
 
 #### ESLint
 
-ESLint is the most widely used JavaScript linter, and actually what StandardJS uses under the hood. 
-Using it directly allows you to benefit from other plugins in the ESLint ecosystem to complement standard conventions, 
+ESLint is the most widely used JavaScript linter, and actually what StandardJS uses under the hood.
+Using it directly allows you to benefit from other plugins in the ESLint ecosystem to complement standard conventions,
 and keep up to date with newer rules, for example related to newer language features.
 
-Standard can be integrated by adding the `eslint-config-standard` to your ESLint configuration. 
+Standard can be integrated by adding the `eslint-config-standard` to your ESLint configuration.
 
 When adding extra ESLint plugins, most come with a `recommended` configuration that's worth using as a starter, rather than deciding on each rule individually. You can then add or remove rules as needs arise during the life of your project. In that area, automatically fixable rules are especially cheap to try out, as the tools will take care of updating your code for you.
 
 #### Prettier
 
-Prettier's only preoccupation is with [code formatting, not code quality][prettier-comparison]. 
+Prettier's only preoccupation is with [code formatting, not code quality][prettier-comparison].
 It can be used as a complement to ESLint for further automated formatting, with much more advanced decisions in terms of indentation, spaces, or line breaks.
 It runs as a separate command (`npx prettier`) and the [`eslint-config-prettier`][prettier-linters] ensures there'll be no conflicts between the rules of ESLint and the formatting of Prettier.
 
