@@ -39,6 +39,7 @@ begin
           /search/ # Provided by tech-docs gem but has a "broken" link from html-proofer's point of view
       ],
       :ignore_urls => [
+        %r{https://engineering-enablement.gds-reliability.engineering},
         %r{https://gds.splunkcloud.com},
         %r{https://gdshelpdesk.digital.cabinet-office.gov.uk/},
         %r{https://github.com/},
