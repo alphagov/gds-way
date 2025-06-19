@@ -31,44 +31,45 @@ Access to `govuk-one-login` is generally limited to those working on the program
 
 ### Configuring GitHub repositories
 
-Consider [protecting your main branch]() to prevent changes being committed without a suitable review.
+Consider [protecting your main branch][protect-main] to prevent changes being committed without a suitable review.
 
 You can also consider backing up your Git repositories to another location (this should be a team responsibility). If you are using AWS to host your service
-[AWS CodeCommit](https://aws.amazon.com/codecommit/) is one option.
+[AWS CodeCommit][aws-code-commit] is one option.
 
 ### How to retire applications
 
-If an application is no longer used in production, you should [archive its repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/archiving-a-github-repository/archiving-repositories).
+If an application is no longer used in production, you should [archive its repository][github-archive-a-repo].
 
 Update the application's README to explain why the repository has been archived, and link to a new location if the application has been superseded.
 
 ### Using Github Actions and workflows
 
-Alphagov repositories can be configured to use [GitHub Actions](https://docs.github.com/en/actions) for CI/CD jobs, for example running unit tests or deploying a static site.
+Alphagov repositories can be configured to use [GitHub Actions][github-actions] for CI/CD jobs, for example running unit tests or deploying a static site.
 
 Actions and workflows can be powerful, so take care to follow best security practice.
 
-Ensure the repository permissions follow [the principle of least privilege](/standards/principle-least-access.html) by:
+Ensure the repository permissions follow [the principle of least privilege][gds-way-principle-least-privilidge] by:
 
 - disabling Actions entirely on repositories that do not use it (this will hide the 'Actions' tab from the repository menu)
 - setting workflow permissions to read-only by default
-- setting [granular permissions in the workflow YAML](https://docs.github.com/actions/reference/authentication-in-a-workflow#modifying-the-permissions-for-the-github_token) where appropriate
-- [using environments to restrict access to secrets](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#environment-secrets)
+- setting [granular permissions in the workflow YAML][github-modifying-the-permissions-for-the-github_token] where appropriate
+- [using environments to restrict access to secrets][github-using-environments-for-deployment]
 
-If your repository has external contributors, [ensure they do not have permissions to add workflows or trigger workflow runs](https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks).
+If your repository has external contributors, [ensure they do not have permissions to add workflows or trigger workflow runs][github-approving-workflow-runs-from-public-forks].
 
 If your workflow interacts with another resource (for example AWS or DockerHub), consider setting up a dedicated account or role, with permissions limited to the scope of the action.
 Use temporary credentials in preference to storing long-lived credentials in a secret.
-In particular, when accessing AWS you must [authenticate using the OpenID Connect token](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services) and not using an IAM User's access key and secret access key.
+In particular, when accessing AWS you must [authenticate using the OpenID Connect token][github-configuring-openid-connect-in-amazon-web-services] and not using an IAM User's access key and secret access key.
 You should also specify the branch you expect to be deploying from (for example, `main`) in your IAM role to make sure code cannot be deployed from untrusted branches.
 
-Consider protecting the `.github/workflows` folder by using [a CODEOWNERS file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) and requiring review from CODEOWNERS for merges into protected branches.
+Consider protecting the `.github/workflows` folder by using [a CODEOWNERS file][github-codeowners] and requiring review from CODEOWNERS for merges into protected branches.
 
-Consider creating a Workflow Template in the [alphagov workflow folder](https://github.com/alphagov/.github/tree/main/workflow-templates) if you need to share a similar workflow between many repositories.
+Consider creating a Workflow Template in the [alphagov workflow folder][alphagov-workflow-template] if you need to share a similar workflow between many repositories.
 
-[Create your own local actions](https://docs.github.com/en/actions/creating-actions/about-actions) wherever possible.
+[Create your own local actions][github-local-actions] wherever possible.
 
-If using GitHub-owned actions, [pin to a specific version](https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#using-release-management-for-your-custom-actions) and [configure Dependabot to keep your actions up to date](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot#example-dependabotyml-file-for-github-actions) by adding a comment on the same line with the tag the commitsha represents. For example:
+If using GitHub-owned actions, you should [pin to a specific version][github-release-management-for-your-custom-actions].
+Also [configure Dependabot to keep your actions up to date][github-keeping-your-actions-up-to-date-with-dependabot] by adding a comment on the same line with the tag the commitsha represents. For example:
 
 ```
 - uses: actions/checkout@01aecccf739ca6ff86c0539fbc67a7a5007bbc81 # v2.1.0
@@ -81,14 +82,15 @@ Please double-check that the digest and the commented version are consistent eac
 
 Third-party actions should only be used if:
 
-- The provider is verified by GitHub (for example, [aws-actions](https://github.com/aws-actions))
+- The provider is verified by GitHub (for example, [aws-actions])
 - The action is complex enough that you cannot write your own local action
 - You have fully reviewed the code in the version of the third-party action you will be using
 - You have pinned the specific version in your workflow and in the repository settings, using a Git commit SHA
 - You have included the semver version in a comment next to the SHA, helping humans understand the version and automated tools report on what is out of date (for example dependabot)
 - The third-party action is actively maintained, well-documented and tested ([follow the guidance on third party dependencies](/standards/tracking-dependencies.html)).
 
-You can enforce this in the settings for Actions by choosing ['Allow select actions'](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-specific-actions-to-run) and then 'Allow actions created by GitHub' and 'Allow Marketplace actions by verified creators' as required.
+You can enforce this in the settings for Actions by choosing ['Allow select actions'][github-managing-github-actions-settings-for-a-repository]
+and then 'Allow actions created by GitHub' and 'Allow Marketplace actions by verified creators' as required.
 
 Note that for public repositories, the output of workflow runs is visible to everyone. Do not use workflows if this output could be considered sensitive.
 
@@ -116,9 +118,25 @@ You should use your `@digital.cabinet-office.gov.uk` email during the sign up pr
 * [Working with Git](working-with-git.html)
 * [Updating actions with DependaBot][github-dependabot-actions]
 
+[aws-actions]: https://github.com/aws-actions
 [GitHub]: https://technology.blog.gov.uk/2016/05/31/how-we-use-git-at-the-government-digital-service/
 [alphagov]: https://github.com/alphagov/
 [govuk-one-login]: https://github.com/govuk-one-login
 [github-dependabot-actions]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot
 [work-emails-for-github]: https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/adding-an-email-address-to-your-github-account
 [govuk-one-login-access]: https://team-manual.account.gov.uk/new-starter-guide/github-access-management/#getting-access-to-github
+[protect-main]: https://docs.github.com/en/github/administering-a-repository/defining-the-mergeability-of-pull-requests/about-protected-branches
+[aws-code-commit]: https://aws.amazon.com/codecommit/
+[github-archive-a-repo]: https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/archiving-a-github-repository/archiving-repositories
+[github-actions]: https://docs.github.com/en/actions
+[gds-way-principle-least-privilidge]: /standards/principle-least-access.html
+[github-modifying-the-permissions-for-the-github_token]: https://docs.github.com/actions/reference/authentication-in-a-workflow#modifying-the-permissions-for-the-github_token
+[github-using-environments-for-deployment]: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#environment-secrets
+[github-approving-workflow-runs-from-public-forks]: https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks
+[github-configuring-openid-connect-in-amazon-web-services]: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+[github-codeowners]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[github-local-actions]: https://docs.github.com/en/actions/creating-actions/about-actions\
+[github-release-management-for-your-custom-actions]: https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#using-release-management-for-your-custom-actions
+[github-keeping-your-actions-up-to-date-with-dependabot]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot#example-dependabotyml-file-for-github-actions)
+[github-managing-github-actions-settings-for-a-repository]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-specific-actions-to-run
+[alphagov-workflow-template]: https://github.com/alphagov/.github/tree/main/workflow-templates
