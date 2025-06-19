@@ -31,14 +31,14 @@ Access to `govuk-one-login` is generally limited to those working on the program
 
 ### Configuring GitHub repositories
 
-Consider [protecting your main branch]() to prevent changes being committed without a suitable review.
+Consider [protecting your main branch][protect-main] to prevent changes being committed without a suitable review.
 
 You can also consider backing up your Git repositories to another location (this should be a team responsibility). If you are using AWS to host your service
-[AWS CodeCommit](https://aws.amazon.com/codecommit/) is one option.
+[AWS CodeCommit][aws-code-commit] is one option.
 
 ### How to retire applications
 
-If an application is no longer used in production, you should [archive its repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/archiving-a-github-repository/archiving-repositories).
+If an application is no longer used in production, you should [archive its repository][github-archive-a-repo].
 
 Update the application's README to explain why the repository has been archived, and link to a new location if the application has been superseded.
 
@@ -71,6 +71,7 @@ You should use your `@digital.cabinet-office.gov.uk` email during the sign up pr
 * [Updating actions with DependaBot][github-dependabot-actions]
 * [Authorizing GitHub Actions][using-gh-actions]
 
+[aws-actions]: https://github.com/aws-actions
 [GitHub]: https://technology.blog.gov.uk/2016/05/31/how-we-use-git-at-the-government-digital-service/
 [alphagov]: https://github.com/alphagov/
 [govuk-one-login]: https://github.com/govuk-one-login
@@ -78,3 +79,18 @@ You should use your `@digital.cabinet-office.gov.uk` email during the sign up pr
 [using-gh-actions]: /standards/source-code/using-github-actions.html
 [work-emails-for-github]: https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/adding-an-email-address-to-your-github-account
 [govuk-one-login-access]: https://team-manual.account.gov.uk/new-starter-guide/github-access-management/#getting-access-to-github
+[protect-main]: https://docs.github.com/en/github/administering-a-repository/defining-the-mergeability-of-pull-requests/about-protected-branches
+[aws-code-commit]: https://aws.amazon.com/codecommit/
+[github-archive-a-repo]: https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/archiving-a-github-repository/archiving-repositories
+[github-actions]: https://docs.github.com/en/actions
+[gds-way-principle-least-privilidge]: /standards/principle-least-access.html
+[github-modifying-the-permissions-for-the-github_token]: https://docs.github.com/actions/reference/authentication-in-a-workflow#modifying-the-permissions-for-the-github_token
+[github-using-environments-for-deployment]: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#environment-secrets
+[github-approving-workflow-runs-from-public-forks]: https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks
+[github-configuring-openid-connect-in-amazon-web-services]: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+[github-codeowners]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[github-local-actions]: https://docs.github.com/en/actions/creating-actions/about-actions\
+[github-release-management-for-your-custom-actions]: https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#using-release-management-for-your-custom-actions
+[github-keeping-your-actions-up-to-date-with-dependabot]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot#example-dependabotyml-file-for-github-actions)
+[github-managing-github-actions-settings-for-a-repository]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-specific-actions-to-run
+[alphagov-workflow-template]: https://github.com/alphagov/.github/tree/main/workflow-templates
