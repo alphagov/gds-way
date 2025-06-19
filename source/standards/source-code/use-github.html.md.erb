@@ -6,21 +6,32 @@ review_in: 6 months
 
 # <%= current_page.data.title %>
 
-GDS uses the [alphagov] organisation on [GitHub] to collaborate on code. The GOV.UK One Login programme uses [govuk-one-login].
+GDS uses [GitHub] to collaborate on code.
+We have two GitHub organisations, the GDS Product group use [alphagov].
+The GOV.UK One Login programme uses [govuk-one-login].
 
-### Getting access to `alphagov`
+## Common rules of access
 
-You can use your personal GitHub account to access alphagov if you wish.
+You can use your personal GitHub account to access either of the GDS GitHub organisations.
 
-All github user accounts added to `alphagov` *must* be [connected](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/adding-an-email-address-to-your-github-account) with a valid `digital.cabinet-office.gov.uk` email address. Accounts not connected to a valid email address will be removed from `alphagov`.
+All GitHub user accounts *must* be [connected][work-emails-for-github] with a valid `digital.cabinet-office.gov.uk` email address.
+Accounts not connected to a valid email address will be removed from the organisation.
 
 You must also set up two-factor authentication on your account.
 
-To join `alphagov` ask your tech lead or technical architect to invite you. Make sure you've connected your GDS email address to your account first, otherwise your account will be removed.
+### Getting access to `alphagov`
+
+To join `alphagov` ask your tech lead or technical architect to invite you.
+Access is generally open for any technologist working within GDS.
+
+### Getting access to `govuk-one-login`
+
+Details about how to obtain access can be found on the [GOV.UK One Login Team manual][govuk-one-login-access].
+Access to `govuk-one-login` is generally limited to those working on the program or associated products (App, Wallet etc).
 
 ### Configuring GitHub repositories
 
-Consider [protecting your main branch](https://docs.github.com/en/github/administering-a-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) to prevent changes being committed without a suitable review.
+Consider [protecting your main branch]() to prevent changes being committed without a suitable review.
 
 You can also consider backing up your Git repositories to another location (this should be a team responsibility). If you are using AWS to host your service
 [AWS CodeCommit](https://aws.amazon.com/codecommit/) is one option.
@@ -65,3 +76,5 @@ You should use your `@digital.cabinet-office.gov.uk` email during the sign up pr
 [govuk-one-login]: https://github.com/govuk-one-login
 [github-dependabot-actions]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot
 [using-gh-actions]: /standards/source-code/using-github-actions.html
+[work-emails-for-github]: https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/adding-an-email-address-to-your-github-account
+[govuk-one-login-access]: https://team-manual.account.gov.uk/new-starter-guide/github-access-management/#getting-access-to-github
