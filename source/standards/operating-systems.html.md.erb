@@ -10,7 +10,7 @@ review_in: 12 months
 
 If you're using [AWS EC2](https://aws.amazon.com/ec2/) and you do not require a Debian-based system, you should use [Amazon Linux 2 LTS](https://aws.amazon.com/amazon-linux-2/release-notes/) as your operating system (OS).
 
-Amazon Linux 2 was forked from `RHEL`/`CentOS` and the primary package manager is [`yum`](http://yum.baseurl.org/wiki/Guides.html). It's mantained by Amazon and includes a Kernel tuned for enhanced performance on EC2. The OS is available as a [virtual machine image](https://cdn.amazonlinux.com/os-images/latest/) and [Docker image](https://hub.docker.com/_/amazonlinux/) for testing.
+Amazon Linux 2 was forked from `RHEL`/`CentOS` and the primary package manager is [`yum`](https://en.wikipedia.org/wiki/Yum_(software)). It's mantained by Amazon and includes a Kernel tuned for enhanced performance on EC2. The OS is available as a [virtual machine image](https://cdn.amazonlinux.com/os-images/latest/) and [Docker image](https://hub.docker.com/_/amazonlinux/) for testing.
 
 ## Non-AWS and Debian virtual machines
 
@@ -20,13 +20,13 @@ GDS recommends using Long Term Support (LTS) versions as the default choice for 
 
 You must make sure these backports and other sources receive regular and timely security updates. This should be less of a burden than having to update the OS on VMs every 6 to 9 months.
 
-If you do use standard Ubuntu, you must migrate to the latest release within 3 months to ensure you stay within the support period and receive security updates. You must consider this carefully when proposing adopting standard Ubuntu releases as it can affect the stability of your running service. 
+If you do use standard Ubuntu, you must migrate to the latest release within 3 months to ensure you stay within the support period and receive security updates. You must consider this carefully when proposing adopting standard Ubuntu releases as it can affect the stability of your running service.
 
 Standard releases only receive security updates for 9 months after their initial release. LTS receives support for 5 years, or longer with paid-for extended support.
 
 ## Hardening
 
-You must apply hardening to your operating system. The National Cyber Security Centre (NCSC) [Cyber Assessment Framework] has a specific objective for this (B4.b). 
+You must apply hardening to your operating system. The National Cyber Security Centre (NCSC) [Cyber Assessment Framework] has a specific objective for this (B4.b).
 
 For example, you should disable root SSH access and deny SSH access using a password. You must also make sure your OS is:
 
@@ -40,5 +40,5 @@ The NCSC also has guidance on [hardening that's specific to the latest Ubuntu LT
 
 The Center for Internet Security also publishes the [CIS Benchmarks], which provide a full breakdown of hardening options for specific operating systems, as well as other firmware.
 
-[Cyber Assessment Framework]: https://www.ncsc.gov.uk/collection/caf/cyber-assessment-framework/caf-objective-b-protecting-against-cyber-attack
+[Cyber Assessment Framework]: https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-b
 [CIS Benchmarks]: https://www.cisecurity.org/cis-benchmarks
