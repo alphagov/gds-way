@@ -42,14 +42,14 @@ begin
       ],
       :ignore_urls => [
         %r{https://engineering-enablement.gds-reliability.engineering},
-        %r{https://gds.splunkcloud.com},
         %r{https://gdshelpdesk.digital.cabinet-office.gov.uk/},
+        %r{https://gds.splunkcloud.com},
         %r{https://github.com/},
-        %r{https://www.cnvc.org/},
         %r{https://securityheaders.com/},
-        %r{https://team-manual.account.gov.uk/}
+        %r{https://team-manual.account.gov.uk/},
+        %r{https://www.cnvc.org/},
+        %r{https://www.pingdom.com/},
         %r{https://www.webpagetest.org/},
-        %r{https://www.pingdom.com/}
     ].concat(individual_exceptions)
      .concat(new_urls)
     }
