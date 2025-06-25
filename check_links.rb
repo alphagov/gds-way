@@ -47,6 +47,7 @@ begin
         %r{https://github.com/},
         %r{https://www.cnvc.org/},
         %r{https://securityheaders.com/},
+        %r{https://team-manual.account.gov.uk/}
         %r{https://www.webpagetest.org/},
         %r{https://www.pingdom.com/}
     ].concat(individual_exceptions)
