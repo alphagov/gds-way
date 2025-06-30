@@ -74,7 +74,7 @@ GEM
     google-protobuf (4.31.1-x86_64-linux-gnu)
       bigdecimal
       rake (>= 13)
-    govuk_tech_docs (5.0.0)
+    govuk_tech_docs (5.0.2)
       autoprefixer-rails (~> 10.2)
       base64
       bigdecimal
