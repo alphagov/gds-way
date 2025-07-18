@@ -48,7 +48,8 @@ begin
         %r{https://www.cnvc.org/},
         %r{https://securityheaders.com/},
         %r{https://www.webpagetest.org/},
-        %r{https://www.pingdom.com/}
+        %r{https://www.pingdom.com/},
+        %r{https://www.sitepoint.com/}
     ].concat(individual_exceptions)
      .concat(new_urls)
     }
