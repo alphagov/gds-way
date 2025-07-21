@@ -5,7 +5,7 @@ service_link: /
 # Header-related options
 show_govuk_logo: false
 service_name: The GDS Way
-description: Technical standards and guidance used by teams building software at GDS
+description: Technical standards and guidance used by teams building software in the GDS Product Group
 
 # Links to show on right-hand-side of header
 header_links:
