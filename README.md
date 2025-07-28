@@ -46,6 +46,14 @@ If you have Docker, you can run the website locally using the [startup script](.
 ./startup.sh
 ```
 
+If you have [Podman](https://podman.io/) you can also use that instead of Docker:
+
+```zsh
+podman machine start
+./startup-podman.sh
+```
+
+
 Otherwise, the following steps will get Middleman running locally.
 
 #### Install Ruby and Bundler
