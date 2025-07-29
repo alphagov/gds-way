@@ -28,7 +28,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.0
       - name: Setup Ruby and install gems
-        uses: ruby/setup-ruby@a9bfc2ecf3dd40734a9418f89a7e9d484c32b990 # v1.248.0
+        uses: ruby/setup-ruby@bb6434c747fa7022e12fa1cae2a0951fcffcff26 # 1.253.0
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: Build middleman site

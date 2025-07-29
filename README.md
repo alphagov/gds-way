@@ -40,28 +40,6 @@ The GDS Way is built from the [Tech Docs Template][tech-docs-template] repositor
 
 To preview or build the website, we need to use the terminal.
 
-If you have Docker, you can run the website locally using the [startup script](./startup.sh) provided:
-
-```zsh
-./startup.sh
-```
-
-If you have [Podman](https://podman.io/) you can also use that instead of Docker:
-
-```zsh
-podman machine start
-./startup-podman.sh
-```
-
-
-Otherwise, the following steps will get Middleman running locally.
-
-#### Install Ruby and Bundler
-
-Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm], and the [Bundler gem][bundler].
-
-A [.ruby-version](./.ruby-version) file is provided for use with [rbenv][]. If you update it, please update the [Dockerfile](./Dockerfile).
-
 #### Clone the repository
 
 Clone the repository using:
@@ -70,6 +48,24 @@ Clone the repository using:
 git clone https://github.com/alphagov/gds-way.git
 cd gds-way
 ```
+
+#### Docker or Podman
+
+If you have Docker or Podman, you can run the website locally using the [startup script](./startup.sh) provided:
+
+```zsh
+./startup.sh
+```
+
+You should then be able to access the site running on [http://localhost:4567/]
+
+Otherwise, the following steps will get Middleman running locally.
+
+#### Manual environment
+
+Install Ruby with Rubygems, preferably with a [Ruby version manager][rvm], and the [Bundler gem][bundler].
+
+A [.ruby-version](./.ruby-version) file is provided for use with [rbenv][]. If you update it, please update the [Dockerfile](./Dockerfile).
 
 #### Install the required gems
 
