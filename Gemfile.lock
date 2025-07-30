@@ -10,10 +10,10 @@ GEM
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     afm (0.2.2)
-    async (2.23.0)
+    async (2.27.0)
       console (~> 1.29)
       fiber-annotation
-      io-event (~> 1.9)
+      io-event (~> 1.11)
       metrics (~> 0.12)
       traces (~> 0.15)
     autoprefixer-rails (10.4.21.0)
@@ -41,7 +41,7 @@ GEM
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
     concurrent-ruby (1.3.4)
-    console (1.29.3)
+    console (1.33.0)
       fiber-annotation
       fiber-local (~> 1.1)
       json
@@ -64,7 +64,7 @@ GEM
     fiber-annotation (0.2.0)
     fiber-local (1.1.0)
       fiber-storage
-    fiber-storage (1.0.0)
+    fiber-storage (1.0.1)
     google-protobuf (4.31.1-arm64-darwin)
       bigdecimal
       rake (>= 13)
@@ -74,7 +74,7 @@ GEM
     google-protobuf (4.31.1-x86_64-linux-gnu)
       bigdecimal
       rake (>= 13)
-    govuk_tech_docs (5.0.0)
+    govuk_tech_docs (5.0.2)
       autoprefixer-rails (~> 10.2)
       base64
       bigdecimal
@@ -115,8 +115,8 @@ GEM
     http_parser.rb (0.8.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    io-event (1.9.0)
-    json (2.10.2)
+    io-event (1.12.1)
+    json (2.13.2)
     kramdown (2.5.1)
       rexml (>= 3.3.9)
     listen (3.9.0)
@@ -124,7 +124,7 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
     memoist (0.16.2)
-    metrics (0.12.1)
+    metrics (0.12.2)
     middleman (4.5.1)
       coffee-script (~> 2.2)
       haml (>= 4.0.5)
@@ -175,17 +175,17 @@ GEM
     middleman-sprockets (4.0.0)
       middleman-core (~> 4.0)
       sprockets (>= 3.0)
-    middleman-syntax (3.5.0)
+    middleman-syntax (3.6.0)
       middleman-core (>= 3.2)
       rouge (~> 3.2)
     minitest (5.25.5)
-    multi_json (1.15.0)
+    multi_json (1.17.0)
     mutex_m (0.3.0)
-    nokogiri (1.18.8-arm64-darwin)
+    nokogiri (1.18.9-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.8-x86_64-darwin)
+    nokogiri (1.18.9-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.8-x86_64-linux-gnu)
+    nokogiri (1.18.9-x86_64-linux-gnu)
       racc (~> 1.4)
     openapi3_parser (0.9.2)
       commonmarker (~> 0.17)
@@ -232,7 +232,7 @@ GEM
       concurrent-ruby (~> 1.0)
       logger
       rack (>= 2.2.4, < 4)
-    temple (0.10.3)
+    temple (0.10.4)
     terser (1.2.6)
       execjs (>= 0.3.0, < 3)
     thor (1.2.2)
@@ -250,7 +250,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     webrick (1.9.1)
     yell (2.2.2)
-    zeitwerk (2.7.2)
+    zeitwerk (2.7.3)
 
 PLATFORMS
   arm64-darwin-21
