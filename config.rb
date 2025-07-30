@@ -1,5 +1,7 @@
 require 'govuk_tech_docs'
 
-GovukTechDocs.configure(self, livereload: { js_host: 'localhost' })
+environment = ENV.fetch('APP_ENV', 'local')
+
+GovukTechDocs.configure(self, livereload: environment == 'docker' ? { js_host: 'localhost' } : {})
 
 set :layout, 'custom'
