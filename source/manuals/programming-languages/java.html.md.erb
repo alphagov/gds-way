@@ -33,7 +33,7 @@ Some Java teams within GDS have had success using the [Spotless](https://github.
 
 Beginning with version 9, Jakarta EE switched from using the `javax` package namespace to the `jakarta` package namespace, instantly breaking all applications that referenced the old package names.  (Be aware that other APIs — including some that are part of Java Standard Edition — also use the `javax` package namespace.)
 
-Migrating from Java EE to Jakarta EE is hard. Many libraries and frameworks use Java EE or Jakarta EE so migrating completely may involve updating many of your dependencies to new versions that work with Jakarta EE (if they exist).
+Migrating from Java EE to Jakarta EE may be involved. Many libraries and frameworks use Java EE or Jakarta EE so migrating completely may involve updating many of your dependencies to new versions that work with Jakarta EE (if they exist).
 
 Some libraries and frameworks make this a little easier by having two parallel versions, one that works with Java EE and one that works with Jakarta EE, while being otherwise equivalent. This makes it possible to upgrade to the latest Java EE version of a dependency and then migrate across to its Jakarta EE equivalent in two separate steps.
 
