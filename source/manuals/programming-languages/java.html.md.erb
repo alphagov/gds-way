@@ -201,6 +201,8 @@ Dependabot only deals with direct dependencies, not transitive dependencies. Eve
 
 When viewing a Maven POM file, IntelliJ IDEA can warn you if your transitive dependencies have reported security vulnerabilities.
 
+You can often force a newer version of a transitive dependency to be used by explicitly adding the dependency then adding exclusions to stop other dependencies using it transitively.
+
 ## Build tools
 
 You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apache.org/) as the build tool. Use recent versions if you can. Maven now supports the [Bill of Materials (BOM)](https://www.jvt.me/posts/2021/08/28/java-bom/) concept, which can simplify dependency management (Gradle also supports Maven BOMs).
