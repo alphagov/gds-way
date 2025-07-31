@@ -127,6 +127,10 @@ The [OpenJDK project has some style guidelines for local variable type inference
 
 Java 16 introduced record classes, which provide an excellent way to model immutable data with a concise syntax that eliminates the need to write tedious and error-prone code for basic functionality. Records also support pattern matching. [Dev.java has a good introduction to records.](https://dev.java/learn/records/)
 
+## Switch expressions and the new switch syntax
+
+Java 17 introduced a new switch syntax, which uses arrows and eliminates error-prone fallthrough. Always use this style in preference to the old syntax. In situations where a switch statement is used to assign a value to a variable or similar, you can replace it with a [switch expression](https://docs.oracle.com/en/java/javase/17/language/switch-expressions-and-statements.html). Java 21 introduced [pattern matching for switch](https://www.baeldung.com/java-switch-pattern-matching), which can make some code significantly more elegant.
+
 ## Prefer functionality in the Java standard library
 
 Where possible, use functionality from the Java standard library rather than external libraries.
