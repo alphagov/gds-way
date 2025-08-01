@@ -17,4 +17,6 @@ RUN bundle check
 
 WORKDIR /usr/src/docs
 
+ENV APP_ENV=docker
+
 CMD [ "bundle", "exec", "--gemfile=/usr/src/gems/Gemfile", "middleman", "server" ]
