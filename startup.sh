@@ -2,7 +2,7 @@
 
 set -e
 
-CONTAINER_ENGINE=docker
+CONTAINER_ENGINE=podman
 
 if [[ "$CONTAINER_ENGINE" == "podman" ]] && command -v podman >/dev/null 2>&1;
 then
