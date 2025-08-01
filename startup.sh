@@ -6,7 +6,8 @@ if command -v podman >/dev/null 2>&1
 then
     echo "Podman detected, launching in podman."
     podman build . --tag gds-way
-    podman run --rm -p 4567:4567 -p 35729:35729 -v $(pwd):/usr/src/docs -e RUBYOPT="-r/usr/src/docs/patches/patch_listen.rb" -it gds-way
+    # We need to force middleman into polling mode due to this podman issue: https://github.com/containers/podman/discussions/19430
+    podman run --rm -p 4567:4567 -p 35729:35729 -v $(pwd):/usr/src/docs -it gds-way bash -c "bundle exec --gemfile=/usr/src/gems/Gemfile middleman --watcher-force-polling server"
 elif command -v docker >/dev/null 2>&1
 then
     echo "Docker detected, launching in docker."
