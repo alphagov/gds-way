@@ -1,0 +1,129 @@
+---
+title: Authorizing Github Actions
+last_reviewed_on: 2025-08-04
+review_in: 6 months
+---
+
+# Authorizing Github Actions
+
+We use [Github Actions](https://docs.github.com/en/actions/get-started/understanding-github-actions) to automate steps in our development and deployment workflows.
+
+Github Actions need authorization in order to carry out their intended tasks. Choose the right approach for authorizing your Github Actions for your context.
+
+## Using a Github App
+
+Use a [Github App](https://docs.github.com/en/apps/overview) to authenticate your Github Actions if they need to:
+
+- undertake privileged tasks outside a single repository
+- have persistent authentication
+- use finer-grained permissions
+- act as an integration rather than a user or workflow
+
+There's more information about using Github Apps to run automated tasks in the [GitHub guidance](https://docs.github.com/en/apps/creating-github-apps/about-creating-github-apps/deciding-when-to-build-a-github-app).
+
+### Examples of when to use a Github App
+
+- **Needing cross-repository or organization-wide automation**
+  for example a bot that manages issues across multiple repositories in an organization.
+- **Requiring fine-grained permissions**
+  for example an integration that only needs read access to issues but write access to pull requests.
+- **Building external integrations or services**
+  for example a dashboard that aggregates PR status from multiple repos for reporting.
+- **Acting on behalf of an integration, not a specific user or workflow**
+  for example automatically enforcing code review policies across all repositories.
+- **Needing persistent authentication outside of GitHub Actions**
+  for example a scheduled job running on your own infrastructure that interacts with the GitHub API.
+
+## Using the built in GITHUB_TOKEN
+
+If your Github Action only needs to carry out tasks within a single repository, use the [GITHUB_TOKEN](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication) for that repository.
+
+For example, you can use the GITHUB_TOKEN to authorize a Github Action to:
+
+- comment on issues
+- create pull requests
+- update workflow statuses in the same repository.
+
+Read more about the [permissions of the GITHUB_TOKEN in the Github documentation](https://docs.github.com/en/actions/reference/github_token-reference#permissions-for-the-github_token)
+
+### Examples of when to use the GITHUB_TOKEN
+
+- **Automating tasks within a GitHub Actions workflow**
+  for example automatically labeling issues or PRs in the same repository during a workflow run.
+- **Posting workflow status checks**
+  for example updating commit status or posting a check run result from a CI job.
+- **Creating or updating issues/PRs in the same repository**
+  for example creating a release note issue after a successful deployment.
+- **Managing workflow artifacts**
+  for example uploading or downloading build artifacts in a workflow.
+
+<%= warning_text('Do not use Personal Access Tokens to authorize Github Actions') %>
+
+Personal Access Tokens:
+
+- rely on an individual person's Github account, causing Githhub Actions to break when people move teams, leave the programme, or the token expires
+- are intended for individual use, and can't be centrally managed and audited
+
+Only use PATs to authorize calls to the Github API you're making yourself as part of development.
+
+## Configuring a Github App
+
+Follow the guidance here to set up a GitHub App in your developer account:
+
+- [About creating GitHub Apps](https://docs.github.com/en/apps/creating-github-apps/about-creating-github-apps/about-creating-github-apps)
+
+You will need to provide your App permissions to access GitHub resources. Ensure the app only has the permissions it needs.
+
+### Storing your Secrets Safely
+
+Store the `client_id`, `client_secret` and `private_key` for this application safely.
+The `client_secret` and `private_key` are sensitive and must be stored in a secrets manager. Choose from one of the following recommended approaches, depending on the scope of your app:
+
+| App Scope                             | Recommendation                                                   |
+| ------------------------------------- | ---------------------------------------------------------------- |
+| Single Repository                     | Local Repository Secret                                          |
+| Multi-Repository (i.e. a Team or Pod) | Organisation Secret Value or AWS Secrets Manager (Build account) |
+| Organisation-Wide                     | Organisation Secret Value                                        |
+
+### Rotating your GH App Secrets
+
+Rotate your app's secrets according to GDS and DI programme guidance.
+
+Private keys do not expire and must be manually revoked. For more information about how to revoke or delete a private key, see [Deleting private keys](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps#deleting-private-keys).
+
+### Naming Convention
+
+To allow the use of Shared Github Actions and tooling, the following naming convention for secrets is recommended:
+
+- `GH_APP_{APP_NAME_ABBREVIATION}_CLIENT_ID`
+- `GH_APP_{APP_NAME_ABBREVIATION}_CLIENT_SECRET`
+- `GH_APP_{APP_NAME_ABBREVIATION}_PRIVATE_KEY`
+- `GH_APP_{APP_NAME_ABBREVIATION}_PRIVATE_KEY_B64` - if required to encode in base64
+
+## Installing your App
+
+Once configured, you can request that the app is [installed](https://docs.github.com/en/apps/using-github-apps/installing-your-own-github-app) in the organisation.
+
+You can also request a transfer from your personal account to the organisation. To do this, once the App is production ready, change the ownership of the App to the
+[govuk-one-login](https://github.com/govuk-one-login/) organisation by visiting `Settings -> Developer Settings -> GitHub Apps -> <your app> -> Advanced -> Transfer`
+
+You will need a Github Org Admin to approve either of these installation approaches, reach out to them on #di-github-management.
+
+## Using your App
+
+### Github Actions
+
+If you are using the App in a Github Workflow, Github publishes a [common github action](https://github.com/actions/create-github-app-token) which allows you to generate a new short-lived access token for your app, to undertake github api calls, this should be your first port of call before implementing anything custom.
+
+### Scripting / External Implementations
+To enable the App to perform REST API calls you will need to use the App ID and Private key to generate a Json Web Token (JWT), then use the JWT to generate a Token, once you have the token you can make the request.
+
+The lifetime of the JWT/Token is limited. Create them in a workflow. See an
+[example workflow](https://github.com/govuk-one-login/team-manual/blob/main/.github/actions/make-jwt-for-gh/action.yaml) which expects
+an App Client ID and Private Key to be provided.
+
+See the GitHub documentation for further guidance:
+
+- [generate a JWT](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-json-web-token-jwt-for-a-github-app)
+- [generate a token](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-an-installation-access-token-for-a-github-app)
+- [make a REST API call](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/making-authenticated-api-requests-with-a-github-app-in-a-github-actions-workflow)
