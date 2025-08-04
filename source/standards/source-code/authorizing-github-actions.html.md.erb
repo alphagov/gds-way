@@ -85,9 +85,9 @@ The `client_secret` and `private_key` are sensitive and must be [stored in a sec
 | Multi-Repository (i.e. a Team or Pod) | Organisation Secret Value or AWS Secrets Manager (Build account) |
 | Organisation-Wide                     | Organisation Secret Value                                        |
 
-### Rotating your GH App Secrets
+### Rotating your GitHub App's Secrets
 
-Rotate your app's secrets according to GDS and DI programme guidance.
+You should include your GitHub App's secrets in your periodic [secrets audit](/standards/secrets-auditing.html).
 
 Private keys do not expire and must be manually revoked. For more information about how to revoke or delete a private key, see [Deleting private keys](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps#deleting-private-keys).
 
