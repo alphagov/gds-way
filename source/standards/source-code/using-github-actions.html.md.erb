@@ -78,28 +78,11 @@ There's more information about using GitHub Apps to run automated tasks in the [
 - **Building external integrations or services**
   for example a dashboard that aggregates PR status from multiple repos for reporting.
 
-### Using the built in GITHUB_TOKEN
+### Using the built-in GITHUB_TOKEN
 
-If your GitHub Action only needs to carry out tasks within a single repository, use the [GITHUB_TOKEN](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication) for that repository.
-
-For example, you can use the GITHUB_TOKEN to authorize a GitHub Action to:
-
-- comment on issues
-- create pull requests
-- update workflow statuses in the same repository.
-
-Read more about the [permissions of the GITHUB_TOKEN in the GitHub documentation](https://docs.github.com/en/actions/reference/github_token-reference#permissions-for-the-github_token)
-
-#### Examples of when to use the GITHUB_TOKEN
-
-- **Automating tasks within a GitHub Actions workflow**
-  for example automatically labeling issues or PRs in the same repository during a workflow run.
-- **Posting workflow status checks**
-  for example updating commit status or posting a check run result from a CI job.
-- **Creating or updating issues/PRs in the same repository**
-  for example creating a release note issue after a successful deployment.
-- **Managing workflow artifacts**
-  for example uploading or downloading build artifacts in a workflow.
+If your GitHub Action only needs to carry out tasks within a single repository, use the built-in
+[GITHUB_TOKEN]((https://docs.github.com/en/actions/reference/github_token-reference)
+for that repository.
 
 <%= warning_text('Do not use Personal Access Tokens to authorize GitHub Actions') %>
 
