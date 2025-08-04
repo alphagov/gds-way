@@ -93,7 +93,7 @@ Private keys do not expire and must be manually revoked. For more information ab
 
 ### Naming Convention
 
-To allow the use of Shared Github Actions and tooling, the following naming convention for secrets is recommended:
+To allow the use of Shared Github Actions and tooling, use the following naming convention for secrets:
 
 - `GH_APP_{APP_NAME_ABBREVIATION}_CLIENT_ID`
 - `GH_APP_{APP_NAME_ABBREVIATION}_CLIENT_SECRET`
@@ -105,18 +105,18 @@ To allow the use of Shared Github Actions and tooling, the following naming conv
 Once configured, you can request that the app is [installed](https://docs.github.com/en/apps/using-github-apps/installing-your-own-github-app) in the organisation.
 
 You can also request a transfer from your personal account to the organisation. To do this, once the App is production ready, change the ownership of the App to the
-[govuk-one-login](https://github.com/govuk-one-login/) organisation by visiting `Settings -> Developer Settings -> GitHub Apps -> <your app> -> Advanced -> Transfer`
+GitHub organisation by visiting `Settings -> Developer Settings -> GitHub Apps -> <your app> -> Advanced -> Transfer`
 
-You will need a Github Org Admin to approve either of these installation approaches, reach out to them on #di-github-management.
+You will need a Github Org Admin to approve either of these installation approaches.
 
 ## Using your App
 
 ### Github Actions
 
-If you are using the App in a Github Workflow, Github publishes a [common github action](https://github.com/actions/create-github-app-token) which allows you to generate a new short-lived access token for your app, to undertake github api calls, this should be your first port of call before implementing anything custom.
+If you are using the App in a Github Workflow, Github publishes a [common github action](https://github.com/actions/create-github-app-token) which allows you to generate a new short-lived access token for your app, to undertake GitHub API requests.  This should be your first port of call before implementing anything custom.
 
 ### Scripting / External Implementations
-To enable the App to perform REST API calls you will need to use the App ID and Private key to generate a Json Web Token (JWT), then use the JWT to generate a Token, once you have the token you can make the request.
+To enable the App to make REST API requests you will need to use the App ID and Private key to generate a Json Web Token (JWT), then use the JWT to generate a Token.  Once you have the token you can make the request.
 
 The lifetime of the JWT/Token is limited. Create them in a workflow. See an
 [example workflow](https://github.com/govuk-one-login/team-manual/blob/main/.github/actions/make-jwt-for-gh/action.yaml) which expects
@@ -126,4 +126,4 @@ See the GitHub documentation for further guidance:
 
 - [generate a JWT](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-json-web-token-jwt-for-a-github-app)
 - [generate a token](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-an-installation-access-token-for-a-github-app)
-- [make a REST API call](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/making-authenticated-api-requests-with-a-github-app-in-a-github-actions-workflow)
+- [make a REST API request](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/making-authenticated-api-requests-with-a-github-app-in-a-github-actions-workflow)
