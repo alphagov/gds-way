@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.0
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.1.0
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@2a7b30092b0caf9c046252510f9273b4875f3db9 # 1.254.0
         with:
