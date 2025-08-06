@@ -24,7 +24,7 @@ cross-account access pattern][].
 ### Requesting a new AWS user
 
 To add a user to the `gds-users` base account, complete the "Request user access"
-section of the [request an AWS account form][]. The user can request this
+section of the [request an AWS user form][]. The user can request this
 themselves or someone else can request it on their behalf.
 
 Once the request is submitted it will be reviewed by members of the [AWS user
@@ -186,7 +186,7 @@ Further usage instructions can be found in the [gds-cli README](https://github.c
 [maximum session duration]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
 [team specific roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html
 
-## Create AWS Accounts
+## Create and manage AWS Accounts
 
 GDS teams can request as many AWS accounts as required, for example one production and one non-production account.
 
@@ -196,6 +196,8 @@ Using multiple AWS accounts allows GDS teams to:
 - minimize the impact of security breaches
 - isolate audit data in separate accounts
 
+By having separate AWS accounts for production and test workloads teams can restrict the security impact of a compromised AWS credential.
+
 AWS Answers has more information about [AWS Multiple Account Security Strategy][].
 
 ### Request an account
@@ -204,43 +206,36 @@ To request an AWS account, follow the [instructions on the GDS Engineering Hub](
 
 The GDS Engineering Enablement Team will confirm if your account can be included in GDS AWS billing and perform the initial account setup.
 
-Once your account is created you’ll receive an email with the account ID and will be able to assume an administrative role from [the GDS users base account][].
+Once your account is created you’ll receive an email with the account ID and will be able to assume an administrative role from the `gds-users` base account.
 
 ### Set up an account
 
 Your new account will come with a GDS created `bootstrap` role which has full admin rights.
 
-All users in the [Request an AWS account form][] will be able to assume the bootstrap role from [the GDS users base account][].
+The users you requested will be able to assume the bootstrap role by following the [Access AWS Accounts](#access-aws-accounts) guidance.
 
 You should use the bootstrap role to set up your new account following your
 team’s best practices, for example using [Terraform][].
 
-As part of your account setup, ensure your users can assume
-roles with permissions relevant to their role.
+> [!IMPORTANT]
+> You'll need to use the
+> [GDS VPN](https://sites.google.com/digital.cabinet-office.gov.uk/the-gds-wiki/it-hub/connect-to-vpn)
+> to access your account using the bootstrap role.
+> This is only available from a GDS Developer Laptop (issued by GDS IT), not from an ICS (DSIT) laptop.
+
+Unless your team uses AWS Identity Center, you must now set up an admin role with the `gds-users` account as the base account for
+[cross account access](#cross-account-access)
+by human (rather than machine) users.
+
+> [!TIP]
+> Most teams don't use AWS Identity Center at this time.
 
 Remove the bootstrap role once you’ve added a properly configured admin role.
-
 
 [Amazon Web Services (AWS)]: https://aws.amazon.com/
 [AWS Multiple Account Security Strategy]: https://d1.awsstatic.com/aws-answers/AWS_Multi_Account_Security_Strategy.pdf
 [request an AWS user form]: https://request-an-aws-user.digital.cabinet-office.gov.uk/
-[the GDS users base account]: https://gds-users.signin.aws.amazon.com/console
 [Terraform]: https://www.terraform.io/
-[accessing aws accounts]: access-aws-accounts.html
-
-## Manage AWS accounts
-
-If you’re setting up a new AWS account and your team want to use cross-account access use the `gds-users` account as your base account.
-
-Use multiple AWS accounts to:
-
-* enforce administrative isolation between workloads
-* minimize the impact of security breaches
-* isolate audit data in separate accounts
-
-By having separate AWS accounts for production and test workloads teams can restrict the security impact of a compromised AWS credential.
-
-To avoid managing several sets of AWS credentials for multiple accounts, teams should use roles and cross-account access. AWS describe this approach as [multiple account security strategy][].
 
 ### Cross account access
 
@@ -328,7 +323,6 @@ and ideally conform to the following (except for extenuating circumstances):
             should NOT be able to do things like `ssm:DescribeParameters`
 
 [multiple account security strategy]: https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/organizing-your-aws-environment.html
-[accessing aws accounts]: access-aws-accounts.html
 [AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
 [AWS principle]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
 [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
@@ -341,9 +335,7 @@ When your team no longer requires an AWS account, contact the Engineering Enable
 
 ## Remove access to AWS accounts
 
-When someone no longer requires access to AWS (for example, because they've left GDS or your team) remove them from the `gds-users` base account using the **Request user removal** section of the:
-
-[Request an AWS user form](https://request-an-aws-user.digital.cabinet-office.gov.uk/).
+When someone no longer requires access to AWS (for example, because they've left GDS or your team) remove them from the `gds-users` base account using the **Request user removal** section of the [Request an AWS user form][].
 
 Before you request someone's removal make sure they do not need access to AWS in another team within GDS.
 
