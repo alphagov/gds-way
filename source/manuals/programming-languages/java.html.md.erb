@@ -1,6 +1,6 @@
 ---
 title: Java style guide
-last_reviewed_on: 2025-01-13
+last_reviewed_on: 2025-07-11
 review_in: 6 months
 owner_slack: '#java'
 ---
@@ -33,7 +33,7 @@ Some Java teams within GDS have had success using the [Spotless](https://github.
 
 Beginning with version 9, Jakarta EE switched from using the `javax` package namespace to the `jakarta` package namespace, instantly breaking all applications that referenced the old package names.  (Be aware that other APIs — including some that are part of Java Standard Edition — also use the `javax` package namespace.)
 
-Migrating from Java EE to Jakarta EE is hard. Many libraries and frameworks use Java EE or Jakarta EE so migrating completely may involve updating many of your dependencies to new versions that work with Jakarta EE (if they exist).
+Migrating from Java EE to Jakarta EE may be involved. Many libraries and frameworks use Java EE or Jakarta EE so migrating completely may involve updating many of your dependencies to new versions that work with Jakarta EE (if they exist).
 
 Some libraries and frameworks make this a little easier by having two parallel versions, one that works with Java EE and one that works with Jakarta EE, while being otherwise equivalent. This makes it possible to upgrade to the latest Java EE version of a dependency and then migrate across to its Jakarta EE equivalent in two separate steps.
 
@@ -77,10 +77,10 @@ If a getter may return `null`, you should usually return an `Optional` instead.
 
 `Optional` is intended to only to represent the absence of a result: do not use it for fields or method parameters. Java language architect [Brian Goetz posted a StackOverflow answer explaining the intent of `Optional`](https://stackoverflow.com/questions/26327957/should-java-8-getters-return-optional-type/26328555#26328555) with further reasoning.
 
-You almost never need to use the `isPresent()` or `isEmpty()` methods on an `Optional`. Use `ifPresent(…)`, `ifPresentOrElse(…)`, `map(…)` or `flatMap(…)` instead. See DZone Java Zone’s article _[
+You almost never need to use the `isPresent()` or `isEmpty()` methods on an `Optional`. Use `ifPresent(…)`, `ifPresentOrElse(…)`, `map(…)` or `flatMap(…)` instead. See DZone’s article _[
 Optional isPresent() Is Bad for You](https://dzone.com/articles/optional-ispresent-is-bad-for-you)_ for more details.
 
-Optionals work best when used in a functional style, which can take time to learn. The DZone Java Zone article _[
+Optionals work best when used in a functional style, which can take time to learn. The DZone article _[
 26 Reasons Why Using Optional Correctly Is Not Optional
 ](https://dzone.com/articles/using-optional-correctly-is-not-optional)_ has some guidance.
 
@@ -126,6 +126,10 @@ The [OpenJDK project has some style guidelines for local variable type inference
 ## Records
 
 Java 16 introduced record classes, which provide an excellent way to model immutable data with a concise syntax that eliminates the need to write tedious and error-prone code for basic functionality. Records also support pattern matching. [Dev.java has a good introduction to records.](https://dev.java/learn/records/)
+
+## Switch expressions and the new switch syntax
+
+Java 17 introduced a new switch syntax, which uses arrows and eliminates error-prone fallthrough. Always use this style in preference to the old syntax. In situations where a switch statement is used to assign a value to a variable or similar, you can replace it with a [switch expression](https://docs.oracle.com/en/java/javase/17/language/switch-expressions-and-statements.html). Java 21 introduced [pattern matching for switch](https://www.baeldung.com/java-switch-pattern-matching), which can make some code significantly more elegant.
 
 ## Prefer functionality in the Java standard library
 
@@ -201,6 +205,8 @@ Dependabot only deals with direct dependencies, not transitive dependencies. Eve
 
 When viewing a Maven POM file, IntelliJ IDEA can warn you if your transitive dependencies have reported security vulnerabilities.
 
+You can often force a newer version of a transitive dependency to be used by explicitly adding the dependency then adding exclusions to stop other dependencies using it transitively.
+
 ## Build tools
 
 You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apache.org/) as the build tool. Use recent versions if you can. Maven now supports the [Bill of Materials (BOM)](https://www.jvt.me/posts/2021/08/28/java-bom/) concept, which can simplify dependency management (Gradle also supports Maven BOMs).
@@ -243,7 +249,7 @@ In addition, Temurin has benefits such as being available in package repositorie
 
 ## Publishing artifacts
 
-We recommend publishing artifacts (for which the source is already public) to [Maven Central](https://central.sonatype.com/).
+We recommend publishing artifacts (for which the source is already public) to [Maven Central](https://central.sonatype.com/). You need to [register to publish via the Central Portal](https://central.sonatype.org/register/central-portal/).
 
 You should _not_ use Maven Central to publish artifacts for which the source is closed or contains other proprietary assets, as it is a public repository with anonymous access. If you need to publish private artifacts for internal use, consider running your own [Sonatype Nexus Repository](https://www.sonatype.com/products/sonatype-nexus-repository).
 
@@ -259,8 +265,8 @@ You should follow [Sonatype’s guidance on registering for and claiming a group
 
 Sonatype requires that artifacts published to their repository have been signed with a published GPG key. Each programme that wants to publish artifacts should create their own GPG key, [publish it to a public keyserver](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key) ([keys.openpgp.org](https://keys.openpgp.org/) and [keyserver.ubuntu.com](https://keyserver.ubuntu.com/) are recommended), then store the private key safely and in accordance with any programme-specific guidance.
 
-The key and its associated passphrase will be used during the publishing process. This will require making it available safely to the task runner, for example Concourse, that is performing the deployment.
+The key and its associated passphrase will be used during the publishing process. This will require making it available safely to the task runner, for example [Concourse](https://concourse-ci.org/), that is performing the deployment.
 
 We recommend additionally publishing the public keys elsewhere, for example as a public GitHub repository, so that a third-party user knows an artifact is signed by a key that we have declared we use for signing.
 
-Sonatype publishes [build-tool-specific guidance for publishing and releasing artifacts on Maven Central](https://central.sonatype.org/register/central-portal/).
+Sonatype publishes [build-tool-specific guidance for publishing and releasing artifacts on Maven Central](https://central.sonatype.org/publish/publish-portal-guide/).
