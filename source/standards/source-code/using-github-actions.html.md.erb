@@ -1,0 +1,160 @@
+---
+title: Using GitHub Actions and workflows
+last_reviewed_on: 2025-08-04
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+GitHub repositories can be configured to use [GitHub Actions](https://docs.github.com/en/actions) for CI/CD jobs, for example running unit tests or deploying a static site.
+
+Actions and workflows can be powerful, so take care to follow best security practice.
+
+Ensure the repository permissions follow [the principle of least privilege](/standards/principle-least-access.html) by:
+
+- disabling Actions entirely on repositories that do not use it (this will hide the 'Actions' tab from the repository menu)
+- setting workflow permissions to read-only by default
+- setting [granular permissions in the workflow YAML](https://docs.github.com/actions/reference/authentication-in-a-workflow#modifying-the-permissions-for-the-github_token) where appropriate
+- [using environments to restrict access to secrets](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment)
+
+If your repository has external contributors, [ensure they do not have permissions to add workflows or trigger workflow runs](https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks).
+
+If your workflow interacts with another resource (for example AWS or DockerHub), consider setting up a dedicated account or role, with permissions limited to the scope of the action.
+Use temporary credentials in preference to storing long-lived credentials in a secret.
+In particular, when accessing AWS you must [authenticate using the OpenID Connect token](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services) and not using an IAM User's access key and secret access key.
+You should also specify the branch you expect to be deploying from (for example, `main`) in your IAM role to make sure code cannot be deployed from untrusted branches.
+
+Consider protecting the `.github/workflows` folder by using [a CODEOWNERS file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) and requiring review from CODEOWNERS for merges into protected branches.
+
+Consider creating a Workflow Template in the [alphagov workflow folder](https://github.com/alphagov/.github/tree/main/workflow-templates) if you need to share a similar workflow between many repositories.
+
+[Create your own local actions](https://docs.github.com/en/actions/creating-actions/about-actions) wherever possible.
+
+If using GitHub-owned actions, [pin to a specific version](https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#using-release-management-for-your-custom-actions) and [configure Dependabot to keep your actions up to date](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot#example-dependabotyml-file-for-github-actions) by adding a comment on the same line with the tag the commitsha represents. For example:
+
+```
+- uses: actions/checkout@01aecccf739ca6ff86c0539fbc67a7a5007bbc81 # v2.1.0
+```
+
+Pinned versions should include the semver version in a comment next to the SHA, helping humans understand which versions we are pinned to.
+Where possible, allow automated dependency management tools to scan these version comments and suggest updates.
+
+Please double-check that the digest and the commented version are consistent each time you upgrade, as dependabot does not have perfect capability at either identifying the magnitude of the upgrade, or necessarily updating the commented pin.
+
+Third-party actions should only be used if:
+
+- The provider is verified by GitHub (for example, [aws-actions](https://github.com/aws-actions))
+- The action is complex enough that you cannot write your own local action
+- You have fully reviewed the code in the version of the third-party action you will be using
+- You have pinned the specific version in your workflow and in the repository settings, using a Git commit SHA
+- You have included the semver version in a comment next to the SHA, helping humans understand the version and automated tools report on what is out of date (for example dependabot)
+- The third-party action is actively maintained, well-documented and tested ([follow the guidance on third party dependencies](/standards/tracking-dependencies.html)).
+
+You can enforce this in the settings for Actions by choosing ['Allow select actions'](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-specific-actions-to-run) and then 'Allow actions created by GitHub' and 'Allow Marketplace actions by verified creators' as required.
+
+Note that for public repositories, the output of workflow runs is visible to everyone. Do not use workflows if this output could be considered sensitive.
+
+## Authorizing GitHub Actions
+
+GitHub Actions need authorization in order to carry out their intended tasks. Choose the right approach for authorizing your GitHub Actions for your context.
+
+### Using a GitHub App
+
+Use a [GitHub App](https://docs.github.com/en/apps/overview) to authenticate your GitHub Actions if they need to:
+
+- undertake privileged tasks outside a single repository
+- have persistent authentication
+- use finer-grained permissions
+- act as an integration rather than a user or workflow
+
+There's more information about using GitHub Apps to run automated tasks in the [GitHub guidance](https://docs.github.com/en/apps/creating-github-apps/about-creating-github-apps/deciding-when-to-build-a-github-app).
+
+#### Examples of when to use a GitHub App
+
+- **Needing cross-repository or organization-wide automation**
+  for example a bot that manages issues across multiple repositories in an organization.
+- **Requiring fine-grained permissions**
+  for example an integration that only needs read access to issues but write access to pull requests.
+
+### Using the built-in GITHUB_TOKEN
+
+If your GitHub Action only needs to carry out tasks within a single repository, use the built-in
+[GITHUB_TOKEN](https://docs.github.com/en/actions/tutorials/authenticate-with-github_token)
+for that repository.
+
+### Personal Access Tokens
+
+<%= warning_text('Do not use Personal Access Tokens to authorize GitHub Actions') %>
+
+Personal Access Tokens:
+
+- rely on an individual person's GitHub account, causing GitHub Actions to break when people move teams, leave GDS, or the token expires
+- are intended for individual use, and can't be centrally managed and audited
+
+Only use PATs to authorize calls to the GitHub API you're making yourself as part of development.
+
+[Classic Personal Access Tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
+must not be used to take actions in GDS repositories.  Their use may be disabled altogether in future.
+Classic PATs have overly broad permissions, can be configured never to expire, and have access to all the repositories your account has.
+
+### Configuring a GitHub App
+
+Follow the guidance here to set up a GitHub App in your developer account:
+
+- [About creating GitHub Apps](https://docs.github.com/en/apps/creating-github-apps/about-creating-github-apps/about-creating-github-apps)
+
+You will need to provide your App permissions to access GitHub resources. Ensure the app only has the permissions it needs.
+
+#### Storing your Secrets Safely
+
+Store the `client_id`, `client_secret` and `private_key` for this application safely.
+The `client_secret` and `private_key` are sensitive and must be [stored in a secrets manager](/standards/storing-credentials.html). Choose from one of the following recommended approaches, depending on the scope of your app:
+
+| App Scope                             | Recommendation                                                   |
+| ------------------------------------- | ---------------------------------------------------------------- |
+| Single Repository                     | Local Repository Secret                                          |
+| Multi-Repository (i.e. a Team or Pod) | Organisation Secret Value or AWS Secrets Manager (Build account) |
+| Organisation-Wide                     | Organisation Secret Value                                        |
+
+#### Rotating your GitHub App's Secrets
+
+You should include your GitHub App's secrets in your periodic [secrets audit](/standards/secrets-auditing.html).
+
+Private keys do not expire and must be manually revoked. For more information about how to revoke or delete a private key, see [Deleting private keys](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps#deleting-private-keys).
+
+#### Naming Convention
+
+To allow the use of Shared GitHub Actions and tooling, use the following naming convention for secrets:
+
+- `GH_APP_{APP_NAME_ABBREVIATION}_CLIENT_ID`
+- `GH_APP_{APP_NAME_ABBREVIATION}_CLIENT_SECRET`
+- `GH_APP_{APP_NAME_ABBREVIATION}_PRIVATE_KEY`
+- `GH_APP_{APP_NAME_ABBREVIATION}_PRIVATE_KEY_B64` - if required to encode in base64
+
+### Installing your App
+
+Once configured, you can request that the app is [installed](https://docs.github.com/en/apps/using-github-apps/installing-your-own-github-app) in the organisation.
+
+You can also request a transfer from your personal account to the organisation. To do this, once the App is production ready, change the ownership of the App to the
+GitHub organisation by visiting `Settings -> Developer Settings -> GitHub Apps -> <your app> -> Advanced -> Transfer`
+
+You will need a GitHub Org Admin to approve either of these installation approaches.
+
+### Using your App
+
+#### GitHub Actions
+
+If you are using the App in a GitHub Workflow, GitHub publishes a [common github action](https://github.com/actions/create-github-app-token) which allows you to generate a new short-lived access token for your app, to undertake GitHub API requests.  This should be your first port of call before implementing anything custom.
+
+### Scripting / External Implementations
+To enable the App to make REST API requests you will need to use the App ID and Private key to generate a Json Web Token (JWT), then use the JWT to generate a Token.  Once you have the token you can make the request.
+
+The lifetime of the JWT/Token is limited. Create them in a workflow. See an
+[example workflow](https://github.com/govuk-one-login/team-manual/blob/main/.github/actions/make-jwt-for-gh/action.yaml) which expects
+an App Client ID and Private Key to be provided.
+
+See the GitHub documentation for further guidance:
+
+- [generate a JWT](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-json-web-token-jwt-for-a-github-app)
+- [generate a token](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-an-installation-access-token-for-a-github-app)
+- [make a REST API request](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/making-authenticated-api-requests-with-a-github-app-in-a-github-actions-workflow)
