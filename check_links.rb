@@ -10,6 +10,7 @@ begin
     .map { |path| path.delete_prefix("source/").delete_suffix(".erb").delete_suffix(".md") }
 
   individual_exceptions = [
+    "https://www.baeldung.com/java-switch-pattern-matching", # requires JS
     "https://architecturechronicles.substack.com/p/what-is-connascence",
     "https://www.cloudflare.com/en-gb/learning/dns/dnssec/how-dnssec-works/",
     "https://docs.google.com/presentation/d/1LHLKPclfrn5KVFrFd2WqyPOYpS6wXklE4Lexb2rJNW0/",
@@ -48,7 +49,8 @@ begin
         %r{https://www.cnvc.org/},
         %r{https://securityheaders.com/},
         %r{https://www.webpagetest.org/},
-        %r{https://www.pingdom.com/}
+        %r{https://www.pingdom.com/},
+        %r{https://.*.cloud.service.gov.uk/?}
     ].concat(individual_exceptions)
      .concat(new_urls)
     }
