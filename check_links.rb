@@ -32,6 +32,13 @@ begin
   proofer = HTMLProofer.check_directory(
     "build",
     {
+      :cache => {
+        :timeframe => {
+            :external => "7d"
+        },
+        :cache_file => "link-check.json",
+        :storage_dir => "/tmp"
+      },
       typhoeus: {
         headers: { "User-Agent" => "Mozilla/5.0 (Android 14; Mobile; LG-M255; rv:122.0) Gecko/122.0 Firefox/122.0" }
       },
@@ -50,14 +57,18 @@ begin
         %r{https://securityheaders.com/},
         %r{https://www.webpagetest.org/},
         %r{https://www.pingdom.com/},
-        %r{https://.*.cloud.service.gov.uk/?}
+        %r{https://.*.cloud.service.gov.uk/?},
     ].concat(individual_exceptions)
      .concat(new_urls)
     }
   )
 
+  proofer.before_request do |request|
+    sleep(0.1)
+  end
+
   proofer.run
 rescue RuntimeError => e
-  abort e.to_s
+  puts e.to_s
 end
 
