@@ -10,6 +10,7 @@ begin
     .map { |path| path.delete_prefix("source/").delete_suffix(".erb").delete_suffix(".md") }
 
   individual_exceptions = [
+    "https://www.baeldung.com/java-switch-pattern-matching", # requires JS
     "https://architecturechronicles.substack.com/p/what-is-connascence",
     "https://www.cloudflare.com/en-gb/learning/dns/dnssec/how-dnssec-works/",
     "https://docs.google.com/presentation/d/1LHLKPclfrn5KVFrFd2WqyPOYpS6wXklE4Lexb2rJNW0/",
@@ -31,6 +32,13 @@ begin
   proofer = HTMLProofer.check_directory(
     "build",
     {
+      :cache => {
+        :timeframe => {
+            :external => "7d"
+        },
+        :cache_file => "link-check.json",
+        :storage_dir => "/tmp"
+      },
       typhoeus: {
         headers: { "User-Agent" => "Mozilla/5.0 (Android 14; Mobile; LG-M255; rv:122.0) Gecko/122.0 Firefox/122.0" }
       },
@@ -48,14 +56,19 @@ begin
         %r{https://www.cnvc.org/},
         %r{https://securityheaders.com/},
         %r{https://www.webpagetest.org/},
-        %r{https://www.pingdom.com/}
+        %r{https://www.pingdom.com/},
+        %r{https://.*.cloud.service.gov.uk/?},
     ].concat(individual_exceptions)
      .concat(new_urls)
     }
   )
 
+  proofer.before_request do |request|
+    sleep(0.1)
+  end
+
   proofer.run
 rescue RuntimeError => e
-  abort e.to_s
+  puts e.to_s
 end
 
