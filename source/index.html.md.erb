@@ -9,6 +9,7 @@ title: The GDS Way
         <ul>
             <li><a href='#about-the-gds-way'>About the GDS way</a></li>
             <li><a href='#how-to-add-new-guidance'>How to add new guidance</a></li>
+            <li><a href='#how-to-remove-guidance'>How to remove guidance</a></li>
             <li><a href='#the-gds-way-forum'>The GDS Way Forum</a></li>
         </ul>
     </li>
@@ -26,6 +27,9 @@ title: The GDS Way
     </li>
     <li><a href="#operating-a-service">Operating a service</a>
         <%= partial 'partials/nav-operating-a-service' %>
+    </li>
+    <li><a href="#deleted-pages">Deleted pages</a>
+        <%= partial 'partials/nav-deleted-pages' %>
     </li>
 </ul>
 <% end %>
@@ -103,6 +107,12 @@ What specific bits of software (commercial or open source) do
 we use to help us do this thing?
 ```
 
+## How to remove guidance
+
+There comes a time where tools, techniques, technology or guidance changes, or we no longer feel the need to document a specific approach.
+
+These documents will always be in our git history, and by putting the page titles in our <a href="#deleted-pages">deleted pages</a>, you can search our history and know if the GDS Way previously had an article.
+
 ## The GDS Way Forum
 
 This site documents some of the decisions agreed at the GDS Way Forum about the products we operate.
@@ -138,3 +148,7 @@ Contact the GDS Way Forum using the [#gds-way Slack channel](https://gds.slack.c
 ## Operating a service
 
 <%= partial 'partials/nav-operating-a-service' %>
+
+## Deleted pages
+
+<%= partial 'partials/nav-deleted-pages' %>
