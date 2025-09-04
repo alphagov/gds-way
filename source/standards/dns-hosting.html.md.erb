@@ -44,20 +44,21 @@ the zone for a subdomain to an AWS account that relates specifically to that env
 
 ## Internal GDS services
 
-Internal GDS services must be hosted on subdomains of the `digital.cabinet-office.gov.uk` domain.
+Internal GDS services must be hosted on subdomains of the `digital.gov.uk` domain.
 
-> This domain is likely to change as part of GDS joining the Department for Science, Innovation and Technology (DSIT).
+> The `digital.cabinet-office.gov.uk` domain can continue to be used for existing services, for a transitional period.
+
+You must not use the `digital.gov.uk` domain for services where the intended users are outside of the Department for Science, Innovation and Technology (DSIT).
+
+> This does not mean that services on this domain must necessarily be access-controlled, because [we work in the open][].
 
 Once you have
 [configured your Route 53 hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingNewSubdomain.html),
-you'll need to use the
-[GDS IT Help Desk](https://gdshelpdesk.digital.cabinet-office.gov.uk/helpdesk)
-to request delegation of your subdomain - choose:
-
-* IT Requests
-* Changes - Request & Support
-* DNS
+you'll need to
+[contact Engineering Enablement](https://engineering-enablement.gds-reliability.engineering/support.html)
+to request delegation of your subdomain.
 
 You must follow the [GDS brand guidance][] for services that are accessible by the public but which don't use the GOV.UK brand.
 
+[we work in the open]: https://www.gov.uk/guidance/government-design-principles#make-things-open-it-makes-things-better
 [GDS brand guidance]: https://docs.google.com/document/d/1MXFXP7oMxALiA4t6Gw8XFPksMI-aBjKqO5wCHvnccyo
