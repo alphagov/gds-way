@@ -1,6 +1,6 @@
 ---
 title: Working with AWS accounts
-last_reviewed_on: 2025-02-18
+last_reviewed_on: 2025-08-28
 review_in: 12 months
 ---
 
@@ -328,10 +328,28 @@ and ideally conform to the following (except for extenuating circumstances):
 [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 [IAM Policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
 [examples of AWS policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html
+[its metadata]: https://github.com/alphagov/gds-aws-organisation-accounts/tree/main/terraform/production
+[AWS's 90 day post-closure period]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-closing.html#what-to-expect-after-closure
+[the gds-aws-organisation-accounts GitHub repo]: https://github.com/alphagov/gds-aws-organisation-accounts
 
-## Delete AWS accounts
+## Deleting an AWS account
 
-When your team no longer requires an AWS account, contact the Engineering Enablement Team using the [#gds-engineering-enablement Slack Channel](https://gds.slack.com/messages/C05DC0SJ6UW).
+If an AWS account is no longer needed it should be closed so that it does not
+accrue unnecessary costs.
+
+To close an AWS account, email [the Engineering Enablement
+team](mailto:gds-engineering-enablement-support@digital.cabinet-office.gov.uk)
+requesting that it be closed. The request should come from one of the named
+contacts for the account, which can be found in [its metadata][].
+
+The Engineering Enablement team will raise a pull request in [the
+gds-aws-organisation-accounts GitHub repo][], which you will need to add your
+approval to. The Engineering Enablement team will then close the account.
+
+Once the account is closed it will go into [AWS's 90 day post-closure period][],
+during which the account still exists but is suspended and not accruing costs.
+The account can be reopened during this period if needed. After 90 days, the
+account and all data in it will be permanently deleted by AWS.
 
 ## Remove access to AWS accounts
 
