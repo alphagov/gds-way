@@ -33,7 +33,6 @@ GDS projects using Node.js include:
 
 - [GOV.UK Frontend](https://github.com/alphagov/govuk-frontend)
 - [GOV.UK Pay](https://www.payments.service.gov.uk/)
-- [GOV.UK PaaS](https://www.cloud.service.gov.uk/) (TypeScript)
 - [GOV.UK Prototype Kit](https://govuk-prototype-kit.herokuapp.com/docs)
 - [GOV.UK One Login](https://www.sign-in.service.gov.uk/) - see [repositories in TypeScript][di-ts] and [in JavaScript][di-js]
 
@@ -44,11 +43,8 @@ You can use Node.js to render a web interface for your service. For example,
 GOV.UK Pay has created thin, client-facing applications that do not store
 data (although they may retrieve data from an API).
 
-You can use [TypeScript](https://www.typescriptlang.org/) when teams think it’s
-appropriate. For example, the GOV.UK PaaS team uses TypeScript
-because they are used to working with a statically typed, compiled language,
-and they think the compilation and static-analysis tooling is better for
-their workflow. There’s more information about TypeScript on the
+You can use [TypeScript](https://www.typescriptlang.org/) if your team decides it’s appropriate.
+There’s more information about TypeScript on the
 [Node.js page](/manuals/programming-languages/nodejs/).
 
 ## Backend development
@@ -78,11 +74,8 @@ production.
 
 Go is no longer a core backend development language in GDS.
 
-The only Go service currently in production operation is the [GOV.UK
-router][router], and it is the core language for [Cloud
-Foundry](https://www.cloudfoundry.org/), which GOV.UK PaaS uses, although
-GOV.UK PaaS is being [decommissioned][pass-decom]. As such, the knowledge and
-experience of building and running services in Go is small and decreasing.
+The only Go service currently in production operation is the [GOV.UK router][router].
+As such, the knowledge and experience of building and running services in Go is small and decreasing.
 
 Go _may_ be an appropriate language for instances of systems programming, like
 proxying, routing, and transforming HTTP requests. However you should only
@@ -90,7 +83,6 @@ write these sorts of components if there is no alternative maintained open
 source tool available.
 
 [router]: https://github.com/alphagov/router
-[pass-decom]: https://gds.blog.gov.uk/2022/07/12/why-weve-decided-to-decommission-gov-uk-paas-platform-as-a-service/
 
 ### Languages we do not use for new projects
 
