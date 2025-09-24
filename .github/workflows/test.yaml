@@ -32,7 +32,7 @@ jobs:
       run: bundle exec middleman build
 
     - name: Check external links
-      if: ${{ github.ref != 'refs/heads/main' }}
+      if: ${{ github.ref != 'refs/heads/main' && vars.RUN_LINK_CHECK == 'true' }}
       run: bundle exec ruby check_links.rb
 
     # Share data between the build and deploy jobs so we don't need to run `npm run build` again on deploy
