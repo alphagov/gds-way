@@ -121,9 +121,16 @@ bundle exec ruby check_links.rb
 
 This script is automatically run as part of CI, but skipped on the main branch (so that the main branch can always be deployed).
 
-## Deploy
+## Deployment
 
-This repo is continuously deployed from the `main` branch by GitHub Actions, using the workflow defined in [`/.github/workflows/deploy-to-pages.yaml`](/.github/workflows/deploy-to-pages.yaml).
+This repo is continuously
+[deployed to GitHub Pages](https://alphagov.github.io/gds-way)
+from the `main` branch by a GitHub Action, using the workflow defined in
+[`/.github/workflows/deploy-to-pages.yaml`](/.github/workflows/deploy-to-pages.yaml).
+
+We use a
+[custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
+so that the site is always accessed via its [canonical URL][gds-way].
 
 ## Licence
 
