@@ -142,3 +142,15 @@ Contact the GDS Way Forum using the [#gds-way Slack channel](https://gds.slack.c
 ## Operating a service
 
 <%= partial 'partials/nav-operating-a-service' %>
+
+## Withdrawn guidance
+
+<ul>
+    <% sitemap.resources.each do |resource| %>
+        <% if resource.options[:layout].eql? "withdrawn" %>
+            <li>
+                <a href="<%= resource.url =%>"><%= resource.data.title =%></a>
+            </li>
+        <% end %>
+    <% end %>
+</ul>
