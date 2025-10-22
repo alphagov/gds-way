@@ -1,0 +1,404 @@
+---
+title: How to handle sensitive code
+last_reviewed_on: 2025-10-01
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+The kinds of services GDS runs has changed over time. Broadly we are increasingly engaged in more sentive areas,
+and we run many components that are designed to take burdens off other services. We run sensitive things so others
+do not have to.
+
+In additton, that working in the open has strong tangible benefits to delivery, whilst supporting a key philosophical approach to digital public service delivery.
+This manfests in a range of guidance, cultural norms, government policy and established custom and practice, that encourage a measured approach to openness.
+Examples of thsi can be found in:
+
+- Point 12 of the [Service Standard][service-standard] ([detail here][service-standard-open-code])
+- Well established in the [GDS Way][gds-way-open-standards] and operational practice around GDS (Including on Critical National Infrastructure components)
+- A part of the [DI Source Control Management Policy][source-control] (see overview)
+- Something we have talked about [publicly][2012-coding-in-open] and frequently as a benefit to GDS:
+  - [Coding in the open][2012-coding-in-open]
+  - [Why we code in the open][2017-why-we-open]
+  - [Benefits of coding in the open][2017-benefits-of-open]
+  - [Don't be afraid to code in the open and how to do it securely][2017-dont-be-afraid]
+  - [Barriers to openness and how to overcome them][2018-barriers-to-open]
+- It's something our colleagues and peers also do as an industry norm across government
+  - [MOJ: How making our deployment code open improved our workflow][moj-open-blog]
+  - [NHS Service Standard:12. Make new source code open][nhs-service-standards]
+
+Potential frictions between working in the open and managing sensitive data are easily mediated with greater definition and description
+of in what way documents are sensitive, and why that decision was made.
+
+The theory and practice is very similar to GDS's standard approach to [writing good commit messages](/standards/source-code/working-with-git.html#commit-messages).
+
+In particular better metadata applied to sensitive information should help with the tasks of establishing:
+- the reasons or history of choices that led to something being made public or private
+- if those reasons remain valid or have changed with risk appetite or context
+- how any decisions may or may not serve as useful precedent to help expedite future decision making on similar topics.
+
+Proper documentation and information availability around sensitivity and its causes when applied to our documentation and code helps staff
+more quickly navigate handling decisions. It ensures that we keep close to the service standard and work in the open, and understand where there are legitimate excpetions
+to that rule.
+
+## Context
+
+### Government context
+
+As Civil Servants, or contractors to the Civil Service, we are bound to follow the [Government Security Classifications Policy][government-security-classifications-policy].
+
+Whilst the total landscape of Government Information Handling is complex, at GDS our subset is simpler.
+
+Neither our staff, nor our systems are generally rated to handle [SECRET][definition-of-secret] or [TOP SECRET][definition-of-top-secret] information.
+Where this does occur it will be by exception, and generally mediated through staff with Developed Vetting around specific tasks.
+Examples might be information gathering in relation to specific NCSC concerns.
+These areas are treated as being outside the scope of this RFC.
+
+All our information will be treated as [OFFICIAL][definition-of-OFFICIAL] as it is generated as part of Civil Service duties.
+In most cases there are limited to no negative consequences if OFFICIAL information is compromised or disclosed.
+
+However in some circumstances a subset of this information could lead to moderate damage if disclosed.
+In these cases we may mark this information as [OFFICIAL-SENSITIVE][application-of-sensitive] indicating that it is not for public release in relation to a concern of threat upon disclosure.
+
+Within each tier it is best practice to attach [handling instructions](https://www.gov.uk/government/publications/government-security-classifications/government-security-classifications-policy-html#handling-instructions) that can be used to give a more detailed picture of the information’s sensitivity and how it should be appropriately handled.
+
+### GitHub Context
+
+GitHub provides three
+[visibility][github-visibility]
+settings:
+
+- **Public** repositories are visible to the world and are primarily used for open source content.
+- **Internal** repositories are read-accessible to all full members of your enterprise account (GDS, CDDO, CO:Di.AI and other parts of Cabinet Office but not to outside collaborators).
+- **Private** repositories are only visible to individuals or teams who have been given explicit access, including through enterprise or organization base permissions.
+
+See [GitHub resource for more information](https://resources.github.com/learn/pathways/administration-governance/essentials/manage-your-repository-visibility-rules-and-settings/).
+
+## Scope
+
+Teams should make use of Handling Instructions to contextualise and aid decision making around who should have read access to code.
+
+Write and admin access to repositories should be more tightly controlled.
+This RFC does not change alter any previous decisions to manage GitHub access via the [configuration repository][config-repo].
+
+Where targeted controls are required to limit who can review and merge changes, [CODEOWNERS][code-owners] should be used as the mechanism.
+
+## GitHub repositories to include handling instructions
+
+New GitHub repositories in the GOV.UK any GDS organization should follow the requirements of this section.
+Existing repositories will become compliant over time (see [remediation](#costs-benefits-and-remediation)).
+
+GitHub repository visibility must be:
+
+- aligned with the Service Standard, that is, public by default
+- aligned with the Government Security Classifications Policy, by recording handling instructions that reflect any other choice made
+
+Repository owners should use the following process:
+
+1. Presume a default classification of `OFFICIAL - FOR PUBLIC RELEASE` - public visibility - for all source code generated by the programme, with no handling instructions recorded in this case.
+
+2. Use the Service Manual's [making source code open and reusable][service-manual-open] advice to decide to restrict visibility, where there are concerns that require deviation from the Service Standard.
+
+In the second case, they must record handling instructions in a file committed into version control of every non public repository, where:
+
+- Internal is mapped to `OFFICIAL-SENSITIVE` with the handling instruction `HMG USE ONLY`: there is an assumption of broad visibility within the GitHub enterprise, and ability to add outside collaborators across Government.
+- Private is mapped to `OFFICIAL-SENSITIVE` with the handling instruction `[INSERT ORGANISATION(S) NAME] USE ONLY` or `RECIPIENTS ONLY` as appropriate.
+
+Where GDS engages contractors, either as Managed Service Providers (MSP) or Contingent Labour (CL), the Programme Office should establish at the point of contract how they are to be treated with respect to information handling.
+A common pattern may be to assure that a staff member under contract by the government should be treated as within scope for `HMG USE ONLY`.
+
+Where sensitive matters exist that might require other handling boundaries, perhaps contract renegotiation documents, `RECIPIENTS ONLY` or `[INSERT ORGANISATION(S) NAME] USE ONLY` should be used with an explicit description of sensitivities relating to specific staff member's access.
+
+Repository owners should prefer `HMG USE ONLY` (that is, internal visibility) over private visibility where possible, using [code owners][code-owners] to mitigate risks about who can make changes.
+
+### Standard format for handling instructions
+
+Repository owners must follow this human and machine readable format, so that users can easily parse handling instructions and so that we can use automated auditing tools.
+
+They must create a `HANDLING_INSTRUCTIONS.md` file in the root of every `Private` or `Internal` repository.
+
+The goal is that from a single markdown document it must be possible to establish:
+
+- Who can I safely share this with
+- What are the concerns that lead to this being made private
+- What might change to trigger a re-evaluation of those concerns
+
+The file must include the following information as frontmatter at the top:
+
+```md
+---
+classification: OFFICIAL-SENSITIVE
+handling_group: {handling_group}
+last_reviewed_on: yyyy-mm-dd
+review_in: {period for review}
+responsible_role: {role}
+responsible_role_contact: {contact_details}
+---
+```
+
+Values must be as follows:
+
+- classification will always be `OFFICIAL-SENSITIVE`, OFFICIAL information should be public, and so does not require a `HANDLING_INSTRUCTIONS.md` for the purposes described here. `SECRET` and `TOP SECRET` are out of scope and should not be stored in GitHub anyway.
+- The handling group should conform to one of the four options listed within [The Government Security Classifications Policy - Handling Instructions][handling-instructions]. Namely it must be one of:
+  - `RECIPIENTS ONLY` - Named Individuals only. Should align strictly with access controls provided to the repository. Must also include all GitHub Enterprise and Organisation owners, as they will always have access to any repository.
+  - `[INSERT ORGANISATION(S) NAME] USE ONLY` - Named organisations with whom the data can be shared
+  - `HMG USE ONLY` - Information should only be shared with other HMG departments; not with external partners.
+  - `EMBARGOED` - Information that is only sensitive for a specific period of time and whose sensitivity will be reduced at the end of that period.
+- `last_reviewed_on` - should be a YYYY-MM-DD formatted date for when a last review was completed and the handling instruction affirmed.
+- `review_in` - a string describing an integer number of months until the next review, for example "6 months" or "120 months"
+- `responsible_role` - the role responsible for reviews, and to whom requests can be made for sharing outside of these terms. Please use role titles and contact points do not name individuals (for example: Lead Developer)
+- `responsible_role_contact` - either a generic shared inbox, or a slack channel where a request for more information can be made
+
+Followed by a body that MUST include:
+
+- A description of what aspects of this repository have been deemed sensitive
+- A summary of the concern that has triggered the deviation from the standard
+- A summary of what might trigger a re-evaluation
+- A responsible role whom permission can be sought from to share in exception to these instructions
+- A contact point for that role (slack channel or email inbox)
+
+Depending on the context the following should also be included:
+
+- a link to the [central guidance][when-code-should-be-open-or-closed] if (and only if) the decision is in complete conformance with that policy
+- an outline of, or link to centrally held, threat assessments that help individuals understand the nature of the threat
+- more detail on key assumptions which were understood to be true at the time, but may change triggering re-evaluation later
+- where there are multiple individuals in a role (for example "Lead Developer" or "Security Architect"), clarify with an area of responsibility. For example "Lead Developer for Identity product teams"
+
+#### The Sensitivity of HANDLING_INSTRUCTIONS.md
+
+Handling instructions should be authored in a way that expects their contents will be made public at some point in the future.
+The lifespan of their sensitivity should be linked to the sensitivity of the repository.
+
+Where there may be other items with a sensitivity that endures beyond that term (perhaps a threat assessment), that should be linked to.
+
+A key principle should be that a handling instruction should provide enough information to allow for clarity on handling, and no more.
+
+### Account for uncertainty
+
+Sometimes we will make things private or internal out of an abundance of caution.
+Or react quickly in response to uncertainty.
+It is important that the documenting of these instructions not be seen as a barrier or administrative burden, and enable teams to move quickly when needing to set things private.
+
+It is OK to make a repository private or internal and then come back and add the handling instructions a short while after.
+
+It is also OK to make explicit any uncertainties within the details.
+
+For example, an acceptable statement might be:
+
+> The team needed to quickly deliver on a piece of work, we were unsure if the following GPG-45 rules were sensitive or not and could find no documentation to confirm.
+We made the repository private out of an abundance of caution, and set a short review period after 3 months whilst we engage program stakeholders
+
+or
+
+> We are publishing code within the period of Pre-election sensitivity. Whilst there is nothing actively concerning in the source, we were uncertain if making these elements public during the run up to the election was allowable under pre-election-period rules or not.
+So we have made it private, with the presumption we'll take the repo back into the public domain after the election
+
+The important aspect is to provide whatever reasoning was generally known to the team, as clearly as is possible to summarise.
+This would allow for any future resource owner, or stakeholders such as security, to quickly review in future.
+
+## Costs, benefits and remediation
+
+If we agree to this approach, there'll be marginally more administration to the act of taking a GitHub repository out of the public domain.
+
+This can be viewed as positive friction ensuring the burden of effort is placed on deviation from our standards of working in the open.
+Given a team may act first and document after, there is not expected to be a direct cost to any urgent delivery or incident response.
+
+In addition, we will need a plan to remediate existing private repositories that do not currently have handling instructions.
+
+GitHub owners (the Head of Engineering and G6 Lead Developers) will:
+
+- audit the 140 repositories that are not currently in the public domain
+- add a `HANDLING_INSTRUCTIONS.md` in all cases
+- where reasoning is unclear, capture the uncertainty in the handling instructions, and reduce the review period
+
+Their responsibilities also include:
+
+- auditing and amending handling instructions in repositories within their pod or area of responsibility
+- coming to a collective position on un-owned repositories
+- monitoring on an ongoing basis to ensure handling instructions are added to any repository newly created or taken out of the public domain.
+
+Any final calls will be made by the Head of Engineering.
+
+This should be completed within six months following the date of merging this RFC.
+
+In exchange we'll have a much stronger sense of what is sensitive, how it may be used in line with its sensitivity, who it can be shared with and how those decisions can be reviewed over time.
+This will result in a much more auditable and informed environment to support staff in making sensible information choices.
+
+### Ensuring these are visible
+
+To enhance visibility private repos should also note HANDLING_INSTRUCTIONS.md exists prominently in their `README.md`.
+
+A notice should be displayed, ideally visible without scrolling to a user that notifies it is sensitive with handling instructions. An example might be:
+
+```md
+> [!IMPORTANT]
+> This repository is OFFICIAL-SENSITIVE, information within should be shared in line with [HANDLING_INSTRUCTIONS.md](/HANDLING_INSTRUCTIONS.md)
+```
+
+### Costs of making a repo public after sensitivity lapses
+
+It should be generally expected that all sensitivity is time limited and will lapse at some point in the future.
+This will primarily be due to the concerns that led a repo going private lapsing.
+It may also be triggered by wider public sector information disclosure regulations, or Freedom of Information depending on context.
+
+Whilst the time period of likelihood for this may vary, a general expectation should be that the code will return to the public domain at some stage.
+
+At that point there will likely be accrued costs to review not only the contents of the repository, but also its full commit history since it was last made public.
+This should be evaluated against both the handling instructions that have lapsed and any other areas of program sensitivity.
+Any review should also take into account the HANDLING_INSTRUCTIONS.md itself.
+See [The Sensitivity of HANDLING_INSTRUCTIONS.md](#the-sensitivity-of-handling_instructions.md).
+
+The cost of doing such a review could easily become disproportionate, this should be mitigated in the following ways:
+
+#### How do I know if sensitivity has lapsed?
+
+HANDLING_INSTRUCTIONS.md establish a responsible role.
+Most often this will be the pereson directly involved in the decision to take the repository private or internal.
+However it may also be someone who was handed responsibility for this repository and has had to ensure they fully understand the sensitivities they are responsible for.
+
+At either the point of making a repository private or internal, or at the point of handover it is the responsible role must ensure that the decision is fully documented and understood in the HANDLING_INSTRUCTIONS.md. After which there should be a high degree of confidence in _why_ we made the repository private.
+
+From that basis, it is expected to be clear from this documentation if any context has changed, if the initial concern has now lapsed or if the threat landscape has been updated.
+
+Where there is remaining ambiguity or a resource owner is not sure if a sensitivity has lapsed, or should be renewed, advice should be sought from the Information Assurance and Security team.
+
+In addition a responsible role must undertake to:
+
+- Ensure they are keeping up to date with security threat assessments. Ensuring their judgement is up to date with the latest program guidance.
+- In the case of leavers or a change in role, they must ensure ownership responsibilities are effectively handed over to a new role.
+
+#### Only committing sensitive information detailed in HANDLING_INSTRUCTIONS.md
+
+The assumption of future disclosure should be a consideration for any commit to a private repo.
+The only sensitive materials committed to private repos should be those described in the HANDLING_INSTRUCTIONS.md.
+Any new sources of sensitivity should be added to the HANDLING_INSTRUCTIONS.md along with the commit.
+
+For any materials not detailed in HANDLING_INSTRUCTIONS.md expectations of what we commit should remain aligned between public and private repos.
+For instance, we would not expect secrets or access tokens to be committed to a private repo, without good reasoning described in HANDLING_INSTRUCTIONS.
+
+This will ensure the HANDLING_INSTRUCTIONS, and their version history, will remain a guide to the repository's current and historic sensitivities.
+Allowing for a speedier audit upon a decision to return to the public domain.
+
+#### Regular reviews
+
+A review period should not be longer than one year. One task of a review should be to examine changes during the period and extend the HANDLING_INSTRUCTIONS.md
+with an audit of if it remains accurate, and any new sensitivities introduced during that period.
+
+If a review acts as a rolling audit it can ensure HANDLING_INSTRUCTIONS.md remains accurate, but also provide confidence checkpoints to reduce the cost of an audit when a repository is being considered for release into the public domain.
+
+#### Split the repository along sensitive lines
+
+Where sensitivity has lapsed and a repository can now be made public, but uncertainty remains about the version history and accuracy of the HANDLING_INSTRUCTIONS.md.
+A decision can be made to split a suitable repository. This could be in the format of:
+
+- Functional changes, abstracting a component off into a new public repository and distributing it from there.
+- Partial transfer, for instance with documentation repositories, transferring files where this is confidence they are not OFFICIAL-SENSITIVE to a new repo and leaving ones where uncertainty remains.
+- Full transfer without version history, full transfer of the state of `main` to a new repository, whilst preserving the old archive as private for `git blame` purposes.
+
+In any case this will represent the loss of version history under source control.
+This should be considered a trade-off that can be used to mitigate uncertainty about version history.
+
+#### Doing nothing, leaving a repository private
+
+Where concerns cannot be established the handling instructions should be renewed with a line on progress of the audit and non-public status maintained under review.
+
+However this should be regarded as a failure of quality in information management, likely due to improper execution of the above guidance.
+It should be marked in the HANDLING_INSTRUCTIONS.md and monitored to ensure numbers in this state do not reach unmanageable levels, and avoided if possible.
+
+### How to make a private repository public
+
+The steps for making a private repository public should include:
+
+1. Establishing the date it was last in the public domain
+2. Establishing if the HANDLING_INSTRUCTIONS.md or its own version history contains any sensitivities that continue to apply.
+3. Auditing all commits since that time, looking for information outside of the HANDLING_INSTRUCTIONS.md
+4. Confirmation that any items deemed sensitive have indeed lapsed (by the role who made it private, and if required the ultimate Information Asset Owner)
+5. Removal of the HANDLING_INSTRUCTIONS.md
+6. Removal of the README.md reference to HANDLING_INSTRUCTIONS.md
+7. Setting the repository public.
+
+## Examples
+
+Below are some examples of what a HANDLING_INSTRUCTIONS.md might look like for scenarios of varying certainty.
+
+### Example HANDLING_INSTRUCTIONS.md handling for uncertainty
+
+```md
+---
+classification: OFFICIAL-SENSITIVE
+handling_group: HMG USE ONLY
+last_reviewed_on: 2024-01-01
+review_in: 1 month
+responsible_role: Head of Coffee Supplies
+responsible_role_contact: #di-beverages
+---
+
+On 1st of January 2024, we created a new component to monitor availability of coffee within the GDS Offices.
+
+We were unsure at the time if personal data of staff could be inferred from their coffee consumption, or if the level of caffeination of staff might reveal key operational details.
+
+As a precaution we decided to set the repository visibility to Internal, visible to only GDS staff, with agreement to review in a month.
+```
+
+### Example HANDLING_INSTRUCTIONS.md handling with greater clarity
+
+```md
+---
+classification: OFFICIAL-SENSITIVE
+handling_group: HMG USE ONLY
+last_reviewed_on: 2024-02-01
+review_in: 12 months
+responsible_role: Head of Coffee Supplies
+responsible_role_contact: #di-beverages
+---
+
+On 1st of January 2024, we created a new component to monitor availability of coffee within the GDS Offices.
+
+We initially deemed the component sensitive and rendered it Internal, fearing personal information concerns.
+
+We have since confirmed that there is no PII risk within the application.
+
+However the crucial feature of displaying where today's coffee pot sources its beans has been reviewed and deemed information that should not be disclosed to the public at the present time.
+
+The concern is that it would provide an adversary information that could lead to a coffee based supply chain attack.
+
+This relates to the program's established [low level of risk for coffee based threats](http://mock.gov.uk/coffee-risk).
+
+This is likely to be renewed for as long as:
+- we continue to display the source of beans in the application
+- the source of beans is not made manifestly public by any other source
+- the source of coffee beans remains a sensitive political issue in the UK
+- the programs appetite for coffee based risk remains low
+- supply chain attacks in the coffee space remain credible threats
+- all components responding with the 418 HTTP status code have been appropriately mitigated
+
+We should review after a year.
+```
+
+[service-standard]: https://www.gov.uk/service-manual/service-standard
+[service-standard-open-code]: https://www.gov.uk/service-manual/service-standard/point-12-make-new-source-code-open
+[gds-way-open-standards]: https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/#publish-open-source-code
+[source-control]: https://docs.google.com/document/d/1GtWGB9O2ncVWLkf3-pCAXIWWPhqEv-0vGRI_Cn7hql4/
+[2012-coding-in-open]: https://gds.blog.gov.uk/2012/10/12/coding-in-the-open/
+[2017-why-we-open]: https://mojdigital.blog.gov.uk/2017/02/21/why-we-code-in-the-open/
+[2017-benefits-of-open]: https://gds.blog.gov.uk/2017/09/04/the-benefits-of-coding-in-the-open/
+[2017-dont-be-afraid]: https://technology.blog.gov.uk/2017/09/27/dont-be-afraid-to-code-in-the-open-heres-how-to-do-it-securely/
+[2018-barriers-to-open]: https://technology.blog.gov.uk/2018/11/05/11-barriers-to-coding-in-the-open-and-how-to-overcome-them/
+[moj-open-blog]: https://technology.blog.gov.uk/2018/01/05/how-making-our-deployment-code-open-improved-our-workflow/
+[nhs-service-standards]: https://service-manual.nhs.uk/standards-and-technology/service-standard-points/12-make-new-source-code-open
+[government-security-classifications-policy]: https://www.gov.uk/government/publications/government-security-classifications/government-security-classifications-policy-html
+[definition-of-official]: https://www.gov.uk/government/publications/government-security-classifications/government-security-classifications-policy-html#official
+[definition-of-secret]: https://www.gov.uk/government/publications/government-security-classifications/government-security-classifications-policy-html#secret
+[definition-of-top-secret]: https://www.gov.uk/government/publications/government-security-classifications/government-security-classifications-policy-html#top-secret
+[application-of-sensitive]: https://www.gov.uk/government/publications/government-security-classifications/government-security-classifications-policy-html#applying-the--sensitive-marking
+[handling-instructions]: https://www.gov.uk/government/publications/government-security-classifications/government-security-classifications-policy-html#handling-instructions
+[github-repos]: https://github.com/orgs/govuk-one-login/repositories
+[github-repos-private]: https://github.com/orgs/govuk-one-login/repositories?q=visibility%3Aprivate
+[github-repos-internal]: https://github.com/orgs/govuk-one-login/repositories?q=visibility%3Ainternal
+[github-repos-public]: https://github.com/orgs/govuk-one-login/repositories?q=visibility%3Apublic
+[github-visibility]: https://docs.github.com/en/enterprise-cloud@latest/repositories/creating-and-managing-repositories/about-repositories#about-repository-visibility
+[github-visibility-resource]: https://resources.github.com/learn/pathways/administration-governance/essentials/manage-your-repository-visibility-rules-and-settings/
+[when-code-should-be-open-or-closed]: https://www.gov.uk/government/publications/open-source-guidance/when-code-should-be-open-or-closed
+[service-manual-open]: https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable
+[code-owners]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[config-repo]: https://github.com/govuk-one-login/configuration
