@@ -11,7 +11,7 @@ description: Technical standards and guidance used by teams building software in
 header_links:
   GitHub: https://github.com/alphagov/gds-way
 
-footer_links: 
+footer_links:
   Accessibility: /accessibility.html
 
 enable_search: true
