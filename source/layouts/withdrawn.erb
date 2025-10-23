@@ -1,0 +1,5 @@
+<% wrap_layout :layout do %>
+  <%= partial 'partials/site-banner' %>
+  <h1><%= current_page.data.title %></h1>
+  <%= warning_text('This guidance has been withdrawn.') %>
+<% end %>
