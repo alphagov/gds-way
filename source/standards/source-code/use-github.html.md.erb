@@ -1,41 +1,62 @@
 ---
 title: Use GitHub
-last_reviewed_on: 2024-11-20
+last_reviewed_on: 2025-07-19
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-GDS uses the [alphagov] organisation on [GitHub] to collaborate on code. The GOV.UK One Login programme uses [govuk-one-login].
+GDS uses [GitHub] to collaborate on code.
+We have a number of GitHub organisations covering different parts of GDS, including:
 
-### Getting access to `alphagov`
+| [GDS AlphaGov](https://github.com/alphagov) | Used by most teams in the GDS Product Group, including GOV.UK and the Products and Services directorate.
+| [Central Digital and Data Office](https://github.com/co-cddo) | Used by the Office of the Chief Technology Officer (OCTO) and other teams that used to be part of CDDO.
+| [GOV.UK](https://github.com/GOVUK) | Not currently used.
+| [GOV.UK Digital Backbone](https://github.com/govuk-digital-backbone) | Used for the Digital Backbone (DBB) initiative which is part of OCTO.
+| [GOV.UK One Login](https://github.com/govuk-one-login) | Used by the Digital Identity directorate.
+| [i.AI](https://github.com/i-dot-ai) | Used by the Incubator for Artificial Intelligence.
 
-You can use your personal GitHub account to access alphagov if you wish.
+## Common rules of access
 
-All github user accounts added to `alphagov` *must* be [connected](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/adding-an-email-address-to-your-github-account) with a valid `digital.cabinet-office.gov.uk` email address. Accounts not connected to a valid email address will be removed from `alphagov`.
+You can use your personal GitHub account to access our GDS GitHub organisations.
+
+All GitHub user accounts *must* be [connected][github-work-emails-for-github] with a valid `digital.cabinet-office.gov.uk` email address.
+You can also connect your `dsit.gov.uk` address if you like.
+
+All `alphagov` not connected to a valid email address will be removed from the organisation.
+Each organisation under the wider GDS Product Group Enterprise must enable similar processes for their area of responsibility.
 
 You must also set up two-factor authentication on your account.
 
-To join `alphagov` ask your tech lead or technical architect to invite you. Make sure you've connected your GDS email address to your account first, otherwise your account will be removed.
+### Getting access to `alphagov`
 
-### Configuring GitHub repositories
+To join `alphagov` ask your tech lead or technical architect to invite you.
+Access is generally open for any technologist working within GDS.
 
-Consider [protecting your main branch](https://docs.github.com/en/github/administering-a-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) to prevent changes being committed without a suitable review.
+### Getting access to `govuk-one-login`
+
+Details about how to obtain access can be found on the 🔐 [GOV.UK One Login Team manual][gds-govuk-one-login-access] (GDS SSO required).
+Access to `govuk-one-login` is generally limited to those working on the program or associated products (App, Wallet etc).
+
+## Configuring GitHub repositories
+
+Consider [protecting your main branch][github-protect-main] to prevent changes being committed without a suitable review.
 
 You can also consider backing up your Git repositories to another location (this should be a team responsibility). If you are using AWS to host your service
-[AWS CodeCommit](https://aws.amazon.com/codecommit/) is one option.
-
-### How to retire applications
-
-If an application is no longer used in production, you should [archive its repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/archiving-a-github-repository/archiving-repositories).
-
-Update the application's README to explain why the repository has been archived, and link to a new location if the application has been superseded.
+[AWS CodeCommit][aws-code-commit] is one option.
 
 ### Using Github Actions and workflows
 
-See [Using GitHub Actions and workflows][using-gh-actions]
+See [Using GitHub Actions and workflows][gds-use-of-gh-actions]
 
-### Access GitHub support
+## How to retire applications
+
+If an application is no longer used in production, you should [archive its repositories][github-archive-a-repo].
+
+Update the application's README to explain why the repository has been archived, and link to a new location if the application has been superseded.
+
+
+## Access GitHub support
 
 The alphagov organisation is covered under the Cabinet Office's [GitHub enterprise support agreement][]. Under this agreement GitHub will respond to support requests within eight hours, Monday to Friday.
 
@@ -49,19 +70,39 @@ Once you've been given permission, you can view and raise support requests using
 
 You should use your `@digital.cabinet-office.gov.uk` email during the sign up process to ensure your ticket is prioritised. You should also state that you are part of alphagov organisation in your request.
 
-[GitHub enterprise support agreement]: https://help.github.com/en/github/working-with-github-support/github-enterprise-cloud-support
-[support portal]: https://support.github.com/
-[GDS GitHub enterprise owners google group]: mailto:gds-github-enterprise-owners@digital.cabinet-office.gov.uk
-
 ## See also
 
 * [How to store source code](index.html)
 * [Working with Git](working-with-git.html)
 * [Updating actions with DependaBot][github-dependabot-actions]
-* [Authorizing GitHub Actions][using-gh-actions]
+* [Authorizing GitHub Actions][gds-use-of-gh-actions]:
+
+[aws-actions]: https://github.com/aws-actions
+[aws-code-commit]: https://aws.amazon.com/codecommit/
+
+[gds-alphagov]: https://github.com/alphagov/
+[gds-govuk-one-login]: https://github.com/govuk-one-login
+[gds-govuk-one-login-access]: https://team-manual.account.gov.uk/new-starter-guide/github-access-management/#getting-access-to-github
+[gds-way-principle-least-privilidge]: /standards/principle-least-access.html
+[gds-use-of-gh-actions]: /standards/source-code/using-github-actions.html
+[gds-alphagov-workflow-template]: https://github.com/alphagov/.github/tree/main/workflow-templates
+
+[GDS GitHub enterprise owners google group]: mailto:gds-github-enterprise-owners@digital.cabinet-office.gov.uk
+[GitHub enterprise support agreement]: https://help.github.com/en/github/working-with-github-support/github-enterprise-cloud-support
+[support portal]: https://support.github.com/
 
 [GitHub]: https://technology.blog.gov.uk/2016/05/31/how-we-use-git-at-the-government-digital-service/
-[alphagov]: https://github.com/alphagov/
-[govuk-one-login]: https://github.com/govuk-one-login
+[github-actions]: https://docs.github.com/en/actions
+[github-approving-workflow-runs-from-public-forks]: https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks
+[github-archive-a-repo]: https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/archiving-a-github-repository/archiving-repositories
+[github-codeowners]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[github-configuring-openid-connect-in-amazon-web-services]: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
 [github-dependabot-actions]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot
-[using-gh-actions]: /standards/source-code/using-github-actions.html
+[github-keeping-your-actions-up-to-date-with-dependabot]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot#example-dependabotyml-file-for-github-actions
+[github-local-actions]: https://docs.github.com/en/actions/creating-actions/about-actions\
+[github-managing-github-actions-settings-for-a-repository]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-specific-actions-to-run
+[github-modifying-the-permissions-for-the-github_token]: https://docs.github.com/actions/reference/authentication-in-a-workflow#modifying-the-permissions-for-the-github_token
+[github-protect-main]: https://docs.github.com/en/github/administering-a-repository/defining-the-mergeability-of-pull-requests/about-protected-branches
+[github-release-management-for-your-custom-actions]: https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#using-release-management-for-your-custom-actions
+[github-using-environments-for-deployment]: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#environment-secrets
+[github-work-emails-for-github]: https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/adding-an-email-address-to-your-github-account
