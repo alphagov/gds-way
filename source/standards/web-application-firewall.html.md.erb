@@ -1,6 +1,6 @@
 ---
 title: Use a web application firewall (WAF)
-last_reviewed_on: 2024-07-24
+last_reviewed_on: 2025-10-29
 review_in: 6 months
 ---
 
@@ -10,17 +10,11 @@ A [web application firewall (WAF)](https://owasp.org/www-community/Web_Applicati
 
 ## Why you should use a WAF
 
-Your continuous integration (CI) and continuous deployment (CD) pipelines should include security tests in their workflows to identify any common vulnerabilities in your code. Some common vulnerabilities like [Cross-site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) and [XML command injection attacks](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/07-Testing_for_XML_Injection) are still possible in your production environments due to human error.
+Implementing a WAF is considered basic practice for protecting public web applications and is a key component of a layered security strategy.
 
-Combining a WAF with CI and CD tools reduces the risk of these attacks being successful, and provides enhanced layered security coverage for your service.
+Your continuous integration (CI) and continuous deployment (CD) pipelines should include security tests in their workflows to identify any common vulnerabilities in your code. Some common vulnerabilities like [Cross-site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) and [XML command injection attacks](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/07-Testing_for_XML_Injection) are still possible in your production environments due to human error. Combining a WAF with CI and CD tools reduces the risk of these attacks being successful, and provides enhanced layered security coverage for your service.
 
-You may also need to use a WAF because of:
-
-- GDS or departmental policies or standards
-- HMG Standards such as the [Cyber Assessment Framework][] (NCSC) or [Secure by Design Principles][] (CDDO)
-- [Information Security][] requirements to minimise risk
-- [Payment Card Industry Data Security Standard (PCI DSS)](https://www.pcisecuritystandards.org/) compliance
-- they are generally considered basic practice for protecting public web applications
+Implementing a WAF can also help you meet government and industry security standards such as the [NCSC Cyber Assessment Framework][], [Secure by Design][] and the [Payment Card Industry Data Security Standard (PCI DSS)](https://www.pcisecuritystandards.org/).
 
 ## When and how to use a WAF
 
@@ -75,7 +69,7 @@ GOV.UK Pay operates under the governance of [PCI compliance and DSS point 6.6](h
 
 Contact GDS [Information Security][] or the security architects in the [CO:D Cyber Security team][] or use the [#cyber-security-help Slack channel](https://gds.slack.com/messages/CCMPJKFDK/) for help and advice.
 
-[Information Security]: https://sites.google.com/a/digital.cabinet-office.gov.uk/gds/directorates-and-groups/cto-and-ciso-office/information-security
-[Cyber Assessment Framework]: https://www.ncsc.gov.uk/collection/cyber-assessment-framework/introduction-to-caf
-[Secure by Design Principles]: https://www.security.gov.uk/guidance/secure-by-design/
-[CO:D Cyber Security team]: https://intranet.cabinetoffice.gov.uk/it-data-and-security/cyber-and-information-security-services/threat-modelling/
+[Information Security]: https://sites.google.com/digital.cabinet-office.gov.uk/the-gds-wiki/people-and-teams/information-security-team
+[NCSC Cyber Assessment Framework]: https://www.ncsc.gov.uk/collection/cyber-assessment-framework/introduction-to-caf
+[Secure by Design]: https://www.security.gov.uk/guidance/secure-by-design/
+[CO:D Cyber Security team]: https://intranet.cabinetoffice.gov.uk/it-data-and-security/cyber-and-information-security-services/
