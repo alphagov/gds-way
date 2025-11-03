@@ -285,6 +285,9 @@ A decision can be made to split a suitable repository. This could be in the form
 - Partial transfer, for instance with documentation repositories, transferring files where this is confidence they are not OFFICIAL-SENSITIVE to a new repo and leaving ones where uncertainty remains.
 - Full transfer without version history, full transfer of the state of `main` to a new repository, whilst preserving the old archive as private for `git blame` purposes.
 
+Choice between these options will depend on the nature of the sensitivity we initially guarded against.
+It will also depend on if there are historic sensitivites. What is important is to ensure no historic sensitivites can be found in either the content of the commit history, or metadata like commit messages.
+
 In any case this will represent the loss of version history under source control.
 This should be considered a trade-off that can be used to mitigate uncertainty about version history.
 
