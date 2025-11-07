@@ -67,24 +67,27 @@ authentication (MFA)" section and click "Assign MFA device".
 The device name _must_ be prefixed with your IAM username, which is usually your
 email address. If you do not do this you will receive a permissions error.
 
-Decide on the MFA device type(s) to setup, using this table:
+Decide on the MFA device type(s) to setup:
 
-MFA device type  | Protocol | Client | GDS advice
------------------|----------|--------|------------
-Passkey or security key | Passkey or FIDO2 | Password manager (passkey) OR Yubikey's FIDO functionality | Recommended. It has the best security. It has nice usability when logging into AWS Console via AWS Identity Centre or the IAM user sign in page. However this MFA device type is not compatible with gds-cli due to [limitations around FIDO and STS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html))
-Authenticator app| TOTP     | Google Authenticator (or similar) OR Yubikey's TOTP/OATH functionality | Only use this in particular circumstances. If your team uses [gds-cli](#installing-gds-cli), then you should [setup a Yubikey for gds-cli with TOTP](https://github.com/alphagov/gds-cli?tab=readme-ov-file#using-yubikey-preferred) (Yubikey refers to it as "OATH"). But it's NOT advised to use this MFA type in the usual arrangement where the human user types in the 6 digit codes, because that is vulnerable to phishing. (gds-cli is phishing resistent because it gets the codes *programmatically* from the Yubikey, not via a human). It can be useful though to have an Authenticator app configured as a backup, for if you lose your passkeys / security keys.
+* Most users should setup a Yubikey TOTP for using [gds-cli](#installing-gds-cli) - see instructions: [setup a Yubikey for gds-cli with TOTP](https://github.com/alphagov/gds-cli?tab=readme-ov-file#using-yubikey-preferred)
+* As a backup for the Yubikey you should also create a Passkey. This gives you a way to get into the AWS Console to update your AWS User's Security Settings and configure a new Yubikey.
+
+More info on the MFA device types:
+
+MFA device type  | Protocol | Recommended client | Notes
+-----------------|----------|--------------------|------------
+Passkey or security key | Passkey or FIDO2 | Store passkey in device secure enclave or browser or password manager | It has the best security, due to non-phishability. However this MFA device type is not compatible with gds-cli due to [limitations around FIDO and STS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html))
+Authenticator app| TOTP     | Yubikey's TOTP/OATH functionality | Compatible with [gds-cli](#installing-gds-cli). You should not use this MFA type in the usual arrangement where the human user types in the 6 digit codes, because that is vulnerable to phishing. (gds-cli is phishing resistent because it can only pass the codes to AWS.)
 
 ![Select MFA device image](../images/working-with-aws-accounts/select-mfa-device.png)
 
 Click Next.
 
-If adding an "Authenticator app", on the "Set up device" page, you can choose to either display the QR code for
-apps like Google Authenticator, or "Show secret key" if you are using something
-like a Yubikey for TOTP/OATH with ykman. Once you have added the QR code or secret key to your Authenticator app or app, you will need to input two consecutive one-time codes from your device and click "Add MFA".
+If adding an "Authenticator app", on the "Set up device" page, to setup the Yubikey for TOTP/OATH with ykman, see the instrouctions: [setup a Yubikey for gds-cli with TOTP](https://github.com/alphagov/gds-cli?tab=readme-ov-file#using-yubikey-preferred). Once you've added the secret key to ykman, and inputed two consecutive one-time codes into the web page, click "Add MFA".
 
 ![Set up TOTP MFA device image](../images/working-with-aws-accounts/set-up-totp-mfa-device.png)
 
-Else if adding a "Passkey or security key", then depending on your browser and device configuration you may be able to store it in your Yubikey, laptop or password manager. Once complete, click "Add MFA".
+Else if adding a "Passkey or security key", then depending on your browser and device configuration you may be able to store it in your browser profile, mobile device or password manager. (Just don't store it in your Yubikey if you're using this as your backup for your Yubikey TOTP.) Once complete, click "Add MFA".
 
 You should now see the new MFA device listed in the MFA
 section of the "My security credentials" page.
