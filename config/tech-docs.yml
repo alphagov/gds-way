@@ -3,7 +3,8 @@ host: https://gds-way.digital.cabinet-office.gov.uk
 service_link: /
 
 # Header-related options
-show_govuk_logo: false
+show_govuk_logo: false  # no GOV.UK branding - see README.md
+logo_html: <img src="/images/GDS_Informal_Shorthand_AquaBlock.svg" alt="GDS [logo]" width="100" class="govuk-header__logotype">
 service_name: The GDS Way
 description: Technical standards and guidance used by teams building software in the GDS Product Group
 
