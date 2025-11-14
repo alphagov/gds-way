@@ -74,7 +74,7 @@ prefixed with your IAM username, which is usually your @digital email address. O
 1. Select the MFA device, using this guidance:
 
     1. Most users should setup a Yubikey TOTP for using [gds-cli](#installing-gds-cli) - see instructions: [setup a Yubikey for gds-cli with TOTP](https://github.com/alphagov/gds-cli?tab=readme-ov-file#using-yubikey-preferred)
-    1. As a backup for the Yubikey you should also create a Passkey. This gives you a way to get into the AWS Console to update your AWS User's Security Settings and configure a new Yubikey.
+    1. As a backup for the Yubikey you should also create a Passkey saved on another device. This gives you a way to get into the AWS Console to update your AWS User's Security Settings and configure a new Yubikey.
 
     More info on the MFA device types:
     
@@ -95,7 +95,12 @@ prefixed with your IAM username, which is usually your @digital email address. O
 
     ![Set up TOTP MFA device image](../images/working-with-aws-accounts/set-up-totp-mfa-device.png)
 
-    **Else** if adding a "Passkey or security key": depending on your browser and device configuration you may be able to store it in your browser profile, mobile device or password manager. (Just don't store it in your Yubikey if you're using this as your backup for your Yubikey TOTP.) Once complete, click "Add MFA".
+    **Else** if adding a "Passkey or security key": you must only save passkeys in one of these approved locations:
+
+    * "Chrome profile" / "Edge profile" - only available on these browsers. They do not sync passkeys to other devices.
+    * Yubikey - this must be a physically different Yubikey to one used for gds-cli, and stored separately to avoid losing both Yubikeys at once.
+
+    Note: your browser may prompt you to save passkeys in Google Password Manager or other unapproved password managers - you need to click "Save another way" to see all the options.
 
 1. Check you now see the new MFA device listed in the MFA section of the "My security credentials" page.
 
