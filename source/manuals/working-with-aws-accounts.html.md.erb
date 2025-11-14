@@ -81,7 +81,7 @@ prefixed with your IAM username, which is usually your @digital email address. O
     MFA device type  | Protocol | Recommended implementation | Notes
     -----------------|----------|----------------------------|------------
     Passkey or security key | FIDO | Store passkey in Chrome Profile, Edge Profile or Yubikey | It has the best security, due to non-phishability. However this MFA device type is not compatible with gds-cli due to [limitations around FIDO and STS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html)
-    Authenticator app| TOTP | Yubikey's TOTP/OATH functionality | Compatible with [gds-cli](#installing-gds-cli). You should not use this MFA type in the usual arrangement where the human user types in the 6 digit codes, because that is vulnerable to phishing. (gds-cli is phishing resistent because it can only pass the codes to AWS.)
+    Authenticator app| TOTP | Yubikey's TOTP/OATH functionality | Compatible with [gds-cli](#installing-gds-cli). You should not use this MFA type in the usual arrangement where the human user types in the 6 digit codes, because that is vulnerable to phishing. (gds-cli is more resistent to phishing because it can only pass the codes to AWS.)
 
 1. Click Next.
 
