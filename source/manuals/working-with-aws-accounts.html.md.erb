@@ -52,45 +52,52 @@ permission to change password.
 You must enable Multi-factor Authentication (MFA) on your `gds-users` user,
 otherwise you will not be able to assume roles in other AWS accounts.
 
-You may add up to 8 MFA devices. However, note that __MFA device names must be
-prefixed with your IAM username (usually your email addres)__, otherwise you
-will receive a permissions error.
+You may add up to 8 MFA devices.
 
-You can add MFA devices by clicking your username in the top right corner and
-selecting "Security credentials".
+To add an MFA device:
 
-![Top right menu image](../images/working-with-aws-accounts/top-right-menu.png)
+1. Click your username in the top right corner and select "Security credentials".
 
-On the "My security credentials" page scroll down to the "Multi-factor
+    ![Top right menu image](../images/working-with-aws-accounts/top-right-menu.png)
+
+1. "My security credentials" page: Scroll down to the "Multi-factor
 authentication (MFA)" section and click "Assign MFA device".
 
-The device name _must_ be prefixed with your IAM username, which is usually your
-email address. If you do not do this you will receive a permissions error.
+1. "Select MFA device" page: Under "MFA device name", give it a name that starts with your @digital email address.
 
-You will usually want to add the "Authenticator app" device type for things like
-Google Authenticator and Yubikeys, but you may want to choose "Security Key" if
-you are adding a FIDO device.
+    <%= warning_text('The MFA device name *must* be
+prefixed with your IAM username, which is usually your @digital email address. Otherwise you\'ll get an IAM permissions error on the next screen.') %>
 
-Click Next.
+    ![Select MFA device image](../images/working-with-aws-accounts/select-mfa-device.png)
 
-![Assign MFA device image](../images/working-with-aws-accounts/assign-mfa-device.png)
+1. Select the MFA device
 
-On the "Set up device" page you can choose to either display the QR code for
+    You will usually want to add the "Authenticator app" device type for things like
+    Google Authenticator and Yubikeys, but you may want to choose "Security Key" if
+    you are adding a FIDO device.
+
+    ![Assign MFA device image](../images/working-with-aws-accounts/assign-mfa-device.png)
+
+1.  Click Next.
+
+    If you get the "You need permissions" error, then it's probably because of an invalid "MFA device name". In this case, select "Previous" and ensure you follow the instructions above for completing the field.
+
+    !["You need permissions" error when adding MFA](../images/working-with-aws-accounts/mfa-permissions-error.png)
+
+1. Now on the "Set up device" page: you can choose to either display the QR code for
 apps like Google Authenticator or "Show secret key" if you are using something
 like a Yubikey with ykman.
 
-Once you have added the code to your MFA device or app you will need to input
-two consecutive one-time codes from your device and click "Add MFA".
+    Once you have added the code to your MFA device or app you will need to input
+    two consecutive one-time codes from your device and click "Add MFA".
 
-![Set up MFA device image](../images/working-with-aws-accounts/set-up-mfa-device.png)
+    ![Set up MFA device image](../images/working-with-aws-accounts/set-up-mfa-device.png)
 
-If you have done this correctly you should now see a device listed in the MFA
-section of the "My security credentials" page.
+1. Check you now see the new MFA device listed in the MFA section of the "My security credentials" page.
 
-![MFA devices image](../images/working-with-aws-accounts/mfa-devices.png)
+    ![MFA devices image](../images/working-with-aws-accounts/mfa-devices.png)
 
-You should test that you can sign out and back in again successfully, and that
-you are prompted for an MFA code.
+1. Test that you can sign out and back in again successfully, and that you are prompted for MFA.
 
 Further guidance on adding MFA can be found [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html).
 
