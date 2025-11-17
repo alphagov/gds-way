@@ -70,36 +70,48 @@ prefixed with your IAM username, which is usually your @digital email address. O
 
     ![Select MFA device image](../images/working-with-aws-accounts/select-mfa-device.png)
 
-1. Select the MFA device
 
-    You will usually want to add the "Authenticator app" device type for things like
-    Google Authenticator and Yubikeys, but you may want to choose "Security Key" if
-    you are adding a FIDO device.
+1. Select the MFA device, using this guidance:
 
-    ![Assign MFA device image](../images/working-with-aws-accounts/assign-mfa-device.png)
+    1. Most users should setup a Yubikey TOTP for using [gds-cli](#installing-gds-cli) - see instructions: [setup a Yubikey for gds-cli with TOTP](https://github.com/alphagov/gds-cli?tab=readme-ov-file#using-yubikey-preferred)
+    1. As a backup for the gds-cli Yubikey you should also create a *Passkey* saved to a different location - either a 2nd Yubikey or on your laptop. This gives you a way to get into the AWS Console to update your AWS User's Security Settings and configure a new gds-cli Yubikey.
 
-1.  Click Next.
+    More info on the MFA device types:
+    
+    MFA device type  | Protocol | Recommended implementation | Notes
+    -----------------|----------|----------------------------|------------
+    Passkey or security key | FIDO | Store passkey in Chrome Profile, Edge Profile or Yubikey | It has the best security, due to non-phishability. However this MFA device type is not compatible with gds-cli due to [limitations around FIDO and STS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html)
+    Authenticator app| TOTP | Yubikey's TOTP/OATH functionality | Compatible with [gds-cli](#installing-gds-cli). You should not use this MFA type in the usual arrangement where the human user types in the 6 digit codes, because that is vulnerable to phishing. (gds-cli is more resistent to phishing because it can only pass the codes to AWS.)
+
+1. Click Next.
 
     If you get the "You need permissions" error, then it's probably because of an invalid "MFA device name". In this case, select "Previous" and ensure you follow the instructions above for completing the field.
 
     !["You need permissions" error when adding MFA](../images/working-with-aws-accounts/mfa-permissions-error.png)
 
-1. Now on the "Set up device" page: you can choose to either display the QR code for
-apps like Google Authenticator or "Show secret key" if you are using something
-like a Yubikey with ykman.
+1. Now on the "Set up device" page:
 
-    Once you have added the code to your MFA device or app you will need to input
-    two consecutive one-time codes from your device and click "Add MFA".
+    **If** adding an "Authenticator app": to setup the Yubikey for TOTP/OATH with ykman, see the instructions: [setup a Yubikey for gds-cli with TOTP](https://github.com/alphagov/gds-cli?tab=readme-ov-file#using-yubikey-preferred). Once you've added the secret key to ykman, and inputed two consecutive one-time codes into the web page, click "Add MFA".
 
-    ![Set up MFA device image](../images/working-with-aws-accounts/set-up-mfa-device.png)
+    ![Set up TOTP MFA device image](../images/working-with-aws-accounts/set-up-totp-mfa-device.png)
+
+    **Else** if adding a "Passkey or security key": you must only save passkeys in one of these approved locations:
+
+    1. "Chrome profile" / "Edge profile" - only available on these browsers. They do not sync passkeys to other devices.
+    
+    2. Yubikey - this should be a physically different Yubikey to one used for gds-cli, and stored separately to avoid losing both Yubikeys at once.
+
+    Note: your browser may prompt you to save passkeys in Google Password Manager or other unapproved password managers - you need to click "Save another way" to see all the options.
 
 1. Check you now see the new MFA device listed in the MFA section of the "My security credentials" page.
 
     ![MFA devices image](../images/working-with-aws-accounts/mfa-devices.png)
 
+    ("Virtual" actually means "Authenticator app")
+
 1. Test that you can sign out and back in again successfully, and that you are prompted for MFA.
 
-Further guidance on adding MFA can be found [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html).
+Further guidance on adding MFA can be found [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html).
 
 [Amazon Web Services (AWS)]: https://aws.amazon.com/
 [Amazon's cross-account access pattern]: https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html
