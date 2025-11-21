@@ -6,6 +6,21 @@ review_in: 6 months
 
 # <%= current_page.data.title %>
 
+## Summary
+
+GitHub repos that are not 'Public' should have a `HANDLING_INSTRUCTIONS.md` file at the root.
+
+Key info in that file:
+* Classification: 'OFFICIAL-SENSITIVE' (if it was only OFFICIAL, then the repo shoud probably be Public)
+* Handling instructions:
+    * Internal repos should be `HMG USE ONLY`
+    * Private repos should be `[INSERT ORGANISATION(S) NAME] USE ONLY` or `RECIPIENTS ONLY` as appropriate.
+* Explanation: what's the sensitivity of this repo, that explains the handling instructions
+
+Format details: [Standard format for handling instructions](#standard-format-for-handling-instructions)
+
+## Introduction
+
 The services GDS runs has changed over time. We are increasingly engaged in more sensitive areas,
 and run many components designed to take some burden off other services.
 
