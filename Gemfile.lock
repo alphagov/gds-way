@@ -20,6 +20,7 @@ GEM
       execjs (~> 2)
     backports (3.25.1)
     base64 (0.3.0)
+    benchmark (0.5.0)
     bigdecimal (3.3.1)
     chronic (0.10.2)
     chunky_png (1.4.0)
@@ -104,9 +105,10 @@ GEM
       concurrent-ruby (~> 1.0)
     hashery (2.1.2)
     hashie (3.6.0)
-    html-proofer (5.1.0)
+    html-proofer (5.1.1)
       addressable (~> 2.3)
       async (~> 2.1)
+      benchmark (~> 0.5)
       nokogiri (~> 1.13)
       pdf-reader (~> 2.11)
       rainbow (~> 3.0)
@@ -116,7 +118,7 @@ GEM
     http_parser.rb (0.8.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    io-event (1.14.0)
+    io-event (1.14.2)
     json (2.16.0)
     kramdown (2.5.1)
       rexml (>= 3.3.9)
@@ -262,7 +264,7 @@ PLATFORMS
 
 DEPENDENCIES
   govuk_tech_docs
-  html-proofer (~> 5.1.0)
+  html-proofer (~> 5.1.1)
   tzinfo-data
   wdm (~> 0.1.0)
 
