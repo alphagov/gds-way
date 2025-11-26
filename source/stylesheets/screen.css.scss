@@ -6,7 +6,8 @@ a[href^="https://sites.google.com/digital.cabinet-office.gov.uk/"]::before,
 a[href^="https://sites.google.com/a/digital.cabinet-office.gov.uk/"]::before,
 a[href^="https://sites.google.com/cabinetoffice.gov.uk/"]::before,
 a[href^="https://gds.slack.com/"]::before,
-a[href^="https://engineering-enablement.gds-reliability.engineering/"]::before
+a[href^="https://engineering-enablement.gds-reliability.engineering/"]::before,
+a[href^="https://docs.google.com/"]::before
 {
   content: "\1F512\00a0";  // padlock
   display: inline-block;  // avoid text-decoration propagation

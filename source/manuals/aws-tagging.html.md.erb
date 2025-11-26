@@ -1,62 +1,105 @@
 ---
 title: Tagging AWS resources
-last_reviewed_on: 2023-10-30
+last_reviewed_on: 2025-10-23
 review_in: 12 months
+owner_slack: "#gds-engineering-enablement"
 ---
 
 # <%= current_page.data.title %>
 
 We use [AWS for hosting](../standards/hosting.html).
-Most AWS resources support tagging.
+Most AWS resources support tagging, and the
+[Engineering Enablement team](https://engineering-enablement.gds-reliability.engineering/engineering-enablement-team.html)
+coordinates their effective use at GDS.
 
-This manual documents our efforts with tagging.
-In time, it may be upgraded to a standard.
+> This guidance explains the tagging strategy for the
+> [interim GDS AWS organisation](https://engineering-enablement.gds-reliability.engineering/instances/aws-gds.html).
+> You can find
+> [information about other AWS organisations](https://engineering-enablement.gds-reliability.engineering/tools/amazon-web-services.html)
+> on the Engineering Hub.
 
-## Why tag?
+## Account tags
 
-The main reasons for tagging are:
+Account tags are essential for accurate recharging to your business unit and cost centre.
+
+You can read more about
+[service team responsibilities for finance and billing](https://engineering-enablement.gds-reliability.engineering/aws.html#finance-and-billing)
+on the Engineering Hub.
+
+## Resource tags
+
+The main reasons for adding tags to your AWS resources are:
 
  - to be able to understand costs (by assisting queries in Cost Explorer)
  - to understand the provenance of resources (by tagging with metadata about source code)
  - security and assurance
 
-Currently, we care most about understanding costs.
+Resource tags are not used for financial reporting in GDS, but they can still help you understand your cloud infrastructure costs.
 
-It's not always clear to a developer what impact their work has on AWS costs.
+We therefore make available a set of
+[standard resource-level cost allocation tags](#gds-standard-resource-tags),
+to help you understand spend with respect to specific components, teams, and environments.
 
-If resources are consistently tagged as part of a particular directorate, programme, product, component, team, and environment, it becomes much easier to understand how much money is being spent in each particular context.
+> If you want to analyse spend by directorate, programme or product, you may want to use Cost Explorer's facility for grouping or filtering spend by _linked account_.
+> The Engineering Enablement team will consider using the _cost category_ feature to expose account-level tags (such as cost centre codes) into Cost Explorer.
 
-AWS Cost Explorer supports using cost allocation tags to filter and group resources.
+### Tag names
 
-Note that using AWS Organizations to tag accounts does not help here, because account-level tags are not supported for querying in Cost Explorer.
+The tag names in this guidance use UpperCamelCase case, except for a limited number of tags which for historical reasons contain a space character.
+AWS tags are case sensitive.
 
-## Alerting and enforcement
+AWS [limits](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions)
+the names and values of tags to alphanumeric, space, and a limited set of punctuation (`\+-=.\_:/`), so you must avoid characters outside this set.
+Space characters are not allowed in instance metadata, so you should avoid those too.
 
-Currently, we do not enforce tags.
+### Validation and preventative controls
 
-In future, we may wish to consider mechanisms such as alerting on untagged resources, or automatically deleting untagged resources.
+All tags are optional and there are no plans to establish
+[preventative controls](https://docs.aws.amazon.com/whitepapers/latest/establishing-your-cloud-foundation-on-aws/establish-preventive-controls-across-your-environment.html)
+to enforce the inclusion of tags when resources are created.
 
+You should follow any schema described in the table below for GDS standard resource tags, but enforcing a schema for such tags is a future aspiration only.
 
-### Mandatory
+### GDS standard resource tags
 
- - `Product`: `GOV.UK One Login` / `GOV.UK` or `DSP`
- - `System`: the name of the software system, for example `Authentication` or `Identity proofing and verification core`. Avoid abbreviations.
- - `Environment`: should be one of `production`, `staging`, `integration`, or `development`.
- - `Owner`: an email address for an owner for the resource. For dev environments, this will be an individual email address; elsewhere it will be a group address.
+Only the tags marked with a **Y** below are
+[enabled as cost allocation tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html)
+in the interim GDS AWS organisation.
 
-### Optional
+| Tag name | Example values | Description | Cost allocation tag? |
+| :---- | :---- | :---- | :---- |
+| `Name` | `ec2-instance-prod-1` | Identifies an individual resource | Y |
+| `Service` | `webcaf.nonprod-service.security.gov.uk`, `CSLS - Centralised Security Logging Service` | Identifies what service this resource (or a collection of resources with the same tag value) provides to its clients, which may be internal or external. You should use a domain name if applicable. | Y |
+| `Component` | `front-end`, `db`, `api` | The component or microservice associated with the resource. Typically this is a lower level construct than `Service`, but you do not have to use both. If your multi-account strategy allows you to perform account-level analysis without the `Service` tag, `Component` may still be useful for lower-level cost analysis. | Y |
+| `Environment` | `production`, `test`, `development`, `dev`, `staging`, `integration`, `prototype`, `sandbox`, `preview` | Application environment the resource belongs to. Teams should follow a multi-account strategy with a [separate account for each environment](https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/benefits-of-using-multiple-aws-accounts.html), so as a resource tag this may be redundant and could be deprecated in future. | Y |
+| `Owner` | `team1@digital.cabinet-office.gov.uk` | Email address of the individual or team that is responsible for the resource. | Y |
+| `Source` | `https://github.com/alphagov/gds-way/` | The URL(s) for any source code repositories related to this resource, separated by spaces. | N |
+| `Data Classification` | `PCI DSS`, `OFFICIAL` | Identifies the highest data classification level the resource handles. | N |
+| `BillingProject` |  | For analysis of cost/benefit of projects, as well as the proportional cost of each project vs total account cost. This could be used to compare one technology solution against another. | Y |
+| `Exposure` | `internal`, `external` | Specifies the level of exposure the resource has to determine its attack surface area. | N |
+| `PipelineStackName` |  | Pipelines can use this to indicate which CloudFormation stack and pipeline deployed the resource. | N |
+| `BackupFrequency` | `Daily`, `BiHourly` | (Used [in the Digital Identity AWS organisation](https://github.com/govuk-one-login/backup-as-a-service/blob/main/management-backup/template.yaml).) | N |
 
- - `Service`: used to describe the function of a particular resource (for example: `account management`, `session storage`, `front end`)
- - `Source`: the URL(s) for any source code repositories related to this resource, separated by spaces
- - `Exposure` : should specify the level of exposure the resource has to determine its attack surface area. (for example `internal` or `external`)
- - `Data Classification` : should specify the highest data classification level the resource handles. This will help internal security teams to know what level of controls to apply and help focus on the resources with greatest level of risk.
- - `Cost Centre` : helps the organisation's accounting or financial management system to track and allocate expenses or costs to specific departments, teams, projects, or functions
+> Note that cost allocation is only enabled for internal use by teams (for example, to help with re-charging, or to understand their cloud spend).
+> All GDS financial reporting uses
+> [account-level tagging](#account-tags),
+> so that every resource is accounted for according to the owner of the account in which it’s created.
+
+### Deprecated resource tags
+
+The following resource tags, previously mentioned in the GDS Way, are deprecated.
+There's no obligation to remove them from existing resources, and if you think they're useful please contact Engineering Enablement.
+
+| Tag name | Deprecation reason |
+| :---- | :---- |
+| Product | Product should be clear from the [name of the account](https://github.com/alphagov/engineering-enablement/blob/main/services/AWS/ADR/ADR-AWS009-account-naming.md), in particular where you follow the [AWS recommendation to separate workloads into multiple accounts](https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/organizing-your-aws-environment.html#aws-accounts) (a 'multi-account strategy'). The widely used `Service` tag is an alternative, if resource-level tagging is required. |
+| System | The system or component should be clear from the name of the account. `BillingProject` is an alternative for analysing different technology solutions you're trying out; `Service` and `Component` are alternatives for comparing other resource use within an account. |
 
 ## References
 
-This is based on:
+You may find the following references useful:
 
  - [AWS documentation and best practices on tagging](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
- - 🔐 [GDS's former tagging strategy](https://docs.google.com/presentation/d/1LHLKPclfrn5KVFrFd2WqyPOYpS6wXklE4Lexb2rJNW0/) (Google Access required)
+ - [RFC: GDS tagging strategy](https://docs.google.com/document/d/1I1CtYz8h1PM52M5ABliMM-IOwpEwKQ-28ym34BRayms/edit?tab=t.0)
  - [MoJ digital tagging strategy](https://cloud-optimisation-and-accountability.justice.gov.uk/documentation/finops-and-greenops-at-moj/standards/tagging.html)
  - [the duckbill group's guide to tagging best practices](https://www.duckbillgroup.com/blog/aws-cost-allocation-guide-tagging-best-practices/)
