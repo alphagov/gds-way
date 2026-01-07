@@ -1,0 +1,99 @@
+---
+title: Use infrastructure as code
+last_reviewed_on: 2025-02-18
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+We use a small selection of infrastructure as code tools at GDS because we 
+think different tools are better suited to different tasks. Use [infrastructure as code][] to 
+define, deploy and manage your infrastructure. When using infrastructure 
+as code you store your [infrastructure as code][] in a version control 
+system such as Git which provides robust change tracking, change approval process 
+and auditability.
+
+## Puppet
+
+The use of [Puppet][] at GDS is diminishing as we move more of our infrastructure to containers and higher level services.
+
+If your environment consists of a simple deployment artefact like an [Amazon Machine Image (AMI)][], Puppet may not be necessary, but the process for building that artefact must still be codified and version controlled.
+
+## Terraform
+
+Use [Terraform][] to configure third party cloud infrastructure like Amazon Web Services (AWS) or [Fastly][].
+
+Terraform supports a [large number of providers][], and you can configure it to support multiple environments with different parameters. See the [govuk-aws][] repository as an example.
+
+### When to use Terraform over CDK
+
+Consider using Terraform when:
+
+* your team prefers declarative configuration over imperative programming
+* you want to leverage existing Terraform modules and community resources
+* you want to benefit from an extensive library of terraform code that already exists within GDS
+* you want the IaC code to be easily understandable by team members who may not be familiar with a specific programming language and wish to avoid the complexity that can come with using all the featue of a high-level programming language
+* you need to manage resources across multiple cloud providers or third-party services (for example, Fastly, Cloudflare) in a single codebase
+
+### Versioning
+
+Due to the high rate of change in many cloud provider offerings we
+recommend you keep your Terraform versions and codebases up to date. A
+version manager such as [tfenv](https://github.com/tfutils/tfenv),
+already used by a number of GDS teams, can help you with supporting
+multiple versions.
+
+### Code analysis
+
+There are a number of Terraform focused static analysis tools in use at
+GDS. While none of them are yet ubiquitous they can help ensure your
+code is more idiomatic, consistent and secure and you should consider the
+benefits they could bring to your build pipelines.
+
+ * [checkov](https://github.com/bridgecrewio/checkov) - "detects security and compliance misconfigurations"
+
+ * [tfsec](https://github.com/aquasecurity/tfsec) - "spots potential security issues"
+
+ * [tflint](https://github.com/terraform-linters/tflint) "linter focused on possible errors, best practices and so on."
+
+## AWS CDK
+
+Use [AWS Cloud Development Kit (CDK)][] to configure Amazon Web Services (AWS) infrastructure.
+CDK allows you to define your cloud infrastructure using a familiar programming language. This can be useful when you need to use programmatic logic to define your infrastructure, or when you want to take advantage of type safety and IDE support.
+
+### When to use Terraform over CDK
+Consider using CDK when:
+* you prefer using a programming language over declarative configuration
+* you want type safety and IDE support
+* you are working exclusively with AWS Serverless resources 
+* you are defining complex serverless applications that can benefit from using the same programming language for both infrastructure and application code
+
+### Languages
+CDK supports multiple programming languages including TypeScript, Python, Java, "C#" and Go. 
+TypeScript and Python are the most commonly used languages for CDK at GDS, see section on [programming languages](/standards/programming-languages.html) for more information on our preferred languages.
+
+### Code analysis
+
+Each CDK supported language has its own set of analysis tools. Common tools that focus on CDK Definiton that should be considered include:
+
+ * [checkov](https://github.com/bridgecrewio/checkov) - "detects security and compliance misconfigurations"
+
+ * [cdk-nag](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/check-aws-cdk-applications-or-cloudformation-templates-for-best-practices-by-using-cdk-nag-rule-packs.html) - "AWS Native tooling for checking CDK code for best practices"
+
+
+## Further reading
+
+Find out more about configuration management in the [Service Manual][].
+
+[configuration management]: https://www.digitalocean.com/community/tutorials/an-introduction-to-configuration-management
+[infrastructure as code]: https://www.gov.uk/service-manual/technology/manage-your-software-configuration#use-infrastructure-as-code
+[Amazon Elastic Compute Cloud (Amazon EC2)]: https://aws.amazon.com/ec2/
+[Amazon Machine Image (AMI)]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html
+[AWS IaC Tool Guidance]: https://docs.aws.amazon.com/prescriptive-guidance/latest/choose-iac-tool/introduction.html
+[CDK]: https://aws.amazon.com/cdk/
+[Terraform]: https://www.terraform.io/
+[Puppet]: https://puppet.com/
+[Service Manual]: https://www.gov.uk/service-manual/technology/manage-your-software-configuration#using-configuration-management-tools
+[Fastly]: https://www.fastly.com/
+[govuk-aws]: https://github.com/alphagov/govuk-aws
+[large number of providers]: https://www.terraform.io/docs/language/providers/index.html
