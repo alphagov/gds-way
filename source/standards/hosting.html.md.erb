@@ -1,17 +1,66 @@
 ---
 title: How to host a service
-last_reviewed_on: 2024-11-06
+last_reviewed_on: 2026-02-23
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-In GDS, we use [Amazon Web Services (AWS)](https://aws.amazon.com) to host our services. 
+In GDS, we follow the [Government Cloud First policy](https://www.gov.uk/guidance/government-cloud-first-policy) and use [Amazon Web Services (AWS)](https://aws.amazon.com/) as core infrastructure and to host services rather than using our own hardware.
 
-We follow the [Government Cloud First policy](https://www.gov.uk/guidance/government-cloud-first-policy) and use AWS managed cloud services and Infrastructure as a Service (IaaS) solutions to host our services rather than using our own hardware.
+GDS manages an AWS Organization – a collection of [AWS accounts -](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account) which is referred to as the GDS AWS Platform. All new digital services that require infrastructure hosting should be hosted on this platform.
+
+You can find more details about the core GDS AWS Platform on the [GDS Engineering Hub](https://engineering-enablement.gds-reliability.engineering/aws.html).
+  
+GDS teams in GOV.UK and DSP manage their own AWS accounts, but users must first sign into a shared base AWS account called ‘gds-users’. Users can then assume roles in their team’s AWS account to perform administrative tasks using [AWS’s cross-account access pattern](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html).
+
+GOV.UK One Login has its own AWS organisation, managed by the Digital Identity directorate. More information is available in the [#di-platform-fog-support](https://gds.slack.com/archives/C04UJ0F91QA) Slack channel, and the guidance here does not apply.
+
+## User access to an AWS account
+People joining GDS do not automatically have access to [Amazon Web Services (AWS)](https://aws.amazon.com/). There are two ways to get access, depending on whether the AWS accounts to which you need access use AWS Identity Center, or use cross-account access from the gds-users base account.
+
+For more information on how to create a user account, see [link ‘Requesting a new AWS user’].
+
+For accounts using the cross-account access pattern, it’s then the individual teams’ responsibility to grant that user access to any [team specific roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html).
+
+See [cross-account access with gds-users] for more information.
+
+## Managing AWS accounts
+GDS teams can request as many AWS accounts as they need, for example for production, for automated testing, and for development.
+
+Using separate AWS accounts for different [workloads](https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads.html) (for example, for production and test workloads) allows GDS teams to:
+
+-   enforce administrative isolation between workloads    
+-   minimise the impact of security breaches, for example, a compromised AWS credential
+-   isolate audit data in separate accounts
+
+You can read more information about multiple accounts in the [AWS Multiple Account Security Strategy](https://d1.awsstatic.com/aws-answers/AWS_Multi_Account_Security_Strategy.pdf).
+
+### Admin roles
+You should provide access to an administrative role to any engineers on your team that meet your personnel security requirements and are required to support your product in an engineering capacity. This role must allow them to fully bootstrap your account, for example by creating or fixing infrastructure-as-code pipelines that create the resources you need.
+
+Except in development and sandbox accounts, such administrative roles should only be used in an emergency or when you’re first bootstrapping an environment. You should also create more limited support roles that allow your team to diagnose (and in some cases fix) problems that occur in your production and production-adjacent accounts.
+
+### Controls
+You should consider limiting what kinds of resources can be created in an account. You might do this by:
+
+-   using [Permissions Boundaries](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) to restrict what resources your pipelines or support roles can create    
+-   working with Engineering Enablement to implement service control policies (SCPs) to additionally constrain even your administrative roles
+
+This could help you comply with a standard architectural pattern, prevent unnecessary spending, and reduce risks.
+
+## Deleting an AWS account
+If an AWS account is no longer needed the team should [request its closure] so that it does not accrue unnecessary costs.
+
+## Remove access to AWS accounts
+GDS teams are responsible for managing their own leavers’ process, and that includes removal of AWS user accounts. You can read more about responsibilities in the ‘AWS shared responsibility model’
+
+Before you request someone’s removal make sure they do not need access to AWS in another team within GDS.
+
+Detailed instructions are [available on the Engineering Hub].
+
 
 ## See also
 
-* [Working with AWS accounts](/manuals/working-with-aws-accounts.html)
 * [Tagging AWS resources](/manuals/aws-tagging.html)
 * [Use configuration management](/standards/configuration-management.html)
