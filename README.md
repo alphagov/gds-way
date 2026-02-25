@@ -138,6 +138,11 @@ Unless stated otherwise, the codebase is released under [the MIT License][mit]. 
 
 The documentation is [© Crown copyright][copyright] and available under the terms of the [Open Government 3.0][ogl] licence.
 
+## Branding
+
+The GDS Way uses GDS DSIT branding in accordance with the
+[instructions in the Service Manual](https://www.gov.uk/service-manual/design/making-your-service-look-like-govuk#if-your-service-isnt-on-govuk).
+
 [gds-way]: https://gds-way.digital.cabinet-office.gov.uk/
 [repo]: https://github.com/alphagov/gds-way
 [markdown]: https://www.markdownguide.org/
