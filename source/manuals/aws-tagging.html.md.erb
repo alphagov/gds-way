@@ -80,7 +80,8 @@ in the interim GDS AWS organisation.
 | `PipelineStackName` |  | Pipelines can use this to indicate which CloudFormation stack and pipeline deployed the resource. | N |
 | `BackupFrequency` | `Daily`, `BiHourly` | (Used [in the Digital Identity AWS organisation](https://github.com/govuk-one-login/backup-as-a-service/blob/main/management-backup/template.yaml).) | N |
 
-> Note that cost allocation is only enabled for internal use by teams (for example, to help with re-charging, or to understand their cloud spend).
+> Note that the above resource tags are not used for recharging to GDS business units.
+> We enable cost allocation only to help teams visualise their costs and to understand their cloud spend.
 > All GDS financial reporting uses
 > [account-level tagging](#account-tags),
 > so that every resource is accounted for according to the owner of the account in which it’s created.
