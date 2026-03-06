@@ -79,7 +79,7 @@ in the interim GDS AWS organisation.
 | `BillingProject` |  | Helps with cost/benefit analysis and reporting to your stakeholders. Compare the relative cost of one project against another, or one technology stack against another, or one component against another. | Y |
 | `Exposure` | `internal`, `external` | Specifies the level of exposure the resource has to determine its attack surface area. | N |
 | `PipelineStackName` |  | Pipelines can use this to indicate which CloudFormation stack and pipeline deployed the resource. | N |
-| `BackupFrequency` | `Daily`, `BiHourly` | (Used [in the Digital Identity AWS organisation](https://github.com/govuk-one-login/backup-as-a-service/blob/main/management-backup/template.yaml).) | N |
+| `BackupFrequency` | `Daily`, `BiHourly` | Used [in the Digital Identity AWS organisation](https://github.com/govuk-one-login/backup-as-a-service/blob/main/management-backup/template.yaml) for automated backups using [AWS Backup](https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html). | N |
 
 > Note that the above resource tags are not used for recharging to GDS business units.
 > We enable cost allocation only to help teams visualise their costs and to understand their cloud spend.
