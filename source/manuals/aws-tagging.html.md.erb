@@ -48,9 +48,10 @@ to help you understand spend with respect to specific components, teams, and env
 The tag names in this guidance use UpperCamelCase case, except for a limited number of tags which for historical reasons contain a space character.
 AWS tags are case sensitive.
 
-AWS [limits](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions)
+AWS
+[limits](https://docs.aws.amazon.com/general/latest/gr/arg.html)
 the names and values of tags to alphanumeric, space, and a limited set of punctuation (`\+-=.\_:/`), so you must avoid characters outside this set.
-Space characters are not allowed in instance metadata, so you should avoid those too.
+[Further limitations for EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions) disallow space and other characters for instance metadata, so for consistency you should avoid those too.
 
 ### Validation and preventative controls
 
