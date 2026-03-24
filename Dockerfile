@@ -9,7 +9,7 @@ WORKDIR /usr/src/gems
 COPY ./Gemfile /usr/src/gems
 COPY ./Gemfile.lock /usr/src/gems
 
-RUN apt-get update && apt-get install -y nodejs
+RUN apt-get update && apt-get install -y nodejs build-essential curl
 
 RUN bundle config set force_ruby_platform true
 RUN bundle install
