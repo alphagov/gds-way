@@ -8,49 +8,96 @@ review_in: 6 months
 
 GitHub repositories can be configured to use [GitHub Actions](https://docs.github.com/en/actions) for CI/CD jobs, for example running unit tests or deploying a static site.
 
-Actions and workflows can be powerful, so take care to follow best security practice.
+## Security
 
-Ensure the repository permissions follow [the principle of least privilege](/standards/principle-least-access.html) by:
+### Triggers
 
-- disabling Actions entirely on repositories that do not use it (this will hide the 'Actions' tab from the repository menu)
-- setting workflow permissions to read-only by default
-- setting [granular permissions in the workflow YAML](https://docs.github.com/actions/reference/authentication-in-a-workflow#modifying-the-permissions-for-the-github_token) where appropriate
-- [using environments to restrict access to secrets](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment)
+Do not use these risky triggers: `pull_request_target`, `workflow_run`, `issue_comment`, `issues`, `discussion_comment`, `discussion`, `fork`, `watch` unless subjected to rigorous security review - see ["Pwn Request" vulnerability](https://www.stepsecurity.io/blog/github-actions-pwn-request-vulnerability).
 
+### Permissions
+
+Set the workflow `permissions:` to only what's needed.
+
+For example at the top level of your workflow give it just read-only access to the repo contents:
+```
+permissions:
+  contents: read
+```
+
+Any further permissions can be added to the individual Job that needs it - see: [granular permissions in the workflow YAML](https://docs.github.com/actions/reference/authentication-in-a-workflow#modifying-the-permissions-for-the-github_token)
+
+### Secrets
+The **scope** of your secret should be minimized. Prefer [Environment secrets](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) to Repo secrets to Organisation secrets.
+
+Avoid storing long-lived credentials in a secret where possible. For connecting to AWS, DockerHub and other external services, see: "Authenticating with AWS and other external services".
+
+### Authenticating with AWS and other external services
+If your workflow interacts with another service (for example AWS or DockerHub), consider setting up a dedicated account or role in that service, with permissions limited to the scope of the action.
+
+When accessing AWS you must [authenticate using OpenID Connect (OIDC)](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services) and not using an IAM User's access key and secret access key.
+
+Your IAM Role must specify your **repo** and should specify the **branch** you expect to be deploying from (for example, `main`),to make sure code cannot be deployed from untrusted branches.
+
+### Script injections - interpolating untrusted user content
+Look out for script injection when referencing user-submitted content.
+
+The risk is when you have interpolation `${{ github.something }}` of 'something' that came from a user e.g. `${{ github.event.pull_request.title }}`, and that is executed in a `run:`, script or similar.
+
+Using an intermediate environment variable is the simplest advice - see (https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks)
+
+Bad:
+
+```yaml
+- name: Print PR Title
+  run: echo "The title is ${{ github.event.pull_request.title }}"
+```
+If the title is `rm -rf /`, the runner will execute that command.
+
+Good:
+
+```yaml
+- name: Print PR Title
+  env:
+    PR_TITLE: ${{ github.event.pull_request.title }}
+  run: echo "The title is $PR_TITLE"
+```
+
+### User permissions
 If your repository has external contributors, [ensure they do not have permissions to add workflows or trigger workflow runs](https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks).
-
-If your workflow interacts with another resource (for example AWS or DockerHub), consider setting up a dedicated account or role, with permissions limited to the scope of the action.
-Use temporary credentials in preference to storing long-lived credentials in a secret.
-In particular, when accessing AWS you must [authenticate using the OpenID Connect token](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services) and not using an IAM User's access key and secret access key.
-You should also specify the branch you expect to be deploying from (for example, `main`) in your IAM role to make sure code cannot be deployed from untrusted branches.
 
 Consider protecting the `.github/workflows` folder by using [a CODEOWNERS file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) and requiring review from CODEOWNERS for merges into protected branches.
 
-Consider creating a Workflow Template in the [alphagov workflow folder](https://github.com/alphagov/.github/tree/main/workflow-templates) if you need to share a similar workflow between many repositories.
+### Third party actions
 
-[Create your own local actions](https://docs.github.com/en/actions/creating-actions/about-actions) wherever possible.
+Make use of a Third-party action only if:
 
-If using GitHub-owned actions, [pin to a specific version](https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#using-release-management-for-your-custom-actions) and [configure Dependabot to keep your actions up to date](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot#example-dependabotyml-file-for-github-actions) by adding a comment on the same line with the tag the commitsha represents. For example:
+- The provider is verified by GitHub (for example, [aws-actions](https://github.com/aws-actions))
+- The action is complex enough that you cannot write your own local action
+- You have fully reviewed the code in the version of the third-party action you will be using
+- The third-party action is actively maintained, well-documented and tested ([follow the guidance on third party dependencies](/standards/tracking-dependencies.html)).
+
+Prefer actions owned by your team, GDS or GitHub.
+
+You can enforce this in the repo settings: under Actions -> ['Allow enterprise, and select non-enterprise, actions and reusable workflows'](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-select-actions-and-reusable-workflows-to-run) select 'Allow actions created by GitHub' and 'Allow actions by Marketplace verified creators' as required.
+
+#### Pinning Actions
+You must pin third-party Actions to full-length commit Git commit SHA, for example:
 
 ```
 - uses: actions/checkout@01aecccf739ca6ff86c0539fbc67a7a5007bbc81 # v2.1.0
 ```
 
-Pinned versions should include the semver version in a comment next to the SHA, helping humans understand which versions we are pinned to.
-Where possible, allow automated dependency management tools to scan these version comments and suggest updates.
+Include the semver version in a comment next to the SHA, like this example, to help humans to understand the version.
 
-Please double-check that the digest and the commented version are consistent each time you upgrade, as dependabot does not have perfect capability at either identifying the magnitude of the upgrade, or necessarily updating the commented pin.
+(Please double-check that the digest and the commented version are consistent each time you upgrade, as dependabot does not have perfect capability at either identifying the magnitude of the upgrade, or necessarily updating the commented pin.)
 
-Third-party actions should only be used if:
+#### Updating
 
-- The provider is verified by GitHub (for example, [aws-actions](https://github.com/aws-actions))
-- The action is complex enough that you cannot write your own local action
-- You have fully reviewed the code in the version of the third-party action you will be using
-- You have pinned the specific version in your workflow and in the repository settings, using a Git commit SHA
-- You have included the semver version in a comment next to the SHA, helping humans understand the version and automated tools report on what is out of date (for example dependabot)
-- The third-party action is actively maintained, well-documented and tested ([follow the guidance on third party dependencies](/standards/tracking-dependencies.html)).
+Keep Actions up to date by [configuring Dependabot](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot#example-dependabotyml-file-for-github-actions) or other automated dependency management tool.
 
-You can enforce this in the settings for Actions by choosing ['Allow enterprise, and select non-enterprise, actions and reusable workflows'](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-select-actions-and-reusable-workflows-to-run) and then 'Allow actions created by GitHub' and 'Allow actions by Marketplace verified creators' as required.
+Be [suspicious](https://www.vaines.org/posts/2026-03-24-the-comforting-lie-of-sha-pinning/) of external pull requests that update this content. 
+
+### Output
 
 Note that for public repositories, the output of workflow runs is visible to everyone. Do not use workflows if this output could be considered sensitive.
 
