@@ -19,6 +19,7 @@ Do not use these risky triggers: `pull_request_target`, `workflow_run`, `issue_c
 Set the workflow `permissions:` to only what's needed.
 
 For example at the top level of your workflow give it just read-only access to the repo contents:
+
 ```
 permissions:
   contents: read
@@ -36,14 +37,14 @@ If your workflow interacts with another service (for example AWS or DockerHub), 
 
 When accessing AWS you must [authenticate using OpenID Connect (OIDC)](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services) and not using an IAM User's access key and secret access key.
 
-Your IAM Role must specify your **repo** and should specify the **branch** you expect to be deploying from (for example, `main`),to make sure code cannot be deployed from untrusted branches.
+Your IAM Role must specify your **repo** and should specify the **branch** you expect to be deploying from (for example, `main`), to make sure code cannot be deployed from untrusted branches.
 
 ### Script injections - interpolating untrusted user content
 Look out for script injection when referencing user-submitted content.
 
 The risk is when you have interpolation `${{ github.something }}` of 'something' that came from a user e.g. `${{ github.event.pull_request.title }}`, and that is executed in a `run:`, script or similar.
 
-Using an intermediate environment variable is the simplest advice - see [Good practices for mitigating script injection attacks](https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks).
+The simplest fix is to use an intermediate environment variable - see [Good practices for mitigating script injection attacks](https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks).
 
 Bad:
 
@@ -81,7 +82,7 @@ Prefer actions owned by your team, GDS or GitHub.
 You can enforce this in the repo settings: under Actions -> ['Allow enterprise, and select non-enterprise, actions and reusable workflows'](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-select-actions-and-reusable-workflows-to-run) select 'Allow actions created by GitHub' and 'Allow actions by Marketplace verified creators' as required.
 
 #### Pinning Actions
-You must pin third-party Actions to full-length commit Git commit SHA, for example:
+You must pin third-party Actions to full-length Git commit SHA, for example:
 
 ```
 - uses: actions/checkout@01aecccf739ca6ff86c0539fbc67a7a5007bbc81 # v2.1.0
@@ -103,7 +104,7 @@ Note that for public repositories, the output of workflow runs is visible to eve
 
 ## Authorizing GitHub Actions
 
-GitHub Actions need authorization in order to carry out their intended tasks. Choose the right approach for authorizing your GitHub Actions for your context.
+GitHub Actions need authorization in order to access things in GitHub. Choose the right approach for authorizing your GitHub Actions for your context.
 
 ### Using a GitHub App
 
