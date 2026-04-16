@@ -43,7 +43,7 @@ Look out for script injection when referencing user-submitted content.
 
 The risk is when you have interpolation `${{ github.something }}` of 'something' that came from a user e.g. `${{ github.event.pull_request.title }}`, and that is executed in a `run:`, script or similar.
 
-Using an intermediate environment variable is the simplest advice - see (https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks)
+Using an intermediate environment variable is the simplest advice - see [Good practices for mitigating script injection attacks](https://docs.github.com/en/actions/reference/security/secure-use#good-practices-for-mitigating-script-injection-attacks).
 
 Bad:
 
@@ -89,13 +89,13 @@ You must pin third-party Actions to full-length commit Git commit SHA, for examp
 
 Include the semver version in a comment next to the SHA, like this example, to help humans to understand the version.
 
-(Please double-check that the digest and the commented version are consistent each time you upgrade, as dependabot does not have perfect capability at either identifying the magnitude of the upgrade, or necessarily updating the commented pin.)
+When the SHA is updated, please double-check that the commented version is also updated, as Dependabot does not have perfect capability at either identifying the magnitude of the upgrade, or necessarily updating the commented pin.
+
+If the SHA is updated by an externally contributed pull request, be [suspicious](https://www.vaines.org/posts/2026-03-24-the-comforting-lie-of-sha-pinning/).
 
 #### Updating
 
 Keep Actions up to date by [configuring Dependabot](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot#example-dependabotyml-file-for-github-actions) or other automated dependency management tool.
-
-Be [suspicious](https://www.vaines.org/posts/2026-03-24-the-comforting-lie-of-sha-pinning/) of external pull requests that update this content. 
 
 ### Output
 
