@@ -52,7 +52,7 @@ Bad:
 - name: Print PR Title
   run: echo "The title is ${{ github.event.pull_request.title }}"
 ```
-If the title is `rm -rf /`, the runner will execute that command.
+If the title is `"; rm -rf / #`, the runner will execute that command.
 
 Good:
 
