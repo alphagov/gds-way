@@ -1,6 +1,6 @@
 ---
 title: Kotlin style guide
-last_reviewed_on: 2026-01-02
+last_reviewed_on: 2026-03-25
 review_in: 6 months
 owner_slack: '#mobile-community'
 ---
@@ -13,5 +13,21 @@ For use cases outside of mobile development, [Java] is still our default choice 
 
 As a result, this guide may lean towards Android-specific tools and conventions.
 
+## Code style and formatting
+
+### ktlint
+
+We use [ktlint] for linting and code formatting. Its default rule set is based on the [Kotlin coding conventions] and the [Android Kotlin style guide].
+
+## Static analysis
+
+### detekt
+
+We use [detekt] for static code analysis. It can identify code smells, complexity issues, potential bugs and other problems.
+
 [Android's Kotlin-first approach]: https://developer.android.com/kotlin/first
 [Java]: java.html
+[ktlint]: https://pinterest.github.io/ktlint/
+[Kotlin coding conventions]: https://kotlinlang.org/docs/coding-conventions.html
+[Android Kotlin style guide]: https://developer.android.com/kotlin/style-guide
+[detekt]: https://detekt.dev/
