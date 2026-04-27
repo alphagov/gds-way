@@ -1,5 +1,5 @@
 # 3.4.8-slim-bookworm
-FROM ruby@sha256:d507fb52da3ccfc5644b056b94804fd8376350ef74d3a6656ec7bde2624a4816
+FROM ruby@sha256:ebd9bbec4962e1ed9ae266b6dd89fe183a6f748ef71ddbfd76994e91f13f62ad
 
 EXPOSE 4567
 EXPOSE 35729
