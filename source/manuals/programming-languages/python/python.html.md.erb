@@ -1,6 +1,6 @@
 ---
-title: Python style guide
-last_reviewed_on: 2025-02-14
+title: Python style and standards
+last_reviewed_on: 2026-04-28
 review_in: 12 months
 owner_slack: '#python'
 ---
@@ -122,93 +122,24 @@ We recommend you put `source .venv/bin/activate` in your `.envrc` file to ensure
 
 ## Dependencies
 
-A Python application project typically brings together Python packages from PyPI, with
-others written in-house (or otherwise not distributed through PyPI).
+**Dependency manager** - you should use [uv][uv-readme]. This is recommended because it is fast, modern, aligned with standards like pyproject.toml and is well-maintained. Prefer it to pip, poetry and pipenv.
 
-These packages are the applications immediate dependencies. Additionally, any
-package can have its own immediate dependencies, where they draw on other
-packages. From an application's point of view, the dependencies of the packages
-it requires are its sub-dependencies.
+**Specifying dependencies** - you should use pyproject.toml to specify your direct dependencies. (This is because it is the modern recommended standard.)
 
-The below diagram shows a simplified view of the resulting pyramid of dependencies;
-however it is important to note that the hierarchy can repeat itself infinitely.
+**Pinning and lockfiles** - you **must** pin your dependencies with a lock-file (unless it's a library - see Libraries) e.g. `uv lock`. The lockfile must be used whenever installing/deploying packages, to main consistency between environments. The lockfile must store a **cryptographic hash of the package**, and check the hash on install, to guard against installing tampered packages.
 
-```
-                               Application
-
-                                    |
-                              +-----+-----+
-                              |     |     |
-
-                          Immediate dependencies
-
-                              |     |     |
-                        +--+--+--+--+--+--+--+--+
-                        |  |  |  |  |  |  |  |  |
-
-                         ... Sub-dependencies ...
-```
-
-There are two ways of specifying dependencies in Python world: as a specific version or
-as an allowable range.
-
-Different considerations apply to dependency management depending whether you are packaging a library, or creating
-an end-product such as an application or a bundle of scripts. In general, you should only specify specific versions
-when creating a Python system that sits at the top of the dependency pyramid; otherwise there is a danger of creating
-version conflicts.
-
-### Applications
-
-These recommendations apply wherever you need a reproducible set of dependencies, such
-as a complete web application, perhaps with many dependencies and sub-dependencies. It also
-applies to a collection of scripts that are deployed into the cloud and run automatically
-(for example, batch jobs).
-
-A good strategy for specifying your application's Python dependencies has two desirable
-characteristics - they should be:
-
-1. Reproducible (predictable)
-
-    Pin your application's full dependencies – specific versions, rather than ranges – or you'll
-    get unpredictability between your dev environment and other environments. You want a
-    new starter to avoid small hard-to-spot problems. And you want parity between what you
-    test locally, what is tested by CI, and what you deploy, or you risk new issues appearing on
-    a live server. Additionally these things can be hard to diagnose.
-
-2. Kept up-to-date
-
-    Security issues are found in libraries, so it is important to choose libraries that are
-    maintained and to ensure your team has a strategy to ensure security updates are installed
-    without significant delay. The [how to manage third party software dependencies][gds-way-deps] section
-    gives further context and discusses tools that can help, such as [snyk.io][].
-
-Your README should document an easy-to-follow process by which all your Python
-dependencies can be upgraded to get bug fixes and security fixes, without introducing
-breaking changes to your build.
-
-Your pinned dependencies should be fully specified in a file called `requirements.txt`, and checked
-into your version control system (VCS). For projects with only a small number of dependencies, maintaining
-this manually (for example, installing with `uv pip install`, then using `pip freeze`) may be adequate.
-
-GDS recommends using [uv][uv-readme] for managing dependencies.
-
-Put your top-level requirements in a `requirements.in` file, and then use
-`uv pip compile requirements_for_test.in -o requirements_for_test.txt` to generate a
-`requirements.txt` file. Both the .in and .txt files should be commited to your repository.
-
-List dependencies only needed for development or testing into a separate `requirements-dev.txt` file.
+**Updating** - you **must** keep dependencies up to date with security patches, and the latest major & minor versions (or older versions which are expected to receive security patches). You should **automate the updating**, for example with Dependabot and making sure the PRs are merged, lockfiles updated and deployed in a timely fashion. This is to ensure that you quickly move to the secure versions of packages. Document this update process in your README. See also: [how to manage third party software dependencies][gds-way-deps].
 
 ### Libraries
 
-This recommendation applies to any Python repository that intended to be installable (into
+Libraries are the exception to the rule about exact dependencies being specified and pinned.
+This applies to any Python repository that intended to be installable (into
 a virtual environment, a container, or onto bare metal) as a dependency of some larger system
 or application. It may be applicable to repositories that provide scripts to be run by
 developers or other end-users, but is not recommended for code that's intended to be deployed
 on its own into the cloud.
 
-Use a [`pyproject.toml`][pyproject-toml] to specify your library's configuration.
-When specifying the dependencies of your library and the version ranges with which it
-can be reasonably expected to work:
+Put **version ranges** in your [`pyproject.toml`][pyproject-toml] to specifying the dependencies of your library. These are the rangeswith which it can be reasonably expected to work:
 
 - The range you choose will depend on the guarantees each dependency makes about
   backward-compatibility. For example, if you're currently using version 1.3.1 of
@@ -240,10 +171,8 @@ file otherwise.
 [slack-python]: https://gds.slack.com/messages/python
 [GPSG]: https://google.github.io/styleguide/pyguide.html
 
-[snyk.io]: https://snyk.io/
 [pyproject-toml]: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 
-[Black]: https://black.readthedocs.io/en/stable/
 [PEP 8]: https://www.python.org/dev/peps/pep-0008/
 [PEP 440]: https://www.python.org/dev/peps/pep-0440/#direct-references
 
