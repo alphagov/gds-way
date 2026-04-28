@@ -129,7 +129,7 @@ We recommend you put `source .venv/bin/activate` in your `.envrc` file to ensure
 **Pinning and lockfiles** - you **must** pin your dependencies with a lock-file (unless it's a library - see Libraries) e.g. `uv lock`. The lockfile must be used whenever installing/deploying packages, to main consistency between environments. The lockfile must store a **cryptographic hash of the package**, and check the hash on install, to guard against installing tampered packages.
 
 **Updating** - you **must** keep dependencies up to date with security patches - see also: [how to manage third party software dependencies][gds-way-deps]
-* Configure a **cool-off period** (for example 7 days) meaning that new releases are not adopted immediately, to reduce the risk of using compromised new releases, which are usually spotted by the community and security companies and are pulled within hours. [uv and Dependabot have cool-off settings](https://docs.astral.sh/uv/guides/integration/dependabot/#dependency-cooldown).
+* You should configure a **cool-off period** (for example 7 days) meaning that new releases are not adopted immediately, to reduce the risk of using compromised new releases, which are usually spotted by the community and security companies and are pulled within hours. [uv and Dependabot have cool-off settings](https://docs.astral.sh/uv/guides/integration/dependabot/#dependency-cooldown).
 * You should have a process to **update quickly** to new versions, after the cool-off period. Ensure the lockfile is also updated. For example, use Dependabot to automate creating PRs, and a daily team process to manually review and merge, triggering automated deployment.
 * Document your update process in your README.
 
