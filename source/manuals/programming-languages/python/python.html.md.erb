@@ -122,16 +122,26 @@ We recommend you put `source .venv/bin/activate` in your `.envrc` file to ensure
 
 ## Dependencies
 
-**Dependency manager** - you should use [uv][uv-readme]. This is recommended because it is fast, modern, aligned with standards like pyproject.toml and is well-maintained. Prefer it to pip, poetry and pipenv.
+### Dependency manager
 
-**Specifying dependencies** - you should use pyproject.toml to specify your direct dependencies. (This is because it is the modern recommended standard.)
+You should use [uv][uv-readme]. This is recommended because it is fast, modern, aligned with standards like `pyproject.toml` and is well-maintained. Prefer it to pip, poetry and pipenv.
 
-**Pinning and lockfiles** - you **must** pin your dependencies with a lock-file (unless it's a library - see Libraries) e.g. `uv lock`. The lockfile must be used whenever installing/deploying packages, to main consistency between environments. The lockfile must store a **cryptographic hash of the package**, and check the hash on install, to guard against installing tampered packages.
+### Specifying dependencies
 
-**Updating** - you **must** keep dependencies up to date with security patches - see also: [how to manage third party software dependencies][gds-way-deps]
-* You should configure a **cool-off period** (for example 7 days) meaning that new releases are not adopted immediately, to reduce the risk of using compromised new releases, which are usually spotted by the community and security companies and are pulled within hours. [uv and Dependabot have cool-off settings](https://docs.astral.sh/uv/guides/integration/dependabot/#dependency-cooldown).
-* You should have a process to **update quickly** to new versions, after the cool-off period. Ensure the lockfile is also updated. For example, use Dependabot to automate creating PRs, and a daily team process to manually review and merge, triggering automated deployment.
-* Document your update process in your README.
+You should use `pyproject.toml` to specify your direct dependencies because it is the modern, recommended standard.
+
+### Pinning and lockfiles
+
+You **must** pin your dependencies with a lock-file (unless it's a library - see Libraries) e.g. `uv lock`. The lockfile must be used whenever installing/deploying packages, to main consistency between environments. The lockfile must store a **cryptographic hash of the package**, and check the hash on install, to guard against installing tampered packages.
+
+### Updating
+
+You **must** keep dependencies up to date with security patches - see also: [how to manage third party software dependencies][gds-way-deps]
+* You should configure a **cooldown period** (for example 7 days) meaning that new releases are not adopted immediately, to reduce the risk of using compromised new releases, which are usually spotted by the community and security companies and are pulled within hours. [uv and Dependabot have cool-off settings](https://docs.astral.sh/uv/guides/integration/dependabot/#dependency-cooldown).
+
+You should have a process to **update quickly** to new versions, after the cooldown period. Ensure the lockfile is also updated. For example, use Dependabot to automate creating PRs, and a daily team process to manually review and merge, triggering automated deployment.
+
+Document your update process in your README.
 
 ### Libraries
 
