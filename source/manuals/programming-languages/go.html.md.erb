@@ -1,72 +1,108 @@
 ---
 title: Go style guide
-last_reviewed_on: 2024-04-23
+last_reviewed_on: 2026-05-13
 review_in: 12 months
-owner_slack: '#golang'
+owner_slack: '#govuk-platform-engineering'
 ---
 
 # <%= current_page.data.title %>
 
-> Note: [Go is no longer a core language](/standards/programming-languages.html#go)
-for backend development in GDS.
+This style guide provides conventions for working on Go code within GDS. It is owned and maintained by the **GOV.UK Platform Engineering team**, who are the primary users of Golang at GDS.
 
-The purpose of this style guide is to provide some conventions for working on Go code within GDS. There are already good resources on writing Go code, which are worth reading first:
+Go is an actively used language at GDS for Platform Engineering work, including Kubernetes operators and controllers, CLI tools, APIs, and [Crossplane](https://www.crossplane.io/) composition functions. A large proportion of the [CNCF (Cloud Native Computing Foundation)](https://www.cncf.io/) tooling the team relies on — including Kubernetes itself — is written in Go, making it a natural and productive fit for this kind of work.
 
-* [Effective Go](https://golang.org/doc/effective_go)
-* [Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments) (documenting points that have been raised in Google code reviews)
+There are already good resources on writing Go code, which are worth reading first:
+
+* [Effective Go](https://go.dev/doc/effective_go)
+* [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
+* [Go Proverbs](https://go-proverbs.github.io/)
+* [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
+
+### GDS Projects using Go
+
+These projects are currently using Go:
+
+- [GDS CLI](https://github.com/alphagov/gds-cli)
+- [GOV.UK CLI](https://github.com/alphagov/govuk-cli)
+- [GOV.UK Mirror](https://github.com/alphagov/govuk-mirror)
+- [GOV.UK Router](https://github.com/alphagov/router)
 
 ## Code formatting
 
-Use [`gofmt`](https://golang.org/cmd/gofmt/). This means all Go code reads in the same way which is [important when looking at unfamiliar code](https://blog.golang.org/go-fmt-your-code).
+Use [`gofmt`](https://pkg.go.dev/cmd/gofmt) to automatically format your code. All Go code must be `gofmt`-formatted. Most editors can be configured to run `gofmt` on save.
 
-You may also want to use [`golint`](https://github.com/golang/lint) which assesses code style.
+You should also use [`goimports`](https://pkg.go.dev/golang.org/x/tools/cmd/goimports), which runs `gofmt` and additionally manages import grouping and ordering.
+
+## Linting
+
+Use [`golangci-lint`](https://golangci-lint.run/) as your primary linting tool. It is a fast, configurable meta-linter that runs many linters in parallel and is widely adopted across the CNCF ecosystem.
+
+A `.golangci.yml` configuration file in the root of your repository controls which linters are enabled. Consult the [golangci-lint documentation](https://golangci-lint.run/usage/configuration/) for configuration options.
+
+Recommended linters include:
+
+- [`staticcheck`](https://staticcheck.dev/) — correctness, performance, and simplicity checks
+- [`errcheck`](https://github.com/kisielk/errcheck) — ensures errors are not silently discarded
+- [`gosec`](https://github.com/securego/gosec) — security-focussed static analysis
+- [`revive`](https://github.com/mgechev/revive) — general style checks (a maintained replacement for the now-unmaintained `golint`)
 
 ## Code checking
 
-[`go vet`](https://golang.org/cmd/vet/), which checks correctness, should be used as part of your build process.
+[`go vet`](https://pkg.go.dev/cmd/vet) checks for correctness and should be used as part of your build process. It is typically included in a `golangci-lint` run.
 
-If you are writing concurrent code, use the [race detector](https://blog.golang.org/race-detector) to detect race conditions.
+If you are writing concurrent code, use the [race detector](https://go.dev/doc/articles/race_detector) to detect race conditions:
+
+```sh
+go test -race ./...
+```
 
 ## External dependencies
 
-As of Go 1.11 there is an [officially developed module system](https://blog.golang.org/using-go-modules), which is finalized in Go 1.13: `go mod`.
+Use [Go modules](https://go.dev/blog/using-go-modules) (`go mod`) for all dependency management. This has been the official, default approach since Go 1.16.
 
-A historical pain point of development in Go was the manipulation of `$GOPATH` which is no longer required when using `go mod`.
+Older tools such as `dep`, `godep`, and `glide` are no longer in development and must not be used in new projects.
 
-There are several Go depency management tools in use at GDS, other than `go mod`:
+### Vendoring
 
-- [dep](https://golang.github.io/dep/) (no longer in development)
-- [godep](https://github.com/tools/godep) (no longer in development)
-- [glide](https://github.com/Masterminds/glide) (no longer in development)
-* [gopkg.in](https://labix.org/gopkg.in), which provides a method of using versioned import paths
-* vendoring (ie copying source code in some manner to a location you control)
+Vendoring is not generally necessary when using Go modules. The Go toolchain downloads and authenticates modules via the [Go module mirror](https://proxy.golang.org/) and the [Go checksum database](https://sum.golang.org/).
 
-All new projects should use the officially developed `go mod` unless they have specific requirements not met by `go mod`
+You may still choose to vendor when:
 
-Vendoring is still common practice in Go, but if you are using `go mod` with Go
-1.13+ then the go command will download and authenticate modules from the
-highly available [Go module mirror](https://pkg.go.dev/cmd/go#hdr-Configuration_for_downloading_non_public_code) and Go checksum database run by Google which
-alleviates the need to vendor your modules
+- your build environment has restricted internet access
+- you want fully self-contained, reproducible builds without relying on external mirrors
+
+Use `go mod vendor` if you choose to vendor.
+
+## Kubernetes and CNCF development
+
+GOV.UK Platform Engineering uses Go extensively for Kubernetes-related work, as Go is the primary language of the Kubernetes ecosystem and the wider CNCF landscape.
+
+### CLI tools
+
+Use [`cobra`](https://github.com/spf13/cobra) for building CLI tools. It is the de facto standard for Go CLIs in the CNCF ecosystem, used by `kubectl`, `helm`, `kind`, `flux`, and many others. Pair it with [`viper`](https://github.com/spf13/viper) if you need configuration file support alongside flags and environment variables.
+
+For smaller, simpler CLIs where subcommands are not needed, [`urfave/cli`](https://github.com/urfave/cli) is a viable alternative.
 
 ## Web frameworks
 
-While it's difficult to provide any guidance that will be generally applicable, there are couple of useful things to consider when structuring your Go program.
+Go's standard library is modern and capable. For simple HTTP routing and handling, the [`net/http`](https://pkg.go.dev/net/http) package will likely meet your needs.
 
-The first is that Go's standard library is modern and powerful. If you just need simple HTTP routing and handling, the [`net/http` package will probably meet your needs](https://golang.org/doc/articles/wiki/).
+For more complex routing requirements such as path parameters or structured middleware, consider:
 
-The second is that if `net/http` falls short, it's worth choosing something that integrates well with it.
+- [`go-chi/chi`](https://github.com/go-chi/chi) — lightweight, idiomatic router that is 100% compatible with `net/http`
+- [`gin-gonic/gin`](https://github.com/gin-gonic/gin) — performant framework with a larger feature set
 
-The third is that Go is not a language we use at GDS for developing fully-fledged web applications, eg rendering HTML. If you find yourself rendering HTML using Go, consider using a different GDS supported language.
+Prefer a router or framework that integrates well with the standard `net/http` interface, so that standard library middleware and tooling remain compatible.
+
+Go is not routinely used at GDS for building fully-fledged, HTML-rendering web applications. If you find yourself in that position, consider whether one of the other [GDS supported backend languages](/standards/programming-languages.html#backend-development) might be more appropriate.
 
 ## Channels
 
 ### Signalling
 
-Channels that are being used purely for signalling should use an
-empty struct rather than boolean or int types.
+Channels that are being used purely for signalling should use an empty struct rather than boolean or int types.
 
-Using an empty struct declares that we're not interested in the value
-sent or received; only in its closed property.
+Using an empty struct declares that we're not interested in the value sent or received; only in its closed property.
 
 See [this talk](https://go.dev/talks/2012/10things.slide#11)
 
@@ -99,47 +135,78 @@ func main() {
 
 ## Testing
 
-There is some use across GDS of [gomega](https://onsi.github.io/gomega/) for matching, and [ginkgo](https://onsi.github.io/ginkgo/) for BDD testing.
+Use [Ginkgo](https://onsi.github.io/ginkgo/) with [Gomega](https://onsi.github.io/gomega/) as the preferred testing framework for Go code at GDS. Ginkgo provides a BDD-style structure that makes test intent clear and readable, and is widely used across the Kubernetes and CNCF ecosystem.
 
-If you find yourself writing too much boilerplate when testing Go, consider reaching for these libraries.
+### Ginkgo and Gomega
 
-Gomega can help make your tests more readable:
+[Ginkgo](https://onsi.github.io/ginkgo/) structures tests using `Describe`, `Context`, and `It` blocks, making it easy to express behaviour and organise related scenarios:
 
-```
-err := doAThing() // this should fail
-Expect(err).Should(HaveOccurred())
-```
-
-And Ginkgo can help set up a test suite:
-
-```
+```go
 var _ = Describe("Something", func() {
-  It("should do a thing", func() {
-
-    Expect("hi").To(HaveLen(2))
-
-  })
+    Context("when a condition is true", func() {
+        It("should do a thing", func() {
+            Expect("hi").To(HaveLen(2))
+        })
+    })
 })
 ```
 
-which can be run with:
+[Gomega](https://onsi.github.io/gomega/) provides the matcher library and makes assertions read naturally:
 
-```
-ginkgo
+```go
+err := doAThing()
+Expect(err).NotTo(HaveOccurred())
+
+Expect(result).To(Equal("expected value"))
 ```
 
-Tests can be focused (using regular expressions), to speed up development:
+Run a Ginkgo test suite with:
 
+```sh
+ginkgo ./...
 ```
-ginkgo -focus 'a thing'
+
+Tests can be focused to speed up development cycles:
+
+```sh
+ginkgo --focus "a thing" ./...
 ```
+
+### Standard library testing
+
+For simpler tests, or where a BDD style is not appropriate, the standard library [`testing`](https://pkg.go.dev/testing) package is a safe fallback. Prefer [table-driven tests](https://go.dev/wiki/TableDrivenTests) to reduce boilerplate:
+
+```go
+func TestAdd(t *testing.T) {
+    tests := []struct {
+        name string
+        a, b int
+        want int
+    }{
+        {"positive numbers", 1, 2, 3},
+        {"zero values", 0, 0, 0},
+        {"negative numbers", -1, -2, -3},
+    }
+    for _, tc := range tests {
+        t.Run(tc.name, func(t *testing.T) {
+            if got := Add(tc.a, tc.b); got != tc.want {
+                t.Errorf("Add(%d, %d) = %d, want %d", tc.a, tc.b, got, tc.want)
+            }
+        })
+    }
+}
+```
+
+[`testify`](https://github.com/stretchr/testify) can complement the standard library with cleaner assertions and mocking:
+
+- `testify/assert` — non-fatal assertions (test continues on failure)
+- `testify/require` — fatal assertions (test stops immediately on failure)
+- `testify/mock` — mock objects
 
 ## Configuration parsing
 
-There are a number of tools in use at GDS for parsing configuration and arguments:
+For CLI tools, use [`cobra`](https://github.com/spf13/cobra) for command-line arguments and subcommands. Pair it with [`spf13/viper`](https://github.com/spf13/viper) when you also need to read from configuration files or environment variables.
 
-- [alecthomas/kingpin](https://github.com/alecthomas/kingpin) (not actively maintained) for parsing simple command line arguments and environment variables
-- [urfave/cli](https://github.com/urfave/cli) for building more advanced CLI tools
-- [spf13/viper](https://github.com/spf13/viper) for parsing configuration files
+For applications without a CLI entry-point, [`spf13/viper`](https://github.com/spf13/viper) supports YAML, JSON, TOML, and environment variable binding on its own.
 
-These tools can make it easier to accept configuration parameters and help to make your application self-documenting.
+These tools make it easier to accept configuration parameters and help to make your application self-documenting.
