@@ -1,6 +1,6 @@
 ---
 title: Programming languages
-last_reviewed_on: 2026-03-19
+last_reviewed_on: 2026-05-13
 review_in: 12 months
 ---
 
@@ -72,17 +72,26 @@ production.
 
 ### Go
 
-Go is no longer a core backend development language in GDS.
+Go is an actively used language at GDS, owned and maintained by the **GOV.UK Platform Engineering team** — the primary team using Go in GDS.
 
-The only Go service currently in production operation is the [GOV.UK router][router].
-As such, the knowledge and experience of building and running services in Go is small and decreasing.
+The team uses Go for:
 
-Go _may_ be an appropriate language for instances of systems programming, like
-proxying, routing, and transforming HTTP requests. However you should only
-write these sorts of components if there is no alternative maintained open
-source tool available.
+- Kubernetes operators and controllers
+- Command-line tools
+- APIs and microservices
+- [Crossplane](https://www.crossplane.io/) composition functions
+
+The GOV.UK Platform Engineering team's use of Go is closely tied to the [CNCF (Cloud Native Computing Foundation)](https://www.cncf.io/) ecosystem. A significant proportion of CNCF tooling — including Kubernetes itself, as well as tools such as Helm, Flux, and Crossplane — is written in Go. This makes Go the natural language choice for platform engineering work.
+
+The team also maintains existing Go services including the [GOV.UK Router][router] and [GOV.UK Mirror][mirror].
+
+If you are working outside a platform engineering context, you should use one of the other supported backend languages listed above. Go may also be appropriate for systems programming tasks such as proxying, routing, and transforming HTTP requests, where no suitable maintained open source tool exists.
+
+Refer to the [Go style guide][go-style] for coding conventions and tooling recommendations, and contact the GOV.UK Platform Engineering team in [#govuk-platform-engineering](https://gds.slack.com/archives/govuk-platform-engineering) if you have questions.
 
 [router]: https://github.com/alphagov/router
+[mirror]: https://github.com/alphagov/govuk-cdn-config
+[go-style]: /manuals/programming-languages/go.html
 
 ### Languages we do not use for new projects
 
@@ -97,15 +106,15 @@ For developing mobile apps, we use:
 - [Swift](https://www.swift.org/) for [iOS](https://developer.apple.com/)
 - [Kotlin](https://kotlinlang.org/) for [Android](https://developer.android.com/)
 
-To give users the expected experience on their respective platform, we prefer to use the native languages over cross-platform solutions. 
+To give users the expected experience on their respective platform, we prefer to use the native languages over cross-platform solutions.
 
 ### Swift
 
 When starting a new app project, you'll likely want to use the most recent version of Swift which will be installed with Xcode.
 
-### Kotlin 
- 
-We prefer to develop Android apps using the latest stable version of Kotlin. 
+### Kotlin
+
+We prefer to develop Android apps using the latest stable version of Kotlin.
 
 ## Using other languages
 
