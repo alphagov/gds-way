@@ -19,7 +19,7 @@ jobs:
         fetch-depth: 0 # Fetch entire history, because the check_links.rb script relies on it
 
     - name: Set up Ruby
-      uses: ruby/setup-ruby@7372622e62b60b3cb750dcd2b9e32c247ffec26a # 1.302.0
+      uses: ruby/setup-ruby@97ecb7b512899eb71ab1bf2310a624c6f1589ac6 # 1.308.0
       with:
         bundler-cache: true
 
