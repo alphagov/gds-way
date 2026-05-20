@@ -21,6 +21,42 @@ Collecting metrics on the performance of your service is useful for [capacity pl
 
 We recommend using [Prometheus][] to gather metrics and monitor your service, as this is what many GDS teams are using. Amazon provides a [Managed Prometheus service][], which you may wish to use instead of hosting Prometheus yourself. You may also consider using [CloudWatch Metrics][] instead for simpler use-cases where the complexity of Prometheus is not required.
 
+## Using Engineering Enablement tools
+
+The Engineering Enablement team also provides the following AWS-specific tools which you can use to ensure your service is reliable.
+
+1. [Health Events Dashboard][]
+
+The EE team has enabled the health events dashboard using the AWS Cloud Intelligence Dashboards Framework, which uses the [Data Collection Stack][] to automate the collection of AWS resource utilisation data across multiple Management and Linked accounts.
+The Health Events Dashboard uses data collected from AWS Health Organizational View API and creates a variety of visualisations for your past, current, and upcoming AWS Health events. The dashboard’s charts allow you analyse individual or multiple events to raise awareness and facilitate your operational planning.
+
+![Health Events Dashboard Architecture](../images/aws-health-architecture.png)
+
+1. The Data Collection Stack provides an Amazon Lambda function that assumes a role in the Management account to retrieve daily the AWS Health Data and store it on Amazon S3. The Lambda only pulls data that are updated since the last retrieval. The stack also provides AWS Glue Tables to query collected data.
+1. Cloud Intelligence Dashboards provide Amazon Athena views for querying data directly from the S3 bucket using AWS Glue tables and Amazon Quick Sight Datasets and Dashboards. Service teams can access the Health Events Dashboard in Amazon Quick Sight using Quick Sight users created by the EE team.
+
+The EE team has added AWS account tags as cost allocation tags to enable service teams to filter and see their own costs on all the enabled dashboards. The AWS account tags are:
+
+- programme
+- team-name
+- service-name
+- billing-dsit-cost-centre-code
+- billing-dsit-programme-code
+- billing-dsit-directorate-code
+
+The EE team uses Amazon Quick for managing both authentication and authorisation to the foundational dashboards.
+You'll need to raise a Jira ticket in the [EE - Cloud Platform (ECP)][] if you wish to have access to these dashboards.
+Service team members will be assigned the `Amazon Quick Sight Reader` role by default which allows you to view and interact with dashboards and reports.
+
+Once you receive an email invitation to join Amazon Quick, accept the invitation and set a new password for your Quick Sight user.
+You'll then require the following information to sign in and access the dashboards:
+
+1. Quick sign in URL: https://quicksight.aws.amazon.com/
+1. Quick account name: `gds-cloud-intelligence`
+1. Username: your GDS email address without the email domain for example, `yas.jaffoo` or `elliot.charlton`
+1. Password: your new password that you have set after accepting the invitation to join
+
+
 [monitor the status of services]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
 [performance metrics]: https://www.gov.uk/service-manual/measuring-success/how-to-set-performance-metrics-for-your-service
 [Pingdom]: https://www.pingdom.com/
@@ -31,3 +67,6 @@ We recommend using [Prometheus][] to gather metrics and monitor your service, as
 [Prometheus]: https://prometheus.io/
 [CloudWatch Metrics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html
 [Managed Prometheus service]: https://aws.amazon.com/prometheus/
+[Health Events Dashboard]: https://docs.aws.amazon.com/guidance/latest/cloud-intelligence-dashboards/health-events-dashboard.html
+[Data Collection Stack]: https://docs.aws.amazon.com/guidance/latest/cloud-intelligence-dashboards/data-collection.html
+[EE - Cloud Platform (ECP)]: https://gds-cyber-and-engineering.atlassian.net/jira/software/c/projects/ECP/summary
