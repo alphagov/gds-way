@@ -140,16 +140,7 @@ See the overall advice in: [How to manage third party software dependencies][gds
 
 **Dependabot** supports uv - see [Using uv with Dependabot](https://docs.astral.sh/uv/guides/integration/dependabot/). It will bump dependencies in `pyproject.toml` and regenerate `uv.lock`.
 
-Suggested Dependabot configuration:
-
-* `version-updates`
-  * weekly
-  * grouped into a single pull request
-  * cooldown of 1-7 days
-* `security-updates` (these create PRs immediately by default)
-
 A **cooldown period** should be configured in both [Dependabot](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference#cooldown-) and [uv](https://docs.astral.sh/uv/guides/integration/dependabot/#dependency-cooldown).
-
 
 ### Libraries
 
