@@ -1,6 +1,6 @@
 ---
-title: Python style and standards
-last_reviewed_on: 2026-04-28
+title: Python style guide
+last_reviewed_on: 2026-06-03
 review_in: 12 months
 owner_slack: '#python'
 ---
@@ -132,14 +132,24 @@ You should use `pyproject.toml` to specify your direct dependencies because it i
 
 ### Pinning and lockfiles
 
-You **must** pin your dependencies with a lock-file (unless it's a library - see Libraries) e.g. `uv lock`. The lockfile must be used whenever installing/deploying packages, to main consistency between environments. The lockfile must store a **cryptographic hash of the package**, and check the hash on install, to guard against installing tampered packages.
+You must pin your dependencies with a lock-file (unless it's a library - see Libraries) e.g. `uv lock`. The lockfile must be used whenever installing/deploying packages, to main consistency between environments. The lockfile must store a **cryptographic hash of the package**, and check the hash on install, to guard against installing tampered packages.
 
 ### Updating
 
-You **must** keep dependencies up to date with security patches - see also: [how to manage third party software dependencies][gds-way-deps]
-* You should configure a **cooldown period** (for example 7 days) meaning that new releases are not adopted immediately, to reduce the risk of using compromised new releases, which are usually spotted by the community and security companies and are pulled within hours. [uv and Dependabot have cool-off settings](https://docs.astral.sh/uv/guides/integration/dependabot/#dependency-cooldown).
+See the overall advice in: [How to manage third party software dependencies][gds-way-deps]. The remainder of this section covers Python-specific practicalities.
 
-You should have a process to **update quickly** to new versions, after the cooldown period. Ensure the lockfile is also updated. For example, use Dependabot to automate creating PRs, and a daily team process to manually review and merge, triggering automated deployment.
+**Dependabot** supports uv - see [Using uv with Dependabot](https://docs.astral.sh/uv/guides/integration/dependabot/). It will bump dependencies in `pyproject.toml` and regenerate `uv.lock`.
+
+Suggested Dependabot configuration:
+
+* `version-updates`
+  * weekly
+  * grouped into a single pull request
+  * cooldown of 1-7 days
+* `security-updates` (these create PRs immediately by default)
+
+A **cooldown period** should be configured in both [Dependabot](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference#cooldown-) and [uv](https://docs.astral.sh/uv/guides/integration/dependabot/#dependency-cooldown).
+
 
 ### Libraries
 
