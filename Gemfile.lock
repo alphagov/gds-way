@@ -87,12 +87,12 @@ GEM
     google-protobuf (4.35.0-x86_64-linux-gnu)
       bigdecimal
       rake (~> 13.3)
-    govuk_tech_docs (6.2.3)
+    govuk_tech_docs (6.2.4)
       autoprefixer-rails
       chronic
       concurrent-ruby
       csv
-      haml (~> 6.0)
+      haml (>= 6, < 8)
       middleman
       middleman-autoprefixer
       middleman-compass
@@ -130,7 +130,7 @@ GEM
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     io-event (1.14.5)
-    json (2.19.5)
+    json (2.19.8)
     kramdown (2.5.2)
       rexml (>= 3.4.4)
     listen (3.10.0)
