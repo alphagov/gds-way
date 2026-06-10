@@ -11,5 +11,8 @@ gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 # Include the tech docs gem
 gem 'govuk_tech_docs'
 
+# Required explicitly from Ruby 4.0+ (removed from default gems)
+gem 'cgi'
+
 # Include linter to check for dead internal links
 gem 'html-proofer', '~> 5.2.1'
