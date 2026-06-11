@@ -1,0 +1,164 @@
+---
+title: How to handle sensitive code
+last_reviewed_on: 2025-10-01
+review_in: 6 months
+---
+
+# <%= current_page.data.title %>
+
+## Summary
+
+GitHub repositories that are not public should have a `HANDLING_INSTRUCTIONS.md` file at the root explaining why the code is not open and how it should be handled.
+
+This supports [Point 12 of the Service Standard][service-standard-open-code], and ensures decisions about visibility are documented, reviewable and time-limited.
+
+## What you need to do
+
+**Public repositories** do not need handling instructions. Public is the default for GDS code.
+
+**Internal or private repositories** must have a `HANDLING_INSTRUCTIONS.md` committed to the root of the repository, following the format below.
+
+Map your repository visibility to a handling group:
+
+| Visibility | Classification | Handling group |
+|---|---|---|
+| Internal | OFFICIAL-SENSITIVE | `HMG USE ONLY` |
+| Private | OFFICIAL-SENSITIVE | `[ORGANISATION] USE ONLY` or `RECIPIENTS ONLY` |
+
+New repositories should include this file from the start.
+Existing repositories should become compliant over time.
+Business units may choose to enforce this as policy for their area, referencing this page from their team documentation.
+
+### Contractors and outside collaborators
+
+Note that `internal` repositories are readable by all members of the 'Government Digital Service' GitHub enterprise and its various GitHub organizations, including any contractors who have been onboarded as enterprise members.
+
+Where GDS engages contractors (MSP or contingent labour), the programme's business operations team should establish how they are treated with respect to information handling. A common pattern is to treat staff under contract to government as within scope for `HMG USE ONLY`.
+
+Where sensitive matters require tighter boundaries (for example, contract renegotiation), use `RECIPIENTS ONLY` with an explicit description of access restrictions.
+
+### Write access
+
+This guidance covers **read access** (who can see the code).
+Write and admin access should be controlled separately using [CODEOWNERS][code-owners] and infrastructure as code for access management.
+
+## Formatting handling instructions
+
+Create a file called `HANDLING_INSTRUCTIONS.md` in the repository root with this structure:
+
+```md
+---
+classification: OFFICIAL-SENSITIVE
+handling_group: {handling_group}
+last_reviewed_on: yyyy-mm-dd
+review_in: {period}
+responsible_role: {role title}
+responsible_role_contact: {contact}
+---
+
+{Explanation body}
+```
+
+### Field reference
+
+| Field | Value |
+|---|---|
+| `classification` | Always `OFFICIAL-SENSITIVE`.<br> OFFICIAL repos should be public; SECRET/TOP SECRET must not be on GitHub. |
+| `handling_group` | One of: `RECIPIENTS ONLY`, `[ORG NAME] USE ONLY`, `HMG USE ONLY`, `EMBARGOED` (per [Government Security Classifications Policy][handling-instructions]). |
+| `last_reviewed_on` | Date of last review (YYYY-MM-DD). |
+| `review_in` | When to next review, e.g. "6 months" or "12 months". |
+| `responsible_role` | Role title responsible for reviews (not an individual's name). e.g. "Lead Developer, GOV.Uk". |
+| `responsible_role_contact` | A Slack channel or shared inbox. |
+
+### What to write in the body
+
+The body should allow any reader to quickly understand:
+
+- what aspects of this repository are sensitive
+- what concern triggered the deviation from public visibility
+- what might change to trigger re-evaluation
+- who to contact for access exceptions
+
+Write handling instructions on the basis that they will be made public when sensitivity lapses.
+Focus on describing the *causes* of classification, not the sensitive details themselves.
+
+## Making the file visible
+
+Add a banner to the repository's `README.md` so sensitivity is obvious without scrolling:
+
+```md
+> [!IMPORTANT]
+> This repository is OFFICIAL-SENSITIVE. Handle in line with [HANDLING_INSTRUCTIONS.md](/HANDLING_INSTRUCTIONS.md).
+```
+
+## Handling uncertainty
+
+It is fine to make a repository private first and add handling instructions shortly after.
+It is also fine to be explicit about uncertainty:
+
+> We were unsure if business rules in this component were sensitive.
+We made the repo private out of caution and set a 3-month review while we engage stakeholders.
+
+The important thing is to record whatever reasoning was known to the team at the time, clearly enough for a future reviewer to review and act on.
+
+## Reviews and returning to public
+
+### Review cadence
+
+Review handling instructions at least every 12 months.
+Each review should confirm the stated sensitivities still apply and note any new sensitivities introduced since the last review.
+
+Teams should set up reminders using whatever tooling suits them — calendar invites, CI checks, or similar automation.
+
+### Making a private repository public
+
+When sensitivity lapses:
+
+1. Confirm the handling instructions (and any sensitivities they describe) no longer apply.
+2. Audit commits since the repo was last public for unrecorded sensitivities, including in commit messages and metadata.
+3. Remove `HANDLING_INSTRUCTIONS.md` and the README banner.
+4. Set the repository to public.
+
+Where historic commits contain sensitive material, create a new public repository from the current main (without history) and archive the original privately.
+This removes the risk of disclosing historic sensitivities.
+
+## Example handling instruction
+
+```md
+---
+classification: OFFICIAL-SENSITIVE
+handling_group: HMG USE ONLY
+last_reviewed_on: 2024-02-01
+review_in: 12 months
+responsible_role: Lead Developer, Beverage Platform
+responsible_role_contact: #gds-beverages
+---
+
+This component monitors coffee availability in GDS offices.
+
+It displays the source of beans for today's coffee pot. This has been
+reviewed and deemed information that should not be disclosed publicly
+as it could enable a supply chain attack.
+
+This relates to the GDS's established low appetite for coffee-based threats.
+
+Sensitivity is likely to lapse when:
+- the source of beans is made public by another channel
+- the programme's risk appetite changes
+- supply chain attacks in this area are no longer credible
+
+We should review after a year.
+```
+
+## Further reading
+
+- [Government Security Classifications Policy][government-security-classifications-policy]
+- [When code should be open or closed][when-code-should-be-open-or-closed]
+- [Service Manual: making source code open and reusable][service-manual-open]
+
+[service-standard-open-code]: https://www.gov.uk/service-manual/service-standard/point-12-make-new-source-code-open
+[government-security-classifications-policy]: https://www.gov.uk/government/publications/government-security-classifications/government-security-classifications-policy-html
+[handling-instructions]: https://www.gov.uk/government/publications/government-security-classifications/government-security-classifications-policy-html#handling-instructions
+[when-code-should-be-open-or-closed]: https://www.gov.uk/government/publications/open-source-guidance/when-code-should-be-open-or-closed
+[service-manual-open]: https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable
+[code-owners]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
