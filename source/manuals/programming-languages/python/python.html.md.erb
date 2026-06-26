@@ -132,7 +132,15 @@ You should use `pyproject.toml` to specify your direct dependencies because it i
 
 ### Pinning and lockfiles
 
-You must pin your dependencies with a lock-file (unless it's a library - see Libraries) e.g. `uv.lock`. The lockfile must be used whenever installing/deploying packages, to main consistency between environments. The lockfile must store a **cryptographic hash of the package**, and check the hash on install, to guard against installing tampered packages.
+You must pin your dependencies with a lock-file (unless it's a library - see Libraries) for example `uv.lock`.
+The lockfile must store a **cryptographic hash of the package**, and check the hash on install, to guard against installing tampered packages.
+
+The lockfile must be used whenever installing/deploying packages (such as in CI/CD or some other non-development environment), to maintain consistency between environments. If you're using uv this probably means using `uv run --frozen` or `uv sync --frozen`.
+
+> [!IMPORTANT]
+> The above uv commands don't work the same as `uv pip sync` where the default behaviour is to use the lockfile without re-locking dependencies.
+> The uv developers have
+> [explained their approach balancing convenience and safe defaults](https://github.com/astral-sh/uv/issues/10793#issuecomment-2743956736).
 
 ### Updating
 
