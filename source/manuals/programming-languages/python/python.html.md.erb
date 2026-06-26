@@ -136,12 +136,14 @@ You must pin your dependencies with a lock-file (unless it's a library - see Lib
 
 The lockfile must store a **cryptographic hash of the package**, and check the hash on install, to guard against installing tampered packages.
 
-The lockfile must be used whenever installing/deploying packages during build or deployment (or some other non-development environment), to maintain consistency between environments. If you're using uv this probably means using `uv run --frozen` or `uv sync --frozen`.
+The lockfile must be used whenever installing/deploying packages during build or deployment (or some other non-development environment), to maintain consistency between environments.
+If you're using uv this probably means using `uv run --frozen` or `uv sync --frozen`.
 
 > **_Note:_**
 > The above uv commands work differently to pip (e.g. `uv pip sync`):
 >
-> `uv run` and `uv sync` have situations where they *update* the lockfile, re-resolving the dependencies (unless you use `--frozen`). The uv developers have
+> `uv run` and `uv sync` have situations where they *update* the lockfile, re-resolving the dependencies (unless you use `--frozen`).
+> The uv developers have
 > [explained the default favours convenience during local development over build / deploy](https://github.com/astral-sh/uv/issues/10793#issuecomment-2743956736).
 
 ### Updating
