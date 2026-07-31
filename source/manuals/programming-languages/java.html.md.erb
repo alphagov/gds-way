@@ -182,7 +182,7 @@ If possible, configure your static analysis tools using configuration files and 
 
 Some cloud-based static analysis tools, including Codacy, can work directly with GitHub repositories. Only grant a tool access to your repositories if it has been approved by an information assurance review. The Digital Identity programme has approval to use [SonarQube Cloud](https://www.sonarsource.com/products/sonarqube/cloud/) on public repos.
 
-Try to minimise compiler warnings. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why. For example:
+Minimise compiler warnings. Lots of ignored compiler warnings cause noise and can mean real problems are overlooked. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why. For example:
 
 ```java
 public void frobulateFoos() {
