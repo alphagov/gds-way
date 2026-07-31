@@ -170,6 +170,8 @@ For new projects, use JUnit 5/6. If you have a free choice, use JUnit 6. If itâ€
 
 Use [Mockito](https://site.mockito.org/) for mocking. If youâ€™re still using an older version, upgrading should be fairly straightforward: Mockito 3 contains no breaking changes, Mockito 4 only removes deprecated APIs and Mockito 5 mainly changes internals.
 
+For integration tests, [Testcontainers](https://testcontainers.com/) can be very useful. [WireMock](https://wiremock.org/) can be used to simulate HTTP APIs (run WireMock Java locally as a self-contained testing library rather than using WireMock Cloud).
+
 ## Code checking
 
 We encourage the use of static analysis. Static analysis tools for Java include [CodeQL](https://codeql.github.com/), [SonarQube Server](https://www.sonarsource.com/products/sonarqube/), [Codacy](https://www.codacy.com/) and [CheckStyle](https://checkstyle.sourceforge.io/).
