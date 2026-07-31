@@ -86,23 +86,23 @@ Optionals work best when used in a functional style, which can take time to lear
 
 ## Local variable type inference (the var keyword)
 
-You can use `var` in Java 10 onwards with local variables to have the compiler infer the type. This is especially good when invoking a constructor:
+You can use `var` with local variables to have the compiler infer the type. This is especially good when invoking a constructor:
 
 ```java
-// Java 9
+// Compare:
 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-// Java 10+
+// … to:
 var outputStream = new ByteArrayOutputStream();
 ```
 
 It can also remove duplication where the return type and the variable name are the same:
 
 ```java
-// Java 9
+// Compare:
 CheckResponse checkResponse = service.getCheckResponse();
 
-// Java 10+
+// … to:
 var checkResponse = service.getCheckResponse();
 ```
 
