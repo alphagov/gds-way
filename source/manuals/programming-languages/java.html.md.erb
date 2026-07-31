@@ -135,6 +135,8 @@ Java 17 introduced a new switch syntax, which uses arrows and eliminates error-p
 
 Where possible, use functionality from the Java standard library rather than external libraries.
 
+Every external library adds risk: at the very least you will have to manage updates and there is always the possibility that a library may become unmaintained or be compromised due to a supply chain attack. Before adding a new external library, think carefully about whether the functionality it offers is worth the risk and overhead.
+
 Keep in mind that improvements to the Java standard library mean that some external libraries which were popular in the past now add less value. For example, while Joda-Time was significantly better than the date and time libraries built into older Java versions, the `java.time` package introduced in Java 8 renders it redundant. Similarly, [Google’s Guava](https://github.com/google/guava) is very useful (and recommended) but the unmodifiable collections built in to Java 9 largely remove the need for Guava’s immutable collections. The [HttpClient](https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html) introduced in Java 11 is good enough that you might not need a third party one.
 
 When using external libraries, favour those which complement the Java standard library. For example, consider a library that introduces an object that behaves like a list. If this type does not implement `java.util.List`, it will not automatically benefit from the standard library’s support for features like streams.
