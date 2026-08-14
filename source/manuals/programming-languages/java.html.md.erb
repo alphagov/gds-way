@@ -1,6 +1,6 @@
 ---
 title: Java style guide
-last_reviewed_on: 2026-01-16
+last_reviewed_on: 2026-07-13
 review_in: 6 months
 owner_slack: '#java'
 ---
@@ -15,7 +15,7 @@ The more far-reaching _[Java for Small Teams](https://ncrcoe.gitbooks.io/java-fo
 
 While the above resources are good guides, they may conflict with either each other or your team’s established practices. We favour consistency across our code, so make sure that you have the agreement of your team when considering using a new or different method or paradigm to those currently in use.
 
-We generally use [IntelliJ IDEA](https://www.jetbrains.com/idea/) within GDS. Using it consistently helps when ensemble programming (pairing and mobbing). GDS have purchased licences for the commercial editions of IntelliJ IDEA for some teams. Some features of IntelliJ IDEA like [Code With Me](https://www.jetbrains.com/code-with-me/) and [JetBrains AI](https://www.jetbrains.com/ai/) have not passed an information assurance review and must not be used ([Full Line code completion](https://www.jetbrains.com/help/idea/full-line-code-completion.html) can be used because it runs entirely on your device).
+We generally use [IntelliJ IDEA](https://www.jetbrains.com/idea/) within GDS. Using it consistently helps when ensemble programming (pairing and mobbing). GDS have purchased licences for the commercial editions of IntelliJ IDEA for some teams. Follow the GDS Artificial Intelligence Coding Assistant Policy and your programme’s guidance when using AI features ([Full Line code completion](https://www.jetbrains.com/help/idea/full-line-code-completion.html) can be used because it runs entirely on your device).
 
 ## Code formatting
 
@@ -86,23 +86,23 @@ Optionals work best when used in a functional style, which can take time to lear
 
 ## Local variable type inference (the var keyword)
 
-You can use `var` in Java 10 onwards with local variables to have the compiler infer the type. This is especially good when invoking a constructor:
+You can use `var` with local variables to have the compiler infer the type. This is especially good when invoking a constructor:
 
 ```java
-// Java 9
+// Compare:
 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-// Java 10+
+// … to:
 var outputStream = new ByteArrayOutputStream();
 ```
 
 It can also remove duplication where the return type and the variable name are the same:
 
 ```java
-// Java 9
+// Compare:
 CheckResponse checkResponse = service.getCheckResponse();
 
-// Java 10+
+// … to:
 var checkResponse = service.getCheckResponse();
 ```
 
@@ -135,6 +135,8 @@ Java 17 introduced a new switch syntax, which uses arrows and eliminates error-p
 
 Where possible, use functionality from the Java standard library rather than external libraries.
 
+Every external library adds risk: at the very least you will have to manage updates and there is always the possibility that a library may become unmaintained, have unfixed security vulnerabilities or be compromised due to a supply chain attack. Before adding a new external library, think carefully about whether the functionality it offers is worth the risk and overhead.
+
 Keep in mind that improvements to the Java standard library mean that some external libraries which were popular in the past now add less value. For example, while Joda-Time was significantly better than the date and time libraries built into older Java versions, the `java.time` package introduced in Java 8 renders it redundant. Similarly, [Google’s Guava](https://github.com/google/guava) is very useful (and recommended) but the unmodifiable collections built in to Java 9 largely remove the need for Guava’s immutable collections. The [HttpClient](https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html) introduced in Java 11 is good enough that you might not need a third party one.
 
 When using external libraries, favour those which complement the Java standard library. For example, consider a library that introduces an object that behaves like a list. If this type does not implement `java.util.List`, it will not automatically benefit from the standard library’s support for features like streams.
@@ -144,13 +146,13 @@ Make sure any external library you use is appropriate for your purposes and avoi
 ## Comments
 Agree with your team to what extent you permit comments in your code. Some teams look more favourably on method-level and class-level Javadoc describing the context and responsibility of code, rather than inline comments.
 
-It’s often possible to [make code more readable so it does not need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html). The book _[Clean Code](https://www.pearson.com/en-gb/subject-catalog/p/clean-code-a-handbook-of-agile-software-craftsmanship-2nd-edition/P200000013239/9780135398579)_ by Robert C Martin (Pearson, 2008) has some advice on how to do this.
+Outdated comments can be worse than no comments at all because they may be misleading. Consider this before adding a comment and always keep comments up to date when changing code.
+
+It’s often possible to [make code more readable so it does not need comments](https://ncrcoe.gitbooks.io/java-for-small-teams/content/style/20_prefer_readable_code_to_comments.html). Some consider comments to be akin to technical debt for this reason. The book _[Clean Code](https://www.pearson.com/en-gb/subject-catalog/p/clean-code-a-handbook-of-agile-software-craftsmanship-2nd-edition/P200000013239/9780135398579)_ by Robert C Martin (Pearson, 2008) has some advice on how reduce the need for comments. 
 
 Comments rarely need to describe _what_ some code is doing or _how_ it’s doing it. Comments explaining _why_ the code is doing something, particularly if it’s non-obvious or requires external contextual knowledge, may be helpful.
 
 When deciding whether or not something is non-obvious enough to require a comment, bear in mind that you are probably more familiar with the code you’re writing than most people who read it will be. Questions and misunderstandings from code reviewers can act as a guide (but keep in mind that other remedies such as renaming variables or methods may be better than adding comments).
-
-Outdated comments can be worse than no comments at all because they may be misleading. Consider this before adding a comment and always keep comments up to date when changing code.
 
 As an alternative to comments, commit messages can be a good place for describing why a particular piece of code was added, removed or modified. Tools like `git-blame` are built into most IDEs, allowing a developer to easily pull up the commit messages for revisions to a particular line of code. The age of each commit provides an indication of whether the commit message may be outdated.
 
@@ -160,13 +162,15 @@ Use [JUnit](https://junit.org/) for unit tests. It can also be used for many int
 
 While JUnit 6 is a relatively small upgrade from JUnit 5, neither are drop-in replacements for [JUnit 4](https://junit.org/junit4/). The [JUnit Vintage test engine](https://docs.junit.org/current/migrating-from-junit4.html) makes it possible to run JUnit 4 tests within JUnit 5/6, though not all JUnit 4 features are supported. If you use lots of JUnit 4 rules and alternative runners, or rely on other testing libraries that integrate with JUnit 4, you will have to make more changes.
 
-Teams within GDS have found it typically takes a few days to upgrade a project from JUnit 4 to JUnit 5 (keeping the test classes as JUnit 4 where possible). Upgrading from JUnit 5 to JUnit 6 should be almost trivial in most cases. JUnit 4 continues to be maintained.
+Teams within GDS have found it typically takes a few days to upgrade a project from JUnit 4 to JUnit 5 (keeping the test classes as JUnit 4 where possible). Upgrading from JUnit 5 to JUnit 6 should be almost trivial in most cases. JUnit 4 continues to receive critical bug fixes but is otherwise moribund.
 
 When you upgrade from JUnit 4 to JUnit 5/6, have a strategy for gradually moving more and more of your test classes away from JUnit 4. A good rule is to write all new test classes in JUnit 5/6 and to migrate over existing ones when you need to make major changes to them (generally it’s best to do the migration in a separate pull request first before making other changes).
 
 For new projects, use JUnit 5/6. If you have a free choice, use JUnit 6. If it’s easier to use JUnit 5 (for example, if JUnit 5 comes bundled with your framework or if your tooling does not fully support JUnit 6), use JUnit 5.
 
 Use [Mockito](https://site.mockito.org/) for mocking. If you’re still using an older version, upgrading should be fairly straightforward: Mockito 3 contains no breaking changes, Mockito 4 only removes deprecated APIs and Mockito 5 mainly changes internals.
+
+For integration tests, [Testcontainers](https://testcontainers.com/) can be very useful. [WireMock](https://wiremock.org/) can be used to simulate HTTP APIs (run WireMock Java locally as a self-contained testing library rather than using WireMock Cloud).
 
 ## Code checking
 
@@ -178,7 +182,7 @@ If possible, configure your static analysis tools using configuration files and 
 
 Some cloud-based static analysis tools, including Codacy, can work directly with GitHub repositories. Only grant a tool access to your repositories if it has been approved by an information assurance review. The Digital Identity programme has approval to use [SonarQube Cloud](https://www.sonarsource.com/products/sonarqube/cloud/) on public repos.
 
-Try to minimise compiler warnings. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why. For example:
+Minimise compiler warnings. Lots of ignored compiler warnings cause noise and can mean real problems are overlooked. If you cannot remove a warning, use an appropriate annotation to suppress it, preferably with a comment explaining why. For example:
 
 ```java
 public void frobulateFoos() {
@@ -199,15 +203,19 @@ Try to keep up to date with the latest versions of your external dependencies. O
 
 [Dependabot](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/configuring-dependabot-alerts) (which is part of GitHub) can automatically open pull requests to upgrade your libraries and other dependencies. Be aware that not all dependency upgrades are backwards compatible. Major version upgrades are more likely to cause problems than minor upgrades. Dependabot provides compatibility scores and links to release notes, which can help you make an informed decision. Do not merge a dependency upgrade unless it passes your automated tests. If it’s a major upgrade, monitor for any problems after it’s deployed.
 
+In order to reduce the risk from supply chain attacks, [Dependabot has a default three-day cooldown delay for non-security updates](https://github.blog/security/supply-chain-security/the-case-for-a-cooldown-why-dependabot-now-waits-before-issuing-version-updates/). Do not turn this off.
+
 Dependabot makes assumptions about version numbers that not all dependencies follow. This can cause it to open pull requests that update to beta versions, release candidates or even alternative variants of the dependency. Always have a human sense-check each Dependabot pull request before merging.
 
-If you are not ready to upgrade to a particular version of a dependency, tell Dependabot to ignore that version by using a [dependabot.yml](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference) file. A comment in the file explaining why it has been ignored can be useful. Using a dependabot.yml file is preferable to using `@dependabot ignore` commands because it’s much more visible and it’s also easier to tell Dependabot to stop ignoring a version upgrade. 
+If you are not ready to upgrade to a particular version of a dependency, tell Dependabot to ignore that version by using a [dependabot.yml](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference) file. A comment in the file explaining why it has been ignored can be useful. Using a dependabot.yml file is preferable to using `@dependabot ignore` commands because it’s much more visible and it’s also easier to tell Dependabot to stop ignoring a version upgrade.
+
+Dependabot can be configured to, for example, limit how many pull requests it will open at a time or only open pull requests on certain days. These options can be used to make dealing with Dependabot pull requests more predictable and manageable. [Dependabot supports grouped version updates](https://github.blog/changelog/2023-08-24-grouped-version-updates-for-dependabot-are-generally-available/) for when several dependencies need to be updated in lockstep.
 
 There have been cases of bad actors raising malicious pull requests on repositories that appear to come from Dependabot. Make sure a pull request really comes from Dependabot before merging.
 
 Dependabot only deals with direct dependencies, not transitive dependencies. Even if Dependabot thinks your project’s dependencies are fully up to date, you may still have outdated transitive dependencies (which may contain security vulnerabilities).
 
-When viewing a Maven POM file, IntelliJ IDEA can warn you if your transitive dependencies have reported security vulnerabilities.
+When viewing a Maven POM file, IntelliJ IDEA can warn you if your transitive dependencies have reported security vulnerabilities. Gradle offers similar warnings.
 
 You can often force a newer version of a transitive dependency to be used by explicitly adding the dependency then adding exclusions to stop other dependencies using it transitively.
 
@@ -221,7 +229,7 @@ You should use either [Gradle](https://gradle.org/) or [Maven](https://maven.apa
 
 The [Dropwizard](https://www.dropwizard.io/) web framework is used widely within GDS.
 
-Only the latest Dropwizard 5 is supported beyond 31 January 2026. [Upgrade to Dropwizard 5](https://www.dropwizard.io/en/stable/manual/upgrade-notes/upgrade-notes-5_0_x.html) if you are still using an older version.
+Only the latest Dropwizard 5 is supported. [Upgrade to Dropwizard 5](https://www.dropwizard.io/en/stable/manual/upgrade-notes/upgrade-notes-5_0_x.html) if you are still using an older version.
 
 Dropwizard versions 1 to 3 used Java EE and the `javax` package namespace while Dropwizard 4 and later use Jakarta EE and the `jakarta` package namespace (Dropwizard 3 and 4 otherwise have equivalent functionality).
 
@@ -235,7 +243,7 @@ New major versions of the JDK are released twice a year (in March and September)
 
 For this reason, it is highly recommended to use an LTS release of Java. If you choose to use non-LTS releases, be aware that you will have to perform major version upgrades every six months and risk being stranded if libraries and tools you rely on are not prompt in adding support for the latest Java release.
 
-If you are starting a new Java project, do not use anything older than the latest LTS release unless you have a good reason (for example, compatibility issues).
+If you are starting a new Java project, do not use anything older than the latest LTS.
 
 If you are currently using an older LTS release, you should be planning to upgrade to a later LTS version. There is usually an overlap of several years when both the current and some previous LTS releases are supported. Use this time wisely and balance the risk of upgrading before your tools and dependencies fully support a new LTS release against the risk of leaving the upgrade to the last minute. Bear in mind that your dependencies may stop supporting an LTS release before your JDK vendor does.
 
@@ -243,7 +251,9 @@ In general, upgrading between recent Java versions is a lot easier than it was a
 
 ### JDKs from different vendors
 
-Recent versions of the [Oracle JDK can be used free of charge](https://www.oracle.com/downloads/licenses/no-fee-license.html) for commercial and production purposes under the terms of a bespoke licence. OpenJDK is open source under the [GPLv2 with the Classpath Exception](https://openjdk.org/legal/gplv2+ce.html) but Oracle only provide general-availability [OpenJDK builds](https://jdk.java.net/) for the latest release.
+While recent versions of the [Oracle JDK can be used free of charge](https://www.oracle.com/downloads/licenses/no-fee-license.html) for commercial and production purposes under the terms of a bespoke licence, the complexities of the licence and the risk of future unfavourable licensing changes make the Oracle JDK impossible to recommended.
+
+OpenJDK is open source under the [GPLv2 with the Classpath Exception](https://openjdk.org/legal/gplv2+ce.html) but Oracle only provide general-availability [OpenJDK builds](https://jdk.java.net/) for the latest release.
 
 The [Adoptium](https://adoptium.net/) (formerly AdoptOpenJDK) project (part of the [Eclipse Foundation](https://www.eclipse.org/)) provides fully open-source TCK-certified pre-built OpenJDK binaries under the name [Eclipse Temurin](https://projects.eclipse.org/projects/adoptium.temurin). For LTS releases (such as Java 11, 17, 21 and 25), Adoptium have committed to releasing free updates for several years.
 
@@ -255,7 +265,7 @@ In addition, Temurin has benefits such as being available in package repositorie
 
 We recommend publishing artifacts (for which the source is already public) to [Maven Central](https://central.sonatype.com/). You need to [register to publish via the Central Portal](https://central.sonatype.org/register/central-portal/).
 
-You should _not_ use Maven Central to publish artifacts for which the source is closed or contains other proprietary assets, as it is a public repository with anonymous access. If you need to publish private artifacts for internal use, consider running your own [Sonatype Nexus Repository](https://www.sonatype.com/products/sonatype-nexus-repository).
+You should _not_ use Maven Central to publish artifacts for which the source is closed or contains other proprietary assets, as it is a public repository with anonymous access. If you need to publish private artifacts for internal use, consider [AWS CodeArtifact](https://aws.amazon.com/codeartifact/).
 
 ### Claiming group IDs
 
