@@ -67,7 +67,17 @@ to request delegation of your subdomain.
 
 You must follow the [GDS brand guidance][] for services that are accessible by the public but which don't use the GOV.UK brand.
 
-> Don't use `digital.gov.uk` for development and other non-production sites, unless the production instance of the site will also sit under `digital.gov.uk`.
+### Restrictions on non-production environments
+
+You may use subdomains of `internal.digital.gov.uk` for non-production environments associated with an **internal** GDS service, such as development, test, staging, or preview.
+
+For example, if your production service is hosted at `my-service.internal.digital.gov.uk`, you may also use subdomains such as:
+
+* `dev.my-service.internal.digital.gov.uk`
+* `staging.my-service.internal.digital.gov.uk`
+
+You must not host non-production environments for other services on subdomains of `internal.digital.gov.uk`.
+
 
 
 [we work in the open]: https://www.gov.uk/guidance/government-design-principles#make-things-open-it-makes-things-better
