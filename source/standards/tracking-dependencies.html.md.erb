@@ -20,7 +20,7 @@ Update your dependencies frequently rather than in ‘big bang’ batches. This 
 
 There are tools which scan GitHub repositories and raise pull requests (PRs) when they find dependency updates. Most teams at GDS use [Dependabot][] for this.
 
-You should [configure your dependency management tool with a cooldown period](https://cooldowns.dev/) to reduce your exposure to newly compromised dependencies. [Dependabot has this by default](https://github.blog/changelog/2026-07-14-dependabot-version-updates-introduce-default-package-cooldown/).
+You should [configure your dependency management tool with a cooldown period][] to reduce your exposure to newly compromised dependencies. [Dependabot has this by default][].
 
 ### Dependabot
 
@@ -33,7 +33,7 @@ Some teams have enabled automatic merges for some Github PRs. GOV.UK's [RFC-167]
 > - repos requiring at least one approving review for PRs cannot, and should not, use [Dependabot's auto-approve-and-merge facility].
 > - we have not enabled "Treat PR approval as a request to merge", as this would lead to a surprising behaviour at the point of approval.
 
-The Cyber Security team will review the repositories that do not have dependency management in use and will turn on Dependabot where required. Service teams are free to use a different tool such as [Snyk](https://snyk.io/), but will need to add a `no-dependabot` tag to their repository for monitoring purposes. You can [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK) if you have any questions or need help.
+The Cyber Security team will review the repositories that do not have dependency management in use and will turn on Dependabot where required. Service teams are free to use a different tool such as [Snyk][], but will need to add a `no-dependabot` tag to their repository for monitoring purposes. You can [contact Cyber Security][] if you have any questions or need help.
 
 ## Monitor for vulnerabilities
 
@@ -53,7 +53,7 @@ If you have an old repository that is receiving security alerts but is not being
 
 ### Splunk dashboards
 
-The Cyber Security team has created a Splunk dashboard. This gives service teams visibility of vulnerabilities in their repositories. To allow for your repositories to be categorised correctly in the Splunk dashboard, please make sure you tag your repository with the service name. If you would like to access the dashboard, [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK).
+The Cyber Security team has created a Splunk dashboard which gives service teams visibility of vulnerabilities in their repositories. To allow for your repositories to be categorised correctly in the Splunk dashboard, please make sure you tag your repository with the service name. If you would like to access the dashboard, [contact Cyber Security][].
 
 ## Managing Docker dependencies
 
@@ -63,7 +63,7 @@ Like dependencies, Docker base images are also frequently updated. If you run co
 
 ### Specifying Docker image tags and digests
 
-The GDS Way Dockerfile guidance contains advice on [how to use Docker image tags and digests](/manuals/programming-languages/docker.html#using-tags-and-digests-in-from-instructions) to specify the exact container image version to use.
+The GDS Way Dockerfile guidance contains advice on [how to use Docker image tags and digests][] to specify the exact container image version to use.
 
 ### Use official Docker base images
 
@@ -76,23 +76,22 @@ Minimise the things you need to monitor by minimising dependencies where possibl
 Also consider managed solutions where possible.
 For example, using managed container orchestration technology such as [AWS Fargate][] means you don't have to monitor for vulnerabilities in your OS or control plane.
 
-[Dependabot's auto-approve-and-merge facility]: https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions
-[security-only updates provided automatically by GitHub Dependabot]: https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/about-alerts-for-vulnerable-dependencies
 [GDS supported programming languages]: /standards/programming-languages.html#content
 [managing software dependencies in the Service Manual]: https://www.gov.uk/service-manual/technology/managing-software-dependencies
 [programming language style guides]: /manuals/programming-languages.html
 [managing Python dependencies]: /manuals/programming-languages/python/python.html#dependencies
-[Snyk]: https://snyk.io/
-[monitor code dependencies]: https://snyk.io/features
 [continuous delivery]: /standards/continuous-delivery.html
 [Dependabot]: https://dependabot.com/
+[configure your dependency management tool with a cooldown period]: https://cooldowns.dev/
+[Dependabot has this by default]: https://github.blog/changelog/2026-07-14-dependabot-version-updates-introduce-default-package-cooldown/
 [guidance on using Dependabot]: https://docs.publishing.service.gov.uk/manual/manage-ruby-dependencies.html
 [how the PRs raised should be reviewed]: https://docs.publishing.service.gov.uk/manual/merge-pr.html#dependabot
-[PyUp]: https://pyup.io/
-[Node.js client for the Verify Service Provider]: https://github.com/alphagov/passport-verify
+[RFC-167]: https://github.com/alphagov/govuk-rfcs/blob/main/rfc-167-auto-patch-dependencies.md
+[Dependabot's auto-approve-and-merge facility]: https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions
+[Snyk]: https://snyk.io/
+[contact Cyber Security]: https://gds.slack.com/archives/CCMPJKFDK
 [guidance on browser technology, tooling and mailing lists you can subscribe to]: https://www.gov.uk/service-manual/technology/managing-software-dependencies#managing-risks-in-third-party-code
 [GitHub security alerts]: https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/about-alerts-for-vulnerable-dependencies
+[how to use Docker image tags and digests]: /manuals/programming-languages/docker.html#using-tags-and-digests-in-from-instructions
 [official base images]: https://docs.docker.com/docker-hub/official_images/
-[Snyk container vulnerability management tooling]: https://snyk.io/product/container-vulnerability-management/
 [AWS Fargate]: https://aws.amazon.com/fargate/
-[RFC-167]: https://github.com/alphagov/govuk-rfcs/blob/main/rfc-167-auto-patch-dependencies.md
