@@ -26,7 +26,7 @@ You should [configure your dependency management tool with a cooldown period][] 
 
 Github enables Dependabot by default for security updates, but it can be configured to handle dependency updates too. The GOV.UK docs contain [guidance on using Dependabot][] and [how the PRs raised should be reviewed][].
 
-Some teams have enabled automatic merges for some Github PRs. GOV.UK's [RFC-167][] explains the benefits and tradeoffs of this.
+Some teams have enabled automatic merges for some Github PRs. For example, GOV.UK's [RFC-167][] explains their implement this this and some of the benefits and tradeoffs of the decision.
 
 > Note that:
 >
@@ -50,10 +50,6 @@ When GitHub discovers or is informed about a vulnerability, it will email an ale
 Snyk is capable of detecting vulnerabilities in a variety of languages including all the [GDS supported programming languages][]. You can configure Snyk to raise PRs, email regular reports and alert you when new vulnerabilities are detected.
 
 If you have an old repository that is receiving security alerts but is not being worked on or maintained, you may wish to archive your repository instead.
-
-### Splunk dashboards
-
-The Cyber Security team has created a Splunk dashboard which gives service teams visibility of vulnerabilities in their repositories. To allow for your repositories to be categorised correctly in the Splunk dashboard, please make sure you tag your repository with the service name. If you would like to access the dashboard, [contact Cyber Security][].
 
 ## Managing Docker dependencies
 
