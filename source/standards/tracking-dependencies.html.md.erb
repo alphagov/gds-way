@@ -24,14 +24,34 @@ You should [configure your dependency management tool with a cooldown period][] 
 
 ### Dependabot
 
-Github enables Dependabot by default for security updates, but it can be configured to handle dependency updates too. The GOV.UK docs contain [guidance on using Dependabot][] and [how the PRs raised should be reviewed][].
+Github enables Dependabot by default for security updates, but it can be configured to check for dependency updates too. Turn this on by configuring a [.github/dependabot.yml][] file with your desired update frequency.
 
-Some teams have enabled automatic merges for some Github PRs. For example, GOV.UK's [RFC-167][] explains their implement this this and some of the benefits and tradeoffs of the decision.
+```yml
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+```
+
+By default dependabot will limit the number of open update PRs to 5 - you should to increase this limit to 10 or more unless your repo has a very small number of dependencies.
+
+As your project evolves, you may find it useful to:
+
+- use more advanced Dependabot - for example by grouping dependencies or varying the configuration between different package ecosystems
+  - > Example: GOV.UK's [guidance on using Dependabot][] includes an example Dependabot config file which uses some of these features
+- document your process for reviewing and merging Dependabot PRs
+  - > Example: GOV.UK's 'Merge a Pull Request' documentation includes guidance on [how to review PRs raised by Dependabot][]
+
+Some teams have enabled automatic merges for some Github PRs. This can reduce the amount of manual effort required to stay up to date, but before enabling this you should be confident in your branch protection, CI and security processes.
+
+> Example: GOV.UK have enabled automatic merging for some Dependabot PRs - they have explained their implementation and some of the benefits and tradeoffs in [RFC-167][].
 
 > Note that:
 >
 > - repos requiring at least one approving review for PRs cannot, and should not, use [Dependabot's auto-approve-and-merge facility].
-> - we have not enabled "Treat PR approval as a request to merge", as this would lead to a surprising behaviour at the point of approval.
+> - do not enable "Treat PR approval as a request to merge", as this would lead to a surprising behaviour at the point of approval.
 
 Service teams are free to use a different tool such as [Snyk][], but will need to add a `no-dependabot` tag to their repository for monitoring purposes. You can [contact Cyber Security][] if you have any questions or need help.
 
@@ -80,8 +100,9 @@ For example, using managed container orchestration technology such as [AWS Farga
 [Dependabot]: https://dependabot.com/
 [configure your dependency management tool with a cooldown period]: https://cooldowns.dev/
 [Dependabot has this by default]: https://github.blog/changelog/2026-07-14-dependabot-version-updates-introduce-default-package-cooldown/
+[.github/dependabot.yml]: https://docs.github.com/en/code-security/concepts/supply-chain-security/about-the-dependabot-yml-file
 [guidance on using Dependabot]: https://docs.publishing.service.gov.uk/manual/manage-ruby-dependencies.html
-[how the PRs raised should be reviewed]: https://docs.publishing.service.gov.uk/manual/merge-pr.html#dependabot
+[how to review PRs raised by Dependabot]: https://docs.publishing.service.gov.uk/manual/merge-pr.html#dependabot
 [RFC-167]: https://github.com/alphagov/govuk-rfcs/blob/main/rfc-167-auto-patch-dependencies.md
 [Dependabot's auto-approve-and-merge facility]: https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions
 [Snyk]: https://snyk.io/
