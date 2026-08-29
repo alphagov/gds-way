@@ -21,6 +21,19 @@ Collecting metrics on the performance of your service is useful for [capacity pl
 
 We recommend using [Prometheus][] to gather metrics and monitor your service, as this is what many GDS teams are using. Amazon provides a [Managed Prometheus service][], which you may wish to use instead of hosting Prometheus yourself. You may also consider using [CloudWatch Metrics][] instead for simpler use-cases where the complexity of Prometheus is not required.
 
+## FinOps ("financial operations")
+
+Delivery teams and lead technologists are responsible for their technology spending, and are ultimately accountable to a
+[senior responsible owner][] (SRO).
+
+The [FinOps Foundation][] provide useful guidance such as [FinOps for Public Cloud][].
+Someone from your team, often a tech lead or technical architect, should work with product managers and delivery managers to identify opportunities to optmise spending and reduce waste, as your service scales from private beta.
+
+GDS Engineering Enablement provide
+[FinOps tools such as AWS Cloud Intelligence Dashboards](https://engineering-enablement.gds-reliability.engineering/engineering/aws/finance-billing.html)
+to help you understand your cloud infrastructure spending.
+
+
 [monitor the status of services]: https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service
 [performance metrics]: https://www.gov.uk/service-manual/measuring-success/how-to-set-performance-metrics-for-your-service
 [Pingdom]: https://www.pingdom.com/
@@ -31,3 +44,7 @@ We recommend using [Prometheus][] to gather metrics and monitor your service, as
 [Prometheus]: https://prometheus.io/
 [CloudWatch Metrics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html
 [Managed Prometheus service]: https://aws.amazon.com/prometheus/
+[senior responsible owner]: https://www.gov.uk/government/publications/the-role-of-the-senior-responsible-owner
+[FinOps Foundation]: https://www.finops.org/
+[FinOps for Public Cloud]: https://www.finops.org/framework/technology-categories/public-cloud/
+
