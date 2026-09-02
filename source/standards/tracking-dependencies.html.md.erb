@@ -1,6 +1,6 @@
 ---
 title: How to manage third party software dependencies
-last_reviewed_on: 2024-06-27
+last_reviewed_on: 2026-08-26
 review_in: 6 months
 ---
 
@@ -18,20 +18,39 @@ Our [programming language style guides][] also contain language-specific advice 
 
 Update your dependencies frequently rather than in ‘big bang’ batches. This works well with [continuous delivery][] principles and makes sure the changes introduced are small and can be automatically tested.
 
-There are tools which scan GitHub repositories and raise pull requests (PRs) when they find dependency updates. Teams at GDS are using:
+There are tools which scan GitHub repositories and raise pull requests (PRs) when they find dependency updates. Most teams at GDS use [Dependabot][] for this.
 
-* [Dependabot][] - used by GOV.UK, and GOV.UK Pay. The GOV.UK docs contain [guidance on using Dependabot][] and [how the PRs raised should be reviewed][]
-    > Note: this is separate from the [security-only updates provided automatically by GitHub Dependabot].
+You should [configure your dependency management tool with a cooldown period][] to reduce your exposure to newly compromised dependencies. [Dependabot has this by default][].
 
-    > Note: repos requiring at least one approving review for PRs cannot, and should not, use [Dependabot's auto-approve-and-merge facility].
+### Dependabot
 
-    > Note: we have not enabled "Treat PR approval as a request to merge", as this would lead to a surprising behaviour at the point of approval.
+Github enables Dependabot by default for security updates, but it can be configured to check for dependency updates too. Turn this on by configuring a [.github/dependabot.yml][] file with your desired update frequency.
 
-    > Note: GOV.UK has implemented [RFC-167][] which allows automatic patching of all dependencies in certain cases.
+```yml
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+```
 
-All the above tools are free to use on public repositories.
+By default dependabot will limit the number of open update PRs to 5 - you should to increase this limit to 10 or more unless your repo has a very small number of dependencies.
 
-The COD Cyber Security team will review the repositories that do not have dependency management in use and will turn on Dependabot where required. Service teams are free to use a different tool such as [Snyk](https://snyk.io/), but will need to add a `no-dependabot` tag to their repository for monitoring purposes. You can [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK) if you have any questions or need help.
+As your project evolves, you may find it useful to:
+
+- use more advanced Dependabot - for example by grouping dependencies or varying the configuration between different package ecosystems
+  - > Example: GOV.UK's [guidance on using Dependabot][] includes an example Dependabot config file which uses some of these features
+- document your process for reviewing and merging Dependabot PRs
+  - > Example: GOV.UK's 'Merge a Pull Request' documentation includes guidance on [how to review PRs raised by Dependabot][]
+
+Some teams have enabled automatic merges for some Github PRs. This can reduce the amount of manual effort required to stay up to date, but before enabling this you should be confident in your branch protection, CI and security processes.
+
+> Example: GOV.UK have enabled automatic merging for some Dependabot PRs - they have explained their implementation and some of the benefits and tradeoffs in [RFC-167][].
+
+Github has some [examples for using Actions to automate dependabot][] merges, but these may not work for your repo - for example, many GDS repos have branch protection rules requiring at least one approving review from a maintainer for PRs to be merged into `main`. These repos will not be able to automatically merge PRs since the action will not be able to approve with maintainer permissions. Do not use actions to automatically merge approved Dependabot PRs, as this would lead to a surprising behaviour at the point of approval.
+
+Service teams are free to use a different tool such as [Snyk][], but will need to add a `no-dependabot` tag to their repository for monitoring purposes. You can [contact Cyber Security][] if you have any questions or need help.
 
 ## Monitor for vulnerabilities
 
@@ -49,27 +68,19 @@ Snyk is capable of detecting vulnerabilities in a variety of languages including
 
 If you have an old repository that is receiving security alerts but is not being worked on or maintained, you may wish to archive your repository instead.
 
-### Splunk dashboards
-
-The Cyber Security team has created a Splunk dashboard. This gives service teams visibility of vulnerabilities in their repositories. To allow for your repositories to be categorised correctly in the Splunk dashboard, please make sure you tag your repository with the service name. If you would like to access the dashboard, [contact Cyber Security](https://gds.slack.com/archives/CCMPJKFDK).
-
 ## Managing Docker dependencies
 
 ### Rebuild Docker base images
 
 Like dependencies, Docker base images are also frequently updated. If you run containers as part of your service, you should regularly rebuild your images (and base images) to include the latest updates. Automate this process where possible.
 
-### Specifying Docker image tags
+### Specifying Docker image tags and digests
 
-The GDS Way Dockerfile guidance contains advice on how
-to use [Docker image tags](/manuals/programming-languages/docker.html#using-tags-and-digests-in-from-instructions)
-to specify the exact container image version to use.
+The GDS Way Dockerfile guidance contains advice on [how to use Docker image tags and digests][] to specify the exact container image version to use.
 
 ### Use official Docker base images
 
 Always use [official base images][]. Docker Hub regularly scans official images and you can view the results by logging into Docker Hub. If you do not regularly update your base image, you must make sure a manual process exists to monitor and prioritise fixes for detected vulnerabilities.
-
-The Digital Marketplace team uses [Snyk container vulnerability management tooling][] to regularly scan base images.
 
 ## Minimise what you need to monitor
 
@@ -78,23 +89,23 @@ Minimise the things you need to monitor by minimising dependencies where possibl
 Also consider managed solutions where possible.
 For example, using managed container orchestration technology such as [AWS Fargate][] means you don't have to monitor for vulnerabilities in your OS or control plane.
 
-[Dependabot's auto-approve-and-merge facility]: https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions
-[security-only updates provided automatically by GitHub Dependabot]: https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/about-alerts-for-vulnerable-dependencies
 [GDS supported programming languages]: /standards/programming-languages.html#content
 [managing software dependencies in the Service Manual]: https://www.gov.uk/service-manual/technology/managing-software-dependencies
 [programming language style guides]: /manuals/programming-languages.html
 [managing Python dependencies]: /manuals/programming-languages/python/python.html#dependencies
-[Snyk]: https://snyk.io/
-[monitor code dependencies]: https://snyk.io/features
 [continuous delivery]: /standards/continuous-delivery.html
 [Dependabot]: https://dependabot.com/
+[configure your dependency management tool with a cooldown period]: https://cooldowns.dev/
+[Dependabot has this by default]: https://github.blog/changelog/2026-07-14-dependabot-version-updates-introduce-default-package-cooldown/
+[.github/dependabot.yml]: https://docs.github.com/en/code-security/concepts/supply-chain-security/about-the-dependabot-yml-file
 [guidance on using Dependabot]: https://docs.publishing.service.gov.uk/manual/manage-ruby-dependencies.html
-[how the PRs raised should be reviewed]: https://docs.publishing.service.gov.uk/manual/merge-pr.html#dependabot
-[PyUp]: https://pyup.io/
-[Node.js client for the Verify Service Provider]: https://github.com/alphagov/passport-verify
+[how to review PRs raised by Dependabot]: https://docs.publishing.service.gov.uk/manual/merge-pr.html#dependabot
+[RFC-167]: https://github.com/alphagov/govuk-rfcs/blob/main/rfc-167-auto-patch-dependencies.md
+[examples for using Actions to automate dependabot]: https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions
+[Snyk]: https://snyk.io/
+[contact Cyber Security]: https://gds.slack.com/archives/CCMPJKFDK
 [guidance on browser technology, tooling and mailing lists you can subscribe to]: https://www.gov.uk/service-manual/technology/managing-software-dependencies#managing-risks-in-third-party-code
 [GitHub security alerts]: https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/about-alerts-for-vulnerable-dependencies
+[how to use Docker image tags and digests]: /manuals/programming-languages/docker.html#using-tags-and-digests-in-from-instructions
 [official base images]: https://docs.docker.com/docker-hub/official_images/
-[Snyk container vulnerability management tooling]: https://snyk.io/product/container-vulnerability-management/
 [AWS Fargate]: https://aws.amazon.com/fargate/
-[RFC-167]: https://github.com/alphagov/govuk-rfcs/blob/main/rfc-167-auto-patch-dependencies.md
