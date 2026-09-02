@@ -1,12 +1,12 @@
 ---
 title: Diagrams as code
-last_reviewed_on: 2025-10-24
+last_reviewed_on: 2026-08-27
 review_in: 6 months
 ---
 
 # <%= current_page.data.title %>
 
-Code can be used to define the content, structure and appearance of a diagram which can then be rendered, instead of using a drawing tool directly. This approach is known as "diagrams as code".
+You can use code to define the content, structure and appearance of a diagram which is then rendered automatically. This approach is known as "diagrams as code".
 
 ## What are diagrams for?
 
@@ -16,7 +16,7 @@ Code can be used to define the content, structure and appearance of a diagram wh
 
 There are many ways to create a diagram, from pen and paper or whiteboard through to specialist diagramming software. The right tool will depend on the circumstances, including what the diagram is for and who needs to be able to contribute to it, but it's always worth considering a diagram generated from code.
 
-Diagrams are a form of documentation, and some teams already use a '[docs as code](https://technology.blog.gov.uk/2017/08/25/why-we-use-a-docs-as-code-approach-for-technical-documentation/)' approach. Diagrams as code builds on the rationale and benefits of docs as code, including
+Diagrams are a form of documentation, and some teams already use a '[docs as code](https://technology.blog.gov.uk/2017/08/25/why-we-use-a-docs-as-code-approach-for-technical-documentation/)' approach. Diagrams as code builds on the rationale and benefits of docs as code, including:
 
 * keeping documentation close to source code
 * ease of change
@@ -28,13 +28,13 @@ Diagrams are a form of documentation, and some teams already use a '[docs as cod
 
 Refer to [guidance on making images or charts accessible](https://www.gov.uk/guidance/publishing-accessible-documents).
 
-Since the source of the diagram provides a text based representation of the generated image, this probably makes it more accessible than a diagram drawn through a graphic editor. It may be preferable to signpost users to get to the source of the diagram rather than duplicating it alongside the diagram itself.
+The source of the diagram provides a text-based representation of the generated image, making it more accessible than a diagram drawn in a graphic editor. Consider linking users to the diagram source rather than duplicating it alongside the rendered image.
 
 ## Diagrams as code tools
 
 ### Mermaid
 
-Assuming you already [use GitHub](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/use-github.html) then you can [use Mermaid in Markdown files](https://github.blog/developer-skills/github/include-diagrams-markdown-files-mermaid/).
+If you [use GitHub](/standards/source-code/use-github.html) then you can [use Mermaid in Markdown files](https://github.blog/developer-skills/github/include-diagrams-markdown-files-mermaid/).
 
 The [Mermaid Live Editor](https://mermaid.live/) is a good way of trying out Mermaid, and seeing diagrams rendered from code in real time.
 
@@ -50,11 +50,11 @@ graph LR
   accDescr: Accessible Description
 ```
 
-We should consider [contributing to Mermaid](https://mermaid.js.org/community/contributing.html) if there are aspects of its accessibility we are able to improve.
+Consider [contributing to Mermaid](https://mermaid.js.org/community/contributing.html) if there are aspects of its accessibility you can improve.
 
 ## Open source diagrams as code
 
-Consider making the code for your diagrams open in the same way as [your other source code](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/index.html#publish-open-source-code).
+Consider making the code for your diagrams open in the same way as [your other source code](/standards/source-code/index.html#publish-open-source-code).
 
 ## Sequence diagrams as code
 
