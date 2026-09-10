@@ -1,7 +1,7 @@
 ---
 title: Using AI Assistants
-last_reviewed_on: 2025-03-20
-review_in: 12 months
+last_reviewed_on: 2026-09-10
+review_in: 3 months
 owner_slack: '#gds-way'
 ---
 
@@ -9,12 +9,15 @@ owner_slack: '#gds-way'
 
 ## Considerations
 
-### Garbage In Garbage Out (GIGO)
+### Adherence to the policy
 
-The training sets used by AI models are reflective of the quality of their answers, so if they are trained on
-lower quality content then the outputs will also be lower quality, the same applies to how current the training data is.
+There is an AI Coding policy [here](https://engineering-enablement.gds-reliability.engineering/InfoSec/ai-policy.html) which should be read and followed
 
-### Hallucinations
+### Sandboxing
+
+Running AI Agents should be within a sandbox such as [https://github.com/govuk-one-login/ai-sandbox](https://github.com/govuk-one-login/ai-sandbox)
+
+### Mistakes
 
 AI responses will often contain errors and should not be relied on to be correct - you will need to check the content
 carefully before including in your application.
@@ -29,15 +32,6 @@ may be inappropriate.
 
 AI is a resource intensive technology. Using it when not necessary could be a waste of resources.
 
-## AI Coding assistants
 
-The following are the only approved AI assistants:
-
-### GitHub CoPilot Enterprise
-
-### Amazon Q (Developer Pro)
-
-Amazon Q is a coding assistant offered by AWS, it is built using the AWS Bedrock service. On the free version AWS will
-use your prompts as part of it's training data. With the Pro tier this doesn't happen.
 
 
