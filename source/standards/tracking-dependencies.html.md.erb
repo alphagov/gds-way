@@ -18,7 +18,7 @@ Our [programming language style guides][] also contain language-specific advice 
 
 Update your dependencies frequently rather than in ‘big bang’ batches. This works well with [continuous delivery][] principles and makes sure the changes introduced are small and can be automatically tested.
 
-There are tools which scan GitHub repositories and raise pull requests (PRs) when they find dependency updates. Most teams at GDS use [Dependabot][] for this.
+There are tools which scan GitHub repositories and raise pull requests (PRs) when they find dependency updates. Most teams at GDS use [Dependabot][] for this, but service teams are free to use a different tool such as [Snyk][].
 
 You should [configure your dependency management tool with a cooldown period][] to reduce your exposure to newly compromised dependencies. [Dependabot has this by default][].
 
@@ -50,8 +50,6 @@ Some teams have enabled automatic merges for some Github PRs. This can reduce th
 
 Github has some [examples for using Actions to automate dependabot][] merges, but these may not work for your repo - for example, many GDS repos have branch protection rules requiring at least one approving review from a maintainer for PRs to be merged into `main`. These repos will not be able to automatically merge PRs since the action will not be able to approve with maintainer permissions. Do not use actions to automatically merge approved Dependabot PRs, as this would lead to a surprising behaviour at the point of approval.
 
-Service teams are free to use a different tool such as [Snyk][], but will need to add a `no-dependabot` tag to their repository for monitoring purposes. You can [contact Cyber Security][] if you have any questions or need help.
-
 ## Monitor for vulnerabilities
 
 You should monitor for potential vulnerabilities in every layer of your technology stack. This is not straightforward but tooling exists to help. The Service Manual provides [guidance on browser technology, tooling and mailing lists you can subscribe to][].
@@ -60,7 +58,7 @@ Most of the tooling that helps you stay on top of dependency updates will also h
 
 ### [GitHub security alerts][]
 
-When GitHub discovers or is informed about a vulnerability, it will email an alert to the repository owner and users with admin access. GitHub security alerts will be turned on for all Alphagov repositories. If services wish to opt out of security advisories on their repository, they can contact Cyber Security and then add the `no-security-advisories` tag to their repository.
+When GitHub discovers or is informed about a vulnerability, it will email an alert to the repository owner and users with admin access. GitHub security alerts will be turned on for all Alphagov repositories. If services wish to opt out of security advisories on their repository, they can [contact Cyber Security][] and then add the `no-security-advisories` tag to their repository.
 
 ### [Snyk][]
 
