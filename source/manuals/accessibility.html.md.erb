@@ -9,7 +9,7 @@ owner_slack: "#accessibility-community"
 
 Government services must be accessible to everyone. This includes anyone with a visual, hearing, speech, motor, learning or cognitive impairment. This also includes anyone with a temporary or situational disability, such as a person with a broken arm or working in a loud environment.
 
-Building a service with accessibility in mind not only allows those with access needs to use your service, it also improves the service for everyone else. An accessibility problem with a website can be something that affects everyone, not just people who can only access the web with a keyboard or screen reader.
+Building a service with accessibility in mind not only allows those with access needs to use your service, it also improves the service for everyone else. An accessibility problem can affect everyone, not just people who can only access the web with a keyboard or screen reader.
 
 Government services are legally required to be accessible. This means services must comply with the international WCAG 2.2 AA accessibility standard. This requirement applies to all new and existing public sector websites and mobile applications.
 
@@ -31,7 +31,7 @@ You cannot achieve accessibility by adding some final touches - it must be consi
 
 A sighted user might navigate a page from top to bottom, perhaps skim reading through headings and paragraphs to find the content they want.
 
-Non sighted users can also skim read a page. Screen readers can announce content by element type, such as headings, paragraphs or links. For example, if a screen reader user expects a page to contain data in a table element, such as a train timetable, they might start by reading through all the tables on a page.
+Non-sighted users can also skim read a page. Screen readers can announce content by element type, such as headings, paragraphs or links. For example, if a screen reader user expects a page to contain data in a table element, such as a train timetable, they might start by navigating through all the tables on a page.
 
 This is why [semantic markup](https://developer.mozilla.org/en-US/docs/Glossary/Semantics) and good heading structure are important when building accessible services.
 
@@ -69,11 +69,11 @@ You can use [Assistiv Labs](https://assistivlabs.com/) to test your service with
 
 [Contact the Engineering Enablement team](https://engineering-enablement.gds-reliability.engineering/support.html) to request an account.
 
-We have been assured by Assistiv Labs that the Virtual Machine (VM) is deleted when you exit, however in the interests of security and to make sure we do not leak any personal data or sensitive material:
+We have been assured by Assistiv Labs that the Virtual Machine (VM) is deleted when you exit. However, in the interests of security and to make sure we do not leak any personal data or sensitive material:
 
 - treat the VM you are using as if it was a shared device – like using a public computer in an internet cafe or library
-- do not use it to test any confidential or secret service, or services containing content that is considered sensitive
-- do not use any credentials from live systems with access to "real data" during your testing
+- do not use it to test any confidential or secret service or services containing content that is considered sensitive
+- do not use any credentials from live systems with access to real data during your testing
 - do not sign in to any accounts, unless those accounts are used solely for the purposes of testing (for example, a test account in an integration or staging environment)
 - make configuration changes to the system through your own device rather than the VM
 
@@ -159,8 +159,8 @@ Pages that provide detailed interaction for the user must be built with accessib
 
 ### Image alt text and captions
 
-Images should be described using words for people that cannot see them, either using the `alt` attribute or in the accompanying body text.
+The meaning of images should be conveyed using words for people that cannot see them, either using the `alt` attribute or in the accompanying body text.
 
-Captions using the `figcaption` element are sometimes not read aloud by screenreaders when the image has a blank `alt` text. Do not use the caption to describe your image - the description should be put in the body text.
+Captions using the `figcaption` element are sometimes not read aloud by screen readers when the image has a blank `alt` text. Do not use the caption to describe your image - the description should be put in the body text.
 
 The GOV.UK Design System provides [guidance on using alt text](https://design-system.service.gov.uk/styles/images/#alt-text).
