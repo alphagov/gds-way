@@ -85,9 +85,9 @@ You can test your service using an [accessibility lab](https://gds.blog.gov.uk/2
 
 ### Manual accessibility testing guide
 
-The Government Digital Service’s accessibility monitoring team has a publicly-available [accessibility testing guide](https://github.com/alphagov/wcag-primer/wiki). The guide is currently labelled as a ‘work in progress’, and was published in 2022.
+The Government Digital Service’s accessibility specialists have a publicly available [accessibility testing guide](https://github.com/alphagov/wcag-primer/wiki).
 
-The guide outlines some approaches for testing websites and applications against the [Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/TR/WCAG/).
+The guide outlines how to test websites and applications against the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG/).
 
 ### Testing with real users
 
@@ -109,13 +109,13 @@ You can also use the [GOV.UK Prototype Kit](https://prototype-kit.service.gov.uk
 
 ## Specific guidance
 
-There is a common misconception that accessibility is difficult, time consuming and costly. This is not true, however the range of possible issues that could occur is too wide to detail here. Having said that, here are some common accessibility issues many websites have, why they’re a problem and how to avoid them.
+There is a common misconception that accessibility is difficult, time consuming and costly. This is only true for a small subset of accessibility testing and issues. The majority of testing can easily be done by most UCD professionals. The range of possible issues that could occur is too wide to detail here. Having said that, here are some common accessibility issues many websites have, why they’re a problem and how to avoid them.
 
 ### Non semantic HTML
 
-Semantic HTML means using the appropriate element for the element being described. A common example of this is not using a button element for a button, but relying on JavaScript to provide the correct action when the element is used.
+Semantic HTML means using the appropriate element for the element being described. A common example of this is not using a button element for a button, but using a div and relying on JavaScript to provide the correct action when the element is used.
 
-This is a problem because non-semantic HTML is difficult for technologies such as screen readers to understand. This means that some users will not be able to operate or interact with these elements, potentially rendering a service unusable.
+This is a problem because non-semantic HTML is difficult for technologies such as screen readers to interpret correctly. This means that some users will not be able to operate or interact with these elements, potentially rendering a service unusable.
 
 ### Poor in-page navigation
 
@@ -125,7 +125,7 @@ You should build pages using landmarks in order to allow users to navigate more 
 
 ### Improper heading structure
 
-Screen reader users can rely heavily on correct heading structure within a page in order to navigate and understand its content. The page title should be presented within an H1 element, and all other headings should follow a logical ordering, for example `H1`, `H2`, `H3`, not `H1`, `H3`, `H2`.
+Lots of screen reader users rely heavily on a correct heading structure within a page in order to navigate and understand its content. The page title should be presented within an H1 element, and all other headings should follow a logical ordering, for example `H1`, `H2`, `H3`, not `H1`, `H3`, `H2`.
 
 ### Form controls not associated with a label
 
@@ -135,7 +135,7 @@ Labels should provide a short but clear explanation of a form control. Further d
 
 ### Meaningless or duplicated link text
 
-The text of a link should describe what that link points to. It should not rely on the surrounding text for context. Users of assistive technology can navigate pages by element type, which means that link text such as ‘click here’ or ‘read more’ does not help a user understand where the link goes.
+The text of a link should describe what that link points to. It should not rely on the surrounding text for context. Users of assistive technology can navigate pages by element type. Link text such as ‘click here’ or ‘read more’ does not help a user understand where the link goes.
 
 ### Poor colour contrast
 
