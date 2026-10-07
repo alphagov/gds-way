@@ -9,18 +9,20 @@
  */
 
 .page-banner {
-  padding: 10px 0 8px;
-  margin-top: 15px;
-
+  margin-top: govuk-spacing(4);
+  margin-bottom: govuk-spacing(2);
+  
   @include govuk-media-query(tablet) {
-    padding-bottom: 10px;
+    // Adjust the spacing on larger screens so that the top-level heading isnt too far away
+    margin-bottom: -1 * govuk-spacing(4);
   }
 
   border-bottom: 1px solid $govuk-border-colour;
 
   p {
     margin: 0;
+    margin-bottom: 0.5em;
     color: $govuk-text-colour;
-    @include govuk-font($size: 16);
+    @include govuk-font($size: 16, $line-height: 1.5);
   }
 }
