@@ -1,0 +1,51 @@
+---
+title: Using AI Assistants
+last_reviewed_on: 2026-09-10
+review_in: 3 months
+owner_slack: '#gds-way'
+---
+
+# <%= current_page.data.title %>
+
+## Considerations
+
+### Adherence to the policy
+
+There is an AI Coding policy [here](https://engineering-enablement.gds-reliability.engineering/InfoSec/ai-policy.html) which should be read and followed
+
+### Mistakes
+
+AI responses will often contain errors and should not be relied on to be correct - you will need to check the content
+carefully before including in your application.
+
+### Security assurance
+
+Before using an AI Coding assistant you should speak with your security team and mitigate any concerns. AI Coding is
+usually provided as a SaaS solution meaning that your content is uploaded to third party servers for inference, which
+may be inappropriate.
+
+### Sustainability
+
+AI is a resource intensive technology. Using it when not necessary could be a waste of resources. Using appropriate models for the task is advisable.
+
+### Best Practice
+
+#### Sandboxing
+
+Running AI Agents should be within a sandbox such as [https://github.com/govuk-one-login/ai-sandbox](https://github.com/govuk-one-login/ai-sandbox) to limit the blast radius of any prompt injection.
+
+#### Skills
+
+Using skills can make AI more efficient and lead to better outcomes. AI can help to write skills and they can be shared between and across teams.
+
+#### Local inference
+
+If you have a sufficiently powerful local machine you can run open-weight models locally, this can be cost effective and gives you more choice in model selection.
+The [Ollama framework](https://github.com/ollama/ollama) is a way of running LLM models locally.
+
+#### Choice of harness
+
+There are different harnesses available just as there are different models, some currently worth mentioning are:
+* [OpenHarness](https://github.com/HKUDS/OpenHarness)
+* [Pi](https://github.com/earendil-works/pi/tree/main/packages/coding-agent)
+* [OpenCode](https://github.com/anomalyco/opencode/tree/v2)
