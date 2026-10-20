@@ -52,6 +52,18 @@ To reduce these risks, you should:
 * use two-factor authentication
 * make sure you have a documented process for removing an individual’s access to the Google Group,  credential store and for rotating credentials including any API keys
 
+### Manage domain claims centrally
+
+You should not claim a GDS domain (such as digital.cabinet-office.gov.uk or dsit.gov.uk) for a SaaS tool at a team or programme level.
+Domain claiming should always be managed centrally by an IT team or GDS Business Enablement.
+
+If an individual programme claims a domain to manage their own isolated instance of a tool, it can:
+* inadvertently lock other teams out of the platform
+* block future enterprise-wide rollouts
+* disrupt central Single Sign-On integrations
+
+Centralising this process ensures that access controls are handled consistently across the organisation, preventing fragmented shadow IT and keeping our data secure.
+
 ## Managing GitHub accounts
 
 See [Use GitHub](/standards/source-code/use-github.html#common-rules-of-access)
