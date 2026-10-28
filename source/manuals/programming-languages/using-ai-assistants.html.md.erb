@@ -7,43 +7,41 @@ owner_slack: '#gds-way'
 
 # <%= current_page.data.title %>
 
-## Considerations
-
-### Adherence to the policy
+## Adherence to the policy
 
 This guide must be read and used in conjunction with the [AI Coding policy](https://engineering-enablement.gds-reliability.engineering/InfoSec/ai-policy.html).
 
-### Mistakes
+## Mistakes
 
 You must check AI responses as they often contain errors.
 You will need to check the content carefully before using it in your application.
 
-### Security assurance
+## Security assurance
 
 Before using an AI Coding assistant you should speak with your security team and mitigate any concerns. AI Coding is
 usually provided as a SaaS solution meaning that your content is uploaded to third party servers for inference, which
 may be inappropriate.
 
-### Sustainability
+## Sustainability
 
 AI is a resource intensive technology. Using it when not necessary could be a waste of resources. Using appropriate models for the task is advisable.
 
-### Best Practice
+## Best Practice
 
-#### Sandboxing
+### Sandboxing
 
 Running AI Agents should be within a sandbox such as [https://github.com/govuk-one-login/ai-sandbox](https://github.com/govuk-one-login/ai-sandbox) to limit the impact of any prompt injection.
 
-#### Skills
+### Skills
 
 Using skills can make AI more efficient and lead to better outcomes. AI can help to write skills which you can share between teams.
 
-#### Local inference
+### Local inference
 
 If you have a sufficiently powerful local machine you can run open-weight models locally. This can be cost effective and gives you more choice in model selection.
 The [Ollama framework](https://github.com/ollama/ollama) is a way of running LLM models locally.
 
-#### Choice of harness
+### Choice of harness
 
 There are different harnesses available just as there are different models, some currently worth mentioning are:
 * [OpenHarness](https://github.com/HKUDS/OpenHarness)
