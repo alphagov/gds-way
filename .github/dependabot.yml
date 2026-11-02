@@ -7,6 +7,8 @@ updates:
       day: "monday"
     open-pull-requests-limit: 10
     versioning-strategy: "increase-if-necessary"
+    cooldown:
+      default-days: 5
     groups:
       app-dependencies:
         patterns:
